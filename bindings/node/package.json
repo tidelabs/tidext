@@ -1,0 +1,39 @@
+{
+  "name": "tidext",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "napi": {
+    "name": "nodejs-tidext",
+    "triples": {
+      "additional": [
+        "aarch64-apple-darwin",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "armv7-unknown-linux-gnueabihf",
+        "x86_64-unknown-linux-musl",
+        "i686-pc-windows-msvc"
+      ]
+    }
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.4.2",
+    "dotenv": "^16.0.0",
+    "mocha": "^9.2.0"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release && node scripts/fix-typedef.js",
+    "build:debug": "napi build --platform && node scripts/fix-typedef.js",
+    "prepublishOnly": "napi prepublish -t npm",
+    "version": "napi version",
+    "pretest": "yarn build",
+    "test": "mocha -r dotenv/config",
+    "test:local": "mocha -r dotenv/config"
+  }
+}

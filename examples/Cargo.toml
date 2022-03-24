@@ -1,0 +1,20 @@
+[package]
+name = "tidext-examples"
+version = "0.1.0"
+authors = ["Semantic Network Team <admin@semantic-network.com>"]
+edition = "2021"
+publish = false
+
+[dependencies]
+tidext = { path = "../tidext" }
+tidefi-primitives = { git = "https://github.com/tide-labs/primitives", branch = "dev" }
+
+tokio = { version = "1", features = [ "full" ], default-features = false }
+strum = { version = "0.23.0" }
+sp-keyring = { git = "https://github.com/tide-labs/substrate", branch = "tidechain" }
+serde_json = "1.0"
+log = "0.4"
+simple_logger = "=1.12"
+actix = "0.12"
+futures = "0.3"
+hex = "0.4"
