@@ -175,7 +175,7 @@ publish-rustdoc:
     # publish though, hence the `|| true`.
     - git commit -m "Updated docs for ${CI_COMMIT_REF_NAME}" ||
       echo "___Nothing to commit___"
-    - git push origin gh-pages --force
+    - git push github gh-pages --force
     - echo "___Rustdoc was successfully published to https://tide-labs.github.io/tidext/___"
   after_script:
     - rm -rf .git/ ./*
