@@ -1,6 +1,7 @@
 #![cfg(feature = "keyring-stronghold")]
-use crate::{keyring::AccountId, TidechainConfig};
-use std::{fmt, sync::Arc};
+use crate::{primitives::AccountId, Error, TidechainConfig};
+use std::{fmt, path::Path, sync::Arc};
+use stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold};
 use subxt::{
   sp_core::{
     crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
@@ -10,12 +11,12 @@ use subxt::{
 };
 
 pub use iota_stronghold as stronghold;
-use stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold};
 
 /// Stronghold pair signer.
 pub type TidefiPairSigner =
   PairSigner<TidechainConfig, DefaultExtra<TidechainConfig>, StrongholdSigner>;
 
+/// Stronghold signer instance.
 #[derive(Clone)]
 pub struct StrongholdSigner {
   keypair_location: Location,
@@ -26,41 +27,14 @@ impl CryptoType for StrongholdSigner {
   type Pair = Self;
 }
 
-// we implement `Pair` because `PairSigner` requires it.
-// Only `public` and `sign` methods are needed, so the others are `unimplemented!()`.
+/// Stronghold typical cryptographic PKI key pair type
 impl Pair for StrongholdSigner {
   type Public = Public;
   type Seed = Vec<u8>;
   type Signature = Signature;
   type DeriveError = String;
 
-  fn generate_with_phrase(_password: Option<&str>) -> (Self, String, Self::Seed) {
-    unimplemented!()
-  }
-
-  fn from_phrase(
-    _phrase: &str,
-    _password: Option<&str>,
-  ) -> Result<(Self, Self::Seed), SecretStringError> {
-    unimplemented!()
-  }
-
-  fn derive<Iter: Iterator<Item = DeriveJunction>>(
-    &self,
-    _path: Iter,
-    _seed: Option<Self::Seed>,
-  ) -> Result<(Self, Option<Self::Seed>), Self::DeriveError> {
-    unimplemented!()
-  }
-
-  fn from_seed(_seed: &Self::Seed) -> Self {
-    unimplemented!()
-  }
-
-  fn from_seed_slice(_seed: &[u8]) -> Result<Self, SecretStringError> {
-    unimplemented!()
-  }
-
+  /// Sign message
   fn sign(&self, message: &[u8]) -> Self::Signature {
     let stronghold = self.stronghold.clone();
     let message = message.to_vec();
@@ -75,14 +49,7 @@ impl Pair for StrongholdSigner {
     sig.inner().clone()
   }
 
-  fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
-    unimplemented!()
-  }
-
-  fn verify_weak<P: AsRef<[u8]>, M: AsRef<[u8]>>(_sig: &[u8], _message: M, _pubkey: P) -> bool {
-    unimplemented!()
-  }
-
+  /// Get public key pair
   fn public(&self) -> Self::Public {
     let stronghold = self.stronghold.clone();
     let keypair_location = self.keypair_location.clone();
@@ -96,11 +63,41 @@ impl Pair for StrongholdSigner {
     *pk.inner()
   }
 
+  // These functions are not used by the the signer, this is why they are `unimplemented`.
+  fn generate_with_phrase(_password: Option<&str>) -> (Self, String, Self::Seed) {
+    unimplemented!()
+  }
+  fn from_phrase(
+    _phrase: &str,
+    _password: Option<&str>,
+  ) -> Result<(Self, Self::Seed), SecretStringError> {
+    unimplemented!()
+  }
+  fn derive<Iter: Iterator<Item = DeriveJunction>>(
+    &self,
+    _path: Iter,
+    _seed: Option<Self::Seed>,
+  ) -> Result<(Self, Option<Self::Seed>), Self::DeriveError> {
+    unimplemented!()
+  }
+  fn from_seed(_seed: &Self::Seed) -> Self {
+    unimplemented!()
+  }
+  fn from_seed_slice(_seed: &[u8]) -> Result<Self, SecretStringError> {
+    unimplemented!()
+  }
   fn to_raw_vec(&self) -> Vec<u8> {
+    unimplemented!()
+  }
+  fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
+    unimplemented!()
+  }
+  fn verify_weak<P: AsRef<[u8]>, M: AsRef<[u8]>>(_sig: &[u8], _message: M, _pubkey: P) -> bool {
     unimplemented!()
   }
 }
 
+/// Tidefi keyring backed with a stronghold pair signer.
 #[derive(Clone)]
 pub struct TidefiKeyring {
   account_id: AccountId,
@@ -128,6 +125,11 @@ impl TidefiKeyring {
     }
   }
 
+  /// Retrieve the `AccountId`.
+  pub fn account_id(&self) -> &AccountId {
+    &self.account_id
+  }
+
   /// Retrieve the `TidefiPairSigner`.
   pub fn pair_signer(&self) -> TidefiPairSigner {
     TidefiPairSigner::new(StrongholdSigner {
@@ -136,9 +138,146 @@ impl TidefiKeyring {
     })
   }
 
-  /// Retrieve the `AccountId`.
-  pub fn account_id(&self) -> AccountId {
-    self.account_id.clone()
+  /// Try to get signer from existing stronghold instance
+  pub async fn try_from_stronghold_instance(
+    stronghold: Stronghold,
+    keypair_location: Option<Location>,
+  ) -> Result<Self, Error> {
+    let default_keypair_location = keypair_location.unwrap_or(Location::Generic {
+      vault_path: b"tidext".to_vec(),
+      record_path: b"default".to_vec(),
+    });
+
+    get_signer_from_stronghold(stronghold, &default_keypair_location).await
+  }
+
+  /// Try to launch a new stronghold instance with the provided path and location
+  pub async fn try_from_stronghold_path<P: AsRef<Path>>(
+    stronghold_path: P,
+    keypair_location: Option<Location>,
+    passphrase: Option<String>,
+  ) -> Result<Self, Error> {
+    let default_keypair_location = keypair_location.unwrap_or(Location::Generic {
+      vault_path: b"tidext".to_vec(),
+      record_path: b"default".to_vec(),
+    });
+
+    get_signer_from_stronghold(
+      init_stronghold_from_path(stronghold_path, passphrase).await?,
+      &default_keypair_location,
+    )
+    .await
+  }
+
+  /// Try to launch a new stronghold instance with the provided seed and location
+  pub async fn try_from_seed(
+    seed: String,
+    keypair_location: Option<Location>,
+  ) -> Result<Self, Error> {
+    let default_keypair_location = keypair_location.unwrap_or(Location::Generic {
+      vault_path: b"tidext".to_vec(),
+      record_path: b"default".to_vec(),
+    });
+
+    get_signer_from_stronghold(
+      init_stronghold_from_seed(&default_keypair_location, Some(seed), None).await?,
+      &default_keypair_location,
+    )
+    .await
+  }
+}
+
+/// Initialize a new stronghold instance from the `sr25519` mnemonic or raw seed
+pub async fn init_stronghold_from_seed(
+  keypair_location: &Location,
+  mnemonic_or_seed: Option<String>,
+  passphrase: Option<String>,
+) -> Result<Stronghold, Error> {
+  let (tx, rx) = std::sync::mpsc::channel();
+  std::thread::spawn(move || {
+    let system = actix::System::new();
+    let stronghold = system
+      .block_on(Stronghold::init_stronghold_system(vec![], vec![]))
+      .unwrap();
+    tx.send(stronghold).unwrap();
+    system.run().expect("actix system run failed");
+  });
+  let stronghold = rx.recv().unwrap();
+
+  if let ProcResult::Sr25519Generate(ResultMessage::Error(stronghold_error)) = stronghold
+    .runtime_exec(Procedure::Sr25519Generate {
+      mnemonic_or_seed,
+      passphrase,
+      output: keypair_location.clone(),
+      hint: [0u8; 24].into(),
+    })
+    .await
+  {
+    Err(Error::Stronghold(stronghold_error))
+  } else {
+    Ok(stronghold)
+  }
+}
+
+/// Initialize a new stronghold instance from the provided snapshot path and passphrase
+pub async fn init_stronghold_from_path<P: AsRef<Path>>(
+  stronghold_path: P,
+  passphrase: Option<String>,
+) -> Result<Stronghold, Error> {
+  let (tx, rx) = std::sync::mpsc::channel();
+  std::thread::spawn(move || {
+    let system = actix::System::new();
+    let stronghold = system
+      .block_on(Stronghold::init_stronghold_system(vec![], vec![]))
+      .unwrap();
+    tx.send((stronghold, actix::System::current())).unwrap();
+    system.run().expect("actix system run failed");
+  });
+  let (mut stronghold, system) = rx.recv().unwrap();
+
+  let stronghold_path = stronghold_path.as_ref();
+  let encryption_key = passphrase
+    .map(|s| s.as_bytes().to_vec())
+    .unwrap_or_default();
+
+  if stronghold_path.exists() {
+    if let ResultMessage::Error(stronghold_error) = stronghold
+      .read_snapshot(
+        Vec::new(),
+        None,
+        &encryption_key,
+        None,
+        Some(stronghold_path.to_path_buf()),
+      )
+      .await
+    {
+      system.stop();
+      return Err(Error::Stronghold(stronghold_error));
+    };
+  } else {
+    return Err(Error::Stronghold("Invalid snapshot path".to_string()));
+  }
+
+  Ok(stronghold)
+}
+
+/// Try to get signer details for an existing stronghold instance at the specific location
+pub async fn get_signer_from_stronghold(
+  stronghold: Stronghold,
+  keypair_location: &Location,
+) -> Result<TidefiKeyring, Error> {
+  match stronghold
+    .runtime_exec(Procedure::Sr25519PublicKey {
+      keypair: keypair_location.clone(),
+    })
+    .await
+  {
+    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => Ok(TidefiKeyring::new(
+      AccountId::from(pk.inner().0),
+      stronghold,
+      keypair_location.clone(),
+    )),
+    _ => Err(Error::Stronghold("Invalid public key".into())),
   }
 }
 
@@ -147,57 +286,16 @@ mod test {
   use super::*;
   use std::str::FromStr;
 
-  async fn init_stronghold(
-    mnemonic_or_seed: String,
-    passphrase: Option<String>,
-  ) -> (AccountId, Location, Stronghold) {
-    let (tx, rx) = std::sync::mpsc::channel();
-    std::thread::spawn(move || {
-      let system = actix::System::new();
-      let stronghold = system
-        .block_on(Stronghold::init_stronghold_system(b"path".to_vec(), vec![]))
-        .unwrap();
-      tx.send(stronghold).unwrap();
-      system.run().expect("actix system run failed");
-    });
-    let stronghold = rx.recv().unwrap();
-
-    let keypair_location = Location::generic("SR25519", "keypair");
-
-    match stronghold
-      .runtime_exec(Procedure::Sr25519Generate {
-        mnemonic_or_seed: Some(mnemonic_or_seed),
-        passphrase,
-        output: keypair_location.clone(),
-        hint: [0u8; 24].into(),
-      })
-      .await
-    {
-      ProcResult::Sr25519Generate(ResultMessage::OK) => (),
-      r => panic!("unexpected result: {:?}", r),
-    }
-
-    let pk = match stronghold
-      .runtime_exec(Procedure::Sr25519PublicKey {
-        keypair: keypair_location.clone(),
-      })
-      .await
-    {
-      ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => pk,
-      r => panic!("unexpected result: {:?}", r),
-    };
-
-    (AccountId::from(pk.inner().0), keypair_location, stronghold)
-  }
-
   #[tokio::test]
   async fn test_get_pair() {
     let mnemonic = "plug math bacon find roast scrap shrug exchange announce october exclude plate";
-    let (account_id, location, stronghold) = init_stronghold(mnemonic.into(), None).await;
-    let mnemonic_pair = TidefiKeyring::new(account_id, stronghold, location);
+    let mnemonic_pair = TidefiKeyring::try_from_seed(mnemonic.into(), None)
+      .await
+      .expect("Unable to intialize pair signer");
     let seed = "0x9abdf3e8edda03c1708bcd5bc3353e91efd503fd9105ff0ee68a7cbc66b740d8";
-    let (account_id, location, stronghold2) = init_stronghold(seed.into(), None).await;
-    let seed_pair = TidefiKeyring::new(account_id, stronghold2, location);
+    let seed_pair = TidefiKeyring::try_from_seed(seed.into(), None)
+      .await
+      .expect("Unable to intialize pair signer");
     assert_eq!(mnemonic_pair.account_id(), seed_pair.account_id())
   }
 

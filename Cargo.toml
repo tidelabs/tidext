@@ -1,6 +1,7 @@
 [workspace]
 members = [
-   "tidext", 
+   "tidext",
+   "macro",
    "examples",
    "bindings/node", 
    "bindings/python",

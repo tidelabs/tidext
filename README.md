@@ -55,7 +55,7 @@ Most tests require a running tidechain node to communicate with. This is done by
 substrate node per test.
 
 ```
-TIDECHAIN_NODE_PATH=~/dev/semnet/tidechain/target/release/tidechain cargo test
+TIDECHAIN_NODE_PATH=~/.bin/tidechain cargo test
 ```
 
 #### License

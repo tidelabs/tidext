@@ -1,7 +1,4 @@
-use crate::{
-  test_utils::{tidefi_keyring, AccountKeyring},
-  Client, ClientBuilder,
-};
+use crate::{keyring::TidefiKeyring, test_utils::AccountKeyring, Client, ClientBuilder};
 use std::{
   ffi::{OsStr, OsString},
   net::TcpListener,
@@ -10,7 +7,7 @@ use std::{
   thread, time,
 };
 
-/// Spawn a local substrate node for testing `subxt`.
+/// Spawn a local tidechain node for testing `tidext`.
 pub struct TestNodeProcess {
   proc: process::Child,
   client: Client,
@@ -42,7 +39,7 @@ impl TestNodeProcess {
     Ok(())
   }
 
-  /// Returns the `subxt` client connected to the running node.
+  /// Returns the `tidext` client connected to the running node.
   pub fn client(&self) -> &Client {
     &self.client
   }
@@ -132,7 +129,12 @@ impl TestNodeProcessBuilder {
 
       // test keyring as well
       let result = ClientBuilder::new()
-        .set_signer(tidefi_keyring(AccountKeyring::Alice).await)
+        .set_signer(
+          TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None)
+            .await
+            .map_err(|err| err.to_string())?
+            .pair_signer(),
+        )
         .set_url(ws_url.clone())
         .build()
         .await;

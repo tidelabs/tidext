@@ -27,7 +27,7 @@ pub trait OracleExt {
   /// Cancel swap
   async fn cancel_swap(&self, request_id: Hash) -> Result<(), Error>;
 
-  /// Im Alive
+  /// I'm alive
   async fn im_alive(&self, im_alive: OracleImAlive) -> Result<(), Error>;
 }
 

@@ -1,6 +1,6 @@
 use std::{thread::sleep, time::Duration};
 use tidefi_primitives::{assets::Asset, ProposalType};
-use tidext::{ClientBuilder, QuorumCall, QuorumExt, TidechainCall};
+use tidext::{ClientBuilder, QuorumCall, QuorumExt, TidechainCall, TidefiKeyring};
 // load sr25519 test account
 use sp_keyring::AccountKeyring;
 use strum::IntoEnumIterator;
@@ -17,17 +17,19 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init logger
   helpers::init_logger()?;
   // init signer
-  let signer = helpers::init_signer(AccountKeyring::Charlie.to_seed()).await;
+  let signer = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None)
+    .await?
+    .pair_signer();
   // init client
   let client = ClientBuilder::new()
     // set main signer (need to use stronghold)
     .set_signer(signer)
-    //.set_url("ws://dedevtidesubstrate-a.semantic-network.tech:9944")
+    //.set_url("ws://127.0.0.1:9944")
     .build()
     .await?;
 
   // we should probably set keys on each start (it delete all the old-ones)
-  if client.is_quorum_member(&client.get_account_id()).await? {
+  if client.is_quorum_member(client.account_id()).await? {
     let all_assets_pubkey = Asset::iter()
       .map(|asset| (asset.id(), "pubkey".as_bytes().to_vec()))
       .collect();
@@ -86,5 +88,3 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
   Ok(())
 }
-
-//

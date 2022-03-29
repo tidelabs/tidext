@@ -117,12 +117,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4361135be9122e0870de935d7c439aef945b9f9ddd4199a553b5270b49c82a27"
 
 [[package]]
-name = "array-bytes"
-version = "1.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a14a3cc05445830e3f8aed09cc974007c2c9026729f77c09616c0bcbe78d973"
-
-[[package]]
 name = "arrayref"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2229,17 +2223,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "num-derive"
-version = "0.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
 name = "num-format"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3619,16 +3602,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sp-rpc"
-version = "6.0.0"
-source = "git+https://github.com/tide-labs/substrate?branch=tidechain#77c15d2546276a865b6e8f1c5d4b1d0ec1961e72"
-dependencies = [
- "rustc-hash",
- "serde",
- "sp-core",
-]
-
-[[package]]
 name = "sp-runtime"
 version = "6.0.0"
 source = "git+https://github.com/tide-labs/substrate?branch=tidechain#77c15d2546276a865b6e8f1c5d4b1d0ec1961e72"
@@ -4081,8 +4054,6 @@ name = "tidext"
 version = "0.1.0"
 dependencies = [
  "actix",
- "anyhow",
- "array-bytes",
  "async-std",
  "async-trait",
  "env_logger",
@@ -4094,24 +4065,20 @@ dependencies = [
  "jsonrpsee",
  "log",
  "num-bigint 0.4.3",
- "num-derive",
- "num-traits",
  "pallet-transaction-payment-rpc-runtime-api",
  "parity-scale-codec",
- "regex",
  "serde",
  "serde_json",
  "sp-core",
  "sp-keyring",
- "sp-rpc",
  "sp-runtime",
  "subxt",
  "subxt-macro",
  "thiserror",
  "tidefi-primitives",
  "tidext",
+ "tidext-macro",
  "tokio",
- "uuid",
  "which",
 ]
 
@@ -4119,7 +4086,6 @@ dependencies = [
 name = "tidext-examples"
 version = "0.1.0"
 dependencies = [
- "actix",
  "futures",
  "hex",
  "log",
@@ -4130,6 +4096,18 @@ dependencies = [
  "tidefi-primitives",
  "tidext",
  "tokio",
+]
+
+[[package]]
+name = "tidext-macro"
+version = "0.1.0"
+dependencies = [
+ "convert_case 0.5.0",
+ "proc-macro-crate 0.1.5",
+ "proc-macro-error",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -4477,15 +4455,6 @@ dependencies = [
  "idna",
  "matches",
  "percent-encoding",
-]
-
-[[package]]
-name = "uuid"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
-dependencies = [
- "getrandom 0.2.5",
 ]
 
 [[package]]

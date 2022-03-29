@@ -6,11 +6,9 @@ use std::{convert::TryInto, path::PathBuf};
 use anyhow::anyhow;
 use napi::bindgen_prelude::{Buffer, Error, Result, Status};
 use tidext::{
-  keyring::{
-    stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
-    AccountId, TidefiKeyring,
-  },
-  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill,
+  primitives::AccountId,
+  stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
+  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill, TidefiKeyring,
 };
 use zeroize::Zeroize;
 
@@ -155,32 +153,32 @@ impl Client {
 
   #[napi]
   pub async fn get_account_id(&self) -> Buffer {
-    let id = self.inner.get_account_id();
+    let id = self.inner.account_id();
     Buffer::from(id.as_ref())
   }
 
   #[napi]
   pub async fn get_account_id_ss58(&self) -> String {
-    self.inner.get_account_id().to_string()
+    self.inner.account_id().to_string()
   }
 
   #[napi]
-  pub async fn get_regular_swap_fee(&self) -> Result<f64> {
+  pub async fn get_regular_swap_fee(&self) -> Result<u32> {
     self
       .inner
-      .get_regular_swap_fee()
+      .swap_fee()
       .await
-      .map(Into::into)
+      .map(|a| a.deconstruct())
       .map_err(err_mapper)
   }
 
   #[napi]
-  pub async fn get_market_maker_swap_fee(&self) -> Result<f64> {
+  pub async fn get_market_maker_swap_fee(&self) -> Result<u32> {
     self
       .inner
-      .get_market_maker_swap_fee()
+      .swap_fee_market_maker()
       .await
-      .map(Into::into)
+      .map(|a| a.deconstruct())
       .map_err(err_mapper)
   }
 
@@ -272,7 +270,7 @@ impl Client {
     self
       .inner
       .transfer_extrinsic(
-        &AccountId::from(destination),
+        AccountId::from(destination),
         wrapper::currency_id_into(token_id),
         wrapper::balance_info_into(amount),
       )
@@ -290,7 +288,7 @@ impl Client {
       let id: [u8; 32] = id[0..32][..].try_into().expect("invalid account id value");
       AccountId::from(id)
     } else {
-      self.inner.get_account_id()
+      self.inner.account_id().clone()
     };
 
     let token_balance = self
