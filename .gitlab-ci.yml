@@ -158,9 +158,8 @@ publish-rustdoc:
     # Set git config
     - git config user.email "tidechain.ci@gmail.com"
     - git config user.name "${GITHUB_USER}"
-    - git config remote.origin.url "git@github.com:/tide-labs/tidext.git"
-    - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-    - git fetch origin gh-pages
+    - git remote add github "git@github.com:/tide-labs/tidext.git"
+    - git fetch github gh-pages
     # Save README and docs
     - cp -r ./crate-docs/ /tmp/doc/
     - cp README.md /tmp/doc/
