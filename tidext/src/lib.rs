@@ -75,7 +75,6 @@
 //! ```
 //! [`runtime`]: TidechainRuntimeApi
 
-use crate::keyring::TidefiPairSigner;
 pub use crate::{
   client::{Client, ClientBuilder},
   error::Error,
