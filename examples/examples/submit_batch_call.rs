@@ -1,5 +1,7 @@
-use tidefi_primitives::{assets, CurrencyId, SwapType};
-use tidext::{ClientBuilder, Permill, TidechainCall, TidefiCall, TidefiStakingCall};
+use tidext::{
+  primitives::{assets, CurrencyId, SwapType},
+  ClientBuilder, Permill, TidechainCall, TidefiCall, TidefiKeyring, TidefiStakingCall,
+};
 // load sr25519 test account
 use sp_keyring::AccountKeyring;
 
@@ -15,11 +17,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init logger
   helpers::init_logger()?;
   // init signer
-  let signer = helpers::init_signer(AccountKeyring::Charlie.to_seed()).await;
+  let signer = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None)
+    .await?
+    .pair_signer();
   // init client
   let client = ClientBuilder::new()
     .set_signer(signer)
-    //.set_url("ws://dedevtidesubstrate-a.semantic-network.tech:9944")
+    //.set_url("ws://127.0.0.1:9944")
     .build()
     .await?;
 

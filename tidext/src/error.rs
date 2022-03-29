@@ -6,17 +6,25 @@ pub enum Error {
   Utf8(#[from] std::string::FromUtf8Error),
   #[error("json error: {0}")]
   Json(#[from] serde_json::Error),
-  #[error("substrate error: {0}")]
+  #[error("tidechain error: {0}")]
   Substrate(#[from] subxt::BasicError),
-  #[error("substrate error: {0}")]
+  #[error("dispatch error: {0}")]
+  DispatchError(String),
+  #[error("codec error: {0}")]
   Codec(#[from] parity_scale_codec::Error),
+  #[error("jsonrpsee error: {0}")]
+  JsonRpsee(#[from] jsonrpsee::core::Error),
   #[error("other error: {0}")]
   Other(String),
-  #[error("quorum initialization error: {0}")]
+  #[error("stronghold error: {0}")]
+  Stronghold(String),
+  #[error("stronghold engine error: {0}")]
+  StrongholdEngine(#[from] iota_stronghold::Error),
+  #[error("quorum: {0}")]
   QuorumInit(String),
   #[error("network error: {0}")]
   NetworkError(String),
-  #[error("subscription channel closed")]
+  #[error("channel closed")]
   ChannelClosed,
 }
 

@@ -7,12 +7,10 @@ use pyo3::{
   types::PyList,
 };
 use tidext::{
-  error::Error,
-  keyring::{
-    stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
-    AccountId, TidefiKeyring,
-  },
-  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill,
+  primitives::AccountId,
+  stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
+  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Error, Permill,
+  TidefiKeyring,
 };
 use zeroize::Zeroize;
 
@@ -176,23 +174,26 @@ impl Client {
   }
 
   fn get_account_id(&self) -> Vec<u8> {
-    let account_id: [u8; 32] = self.inner.get_account_id().into();
+    let account_id: [u8; 32] = self.inner.account_id().clone().into();
     account_id.to_vec()
   }
 
   fn get_account_id_ss58(&self) -> String {
-    self.inner.get_account_id().to_string()
+    self.inner.account_id().to_string()
   }
 
+  /*
+  FIXME: Expose Permill
   fn get_regular_swap_fee<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
-    python_future!(py, client.get_regular_swap_fee())
+    python_future!(py, client.swap_fee())
   }
 
   fn get_market_maker_swap_fee<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
-    python_future!(py, client.get_market_maker_swap_fee())
+    python_future!(py, client.swap_fee_market_maker())
   }
+  */
 
   fn extrinsic_cost<'p>(&self, py: Python<'p>, extrinsic: String) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
@@ -274,7 +275,7 @@ impl Client {
     python_future!(
       py,
       client.transfer_extrinsic(
-        &AccountId::from(destination),
+        AccountId::from(destination),
         wrapper::currency_id_into(token_id),
         amount,
       )
@@ -291,7 +292,7 @@ impl Client {
       let id: [u8; 32] = id[0..32][..].try_into().expect("invalid account id value");
       AccountId::from(id)
     } else {
-      self.inner.get_account_id()
+      self.inner.account_id().clone()
     };
 
     let client = self.inner.clone();
@@ -372,7 +373,7 @@ impl Client {
       client.withdrawal(
         wrapper::currency_id_into(token_id),
         amount,
-        external_address.into(),
+        external_address,
       )
     )
   }
@@ -390,7 +391,7 @@ impl Client {
       client.withdrawal_extrinsic(
         wrapper::currency_id_into(token_id),
         amount,
-        external_address.into(),
+        external_address,
       )
     )
   }

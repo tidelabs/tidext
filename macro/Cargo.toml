@@ -1,0 +1,19 @@
+[package]
+name = "tidext-macro"
+version = "0.1.0"
+authors = ["Semantic Network Team <admin@semantic-network.com>"]
+edition = "2021"
+autotests = false
+
+license = "GPL-3.0"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "1.0", features = ["full"] }
+proc-macro-error = "1.0.4"
+proc-macro-crate = "0.1.5"
+convert_case = "0.5.0"

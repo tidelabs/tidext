@@ -8,35 +8,27 @@ edition = "2021"
 default = [ "production" ]
 production = ["keyring-stronghold"]
 dev = [ "sp-keyring", "another" ]
-keyring-stronghold = [ "iota_stronghold" ]
+keyring-stronghold = [ "iota_stronghold", "actix" ]
 keyring-stronghold_ex = [ "ex_client" ]
 test = ["which", "env_logger", "sp-keyring"]
 another = []
 
 [dependencies]
-tokio = { version = "1", features = [], default-features = false }
-num-traits = "0.2"
-num-derive = "0.3"
-anyhow = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 thiserror = "1.0"
 log = "0.4"
 futures = "0.3"
-uuid = { version = "0.8", features = ["v4"] }
 hex = "0.4"
-actix = "0.12"
-regex = { version = "1.4", optional = true }
+actix = { version = "0.12", optional = true }
 num-bigint = "0.4.2"
-array-bytes = "1.1.0"
-# substrate
 async-trait = "0.1.40"
 parity-scale-codec = { version = "3" }
+
 # Internal fork of `subxt` with few patches, branched for better `diff` and cherry picking
 subxt = {git = "https://github.com/tide-labs/subxt", branch = "tidechain" }
 subxt-macro = { git = "https://github.com/tide-labs/subxt", branch = "tidechain" }
 
-sp-rpc = { git = "https://github.com/tide-labs/substrate", branch = "tidechain", optional = true }
 sp-keyring = { git = "https://github.com/tide-labs/substrate", branch = "tidechain", optional = true }
 sp-runtime = { git = "https://github.com/tide-labs/substrate", branch = "tidechain"}
 frame-support = { git = "https://github.com/tide-labs/substrate", branch = "tidechain" }
@@ -57,6 +49,8 @@ jsonrpsee = { version = "0.8.0", features = ["macros", "ws-client", "client-ws-t
 # test module dependencies
 which = { version = "4.2.2", optional = true }
 env_logger = { version = "0.8.3", optional = true }
+
+tidext-macro = { path = "../macro" }
 
 [dev-dependencies]
 tidext = { path = ".", features = ["test"] }

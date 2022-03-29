@@ -159,7 +159,7 @@ impl QuorumExt for Client {
       .runtime()
       .storage()
       .quorum()
-      .members(&account_id, None)
+      .members(account_id, None)
       .await?
       .unwrap_or(false);
     Ok(is_member)
