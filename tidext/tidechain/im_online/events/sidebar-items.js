@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AllGood",""],["HeartbeatReceived",""],["SomeOffline",""]]});

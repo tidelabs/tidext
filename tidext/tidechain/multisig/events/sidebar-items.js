@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["MultisigApproval",""],["MultisigCancelled",""],["MultisigExecuted",""],["NewMultisig",""]]});

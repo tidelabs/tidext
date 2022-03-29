@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["dispatch",""],["storage",""],["traits",""],["weights",""]],"struct":[["PalletId",""]]});

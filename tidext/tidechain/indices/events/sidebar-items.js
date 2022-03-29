@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["IndexAssigned",""],["IndexFreed",""],["IndexFrozen",""]]});

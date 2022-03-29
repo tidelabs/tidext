@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ApprovalCancelled",""],["ApprovedTransfer",""],["AssetFrozen",""],["AssetStatusChanged",""],["AssetThawed",""],["Burned",""],["Created",""],["Destroyed",""],["ForceCreated",""],["Frozen",""],["Issued",""],["MetadataCleared",""],["MetadataSet",""],["OwnerChanged",""],["TeamChanged",""],["Thawed",""],["Transferred",""],["TransferredApproved",""]]});

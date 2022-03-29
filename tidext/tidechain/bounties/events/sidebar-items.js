@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BountyAwarded",""],["BountyBecameActive",""],["BountyCanceled",""],["BountyClaimed",""],["BountyExtended",""],["BountyProposed",""],["BountyRejected",""]]});

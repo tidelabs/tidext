@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcknowledgeBurned",""],["AcknowledgeProposal",""],["EvalProposalState",""],["RejectProposal",""],["SubmitProposal",""],["SubmitPublicKeys",""],["TransactionApi",""]]});

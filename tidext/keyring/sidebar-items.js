@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["StrongholdSigner",""],["TidefiKeyring",""]],"type":[["AccountId","`TiDeFi` Account ID representation"],["KeyPair","`TiDeFi` Key-pair representation"],["TidefiPairSigner","Stronghold pair signer."]]});

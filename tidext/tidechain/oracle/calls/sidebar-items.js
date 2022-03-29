@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AddMarketMaker",""],["CancelSwap",""],["ConfirmSwap",""],["ImAlive",""],["RemoveMarketMaker",""],["SetAccountId",""],["SetStatus",""],["TransactionApi",""]]});

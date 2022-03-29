@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["BountyStatus",""]],"mod":[["pallet",""]],"struct":[["Bounty",""]]});

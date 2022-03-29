@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Cache","The [`Cache`] struct used to store the data in an ordered format."]]});

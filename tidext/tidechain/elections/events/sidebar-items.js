@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CandidateSlashed",""],["ElectionError",""],["EmptyTerm",""],["MemberKicked",""],["NewTerm",""],["Renounced",""],["SeatHolderSlashed",""]]});

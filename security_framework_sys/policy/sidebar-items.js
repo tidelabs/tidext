@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["kSecRevocationCRLMethod",""],["kSecRevocationNetworkAccessDisabled",""],["kSecRevocationOCSPMethod",""],["kSecRevocationPreferCRL",""],["kSecRevocationRequirePositiveResponse",""],["kSecRevocationUseAnyAvailableMethod",""]],"fn":[["SecPolicyCreateBasicX509",""],["SecPolicyCreateRevocation",""],["SecPolicyCreateSSL",""],["SecPolicyGetTypeID",""]]});

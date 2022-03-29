@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["SecTrust","A type representing a trust evaluation for a certificate."],["TrustOptions","The option flags used to configure the evaluation of a `SecTrust`."],["TrustResult","The result of trust evaluation."]]});

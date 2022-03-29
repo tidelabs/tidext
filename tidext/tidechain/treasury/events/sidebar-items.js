@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Awarded",""],["Burnt",""],["Deposit",""],["Proposed",""],["Rejected",""],["Rollover",""],["Spending",""]]});

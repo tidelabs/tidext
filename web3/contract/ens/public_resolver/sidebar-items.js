@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["PublicResolver","[`PublicResolver`] implements a general-purpose ENS resolver that is suitable for most standard ENS use-cases."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CodeUpdated",""],["ExtrinsicFailed",""],["ExtrinsicSuccess",""],["KilledAccount",""],["NewAccount",""],["Remarked",""]]});

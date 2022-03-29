@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ElectionFinalized",""],["Rewarded",""],["SignedPhaseStarted",""],["Slashed",""],["SolutionStored",""],["UnsignedPhaseStarted",""]]});

@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["pallet_transaction_payment_rpc_runtime_api"] = [{"text":"impl&lt;Block:&nbsp;<a class=\"trait\" href=\"sp_runtime/traits/trait.Block.html\" title=\"trait sp_runtime::traits::Block\">BlockT</a>, Balance&gt; <a class=\"trait\" href=\"sp_api/trait.RuntimeApiInfo.html\" title=\"trait sp_api::RuntimeApiInfo\">RuntimeApiInfo</a> for dyn <a class=\"trait\" href=\"pallet_transaction_payment_rpc_runtime_api/trait.TransactionPaymentApi.html\" title=\"trait pallet_transaction_payment_rpc_runtime_api::TransactionPaymentApi\">TransactionPaymentApi</a>&lt;Block, Balance&gt;","synthetic":false,"types":[]}];
+implementors["sp_api"] = [];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

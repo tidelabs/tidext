@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Item","A batch verification item."],["Verifier","A batch verification context."]]});

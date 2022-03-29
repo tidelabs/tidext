@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Approvals",""],["ProposalCount",""],["Proposals",""],["StorageApi",""]]});

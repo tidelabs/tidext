@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AccountChanged",""],["MarketMakerAdded",""],["MarketMakerRemoved",""],["StatusChanged",""],["SwapCancelled",""],["SwapProcessed",""]]});

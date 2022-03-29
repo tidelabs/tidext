@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AccountChanged",""],["BurnedAcknowledged",""],["BurnedInitialized",""],["ConfigurationUpdated",""],["Minted",""],["ProposalApproved",""],["ProposalProcessed",""],["ProposalRejected",""],["ProposalSubmitted",""],["StatusChanged",""],["VoteAgainst",""],["VoteFor",""],["WatchTransactionAdded",""]]});

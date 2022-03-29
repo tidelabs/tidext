@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["consts",""]],"trait":[["Aead","A common interface for AEAD encryption algorithms."]],"type":[["Key","A key used by an [`Aead`] implementation."],["Nonce","A nonce used by an [`Aead`] implementation."],["Tag","A tag produced by an [`Aead`] implementation."]]});

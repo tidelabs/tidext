@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Bonded",""],["Chilled",""],["EraPaid",""],["Kicked",""],["OldSlashingReportDiscarded",""],["PayoutStarted",""],["Rewarded",""],["Slashed",""],["StakersElected",""],["StakingElectionFailed",""],["Unbonded",""],["Withdrawn",""]]});
