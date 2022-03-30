@@ -156,14 +156,16 @@ publish-rustdoc:
       artifacts: true
   script:
     # Set git config
-    - git config user.email "tidechain.ci@gmail.com"
-    - git config user.name "${GITHUB_USER}"
-    - git remote add github "git@github.com:/tide-labs/tidext.git"
-    - git fetch github gh-pages
+    - git clone "git@github.com:/tide-labs/tidext.git" gh-pages
     # Save README and docs
+    - rm -rf /tmp/doc/
     - cp -r ./crate-docs/ /tmp/doc/
     - cp README.md /tmp/doc/
+    # Checkout gh-pages
+    - pushd gh-pages
     - git checkout gh-pages
+    - git config user.email "tidechain.ci@gmail.com"
+    - git config user.name "${GITHUB_USER}"
     # Remove everything and restore generated docs and README
     - rm -rf ./*
     - mv /tmp/doc/* .
@@ -175,7 +177,8 @@ publish-rustdoc:
     # publish though, hence the `|| true`.
     - git commit -m "Updated docs for ${CI_COMMIT_REF_NAME}" ||
       echo "___Nothing to commit___"
-    - git push github gh-pages --force
+    - git push origin gh-pages --force
     - echo "___Rustdoc was successfully published to https://tide-labs.github.io/tidext/___"
   after_script:
-    - rm -rf .git/ ./*
+    - rm -rf ./gh-pages
+    - rm -rf /tmp/doc/

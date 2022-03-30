@@ -1,3 +1,19 @@
+// Copyright 2021-2022 Semantic Network Ltd.
+// This file is part of tidext.
+
+// tidext is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// Tidechain is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with tidext.  If not, see <http://www.gnu.org/licenses/>.
+
 use serde::{Deserialize, Serialize};
 
 /// Make RPC call to Tidechain
@@ -52,7 +68,7 @@ macro_rules! query_storage {
  }};
 }
 
-/// Get latest tidechain block
+/// Get latest Tidechain block
 #[macro_export]
 macro_rules! latest_block {
   ($self:ident) => {{
@@ -66,7 +82,7 @@ macro_rules! latest_block {
   }};
 }
 
-/// Health status returned by the RPC
+/// Health status of the node the client is currently connected
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NodeHealth {
