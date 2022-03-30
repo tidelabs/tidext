@@ -22,7 +22,39 @@
 <span id="20">20</span>
 <span id="21">21</span>
 <span id="22">22</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">proc_macro</span>::{<span class="self">self</span>, <span class="ident">TokenStream</span>};
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
+<span class="comment">// This file is part of tidext.</span>
+
+<span class="comment">// tidext is free software: you can redistribute it and/or modify</span>
+<span class="comment">// it under the terms of the GNU General Public License as published by</span>
+<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
+<span class="comment">// (at your option) any later version.</span>
+
+<span class="comment">// Tidechain is distributed in the hope that it will be useful,</span>
+<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="comment">// GNU General Public License for more details.</span>
+
+<span class="comment">// You should have received a copy of the GNU General Public License</span>
+<span class="comment">// along with tidext.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kw">use</span> <span class="ident">proc_macro</span>::{<span class="self">self</span>, <span class="ident">TokenStream</span>};
 <span class="kw">use</span> <span class="ident">syn::spanned::Spanned</span>;
 
 <span class="kw">mod</span> <span class="ident">expand</span>;
@@ -32,7 +64,7 @@
 <span class="attribute">#[<span class="ident">proc_macro_attribute</span>]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tidext</span>(<span class="ident">attr</span>: <span class="ident">TokenStream</span>, <span class="ident">item</span>: <span class="ident">TokenStream</span>) -&gt; <span class="ident">TokenStream</span> {
   <span class="kw">if</span> <span class="op">!</span><span class="ident">attr</span>.<span class="ident">is_empty</span>() {
-    <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="string">&quot;Invalid pallet macro call: expected no attributes, e.g. macro call must be just \
+    <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="string">&quot;Invalid tidext macro call: expected no attributes, e.g. macro call must be just \
 			``#[tidext]`&quot;</span>;
     <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">proc_macro2::TokenStream::from</span>(<span class="ident">attr</span>).<span class="ident">span</span>();
     <span class="kw">return</span> <span class="ident">syn::Error::new</span>(<span class="ident">span</span>, <span class="ident">msg</span>).<span class="ident">to_compile_error</span>().<span class="ident">into</span>();
