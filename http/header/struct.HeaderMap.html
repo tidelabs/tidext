@@ -333,7 +333,7 @@ values.</p>
 <code>IntoIter</code>.</p>
 <h5 id="panics-1" class="section-header"><a href="#panics-1">Panics</a></h5>
 <p>This panics if the first yielded item does not have a <code>HeaderName</code>.</p>
-<h5 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h5>
+<h5 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h5>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HeaderMap::new</span>();
 
 <span class="ident">map</span>.<span class="ident">insert</span>(<span class="ident">ACCEPT</span>, <span class="string">&quot;text/plain&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>());
@@ -374,7 +374,7 @@ this.</p>
 <p>For each yielded item that has <code>None</code> provided for the <code>HeaderName</code>,
 then the associated header name is the same as that of the previously
 yielded item. The first yielded item will have <code>HeaderName</code> set.</p>
-<h5 id="examples-25" class="section-header"><a href="#examples-25">Examples</a></h5>
+<h5 id="examples-23" class="section-header"><a href="#examples-23">Examples</a></h5>
 <p>Basic usage.</p>
 
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HeaderMap::new</span>();

@@ -52,20 +52,51 @@
 <span id="50">50</span>
 <span id="51">51</span>
 <span id="52">52</span>
-</pre><pre class="rust"><code><span class="doccomment">/// Make RPC call to tidechain</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+
+<span class="doccomment">/// Make RPC call to Tidechain</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```no_run</span>
-<span class="doccomment">/// use tidext::make_rpc_call;</span>
+<span class="doccomment">/// use tidext::{make_rpc_call, primitives::CurrencyId};</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let account_balance = make_rpc_call!(</span>
 <span class="doccomment">///   client_instance,</span>
 <span class="doccomment">///   &quot;tidefi_getAccountBalance&quot;,</span>
 <span class="doccomment">///   CurrencyBalance&lt;BalanceInfo&gt;,</span>
 <span class="doccomment">///   account_id,</span>
-<span class="doccomment">///   currency_id</span>
-<span class="doccomment">/// );</span>
+<span class="doccomment">///   CurrencyId::Tide</span>
+<span class="doccomment">/// )?;</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">make_rpc_call</span> {
@@ -81,6 +112,19 @@
 }
 
 <span class="doccomment">/// Query Tidechain storage</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Example</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```no_run</span>
+<span class="doccomment">/// use tidext::{query_storage, primitives::CurrencyId};</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let tide_staking_pool = query_storage!(</span>
+<span class="doccomment">///   client_instance,</span>
+<span class="doccomment">///   tidefi_staking,</span>
+<span class="doccomment">///   staking_pool,</span>
+<span class="doccomment">///   &amp;CurrencyId::Tide</span>
+<span class="doccomment">/// )?;</span>
+<span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">query_storage</span> {
   (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">pallet</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">item</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">params</span>: <span class="ident">expr</span>),<span class="kw-2">*</span>) =&gt; {{
@@ -91,7 +135,7 @@
  }};
 }
 
-<span class="doccomment">/// Get latest block</span>
+<span class="doccomment">/// Get latest tidechain block</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules!</span> <span class="ident">latest_block</span> {
   (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ident</span>) =&gt; {{
@@ -103,6 +147,20 @@
       .<span class="kw">await</span><span class="question-mark">?</span>
       .<span class="ident">unwrap_or_default</span>()
   }};
+}
+
+<span class="doccomment">/// Health status returned by the RPC</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>)]</span>
+<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NodeHealth</span> {
+  <span class="doccomment">/// Number of connected peers</span>
+  <span class="kw">pub</span> <span class="ident">peers</span>: <span class="ident">usize</span>,
+  <span class="doccomment">/// Is the node syncing</span>
+  <span class="kw">pub</span> <span class="ident">is_syncing</span>: <span class="ident">bool</span>,
+  <span class="doccomment">/// Should this node have any peers</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// Might be false for local chains or when running without discovery.</span>
+  <span class="kw">pub</span> <span class="ident">should_have_peers</span>: <span class="ident">bool</span>,
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="tidext" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0 (9d1b2106e 2022-02-23)" ></div>

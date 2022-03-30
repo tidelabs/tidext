@@ -32,6 +32,14 @@
 <span id="30">30</span>
 <span id="31">31</span>
 <span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
 </pre><pre class="rust"><code><span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span> {
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;io error: {0}&quot;</span>)]</span>
@@ -40,17 +48,25 @@
   <span class="ident">Utf8</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">std::string::FromUtf8Error</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;json error: {0}&quot;</span>)]</span>
   <span class="ident">Json</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">serde_json::Error</span>),
-  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;substrate error: {0}&quot;</span>)]</span>
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;tidechain error: {0}&quot;</span>)]</span>
   <span class="ident">Substrate</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">subxt::BasicError</span>),
-  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;substrate error: {0}&quot;</span>)]</span>
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;dispatch error: {0}&quot;</span>)]</span>
+  <span class="ident">DispatchError</span>(<span class="ident">String</span>),
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;codec error: {0}&quot;</span>)]</span>
   <span class="ident">Codec</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">parity_scale_codec::Error</span>),
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;jsonrpsee error: {0}&quot;</span>)]</span>
+  <span class="ident">JsonRpsee</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">jsonrpsee::core::Error</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;other error: {0}&quot;</span>)]</span>
   <span class="ident">Other</span>(<span class="ident">String</span>),
-  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;quorum initialization error: {0}&quot;</span>)]</span>
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;stronghold error: {0}&quot;</span>)]</span>
+  <span class="ident">Stronghold</span>(<span class="ident">String</span>),
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;stronghold engine error: {0}&quot;</span>)]</span>
+  <span class="ident">StrongholdEngine</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">iota_stronghold::Error</span>),
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;quorum: {0}&quot;</span>)]</span>
   <span class="ident">QuorumInit</span>(<span class="ident">String</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;network error: {0}&quot;</span>)]</span>
   <span class="ident">NetworkError</span>(<span class="ident">String</span>),
-  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;subscription channel closed&quot;</span>)]</span>
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;channel closed&quot;</span>)]</span>
   <span class="ident">ChannelClosed</span>,
 }
 

@@ -14,10 +14,8 @@
 <span id="12">12</span>
 <span id="13">13</span>
 <span id="14">14</span>
-<span id="15">15</span>
-<span id="16">16</span>
-<span id="17">17</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">subxt::sp_core</span>::{<span class="ident">crypto::AccountId32</span>, <span class="ident">sr25519</span>};
+</pre><pre class="rust"><code><span class="doccomment">//! Tidext official keyring.</span>
+<span class="kw">use</span> <span class="ident">subxt::sp_core::sr25519</span>;
 
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;keyring-stronghold&quot;</span>, <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;stronghold.rs&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;keyring-stronghold_ex&quot;</span>, <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;stronghold_ex.rs&quot;</span>)]</span>
@@ -26,13 +24,9 @@
   <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;dev.rs&quot;</span>
 )]</span>
 <span class="kw">mod</span> <span class="ident">keyring_impl</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">keyring_impl</span>::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::keyring_impl</span>::<span class="kw-2">*</span>;
-
-<span class="doccomment">/// `TiDeFi` Account ID representation</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> <span class="ident">AccountId32</span>;
-
-<span class="doccomment">/// `TiDeFi` Key-pair representation</span>
+<span class="doccomment">/// Tidechain key-pair representation.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">KeyPair</span> <span class="op">=</span> <span class="ident">sr25519::Pair</span>;
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="tidext" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0 (9d1b2106e 2022-02-23)" ></div>
