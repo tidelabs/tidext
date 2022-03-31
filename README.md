@@ -9,7 +9,7 @@ _This project is currently under active development_.
 Take a look in the [examples](./examples/examples) folder for various `tidext` usage examples.
 
 ```
-cargo run -p tidext-examples --example local
+cargo run --example local
 ```
 
 ### Initializing the API client

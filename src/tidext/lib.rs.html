@@ -336,6 +336,23 @@
 <span id="334">334</span>
 <span id="335">335</span>
 <span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -441,6 +458,7 @@
   <span class="ident">AccountId</span>, <span class="ident">Balance</span>, <span class="ident">BalanceInfo</span>, <span class="ident">BlockNumber</span>, <span class="ident">CurrencyBalance</span>, <span class="ident">CurrencyId</span>, <span class="ident">CurrencyMetadata</span>,
   <span class="ident">Hash</span>, <span class="ident">Stake</span>, <span class="ident">SwapType</span>,
 };
+<span class="kw">use</span> <span class="ident">sp_runtime::MultiAddress</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::Permill</span>;
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
 <span class="kw">use</span> <span class="ident">subxt</span>::{
@@ -450,6 +468,7 @@
 };
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SubstrateSubxtError</span>, <span class="ident">Signer</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt_impl</span>::{<span class="ident">tidechain</span>, <span class="ident">TidechainConfig</span>};
+<span class="kw">use</span> <span class="ident">tidechain::runtime_types::pallet_staking::RewardDestination</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">tidefi_primitives</span> <span class="kw">as</span> <span class="ident">primitives</span>;
 <span class="kw">use</span> <span class="ident">tidext_macro::tidext</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">traits</span>::<span class="kw-2">*</span>;
@@ -517,6 +536,21 @@
     <span class="doccomment">/// Stake token for the current signer</span>
     <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;tidefi_staking&quot;</span>]</span>
     <span class="kw">fn</span> <span class="ident">stake</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">currency_id</span>: <span class="ident">CurrencyId</span>, <span class="ident">amount</span>: <span class="ident">Balance</span>, <span class="ident">duration</span>: <span class="ident">u32</span>);
+
+    <span class="doccomment">/// Declare no desire to either validate or nominate</span>
+    <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;staking&quot;</span>]</span>
+    <span class="kw">fn</span> <span class="ident">chill</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
+
+    <span class="doccomment">/// Bond TIDE tokens.</span>
+    <span class="doccomment">/// Take the signer account as a stash and lock up `value` of its balance. `controller` will</span>
+    <span class="doccomment">/// be the account that controls it</span>
+    <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;staking&quot;</span>]</span>
+    <span class="attribute">#[<span class="ident">tidext::substitute_params</span> <span class="op">=</span> (
+      <span class="ident">MultiAddress::Id</span>(<span class="ident">controller</span>),
+      <span class="ident">value</span>,
+      <span class="ident">RewardDestination::Controller</span>
+    )]</span>
+    <span class="kw">fn</span> <span class="ident">bond</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">controller</span>: <span class="ident">AccountId</span>, <span class="ident">value</span>: <span class="ident">Balance</span>);
 
     <span class="doccomment">/// Unstake token for the current signer</span>
     <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;tidefi_staking&quot;</span>]</span>
