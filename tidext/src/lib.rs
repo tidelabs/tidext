@@ -103,6 +103,7 @@ use primitives::{
   AccountId, Balance, BalanceInfo, BlockNumber, CurrencyBalance, CurrencyId, CurrencyMetadata,
   Hash, Stake, SwapType,
 };
+use sp_runtime::MultiAddress;
 pub use sp_runtime::Permill;
 use std::sync::Arc;
 use subxt::{
@@ -112,6 +113,7 @@ use subxt::{
 };
 pub use subxt::{Error as SubstrateSubxtError, Signer};
 pub use subxt_impl::{tidechain, TidechainConfig};
+use tidechain::runtime_types::pallet_staking::RewardDestination;
 pub use tidefi_primitives as primitives;
 use tidext_macro::tidext;
 pub use traits::*;
@@ -179,6 +181,21 @@ mod client {
     /// Stake token for the current signer
     #[tidext::pallet = "tidefi_staking"]
     fn stake(&self, currency_id: CurrencyId, amount: Balance, duration: u32);
+
+    /// Declare no desire to either validate or nominate
+    #[tidext::pallet = "staking"]
+    fn chill(&self);
+
+    /// Bond TIDE tokens.
+    /// Take the signer account as a stash and lock up `value` of its balance. `controller` will
+    /// be the account that controls it
+    #[tidext::pallet = "staking"]
+    #[tidext::substitute_params = (
+      MultiAddress::Id(controller),
+      value,
+      RewardDestination::Controller
+    )]
+    fn bond(&self, controller: AccountId, value: Balance);
 
     /// Unstake token for the current signer
     #[tidext::pallet = "tidefi_staking"]
