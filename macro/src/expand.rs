@@ -61,6 +61,12 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
       })
       .collect();
 
+    let all_params_token : proc_macro2::TokenStream = if let Some(params) = &attr.params_overwrite {
+      params.elems.to_token_stream()
+    } else {
+      quote::quote!(#(#all_params,)*)
+    };
+
     let pallet_name = &attr.pallet;
 
     if let Some(rpc_call) = &attr.is_rpc {
@@ -113,7 +119,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#(#all_params,)*)
+            .#function_name(#all_params_token)
             .sign_and_submit(&self.signer)
             .await?;
           Ok(())
@@ -130,7 +136,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#(#all_params,)*)
+            .#function_name(#all_params_token)
             .sign_and_submit_then_watch(&self.signer)
             .await?
             .wait_for_finalized_success()
@@ -151,7 +157,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#(#all_params,)*)
+            .#function_name(#all_params_token)
             .create_signed(&self.signer, Default::default())
             .await?;
           let bytes: Bytes = extrinsic.encode().into();

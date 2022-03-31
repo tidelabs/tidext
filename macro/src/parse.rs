@@ -27,6 +27,7 @@ mod keyword {
 mod keyword_fn {
   syn::custom_keyword!(pallet);
   syn::custom_keyword!(substitute_fn);
+  syn::custom_keyword!(substitute_params);
   syn::custom_keyword!(rpc);
   syn::custom_keyword!(consts);
 }
@@ -40,6 +41,7 @@ mod keyword_fn {
 pub enum FnAttr {
   Pallet(syn::Ident, proc_macro2::Span),
   Rename(syn::Ident, proc_macro2::Span),
+  Params(syn::ExprTuple, proc_macro2::Span),
   Rpc(syn::Ident, proc_macro2::Span),
   Const(syn::Ident, proc_macro2::Span),
 }
@@ -47,9 +49,11 @@ pub enum FnAttr {
 impl FnAttr {
   fn attr_span(&self) -> proc_macro2::Span {
     match self {
-      Self::Pallet(_, span) | Self::Rename(_, span) | Self::Rpc(_, span) | Self::Const(_, span) => {
-        *span
-      }
+      Self::Pallet(_, span)
+      | Self::Rename(_, span)
+      | Self::Params(_, span)
+      | Self::Rpc(_, span)
+      | Self::Const(_, span) => *span,
     }
   }
 }
@@ -68,6 +72,7 @@ impl syn::parse::Parse for FnAttr {
       content.parse::<keyword_fn::pallet>()?;
       content.parse::<syn::Token![=]>()?;
       let renamed_prefix = content.parse::<syn::LitStr>()?;
+
       let new_ident = syn::parse_str::<syn::Ident>(&renamed_prefix.value()).map_err(|_| {
         let msg = format!("`{}` is not a valid identifier", renamed_prefix.value());
         syn::Error::new(renamed_prefix.span(), msg)
@@ -84,6 +89,12 @@ impl syn::parse::Parse for FnAttr {
       })?;
 
       Ok(Self::Rename(new_ident, attr_span))
+    } else if lookahead.peek(keyword_fn::substitute_params) {
+      content.parse::<keyword_fn::substitute_params>()?;
+      content.parse::<syn::Token![=]>()?;
+
+      let expr_tuple = content.parse::<syn::ExprTuple>()?;
+      Ok(Self::Params(expr_tuple, attr_span))
     } else if lookahead.peek(keyword_fn::rpc) {
       content.parse::<keyword_fn::rpc>()?;
       content.parse::<syn::Token![=]>()?;
@@ -113,6 +124,7 @@ impl syn::parse::Parse for FnAttr {
 
 struct FnAttrInfo {
   pallet: syn::Ident,
+  params: Option<syn::ExprTuple>,
   rename: Option<syn::Ident>,
   is_rpc: Option<syn::Ident>,
   is_const: Option<syn::Ident>,
@@ -124,10 +136,13 @@ impl FnAttrInfo {
     let mut rename = None;
     let mut is_rpc = None;
     let mut is_const = None;
+    let mut params = None;
+
     for attr in attrs {
       match attr {
         FnAttr::Pallet(ident, ..) if pallet.is_none() => pallet = Some(ident),
         FnAttr::Rename(ident, ..) if rename.is_none() => rename = Some(ident),
+        FnAttr::Params(ident, ..) if params.is_none() => params = Some(ident),
         FnAttr::Rpc(found_rpc, ..) if is_rpc.is_none() => is_rpc = Some(found_rpc),
         FnAttr::Const(found_const, ..) if is_const.is_none() => is_const = Some(found_const),
         attr => {
@@ -143,6 +158,7 @@ impl FnAttrInfo {
       is_rpc,
       is_const,
       rename,
+      params,
       pallet: pallet.ok_or_else(|| syn::Error::new(item_span, "Missing `#[tidext::pallet]`"))?,
     })
   }
@@ -198,6 +214,7 @@ pub struct FnItem {
   pub is_rpc: Option<syn::Ident>,
   pub is_const: Option<syn::Ident>,
   pub docs: Vec<syn::Lit>,
+  pub params_overwrite: Option<syn::ExprTuple>,
 }
 
 impl FnItem {
@@ -259,6 +276,7 @@ impl CallDef {
             rename,
             is_const,
             is_rpc,
+            params,
           } = FnAttrInfo::from_attrs(attrs, method.span()).unwrap();
 
           let docs = get_doc_literals(&method.attrs.clone());
@@ -270,6 +288,7 @@ impl CallDef {
             is_rpc,
             is_const,
             docs,
+            params_overwrite: params,
           })
         } else {
           None
