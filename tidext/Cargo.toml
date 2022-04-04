@@ -26,22 +26,22 @@ async-trait = "0.1.40"
 parity-scale-codec = { version = "3" }
 
 # Internal fork of `subxt` with few patches, branched for better `diff` and cherry picking
-subxt = {git = "https://github.com/tide-labs/subxt", branch = "tidechain" }
-subxt-macro = { git = "https://github.com/tide-labs/subxt", branch = "tidechain" }
+subxt = {git = "https://github.com/tidelabs/subxt", branch = "tidechain" }
+subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "tidechain" }
 
-sp-keyring = { git = "https://github.com/tide-labs/substrate", branch = "tidechain", optional = true }
-sp-runtime = { git = "https://github.com/tide-labs/substrate", branch = "tidechain"}
-frame-support = { git = "https://github.com/tide-labs/substrate", branch = "tidechain" }
-pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/tide-labs/substrate", branch = "tidechain" }
+sp-keyring = { git = "https://github.com/tidelabs/substrate", branch = "tidechain", optional = true }
+sp-runtime = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
+frame-support = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
+pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
 
 # Primitives
-tidefi-primitives = { git = "https://github.com/tide-labs/primitives", branch = "dev" }
+tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 
 # Stronghold
-iota_stronghold = { git = "https://github.com/tide-labs/stronghold.rs", branch = "dev", optional = true }
+iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # ex_client stronghold variant
-ex_client = { git = "https://github.com/tide-labs/stronghold.rs", branch = "dev", optional = true }
+ex_client = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # jsonrpsee
 jsonrpsee = { version = "0.8.0", features = ["macros", "ws-client", "client-ws-transport"] }
@@ -55,6 +55,6 @@ tidext-macro = { path = "../macro" }
 [dev-dependencies]
 tidext = { path = ".", features = ["test"] }
 tokio = { version = "1", features = [ "full" ], default-features = false }
-sp-keyring = { git = "https://github.com/tide-labs/substrate", branch = "tidechain" }
-sp-core = { git = "https://github.com/tide-labs/substrate", branch = "tidechain"}
+sp-keyring = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
+sp-core = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
 async-std = { version = "1.9.0", features = ["attributes", "tokio1"] }

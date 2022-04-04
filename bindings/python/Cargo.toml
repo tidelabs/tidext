@@ -13,9 +13,9 @@ doc = false
 tidext = { path = "../../tidext" }
 actix = "0.12"
 zeroize = "1.5"
-iota-crypto = { git = "https://github.com/tide-labs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
+iota-crypto = { git = "https://github.com/tidelabs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
 futures = "0.3"
 # Primitives
-tidefi-primitives = { git = "https://github.com/tide-labs/primitives", branch = "dev" }
+tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 pyo3 = { version = "0.15", features = ["extension-module"] }
 pyo3-asyncio = { version = "0.15", features = ["attributes", "tokio-runtime"] }

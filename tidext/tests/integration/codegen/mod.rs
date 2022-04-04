@@ -20,7 +20,7 @@
 /// Generate by:
 ///
 /// - run `tidechain --dev --tmp` node locally
-/// - cargo install --git https://github.com/tide-labs/substrate --branch=tidechain --force
+/// - cargo install --git https://github.com/tidelabs/substrate --branch=tidechain --force
 /// - `subxt codegen | rustfmt --edition=2021 --emit=stdout > tidext/tests/integration/codegen/tidechain.rs`
 
 #[rustfmt::skip]
