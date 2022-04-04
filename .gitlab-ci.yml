@@ -156,7 +156,7 @@ publish-rustdoc:
       artifacts: true
   script:
     # Set git config
-    - git clone "git@github.com:/tide-labs/tidext.git" gh-pages
+    - git clone "git@github.com:/tidelabs/tidext.git" gh-pages
     # Save README and docs
     - rm -rf /tmp/doc/
     - cp -r ./crate-docs/ /tmp/doc/
@@ -178,7 +178,7 @@ publish-rustdoc:
     - git commit -m "Updated docs for ${CI_COMMIT_REF_NAME}" ||
       echo "___Nothing to commit___"
     - git push origin gh-pages --force
-    - echo "___Rustdoc was successfully published to https://tide-labs.github.io/tidext/___"
+    - echo "___Rustdoc was successfully published to https://tidelabs.github.io/tidext/___"
   after_script:
     - rm -rf ./gh-pages
     - rm -rf /tmp/doc/

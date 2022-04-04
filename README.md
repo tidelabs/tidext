@@ -1,6 +1,6 @@
 # tidext
 
-A library to submit **tide** e**xt**rinsics to a [tidechain](https://github.com/tide-labs/tidechain) node via RPC.
+A library to submit **tide** e**xt**rinsics to a [tidechain](https://github.com/tidelabs/tidechain) node via RPC.
 
 _This project is currently under active development_.
 
@@ -40,12 +40,12 @@ client.swap(
 
 ## Documentation
 
-The package is not published to crates.io yet, but you can find the documentation [here](https://tide-labs.github.io/tidext/).
+The package is not published to crates.io yet, but you can find the documentation [here](https://tidelabs.github.io/tidext/).
 
 ## Generate node metadata
 
 ```
-cargo install --git https://github.com/tide-labs/subxt --branch=tidechain --force
+cargo install --git https://github.com/tidelabs/subxt --branch=tidechain --force
 subxt metadata > tidext/res/tidechain_metadata.scale --format bytes
 ```
 

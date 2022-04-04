@@ -12,9 +12,9 @@ tidext = { path = "../../tidext" }
 actix = "0.12"
 zeroize = "1.5"
 anyhow = "1"
-iota-crypto = { git = "https://github.com/tide-labs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
+iota-crypto = { git = "https://github.com/tidelabs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
 # Primitives
-tidefi-primitives = { git = "https://github.com/tide-labs/primitives", branch = "dev" }
+tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
 napi = { version = "2.0.4", default-features = false, features = ["napi4", "async"] }
 napi-derive = "2.0.8"
