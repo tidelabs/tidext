@@ -35,7 +35,7 @@ client.swap(
   1_000_000,
   SwapType::Limit,
   None,
-);
+).await?;
 ```
 
 ## Documentation
