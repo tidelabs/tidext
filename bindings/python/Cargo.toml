@@ -2,7 +2,7 @@
 name = "python-tidext"
 version = "0.1.0"
 edition = "2021"
-authors = ["Lucas Nogueira <lucas.nogueira@semantic-network.com>"]
+authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 
 [lib]
 name = "tidext"

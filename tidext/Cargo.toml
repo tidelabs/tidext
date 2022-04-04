@@ -1,7 +1,7 @@
 [package]
 name = "tidext"
 version = "0.1.0"
-authors = ["Semantic Network Team <admin@semantic-network.com>"]
+authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 edition = "2021"
 
 [features]
