@@ -2,7 +2,7 @@
 edition = "2021"
 name = "nodejs-tidext"
 version = "0.0.0"
-authors = ["Semantic Network Team"]
+authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 
 [lib]
 crate-type = ["cdylib"]
