@@ -34,8 +34,12 @@ pub enum Error {
   Other(String),
   #[error("stronghold error: {0}")]
   Stronghold(String),
+  #[cfg(not(feature = "keyring-stronghold_ex"))]
   #[error("stronghold engine error: {0}")]
   StrongholdEngine(#[from] iota_stronghold::Error),
+  #[cfg(feature = "keyring-stronghold_ex")]
+  #[error("stronghold engine error: {0}")]
+  ClientExError(#[from] ex_client::Error),
   #[error("quorum: {0}")]
   QuorumInit(String),
   #[error("network error: {0}")]
