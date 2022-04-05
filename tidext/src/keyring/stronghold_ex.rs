@@ -14,21 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{AccountId, TidechainConfig};
+use crate::{Error, TidechainConfig};
 
-use std::fmt;
+use std::{fmt, sync::Arc};
 use subxt::{
   sp_core::{
     crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
     sr25519::{Public, Signature},
   },
-  DefaultExtra, PairSigner,
+  PairSigner,
 };
 
 use ex_client::{public_key_inner, sr25519_sign_inner, KeyStore, Location, SecureBucket};
 
-pub type TidefiPairSigner =
-  PairSigner<TidechainConfig, DefaultExtra<TidechainConfig>, StrongholdSigner>;
+/// Stronghold pair signer
+pub type TidefiPairSigner = PairSigner<TidechainConfig, StrongholdSigner>;
+/// Tidefi keyring
+pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
 
 #[derive(Clone)]
 pub struct StrongholdSigner {
@@ -47,50 +49,15 @@ impl Pair for StrongholdSigner {
   type Signature = Signature;
   type DeriveError = String;
 
-  fn generate_with_phrase(_password: Option<&str>) -> (Self, String, Self::Seed) {
-    unimplemented!()
-  }
-
-  fn from_phrase(
-    _phrase: &str,
-    _password: Option<&str>,
-  ) -> Result<(Self, Self::Seed), SecretStringError> {
-    unimplemented!()
-  }
-
-  fn derive<Iter: Iterator<Item = DeriveJunction>>(
-    &self,
-    _path: Iter,
-    _seed: Option<Self::Seed>,
-  ) -> Result<(Self, Option<Self::Seed>), Self::DeriveError> {
-    unimplemented!()
-  }
-
-  fn from_seed(_seed: &Self::Seed) -> Self {
-    unimplemented!()
-  }
-
-  fn from_seed_slice(_seed: &[u8]) -> Result<Self, SecretStringError> {
-    unimplemented!()
-  }
-
+  /// Sign message
   fn sign(&self, message: &[u8]) -> Self::Signature {
     let msg = message.to_vec();
-
     let loc = self.pair_location.clone();
 
     let sig = sr25519_sign_inner(self.secure_bucket.clone(), self.keystore.clone(), msg, loc)
       .expect("failed to sign");
 
     sig.inner().clone()
-  }
-
-  fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
-    unimplemented!()
-  }
-
-  fn verify_weak<P: AsRef<[u8]>, M: AsRef<[u8]>>(_sig: &[u8], _message: M, _pubkey: P) -> bool {
-    unimplemented!()
   }
 
   fn public(&self) -> Self::Public {
@@ -101,49 +68,82 @@ impl Pair for StrongholdSigner {
     Public::from_raw(bytes)
   }
 
+  // These functions are not used by the the signer, this is why they are `unimplemented`.
+  fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
+    unimplemented!()
+  }
+  fn verify_weak<P: AsRef<[u8]>, M: AsRef<[u8]>>(_sig: &[u8], _message: M, _pubkey: P) -> bool {
+    unimplemented!()
+  }
+  fn generate_with_phrase(_password: Option<&str>) -> (Self, String, Self::Seed) {
+    unimplemented!()
+  }
+  fn from_phrase(
+    _phrase: &str,
+    _password: Option<&str>,
+  ) -> Result<(Self, Self::Seed), SecretStringError> {
+    unimplemented!()
+  }
+  fn derive<Iter: Iterator<Item = DeriveJunction>>(
+    &self,
+    _path: Iter,
+    _seed: Option<Self::Seed>,
+  ) -> Result<(Self, Option<Self::Seed>), Self::DeriveError> {
+    unimplemented!()
+  }
+  fn from_seed(_seed: &Self::Seed) -> Self {
+    unimplemented!()
+  }
+  fn from_seed_slice(_seed: &[u8]) -> Result<Self, SecretStringError> {
+    unimplemented!()
+  }
   fn to_raw_vec(&self) -> Vec<u8> {
     unimplemented!()
   }
 }
 
 #[derive(Clone)]
-pub struct TidefiKeyring {
-  account_id: AccountId,
-  keypair_location: Location,
-  keystore: KeyStore,
-  secure_bucket: SecureBucket,
+pub struct TidextKeyring<T>
+where
+  T: subxt::Config,
+{
+  pub(super) account_id: T::AccountId,
+  pub(super) pair_signer: Arc<TidefiPairSigner>,
 }
 
-impl fmt::Debug for TidefiKeyring {
+impl<T> fmt::Debug for TidextKeyring<T>
+where
+  T: subxt::Config,
+{
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    f.debug_struct("TidefiKeyring").finish()
+    f.debug_struct("TidextKeyring").finish()
   }
 }
 
-impl TidefiKeyring {
+impl<T> TidextKeyring<T>
+where
+  T: subxt::Config,
+{
   pub fn new(
-    account_id: AccountId,
+    account_id: T::AccountId,
     keystore: KeyStore,
     secure_bucket: SecureBucket,
-    keypair_location: Location,
+    pair_location: Location,
   ) -> Self {
     Self {
       account_id,
-      keystore,
-      secure_bucket,
-      keypair_location,
+      pair_signer: Arc::new(TidefiPairSigner::new(StrongholdSigner {
+        pair_location,
+        keystore,
+        secure_bucket,
+      })),
     }
   }
 
-  pub fn pair_signer(&self) -> TidefiPairSigner {
-    TidefiPairSigner::new(StrongholdSigner {
-      pair_location: self.keypair_location.clone(),
-      keystore: self.keystore.clone(),
-      secure_bucket: self.secure_bucket.clone(),
-    })
-  }
-
-  pub fn account_id(&self) -> AccountId {
-    self.account_id.clone()
+  pub async fn try_from_seed(
+    _seed: String,
+    _keypair_location: Option<Location>,
+  ) -> Result<Self, Error> {
+    unimplemented!()
   }
 }

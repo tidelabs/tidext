@@ -164,8 +164,7 @@ impl Builder {
             stronghold,
             Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH),
           )
-          .await?
-          .pair_signer(),
+          .await?,
         )
         .set_url(url)
         .build()

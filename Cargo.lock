@@ -14,9 +14,9 @@ dependencies = [
 
 [[package]]
 name = "actix"
-version = "0.12.0"
+version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3720d0064a0ce5c0de7bd93bdb0a6caebab2a9b5668746145d7b3b0c5da02914"
+checksum = "f728064aca1c318585bf4bb04ffcfac9e75e508ab4e8b1bd9ba5dfe04e2cbed5"
 dependencies = [
  "actix-rt",
  "actix_derive",
@@ -29,11 +29,11 @@ dependencies = [
  "futures-util",
  "log",
  "once_cell",
- "parking_lot 0.11.2",
+ "parking_lot 0.12.0",
  "pin-project-lite",
  "smallvec",
  "tokio",
- "tokio-util 0.6.9",
+ "tokio-util 0.7.1",
 ]
 
 [[package]]
@@ -719,9 +719,9 @@ dependencies = [
 
 [[package]]
 name = "darling"
-version = "0.13.2"
+version = "0.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4e92cb285610dd935f60ee8b4d62dd1988bd12b7ea50579bd6a138201525318e"
+checksum = "dbcc37e3091b4dfd0af76cb0087b9c89b8e03072abc28ae2efc8fdd733bfc5f5"
 dependencies = [
  "darling_core",
  "darling_macro",
@@ -729,9 +729,9 @@ dependencies = [
 
 [[package]]
 name = "darling_core"
-version = "0.13.2"
+version = "0.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c29e95ab498b18131ea460b2c0baa18cbf041231d122b0b7bfebef8c8e88989"
+checksum = "9569a966dba8cd57879b8efd2bf82b5c56bb466e19767a69c560bddee1a27f5c"
 dependencies = [
  "fnv",
  "ident_case",
@@ -743,9 +743,9 @@ dependencies = [
 
 [[package]]
 name = "darling_macro"
-version = "0.13.2"
+version = "0.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b21dd6b221dd547528bd6fb15f1a3b7ab03b9a06f76bff288a8c629bcfbe7f0e"
+checksum = "efae147148c6380157050146a2040b65dbe91bef6e97aaaa39ef0d469d2eb4af"
 dependencies = [
  "darling_core",
  "quote",
@@ -903,9 +903,9 @@ checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
 
 [[package]]
 name = "encoding_rs"
-version = "0.8.30"
+version = "0.8.31"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7896dc8abb250ffdda33912550faa54c88ec8b998dec0b2c55ab224921ce11df"
+checksum = "9852635589dc9f9ea1b6fe9f05b50ef208c85c834a562f0c6abb1c475736ec2b"
 dependencies = [
  "cfg-if",
 ]
@@ -982,7 +982,7 @@ checksum = "77f3309417938f28bf8228fcff79a4a37103981e3e186d2ccd19c74b38f4eb71"
 [[package]]
 name = "ex_client"
 version = "0.1.0"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "anyhow",
  "bincode",
@@ -990,7 +990,6 @@ dependencies = [
  "serde",
  "stronghold-utils",
  "stronghold_engine",
- "subxt",
  "thiserror",
  "zeroize",
  "zeroize_derive",
@@ -1704,7 +1703,7 @@ dependencies = [
 [[package]]
 name = "iota_stronghold"
 version = "0.4.1"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "actix",
  "anyhow",
@@ -1765,9 +1764,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05fd8cd6c6b1bbd06881d2cf88f1fc83cc36c98f2219090f839115fb4a956cb9"
+checksum = "f0d0b8cc1959f8c05256ace093b2317482da9127f1d9227564f47e7e6bf9bda8"
 dependencies = [
  "jsonrpsee-client-transport",
  "jsonrpsee-core",
@@ -1778,9 +1777,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee-client-transport"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3303cdf246e6ab76e2866fb3d9acb6c76a068b1b28bd923a1b7a8122257ad7b5"
+checksum = "fa370c2c717d798c3c0a315ae3f0a707a388c6963c11f9da7dbbe1d3f7392f5f"
 dependencies = [
  "futures",
  "http",
@@ -1799,9 +1798,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee-core"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f220b5a238dc7992b90f1144fbf6eaa585872c9376afe6fe6863ffead6191bf3"
+checksum = "22abc3274b265dcefe2e26c4beecf9fda4fffa48cf94930443a6c73678f020d5"
 dependencies = [
  "anyhow",
  "arrayvec 0.7.2",
@@ -1822,9 +1821,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee-proc-macros"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4299ebf790ea9de1cb72e73ff2ae44c723ef264299e5e2d5ef46a371eb3ac3d8"
+checksum = "63e171d8071079c8ccdce1b4ab34411c5afa6158d57db7963311ad3c6d073cb1"
 dependencies = [
  "proc-macro-crate 1.1.3",
  "proc-macro2",
@@ -1834,9 +1833,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee-types"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c1b3f601bbbe45cd63f5407b6f7d7950e08a7d4f82aa699ff41a4a5e9e54df58"
+checksum = "9f4c45d2e2aa1db4c7d7d7dbaabc10a5b5258d99cd9d42fbfd5260b76f80c324"
 dependencies = [
  "anyhow",
  "beef",
@@ -1848,9 +1847,9 @@ dependencies = [
 
 [[package]]
 name = "jsonrpsee-ws-client"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aff425cee7c779e33920913bc695447416078ee6d119f443f3060feffa4e86b5"
+checksum = "31b58983485b2b626c276f1eb367d62dae82132451b281072a7bfa536a33ddf3"
 dependencies = [
  "jsonrpsee-client-transport",
  "jsonrpsee-core",
@@ -3342,9 +3341,9 @@ dependencies = [
 
 [[package]]
 name = "slab"
-version = "0.4.5"
+version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9def91fd1e018fe007022791f865d0ccc9b3a0d5001e01aabb8b40e46000afb5"
+checksum = "eb703cfe953bccee95685111adeedb76fabe4e97549a58d16f03ea7b9367bb32"
 
 [[package]]
 name = "smallvec"
@@ -3802,7 +3801,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "stronghold-derive"
 version = "0.2.0"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3812,7 +3811,7 @@ dependencies = [
 [[package]]
 name = "stronghold-runtime"
 version = "0.3.0"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "libsodium-sys",
  "serde",
@@ -3821,7 +3820,7 @@ dependencies = [
 [[package]]
 name = "stronghold-utils"
 version = "0.3.0"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "rand 0.8.5",
  "stronghold-derive",
@@ -3830,7 +3829,7 @@ dependencies = [
 [[package]]
 name = "stronghold_engine"
 version = "0.4.0"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#d0e57422045efe113389e4cf43e6329c1ee27fcc"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#4011b706b15c09c3898857352f24fbfde462b705"
 dependencies = [
  "anyhow",
  "dirs-next",
@@ -3892,8 +3891,8 @@ checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 
 [[package]]
 name = "subxt"
-version = "0.18.1"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#69d8467261a50f3c4f020014105ae7e80060e9b5"
+version = "0.19.0"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#50ba1ecbe32a32ba9fd1e236169f7be03b76a2cf"
 dependencies = [
  "async-trait",
  "bitvec",
@@ -3904,7 +3903,6 @@ dependencies = [
  "hex",
  "jsonrpsee",
  "log",
- "num-traits",
  "parity-scale-codec",
  "scale-info",
  "serde",
@@ -3917,8 +3915,8 @@ dependencies = [
 
 [[package]]
 name = "subxt-codegen"
-version = "0.18.1"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#69d8467261a50f3c4f020014105ae7e80060e9b5"
+version = "0.19.0"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#50ba1ecbe32a32ba9fd1e236169f7be03b76a2cf"
 dependencies = [
  "async-trait",
  "darling",
@@ -3935,8 +3933,8 @@ dependencies = [
 
 [[package]]
 name = "subxt-macro"
-version = "0.18.1"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#69d8467261a50f3c4f020014105ae7e80060e9b5"
+version = "0.19.0"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#50ba1ecbe32a32ba9fd1e236169f7be03b76a2cf"
 dependencies = [
  "async-trait",
  "darling",
@@ -4036,7 +4034,7 @@ dependencies = [
 [[package]]
 name = "tidefi-primitives"
 version = "0.1.0"
-source = "git+https://github.com/tidelabs/primitives?branch=dev#202834c71365cb5f9928b13cf2a1336959ba175f"
+source = "git+https://github.com/tidelabs/primitives?branch=dev#740b2e5154bba9ac145ed03c2c6e9c9feb48dcae"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
@@ -4054,7 +4052,7 @@ dependencies = [
 [[package]]
 name = "tidefi-primitives-macro"
 version = "0.1.0"
-source = "git+https://github.com/tidelabs/primitives?branch=dev#202834c71365cb5f9928b13cf2a1336959ba175f"
+source = "git+https://github.com/tidelabs/primitives?branch=dev#740b2e5154bba9ac145ed03c2c6e9c9feb48dcae"
 dependencies = [
  "convert_case 0.5.0",
  "proc-macro-crate 0.1.5",
@@ -4310,9 +4308,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-core"
-version = "0.1.23"
+version = "0.1.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aa31669fa42c09c34d94d8165dd2012e8ff3c66aca50f3bb226b68f216f2706c"
+checksum = "90442985ee2f57c9e1b548ee72ae842f4a9a20e3f417cc38dbc5dc684d9bb4ee"
 dependencies = [
  "lazy_static",
  "valuable",

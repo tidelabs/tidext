@@ -34,7 +34,7 @@ pub enum Error {
   Other(String),
   #[error("stronghold error: {0}")]
   Stronghold(String),
-  #[cfg(not(feature = "keyring-stronghold_ex"))]
+  #[cfg(feature = "keyring-stronghold")]
   #[error("stronghold engine error: {0}")]
   StrongholdEngine(#[from] iota_stronghold::Error),
   #[cfg(feature = "keyring-stronghold_ex")]

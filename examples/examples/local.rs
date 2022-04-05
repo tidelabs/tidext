@@ -32,9 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   helpers::init_logger()?;
 
   // init signer
-  let signer = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None)
-    .await?
-    .pair_signer();
+  let signer = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None).await?;
 
   // init client
   let client = ClientBuilder::new().set_signer(signer).build().await?;
