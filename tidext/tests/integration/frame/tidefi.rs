@@ -23,12 +23,8 @@ async fn tx_basic_transfer() -> Result<(), Error> {
   // 10 tides
   let transfer_amount = Asset::Tide.saturating_mul(10);
 
-  let alice = TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None)
-    .await?
-    .pair_signer();
-  let charlie = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None)
-    .await?
-    .pair_signer();
+  let alice = TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None).await?;
+  let charlie = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None).await?;
 
   let cxt = test_context().await;
   let mut client = cxt.node_proc.client().clone();

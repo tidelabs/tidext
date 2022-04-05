@@ -120,7 +120,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .tx()
             .#pallet_name()
             .#function_name(#all_params_token)
-            .sign_and_submit(&self.signer)
+            .sign_and_submit_default(&self.signer)
             .await?;
           Ok(())
         }
@@ -137,7 +137,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .tx()
             .#pallet_name()
             .#function_name(#all_params_token)
-            .sign_and_submit_then_watch(&self.signer)
+            .sign_and_submit_then_watch_default(&self.signer)
             .await?
             .wait_for_finalized_success()
             .await
@@ -178,7 +178,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
       #[derive(Clone)]
       pub struct #client_builder_struct_name {
         pub rpc_url: String,
-        pub signer: Option<TidefiPairSigner>,
+        pub signer: Option<TidefiKeyring>,
       }
 
       impl Default for #client_builder_struct_name {
@@ -204,7 +204,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
         }
 
         /// Set the tidechain signer
-        pub fn set_signer(mut self, signer: TidefiPairSigner) -> Self {
+        pub fn set_signer(mut self, signer: TidefiKeyring) -> Self {
           self.signer = Some(signer);
           self
         }

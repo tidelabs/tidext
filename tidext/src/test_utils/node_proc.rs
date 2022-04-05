@@ -148,8 +148,7 @@ impl TestNodeProcessBuilder {
         .set_signer(
           TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None)
             .await
-            .map_err(|err| err.to_string())?
-            .pair_signer(),
+            .map_err(|err| err.to_string())?,
         )
         .set_url(ws_url.clone())
         .build()

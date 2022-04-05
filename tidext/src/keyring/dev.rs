@@ -16,37 +16,82 @@
 
 #![cfg(not(feature = "keyring-stronghold"))]
 
-use crate::{keyring::AccountId, TidechainConfig};
+use crate::{Error, TidechainConfig};
 pub use sp_keyring::AccountKeyring;
-use std::fmt;
-use subxt::{sp_core::sr25519::Pair, DefaultExtra, PairSigner};
+use std::{fmt, sync::Arc};
+use subxt::{sp_core::sr25519::Pair, PairSigner};
+
 /// Pair of SR25519 keys for development.
-pub type TidefiPairSigner = PairSigner<TidechainConfig, DefaultExtra<TidechainConfig>, Pair>;
+pub type TidefiPairSigner = PairSigner<TidechainConfig, Pair>;
+/// Tidefi keyring
+pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
 
 #[derive(Clone)]
-pub enum TidefiKeyring {
+pub enum TidextAccountKeyring {
   AccountKeyring(AccountKeyring),
   Custom(usize),
 }
 
-impl fmt::Debug for TidefiKeyring {
+/// Tidefi keyring backed with a stronghold pair signer.
+#[derive(Clone)]
+pub struct TidextKeyring<T>
+where
+  T: subxt::Config,
+{
+  pub(super) account_id: T::AccountId,
+  pub(super) pair_signer: Arc<TidefiPairSigner>,
+}
+
+impl<T> fmt::Debug for TidextKeyring<T>
+where
+  T: subxt::Config,
+{
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    f.debug_struct("TidefiKeyring").finish()
+    f.debug_struct("TidextKeyring").finish()
   }
 }
 
-impl TidefiKeyring {
-  pub fn account_id(&self) -> AccountId {
-    match self {
-      Self::AccountKeyring(keyrig) => keyrig.to_account_id(),
-      Self::Custom(idx) => AccountKeyring::numeric_id(*idx),
+impl<T> From<usize> for TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<tidefi_primitives::AccountId>,
+{
+  fn from(custom_signer: usize) -> TidextKeyring<T> {
+    TidextKeyring::new(TidextAccountKeyring::Custom(custom_signer))
+  }
+}
+
+impl<T> From<AccountKeyring> for TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<tidefi_primitives::AccountId>,
+{
+  fn from(custom_signer: AccountKeyring) -> TidextKeyring<T> {
+    TidextKeyring::new(TidextAccountKeyring::AccountKeyring(custom_signer))
+  }
+}
+
+impl<T> TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<tidefi_primitives::AccountId>,
+{
+  pub fn new(signer: TidextAccountKeyring) -> Self {
+    let account_id = match signer {
+      TidextAccountKeyring::AccountKeyring(keyrig) => keyrig.to_account_id(),
+      TidextAccountKeyring::Custom(idx) => AccountKeyring::numeric_id(idx),
+    };
+
+    Self {
+      account_id: account_id.into(),
+      pair_signer: Arc::new(TidefiPairSigner::new(match signer {
+        TidextAccountKeyring::AccountKeyring(keyrig) => keyrig.pair(),
+        TidextAccountKeyring::Custom(idx) => AccountKeyring::numeric(idx),
+      })),
     }
   }
 
-  pub fn pair_signer(&self) -> TidefiPairSigner {
-    PairSigner::new(match self {
-      Self::AccountKeyring(keyrig) => keyrig.pair(),
-      Self::Custom(idx) => AccountKeyring::numeric(*idx),
-    })
+  pub async fn try_from_seed(_seed: String) -> Result<Self, Error> {
+    unimplemented!()
   }
 }

@@ -139,8 +139,7 @@ impl Builder {
           Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH),
         )
         .await
-        .map_err(anyhow_err_mapper)?
-        .pair_signer(),
+        .map_err(anyhow_err_mapper)?,
       )
       .set_url(&self.url);
 

@@ -15,7 +15,7 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 #![cfg(feature = "keyring-stronghold")]
-use crate::{primitives::AccountId, Error, TidechainConfig};
+use crate::{Error, TidechainConfig};
 use std::{fmt, path::Path, sync::Arc};
 use stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold};
 use subxt::{
@@ -23,14 +23,15 @@ use subxt::{
     crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
     sr25519::{Public, Signature},
   },
-  DefaultExtra, PairSigner,
+  PairSigner,
 };
 
 pub use iota_stronghold as stronghold;
 
 /// Stronghold pair signer.
-pub type TidefiPairSigner =
-  PairSigner<TidechainConfig, DefaultExtra<TidechainConfig>, StrongholdSigner>;
+pub type TidefiPairSigner = PairSigner<TidechainConfig, StrongholdSigner>;
+/// Tidefi keyring
+pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
 
 /// Stronghold signer instance.
 #[derive(Clone)]
@@ -115,45 +116,44 @@ impl Pair for StrongholdSigner {
 
 /// Tidefi keyring backed with a stronghold pair signer.
 #[derive(Clone)]
-pub struct TidefiKeyring {
-  account_id: AccountId,
-  keypair_location: Location,
-  stronghold: Arc<Stronghold>,
+pub struct TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<[u8; 32]>,
+{
+  pub(super) account_id: T::AccountId,
+  pub(super) pair_signer: Arc<TidefiPairSigner>,
 }
 
-impl fmt::Debug for TidefiKeyring {
+impl<T> fmt::Debug for TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<[u8; 32]>,
+{
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    f.debug_struct("TidefiKeyring").finish()
+    f.debug_struct("TidextKeyring").finish()
   }
 }
 
-impl TidefiKeyring {
-  /// Create new TidefiKeyring from `AccountId` and `Stronghold`, with keypair stored on the given `Location`.
+impl<T> TidextKeyring<T>
+where
+  T: subxt::Config,
+  T::AccountId: From<[u8; 32]>,
+{
+  /// Create new TidextKeyring from `AccountId` and `Stronghold`, with keypair stored on the given `Location`.
   pub fn new(
-    account_id: AccountId,
+    account_id: T::AccountId,
     stronghold: Stronghold,
     keypair_location: Location,
-  ) -> TidefiKeyring {
-    TidefiKeyring {
+  ) -> TidextKeyring<T> {
+    TidextKeyring {
       account_id,
-      stronghold: Arc::new(stronghold),
-      keypair_location,
+      pair_signer: Arc::new(TidefiPairSigner::new(StrongholdSigner {
+        keypair_location,
+        stronghold: Arc::new(stronghold),
+      })),
     }
   }
-
-  /// Retrieve the `AccountId`.
-  pub fn account_id(&self) -> &AccountId {
-    &self.account_id
-  }
-
-  /// Retrieve the `TidefiPairSigner`.
-  pub fn pair_signer(&self) -> TidefiPairSigner {
-    TidefiPairSigner::new(StrongholdSigner {
-      keypair_location: self.keypair_location.clone(),
-      stronghold: self.stronghold.clone(),
-    })
-  }
-
   /// Try to get signer from existing stronghold instance
   pub async fn try_from_stronghold_instance(
     stronghold: Stronghold,
@@ -278,18 +278,22 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>>(
 }
 
 /// Try to get signer details for an existing stronghold instance at the specific location
-pub async fn get_signer_from_stronghold(
+pub async fn get_signer_from_stronghold<T>(
   stronghold: Stronghold,
   keypair_location: &Location,
-) -> Result<TidefiKeyring, Error> {
+) -> Result<TidextKeyring<T>, Error>
+where
+  T: subxt::Config,
+  T::AccountId: From<[u8; 32]>,
+{
   match stronghold
     .runtime_exec(Procedure::Sr25519PublicKey {
       keypair: keypair_location.clone(),
     })
     .await
   {
-    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => Ok(TidefiKeyring::new(
-      AccountId::from(pk.inner().0),
+    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => Ok(TidextKeyring::new(
+      T::AccountId::from(pk.inner().0),
       stronghold,
       keypair_location.clone(),
     )),
@@ -300,7 +304,9 @@ pub async fn get_signer_from_stronghold(
 #[cfg(test)]
 mod test {
   use super::*;
+  use crate::Signer;
   use std::str::FromStr;
+  use tidefi_primitives::AccountId;
 
   #[tokio::test]
   async fn test_get_pair() {

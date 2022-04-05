@@ -20,14 +20,14 @@ thiserror = "1.0"
 log = "0.4"
 futures = "0.3"
 hex = "0.4"
-actix = { version = "0.12", optional = true }
+actix = { version = "0.13", optional = true }
 num-bigint = "0.4.2"
 async-trait = "0.1.40"
 parity-scale-codec = { version = "3" }
 
 # Internal fork of `subxt` with few patches, branched for better `diff` and cherry picking
-subxt = {git = "https://github.com/tidelabs/subxt", branch = "tidechain" }
-subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "tidechain" }
+subxt = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
+subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
 
 sp-keyring = { git = "https://github.com/tidelabs/substrate", branch = "tidechain", optional = true }
 sp-runtime = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
@@ -44,7 +44,7 @@ iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = 
 ex_client = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # jsonrpsee
-jsonrpsee = { version = "0.8.0", features = ["macros", "ws-client", "client-ws-transport"] }
+jsonrpsee = { version = "0.9.0", features = ["macros", "ws-client", "client-ws-transport"] }
 
 # test module dependencies
 which = { version = "4.2.2", optional = true }

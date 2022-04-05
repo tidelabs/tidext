@@ -37,8 +37,7 @@
 //! use tidext::TidefiKeyring;
 //!
 //! TidefiKeyring::try_from_seed("sr25519 raw seed or mnemonic", None)
-//!   .await?
-//!   .pair_signer();
+//!   .await?;
 //! ```
 //!
 //! ## Initialize stronghold signer from existing snapshot
@@ -46,8 +45,7 @@
 //! use tidext::TidefiKeyring;
 //!
 //! TidefiKeyring::try_from_stronghold_path("~/.stronghold", None, Some("stronghold password"))
-//!   .await?
-//!   .pair_signer();
+//!   .await?;
 //! ```
 //!
 //! ## Initialize stronghold signer from existing stronghold instance
@@ -59,8 +57,7 @@
 //! let stronghold = Stronghold::init_stronghold_system(vec![], vec![]);
 //!
 //! TidefiKeyring::try_from_stronghold_instance(stronghold, None)
-//!   .await?
-//!   .pair_signer();
+//!   .await?;
 //! ```
 //!
 //! # Tidext client
@@ -106,12 +103,12 @@ use primitives::{
 use sp_runtime::MultiAddress;
 pub use sp_runtime::Permill;
 use std::sync::Arc;
+pub use subxt::{extrinsic::Signer, Error as SubstrateSubxtError};
 use subxt::{
   rpc::{rpc_params, ClientT},
   sp_core::Bytes,
-  DefaultExtra,
+  PolkadotExtrinsicParams,
 };
-pub use subxt::{Error as SubstrateSubxtError, Signer};
 pub use subxt_impl::{tidechain, TidechainConfig};
 use tidechain::runtime_types::pallet_staking::RewardDestination;
 pub use tidefi_primitives as primitives;
@@ -134,7 +131,7 @@ pub mod test_utils;
 
 /// Tidechain runtime API generated from scale encoding file
 pub type TidechainRuntimeApi =
-  tidechain::RuntimeApi<TidechainConfig, DefaultExtra<TidechainConfig>>;
+  tidechain::RuntimeApi<TidechainConfig, PolkadotExtrinsicParams<TidechainConfig>>;
 
 pub use crate::tidechain::runtime_types::{
   lagoon_runtime::Call as TidechainCall, pallet_oracle::pallet::Call as OracleCall,
@@ -148,7 +145,7 @@ mod client {
   #[tidext::client]
   pub struct Client {
     pub runtime_api: Arc<TidechainRuntimeApi>,
-    pub signer: TidefiPairSigner,
+    pub signer: TidefiKeyring,
   }
 
   // Automatic implementation of subxt functions, because we are lazy.
@@ -238,7 +235,7 @@ mod client {
   #[tidext::custom]
   impl Client {
     /// Set new signer for the client
-    pub fn set_signer(&mut self, signer: TidefiPairSigner) {
+    pub fn set_signer(&mut self, signer: TidefiKeyring) {
       self.signer = signer;
     }
 
