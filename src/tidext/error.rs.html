@@ -56,6 +56,10 @@
 <span id="54">54</span>
 <span id="55">55</span>
 <span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -92,8 +96,12 @@
   <span class="ident">Other</span>(<span class="ident">String</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;stronghold error: {0}&quot;</span>)]</span>
   <span class="ident">Stronghold</span>(<span class="ident">String</span>),
+  <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;keyring-stronghold_ex&quot;</span>))]</span>
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;stronghold engine error: {0}&quot;</span>)]</span>
   <span class="ident">StrongholdEngine</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">iota_stronghold::Error</span>),
+  <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;keyring-stronghold_ex&quot;</span>)]</span>
+  <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;stronghold engine error: {0}&quot;</span>)]</span>
+  <span class="ident">ClientExError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">ex_client::Error</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;quorum: {0}&quot;</span>)]</span>
   <span class="ident">QuorumInit</span>(<span class="ident">String</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;network error: {0}&quot;</span>)]</span>
