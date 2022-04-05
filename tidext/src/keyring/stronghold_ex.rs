@@ -14,7 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{keyring::AccountId, TidechainConfig};
+use crate::{AccountId, TidechainConfig};
+
 use std::fmt;
 use subxt::{
   sp_core::{
