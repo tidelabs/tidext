@@ -79,8 +79,10 @@ impl Pair for StrongholdSigner {
 
     let loc = self.pair_location.clone();
 
-    sr25519_sign_inner(self.secure_bucket.clone(), self.keystore.clone(), msg, loc)
-      .expect("failed to sign")
+    let sig = sr25519_sign_inner(self.secure_bucket.clone(), self.keystore.clone(), msg, loc)
+      .expect("failed to sign");
+
+    sig.inner().clone()
   }
 
   fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
