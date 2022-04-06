@@ -194,6 +194,10 @@ mod client {
     )]
     fn bond(&self, controller: AccountId, value: Balance);
 
+    /// Schedule a portion of the stash to be unlocked ready for transfer out after the bond
+    #[tidext::pallet = "staking"]
+    fn unbond(&self, amount: Balance);
+
     /// Unstake token for the current signer
     #[tidext::pallet = "tidefi_staking"]
     fn unstake(&self, stake_id: Hash, force_unstake: bool);
