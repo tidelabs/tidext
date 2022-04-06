@@ -189,7 +189,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">im_alive</span>(<span class="ident">im_alive</span>)
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -204,7 +204,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">confirm_swap</span>(<span class="ident">request_id</span>, <span class="ident">market_makers</span>)
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -215,7 +215,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">set_status</span>(<span class="ident">enabled</span>)
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -226,7 +226,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">set_account_id</span>(<span class="ident">account_id</span>.<span class="ident">clone</span>())
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -237,7 +237,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">cancel_swap</span>(<span class="ident">request_id</span>)
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -248,7 +248,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">add_market_maker</span>(<span class="ident">account_id</span>.<span class="ident">clone</span>())
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }
@@ -259,7 +259,7 @@
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
       .<span class="ident">remove_market_maker</span>(<span class="ident">account_id</span>.<span class="ident">clone</span>())
-      .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+      .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
   }

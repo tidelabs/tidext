@@ -214,7 +214,6 @@
 <span id="212">212</span>
 <span id="213">213</span>
 <span id="214">214</span>
-<span id="215">215</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -365,8 +364,7 @@
         .<span class="ident">set_signer</span>(
           <span class="ident">TidefiKeyring::try_from_seed</span>(<span class="ident">AccountKeyring::Alice</span>.<span class="ident">to_seed</span>(), <span class="prelude-val">None</span>)
             .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>
-            .<span class="ident">pair_signer</span>(),
+            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>,
         )
         .<span class="ident">set_url</span>(<span class="ident">ws_url</span>.<span class="ident">clone</span>())
         .<span class="ident">build</span>()

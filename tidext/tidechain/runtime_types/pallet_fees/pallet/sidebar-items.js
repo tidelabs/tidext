@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Error",""],["Event",""]]});
+initSidebarItems({"enum":[["Call",""],["Error",""],["Event",""]]});

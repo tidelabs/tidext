@@ -30,6 +30,41 @@
 <span id="28">28</span>
 <span id="29">29</span>
 <span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -47,6 +82,7 @@
 <span class="comment">// along with tidext.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
 <span class="doccomment">//! Tidext official keyring.</span>
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Signer</span>;
 <span class="kw">use</span> <span class="ident">subxt::sp_core::sr25519</span>;
 
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;keyring-stronghold&quot;</span>, <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;stronghold.rs&quot;</span>)]</span>
@@ -60,6 +96,40 @@
 
 <span class="doccomment">/// Tidechain key-pair representation.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">KeyPair</span> <span class="op">=</span> <span class="ident">sr25519::Pair</span>;
+
+<span class="doccomment">/// Signing transactions requires a Signer.</span>
+<span class="doccomment">/// This is responsible for providing the &quot;from&quot; account that the transaction is being signed by,</span>
+<span class="doccomment">/// as well as actually signing a SCALE encoded payload. Optionally, a signer can also provide the</span>
+<span class="doccomment">/// nonce for the transaction to use.</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TidextKeyring</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+  <span class="ident">T</span>: <span class="ident">subxt::Config</span>,
+  <span class="ident">T::AccountId</span>: <span class="ident">From</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>]<span class="op">&gt;</span>,
+  <span class="ident">T::Index</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">tidefi_primitives::Index</span><span class="op">&gt;</span>,
+  <span class="ident">T::AccountId</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">tidefi_primitives::AccountId</span><span class="op">&gt;</span>,
+  <span class="ident">T::Address</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">sp_runtime::MultiAddress</span><span class="op">&lt;</span><span class="ident">sp_runtime::AccountId32</span>, <span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+  <span class="ident">T::Signature</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">sp_runtime::MultiSignature</span><span class="op">&gt;</span>,
+{
+  <span class="doccomment">/// Optionally returns a nonce.</span>
+  <span class="kw">fn</span> <span class="ident">nonce</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Index</span><span class="op">&gt;</span> {
+    <span class="self">self</span>.<span class="ident">pair_signer</span>.<span class="ident">nonce</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">nonce</span><span class="op">|</span> <span class="ident">nonce</span>.<span class="ident">into</span>())
+  }
+
+  <span class="doccomment">/// Return the account ID.</span>
+  <span class="kw">fn</span> <span class="ident">account_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">T::AccountId</span> {
+    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">account_id</span>
+  }
+
+  <span class="doccomment">/// Return the &quot;from&quot; address.</span>
+  <span class="kw">fn</span> <span class="ident">address</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T::Address</span> {
+    <span class="self">self</span>.<span class="ident">pair_signer</span>.<span class="ident">address</span>().<span class="ident">into</span>()
+  }
+
+  <span class="doccomment">/// Takes a signer payload for an extrinsic, and returns a signature based on it.</span>
+  <span class="kw">fn</span> <span class="ident">sign</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">signer_payload</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">T::Signature</span> {
+    <span class="self">self</span>.<span class="ident">pair_signer</span>.<span class="ident">sign</span>(<span class="ident">signer_payload</span>).<span class="ident">into</span>()
+  }
+}
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="tidext" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0 (9d1b2106e 2022-02-23)" ></div>
 </body></html>

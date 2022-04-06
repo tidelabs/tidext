@@ -374,7 +374,7 @@
             .<span class="ident">tx</span>()
             .#<span class="ident">pallet_name</span>()
             .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)
-            .<span class="ident">sign_and_submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+            .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
             .<span class="kw">await</span><span class="question-mark">?</span>;
           <span class="prelude-val">Ok</span>(())
         }
@@ -391,7 +391,7 @@
             .<span class="ident">tx</span>()
             .#<span class="ident">pallet_name</span>()
             .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)
-            .<span class="ident">sign_and_submit_then_watch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
+            .<span class="ident">sign_and_submit_then_watch_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
             .<span class="kw">await</span><span class="question-mark">?</span>
             .<span class="ident">wait_for_finalized_success</span>()
             .<span class="kw">await</span>
@@ -432,7 +432,7 @@
       <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
       <span class="kw">pub</span> <span class="kw">struct</span> #<span class="ident">client_builder_struct_name</span> {
         <span class="kw">pub</span> <span class="ident">rpc_url</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">signer</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TidefiPairSigner</span><span class="op">&gt;</span>,
+        <span class="kw">pub</span> <span class="ident">signer</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TidefiKeyring</span><span class="op">&gt;</span>,
       }
 
       <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> #<span class="ident">client_builder_struct_name</span> {
@@ -458,7 +458,7 @@
         }
 
         <span class="doccomment">/// Set the tidechain signer</span>
-        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_signer</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">signer</span>: <span class="ident">TidefiPairSigner</span>) -&gt; <span class="self">Self</span> {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_signer</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">signer</span>: <span class="ident">TidefiKeyring</span>) -&gt; <span class="self">Self</span> {
           <span class="self">self</span>.<span class="ident">signer</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">signer</span>);
           <span class="self">self</span>
         }

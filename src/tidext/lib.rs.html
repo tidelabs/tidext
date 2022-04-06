@@ -353,6 +353,7 @@
 <span id="351">351</span>
 <span id="352">352</span>
 <span id="353">353</span>
+<span id="354">354</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -392,8 +393,7 @@
 <span class="doccomment">//! use tidext::TidefiKeyring;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! TidefiKeyring::try_from_seed(&quot;sr25519 raw seed or mnemonic&quot;, None)</span>
-<span class="doccomment">//!   .await?</span>
-<span class="doccomment">//!   .pair_signer();</span>
+<span class="doccomment">//!   .await?;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Initialize stronghold signer from existing snapshot</span>
@@ -401,8 +401,7 @@
 <span class="doccomment">//! use tidext::TidefiKeyring;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! TidefiKeyring::try_from_stronghold_path(&quot;~/.stronghold&quot;, None, Some(&quot;stronghold password&quot;))</span>
-<span class="doccomment">//!   .await?</span>
-<span class="doccomment">//!   .pair_signer();</span>
+<span class="doccomment">//!   .await?;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Initialize stronghold signer from existing stronghold instance</span>
@@ -414,8 +413,7 @@
 <span class="doccomment">//! let stronghold = Stronghold::init_stronghold_system(vec![], vec![]);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! TidefiKeyring::try_from_stronghold_instance(stronghold, None)</span>
-<span class="doccomment">//!   .await?</span>
-<span class="doccomment">//!   .pair_signer();</span>
+<span class="doccomment">//!   .await?;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Tidext client</span>
@@ -461,12 +459,12 @@
 <span class="kw">use</span> <span class="ident">sp_runtime::MultiAddress</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::Permill</span>;
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">extrinsic::Signer</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SubstrateSubxtError</span>};
 <span class="kw">use</span> <span class="ident">subxt</span>::{
   <span class="ident">rpc</span>::{<span class="ident">rpc_params</span>, <span class="ident">ClientT</span>},
   <span class="ident">sp_core::Bytes</span>,
-  <span class="ident">DefaultExtra</span>,
+  <span class="ident">PolkadotExtrinsicParams</span>,
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SubstrateSubxtError</span>, <span class="ident">Signer</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt_impl</span>::{<span class="ident">tidechain</span>, <span class="ident">TidechainConfig</span>};
 <span class="kw">use</span> <span class="ident">tidechain::runtime_types::pallet_staking::RewardDestination</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">tidefi_primitives</span> <span class="kw">as</span> <span class="ident">primitives</span>;
@@ -489,7 +487,7 @@
 
 <span class="doccomment">/// Tidechain runtime API generated from scale encoding file</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">TidechainRuntimeApi</span> <span class="op">=</span>
-  <span class="ident">tidechain::RuntimeApi</span><span class="op">&lt;</span><span class="ident">TidechainConfig</span>, <span class="ident">DefaultExtra</span><span class="op">&lt;</span><span class="ident">TidechainConfig</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+  <span class="ident">tidechain::RuntimeApi</span><span class="op">&lt;</span><span class="ident">TidechainConfig</span>, <span class="ident">PolkadotExtrinsicParams</span><span class="op">&lt;</span><span class="ident">TidechainConfig</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::tidechain::runtime_types</span>::{
   <span class="ident">lagoon_runtime::Call</span> <span class="kw">as</span> <span class="ident">TidechainCall</span>, <span class="ident">pallet_oracle::pallet::Call</span> <span class="kw">as</span> <span class="ident">OracleCall</span>,
@@ -503,7 +501,7 @@
   <span class="attribute">#[<span class="ident">tidext::client</span>]</span>
   <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Client</span> {
     <span class="kw">pub</span> <span class="ident">runtime_api</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">TidechainRuntimeApi</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">signer</span>: <span class="ident">TidefiPairSigner</span>,
+    <span class="kw">pub</span> <span class="ident">signer</span>: <span class="ident">TidefiKeyring</span>,
   }
 
   <span class="comment">// Automatic implementation of subxt functions, because we are lazy.</span>
@@ -552,6 +550,10 @@
     )]</span>
     <span class="kw">fn</span> <span class="ident">bond</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">controller</span>: <span class="ident">AccountId</span>, <span class="ident">value</span>: <span class="ident">Balance</span>);
 
+    <span class="doccomment">/// Schedule a portion of the stash to be unlocked ready for transfer out after the bond</span>
+    <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;staking&quot;</span>]</span>
+    <span class="kw">fn</span> <span class="ident">unbond</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">amount</span>: <span class="ident">Balance</span>);
+
     <span class="doccomment">/// Unstake token for the current signer</span>
     <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;tidefi_staking&quot;</span>]</span>
     <span class="kw">fn</span> <span class="ident">unstake</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">stake_id</span>: <span class="ident">Hash</span>, <span class="ident">force_unstake</span>: <span class="ident">bool</span>);
@@ -593,7 +595,7 @@
   <span class="attribute">#[<span class="ident">tidext::custom</span>]</span>
   <span class="kw">impl</span> <span class="ident">Client</span> {
     <span class="doccomment">/// Set new signer for the client</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_signer</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">signer</span>: <span class="ident">TidefiPairSigner</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_signer</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">signer</span>: <span class="ident">TidefiKeyring</span>) {
       <span class="self">self</span>.<span class="ident">signer</span> <span class="op">=</span> <span class="ident">signer</span>;
     }
 

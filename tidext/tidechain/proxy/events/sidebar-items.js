@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Announced",""],["AnonymousCreated",""],["ProxyAdded",""],["ProxyExecuted",""]]});
+initSidebarItems({"struct":[["Announced",""],["AnonymousCreated",""],["ProxyAdded",""],["ProxyExecuted",""],["ProxyRemoved",""]]});

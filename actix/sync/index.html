@@ -5,15 +5,15 @@
 This is useful for CPU bound, or concurrent workloads. There can only be
 a single Sync Actor type on a <code>SyncArbiter</code>. This means you can’t have
 Actor type A and B, sharing the same thread pool. You need to create two
-SyncArbiters and have A and B spawn on unique <code>SyncArbiter</code>s respectively.
+<a href="struct.SyncArbiter.html" title="SyncArbiter"><code>SyncArbiter</code></a>s and have A and B spawn on unique <code>SyncArbiter</code>s respectively.
 For more information and examples, see <code>SyncArbiter</code></p>
 </div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SyncArbiter.html" title="actix::sync::SyncArbiter struct">SyncArbiter</a></div><div class="item-right docblock-short"><p>SyncArbiter provides the resources for a single Sync Actor to run on a dedicated
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SyncArbiter.html" title="actix::sync::SyncArbiter struct">SyncArbiter</a></div><div class="item-right docblock-short"><p><a href="struct.SyncArbiter.html" title="SyncArbiter"><code>SyncArbiter</code></a> provides the resources for a single Sync Actor to run on a dedicated
 thread or threads. This is generally used for CPU bound concurrent workloads. It’s
-important to note, that the SyncArbiter generates a single address for the pool
+important to note, that the <a href="struct.SyncArbiter.html" title="SyncArbiter"><code>SyncArbiter</code></a> generates a single address for the pool
 of hosted Sync Actors. Any message sent to this Address, will be operated on by
 a single Sync Actor from the pool.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SyncContext.html" title="actix::sync::SyncContext struct">SyncContext</a></div><div class="item-right docblock-short"><p>Sync actor execution context. This is used instead of impl Actor for your Actor
-instead of Context, if you intend this actor to run in a SyncArbiter.</p>
+instead of Context, if you intend this actor to run in a <a href="struct.SyncArbiter.html" title="SyncArbiter"><code>SyncArbiter</code></a>.</p>
 </div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0 (9d1b2106e 2022-02-23)" ></div>
 </body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;69d8467&#x2F;codegen&#x2F;src&#x2F;api&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;50ba1ec&#x2F;codegen&#x2F;src&#x2F;api&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a class="sidebar-logo" href="../../../subxt_codegen/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></div>
         </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></a><nav class="sub"><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
@@ -424,88 +424,6 @@
 <span id="422">422</span>
 <span id="423">423</span>
 <span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
-<span id="447">447</span>
-<span id="448">448</span>
-<span id="449">449</span>
-<span id="450">450</span>
-<span id="451">451</span>
-<span id="452">452</span>
-<span id="453">453</span>
-<span id="454">454</span>
-<span id="455">455</span>
-<span id="456">456</span>
-<span id="457">457</span>
-<span id="458">458</span>
-<span id="459">459</span>
-<span id="460">460</span>
-<span id="461">461</span>
-<span id="462">462</span>
-<span id="463">463</span>
-<span id="464">464</span>
-<span id="465">465</span>
-<span id="466">466</span>
-<span id="467">467</span>
-<span id="468">468</span>
-<span id="469">469</span>
-<span id="470">470</span>
-<span id="471">471</span>
-<span id="472">472</span>
-<span id="473">473</span>
-<span id="474">474</span>
-<span id="475">475</span>
-<span id="476">476</span>
-<span id="477">477</span>
-<span id="478">478</span>
-<span id="479">479</span>
-<span id="480">480</span>
-<span id="481">481</span>
-<span id="482">482</span>
-<span id="483">483</span>
-<span id="484">484</span>
-<span id="485">485</span>
-<span id="486">486</span>
-<span id="487">487</span>
-<span id="488">488</span>
-<span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
-<span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -557,10 +475,8 @@
 <span class="kw">use</span> <span class="ident">codec::Decode</span>;
 <span class="kw">use</span> <span class="ident">frame_metadata</span>::{
     <span class="ident">v14::RuntimeMetadataV14</span>,
-    <span class="ident">PalletMetadata</span>,
     <span class="ident">RuntimeMetadata</span>,
     <span class="ident">RuntimeMetadataPrefixed</span>,
-    <span class="ident">StorageEntryType</span>,
 };
 <span class="kw">use</span> <span class="ident">heck::ToSnakeCase</span> <span class="kw">as</span> <span class="kw">_</span>;
 <span class="kw">use</span> <span class="ident">proc_macro2::TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>;
@@ -569,7 +485,6 @@
     <span class="ident">format_ident</span>,
     <span class="ident">quote</span>,
 };
-<span class="kw">use</span> <span class="ident">scale_info::form::PortableForm</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
     <span class="ident">fs</span>,
@@ -714,6 +629,7 @@
             <span class="kw">let</span> <span class="ident">constants_mod</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">pallet</span>.<span class="ident">constants</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">constants::generate_constants</span>(
                     <span class="kw-2">&amp;</span><span class="ident">type_gen</span>,
+                    <span class="ident">pallet</span>,
                     <span class="kw-2">&amp;</span><span class="ident">pallet</span>.<span class="ident">constants</span>,
                     <span class="ident">types_mod_ident</span>,
                 )
@@ -776,16 +692,6 @@
         <span class="kw">let</span> <span class="ident">has_module_error_impl</span> <span class="op">=</span>
             <span class="ident">errors::generate_has_module_error_impl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>, <span class="ident">types_mod_ident</span>);
 
-        <span class="kw">let</span> <span class="ident">default_account_data_ident</span> <span class="op">=</span> <span class="macro">format_ident!</span>(<span class="string">&quot;DefaultAccountData&quot;</span>);
-        <span class="kw">let</span> <span class="ident">default_account_data_impl</span> <span class="op">=</span> <span class="ident">generate_default_account_data_impl</span>(
-            <span class="kw-2">&amp;</span><span class="ident">pallets_with_mod_names</span>,
-            <span class="kw-2">&amp;</span><span class="ident">default_account_data_ident</span>,
-            <span class="kw-2">&amp;</span><span class="ident">type_gen</span>,
-        );
-        <span class="kw">let</span> <span class="ident">type_parameter_default_impl</span> <span class="op">=</span> <span class="ident">default_account_data_impl</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">quote!</span>( <span class="op">=</span> #<span class="ident">default_account_data_ident</span> ));
-
         <span class="macro">quote!</span> {
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>, <span class="ident">unused_imports</span>, <span class="ident">non_camel_case_types</span>)]</span>
             <span class="kw">pub</span> <span class="kw">mod</span> #<span class="ident">mod_ident</span> {
@@ -801,39 +707,35 @@
                 <span class="comment">// Impl HasModuleError on DispatchError so we can pluck out module error details.</span>
                 #<span class="ident">has_module_error_impl</span>
 
-                #<span class="ident">default_account_data_impl</span>
-
-                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span>, <span class="ident">A</span> #<span class="ident">type_parameter_default_impl</span><span class="op">&gt;</span> {
+                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span><span class="op">&gt;</span> {
                     <span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-                    <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span><span class="op">&lt;</span>(<span class="ident">X</span>, <span class="ident">A</span>)<span class="op">&gt;</span>,
+                    <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">X</span><span class="op">&gt;</span>,
                 }
 
-                <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">::core::convert::From</span><span class="op">&lt;</span><span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span>
+                <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> <span class="ident">::core::convert::From</span><span class="op">&lt;</span><span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span>
                 <span class="kw">where</span>
                     <span class="ident">T</span>: <span class="ident">::subxt::Config</span>,
-                    <span class="ident">X</span>: <span class="ident">::subxt::SignedExtra</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-                    <span class="ident">A</span>: <span class="ident">::subxt::AccountData</span>,
+                    <span class="ident">X</span>: <span class="ident">::subxt::extrinsic::ExtrinsicParams</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
                 {
                     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">client</span>: <span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
                         <span class="self">Self</span> { <span class="ident">client</span>, <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span> }
                     }
                 }
 
-                <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span>
+                <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span>
                 <span class="kw">where</span>
                     <span class="ident">T</span>: <span class="ident">::subxt::Config</span>,
-                    <span class="ident">X</span>: <span class="ident">::subxt::SignedExtra</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-                    <span class="ident">A</span>: <span class="ident">::subxt::AccountData</span>,
+                    <span class="ident">X</span>: <span class="ident">::subxt::extrinsic::ExtrinsicParams</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
                 {
-                    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">constants</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">ConstantsApi</span> {
-                        <span class="ident">ConstantsApi</span>
+                    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">constants</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">ConstantsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+                        <span class="ident">ConstantsApi</span> { <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">client</span> }
                     }
 
                     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">storage</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">StorageApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
                         <span class="ident">StorageApi</span> { <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">client</span> }
                     }
 
-                    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tx</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> {
+                    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tx</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> {
                         <span class="ident">TransactionApi</span> { <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">client</span>, <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span> }
                     }
 
@@ -851,21 +753,23 @@
                         <span class="ident">::subxt::events::at</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">client</span>, <span class="ident">block_hash</span>).<span class="kw">await</span>
                     }
 
-                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
+                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">::subxt::events::EventSub</span><span class="op">&lt;</span><span class="ident">T::Header</span><span class="op">&gt;</span>, <span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
                         <span class="ident">::subxt::events::subscribe</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">client</span>).<span class="kw">await</span>
                     }
 
-                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_finalized</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
+                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_finalized</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">::subxt::events::FinalizedEventSub</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T::Header</span><span class="op">&gt;</span>, <span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
                         <span class="ident">::subxt::events::subscribe_finalized</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">client</span>).<span class="kw">await</span>
                     }
                 }
 
-                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConstantsApi</span>;
+                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ConstantsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">::subxt::Config</span><span class="op">&gt;</span> {
+                    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+                }
 
-                <span class="kw">impl</span> <span class="ident">ConstantsApi</span> {
+                <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">::subxt::Config</span><span class="op">&gt;</span> <span class="ident">ConstantsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
                     #(
-                        <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">pallets_with_constants</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; #<span class="ident">pallets_with_constants::constants::ConstantsApi</span> {
-                            #<span class="ident">pallets_with_constants::constants::ConstantsApi</span>
+                        <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">pallets_with_constants</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; #<span class="ident">pallets_with_constants::constants::ConstantsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+                            #<span class="ident">pallets_with_constants::constants::ConstantsApi::new</span>(<span class="self">self</span>.<span class="ident">client</span>)
                         }
                     )<span class="op">*</span>
                 }
@@ -885,19 +789,18 @@
                     )<span class="op">*</span>
                 }
 
-                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> {
+                <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span><span class="op">&gt;</span> {
                     <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-                    <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span><span class="op">&lt;</span>(<span class="ident">X</span>, <span class="ident">A</span>)<span class="op">&gt;</span>,
+                    <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">X</span><span class="op">&gt;</span>,
                 }
 
-                <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span>
+                <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> <span class="ident">TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span>
                 <span class="kw">where</span>
                     <span class="ident">T</span>: <span class="ident">::subxt::Config</span>,
-                    <span class="ident">X</span>: <span class="ident">::subxt::SignedExtra</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-                    <span class="ident">A</span>: <span class="ident">::subxt::AccountData</span>,
+                    <span class="ident">X</span>: <span class="ident">::subxt::extrinsic::ExtrinsicParams</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
                 {
                     #(
-                        <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">pallets_with_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; #<span class="ident">pallets_with_calls::calls::TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">A</span><span class="op">&gt;</span> {
+                        <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">pallets_with_calls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; #<span class="ident">pallets_with_calls::calls::TransactionApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> {
                             #<span class="ident">pallets_with_calls::calls::TransactionApi::new</span>(<span class="self">self</span>.<span class="ident">client</span>)
                         }
                     )<span class="op">*</span>
@@ -905,73 +808,6 @@
             }
         }
     }
-}
-
-<span class="doccomment">/// Most chains require a valid account nonce as part of the extrinsic, so the default behaviour of</span>
-<span class="doccomment">/// the client is to fetch the nonce for the current account.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The account index (aka nonce) is commonly stored in the `System` pallet&#39;s `Account` storage item.</span>
-<span class="doccomment">/// This function attempts to find that storage item, and if it is present will implement the</span>
-<span class="doccomment">/// `subxt::AccountData` trait for it. This allows the client to construct the appropriate</span>
-<span class="doccomment">/// storage key from the account id, and then retrieve the `nonce` from the resulting storage item.</span>
-<span class="kw">fn</span> <span class="ident">generate_default_account_data_impl</span>(
-    <span class="ident">pallets_with_mod_names</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">PalletMetadata</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>, <span class="ident">syn::Ident</span>)],
-    <span class="ident">default_impl_name</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>,
-    <span class="ident">type_gen</span>: <span class="kw-2">&amp;</span><span class="ident">TypeGenerator</span>,
-) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TokenStream2</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">storage</span> <span class="op">=</span> <span class="ident">pallets_with_mod_names</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">find</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">pallet</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;System&quot;</span>)
-        .<span class="ident">and_then</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">pallet</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>())<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">storage_entry</span> <span class="op">=</span> <span class="ident">storage</span>
-        .<span class="ident">entries</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">find</span>(<span class="op">|</span><span class="ident">entry</span><span class="op">|</span> <span class="ident">entry</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;Account&quot;</span>)<span class="question-mark">?</span>;
-
-    <span class="comment">// resolve the concrete types for `AccountId` (to build the key) and `Index` to extract the</span>
-    <span class="comment">// account index (nonce) value from the result.</span>
-    <span class="kw">let</span> (<span class="ident">account_id_ty</span>, <span class="ident">account_nonce_ty</span>) <span class="op">=</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">StorageEntryType::Map</span> { <span class="ident">key</span>, <span class="ident">value</span>, .. } <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">storage_entry</span>.<span class="ident">ty</span> {
-            <span class="kw">let</span> <span class="ident">account_id_ty</span> <span class="op">=</span> <span class="ident">type_gen</span>.<span class="ident">resolve_type_path</span>(<span class="ident">key</span>.<span class="ident">id</span>(), <span class="kw-2">&amp;</span>[]);
-            <span class="kw">let</span> <span class="ident">account_data_ty</span> <span class="op">=</span> <span class="ident">type_gen</span>.<span class="ident">resolve_type</span>(<span class="ident">value</span>.<span class="ident">id</span>());
-            <span class="kw">let</span> <span class="ident">nonce_field</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">scale_info::TypeDef::Composite</span>(<span class="ident">composite</span>) <span class="op">=</span>
-                <span class="ident">account_data_ty</span>.<span class="ident">type_def</span>()
-            {
-                <span class="ident">composite</span>
-                    .<span class="ident">fields</span>()
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">find</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">name</span>() <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="string">&quot;nonce&quot;</span>.<span class="ident">to_string</span>()))<span class="question-mark">?</span>
-            } <span class="kw">else</span> {
-                <span class="macro">abort_call_site!</span>(<span class="string">&quot;Expected a `nonce` field in the account info struct&quot;</span>)
-            };
-            <span class="kw">let</span> <span class="ident">account_nonce_ty</span> <span class="op">=</span> <span class="ident">type_gen</span>.<span class="ident">resolve_type_path</span>(<span class="ident">nonce_field</span>.<span class="ident">ty</span>().<span class="ident">id</span>(), <span class="kw-2">&amp;</span>[]);
-            (<span class="ident">account_id_ty</span>, <span class="ident">account_nonce_ty</span>)
-        } <span class="kw">else</span> {
-            <span class="macro">abort_call_site!</span>(<span class="string">&quot;System::Account should be a `StorageEntryType::Map`&quot;</span>)
-        };
-
-    <span class="comment">// this path to the storage entry depends on storage codegen.</span>
-    <span class="comment">// AccountOwned contains the same data as Account does, but without references.</span>
-    <span class="kw">let</span> <span class="ident">storage_entry_path</span> <span class="op">=</span> <span class="macro">quote!</span>(<span class="ident"><span class="self">self</span>::system::storage::AccountOwned</span>);
-
-    <span class="prelude-val">Some</span>(<span class="macro">quote!</span> {
-        <span class="doccomment">/// The default storage entry from which to fetch an account nonce, required for</span>
-        <span class="doccomment">/// constructing a transaction.</span>
-        <span class="kw">pub</span> <span class="kw">enum</span> #<span class="ident">default_impl_name</span> {}
-
-        <span class="kw">impl</span> <span class="ident">::subxt::AccountData</span> <span class="kw">for</span> #<span class="ident">default_impl_name</span> {
-            <span class="kw">type</span> <span class="ident">StorageEntry</span> <span class="op">=</span> #<span class="ident">storage_entry_path</span>;
-            <span class="kw">type</span> <span class="ident">AccountId</span> <span class="op">=</span> #<span class="ident">account_id_ty</span>;
-            <span class="kw">type</span> <span class="ident">Index</span> <span class="op">=</span> #<span class="ident">account_nonce_ty</span>;
-
-            <span class="kw">fn</span> <span class="ident">storage_entry</span>(<span class="ident">account_id</span>: <span class="ident"><span class="self">Self</span>::AccountId</span>) -&gt; <span class="ident"><span class="self">Self</span>::StorageEntry</span> {
-                #<span class="ident">storage_entry_path</span>(<span class="ident">account_id</span>)
-            }
-            <span class="kw">fn</span> <span class="ident">nonce</span>(<span class="ident">result</span>: <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::StorageEntry</span> <span class="kw">as</span> <span class="ident">::subxt::StorageEntry</span><span class="op">&gt;</span><span class="ident">::Value</span>) -&gt; <span class="ident"><span class="self">Self</span>::Index</span> {
-                <span class="ident">result</span>.<span class="ident">nonce</span>
-            }
-        }
-    })
 }
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_structs_from_variants</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>(

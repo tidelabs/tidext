@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["constants",""],["events",""],["storage",""]],"type":[["Event",""]]});
+initSidebarItems({"mod":[["calls",""],["constants",""],["events",""],["storage",""]],"type":[["Event",""]]});

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccountFees",""],["ActiveEra",""],["CurrentEra",""],["CurrentSession",""],["EraTotalFees",""],["OrderBookPrice",""],["SessionTotalFees",""],["StorageApi",""],["StoredSessions",""],["SunrisePools",""],["SunriseRewards",""]]});
+initSidebarItems({"struct":[["AccountFees",""],["ActiveEra",""],["CurrentSession",""],["EraTotalFees",""],["OrderBookPrice",""],["SessionTotalFees",""],["StorageApi",""],["StoredSessions",""],["SunrisePools",""],["SunriseRewards",""]]});
