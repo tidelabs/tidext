@@ -28,7 +28,7 @@ use serde::{Deserialize, Serialize};
 ///   "tidefi_getAccountBalance",
 ///   CurrencyBalance<BalanceInfo>,
 ///   account_id,
-///   CurrencyId::Tide
+///   CurrencyId::Tifi
 /// )?;
 /// ```
 #[macro_export]
@@ -51,11 +51,11 @@ macro_rules! make_rpc_call {
 /// ```no_run
 /// use tidext::{query_storage, primitives::CurrencyId};
 ///
-/// let tide_staking_pool = query_storage!(
+/// let tifi_staking_pool = query_storage!(
 ///   client_instance,
 ///   tidefi_staking,
 ///   staking_pool,
-///   &CurrencyId::Tide
+///   &CurrencyId::Tifi
 /// )?;
 /// ```
 #[macro_export]

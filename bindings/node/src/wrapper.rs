@@ -43,18 +43,18 @@ impl From<PrimitiveNodeHealth> for NodeHealth {
   }
 }
 
-pub type CurrencyId = Option<u32>; // None means Tide
+pub type CurrencyId = Option<u32>; // None means Tifi
 
 pub fn currency_id_from(id: PrimitiveCurrencyId) -> CurrencyId {
   match id {
-    PrimitiveCurrencyId::Tide => None,
+    PrimitiveCurrencyId::Tifi => None,
     PrimitiveCurrencyId::Wrapped(id) => Some(id),
   }
 }
 
 pub fn currency_id_into(id: CurrencyId) -> PrimitiveCurrencyId {
   match id {
-    None => PrimitiveCurrencyId::Tide,
+    None => PrimitiveCurrencyId::Tifi,
     Some(id) => PrimitiveCurrencyId::Wrapped(id),
   }
 }

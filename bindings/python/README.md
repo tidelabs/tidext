@@ -1,6 +1,6 @@
 # Substrate Client for Python
 
-This is the Python binding for the TIDE Substrate client.
+This is the Python binding for the TIFI Substrate client.
 
 ## Requirements
 
@@ -39,7 +39,7 @@ The binding can be built and tested with [tox](https://tox.wiki/en/latest/index.
 The tests uses the following environment variables:
 
 - SUBSTRATE_URL: the address of the Substrate RPC e.g. "wss://rpc.sandbox.tidefi.io:443"
-- STRONGHOLD_PATH: the path to the Stronghold snapshot to use e.g. "/Users/tide/Library/Application\ Support/com.semnet.tidefi-mm/identities/Default.stronghold"
+- STRONGHOLD_PATH: the path to the Stronghold snapshot to use e.g. "/Users/tifi/Library/Application\ Support/com.semnet.tidefi-mm/identities/Default.stronghold"
 - STRONGHOLD_PASSWORD: the password of the Stronghold snapshot e.g. "tidefi123!@"
 
 You can use dotenv to set up these environment variables, just run `$ cp .env.example .env` and fill the .env file with the values to use.

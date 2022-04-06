@@ -1,6 +1,6 @@
 # tidext
 
-A library to submit **tide** e**xt**rinsics to a [tidechain](https://github.com/tidelabs/tidechain) node via RPC.
+A library to submit **tifi** e**xt**rinsics to a [tidechain](https://github.com/tidelabs/tidechain) node via RPC.
 
 _This project is currently under active development_.
 
@@ -20,7 +20,7 @@ let client = ClientBuilder::new()
    .build()
    .await?;
 
-client.total_supply_for(CurrencyId::Tide).await?;
+client.total_supply_for(CurrencyId::Tifi).await?;
 ```
 
 ### Submitting Extrinsics
@@ -29,7 +29,7 @@ Submit an extrinsic, returning success once the transaction is accepted into the
 
 ```rust
 client.swap(
-  CurrencyId::Tide,
+  CurrencyId::Tifi,
   1_000_000_000_000,
   CurrencyId::Wrapped(4),
   1_000_000,

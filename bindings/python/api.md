@@ -39,7 +39,7 @@ Gets the swap percentage fee registered on-chain for a market maker.
 
 ### async extrinsic_cost(): int
 
-Gets the cost (gas fee) of the extrinsic on-chain. It is always in TIDE.
+Gets the cost (gas fee) of the extrinsic on-chain. It is always in TIFI.
 
 ### async submit_signed_extrinsic(extrinsic: str): bytearray
 
