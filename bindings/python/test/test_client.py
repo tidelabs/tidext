@@ -30,6 +30,6 @@ async def test_stake():
   # `2` here is the Bitcoin Token ID; 1 is the amount and 1000000 is the duration
   extrinsic = await client.stake_extrinsic(2, 1, 1000000)
   fee = await client.extrinsic_cost(extrinsic)
-  print(f'staking 1 satoshi, gas fee: {fee} TIDE')
+  print(f'staking 1 satoshi, gas fee: {fee} TIFI')
   await client.submit_signed_extrinsic(extrinsic)
   print('stake extrinsic submitted')

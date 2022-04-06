@@ -19630,7 +19630,7 @@ pub mod api {
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
       pub enum CurrencyId {
         #[codec(index = 0)]
-        Tide,
+        Tifi,
         #[codec(index = 1)]
         Wrapped(::core::primitive::u32),
       }
@@ -19654,7 +19654,7 @@ pub mod api {
           runtime_types::tidefi_primitives::CurrencyId,
           ::core::primitive::u128,
         )>,
-        pub tide_value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
+        pub tifi_value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
       pub enum ProposalStatus {
