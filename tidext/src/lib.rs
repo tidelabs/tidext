@@ -175,15 +175,18 @@ mod client {
     #[tidext::pallet = "tidefi"]
     fn withdrawal(&self, currency_id: CurrencyId, amount: Balance, external_address: Vec<u8>);
 
-    /// Stake token for the current signer
-    #[tidext::pallet = "tidefi_staking"]
-    fn stake(&self, currency_id: CurrencyId, amount: Balance, duration: u32);
-
     /// Declare no desire to either validate or nominate
     #[tidext::pallet = "staking"]
     fn chill(&self);
 
-    /// Bond TIFI tokens.
+    /// Nominate validators
+    #[tidext::pallet = "staking"]
+    #[tidext::substitute_params = (
+      value.iter().map(|v| MultiAddress::Id(v.clone())).collect(),
+    )]
+    fn nominate(&self, value: Vec<AccountId>);
+
+    /// Bond TIFI tokens
     /// Take the signer account as a stash and lock up `value` of its balance. `controller` will
     /// be the account that controls it
     #[tidext::pallet = "staking"]
@@ -194,9 +197,17 @@ mod client {
     )]
     fn bond(&self, controller: AccountId, value: Balance);
 
+    /// Bond some extra amount
+    #[tidext::pallet = "staking"]
+    fn bond_extra(&self, value: Balance);
+
     /// Schedule a portion of the stash to be unlocked ready for transfer out after the bond
     #[tidext::pallet = "staking"]
     fn unbond(&self, amount: Balance);
+
+    /// Stake token for the current signer
+    #[tidext::pallet = "tidefi_staking"]
+    fn stake(&self, currency_id: CurrencyId, amount: Balance, duration: u32);
 
     /// Unstake token for the current signer
     #[tidext::pallet = "tidefi_staking"]
