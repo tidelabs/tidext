@@ -39,7 +39,7 @@ where
   T: subxt::Config,
 {
   pub(super) account_id: T::AccountId,
-  pub(super) pair_signer: Arc<TidefiPairSigner>,
+  pub pair_signer: Arc<TidefiPairSigner>,
 }
 
 impl<T> fmt::Debug for TidextKeyring<T>
