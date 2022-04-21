@@ -205,6 +205,10 @@ mod client {
     #[tidext::pallet = "staking"]
     fn unbond(&self, amount: Balance);
 
+    /// Remove any unlocked chunks from the unlocking queue from our management
+    #[tidext::pallet = "staking"]
+    fn withdraw_unbonded(&self, num_slashing_spans: u32);
+
     /// Stake token for the current signer
     #[tidext::pallet = "tidefi_staking"]
     fn stake(&self, currency_id: CurrencyId, amount: Balance, duration: u32);
