@@ -2103,14 +2103,6 @@ pub mod api {
         pub fn new(client: &'a ::subxt::Client<T>) -> Self {
           Self { client }
         }
-        pub fn transaction_byte_fee(
-          &self,
-        ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          let pallet = self.client.metadata().pallet("TransactionPayment")?;
-          let constant = pallet.constant("TransactionByteFee")?;
-          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
-          Ok(value)
-        }
         pub fn operational_fee_multiplier(
           &self,
         ) -> ::core::result::Result<::core::primitive::u8, ::subxt::BasicError> {
@@ -2129,6 +2121,19 @@ pub mod api {
         > {
           let pallet = self.client.metadata().pallet("TransactionPayment")?;
           let constant = pallet.constant("WeightToFee")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
+        pub fn length_to_fee(
+          &self,
+        ) -> ::core::result::Result<
+          ::std::vec::Vec<
+            runtime_types::frame_support::weights::WeightToFeeCoefficient<::core::primitive::u128>,
+          >,
+          ::subxt::BasicError,
+        > {
+          let pallet = self.client.metadata().pallet("TransactionPayment")?;
+          let constant = pallet.constant("LengthToFee")?;
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
@@ -2973,6 +2978,15 @@ pub mod api {
         const PALLET: &'static str = "Staking";
         const EVENT: &'static str = "PayoutStarted";
       }
+      #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
+      pub struct ValidatorPrefsSet(
+        pub ::subxt::sp_core::crypto::AccountId32,
+        pub runtime_types::pallet_staking::ValidatorPrefs,
+      );
+      impl ::subxt::Event for ValidatorPrefsSet {
+        const PALLET: &'static str = "Staking";
+        const EVENT: &'static str = "ValidatorPrefsSet";
+      }
     }
     pub mod storage {
       use super::runtime_types;
@@ -3055,10 +3069,7 @@ pub mod api {
       impl ::subxt::StorageEntry for Ledger<'_> {
         const PALLET: &'static str = "Staking";
         const STORAGE: &'static str = "Ledger";
-        type Value = runtime_types::pallet_staking::StakingLedger<
-          ::subxt::sp_core::crypto::AccountId32,
-          ::core::primitive::u128,
-        >;
+        type Value = runtime_types::pallet_staking::StakingLedger;
         fn key(&self) -> ::subxt::StorageEntryKey {
           ::subxt::StorageEntryKey::Map(vec![::subxt::StorageMapKey::new(
             &self.0,
@@ -3500,12 +3511,7 @@ pub mod api {
           _0: &::subxt::sp_core::crypto::AccountId32,
           hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<
-          ::core::option::Option<
-            runtime_types::pallet_staking::StakingLedger<
-              ::subxt::sp_core::crypto::AccountId32,
-              ::core::primitive::u128,
-            >,
-          >,
+          ::core::option::Option<runtime_types::pallet_staking::StakingLedger>,
           ::subxt::BasicError,
         > {
           let entry = Ledger(_0);
@@ -7982,7 +7988,7 @@ pub mod api {
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
-        pub fn solution_improvement_threshold(
+        pub fn better_signed_threshold(
           &self,
         ) -> ::core::result::Result<
           runtime_types::sp_arithmetic::per_things::Perbill,
@@ -7992,7 +7998,21 @@ pub mod api {
             .client
             .metadata()
             .pallet("ElectionProviderMultiPhase")?;
-          let constant = pallet.constant("SolutionImprovementThreshold")?;
+          let constant = pallet.constant("BetterSignedThreshold")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
+        pub fn better_unsigned_threshold(
+          &self,
+        ) -> ::core::result::Result<
+          runtime_types::sp_arithmetic::per_things::Perbill,
+          ::subxt::BasicError,
+        > {
+          let pallet = self
+            .client
+            .metadata()
+            .pallet("ElectionProviderMultiPhase")?;
+          let constant = pallet.constant("BetterUnsignedThreshold")?;
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
@@ -8048,6 +8068,17 @@ pub mod api {
             .metadata()
             .pallet("ElectionProviderMultiPhase")?;
           let constant = pallet.constant("SignedMaxWeight")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
+        pub fn signed_max_refunds(
+          &self,
+        ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
+          let pallet = self
+            .client
+            .metadata()
+            .pallet("ElectionProviderMultiPhase")?;
+          let constant = pallet.constant("SignedMaxRefunds")?;
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
@@ -10193,14 +10224,36 @@ pub mod api {
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
-        pub fn bounty_curator_deposit(
+        pub fn curator_deposit_multiplier(
           &self,
         ) -> ::core::result::Result<
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
           let pallet = self.client.metadata().pallet("Bounties")?;
-          let constant = pallet.constant("BountyCuratorDeposit")?;
+          let constant = pallet.constant("CuratorDepositMultiplier")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
+        pub fn curator_deposit_max(
+          &self,
+        ) -> ::core::result::Result<
+          ::core::option::Option<::core::primitive::u128>,
+          ::subxt::BasicError,
+        > {
+          let pallet = self.client.metadata().pallet("Bounties")?;
+          let constant = pallet.constant("CuratorDepositMax")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
+        pub fn curator_deposit_min(
+          &self,
+        ) -> ::core::result::Result<
+          ::core::option::Option<::core::primitive::u128>,
+          ::subxt::BasicError,
+        > {
+          let pallet = self.client.metadata().pallet("Bounties")?;
+          let constant = pallet.constant("CuratorDepositMin")?;
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
@@ -14283,6 +14336,17 @@ pub mod api {
           let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
           Ok(value)
         }
+        pub fn market_maker_limit_fee_amount(
+          &self,
+        ) -> ::core::result::Result<
+          runtime_types::sp_arithmetic::per_things::Permill,
+          ::subxt::BasicError,
+        > {
+          let pallet = self.client.metadata().pallet("Fees")?;
+          let constant = pallet.constant("MarketMakerLimitFeeAmount")?;
+          let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+          Ok(value)
+        }
       }
     }
   }
@@ -16254,7 +16318,7 @@ pub mod api {
           pub who: _0,
           pub deposit: _1,
           pub raw_solution: runtime_types::pallet_election_provider_multi_phase::RawSolution<_2>,
-          pub reward: _1,
+          pub call_fee: _1,
         }
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
@@ -17581,32 +17645,34 @@ pub mod api {
           #[codec(index = 4)]
           ProposalDoesNotExist,
           #[codec(index = 5)]
-          ProposalAlreadyComplete,
+          ProposalBlockIsInFuture,
           #[codec(index = 6)]
-          ProposalExpired,
+          ProposalAlreadyComplete,
           #[codec(index = 7)]
-          MemberAlreadyVoted,
+          ProposalExpired,
           #[codec(index = 8)]
-          MintFailed,
+          MemberAlreadyVoted,
           #[codec(index = 9)]
-          BadProposal,
+          MintFailed,
           #[codec(index = 10)]
-          BadPublicKey,
+          BadProposal,
           #[codec(index = 11)]
-          BadTransactionId,
+          BadPublicKey,
           #[codec(index = 12)]
-          BadExternalAddress,
+          BadTransactionId,
           #[codec(index = 13)]
-          BurnedQueueOverflow,
+          BadExternalAddress,
           #[codec(index = 14)]
-          WatchlistOverflow,
+          BurnedQueueOverflow,
           #[codec(index = 15)]
-          MembersOverflow,
+          WatchlistOverflow,
           #[codec(index = 16)]
-          VotesOverflow,
+          MembersOverflow,
           #[codec(index = 17)]
-          PublicKeysOverflow,
+          VotesOverflow,
           #[codec(index = 18)]
+          PublicKeysOverflow,
+          #[codec(index = 19)]
           UnknownError,
         }
         #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
@@ -18241,6 +18307,11 @@ pub mod api {
               ::core::primitive::u32,
               ::subxt::sp_core::crypto::AccountId32,
             ),
+            #[codec(index = 12)]
+            ValidatorPrefsSet(
+              ::subxt::sp_core::crypto::AccountId32,
+              runtime_types::pallet_staking::ValidatorPrefs,
+            ),
           }
         }
       }
@@ -18320,6 +18391,8 @@ pub mod api {
         V7_0_0,
         #[codec(index = 7)]
         V8_0_0,
+        #[codec(index = 8)]
+        V9_0_0,
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
       pub enum RewardDestination<_0> {
@@ -18335,14 +18408,14 @@ pub mod api {
         None,
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
-      pub struct StakingLedger<_0, _1> {
-        pub stash: _0,
+      pub struct StakingLedger {
+        pub stash: ::subxt::sp_core::crypto::AccountId32,
         #[codec(compact)]
-        pub total: _1,
+        pub total: ::core::primitive::u128,
         #[codec(compact)]
-        pub active: _1,
+        pub active: ::core::primitive::u128,
         pub unlocking: runtime_types::frame_support::storage::bounded_vec::BoundedVec<
-          runtime_types::pallet_staking::UnlockChunk<_1>,
+          runtime_types::pallet_staking::UnlockChunk<::core::primitive::u128>,
         >,
         pub claimed_rewards: ::std::vec::Vec<::core::primitive::u32>,
       }
@@ -19541,11 +19614,13 @@ pub mod api {
         Token(runtime_types::sp_runtime::TokenError),
         #[codec(index = 8)]
         Arithmetic(runtime_types::sp_runtime::ArithmeticError),
+        #[codec(index = 9)]
+        Transactional(runtime_types::sp_runtime::TransactionalError),
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
       pub struct ModuleError {
         pub index: ::core::primitive::u8,
-        pub error: ::core::primitive::u8,
+        pub error: [::core::primitive::u8; 4usize],
       }
       #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
       pub enum MultiSignature {
@@ -19572,6 +19647,13 @@ pub mod api {
         Frozen,
         #[codec(index = 6)]
         Unsupported,
+      }
+      #[derive(:: subxt :: codec :: Encode, :: subxt :: codec :: Decode, Debug)]
+      pub enum TransactionalError {
+        #[codec(index = 0)]
+        LimitReached,
+        #[codec(index = 1)]
+        NoLayer,
       }
     }
     pub mod sp_session {
@@ -19784,7 +19866,7 @@ pub mod api {
       if let Self::Module(module_error) = self {
         Some(::subxt::ModuleErrorData {
           pallet_index: module_error.index,
-          error: [module_error.error, 0, 0, 0],
+          error: module_error.error,
         })
       } else {
         None
