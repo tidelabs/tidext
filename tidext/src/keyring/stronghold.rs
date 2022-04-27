@@ -168,10 +168,10 @@ where
   }
 
   /// Try to launch a new stronghold instance with the provided path and location
-  pub async fn try_from_stronghold_path<P: AsRef<Path>>(
+  pub async fn try_from_stronghold_path<P: AsRef<Path>, V: AsRef<Vec<u8>>>(
     stronghold_path: P,
     keypair_location: Option<Location>,
-    passphrase: Option<String>,
+    passphrase: Option<V>,
   ) -> Result<Self, Error> {
     let default_keypair_location = keypair_location.unwrap_or(Location::Generic {
       vault_path: b"tidext".to_vec(),
@@ -207,7 +207,7 @@ where
 pub async fn init_stronghold_from_seed(
   keypair_location: &Location,
   mnemonic_or_seed: Option<String>,
-  passphrase: Option<String>,
+  seed_passphrase: Option<String>,
 ) -> Result<Stronghold, Error> {
   let (tx, rx) = std::sync::mpsc::channel();
   std::thread::spawn(move || {
@@ -223,7 +223,7 @@ pub async fn init_stronghold_from_seed(
   if let ProcResult::Sr25519Generate(ResultMessage::Error(stronghold_error)) = stronghold
     .runtime_exec(Procedure::Sr25519Generate {
       mnemonic_or_seed,
-      passphrase,
+      passphrase: seed_passphrase,
       output: keypair_location.clone(),
       hint: [0u8; 24].into(),
     })
@@ -236,9 +236,9 @@ pub async fn init_stronghold_from_seed(
 }
 
 /// Initialize a new stronghold instance from the provided snapshot path and passphrase
-pub async fn init_stronghold_from_path<P: AsRef<Path>>(
+pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
   stronghold_path: P,
-  passphrase: Option<String>,
+  passphrase: Option<T>,
 ) -> Result<Stronghold, Error> {
   let (tx, rx) = std::sync::mpsc::channel();
   std::thread::spawn(move || {
@@ -252,9 +252,7 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>>(
   let (mut stronghold, system) = rx.recv().unwrap();
 
   let stronghold_path = stronghold_path.as_ref();
-  let encryption_key = passphrase
-    .map(|s| s.as_bytes().to_vec())
-    .unwrap_or_default();
+  let encryption_key = passphrase.map(|s| s.as_ref().to_vec()).unwrap_or_default();
 
   if stronghold_path.exists() {
     if let ResultMessage::Error(stronghold_error) = stronghold

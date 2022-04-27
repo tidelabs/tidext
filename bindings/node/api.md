@@ -9,7 +9,7 @@ The Node.js package `tidext` exports two main classes: [Builder](#builder) and [
 Constructs a new Builder instance, preparing a Client to use the given node URL,
 using the Stronghold snapshot (`.stronghold` file) on the specified path with its password.
 
-Currently the Stronghold snapshot must contain the mnemonic generated with the TIDEFI application.
+If the Stronghold snapshot does not exist in the provided path, a new seed will be generated and saved to that path.
 
 ### async build(): [Client](#client)
 

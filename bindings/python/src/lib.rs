@@ -23,8 +23,9 @@ use pyo3::{
   types::PyList,
 };
 use tidext::{
+  init_stronghold_from_seed,
   primitives::AccountId,
-  stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
+  stronghold::{Location, ResultMessage},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Error, Permill,
   TidefiKeyring,
 };
@@ -81,23 +82,6 @@ fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Re
   }
 }
 
-async fn get_signer(stronghold: Stronghold, keypair_location: Location) -> PyResult<TidefiKeyring> {
-  let pk = match stronghold
-    .runtime_exec(Procedure::Sr25519PublicKey {
-      keypair: keypair_location.clone(),
-    })
-    .await
-  {
-    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => pk,
-    _ => return Err(PyRuntimeError::new_err("Failed to read public key")),
-  };
-  Ok(TidefiKeyring::new(
-    AccountId::from(pk.inner().0),
-    stronghold,
-    keypair_location,
-  ))
-}
-
 #[pyclass]
 pub struct Currency {
   #[pyo3(get)]
@@ -127,53 +111,51 @@ impl Builder {
 
   fn build<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let url = self.url.clone();
-    let snapshot_path = self.snapshot_path.clone();
-    let password = self.password.clone();
+    let stronghold_path = self.snapshot_path.clone().into();
+    let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
+    let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
     pyo3_asyncio::tokio::future_into_py(py, async move {
-      let (tx, rx) = std::sync::mpsc::channel();
-      std::thread::spawn(move || {
-        let system = actix::System::new();
-        let stronghold = system
-          .block_on(Stronghold::init_stronghold_system(Vec::new(), Vec::new()))
-          .unwrap();
-        tx.send((stronghold, actix::System::current())).unwrap();
-        system.run().expect("failed to run actix system");
-      });
-      let (mut stronghold, system) = rx.recv().unwrap();
-
-      let snapshot_path = PathBuf::from(snapshot_path);
-      if snapshot_path.exists() {
-        let res = stronghold
-          .read_snapshot(
-            Vec::new(),
-            None,
-            &password_to_encryption_key(password.as_bytes().to_vec()).to_vec(),
-            None,
-            Some(snapshot_path),
-          )
-          .await;
-        if let Err(e) = stronghold_response_to_result(res) {
-          system.stop();
-          return Err(PyIOError::new_err(e));
-        }
-      }
-
-      let client = SubstrateClientBuilder::new()
-        .set_signer(
-          get_signer(
-            stronghold,
-            Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH),
-          )
-          .await?,
-        )
-        .set_url(url)
-        .build()
+      let client = try_build(&url, stronghold_path, location, &password)
         .await
-        .map(|c| Client { inner: c })
-        .map_err(to_python_error)?;
+        .map(|client| {
+          password.zeroize();
+          client
+        })
+        .map_err(|e| {
+          password.zeroize();
+          to_python_error(e)
+        })?;
       Python::with_gil(move |py| Py::new(py, client))
     })
   }
+}
+
+async fn try_build(
+  url: &str,
+  stronghold_path: PathBuf,
+  location: Location,
+  password: &Vec<u8>,
+) -> Result<Client, Error> {
+  let builder = SubstrateClientBuilder::new()
+    .set_signer(if stronghold_path.exists() {
+      TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
+        .await?
+    } else {
+      let mut stronghold = init_stronghold_from_seed(&location, None, None).await?;
+      let res = stronghold
+        .write_all_to_snapshot(password, None, Some(stronghold_path))
+        .await;
+      if let Err(e) = stronghold_response_to_result(res) {
+        return Err(Error::Stronghold(e));
+      }
+
+      TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location)).await?
+    })
+    .set_url(url);
+
+  Ok(Client {
+    inner: builder.build().await?,
+  })
 }
 
 #[pyclass]

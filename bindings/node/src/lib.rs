@@ -19,11 +19,11 @@ extern crate napi_derive;
 
 use std::{convert::TryInto, path::PathBuf};
 
-use anyhow::anyhow;
 use napi::bindgen_prelude::{Buffer, Error, Result, Status};
 use tidext::{
+  init_stronghold_from_seed,
   primitives::AccountId,
-  stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold},
+  stronghold::{Location, ResultMessage},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill, TidefiKeyring,
 };
 use zeroize::Zeroize;
@@ -35,10 +35,6 @@ const SR25519_KEYPAIR_RECORD_PATH: &str = "SR25519_KEYPAIR";
 
 fn err_mapper<T: std::fmt::Display>(e: T) -> Error {
   Error::new(Status::GenericFailure, format!("{}", e))
-}
-
-fn anyhow_err_mapper(e: anyhow::Error) -> Error {
-  Error::new(Status::GenericFailure, format!("{:#}", e))
 }
 
 fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
@@ -55,26 +51,6 @@ fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Re
     ResultMessage::Ok(v) => Ok(v),
     ResultMessage::Error(e) => Err(e),
   }
-}
-
-async fn get_signer(
-  stronghold: Stronghold,
-  keypair_location: Location,
-) -> anyhow::Result<TidefiKeyring> {
-  let pk = match stronghold
-    .runtime_exec(Procedure::Sr25519PublicKey {
-      keypair: keypair_location.clone(),
-    })
-    .await
-  {
-    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => pk,
-    _ => return Err(anyhow!("Failed to read public key")),
-  };
-  Ok(TidefiKeyring::new(
-    AccountId::from(pk.inner().0),
-    stronghold,
-    keypair_location,
-  ))
 }
 
 #[napi(object)]
@@ -104,49 +80,49 @@ impl Builder {
 
   #[napi]
   pub async fn build(&self) -> Result<Client> {
-    let (tx, rx) = std::sync::mpsc::channel();
-    std::thread::spawn(move || {
-      let system = actix::System::new();
-      let stronghold = system
-        .block_on(Stronghold::init_stronghold_system(Vec::new(), Vec::new()))
-        .unwrap();
-      tx.send((stronghold, actix::System::current())).unwrap();
-      system.run().expect("failed to run actix system");
-    });
-    let (mut stronghold, system) = rx.recv().unwrap();
+    let stronghold_path: PathBuf = self.snapshot_path.clone().into();
+    let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
+    let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
 
-    let snapshot_path = PathBuf::from(self.snapshot_path.clone());
-    if snapshot_path.exists() {
+    let r = try_build(&self.url, stronghold_path, location, &password).await;
+
+    password.zeroize();
+
+    r
+  }
+}
+
+async fn try_build(
+  url: &str,
+  stronghold_path: PathBuf,
+  location: Location,
+  password: &Vec<u8>,
+) -> Result<Client> {
+  let builder = SubstrateClientBuilder::new()
+    .set_signer(if stronghold_path.exists() {
+      TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
+        .await
+        .map_err(err_mapper)?
+    } else {
+      let mut stronghold = init_stronghold_from_seed(&location, None, None)
+        .await
+        .map_err(err_mapper)?;
       let res = stronghold
-        .read_snapshot(
-          Vec::new(),
-          None,
-          &password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec(),
-          None,
-          Some(snapshot_path),
-        )
+        .write_all_to_snapshot(password, None, Some(stronghold_path))
         .await;
       if let Err(e) = stronghold_response_to_result(res) {
-        system.stop();
-        return Err(Error::new(Status::GenericFailure, e));
+        return Err(err_mapper(e));
       }
-    }
 
-    let builder = SubstrateClientBuilder::new()
-      .set_signer(
-        get_signer(
-          stronghold,
-          Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH),
-        )
+      TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location))
         .await
-        .map_err(anyhow_err_mapper)?,
-      )
-      .set_url(&self.url);
-
-    Ok(Client {
-      inner: builder.build().await.map_err(err_mapper)?,
+        .map_err(err_mapper)?
     })
-  }
+    .set_url(url);
+
+  Ok(Client {
+    inner: builder.build().await.map_err(err_mapper)?,
+  })
 }
 
 #[napi]
