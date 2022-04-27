@@ -197,18 +197,18 @@ impl Client {
     self.inner.account_id().to_string()
   }
 
-  /*
-  FIXME: Expose Permill
   fn get_regular_swap_fee<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
-    python_future!(py, client.swap_fee())
+    python_future!(py, client.swap_fee().map_ok(|a| a.deconstruct()))
   }
 
   fn get_market_maker_swap_fee<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
-    python_future!(py, client.swap_fee_market_maker())
+    python_future!(
+      py,
+      client.swap_fee_market_maker().map_ok(|a| a.deconstruct())
+    )
   }
-  */
 
   fn extrinsic_cost<'p>(&self, py: Python<'p>, extrinsic: String) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();

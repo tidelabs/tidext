@@ -7,6 +7,46 @@ export type CurrencyId = number | undefined | null
 
 export type BalanceInfo = string
 
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
+export type CurrencyId = number | undefined | null
+
+export type BalanceInfo = string
+
 export interface NodeHealth {
   /** Number of connected peers */
   peers: number
