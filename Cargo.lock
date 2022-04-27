@@ -2271,7 +2271,6 @@ name = "nodejs-tidext"
 version = "0.0.0"
 dependencies = [
  "actix",
- "anyhow",
  "iota-crypto",
  "napi",
  "napi-build",

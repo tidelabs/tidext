@@ -11,7 +11,6 @@ crate-type = ["cdylib"]
 tidext = { path = "../../tidext" }
 actix = "0.13"
 zeroize = "1.5"
-anyhow = "1"
 iota-crypto = { git = "https://github.com/tidelabs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
 # Primitives
 tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
