@@ -1,9 +1,13 @@
 const { Builder } = require('..')
 
 async function getClient() {
-  const builder = new Builder(process.env.SUBSTRATE_URL, process.env.STRONGHOLD_PATH, process.env.STRONGHOLD_PASSWORD)
-  const client = await builder.build()
-  return client
+  if (process.env.SUBSTRATE_URL && process.env.STRONGHOLD_PATH && process.env.STRONGHOLD_PASSWORD) {
+    const builder = new Builder(process.env.SUBSTRATE_URL, process.env.STRONGHOLD_PATH, process.env.STRONGHOLD_PASSWORD)
+    const client = await builder.build()
+    return client
+  }
+  console.error('Env variables not set, you must define `SUBSTRATE_URL`, `STRONGHOLD_PATH` and `STRONGHOLD_PASSWORD`')
+  process.exit(1)
 }
 
 describe('Client', function () {

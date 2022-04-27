@@ -1,16 +1,14 @@
-# Substrate Client for Python
+# tidext for Python
 
-This is the Python binding for the TIFI Substrate client.
+This is the Python binding for the tidext library.
 
 ## Requirements
 
-- Rust
+- Rust 1.57 or higher
 - Python 3.7 or higher
 
 Rust can be installed with [rustup](https://rustup.rs/).
 Python can be installed with your package manager or the [official website](https://www.python.org/downloads/).
-
-> : Currently PyO3 has an issue loading the dynamic library, so please remove the Node.js artifacts if you built the Node.js binding earlier: rm ../../target/release/libnodejs_tidext.\*
 
 ## Usage
 
@@ -18,11 +16,11 @@ Currently this binding is not published to PyPI, so you need to build it from so
 Create a virtual environment manually and install [maturin](https://github.com/PyO3/maturin):
 
 ```bash
-$ python -m venv .venv
-$ source .venv/bin/activate
-$ pip install maturin
-$ maturin develop
-$ python -m asyncio
+python -m venv .venv
+source .venv/bin/activate
+pip install maturin
+maturin develop
+python -m asyncio
 >>> import tidext,os
 >>> builder = tidext.Builder(os.getenv('SUBSTRATE_URL'), os.getenv('STRONGHOLD_PATH'), os.getenv('STRONGHOLD_PASSWORD'))
 >>> client = await builder.build()
@@ -47,6 +45,6 @@ You can use dotenv to set up these environment variables, just run `$ cp .env.ex
 To build and test the package, run the following script:
 
 ```bash
-$ python -m pip install tox
-$ tox
+python -m pip install tox
+tox
 ```

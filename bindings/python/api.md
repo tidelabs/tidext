@@ -1,4 +1,4 @@
-# Substrate Client API
+# tidext API
 
 The Python package `tidext` exports two main classes: [Builder](#builder) and [Client](#client).
 
@@ -43,7 +43,13 @@ Gets the cost (gas fee) of the extrinsic on-chain. It is always in TIFI.
 
 ### async submit_signed_extrinsic(extrinsic: str): bytearray
 
-Submits an extrinsic. You can generate one using the [unstake_extrinsic](#async-unstake_extrinsicstake_id-bytearray-force_unstake-bool-str), [stake_extrinsic](#async-stake_extrinsictoken_id-int-amount-int-duration-int-str), [swap_extrinsic](#async-swap_extrinsicfrom_token_id-int-to_token_id-int-from_amount-int-to_amount-int-swap_type-slippage_tolerance-int-str), [transfer_extrinsic](#async-transfer_extrinsictoken_id-int-amount-int-destination-bytearray-str) and [withdrawal_extrinsic](#async-withdrawal_extrinsictoken_id-int-amount-int-external_address-bytearray) APIs.
+Submits an extrinsic. You can generate one using the [unstake_extrinsic], [stake_extrinsic], [swap_extrinsic], [transfer_extrinsic] and [withdrawal_extrinsic] APIs.
+
+[unstake_extrinsic]: #async-unstake_extrinsicstake_id-bytearray-force_unstake-bool-str
+[stake_extrinsic]: #async-stake_extrinsictoken_id-int-amount-int-duration-int-str
+[swap_extrinsic]: #async-swap_extrinsicfrom_token_id-int-to_token_id-int-from_amount-int-to_amount-int-swap_type-slippage_tolerance-int-str
+[transfer_extrinsic]: #async-transfer_extrinsictoken_id-int-amount-int-destination-bytearray-str
+[withdrawal_extrinsic]: #async-withdrawal_extrinsictoken_id-int-amount-int-external_address-bytearray
 
 Returns a hash that can be used later to cancel a swap or unstake.
 
