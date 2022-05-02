@@ -119,7 +119,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#all_params_token)
+            .#function_name(#all_params_token)?
             .sign_and_submit_default(&self.signer)
             .await?;
           Ok(())
@@ -136,7 +136,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#all_params_token)
+            .#function_name(#all_params_token)?
             .sign_and_submit_then_watch_default(&self.signer)
             .await?
             .wait_for_finalized_success()
@@ -157,7 +157,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .runtime()
             .tx()
             .#pallet_name()
-            .#function_name(#all_params_token)
+            .#function_name(#all_params_token)?
             .create_signed(&self.signer, Default::default())
             .await?;
           let bytes: Bytes = extrinsic.encode().into();

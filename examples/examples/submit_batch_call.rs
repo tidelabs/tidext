@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   client
     .submit_batch(vec![
       TidechainCall::Tidefi(TidefiCall::swap {
-        currency_id_from: CurrencyId::Tifi,
+        currency_id_from: CurrencyId::Tdfy,
         amount_from: 1_000_000_000_000,
         currency_id_to: CurrencyId::Wrapped(assets::USDT),
         amount_to: 1_000_000_000,
@@ -53,7 +53,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         slippage_tolerance: None,
       }),
       TidechainCall::Tidefi(TidefiCall::swap {
-        currency_id_from: CurrencyId::Tifi,
+        currency_id_from: CurrencyId::Tdfy,
         amount_from: 2_000_000_000_000,
         currency_id_to: CurrencyId::Wrapped(assets::USDT),
         amount_to: 2_000_000_000,
@@ -62,7 +62,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         slippage_tolerance: Some(Permill::from_rational(1_u32, 1000_u32)),
       }),
       TidechainCall::TidefiStaking(TidefiStakingCall::stake {
-        currency_id: CurrencyId::Tifi,
+        currency_id: CurrencyId::Tdfy,
         amount: 100_000_000_000_000,
         duration: 150,
       }),
