@@ -54,7 +54,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .im_alive(im_alive)
+      .im_alive(im_alive)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -69,7 +69,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .confirm_swap(request_id, market_makers)
+      .confirm_swap(request_id, market_makers)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -80,7 +80,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .set_status(enabled)
+      .set_status(enabled)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -91,7 +91,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .set_account_id(account_id.clone())
+      .set_account_id(account_id.clone())?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -102,7 +102,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .cancel_swap(request_id)
+      .cancel_swap(request_id)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -113,7 +113,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .add_market_maker(account_id.clone())
+      .add_market_maker(account_id.clone())?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -124,7 +124,7 @@ impl OracleExt for Client {
       .runtime()
       .tx()
       .oracle()
-      .remove_market_maker(account_id.clone())
+      .remove_market_maker(account_id.clone())?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())

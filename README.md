@@ -20,7 +20,7 @@ let client = ClientBuilder::new()
    .build()
    .await?;
 
-client.total_supply_for(CurrencyId::Tifi).await?;
+client.total_supply_for(CurrencyId::Tdfy).await?;
 ```
 
 ### Submitting Extrinsics
@@ -29,7 +29,7 @@ Submit an extrinsic, returning success once the transaction is accepted into the
 
 ```rust
 client.swap(
-  CurrencyId::Tifi,
+  CurrencyId::Tdfy,
   1_000_000_000_000,
   CurrencyId::Wrapped(4),
   1_000_000,

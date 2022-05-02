@@ -186,7 +186,7 @@ mod client {
     )]
     fn nominate(&self, value: Vec<AccountId>);
 
-    /// Bond TIFI tokens
+    /// Bond TDFY tokens
     /// Take the signer account as a stash and lock up `value` of its balance. `controller` will
     /// be the account that controls it
     #[tidext::pallet = "staking"]
@@ -335,7 +335,7 @@ mod client {
       .map_err(Into::into)
     }
 
-    /// Return the cost (gas fee) of an extrinsic on-chain (always in TIFI)
+    /// Return the cost (gas fee) of an extrinsic on-chain (always in TDFY)
     pub async fn extrinsic_cost(&self, extrinsic: String) -> Result<Balance, Error> {
       let best_block = latest_block!(self);
       Ok(
@@ -359,7 +359,7 @@ mod client {
     /// Return the total supply for the currency across all accounts
     pub async fn total_supply_for(&self, currency_id: CurrencyId) -> Result<Balance, Error> {
       match currency_id {
-        CurrencyId::Tifi => query_storage!(self, balances, total_issuance).map_err(Into::into),
+        CurrencyId::Tdfy => query_storage!(self, balances, total_issuance).map_err(Into::into),
         CurrencyId::Wrapped(wrapped_token) => {
           Ok(query_storage!(self, assets, asset, &wrapped_token)?.map_or(0, |asset| asset.supply))
         }

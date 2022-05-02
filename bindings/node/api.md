@@ -39,17 +39,17 @@ Gets the swap percentage fee registered on-chain for a market maker.
 
 ### async extrinsicCost(): number
 
-Gets the cost (gas fee) of the extrinsic on-chain. It is always in TIFI.
+Gets the cost (gas fee) of the extrinsic on-chain. It is always in TDFY.
 
 ### async submitSignedExtrinsic(extrinsic: string): Buffer
 
 Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeExtrinsic], [swapExtrinsic], [transferExtrinsic] and [withdrawalExtrinsic] APIs.
 
-[unstakeExtrinsic]: #async-unstakeextrinsicstakeid-Buffer-forceunstake-boolean-string
-[stakeExtrinsic]: #async-stakeextrinsictokenId-number-amount-number-duration-number-string
-[swapExtrinsic]: #async-swapextrinsicfromTokenId-number-toTokenId-number-fromamount-number-toamount-number-swaptype-slippagetolerance-number-string
-[transferExtrinsic]: #async-transferextrinsictokenId-number-amount-number-destination-Buffer-string
-[withdrawalExtrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer
+[unstakeextrinsic]: #async-unstakeextrinsicstakeid-Buffer-forceunstake-boolean-string
+[stakeextrinsic]: #async-stakeextrinsictokenId-number-amount-number-duration-number-string
+[swapextrinsic]: #async-swapextrinsicfromTokenId-number-toTokenId-number-fromamount-number-toamount-number-swaptype-slippagetolerance-number-string
+[transferextrinsic]: #async-transferextrinsictokenId-number-amount-number-destination-Buffer-string
+[withdrawalextrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer
 
 Returns a hash that can be used later to cancel a swap or unstake.
 

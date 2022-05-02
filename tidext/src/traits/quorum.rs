@@ -117,7 +117,7 @@ impl QuorumExt for Client {
       .runtime()
       .tx()
       .quorum()
-      .submit_proposal(proposal)
+      .submit_proposal(proposal)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -128,7 +128,7 @@ impl QuorumExt for Client {
       .runtime()
       .tx()
       .quorum()
-      .acknowledge_proposal(proposal)
+      .acknowledge_proposal(proposal)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -139,7 +139,7 @@ impl QuorumExt for Client {
       .runtime()
       .tx()
       .quorum()
-      .acknowledge_burned(proposal)
+      .acknowledge_burned(proposal)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -150,7 +150,7 @@ impl QuorumExt for Client {
       .runtime()
       .tx()
       .quorum()
-      .reject_proposal(proposal)
+      .reject_proposal(proposal)?
       .sign_and_submit_default(&self.signer)
       .await?;
     Ok(())
@@ -161,7 +161,7 @@ impl QuorumExt for Client {
       .runtime()
       .tx()
       .quorum()
-      .submit_public_keys(public_keys)
+      .submit_public_keys(public_keys)?
       .sign_and_submit_then_watch_default(&self.signer)
       .await?
       .wait_for_finalized_success()
