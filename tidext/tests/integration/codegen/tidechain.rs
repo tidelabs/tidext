@@ -219,7 +219,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, FillBlock, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<FillBlock>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<FillBlock>()?
+          };
+          if runtime_call_hash
             == [
               228u8, 117u8, 251u8, 95u8, 47u8, 56u8, 32u8, 177u8, 191u8, 72u8, 75u8, 23u8, 193u8,
               175u8, 227u8, 218u8, 127u8, 94u8, 114u8, 110u8, 215u8, 61u8, 162u8, 102u8, 73u8,
@@ -244,7 +249,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Remark, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Remark>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Remark>()?
+          };
+          if runtime_call_hash
             == [
               186u8, 79u8, 33u8, 199u8, 216u8, 115u8, 19u8, 146u8, 220u8, 174u8, 98u8, 61u8, 179u8,
               230u8, 40u8, 70u8, 22u8, 251u8, 77u8, 62u8, 133u8, 80u8, 186u8, 70u8, 135u8, 172u8,
@@ -265,7 +275,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetHeapPages, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetHeapPages>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetHeapPages>()?
+          };
+          if runtime_call_hash
             == [
               77u8, 138u8, 122u8, 55u8, 179u8, 101u8, 60u8, 137u8, 173u8, 39u8, 28u8, 36u8, 237u8,
               243u8, 232u8, 162u8, 76u8, 176u8, 135u8, 58u8, 60u8, 177u8, 105u8, 136u8, 94u8, 53u8,
@@ -297,7 +312,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetCode, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetCode>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetCode>()?
+          };
+          if runtime_call_hash
             == [
               35u8, 75u8, 103u8, 203u8, 91u8, 141u8, 77u8, 95u8, 37u8, 157u8, 107u8, 240u8, 54u8,
               242u8, 245u8, 205u8, 104u8, 165u8, 177u8, 37u8, 86u8, 197u8, 28u8, 202u8, 121u8,
@@ -333,7 +353,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetCodeWithoutChecks>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetCodeWithoutChecks>()?
+          };
+          if runtime_call_hash
             == [
               150u8, 148u8, 119u8, 129u8, 77u8, 216u8, 135u8, 187u8, 127u8, 24u8, 238u8, 15u8,
               227u8, 229u8, 191u8, 217u8, 106u8, 129u8, 149u8, 79u8, 154u8, 78u8, 53u8, 159u8,
@@ -357,7 +382,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetStorage, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetStorage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetStorage>()?
+          };
+          if runtime_call_hash
             == [
               197u8, 12u8, 119u8, 205u8, 152u8, 103u8, 211u8, 170u8, 146u8, 253u8, 25u8, 56u8,
               180u8, 146u8, 74u8, 75u8, 38u8, 108u8, 212u8, 154u8, 23u8, 22u8, 148u8, 175u8, 107u8,
@@ -378,7 +408,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, KillStorage, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<KillStorage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<KillStorage>()?
+          };
+          if runtime_call_hash
             == [
               154u8, 115u8, 185u8, 20u8, 126u8, 90u8, 222u8, 131u8, 199u8, 57u8, 184u8, 226u8,
               43u8, 245u8, 161u8, 176u8, 194u8, 123u8, 139u8, 97u8, 97u8, 94u8, 47u8, 64u8, 204u8,
@@ -403,7 +438,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, KillPrefix, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<KillPrefix>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<KillPrefix>()?
+          };
+          if runtime_call_hash
             == [
               214u8, 101u8, 191u8, 241u8, 1u8, 241u8, 144u8, 116u8, 246u8, 199u8, 159u8, 249u8,
               155u8, 164u8, 220u8, 221u8, 75u8, 33u8, 204u8, 3u8, 255u8, 201u8, 187u8, 238u8,
@@ -424,7 +464,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemarkWithEvent, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemarkWithEvent>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemarkWithEvent>()?
+          };
+          if runtime_call_hash
             == [
               171u8, 82u8, 75u8, 237u8, 69u8, 197u8, 223u8, 125u8, 123u8, 51u8, 241u8, 35u8, 202u8,
               210u8, 227u8, 109u8, 1u8, 241u8, 255u8, 63u8, 33u8, 115u8, 156u8, 239u8, 97u8, 76u8,
@@ -683,7 +728,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               224u8, 184u8, 2u8, 14u8, 38u8, 177u8, 223u8, 98u8, 223u8, 15u8, 130u8, 23u8, 212u8,
               69u8, 61u8, 165u8, 171u8, 61u8, 171u8, 57u8, 88u8, 71u8, 168u8, 172u8, 54u8, 91u8,
@@ -706,7 +756,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Account<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               224u8, 184u8, 2u8, 14u8, 38u8, 177u8, 223u8, 98u8, 223u8, 15u8, 130u8, 23u8, 212u8,
               69u8, 61u8, 165u8, 171u8, 61u8, 171u8, 57u8, 88u8, 71u8, 168u8, 172u8, 54u8, 91u8,
@@ -726,7 +781,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ExtrinsicCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ExtrinsicCount>()?
+          };
+          if runtime_storage_hash
             == [
               223u8, 60u8, 201u8, 120u8, 36u8, 44u8, 180u8, 210u8, 242u8, 53u8, 222u8, 154u8,
               123u8, 176u8, 249u8, 8u8, 225u8, 28u8, 232u8, 4u8, 136u8, 41u8, 151u8, 82u8, 189u8,
@@ -747,7 +807,12 @@ pub mod api {
           runtime_types::frame_support::weights::PerDispatchClass<::core::primitive::u64>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<BlockWeight>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BlockWeight>()?
+          };
+          if runtime_storage_hash
             == [
               2u8, 236u8, 190u8, 174u8, 244u8, 98u8, 194u8, 168u8, 89u8, 208u8, 7u8, 45u8, 175u8,
               171u8, 177u8, 121u8, 215u8, 190u8, 184u8, 195u8, 49u8, 133u8, 44u8, 1u8, 181u8,
@@ -772,7 +837,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AllExtrinsicsLen>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AllExtrinsicsLen>()?
+          };
+          if runtime_storage_hash
             == [
               202u8, 145u8, 209u8, 225u8, 40u8, 220u8, 174u8, 74u8, 93u8, 164u8, 254u8, 248u8,
               254u8, 192u8, 32u8, 117u8, 96u8, 149u8, 53u8, 145u8, 219u8, 64u8, 234u8, 18u8, 217u8,
@@ -791,7 +861,12 @@ pub mod api {
           _0: &::core::primitive::u32,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::sp_core::H256, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<BlockHash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BlockHash>()?
+          };
+          if runtime_storage_hash
             == [
               24u8, 99u8, 146u8, 142u8, 205u8, 166u8, 4u8, 32u8, 218u8, 213u8, 24u8, 236u8, 45u8,
               116u8, 145u8, 204u8, 27u8, 141u8, 169u8, 249u8, 111u8, 141u8, 37u8, 136u8, 45u8,
@@ -814,7 +889,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, BlockHash<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<BlockHash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BlockHash>()?
+          };
+          if runtime_storage_hash
             == [
               24u8, 99u8, 146u8, 142u8, 205u8, 166u8, 4u8, 32u8, 218u8, 213u8, 24u8, 236u8, 45u8,
               116u8, 145u8, 204u8, 27u8, 141u8, 169u8, 249u8, 111u8, 141u8, 37u8, 136u8, 45u8,
@@ -833,7 +913,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::std::vec::Vec<::core::primitive::u8>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ExtrinsicData>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ExtrinsicData>()?
+          };
+          if runtime_storage_hash
             == [
               210u8, 224u8, 211u8, 186u8, 118u8, 210u8, 185u8, 194u8, 238u8, 211u8, 254u8, 73u8,
               67u8, 184u8, 31u8, 229u8, 168u8, 125u8, 98u8, 23u8, 241u8, 59u8, 49u8, 86u8, 126u8,
@@ -856,7 +941,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ExtrinsicData<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ExtrinsicData>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ExtrinsicData>()?
+          };
+          if runtime_storage_hash
             == [
               210u8, 224u8, 211u8, 186u8, 118u8, 210u8, 185u8, 194u8, 238u8, 211u8, 254u8, 73u8,
               67u8, 184u8, 31u8, 229u8, 168u8, 125u8, 98u8, 23u8, 241u8, 59u8, 49u8, 86u8, 126u8,
@@ -873,7 +963,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Number>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Number>()?
+          };
+          if runtime_storage_hash
             == [
               228u8, 96u8, 102u8, 190u8, 252u8, 130u8, 239u8, 172u8, 126u8, 235u8, 246u8, 139u8,
               208u8, 15u8, 88u8, 245u8, 141u8, 232u8, 43u8, 204u8, 36u8, 87u8, 211u8, 141u8, 187u8,
@@ -895,7 +990,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::sp_core::H256, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ParentHash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ParentHash>()?
+          };
+          if runtime_storage_hash
             == [
               194u8, 221u8, 147u8, 22u8, 68u8, 141u8, 32u8, 6u8, 202u8, 39u8, 164u8, 184u8, 69u8,
               126u8, 190u8, 101u8, 215u8, 27u8, 127u8, 157u8, 200u8, 69u8, 170u8, 139u8, 232u8,
@@ -920,7 +1020,12 @@ pub mod api {
           runtime_types::sp_runtime::generic::digest::Digest,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Digest>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Digest>()?
+          };
+          if runtime_storage_hash
             == [
               10u8, 176u8, 13u8, 228u8, 226u8, 42u8, 210u8, 151u8, 107u8, 212u8, 136u8, 15u8, 38u8,
               182u8, 225u8, 12u8, 250u8, 56u8, 193u8, 243u8, 219u8, 113u8, 95u8, 233u8, 21u8,
@@ -956,11 +1061,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Events>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Events>()?
+          };
+          if runtime_storage_hash
             == [
-              27u8, 194u8, 201u8, 158u8, 251u8, 2u8, 137u8, 46u8, 76u8, 55u8, 158u8, 221u8, 249u8,
-              24u8, 80u8, 138u8, 193u8, 40u8, 221u8, 70u8, 215u8, 105u8, 129u8, 122u8, 92u8, 7u8,
-              241u8, 97u8, 133u8, 88u8, 103u8, 39u8,
+              144u8, 109u8, 97u8, 8u8, 138u8, 12u8, 122u8, 218u8, 3u8, 146u8, 181u8, 92u8, 212u8,
+              220u8, 235u8, 111u8, 42u8, 212u8, 228u8, 33u8, 109u8, 200u8, 226u8, 97u8, 201u8,
+              245u8, 45u8, 194u8, 117u8, 64u8, 71u8, 103u8,
             ]
           {
             let entry = Events;
@@ -978,7 +1088,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<EventCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EventCount>()?
+          };
+          if runtime_storage_hash
             == [
               236u8, 93u8, 90u8, 177u8, 250u8, 211u8, 138u8, 187u8, 26u8, 208u8, 203u8, 113u8,
               221u8, 233u8, 227u8, 9u8, 249u8, 25u8, 202u8, 185u8, 161u8, 144u8, 167u8, 104u8,
@@ -1013,7 +1128,12 @@ pub mod api {
           ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u32)>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<EventTopics>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EventTopics>()?
+          };
+          if runtime_storage_hash
             == [
               231u8, 73u8, 172u8, 223u8, 210u8, 145u8, 151u8, 102u8, 73u8, 23u8, 140u8, 55u8, 97u8,
               40u8, 219u8, 239u8, 229u8, 177u8, 72u8, 41u8, 93u8, 178u8, 7u8, 209u8, 57u8, 86u8,
@@ -1045,7 +1165,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, EventTopics<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<EventTopics>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EventTopics>()?
+          };
+          if runtime_storage_hash
             == [
               231u8, 73u8, 172u8, 223u8, 210u8, 145u8, 151u8, 102u8, 73u8, 23u8, 140u8, 55u8, 97u8,
               40u8, 219u8, 239u8, 229u8, 177u8, 72u8, 41u8, 93u8, 178u8, 7u8, 209u8, 57u8, 86u8,
@@ -1065,10 +1190,12 @@ pub mod api {
           ::core::option::Option<runtime_types::frame_system::LastRuntimeUpgradeInfo>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<LastRuntimeUpgrade>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<LastRuntimeUpgrade>()?
+          };
+          if runtime_storage_hash
             == [
               219u8, 153u8, 158u8, 38u8, 45u8, 65u8, 151u8, 137u8, 53u8, 76u8, 11u8, 181u8, 218u8,
               248u8, 125u8, 190u8, 100u8, 240u8, 173u8, 75u8, 179u8, 137u8, 198u8, 197u8, 248u8,
@@ -1086,10 +1213,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<UpgradedToU32RefCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UpgradedToU32RefCount>()?
+          };
+          if runtime_storage_hash
             == [
               171u8, 88u8, 244u8, 92u8, 122u8, 67u8, 27u8, 18u8, 59u8, 175u8, 175u8, 178u8, 20u8,
               150u8, 213u8, 59u8, 222u8, 141u8, 32u8, 107u8, 3u8, 114u8, 83u8, 250u8, 180u8, 233u8,
@@ -1112,10 +1241,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<UpgradedToTripleRefCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UpgradedToTripleRefCount>()?
+          };
+          if runtime_storage_hash
             == [
               90u8, 33u8, 56u8, 86u8, 90u8, 101u8, 89u8, 133u8, 203u8, 56u8, 201u8, 210u8, 244u8,
               232u8, 150u8, 18u8, 51u8, 105u8, 14u8, 230u8, 103u8, 155u8, 246u8, 99u8, 53u8, 207u8,
@@ -1140,7 +1271,12 @@ pub mod api {
           ::core::option::Option<runtime_types::frame_system::Phase>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ExecutionPhase>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ExecutionPhase>()?
+          };
+          if runtime_storage_hash
             == [
               174u8, 13u8, 230u8, 220u8, 239u8, 161u8, 172u8, 122u8, 188u8, 95u8, 141u8, 118u8,
               91u8, 158u8, 111u8, 145u8, 243u8, 173u8, 226u8, 212u8, 187u8, 118u8, 94u8, 132u8,
@@ -1171,17 +1307,16 @@ pub mod api {
           runtime_types::frame_system::limits::BlockWeights,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("System", "BlockWeights")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "BlockWeights")?
             == [
               200u8, 248u8, 31u8, 36u8, 218u8, 142u8, 208u8, 76u8, 248u8, 100u8, 87u8, 242u8, 90u8,
               226u8, 143u8, 182u8, 173u8, 156u8, 179u8, 61u8, 82u8, 63u8, 158u8, 192u8, 52u8,
               108u8, 49u8, 5u8, 103u8, 113u8, 106u8, 234u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("BlockWeights")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1196,17 +1331,16 @@ pub mod api {
           runtime_types::frame_system::limits::BlockLength,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("System", "BlockLength")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "BlockLength")?
             == [
               120u8, 249u8, 182u8, 103u8, 246u8, 214u8, 149u8, 44u8, 42u8, 64u8, 2u8, 56u8, 157u8,
               184u8, 43u8, 195u8, 214u8, 251u8, 207u8, 207u8, 249u8, 105u8, 203u8, 108u8, 179u8,
               93u8, 93u8, 246u8, 40u8, 175u8, 160u8, 114u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("BlockLength")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1218,17 +1352,16 @@ pub mod api {
         pub fn block_hash_count(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("System", "BlockHashCount")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "BlockHashCount")?
             == [
               123u8, 126u8, 182u8, 103u8, 71u8, 187u8, 233u8, 8u8, 47u8, 226u8, 159u8, 139u8, 0u8,
               59u8, 190u8, 135u8, 189u8, 77u8, 190u8, 81u8, 39u8, 198u8, 224u8, 219u8, 70u8, 143u8,
               6u8, 132u8, 196u8, 61u8, 117u8, 194u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("BlockHashCount")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1243,14 +1376,16 @@ pub mod api {
           runtime_types::frame_support::weights::RuntimeDbWeight,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().constant_hash("System", "DbWeight")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "DbWeight")?
             == [
               203u8, 8u8, 106u8, 152u8, 74u8, 132u8, 2u8, 132u8, 244u8, 106u8, 147u8, 12u8, 93u8,
               80u8, 61u8, 158u8, 172u8, 178u8, 228u8, 125u8, 213u8, 102u8, 75u8, 210u8, 64u8,
               185u8, 204u8, 84u8, 10u8, 164u8, 204u8, 62u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("DbWeight")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1263,14 +1398,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::sp_version::RuntimeVersion, ::subxt::BasicError>
         {
-          if self.client.metadata().constant_hash("System", "Version")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "Version")?
             == [
-              80u8, 84u8, 52u8, 142u8, 253u8, 110u8, 66u8, 175u8, 247u8, 145u8, 225u8, 119u8, 97u8,
-              151u8, 138u8, 224u8, 47u8, 232u8, 66u8, 7u8, 130u8, 120u8, 59u8, 229u8, 149u8, 53u8,
-              38u8, 98u8, 246u8, 133u8, 246u8, 89u8,
+              143u8, 163u8, 46u8, 7u8, 227u8, 61u8, 208u8, 87u8, 232u8, 226u8, 73u8, 52u8, 76u8,
+              114u8, 76u8, 61u8, 83u8, 4u8, 246u8, 231u8, 155u8, 2u8, 108u8, 3u8, 15u8, 14u8, 68u8,
+              185u8, 151u8, 151u8, 240u8, 76u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("Version")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1286,17 +1423,16 @@ pub mod api {
         pub fn ss58_prefix(
           &self,
         ) -> ::core::result::Result<::core::primitive::u16, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("System", "SS58Prefix")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("System", "SS58Prefix")?
             == [
               197u8, 217u8, 49u8, 68u8, 82u8, 238u8, 120u8, 50u8, 91u8, 58u8, 6u8, 156u8, 40u8,
               1u8, 241u8, 213u8, 141u8, 74u8, 83u8, 115u8, 117u8, 41u8, 119u8, 50u8, 140u8, 136u8,
               163u8, 185u8, 34u8, 190u8, 60u8, 97u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("System")?;
+            let pallet = metadata.pallet("System")?;
             let constant = pallet.constant("SS58Prefix")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -1396,7 +1532,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ReportEquivocation>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ReportEquivocation>()?
+          };
+          if runtime_call_hash
             == [
               123u8, 212u8, 216u8, 77u8, 79u8, 132u8, 201u8, 155u8, 166u8, 230u8, 50u8, 89u8, 98u8,
               68u8, 56u8, 213u8, 206u8, 245u8, 91u8, 104u8, 89u8, 189u8, 57u8, 38u8, 127u8, 22u8,
@@ -1441,10 +1582,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<ReportEquivocationUnsigned>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ReportEquivocationUnsigned>()?
+          };
+          if runtime_call_hash
             == [
               32u8, 163u8, 168u8, 251u8, 251u8, 9u8, 1u8, 195u8, 173u8, 32u8, 235u8, 125u8, 141u8,
               201u8, 130u8, 207u8, 239u8, 76u8, 150u8, 99u8, 74u8, 193u8, 60u8, 165u8, 93u8, 49u8,
@@ -1471,7 +1614,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, PlanConfigChange, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<PlanConfigChange>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<PlanConfigChange>()?
+          };
+          if runtime_call_hash
             == [
               215u8, 121u8, 90u8, 87u8, 178u8, 247u8, 114u8, 53u8, 174u8, 28u8, 20u8, 33u8, 139u8,
               216u8, 13u8, 187u8, 74u8, 198u8, 38u8, 28u8, 175u8, 13u8, 73u8, 132u8, 103u8, 78u8,
@@ -1593,7 +1741,7 @@ pub mod api {
       impl ::subxt::StorageEntry for Initialized {
         const PALLET: &'static str = "Babe";
         const STORAGE: &'static str = "Initialized";
-        type Value = ::core::option::Option<[::core::primitive::u8; 32usize]>;
+        type Value = ::core::option::Option<runtime_types::sp_consensus_babe::digests::PreDigest>;
         fn key(&self) -> ::subxt::StorageEntryKey {
           ::subxt::StorageEntryKey::Plain
         }
@@ -1655,7 +1803,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<EpochIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EpochIndex>()?
+          };
+          if runtime_storage_hash
             == [
               51u8, 27u8, 91u8, 156u8, 118u8, 99u8, 46u8, 219u8, 190u8, 147u8, 205u8, 23u8, 106u8,
               169u8, 121u8, 218u8, 208u8, 235u8, 135u8, 127u8, 243u8, 41u8, 55u8, 243u8, 235u8,
@@ -1683,7 +1836,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Authorities>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Authorities>()?
+          };
+          if runtime_storage_hash
             == [
               39u8, 102u8, 251u8, 125u8, 230u8, 247u8, 174u8, 255u8, 2u8, 81u8, 86u8, 69u8, 182u8,
               92u8, 191u8, 163u8, 66u8, 181u8, 247u8, 9u8, 57u8, 154u8, 239u8, 34u8, 25u8, 139u8,
@@ -1707,7 +1865,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::sp_consensus_slots::Slot, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<GenesisSlot>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<GenesisSlot>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 244u8, 7u8, 142u8, 224u8, 33u8, 144u8, 186u8, 155u8, 144u8, 68u8, 81u8, 241u8,
               57u8, 40u8, 207u8, 35u8, 39u8, 28u8, 41u8, 210u8, 213u8, 53u8, 195u8, 175u8, 119u8,
@@ -1730,7 +1893,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::sp_consensus_slots::Slot, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<CurrentSlot>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentSlot>()?
+          };
+          if runtime_storage_hash
             == [
               233u8, 102u8, 77u8, 99u8, 103u8, 50u8, 151u8, 229u8, 46u8, 226u8, 181u8, 37u8, 117u8,
               204u8, 234u8, 120u8, 116u8, 166u8, 80u8, 188u8, 92u8, 154u8, 137u8, 150u8, 79u8,
@@ -1761,7 +1929,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<[::core::primitive::u8; 32usize], ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Randomness>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Randomness>()?
+          };
+          if runtime_storage_hash
             == [
               191u8, 197u8, 25u8, 164u8, 104u8, 248u8, 247u8, 193u8, 244u8, 60u8, 181u8, 195u8,
               248u8, 90u8, 41u8, 199u8, 82u8, 123u8, 72u8, 126u8, 18u8, 17u8, 128u8, 215u8, 34u8,
@@ -1786,10 +1959,12 @@ pub mod api {
           ::core::option::Option<runtime_types::sp_consensus_babe::digests::NextConfigDescriptor>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<PendingEpochConfigChange>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PendingEpochConfigChange>()?
+          };
+          if runtime_storage_hash
             == [
               98u8, 52u8, 22u8, 32u8, 76u8, 196u8, 89u8, 78u8, 119u8, 181u8, 17u8, 49u8, 220u8,
               159u8, 195u8, 74u8, 33u8, 59u8, 15u8, 104u8, 26u8, 111u8, 165u8, 68u8, 147u8, 14u8,
@@ -1807,7 +1982,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<[::core::primitive::u8; 32usize], ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<NextRandomness>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextRandomness>()?
+          };
+          if runtime_storage_hash
             == [
               185u8, 98u8, 45u8, 109u8, 253u8, 38u8, 238u8, 221u8, 240u8, 29u8, 38u8, 107u8, 118u8,
               117u8, 131u8, 115u8, 21u8, 255u8, 203u8, 81u8, 243u8, 251u8, 91u8, 60u8, 163u8,
@@ -1835,7 +2015,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<NextAuthorities>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextAuthorities>()?
+          };
+          if runtime_storage_hash
             == [
               211u8, 175u8, 218u8, 0u8, 212u8, 114u8, 210u8, 137u8, 146u8, 135u8, 78u8, 133u8,
               85u8, 253u8, 140u8, 242u8, 101u8, 155u8, 159u8, 8u8, 217u8, 176u8, 234u8, 143u8,
@@ -1865,7 +2050,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<SegmentIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SegmentIndex>()?
+          };
+          if runtime_storage_hash
             == [
               128u8, 45u8, 87u8, 58u8, 174u8, 152u8, 241u8, 156u8, 56u8, 192u8, 19u8, 45u8, 75u8,
               160u8, 35u8, 253u8, 145u8, 11u8, 178u8, 81u8, 114u8, 117u8, 112u8, 107u8, 163u8,
@@ -1893,7 +2083,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnderConstruction>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnderConstruction>()?
+          };
+          if runtime_storage_hash
             == [
               12u8, 167u8, 30u8, 96u8, 161u8, 63u8, 210u8, 63u8, 91u8, 199u8, 188u8, 78u8, 254u8,
               255u8, 253u8, 202u8, 203u8, 26u8, 4u8, 105u8, 76u8, 125u8, 191u8, 245u8, 32u8, 97u8,
@@ -1918,7 +2113,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, UnderConstruction<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnderConstruction>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnderConstruction>()?
+          };
+          if runtime_storage_hash
             == [
               12u8, 167u8, 30u8, 96u8, 161u8, 63u8, 210u8, 63u8, 91u8, 199u8, 188u8, 78u8, 254u8,
               255u8, 253u8, 202u8, 203u8, 26u8, 4u8, 105u8, 76u8, 125u8, 191u8, 245u8, 32u8, 97u8,
@@ -1936,14 +2136,21 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<
-          ::core::option::Option<::core::option::Option<[::core::primitive::u8; 32usize]>>,
+          ::core::option::Option<
+            ::core::option::Option<runtime_types::sp_consensus_babe::digests::PreDigest>,
+          >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Initialized>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Initialized>()?
+          };
+          if runtime_storage_hash
             == [
-              48u8, 206u8, 111u8, 118u8, 149u8, 175u8, 148u8, 53u8, 233u8, 82u8, 220u8, 57u8, 22u8,
-              164u8, 116u8, 228u8, 134u8, 237u8, 129u8, 195u8, 60u8, 169u8, 1u8, 164u8, 74u8,
-              177u8, 145u8, 112u8, 66u8, 198u8, 53u8, 157u8,
+              174u8, 23u8, 254u8, 52u8, 114u8, 235u8, 65u8, 46u8, 39u8, 97u8, 238u8, 243u8, 237u8,
+              138u8, 142u8, 85u8, 114u8, 69u8, 58u8, 172u8, 7u8, 238u8, 110u8, 153u8, 22u8, 122u8,
+              117u8, 149u8, 113u8, 221u8, 127u8, 225u8,
             ]
           {
             let entry = Initialized;
@@ -1955,7 +2162,7 @@ pub mod api {
         #[doc = " This field should always be populated during block processing unless"]
         #[doc = " secondary plain slots are enabled (which don't contain a VRF output)."]
         #[doc = ""]
-        #[doc = " It is set in `on_initialize`, before it will contain the value from the last block."]
+        #[doc = " It is set in `on_finalize`, before it will contain the value from the last block."]
         pub async fn author_vrf_randomness(
           &self,
           block_hash: ::core::option::Option<T::Hash>,
@@ -1963,10 +2170,12 @@ pub mod api {
           ::core::option::Option<[::core::primitive::u8; 32usize]>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<AuthorVrfRandomness>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AuthorVrfRandomness>()?
+          };
+          if runtime_storage_hash
             == [
               66u8, 235u8, 74u8, 252u8, 222u8, 135u8, 19u8, 28u8, 74u8, 191u8, 170u8, 197u8, 207u8,
               127u8, 77u8, 121u8, 138u8, 138u8, 110u8, 187u8, 34u8, 14u8, 230u8, 43u8, 241u8,
@@ -1995,7 +2204,12 @@ pub mod api {
           (::core::primitive::u32, ::core::primitive::u32),
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<EpochStart>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EpochStart>()?
+          };
+          if runtime_storage_hash
             == [
               196u8, 39u8, 241u8, 20u8, 150u8, 180u8, 136u8, 4u8, 195u8, 205u8, 218u8, 10u8, 130u8,
               131u8, 168u8, 243u8, 207u8, 249u8, 58u8, 195u8, 177u8, 119u8, 110u8, 243u8, 241u8,
@@ -2021,7 +2235,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Lateness>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Lateness>()?
+          };
+          if runtime_storage_hash
             == [
               229u8, 230u8, 224u8, 89u8, 49u8, 213u8, 198u8, 236u8, 144u8, 56u8, 193u8, 234u8,
               62u8, 242u8, 191u8, 199u8, 105u8, 131u8, 74u8, 63u8, 75u8, 1u8, 210u8, 49u8, 3u8,
@@ -2047,7 +2266,12 @@ pub mod api {
           ::core::option::Option<runtime_types::sp_consensus_babe::BabeEpochConfiguration>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<EpochConfig>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EpochConfig>()?
+          };
+          if runtime_storage_hash
             == [
               169u8, 189u8, 214u8, 159u8, 181u8, 232u8, 243u8, 4u8, 113u8, 24u8, 221u8, 229u8,
               27u8, 35u8, 3u8, 121u8, 136u8, 88u8, 187u8, 193u8, 207u8, 153u8, 223u8, 225u8, 166u8,
@@ -2069,7 +2293,12 @@ pub mod api {
           ::core::option::Option<runtime_types::sp_consensus_babe::BabeEpochConfiguration>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<NextEpochConfig>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextEpochConfig>()?
+          };
+          if runtime_storage_hash
             == [
               239u8, 125u8, 203u8, 223u8, 161u8, 107u8, 232u8, 54u8, 158u8, 100u8, 244u8, 140u8,
               119u8, 58u8, 253u8, 245u8, 73u8, 236u8, 50u8, 67u8, 228u8, 162u8, 166u8, 168u8,
@@ -2099,17 +2328,16 @@ pub mod api {
         pub fn epoch_duration(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Babe", "EpochDuration")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Babe", "EpochDuration")?
             == [
               40u8, 54u8, 255u8, 20u8, 89u8, 2u8, 38u8, 235u8, 70u8, 145u8, 128u8, 227u8, 177u8,
               3u8, 153u8, 91u8, 102u8, 159u8, 160u8, 139u8, 88u8, 111u8, 116u8, 90u8, 139u8, 12u8,
               31u8, 236u8, 11u8, 113u8, 213u8, 254u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Babe")?;
+            let pallet = metadata.pallet("Babe")?;
             let constant = pallet.constant("EpochDuration")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -2125,17 +2353,16 @@ pub mod api {
         pub fn expected_block_time(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Babe", "ExpectedBlockTime")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Babe", "ExpectedBlockTime")?
             == [
               249u8, 170u8, 37u8, 7u8, 132u8, 115u8, 106u8, 71u8, 116u8, 166u8, 78u8, 251u8, 242u8,
               146u8, 99u8, 207u8, 204u8, 225u8, 157u8, 57u8, 19u8, 17u8, 202u8, 231u8, 50u8, 67u8,
               17u8, 205u8, 238u8, 80u8, 154u8, 125u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Babe")?;
+            let pallet = metadata.pallet("Babe")?;
             let constant = pallet.constant("ExpectedBlockTime")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -2147,17 +2374,16 @@ pub mod api {
         pub fn max_authorities(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Babe", "MaxAuthorities")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Babe", "MaxAuthorities")?
             == [
               248u8, 195u8, 131u8, 166u8, 10u8, 50u8, 71u8, 223u8, 41u8, 49u8, 43u8, 99u8, 251u8,
               113u8, 75u8, 193u8, 159u8, 15u8, 77u8, 217u8, 147u8, 205u8, 165u8, 50u8, 6u8, 166u8,
               77u8, 189u8, 102u8, 22u8, 201u8, 19u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Babe")?;
+            let pallet = metadata.pallet("Babe")?;
             let constant = pallet.constant("MaxAuthorities")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -2222,7 +2448,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Set, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Set>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Set>()?
+          };
+          if runtime_call_hash
             == [
               191u8, 73u8, 102u8, 150u8, 65u8, 157u8, 172u8, 194u8, 7u8, 72u8, 1u8, 35u8, 54u8,
               99u8, 245u8, 139u8, 40u8, 136u8, 245u8, 53u8, 167u8, 100u8, 143u8, 244u8, 160u8, 5u8,
@@ -2269,7 +2500,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Now>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Now>()?
+          };
+          if runtime_storage_hash
             == [
               148u8, 53u8, 50u8, 54u8, 13u8, 161u8, 57u8, 150u8, 16u8, 83u8, 144u8, 221u8, 59u8,
               75u8, 158u8, 130u8, 39u8, 123u8, 106u8, 134u8, 202u8, 185u8, 83u8, 85u8, 60u8, 41u8,
@@ -2291,7 +2527,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<DidUpdate>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<DidUpdate>()?
+          };
+          if runtime_storage_hash
             == [
               70u8, 13u8, 92u8, 186u8, 80u8, 151u8, 167u8, 90u8, 158u8, 232u8, 175u8, 13u8, 103u8,
               135u8, 2u8, 78u8, 16u8, 6u8, 39u8, 158u8, 167u8, 85u8, 27u8, 47u8, 122u8, 73u8,
@@ -2326,17 +2567,16 @@ pub mod api {
         pub fn minimum_period(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Timestamp", "MinimumPeriod")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Timestamp", "MinimumPeriod")?
             == [
               141u8, 242u8, 40u8, 24u8, 83u8, 43u8, 33u8, 194u8, 156u8, 149u8, 219u8, 61u8, 10u8,
               123u8, 120u8, 247u8, 228u8, 22u8, 25u8, 24u8, 214u8, 188u8, 54u8, 135u8, 240u8,
               162u8, 41u8, 216u8, 3u8, 58u8, 238u8, 39u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Timestamp")?;
+            let pallet = metadata.pallet("Timestamp")?;
             let constant = pallet.constant("MinimumPeriod")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -2452,7 +2692,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Claim, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Claim>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Claim>()?
+          };
+          if runtime_call_hash
             == [
               27u8, 4u8, 108u8, 55u8, 23u8, 109u8, 175u8, 25u8, 201u8, 230u8, 228u8, 51u8, 164u8,
               15u8, 79u8, 10u8, 219u8, 182u8, 242u8, 102u8, 164u8, 148u8, 39u8, 91u8, 106u8, 197u8,
@@ -2493,7 +2738,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Transfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Transfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Transfer>()?
+          };
+          if runtime_call_hash
             == [
               124u8, 83u8, 33u8, 230u8, 23u8, 70u8, 83u8, 59u8, 76u8, 100u8, 219u8, 100u8, 165u8,
               163u8, 102u8, 193u8, 11u8, 22u8, 30u8, 125u8, 114u8, 28u8, 61u8, 156u8, 38u8, 170u8,
@@ -2531,7 +2781,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Free, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Free>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Free>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 143u8, 162u8, 33u8, 229u8, 3u8, 159u8, 153u8, 111u8, 100u8, 160u8, 250u8,
               227u8, 24u8, 157u8, 226u8, 173u8, 39u8, 25u8, 200u8, 137u8, 147u8, 232u8, 213u8,
@@ -2574,7 +2829,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceTransfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceTransfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceTransfer>()?
+          };
+          if runtime_call_hash
             == [
               181u8, 143u8, 90u8, 135u8, 132u8, 11u8, 145u8, 85u8, 4u8, 211u8, 56u8, 110u8, 213u8,
               153u8, 224u8, 106u8, 198u8, 250u8, 130u8, 253u8, 72u8, 58u8, 133u8, 150u8, 102u8,
@@ -2612,7 +2872,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Freeze, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Freeze>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Freeze>()?
+          };
+          if runtime_call_hash
             == [
               204u8, 127u8, 214u8, 137u8, 138u8, 28u8, 171u8, 169u8, 184u8, 164u8, 235u8, 114u8,
               132u8, 176u8, 14u8, 207u8, 72u8, 39u8, 179u8, 231u8, 137u8, 243u8, 242u8, 57u8, 89u8,
@@ -2703,7 +2968,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Accounts>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Accounts>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 208u8, 81u8, 30u8, 157u8, 108u8, 22u8, 122u8, 152u8, 220u8, 40u8, 97u8, 255u8,
               166u8, 222u8, 11u8, 81u8, 245u8, 143u8, 79u8, 57u8, 19u8, 174u8, 164u8, 220u8, 59u8,
@@ -2722,7 +2992,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Accounts<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Accounts>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Accounts>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 208u8, 81u8, 30u8, 157u8, 108u8, 22u8, 122u8, 152u8, 220u8, 40u8, 97u8, 255u8,
               166u8, 222u8, 11u8, 81u8, 245u8, 143u8, 79u8, 57u8, 19u8, 174u8, 164u8, 220u8, 59u8,
@@ -2749,14 +3024,16 @@ pub mod api {
         pub fn deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().constant_hash("Indices", "Deposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Indices", "Deposit")?
             == [
               217u8, 97u8, 70u8, 109u8, 180u8, 214u8, 183u8, 67u8, 253u8, 148u8, 245u8, 108u8,
               187u8, 95u8, 0u8, 15u8, 167u8, 149u8, 163u8, 194u8, 206u8, 220u8, 164u8, 101u8, 1u8,
               99u8, 206u8, 165u8, 63u8, 141u8, 109u8, 1u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Indices")?;
+            let pallet = metadata.pallet("Indices")?;
             let constant = pallet.constant("Deposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -2907,7 +3184,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Transfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Transfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Transfer>()?
+          };
+          if runtime_call_hash
             == [
               51u8, 127u8, 65u8, 149u8, 186u8, 25u8, 125u8, 225u8, 172u8, 243u8, 144u8, 156u8,
               86u8, 150u8, 89u8, 114u8, 9u8, 142u8, 44u8, 98u8, 24u8, 252u8, 83u8, 64u8, 78u8,
@@ -2940,7 +3222,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetBalance, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetBalance>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetBalance>()?
+          };
+          if runtime_call_hash
             == [
               126u8, 224u8, 173u8, 235u8, 17u8, 214u8, 51u8, 73u8, 132u8, 184u8, 52u8, 124u8,
               147u8, 120u8, 186u8, 82u8, 247u8, 199u8, 89u8, 31u8, 111u8, 94u8, 224u8, 130u8,
@@ -2978,7 +3265,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceTransfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceTransfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceTransfer>()?
+          };
+          if runtime_call_hash
             == [
               39u8, 171u8, 216u8, 52u8, 120u8, 195u8, 8u8, 202u8, 157u8, 154u8, 191u8, 235u8,
               163u8, 121u8, 132u8, 119u8, 166u8, 162u8, 163u8, 68u8, 144u8, 193u8, 97u8, 194u8,
@@ -3019,7 +3311,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<TransferKeepAlive>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<TransferKeepAlive>()?
+          };
+          if runtime_call_hash
             == [
               81u8, 224u8, 225u8, 42u8, 20u8, 198u8, 176u8, 165u8, 166u8, 150u8, 143u8, 162u8,
               202u8, 240u8, 59u8, 171u8, 17u8, 168u8, 211u8, 217u8, 137u8, 108u8, 207u8, 95u8,
@@ -3060,7 +3357,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, TransferAll, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<TransferAll>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<TransferAll>()?
+          };
+          if runtime_call_hash
             == [
               48u8, 241u8, 202u8, 6u8, 29u8, 207u8, 104u8, 141u8, 218u8, 18u8, 127u8, 214u8, 99u8,
               196u8, 39u8, 229u8, 120u8, 123u8, 130u8, 56u8, 129u8, 169u8, 149u8, 62u8, 221u8,
@@ -3087,7 +3389,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceUnreserve, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceUnreserve>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceUnreserve>()?
+          };
+          if runtime_call_hash
             == [
               4u8, 231u8, 55u8, 137u8, 114u8, 76u8, 44u8, 166u8, 28u8, 224u8, 22u8, 92u8, 76u8,
               124u8, 219u8, 29u8, 204u8, 207u8, 179u8, 134u8, 93u8, 137u8, 33u8, 178u8, 174u8,
@@ -3287,7 +3594,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<TotalIssuance>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<TotalIssuance>()?
+          };
+          if runtime_storage_hash
             == [
               1u8, 206u8, 252u8, 237u8, 6u8, 30u8, 20u8, 232u8, 164u8, 115u8, 51u8, 156u8, 156u8,
               206u8, 241u8, 187u8, 44u8, 84u8, 25u8, 164u8, 235u8, 20u8, 86u8, 242u8, 124u8, 23u8,
@@ -3336,7 +3648,12 @@ pub mod api {
           runtime_types::pallet_balances::AccountData<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               129u8, 169u8, 171u8, 206u8, 229u8, 178u8, 69u8, 118u8, 199u8, 64u8, 254u8, 67u8,
               16u8, 154u8, 160u8, 197u8, 177u8, 161u8, 148u8, 199u8, 78u8, 219u8, 187u8, 83u8,
@@ -3382,7 +3699,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Account<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               129u8, 169u8, 171u8, 206u8, 229u8, 178u8, 69u8, 118u8, 199u8, 64u8, 254u8, 67u8,
               16u8, 154u8, 160u8, 197u8, 177u8, 161u8, 148u8, 199u8, 78u8, 219u8, 187u8, 83u8,
@@ -3406,7 +3728,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Locks>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Locks>()?
+          };
+          if runtime_storage_hash
             == [
               31u8, 76u8, 213u8, 60u8, 86u8, 11u8, 155u8, 151u8, 33u8, 212u8, 74u8, 89u8, 174u8,
               74u8, 195u8, 107u8, 29u8, 163u8, 178u8, 34u8, 209u8, 8u8, 201u8, 237u8, 77u8, 99u8,
@@ -3430,7 +3757,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Locks<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Locks>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Locks>()?
+          };
+          if runtime_storage_hash
             == [
               31u8, 76u8, 213u8, 60u8, 86u8, 11u8, 155u8, 151u8, 33u8, 212u8, 74u8, 89u8, 174u8,
               74u8, 195u8, 107u8, 29u8, 163u8, 178u8, 34u8, 209u8, 8u8, 201u8, 237u8, 77u8, 99u8,
@@ -3456,7 +3788,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Reserves>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Reserves>()?
+          };
+          if runtime_storage_hash
             == [
               103u8, 6u8, 69u8, 151u8, 81u8, 40u8, 146u8, 113u8, 56u8, 239u8, 104u8, 31u8, 168u8,
               242u8, 141u8, 121u8, 213u8, 213u8, 114u8, 63u8, 62u8, 47u8, 91u8, 119u8, 57u8, 91u8,
@@ -3479,7 +3816,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Reserves<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Reserves>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Reserves>()?
+          };
+          if runtime_storage_hash
             == [
               103u8, 6u8, 69u8, 151u8, 81u8, 40u8, 146u8, 113u8, 56u8, 239u8, 104u8, 31u8, 168u8,
               242u8, 141u8, 121u8, 213u8, 213u8, 114u8, 63u8, 62u8, 47u8, 91u8, 119u8, 57u8, 91u8,
@@ -3499,7 +3841,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::pallet_balances::Releases, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<StorageVersion>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StorageVersion>()?
+          };
+          if runtime_storage_hash
             == [
               135u8, 96u8, 28u8, 234u8, 124u8, 212u8, 56u8, 140u8, 40u8, 101u8, 235u8, 128u8,
               136u8, 221u8, 182u8, 81u8, 17u8, 9u8, 184u8, 228u8, 174u8, 165u8, 200u8, 162u8,
@@ -3531,17 +3878,16 @@ pub mod api {
         pub fn existential_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Balances", "ExistentialDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Balances", "ExistentialDeposit")?
             == [
               15u8, 100u8, 185u8, 155u8, 56u8, 183u8, 90u8, 235u8, 164u8, 39u8, 3u8, 79u8, 8u8,
               31u8, 168u8, 189u8, 50u8, 118u8, 179u8, 149u8, 157u8, 211u8, 99u8, 115u8, 54u8,
               186u8, 8u8, 46u8, 201u8, 103u8, 81u8, 208u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Balances")?;
+            let pallet = metadata.pallet("Balances")?;
             let constant = pallet.constant("ExistentialDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3554,17 +3900,16 @@ pub mod api {
         pub fn max_locks(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Balances", "MaxLocks")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Balances", "MaxLocks")?
             == [
               250u8, 58u8, 19u8, 15u8, 35u8, 113u8, 227u8, 89u8, 39u8, 75u8, 21u8, 108u8, 202u8,
               32u8, 163u8, 167u8, 207u8, 233u8, 69u8, 151u8, 53u8, 164u8, 230u8, 16u8, 14u8, 22u8,
               172u8, 46u8, 36u8, 216u8, 29u8, 1u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Balances")?;
+            let pallet = metadata.pallet("Balances")?;
             let constant = pallet.constant("MaxLocks")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3576,17 +3921,16 @@ pub mod api {
         pub fn max_reserves(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Balances", "MaxReserves")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Balances", "MaxReserves")?
             == [
               24u8, 30u8, 77u8, 89u8, 216u8, 114u8, 140u8, 11u8, 127u8, 252u8, 130u8, 203u8, 4u8,
               55u8, 62u8, 240u8, 65u8, 182u8, 187u8, 189u8, 140u8, 6u8, 177u8, 216u8, 159u8, 108u8,
               18u8, 73u8, 95u8, 67u8, 62u8, 50u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Balances")?;
+            let pallet = metadata.pallet("Balances")?;
             let constant = pallet.constant("MaxReserves")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3634,7 +3978,12 @@ pub mod api {
           runtime_types::sp_arithmetic::fixed_point::FixedU128,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<NextFeeMultiplier>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextFeeMultiplier>()?
+          };
+          if runtime_storage_hash
             == [
               232u8, 48u8, 68u8, 202u8, 209u8, 29u8, 249u8, 71u8, 0u8, 84u8, 229u8, 250u8, 176u8,
               203u8, 27u8, 26u8, 34u8, 55u8, 83u8, 183u8, 224u8, 40u8, 62u8, 127u8, 131u8, 88u8,
@@ -3658,7 +4007,12 @@ pub mod api {
           runtime_types::pallet_transaction_payment::Releases,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<StorageVersion>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StorageVersion>()?
+          };
+          if runtime_storage_hash
             == [
               219u8, 243u8, 82u8, 176u8, 65u8, 5u8, 132u8, 114u8, 8u8, 82u8, 176u8, 200u8, 97u8,
               150u8, 177u8, 164u8, 166u8, 11u8, 34u8, 12u8, 12u8, 198u8, 58u8, 191u8, 186u8, 221u8,
@@ -3710,17 +4064,16 @@ pub mod api {
         pub fn operational_fee_multiplier(
           &self,
         ) -> ::core::result::Result<::core::primitive::u8, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TransactionPayment", "OperationalFeeMultiplier")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TransactionPayment", "OperationalFeeMultiplier")?
             == [
               161u8, 232u8, 150u8, 43u8, 106u8, 83u8, 56u8, 248u8, 54u8, 123u8, 244u8, 73u8, 5u8,
               49u8, 245u8, 150u8, 70u8, 92u8, 158u8, 207u8, 127u8, 115u8, 211u8, 21u8, 24u8, 136u8,
               89u8, 44u8, 151u8, 211u8, 235u8, 196u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TransactionPayment")?;
+            let pallet = metadata.pallet("TransactionPayment")?;
             let constant = pallet.constant("OperationalFeeMultiplier")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3737,17 +4090,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TransactionPayment", "WeightToFee")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TransactionPayment", "WeightToFee")?
             == [
               199u8, 253u8, 82u8, 206u8, 4u8, 164u8, 139u8, 149u8, 116u8, 179u8, 145u8, 205u8,
               174u8, 60u8, 144u8, 250u8, 154u8, 122u8, 246u8, 127u8, 227u8, 176u8, 97u8, 29u8,
               251u8, 85u8, 213u8, 13u8, 145u8, 37u8, 227u8, 142u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TransactionPayment")?;
+            let pallet = metadata.pallet("TransactionPayment")?;
             let constant = pallet.constant("WeightToFee")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3764,17 +4116,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TransactionPayment", "LengthToFee")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TransactionPayment", "LengthToFee")?
             == [
               149u8, 219u8, 123u8, 143u8, 114u8, 114u8, 81u8, 168u8, 141u8, 27u8, 130u8, 219u8,
               191u8, 64u8, 183u8, 203u8, 237u8, 177u8, 121u8, 67u8, 38u8, 89u8, 79u8, 93u8, 105u8,
               185u8, 193u8, 229u8, 177u8, 205u8, 173u8, 81u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TransactionPayment")?;
+            let pallet = metadata.pallet("TransactionPayment")?;
             let constant = pallet.constant("LengthToFee")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -3833,7 +4184,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetUncles, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetUncles>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetUncles>()?
+          };
+          if runtime_call_hash
             == [
               5u8, 56u8, 71u8, 152u8, 103u8, 232u8, 101u8, 171u8, 200u8, 2u8, 177u8, 102u8, 0u8,
               93u8, 210u8, 90u8, 56u8, 151u8, 5u8, 235u8, 227u8, 197u8, 189u8, 248u8, 2u8, 71u8,
@@ -3904,7 +4260,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Uncles>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Uncles>()?
+          };
+          if runtime_storage_hash
             == [
               71u8, 135u8, 85u8, 172u8, 221u8, 165u8, 212u8, 2u8, 208u8, 50u8, 9u8, 92u8, 251u8,
               25u8, 194u8, 123u8, 210u8, 4u8, 148u8, 30u8, 20u8, 146u8, 21u8, 210u8, 138u8, 128u8,
@@ -3929,7 +4290,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Author>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Author>()?
+          };
+          if runtime_storage_hash
             == [
               191u8, 57u8, 3u8, 242u8, 220u8, 123u8, 103u8, 215u8, 149u8, 120u8, 20u8, 139u8,
               146u8, 234u8, 180u8, 105u8, 129u8, 128u8, 114u8, 147u8, 114u8, 236u8, 23u8, 21u8,
@@ -3947,7 +4313,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<DidSetUncles>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<DidSetUncles>()?
+          };
+          if runtime_storage_hash
             == [
               64u8, 3u8, 208u8, 187u8, 50u8, 45u8, 37u8, 88u8, 163u8, 226u8, 37u8, 126u8, 232u8,
               107u8, 156u8, 187u8, 29u8, 15u8, 53u8, 46u8, 28u8, 73u8, 83u8, 123u8, 14u8, 244u8,
@@ -3981,17 +4352,16 @@ pub mod api {
         pub fn uncle_generations(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Authorship", "UncleGenerations")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Authorship", "UncleGenerations")?
             == [
               0u8, 72u8, 57u8, 175u8, 222u8, 143u8, 191u8, 33u8, 163u8, 157u8, 202u8, 83u8, 186u8,
               103u8, 162u8, 103u8, 227u8, 158u8, 239u8, 212u8, 205u8, 193u8, 226u8, 138u8, 5u8,
               220u8, 221u8, 42u8, 7u8, 146u8, 173u8, 205u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Authorship")?;
+            let pallet = metadata.pallet("Authorship")?;
             let constant = pallet.constant("UncleGenerations")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -4306,7 +4676,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Bond, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Bond>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Bond>()?
+          };
+          if runtime_call_hash
             == [
               128u8, 109u8, 219u8, 32u8, 105u8, 191u8, 244u8, 153u8, 228u8, 154u8, 89u8, 52u8,
               237u8, 82u8, 0u8, 132u8, 27u8, 71u8, 57u8, 96u8, 172u8, 50u8, 192u8, 163u8, 229u8,
@@ -4345,7 +4720,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, BondExtra, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<BondExtra>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<BondExtra>()?
+          };
+          if runtime_call_hash
             == [
               170u8, 38u8, 37u8, 71u8, 243u8, 41u8, 24u8, 59u8, 17u8, 229u8, 61u8, 20u8, 130u8,
               167u8, 1u8, 1u8, 158u8, 180u8, 234u8, 65u8, 196u8, 181u8, 232u8, 146u8, 62u8, 90u8,
@@ -4384,7 +4764,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Unbond, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Unbond>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Unbond>()?
+          };
+          if runtime_call_hash
             == [
               85u8, 188u8, 141u8, 62u8, 242u8, 15u8, 6u8, 20u8, 96u8, 220u8, 201u8, 163u8, 29u8,
               136u8, 24u8, 4u8, 143u8, 13u8, 22u8, 118u8, 22u8, 212u8, 164u8, 125u8, 200u8, 219u8,
@@ -4419,7 +4804,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, WithdrawUnbonded, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<WithdrawUnbonded>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<WithdrawUnbonded>()?
+          };
+          if runtime_call_hash
             == [
               252u8, 47u8, 185u8, 86u8, 179u8, 203u8, 20u8, 5u8, 88u8, 252u8, 212u8, 173u8, 20u8,
               202u8, 206u8, 56u8, 10u8, 186u8, 124u8, 221u8, 42u8, 61u8, 202u8, 110u8, 233u8, 40u8,
@@ -4444,7 +4834,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Validate, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Validate>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Validate>()?
+          };
+          if runtime_call_hash
             == [
               138u8, 13u8, 146u8, 216u8, 4u8, 27u8, 20u8, 159u8, 148u8, 25u8, 169u8, 229u8, 145u8,
               2u8, 251u8, 58u8, 13u8, 128u8, 20u8, 22u8, 194u8, 11u8, 13u8, 65u8, 50u8, 51u8,
@@ -4480,7 +4875,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Nominate, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Nominate>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Nominate>()?
+          };
+          if runtime_call_hash
             == [
               253u8, 19u8, 234u8, 31u8, 124u8, 216u8, 107u8, 102u8, 143u8, 144u8, 73u8, 45u8,
               207u8, 169u8, 48u8, 144u8, 169u8, 97u8, 81u8, 110u8, 216u8, 107u8, 198u8, 93u8,
@@ -4510,7 +4910,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Chill, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Chill>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Chill>()?
+          };
+          if runtime_call_hash
             == [
               94u8, 20u8, 196u8, 31u8, 220u8, 125u8, 115u8, 167u8, 140u8, 3u8, 20u8, 132u8, 81u8,
               120u8, 215u8, 166u8, 230u8, 56u8, 16u8, 222u8, 31u8, 153u8, 120u8, 62u8, 153u8, 67u8,
@@ -4548,7 +4953,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetPayee, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetPayee>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetPayee>()?
+          };
+          if runtime_call_hash
             == [
               185u8, 62u8, 154u8, 65u8, 135u8, 104u8, 38u8, 171u8, 237u8, 16u8, 169u8, 38u8, 53u8,
               161u8, 170u8, 232u8, 249u8, 185u8, 24u8, 155u8, 54u8, 88u8, 96u8, 147u8, 171u8, 85u8,
@@ -4587,7 +4997,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetController, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetController>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetController>()?
+          };
+          if runtime_call_hash
             == [
               174u8, 112u8, 40u8, 87u8, 122u8, 45u8, 254u8, 162u8, 27u8, 128u8, 104u8, 204u8, 5u8,
               51u8, 52u8, 195u8, 40u8, 124u8, 45u8, 63u8, 252u8, 101u8, 56u8, 100u8, 122u8, 231u8,
@@ -4622,7 +5037,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetValidatorCount>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetValidatorCount>()?
+          };
+          if runtime_call_hash
             == [
               181u8, 82u8, 21u8, 239u8, 81u8, 194u8, 166u8, 66u8, 55u8, 156u8, 68u8, 22u8, 76u8,
               251u8, 241u8, 113u8, 168u8, 8u8, 193u8, 125u8, 112u8, 82u8, 200u8, 139u8, 55u8,
@@ -4656,10 +5076,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<IncreaseValidatorCount>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<IncreaseValidatorCount>()?
+          };
+          if runtime_call_hash
             == [
               219u8, 143u8, 69u8, 205u8, 182u8, 155u8, 101u8, 39u8, 59u8, 214u8, 81u8, 47u8, 247u8,
               54u8, 106u8, 92u8, 183u8, 42u8, 30u8, 57u8, 28u8, 136u8, 13u8, 13u8, 170u8, 101u8,
@@ -4693,7 +5115,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ScaleValidatorCount>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ScaleValidatorCount>()?
+          };
+          if runtime_call_hash
             == [
               170u8, 156u8, 101u8, 109u8, 117u8, 199u8, 38u8, 157u8, 132u8, 210u8, 54u8, 66u8,
               251u8, 10u8, 123u8, 120u8, 237u8, 31u8, 206u8, 176u8, 224u8, 112u8, 82u8, 70u8,
@@ -4727,7 +5154,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceNoEras, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceNoEras>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceNoEras>()?
+          };
+          if runtime_call_hash
             == [
               16u8, 81u8, 207u8, 168u8, 23u8, 236u8, 11u8, 75u8, 141u8, 107u8, 92u8, 2u8, 53u8,
               111u8, 252u8, 116u8, 91u8, 120u8, 75u8, 24u8, 125u8, 53u8, 9u8, 28u8, 242u8, 87u8,
@@ -4762,7 +5194,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceNewEra, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceNewEra>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceNewEra>()?
+          };
+          if runtime_call_hash
             == [
               230u8, 242u8, 169u8, 196u8, 78u8, 145u8, 24u8, 191u8, 113u8, 68u8, 5u8, 138u8, 48u8,
               51u8, 109u8, 126u8, 73u8, 136u8, 162u8, 158u8, 174u8, 201u8, 213u8, 230u8, 215u8,
@@ -4785,7 +5222,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetInvulnerables, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetInvulnerables>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetInvulnerables>()?
+          };
+          if runtime_call_hash
             == [
               0u8, 119u8, 27u8, 243u8, 238u8, 65u8, 133u8, 89u8, 210u8, 202u8, 154u8, 243u8, 168u8,
               158u8, 9u8, 147u8, 146u8, 215u8, 172u8, 28u8, 171u8, 183u8, 112u8, 42u8, 245u8,
@@ -4809,7 +5251,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceUnstake, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceUnstake>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceUnstake>()?
+          };
+          if runtime_call_hash
             == [
               254u8, 115u8, 250u8, 15u8, 235u8, 119u8, 2u8, 131u8, 237u8, 144u8, 247u8, 66u8,
               150u8, 92u8, 12u8, 112u8, 137u8, 195u8, 246u8, 178u8, 129u8, 64u8, 214u8, 4u8, 183u8,
@@ -4847,7 +5294,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceNewEraAlways>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceNewEraAlways>()?
+          };
+          if runtime_call_hash
             == [
               179u8, 118u8, 189u8, 54u8, 248u8, 141u8, 207u8, 142u8, 80u8, 37u8, 241u8, 185u8,
               138u8, 254u8, 117u8, 147u8, 225u8, 118u8, 34u8, 177u8, 197u8, 158u8, 8u8, 82u8,
@@ -4880,7 +5332,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelDeferredSlash>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelDeferredSlash>()?
+          };
+          if runtime_call_hash
             == [
               217u8, 175u8, 246u8, 108u8, 78u8, 134u8, 98u8, 49u8, 178u8, 209u8, 98u8, 178u8, 52u8,
               242u8, 173u8, 135u8, 171u8, 70u8, 129u8, 239u8, 62u8, 150u8, 84u8, 142u8, 243u8,
@@ -4922,7 +5379,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, PayoutStakers, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<PayoutStakers>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<PayoutStakers>()?
+          };
+          if runtime_call_hash
             == [
               235u8, 65u8, 65u8, 249u8, 162u8, 235u8, 127u8, 48u8, 216u8, 51u8, 252u8, 111u8,
               186u8, 191u8, 174u8, 245u8, 144u8, 77u8, 135u8, 124u8, 205u8, 160u8, 148u8, 130u8,
@@ -4954,7 +5416,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Rebond, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Rebond>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Rebond>()?
+          };
+          if runtime_call_hash
             == [
               138u8, 156u8, 164u8, 170u8, 178u8, 236u8, 221u8, 242u8, 157u8, 176u8, 173u8, 145u8,
               254u8, 94u8, 158u8, 27u8, 138u8, 103u8, 116u8, 31u8, 41u8, 106u8, 199u8, 180u8,
@@ -4997,7 +5464,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetHistoryDepth, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetHistoryDepth>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetHistoryDepth>()?
+          };
+          if runtime_call_hash
             == [
               128u8, 149u8, 139u8, 192u8, 213u8, 239u8, 248u8, 215u8, 57u8, 145u8, 177u8, 225u8,
               43u8, 214u8, 228u8, 14u8, 213u8, 181u8, 18u8, 40u8, 242u8, 1u8, 210u8, 87u8, 143u8,
@@ -5033,7 +5505,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ReapStash, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ReapStash>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ReapStash>()?
+          };
+          if runtime_call_hash
             == [
               84u8, 192u8, 207u8, 193u8, 133u8, 53u8, 93u8, 148u8, 153u8, 112u8, 54u8, 145u8, 68u8,
               195u8, 42u8, 158u8, 17u8, 230u8, 197u8, 218u8, 179u8, 101u8, 237u8, 105u8, 17u8,
@@ -5072,7 +5549,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Kick, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Kick>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Kick>()?
+          };
+          if runtime_call_hash
             == [
               61u8, 203u8, 76u8, 57u8, 31u8, 73u8, 253u8, 126u8, 233u8, 206u8, 87u8, 168u8, 144u8,
               207u8, 47u8, 108u8, 147u8, 227u8, 50u8, 217u8, 58u8, 195u8, 245u8, 193u8, 207u8,
@@ -5133,7 +5615,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetStakingConfigs>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetStakingConfigs>()?
+          };
+          if runtime_call_hash
             == [
               249u8, 192u8, 107u8, 126u8, 200u8, 50u8, 63u8, 120u8, 116u8, 53u8, 183u8, 80u8,
               134u8, 135u8, 49u8, 112u8, 232u8, 140u8, 177u8, 175u8, 136u8, 220u8, 209u8, 179u8,
@@ -5186,7 +5673,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ChillOther, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ChillOther>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ChillOther>()?
+          };
+          if runtime_call_hash
             == [
               219u8, 114u8, 146u8, 43u8, 175u8, 216u8, 70u8, 148u8, 137u8, 192u8, 77u8, 247u8,
               134u8, 80u8, 188u8, 100u8, 79u8, 141u8, 32u8, 94u8, 15u8, 178u8, 159u8, 233u8, 235u8,
@@ -5216,10 +5708,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<ForceApplyMinCommission>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceApplyMinCommission>()?
+          };
+          if runtime_call_hash
             == [
               8u8, 57u8, 61u8, 141u8, 175u8, 100u8, 174u8, 161u8, 236u8, 2u8, 133u8, 169u8, 249u8,
               168u8, 236u8, 188u8, 168u8, 221u8, 88u8, 148u8, 95u8, 24u8, 214u8, 206u8, 165u8,
@@ -5827,7 +6321,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<HistoryDepth>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<HistoryDepth>()?
+          };
+          if runtime_storage_hash
             == [
               41u8, 54u8, 118u8, 245u8, 75u8, 136u8, 220u8, 25u8, 55u8, 255u8, 149u8, 177u8, 49u8,
               155u8, 167u8, 188u8, 170u8, 29u8, 251u8, 44u8, 240u8, 250u8, 225u8, 205u8, 102u8,
@@ -5849,7 +6348,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ValidatorCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ValidatorCount>()?
+          };
+          if runtime_storage_hash
             == [
               245u8, 75u8, 214u8, 110u8, 66u8, 164u8, 86u8, 206u8, 69u8, 89u8, 12u8, 111u8, 117u8,
               16u8, 228u8, 184u8, 207u8, 6u8, 0u8, 126u8, 221u8, 67u8, 125u8, 218u8, 188u8, 245u8,
@@ -5871,10 +6375,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<MinimumValidatorCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MinimumValidatorCount>()?
+          };
+          if runtime_storage_hash
             == [
               82u8, 95u8, 128u8, 55u8, 136u8, 134u8, 71u8, 117u8, 135u8, 76u8, 44u8, 46u8, 174u8,
               34u8, 170u8, 228u8, 175u8, 1u8, 234u8, 162u8, 91u8, 252u8, 127u8, 68u8, 243u8, 241u8,
@@ -5901,7 +6407,12 @@ pub mod api {
           ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Invulnerables>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Invulnerables>()?
+          };
+          if runtime_storage_hash
             == [
               103u8, 93u8, 29u8, 166u8, 244u8, 19u8, 78u8, 182u8, 235u8, 37u8, 199u8, 127u8, 211u8,
               124u8, 168u8, 145u8, 111u8, 251u8, 33u8, 36u8, 167u8, 119u8, 124u8, 206u8, 205u8,
@@ -5927,7 +6438,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Bonded>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Bonded>()?
+          };
+          if runtime_storage_hash
             == [
               9u8, 214u8, 190u8, 93u8, 116u8, 143u8, 174u8, 103u8, 102u8, 25u8, 123u8, 201u8, 12u8,
               44u8, 188u8, 241u8, 74u8, 33u8, 35u8, 79u8, 210u8, 243u8, 174u8, 190u8, 46u8, 48u8,
@@ -5946,7 +6462,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Bonded<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Bonded>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Bonded>()?
+          };
+          if runtime_storage_hash
             == [
               9u8, 214u8, 190u8, 93u8, 116u8, 143u8, 174u8, 103u8, 102u8, 25u8, 123u8, 201u8, 12u8,
               44u8, 188u8, 241u8, 74u8, 33u8, 35u8, 79u8, 210u8, 243u8, 174u8, 190u8, 46u8, 48u8,
@@ -5963,7 +6484,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<MinNominatorBond>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MinNominatorBond>()?
+          };
+          if runtime_storage_hash
             == [
               187u8, 66u8, 149u8, 226u8, 72u8, 219u8, 57u8, 246u8, 102u8, 47u8, 71u8, 12u8, 219u8,
               204u8, 127u8, 223u8, 58u8, 134u8, 81u8, 165u8, 200u8, 142u8, 196u8, 158u8, 26u8,
@@ -5985,7 +6511,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<MinValidatorBond>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MinValidatorBond>()?
+          };
+          if runtime_storage_hash
             == [
               48u8, 105u8, 85u8, 178u8, 142u8, 208u8, 208u8, 19u8, 236u8, 130u8, 129u8, 169u8,
               35u8, 245u8, 66u8, 182u8, 92u8, 20u8, 22u8, 109u8, 155u8, 174u8, 87u8, 118u8, 242u8,
@@ -6012,7 +6543,12 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Perbill,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<MinCommission>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MinCommission>()?
+          };
+          if runtime_storage_hash
             == [
               198u8, 29u8, 53u8, 56u8, 181u8, 170u8, 164u8, 240u8, 27u8, 171u8, 69u8, 57u8, 151u8,
               40u8, 23u8, 166u8, 157u8, 68u8, 208u8, 20u8, 2u8, 78u8, 63u8, 235u8, 166u8, 50u8,
@@ -6038,7 +6574,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_staking::StakingLedger>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Ledger>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Ledger>()?
+          };
+          if runtime_storage_hash
             == [
               54u8, 158u8, 148u8, 211u8, 91u8, 48u8, 159u8, 56u8, 149u8, 116u8, 43u8, 31u8, 45u8,
               102u8, 252u8, 12u8, 1u8, 176u8, 189u8, 68u8, 97u8, 88u8, 13u8, 204u8, 148u8, 12u8,
@@ -6057,7 +6598,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Ledger<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Ledger>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Ledger>()?
+          };
+          if runtime_storage_hash
             == [
               54u8, 158u8, 148u8, 211u8, 91u8, 48u8, 159u8, 56u8, 149u8, 116u8, 43u8, 31u8, 45u8,
               102u8, 252u8, 12u8, 1u8, 176u8, 189u8, 68u8, 97u8, 88u8, 13u8, 204u8, 148u8, 12u8,
@@ -6078,7 +6624,12 @@ pub mod api {
           runtime_types::pallet_staking::RewardDestination<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Payee>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Payee>()?
+          };
+          if runtime_storage_hash
             == [
               108u8, 35u8, 28u8, 189u8, 146u8, 103u8, 200u8, 73u8, 220u8, 230u8, 193u8, 7u8, 66u8,
               147u8, 55u8, 34u8, 1u8, 21u8, 255u8, 100u8, 64u8, 175u8, 16u8, 106u8, 130u8, 202u8,
@@ -6101,7 +6652,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Payee<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Payee>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Payee>()?
+          };
+          if runtime_storage_hash
             == [
               108u8, 35u8, 28u8, 189u8, 146u8, 103u8, 200u8, 73u8, 220u8, 230u8, 193u8, 7u8, 66u8,
               147u8, 55u8, 34u8, 1u8, 21u8, 255u8, 100u8, 64u8, 175u8, 16u8, 106u8, 130u8, 202u8,
@@ -6122,7 +6678,12 @@ pub mod api {
           runtime_types::pallet_staking::ValidatorPrefs,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Validators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Validators>()?
+          };
+          if runtime_storage_hash
             == [
               45u8, 57u8, 106u8, 30u8, 123u8, 251u8, 148u8, 37u8, 52u8, 129u8, 103u8, 88u8, 54u8,
               216u8, 174u8, 181u8, 51u8, 181u8, 70u8, 6u8, 136u8, 7u8, 239u8, 44u8, 83u8, 153u8,
@@ -6145,7 +6706,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Validators<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Validators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Validators>()?
+          };
+          if runtime_storage_hash
             == [
               45u8, 57u8, 106u8, 30u8, 123u8, 251u8, 148u8, 37u8, 52u8, 129u8, 103u8, 88u8, 54u8,
               216u8, 174u8, 181u8, 51u8, 181u8, 70u8, 6u8, 136u8, 7u8, 239u8, 44u8, 83u8, 153u8,
@@ -6162,10 +6728,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForValidators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForValidators>()?
+          };
+          if runtime_storage_hash
             == [
               139u8, 25u8, 223u8, 6u8, 160u8, 239u8, 212u8, 85u8, 36u8, 185u8, 69u8, 63u8, 21u8,
               156u8, 144u8, 241u8, 112u8, 85u8, 49u8, 78u8, 88u8, 11u8, 8u8, 48u8, 118u8, 34u8,
@@ -6192,10 +6760,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<MaxValidatorsCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MaxValidatorsCount>()?
+          };
+          if runtime_storage_hash
             == [
               250u8, 62u8, 16u8, 68u8, 192u8, 216u8, 236u8, 211u8, 217u8, 9u8, 213u8, 49u8, 41u8,
               37u8, 58u8, 62u8, 131u8, 112u8, 64u8, 26u8, 133u8, 7u8, 130u8, 1u8, 71u8, 158u8,
@@ -6232,7 +6802,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_staking::Nominations>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Nominators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Nominators>()?
+          };
+          if runtime_storage_hash
             == [
               176u8, 26u8, 169u8, 68u8, 99u8, 216u8, 95u8, 198u8, 5u8, 123u8, 21u8, 83u8, 220u8,
               140u8, 122u8, 111u8, 22u8, 133u8, 9u8, 155u8, 35u8, 58u8, 232u8, 143u8, 62u8, 229u8,
@@ -6266,7 +6841,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Nominators<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Nominators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Nominators>()?
+          };
+          if runtime_storage_hash
             == [
               176u8, 26u8, 169u8, 68u8, 99u8, 216u8, 95u8, 198u8, 5u8, 123u8, 21u8, 83u8, 220u8,
               140u8, 122u8, 111u8, 22u8, 133u8, 9u8, 155u8, 35u8, 58u8, 232u8, 143u8, 62u8, 229u8,
@@ -6283,10 +6863,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForNominators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForNominators>()?
+          };
+          if runtime_storage_hash
             == [
               31u8, 94u8, 130u8, 138u8, 75u8, 8u8, 38u8, 162u8, 181u8, 5u8, 125u8, 116u8, 9u8,
               51u8, 22u8, 234u8, 40u8, 117u8, 215u8, 46u8, 82u8, 117u8, 225u8, 1u8, 9u8, 208u8,
@@ -6313,10 +6895,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<MaxNominatorsCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MaxNominatorsCount>()?
+          };
+          if runtime_storage_hash
             == [
               180u8, 190u8, 180u8, 66u8, 235u8, 173u8, 76u8, 160u8, 197u8, 92u8, 96u8, 165u8,
               220u8, 188u8, 32u8, 119u8, 3u8, 73u8, 86u8, 49u8, 104u8, 17u8, 186u8, 98u8, 221u8,
@@ -6340,7 +6924,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<CurrentEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentEra>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 150u8, 49u8, 122u8, 4u8, 78u8, 8u8, 121u8, 34u8, 136u8, 157u8, 227u8, 59u8,
               139u8, 7u8, 253u8, 7u8, 10u8, 117u8, 71u8, 240u8, 74u8, 86u8, 36u8, 198u8, 37u8,
@@ -6364,7 +6953,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_staking::ActiveEraInfo>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ActiveEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ActiveEra>()?
+          };
+          if runtime_storage_hash
             == [
               230u8, 144u8, 49u8, 201u8, 36u8, 253u8, 97u8, 135u8, 57u8, 169u8, 157u8, 138u8, 21u8,
               35u8, 14u8, 2u8, 151u8, 214u8, 176u8, 211u8, 48u8, 105u8, 38u8, 123u8, 98u8, 255u8,
@@ -6389,10 +6983,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasStartSessionIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStartSessionIndex>()?
+          };
+          if runtime_storage_hash
             == [
               92u8, 157u8, 168u8, 144u8, 132u8, 3u8, 212u8, 80u8, 230u8, 229u8, 251u8, 218u8, 97u8,
               55u8, 79u8, 100u8, 163u8, 91u8, 32u8, 246u8, 122u8, 78u8, 149u8, 214u8, 103u8, 249u8,
@@ -6416,10 +7012,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ErasStartSessionIndex<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasStartSessionIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStartSessionIndex>()?
+          };
+          if runtime_storage_hash
             == [
               92u8, 157u8, 168u8, 144u8, 132u8, 3u8, 212u8, 80u8, 230u8, 229u8, 251u8, 218u8, 97u8,
               55u8, 79u8, 100u8, 163u8, 91u8, 32u8, 246u8, 122u8, 78u8, 149u8, 214u8, 103u8, 249u8,
@@ -6449,7 +7047,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ErasStakers>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStakers>()?
+          };
+          if runtime_storage_hash
             == [
               176u8, 250u8, 76u8, 183u8, 219u8, 180u8, 156u8, 138u8, 111u8, 153u8, 154u8, 90u8,
               14u8, 194u8, 56u8, 133u8, 197u8, 199u8, 35u8, 20u8, 188u8, 129u8, 169u8, 38u8, 10u8,
@@ -6477,7 +7080,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ErasStakers<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ErasStakers>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStakers>()?
+          };
+          if runtime_storage_hash
             == [
               176u8, 250u8, 76u8, 183u8, 219u8, 180u8, 156u8, 138u8, 111u8, 153u8, 154u8, 90u8,
               14u8, 194u8, 56u8, 133u8, 197u8, 199u8, 35u8, 20u8, 188u8, 129u8, 169u8, 38u8, 10u8,
@@ -6512,10 +7120,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasStakersClipped>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStakersClipped>()?
+          };
+          if runtime_storage_hash
             == [
               91u8, 87u8, 165u8, 255u8, 253u8, 169u8, 48u8, 28u8, 254u8, 124u8, 93u8, 108u8, 252u8,
               15u8, 141u8, 139u8, 152u8, 118u8, 226u8, 122u8, 178u8, 110u8, 4u8, 242u8, 62u8, 77u8,
@@ -6550,10 +7160,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ErasStakersClipped<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasStakersClipped>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasStakersClipped>()?
+          };
+          if runtime_storage_hash
             == [
               91u8, 87u8, 165u8, 255u8, 253u8, 169u8, 48u8, 28u8, 254u8, 124u8, 93u8, 108u8, 252u8,
               15u8, 141u8, 139u8, 152u8, 118u8, 226u8, 122u8, 178u8, 110u8, 4u8, 242u8, 62u8, 77u8,
@@ -6579,10 +7191,12 @@ pub mod api {
           runtime_types::pallet_staking::ValidatorPrefs,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasValidatorPrefs>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasValidatorPrefs>()?
+          };
+          if runtime_storage_hash
             == [
               8u8, 55u8, 222u8, 216u8, 126u8, 126u8, 131u8, 18u8, 145u8, 58u8, 91u8, 123u8, 92u8,
               19u8, 178u8, 200u8, 133u8, 140u8, 3u8, 207u8, 101u8, 70u8, 204u8, 172u8, 98u8, 137u8,
@@ -6611,10 +7225,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ErasValidatorPrefs<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasValidatorPrefs>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasValidatorPrefs>()?
+          };
+          if runtime_storage_hash
             == [
               8u8, 55u8, 222u8, 216u8, 126u8, 126u8, 131u8, 18u8, 145u8, 58u8, 91u8, 123u8, 92u8,
               19u8, 178u8, 200u8, 133u8, 140u8, 3u8, 207u8, 101u8, 70u8, 204u8, 172u8, 98u8, 137u8,
@@ -6637,10 +7253,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasValidatorReward>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasValidatorReward>()?
+          };
+          if runtime_storage_hash
             == [
               87u8, 80u8, 156u8, 123u8, 107u8, 77u8, 203u8, 37u8, 231u8, 84u8, 124u8, 155u8, 227u8,
               212u8, 212u8, 179u8, 84u8, 161u8, 223u8, 255u8, 254u8, 107u8, 52u8, 89u8, 98u8,
@@ -6663,10 +7281,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ErasValidatorReward<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ErasValidatorReward>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasValidatorReward>()?
+          };
+          if runtime_storage_hash
             == [
               87u8, 80u8, 156u8, 123u8, 107u8, 77u8, 203u8, 37u8, 231u8, 84u8, 124u8, 155u8, 227u8,
               212u8, 212u8, 179u8, 84u8, 161u8, 223u8, 255u8, 254u8, 107u8, 52u8, 89u8, 98u8,
@@ -6688,7 +7308,12 @@ pub mod api {
           runtime_types::pallet_staking::EraRewardPoints<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ErasRewardPoints>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasRewardPoints>()?
+          };
+          if runtime_storage_hash
             == [
               76u8, 221u8, 158u8, 62u8, 3u8, 254u8, 139u8, 170u8, 103u8, 218u8, 191u8, 103u8, 57u8,
               212u8, 208u8, 7u8, 105u8, 52u8, 117u8, 173u8, 8u8, 34u8, 82u8, 141u8, 51u8, 72u8,
@@ -6714,7 +7339,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ErasRewardPoints<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ErasRewardPoints>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasRewardPoints>()?
+          };
+          if runtime_storage_hash
             == [
               76u8, 221u8, 158u8, 62u8, 3u8, 254u8, 139u8, 170u8, 103u8, 218u8, 191u8, 103u8, 57u8,
               212u8, 208u8, 7u8, 105u8, 52u8, 117u8, 173u8, 8u8, 34u8, 82u8, 141u8, 51u8, 72u8,
@@ -6733,7 +7363,12 @@ pub mod api {
           _0: &::core::primitive::u32,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ErasTotalStake>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasTotalStake>()?
+          };
+          if runtime_storage_hash
             == [
               224u8, 240u8, 168u8, 69u8, 148u8, 140u8, 249u8, 240u8, 4u8, 46u8, 77u8, 11u8, 224u8,
               65u8, 26u8, 239u8, 1u8, 110u8, 53u8, 11u8, 247u8, 235u8, 142u8, 234u8, 22u8, 43u8,
@@ -6757,7 +7392,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ErasTotalStake<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ErasTotalStake>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ErasTotalStake>()?
+          };
+          if runtime_storage_hash
             == [
               224u8, 240u8, 168u8, 69u8, 148u8, 140u8, 249u8, 240u8, 4u8, 46u8, 77u8, 11u8, 224u8,
               65u8, 26u8, 239u8, 1u8, 110u8, 53u8, 11u8, 247u8, 235u8, 142u8, 234u8, 22u8, 43u8,
@@ -6775,7 +7415,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::pallet_staking::Forcing, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ForceEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ForceEra>()?
+          };
+          if runtime_storage_hash
             == [
               221u8, 41u8, 71u8, 21u8, 28u8, 193u8, 65u8, 97u8, 103u8, 37u8, 145u8, 146u8, 183u8,
               194u8, 57u8, 131u8, 214u8, 136u8, 68u8, 156u8, 140u8, 194u8, 69u8, 151u8, 115u8,
@@ -6802,10 +7447,12 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Perbill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<SlashRewardFraction>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SlashRewardFraction>()?
+          };
+          if runtime_storage_hash
             == [
               92u8, 55u8, 255u8, 233u8, 174u8, 125u8, 32u8, 21u8, 78u8, 237u8, 123u8, 241u8, 113u8,
               243u8, 48u8, 101u8, 190u8, 165u8, 216u8, 134u8, 35u8, 128u8, 7u8, 207u8, 48u8, 92u8,
@@ -6828,10 +7475,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CanceledSlashPayout>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CanceledSlashPayout>()?
+          };
+          if runtime_storage_hash
             == [
               126u8, 218u8, 66u8, 92u8, 82u8, 124u8, 145u8, 161u8, 40u8, 176u8, 14u8, 211u8, 178u8,
               216u8, 8u8, 156u8, 83u8, 14u8, 91u8, 15u8, 200u8, 170u8, 3u8, 127u8, 141u8, 139u8,
@@ -6862,7 +7511,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnappliedSlashes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnappliedSlashes>()?
+          };
+          if runtime_storage_hash
             == [
               213u8, 28u8, 144u8, 139u8, 187u8, 184u8, 7u8, 192u8, 114u8, 57u8, 238u8, 66u8, 7u8,
               254u8, 41u8, 230u8, 189u8, 188u8, 127u8, 49u8, 201u8, 179u8, 21u8, 157u8, 177u8,
@@ -6887,7 +7541,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, UnappliedSlashes<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnappliedSlashes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnappliedSlashes>()?
+          };
+          if runtime_storage_hash
             == [
               213u8, 28u8, 144u8, 139u8, 187u8, 184u8, 7u8, 192u8, 114u8, 57u8, 238u8, 66u8, 7u8,
               254u8, 41u8, 230u8, 189u8, 188u8, 127u8, 49u8, 201u8, 179u8, 21u8, 157u8, 177u8,
@@ -6910,7 +7569,12 @@ pub mod api {
           ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u32)>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<BondedEras>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BondedEras>()?
+          };
+          if runtime_storage_hash
             == [
               243u8, 162u8, 236u8, 198u8, 122u8, 182u8, 37u8, 55u8, 171u8, 156u8, 235u8, 223u8,
               226u8, 129u8, 89u8, 206u8, 2u8, 155u8, 222u8, 154u8, 116u8, 124u8, 4u8, 119u8, 155u8,
@@ -6941,10 +7605,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ValidatorSlashInEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ValidatorSlashInEra>()?
+          };
+          if runtime_storage_hash
             == [
               241u8, 177u8, 227u8, 239u8, 150u8, 186u8, 50u8, 97u8, 144u8, 224u8, 24u8, 149u8,
               189u8, 166u8, 71u8, 232u8, 221u8, 129u8, 122u8, 248u8, 235u8, 100u8, 130u8, 230u8,
@@ -6966,10 +7632,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ValidatorSlashInEra<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ValidatorSlashInEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ValidatorSlashInEra>()?
+          };
+          if runtime_storage_hash
             == [
               241u8, 177u8, 227u8, 239u8, 150u8, 186u8, 50u8, 97u8, 144u8, 224u8, 24u8, 149u8,
               189u8, 166u8, 71u8, 232u8, 221u8, 129u8, 122u8, 248u8, 235u8, 100u8, 130u8, 230u8,
@@ -6991,10 +7659,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<NominatorSlashInEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NominatorSlashInEra>()?
+          };
+          if runtime_storage_hash
             == [
               149u8, 144u8, 51u8, 167u8, 71u8, 119u8, 218u8, 110u8, 25u8, 45u8, 168u8, 149u8, 62u8,
               195u8, 248u8, 50u8, 215u8, 216u8, 228u8, 4u8, 238u8, 4u8, 52u8, 211u8, 65u8, 223u8,
@@ -7015,10 +7685,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, NominatorSlashInEra<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<NominatorSlashInEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NominatorSlashInEra>()?
+          };
+          if runtime_storage_hash
             == [
               149u8, 144u8, 51u8, 167u8, 71u8, 119u8, 218u8, 110u8, 25u8, 45u8, 168u8, 149u8, 62u8,
               195u8, 248u8, 50u8, 215u8, 216u8, 228u8, 4u8, 238u8, 4u8, 52u8, 211u8, 65u8, 223u8,
@@ -7039,7 +7711,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_staking::slashing::SlashingSpans>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SlashingSpans>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SlashingSpans>()?
+          };
+          if runtime_storage_hash
             == [
               22u8, 73u8, 200u8, 194u8, 106u8, 157u8, 84u8, 5u8, 119u8, 5u8, 73u8, 247u8, 125u8,
               213u8, 80u8, 37u8, 154u8, 192u8, 16u8, 2u8, 135u8, 124u8, 139u8, 26u8, 84u8, 223u8,
@@ -7058,7 +7735,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SlashingSpans<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SlashingSpans>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SlashingSpans>()?
+          };
+          if runtime_storage_hash
             == [
               22u8, 73u8, 200u8, 194u8, 106u8, 157u8, 84u8, 5u8, 119u8, 5u8, 73u8, 247u8, 125u8,
               213u8, 80u8, 37u8, 154u8, 192u8, 16u8, 2u8, 135u8, 124u8, 139u8, 26u8, 84u8, 223u8,
@@ -7081,7 +7763,12 @@ pub mod api {
           runtime_types::pallet_staking::slashing::SpanRecord<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SpanSlash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SpanSlash>()?
+          };
+          if runtime_storage_hash
             == [
               95u8, 42u8, 40u8, 167u8, 201u8, 140u8, 142u8, 55u8, 69u8, 238u8, 248u8, 118u8, 209u8,
               11u8, 117u8, 132u8, 179u8, 33u8, 17u8, 156u8, 137u8, 220u8, 170u8, 144u8, 235u8,
@@ -7105,7 +7792,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SpanSlash<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SpanSlash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SpanSlash>()?
+          };
+          if runtime_storage_hash
             == [
               95u8, 42u8, 40u8, 167u8, 201u8, 140u8, 142u8, 55u8, 69u8, 238u8, 248u8, 118u8, 209u8,
               11u8, 117u8, 132u8, 179u8, 33u8, 17u8, 156u8, 137u8, 220u8, 170u8, 144u8, 235u8,
@@ -7125,10 +7817,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<EarliestUnappliedSlash>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EarliestUnappliedSlash>()?
+          };
+          if runtime_storage_hash
             == [
               2u8, 167u8, 88u8, 76u8, 113u8, 225u8, 232u8, 80u8, 183u8, 162u8, 104u8, 28u8, 162u8,
               13u8, 120u8, 45u8, 200u8, 130u8, 147u8, 124u8, 210u8, 111u8, 30u8, 222u8, 70u8, 79u8,
@@ -7148,10 +7842,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CurrentPlannedSession>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentPlannedSession>()?
+          };
+          if runtime_storage_hash
             == [
               38u8, 22u8, 56u8, 250u8, 17u8, 154u8, 99u8, 37u8, 155u8, 253u8, 100u8, 117u8, 5u8,
               239u8, 31u8, 190u8, 53u8, 241u8, 11u8, 185u8, 163u8, 227u8, 10u8, 77u8, 210u8, 64u8,
@@ -7184,10 +7880,12 @@ pub mod api {
           ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::bool)>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<OffendingValidators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<OffendingValidators>()?
+          };
+          if runtime_storage_hash
             == [
               94u8, 254u8, 0u8, 50u8, 76u8, 232u8, 51u8, 153u8, 118u8, 14u8, 70u8, 101u8, 112u8,
               215u8, 173u8, 82u8, 182u8, 104u8, 167u8, 103u8, 187u8, 168u8, 86u8, 16u8, 51u8,
@@ -7213,7 +7911,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::pallet_staking::Releases, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<StorageVersion>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StorageVersion>()?
+          };
+          if runtime_storage_hash
             == [
               156u8, 107u8, 113u8, 89u8, 107u8, 89u8, 171u8, 229u8, 13u8, 96u8, 203u8, 67u8, 119u8,
               153u8, 199u8, 158u8, 63u8, 114u8, 229u8, 113u8, 81u8, 70u8, 200u8, 9u8, 147u8, 233u8,
@@ -7240,7 +7943,12 @@ pub mod api {
           ::core::option::Option<runtime_types::sp_arithmetic::per_things::Percent>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ChillThreshold>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ChillThreshold>()?
+          };
+          if runtime_storage_hash
             == [
               254u8, 131u8, 112u8, 90u8, 234u8, 72u8, 26u8, 240u8, 38u8, 14u8, 128u8, 234u8, 133u8,
               169u8, 66u8, 48u8, 234u8, 170u8, 159u8, 145u8, 75u8, 135u8, 79u8, 189u8, 54u8, 89u8,
@@ -7268,17 +7976,16 @@ pub mod api {
         pub fn max_nominations(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "MaxNominations")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "MaxNominations")?
             == [
               155u8, 58u8, 120u8, 225u8, 19u8, 30u8, 64u8, 6u8, 16u8, 72u8, 160u8, 120u8, 99u8,
               8u8, 170u8, 47u8, 217u8, 196u8, 184u8, 183u8, 199u8, 156u8, 76u8, 154u8, 143u8,
               172u8, 67u8, 133u8, 95u8, 36u8, 60u8, 50u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("MaxNominations")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7290,17 +7997,16 @@ pub mod api {
         pub fn sessions_per_era(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "SessionsPerEra")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "SessionsPerEra")?
             == [
               73u8, 207u8, 178u8, 212u8, 159u8, 9u8, 41u8, 31u8, 205u8, 221u8, 166u8, 159u8, 104u8,
               218u8, 113u8, 160u8, 174u8, 66u8, 95u8, 0u8, 237u8, 42u8, 120u8, 171u8, 68u8, 78u8,
               136u8, 162u8, 163u8, 225u8, 199u8, 138u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("SessionsPerEra")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7312,17 +8018,16 @@ pub mod api {
         pub fn bonding_duration(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "BondingDuration")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "BondingDuration")?
             == [
               205u8, 83u8, 35u8, 244u8, 140u8, 127u8, 183u8, 152u8, 242u8, 60u8, 44u8, 77u8, 252u8,
               245u8, 35u8, 157u8, 71u8, 124u8, 99u8, 243u8, 122u8, 252u8, 104u8, 33u8, 28u8, 86u8,
               63u8, 26u8, 3u8, 22u8, 193u8, 237u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("BondingDuration")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7337,17 +8042,16 @@ pub mod api {
         pub fn slash_defer_duration(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "SlashDeferDuration")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "SlashDeferDuration")?
             == [
               119u8, 238u8, 165u8, 29u8, 118u8, 219u8, 225u8, 241u8, 249u8, 202u8, 99u8, 86u8,
               123u8, 152u8, 33u8, 200u8, 166u8, 24u8, 240u8, 111u8, 6u8, 56u8, 94u8, 70u8, 198u8,
               4u8, 223u8, 19u8, 39u8, 246u8, 190u8, 167u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("SlashDeferDuration")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7362,17 +8066,16 @@ pub mod api {
         pub fn max_nominator_rewarded_per_validator(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "MaxNominatorRewardedPerValidator")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "MaxNominatorRewardedPerValidator")?
             == [
               203u8, 67u8, 240u8, 15u8, 205u8, 129u8, 216u8, 42u8, 197u8, 166u8, 179u8, 175u8, 9u8,
               179u8, 182u8, 19u8, 57u8, 206u8, 237u8, 79u8, 204u8, 135u8, 76u8, 243u8, 108u8,
               191u8, 151u8, 127u8, 38u8, 154u8, 193u8, 142u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("MaxNominatorRewardedPerValidator")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7385,17 +8088,16 @@ pub mod api {
         pub fn max_unlocking_chunks(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Staking", "MaxUnlockingChunks")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Staking", "MaxUnlockingChunks")?
             == [
               60u8, 255u8, 33u8, 12u8, 50u8, 253u8, 93u8, 203u8, 3u8, 245u8, 156u8, 201u8, 121u8,
               119u8, 72u8, 58u8, 38u8, 133u8, 127u8, 51u8, 21u8, 223u8, 40u8, 23u8, 116u8, 158u8,
               77u8, 24u8, 139u8, 219u8, 197u8, 150u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Staking")?;
+            let pallet = metadata.pallet("Staking")?;
             let constant = pallet.constant("MaxUnlockingChunks")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -7502,7 +8204,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Reports>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Reports>()?
+          };
+          if runtime_storage_hash
             == [
               82u8, 209u8, 30u8, 189u8, 152u8, 16u8, 7u8, 24u8, 178u8, 140u8, 17u8, 226u8, 97u8,
               37u8, 80u8, 211u8, 252u8, 36u8, 196u8, 121u8, 113u8, 79u8, 209u8, 113u8, 236u8,
@@ -7521,7 +8228,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Reports<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Reports>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Reports>()?
+          };
+          if runtime_storage_hash
             == [
               82u8, 209u8, 30u8, 189u8, 152u8, 16u8, 7u8, 24u8, 178u8, 140u8, 17u8, 226u8, 97u8,
               37u8, 80u8, 211u8, 252u8, 36u8, 196u8, 121u8, 113u8, 79u8, 209u8, 113u8, 236u8,
@@ -7541,10 +8253,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::std::vec::Vec<::subxt::sp_core::H256>, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ConcurrentReportsIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ConcurrentReportsIndex>()?
+          };
+          if runtime_storage_hash
             == [
               110u8, 42u8, 178u8, 19u8, 180u8, 109u8, 26u8, 134u8, 74u8, 223u8, 19u8, 172u8, 149u8,
               194u8, 228u8, 11u8, 205u8, 189u8, 157u8, 52u8, 179u8, 177u8, 19u8, 65u8, 35u8, 176u8,
@@ -7569,10 +8283,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ConcurrentReportsIndex<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ConcurrentReportsIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ConcurrentReportsIndex>()?
+          };
+          if runtime_storage_hash
             == [
               110u8, 42u8, 178u8, 19u8, 180u8, 109u8, 26u8, 134u8, 74u8, 223u8, 19u8, 172u8, 149u8,
               194u8, 228u8, 11u8, 205u8, 189u8, 157u8, 52u8, 179u8, 177u8, 19u8, 65u8, 35u8, 176u8,
@@ -7596,10 +8312,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::std::vec::Vec<::core::primitive::u8>, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ReportsByKindIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ReportsByKindIndex>()?
+          };
+          if runtime_storage_hash
             == [
               162u8, 66u8, 131u8, 48u8, 250u8, 237u8, 179u8, 214u8, 36u8, 137u8, 226u8, 136u8,
               120u8, 61u8, 215u8, 43u8, 164u8, 50u8, 91u8, 164u8, 20u8, 96u8, 189u8, 100u8, 242u8,
@@ -7629,10 +8347,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ReportsByKindIndex<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ReportsByKindIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ReportsByKindIndex>()?
+          };
+          if runtime_storage_hash
             == [
               162u8, 66u8, 131u8, 48u8, 250u8, 237u8, 179u8, 214u8, 36u8, 137u8, 226u8, 136u8,
               120u8, 61u8, 215u8, 43u8, 164u8, 50u8, 91u8, 164u8, 20u8, 96u8, 189u8, 100u8, 242u8,
@@ -7710,7 +8430,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetKeys, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetKeys>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetKeys>()?
+          };
+          if runtime_call_hash
             == [
               159u8, 63u8, 170u8, 217u8, 61u8, 69u8, 235u8, 239u8, 98u8, 107u8, 18u8, 70u8, 115u8,
               186u8, 110u8, 117u8, 138u8, 56u8, 174u8, 171u8, 14u8, 92u8, 219u8, 133u8, 99u8,
@@ -7745,7 +8470,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, PurgeKeys, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<PurgeKeys>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<PurgeKeys>()?
+          };
+          if runtime_call_hash
             == [
               200u8, 255u8, 4u8, 213u8, 188u8, 92u8, 99u8, 116u8, 163u8, 152u8, 29u8, 35u8, 133u8,
               119u8, 246u8, 44u8, 91u8, 31u8, 145u8, 23u8, 213u8, 64u8, 71u8, 242u8, 207u8, 239u8,
@@ -7871,7 +8601,12 @@ pub mod api {
           ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Validators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Validators>()?
+          };
+          if runtime_storage_hash
             == [
               186u8, 248u8, 234u8, 74u8, 245u8, 141u8, 90u8, 152u8, 226u8, 220u8, 255u8, 104u8,
               174u8, 1u8, 37u8, 152u8, 23u8, 208u8, 25u8, 49u8, 33u8, 253u8, 254u8, 251u8, 141u8,
@@ -7893,7 +8628,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<CurrentIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentIndex>()?
+          };
+          if runtime_storage_hash
             == [
               148u8, 179u8, 159u8, 15u8, 197u8, 95u8, 214u8, 30u8, 209u8, 251u8, 183u8, 231u8,
               91u8, 25u8, 181u8, 191u8, 143u8, 252u8, 227u8, 80u8, 159u8, 66u8, 194u8, 67u8, 113u8,
@@ -7916,7 +8656,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<QueuedChanged>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<QueuedChanged>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 140u8, 235u8, 218u8, 96u8, 100u8, 252u8, 10u8, 58u8, 221u8, 244u8, 251u8,
               67u8, 91u8, 80u8, 202u8, 152u8, 42u8, 50u8, 113u8, 200u8, 247u8, 59u8, 213u8, 77u8,
@@ -7945,7 +8690,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<QueuedKeys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<QueuedKeys>()?
+          };
+          if runtime_storage_hash
             == [
               4u8, 141u8, 43u8, 244u8, 212u8, 32u8, 46u8, 252u8, 104u8, 245u8, 200u8, 243u8, 21u8,
               132u8, 177u8, 66u8, 228u8, 141u8, 26u8, 245u8, 9u8, 6u8, 111u8, 244u8, 86u8, 28u8,
@@ -7972,10 +8722,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::std::vec::Vec<::core::primitive::u32>, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<DisabledValidators>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<DisabledValidators>()?
+          };
+          if runtime_storage_hash
             == [
               135u8, 22u8, 22u8, 97u8, 82u8, 217u8, 144u8, 141u8, 121u8, 240u8, 189u8, 16u8, 176u8,
               88u8, 177u8, 31u8, 20u8, 242u8, 73u8, 104u8, 11u8, 110u8, 214u8, 34u8, 52u8, 217u8,
@@ -8001,7 +8753,12 @@ pub mod api {
           ::core::option::Option<runtime_types::lagoon_runtime::SessionKeys>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<NextKeys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextKeys>()?
+          };
+          if runtime_storage_hash
             == [
               12u8, 86u8, 103u8, 231u8, 0u8, 69u8, 40u8, 44u8, 241u8, 127u8, 71u8, 165u8, 114u8,
               228u8, 159u8, 104u8, 109u8, 41u8, 163u8, 174u8, 166u8, 9u8, 119u8, 226u8, 21u8, 63u8,
@@ -8020,7 +8777,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, NextKeys<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<NextKeys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextKeys>()?
+          };
+          if runtime_storage_hash
             == [
               12u8, 86u8, 103u8, 231u8, 0u8, 69u8, 40u8, 44u8, 241u8, 127u8, 71u8, 165u8, 114u8,
               228u8, 159u8, 104u8, 109u8, 41u8, 163u8, 174u8, 166u8, 9u8, 119u8, 226u8, 21u8, 63u8,
@@ -8042,7 +8804,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<KeyOwner>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<KeyOwner>()?
+          };
+          if runtime_storage_hash
             == [
               49u8, 245u8, 212u8, 141u8, 211u8, 208u8, 109u8, 102u8, 249u8, 161u8, 41u8, 93u8,
               220u8, 230u8, 14u8, 59u8, 251u8, 176u8, 33u8, 127u8, 93u8, 149u8, 205u8, 229u8,
@@ -8061,7 +8828,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, KeyOwner<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<KeyOwner>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<KeyOwner>()?
+          };
+          if runtime_storage_hash
             == [
               49u8, 245u8, 212u8, 141u8, 211u8, 208u8, 109u8, 102u8, 249u8, 161u8, 41u8, 93u8,
               220u8, 230u8, 14u8, 59u8, 251u8, 176u8, 33u8, 127u8, 93u8, 149u8, 205u8, 229u8,
@@ -8157,7 +8929,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ReportEquivocation>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ReportEquivocation>()?
+          };
+          if runtime_call_hash
             == [
               230u8, 252u8, 24u8, 207u8, 164u8, 127u8, 177u8, 30u8, 113u8, 175u8, 207u8, 252u8,
               230u8, 225u8, 181u8, 190u8, 236u8, 110u8, 145u8, 168u8, 200u8, 134u8, 88u8, 234u8,
@@ -8200,10 +8977,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<ReportEquivocationUnsigned>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ReportEquivocationUnsigned>()?
+          };
+          if runtime_call_hash
             == [
               141u8, 235u8, 27u8, 135u8, 124u8, 124u8, 234u8, 51u8, 100u8, 105u8, 188u8, 248u8,
               133u8, 10u8, 84u8, 14u8, 40u8, 235u8, 14u8, 107u8, 63u8, 148u8, 107u8, 172u8, 136u8,
@@ -8234,7 +9013,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, NoteStalled, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<NoteStalled>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<NoteStalled>()?
+          };
+          if runtime_call_hash
             == [
               227u8, 98u8, 249u8, 158u8, 96u8, 124u8, 72u8, 188u8, 27u8, 215u8, 73u8, 62u8, 103u8,
               79u8, 38u8, 48u8, 212u8, 88u8, 233u8, 187u8, 11u8, 95u8, 39u8, 247u8, 55u8, 184u8,
@@ -8356,7 +9140,12 @@ pub mod api {
           runtime_types::pallet_grandpa::StoredState<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<State>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<State>()?
+          };
+          if runtime_storage_hash
             == [
               159u8, 75u8, 78u8, 23u8, 98u8, 89u8, 239u8, 230u8, 192u8, 67u8, 139u8, 222u8, 151u8,
               237u8, 216u8, 20u8, 235u8, 247u8, 180u8, 24u8, 64u8, 160u8, 58u8, 15u8, 205u8, 191u8,
@@ -8383,7 +9172,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<PendingChange>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PendingChange>()?
+          };
+          if runtime_storage_hash
             == [
               128u8, 176u8, 209u8, 41u8, 231u8, 111u8, 205u8, 198u8, 154u8, 44u8, 228u8, 231u8,
               44u8, 110u8, 74u8, 9u8, 31u8, 86u8, 128u8, 244u8, 112u8, 21u8, 120u8, 176u8, 50u8,
@@ -8404,7 +9198,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<NextForced>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<NextForced>()?
+          };
+          if runtime_storage_hash
             == [
               99u8, 43u8, 245u8, 201u8, 60u8, 9u8, 122u8, 99u8, 188u8, 29u8, 67u8, 6u8, 193u8,
               133u8, 179u8, 67u8, 202u8, 208u8, 62u8, 179u8, 19u8, 169u8, 196u8, 119u8, 107u8,
@@ -8425,7 +9224,12 @@ pub mod api {
           ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Stalled>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Stalled>()?
+          };
+          if runtime_storage_hash
             == [
               219u8, 8u8, 37u8, 78u8, 150u8, 55u8, 0u8, 57u8, 201u8, 170u8, 186u8, 189u8, 56u8,
               161u8, 44u8, 15u8, 53u8, 178u8, 224u8, 208u8, 231u8, 109u8, 14u8, 209u8, 57u8, 205u8,
@@ -8444,7 +9248,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<CurrentSetId>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentSetId>()?
+          };
+          if runtime_storage_hash
             == [
               129u8, 7u8, 62u8, 101u8, 199u8, 60u8, 56u8, 33u8, 54u8, 158u8, 20u8, 178u8, 244u8,
               145u8, 189u8, 197u8, 157u8, 163u8, 116u8, 36u8, 105u8, 52u8, 149u8, 244u8, 108u8,
@@ -8473,7 +9282,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SetIdSession>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SetIdSession>()?
+          };
+          if runtime_storage_hash
             == [
               91u8, 175u8, 145u8, 127u8, 242u8, 81u8, 13u8, 231u8, 110u8, 11u8, 166u8, 169u8,
               103u8, 146u8, 123u8, 133u8, 157u8, 15u8, 33u8, 234u8, 108u8, 13u8, 88u8, 115u8,
@@ -8495,7 +9309,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SetIdSession<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SetIdSession>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SetIdSession>()?
+          };
+          if runtime_storage_hash
             == [
               91u8, 175u8, 145u8, 127u8, 242u8, 81u8, 13u8, 231u8, 110u8, 11u8, 166u8, 169u8,
               103u8, 146u8, 123u8, 133u8, 157u8, 15u8, 33u8, 234u8, 108u8, 13u8, 88u8, 115u8,
@@ -8522,17 +9341,16 @@ pub mod api {
         pub fn max_authorities(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Grandpa", "MaxAuthorities")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Grandpa", "MaxAuthorities")?
             == [
               248u8, 195u8, 131u8, 166u8, 10u8, 50u8, 71u8, 223u8, 41u8, 49u8, 43u8, 99u8, 251u8,
               113u8, 75u8, 193u8, 159u8, 15u8, 77u8, 217u8, 147u8, 205u8, 165u8, 50u8, 6u8, 166u8,
               77u8, 189u8, 102u8, 22u8, 201u8, 19u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Grandpa")?;
+            let pallet = metadata.pallet("Grandpa")?;
             let constant = pallet.constant("MaxAuthorities")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -8591,7 +9409,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Heartbeat, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Heartbeat>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Heartbeat>()?
+          };
+          if runtime_call_hash
             == [
               246u8, 83u8, 28u8, 233u8, 69u8, 55u8, 28u8, 178u8, 82u8, 159u8, 56u8, 241u8, 111u8,
               78u8, 194u8, 15u8, 14u8, 250u8, 172u8, 148u8, 208u8, 52u8, 33u8, 106u8, 159u8, 210u8,
@@ -8720,7 +9543,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<HeartbeatAfter>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<HeartbeatAfter>()?
+          };
+          if runtime_storage_hash
             == [
               108u8, 100u8, 85u8, 198u8, 226u8, 122u8, 94u8, 225u8, 97u8, 154u8, 135u8, 95u8,
               106u8, 28u8, 185u8, 78u8, 192u8, 196u8, 35u8, 191u8, 12u8, 19u8, 163u8, 46u8, 232u8,
@@ -8747,7 +9575,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Keys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Keys>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 250u8, 99u8, 106u8, 9u8, 29u8, 73u8, 176u8, 158u8, 247u8, 28u8, 171u8, 95u8,
               1u8, 109u8, 11u8, 231u8, 52u8, 54u8, 102u8, 142u8, 105u8, 209u8, 31u8, 132u8, 60u8,
@@ -8779,10 +9612,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ReceivedHeartbeats>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ReceivedHeartbeats>()?
+          };
+          if runtime_storage_hash
             == [
               29u8, 40u8, 67u8, 222u8, 59u8, 104u8, 24u8, 193u8, 249u8, 200u8, 152u8, 225u8, 72u8,
               243u8, 140u8, 114u8, 121u8, 216u8, 54u8, 145u8, 205u8, 82u8, 133u8, 128u8, 109u8,
@@ -8804,10 +9639,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ReceivedHeartbeats<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<ReceivedHeartbeats>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ReceivedHeartbeats>()?
+          };
+          if runtime_storage_hash
             == [
               29u8, 40u8, 67u8, 222u8, 59u8, 104u8, 24u8, 193u8, 249u8, 200u8, 152u8, 225u8, 72u8,
               243u8, 140u8, 114u8, 121u8, 216u8, 54u8, 145u8, 205u8, 82u8, 133u8, 128u8, 109u8,
@@ -8827,7 +9664,12 @@ pub mod api {
           _1: &::subxt::sp_core::crypto::AccountId32,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<AuthoredBlocks>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AuthoredBlocks>()?
+          };
+          if runtime_storage_hash
             == [
               94u8, 193u8, 107u8, 126u8, 3u8, 13u8, 28u8, 151u8, 197u8, 226u8, 224u8, 48u8, 138u8,
               113u8, 31u8, 57u8, 111u8, 184u8, 218u8, 215u8, 185u8, 83u8, 209u8, 139u8, 114u8,
@@ -8851,7 +9693,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, AuthoredBlocks<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<AuthoredBlocks>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AuthoredBlocks>()?
+          };
+          if runtime_storage_hash
             == [
               94u8, 193u8, 107u8, 126u8, 3u8, 13u8, 28u8, 151u8, 197u8, 226u8, 224u8, 48u8, 138u8,
               113u8, 31u8, 57u8, 111u8, 184u8, 218u8, 215u8, 185u8, 83u8, 209u8, 139u8, 114u8,
@@ -8881,17 +9728,16 @@ pub mod api {
         pub fn unsigned_priority(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ImOnline", "UnsignedPriority")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ImOnline", "UnsignedPriority")?
             == [
               78u8, 226u8, 84u8, 70u8, 162u8, 23u8, 167u8, 100u8, 156u8, 228u8, 119u8, 16u8, 28u8,
               202u8, 21u8, 71u8, 72u8, 244u8, 3u8, 255u8, 243u8, 55u8, 109u8, 238u8, 26u8, 180u8,
               207u8, 175u8, 221u8, 27u8, 213u8, 217u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("ImOnline")?;
+            let pallet = metadata.pallet("ImOnline")?;
             let constant = pallet.constant("UnsignedPriority")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -9034,7 +9880,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetMembers, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetMembers>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetMembers>()?
+          };
+          if runtime_call_hash
             == [
               228u8, 186u8, 17u8, 12u8, 231u8, 231u8, 139u8, 15u8, 96u8, 200u8, 68u8, 27u8, 61u8,
               106u8, 245u8, 199u8, 120u8, 141u8, 95u8, 215u8, 36u8, 49u8, 0u8, 163u8, 172u8, 252u8,
@@ -9070,11 +9921,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Execute, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Execute>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Execute>()?
+          };
+          if runtime_call_hash
             == [
-              231u8, 153u8, 86u8, 108u8, 172u8, 131u8, 151u8, 228u8, 41u8, 249u8, 167u8, 238u8,
-              179u8, 252u8, 248u8, 228u8, 243u8, 17u8, 197u8, 43u8, 191u8, 121u8, 118u8, 236u8,
-              39u8, 187u8, 162u8, 188u8, 168u8, 130u8, 221u8, 243u8,
+              216u8, 4u8, 156u8, 208u8, 47u8, 18u8, 88u8, 160u8, 75u8, 36u8, 106u8, 179u8, 160u8,
+              74u8, 133u8, 4u8, 145u8, 246u8, 96u8, 246u8, 86u8, 11u8, 178u8, 178u8, 109u8, 72u8,
+              45u8, 152u8, 169u8, 12u8, 157u8, 249u8,
             ]
           {
             let call = Execute {
@@ -9122,11 +9978,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Propose, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Propose>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Propose>()?
+          };
+          if runtime_call_hash
             == [
-              171u8, 110u8, 176u8, 177u8, 133u8, 50u8, 40u8, 15u8, 209u8, 90u8, 120u8, 254u8,
-              227u8, 228u8, 213u8, 17u8, 137u8, 23u8, 7u8, 141u8, 254u8, 127u8, 56u8, 222u8, 156u8,
-              188u8, 200u8, 35u8, 226u8, 201u8, 168u8, 65u8,
+              138u8, 182u8, 211u8, 174u8, 21u8, 187u8, 70u8, 217u8, 130u8, 87u8, 187u8, 152u8,
+              220u8, 229u8, 249u8, 29u8, 65u8, 106u8, 1u8, 183u8, 132u8, 162u8, 25u8, 163u8, 195u8,
+              234u8, 84u8, 101u8, 144u8, 1u8, 66u8, 187u8,
             ]
           {
             let call = Propose {
@@ -9163,7 +10024,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Vote, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Vote>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Vote>()?
+          };
+          if runtime_call_hash
             == [
               184u8, 236u8, 80u8, 133u8, 26u8, 207u8, 3u8, 2u8, 120u8, 27u8, 38u8, 135u8, 195u8,
               86u8, 169u8, 229u8, 125u8, 253u8, 220u8, 120u8, 231u8, 181u8, 101u8, 84u8, 151u8,
@@ -9222,7 +10088,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Close, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Close>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Close>()?
+          };
+          if runtime_call_hash
             == [
               242u8, 208u8, 108u8, 202u8, 24u8, 139u8, 8u8, 150u8, 108u8, 217u8, 30u8, 209u8,
               178u8, 1u8, 80u8, 25u8, 154u8, 146u8, 173u8, 172u8, 227u8, 4u8, 140u8, 228u8, 58u8,
@@ -9268,7 +10139,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<DisapproveProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<DisapproveProposal>()?
+          };
+          if runtime_call_hash
             == [
               199u8, 113u8, 221u8, 167u8, 60u8, 241u8, 77u8, 166u8, 205u8, 191u8, 183u8, 121u8,
               191u8, 206u8, 230u8, 212u8, 215u8, 219u8, 30u8, 51u8, 123u8, 18u8, 17u8, 218u8, 77u8,
@@ -9444,7 +10320,12 @@ pub mod api {
           runtime_types::frame_support::storage::bounded_vec::BoundedVec<::subxt::sp_core::H256>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proposals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proposals>()?
+          };
+          if runtime_storage_hash
             == [
               174u8, 75u8, 108u8, 245u8, 86u8, 50u8, 107u8, 212u8, 244u8, 113u8, 232u8, 168u8,
               194u8, 33u8, 247u8, 97u8, 54u8, 115u8, 236u8, 189u8, 59u8, 2u8, 252u8, 84u8, 199u8,
@@ -9470,11 +10351,16 @@ pub mod api {
           ::core::option::Option<runtime_types::lagoon_runtime::Call>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ProposalOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalOf>()?
+          };
+          if runtime_storage_hash
             == [
-              60u8, 211u8, 121u8, 204u8, 136u8, 218u8, 4u8, 31u8, 43u8, 37u8, 11u8, 70u8, 24u8,
-              116u8, 87u8, 88u8, 62u8, 9u8, 146u8, 50u8, 35u8, 239u8, 133u8, 132u8, 118u8, 38u8,
-              44u8, 101u8, 169u8, 141u8, 56u8, 247u8,
+              200u8, 172u8, 37u8, 142u8, 57u8, 119u8, 96u8, 17u8, 59u8, 54u8, 220u8, 6u8, 11u8,
+              204u8, 252u8, 241u8, 37u8, 174u8, 60u8, 46u8, 185u8, 224u8, 142u8, 133u8, 245u8,
+              157u8, 77u8, 76u8, 79u8, 130u8, 57u8, 6u8,
             ]
           {
             let entry = ProposalOf(_0);
@@ -9489,11 +10375,16 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ProposalOf<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ProposalOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalOf>()?
+          };
+          if runtime_storage_hash
             == [
-              60u8, 211u8, 121u8, 204u8, 136u8, 218u8, 4u8, 31u8, 43u8, 37u8, 11u8, 70u8, 24u8,
-              116u8, 87u8, 88u8, 62u8, 9u8, 146u8, 50u8, 35u8, 239u8, 133u8, 132u8, 118u8, 38u8,
-              44u8, 101u8, 169u8, 141u8, 56u8, 247u8,
+              200u8, 172u8, 37u8, 142u8, 57u8, 119u8, 96u8, 17u8, 59u8, 54u8, 220u8, 6u8, 11u8,
+              204u8, 252u8, 241u8, 37u8, 174u8, 60u8, 46u8, 185u8, 224u8, 142u8, 133u8, 245u8,
+              157u8, 77u8, 76u8, 79u8, 130u8, 57u8, 6u8,
             ]
           {
             self.client.storage().iter(block_hash).await
@@ -9515,7 +10406,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               145u8, 223u8, 203u8, 2u8, 137u8, 33u8, 22u8, 239u8, 175u8, 149u8, 254u8, 185u8, 0u8,
               139u8, 71u8, 134u8, 109u8, 95u8, 45u8, 75u8, 33u8, 228u8, 127u8, 67u8, 53u8, 119u8,
@@ -9534,7 +10430,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Voting<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               145u8, 223u8, 203u8, 2u8, 137u8, 33u8, 22u8, 239u8, 175u8, 149u8, 254u8, 185u8, 0u8,
               139u8, 71u8, 134u8, 109u8, 95u8, 45u8, 75u8, 33u8, 228u8, 127u8, 67u8, 53u8, 119u8,
@@ -9551,7 +10452,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ProposalCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalCount>()?
+          };
+          if runtime_storage_hash
             == [
               132u8, 145u8, 78u8, 218u8, 51u8, 189u8, 55u8, 172u8, 143u8, 33u8, 140u8, 99u8, 124u8,
               208u8, 57u8, 232u8, 154u8, 110u8, 32u8, 142u8, 24u8, 149u8, 109u8, 105u8, 30u8, 83u8,
@@ -9576,7 +10482,12 @@ pub mod api {
           ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 91u8, 140u8, 173u8, 238u8, 221u8, 4u8, 132u8, 238u8, 99u8, 195u8, 142u8, 10u8,
               35u8, 210u8, 227u8, 22u8, 72u8, 218u8, 222u8, 227u8, 51u8, 55u8, 31u8, 252u8, 78u8,
@@ -9601,7 +10512,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Prime>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Prime>()?
+          };
+          if runtime_storage_hash
             == [
               70u8, 101u8, 20u8, 160u8, 173u8, 87u8, 190u8, 85u8, 60u8, 249u8, 144u8, 77u8, 175u8,
               195u8, 51u8, 196u8, 234u8, 62u8, 243u8, 199u8, 126u8, 12u8, 88u8, 252u8, 1u8, 210u8,
@@ -9745,7 +10661,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetMembers, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetMembers>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetMembers>()?
+          };
+          if runtime_call_hash
             == [
               228u8, 186u8, 17u8, 12u8, 231u8, 231u8, 139u8, 15u8, 96u8, 200u8, 68u8, 27u8, 61u8,
               106u8, 245u8, 199u8, 120u8, 141u8, 95u8, 215u8, 36u8, 49u8, 0u8, 163u8, 172u8, 252u8,
@@ -9781,11 +10702,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Execute, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Execute>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Execute>()?
+          };
+          if runtime_call_hash
             == [
-              231u8, 153u8, 86u8, 108u8, 172u8, 131u8, 151u8, 228u8, 41u8, 249u8, 167u8, 238u8,
-              179u8, 252u8, 248u8, 228u8, 243u8, 17u8, 197u8, 43u8, 191u8, 121u8, 118u8, 236u8,
-              39u8, 187u8, 162u8, 188u8, 168u8, 130u8, 221u8, 243u8,
+              216u8, 4u8, 156u8, 208u8, 47u8, 18u8, 88u8, 160u8, 75u8, 36u8, 106u8, 179u8, 160u8,
+              74u8, 133u8, 4u8, 145u8, 246u8, 96u8, 246u8, 86u8, 11u8, 178u8, 178u8, 109u8, 72u8,
+              45u8, 152u8, 169u8, 12u8, 157u8, 249u8,
             ]
           {
             let call = Execute {
@@ -9833,11 +10759,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Propose, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Propose>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Propose>()?
+          };
+          if runtime_call_hash
             == [
-              171u8, 110u8, 176u8, 177u8, 133u8, 50u8, 40u8, 15u8, 209u8, 90u8, 120u8, 254u8,
-              227u8, 228u8, 213u8, 17u8, 137u8, 23u8, 7u8, 141u8, 254u8, 127u8, 56u8, 222u8, 156u8,
-              188u8, 200u8, 35u8, 226u8, 201u8, 168u8, 65u8,
+              138u8, 182u8, 211u8, 174u8, 21u8, 187u8, 70u8, 217u8, 130u8, 87u8, 187u8, 152u8,
+              220u8, 229u8, 249u8, 29u8, 65u8, 106u8, 1u8, 183u8, 132u8, 162u8, 25u8, 163u8, 195u8,
+              234u8, 84u8, 101u8, 144u8, 1u8, 66u8, 187u8,
             ]
           {
             let call = Propose {
@@ -9874,7 +10805,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Vote, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Vote>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Vote>()?
+          };
+          if runtime_call_hash
             == [
               184u8, 236u8, 80u8, 133u8, 26u8, 207u8, 3u8, 2u8, 120u8, 27u8, 38u8, 135u8, 195u8,
               86u8, 169u8, 229u8, 125u8, 253u8, 220u8, 120u8, 231u8, 181u8, 101u8, 84u8, 151u8,
@@ -9933,7 +10869,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Close, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Close>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Close>()?
+          };
+          if runtime_call_hash
             == [
               242u8, 208u8, 108u8, 202u8, 24u8, 139u8, 8u8, 150u8, 108u8, 217u8, 30u8, 209u8,
               178u8, 1u8, 80u8, 25u8, 154u8, 146u8, 173u8, 172u8, 227u8, 4u8, 140u8, 228u8, 58u8,
@@ -9979,7 +10920,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<DisapproveProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<DisapproveProposal>()?
+          };
+          if runtime_call_hash
             == [
               199u8, 113u8, 221u8, 167u8, 60u8, 241u8, 77u8, 166u8, 205u8, 191u8, 183u8, 121u8,
               191u8, 206u8, 230u8, 212u8, 215u8, 219u8, 30u8, 51u8, 123u8, 18u8, 17u8, 218u8, 77u8,
@@ -10155,7 +11101,12 @@ pub mod api {
           runtime_types::frame_support::storage::bounded_vec::BoundedVec<::subxt::sp_core::H256>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proposals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proposals>()?
+          };
+          if runtime_storage_hash
             == [
               174u8, 75u8, 108u8, 245u8, 86u8, 50u8, 107u8, 212u8, 244u8, 113u8, 232u8, 168u8,
               194u8, 33u8, 247u8, 97u8, 54u8, 115u8, 236u8, 189u8, 59u8, 2u8, 252u8, 84u8, 199u8,
@@ -10181,11 +11132,16 @@ pub mod api {
           ::core::option::Option<runtime_types::lagoon_runtime::Call>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ProposalOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalOf>()?
+          };
+          if runtime_storage_hash
             == [
-              60u8, 211u8, 121u8, 204u8, 136u8, 218u8, 4u8, 31u8, 43u8, 37u8, 11u8, 70u8, 24u8,
-              116u8, 87u8, 88u8, 62u8, 9u8, 146u8, 50u8, 35u8, 239u8, 133u8, 132u8, 118u8, 38u8,
-              44u8, 101u8, 169u8, 141u8, 56u8, 247u8,
+              200u8, 172u8, 37u8, 142u8, 57u8, 119u8, 96u8, 17u8, 59u8, 54u8, 220u8, 6u8, 11u8,
+              204u8, 252u8, 241u8, 37u8, 174u8, 60u8, 46u8, 185u8, 224u8, 142u8, 133u8, 245u8,
+              157u8, 77u8, 76u8, 79u8, 130u8, 57u8, 6u8,
             ]
           {
             let entry = ProposalOf(_0);
@@ -10200,11 +11156,16 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ProposalOf<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ProposalOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalOf>()?
+          };
+          if runtime_storage_hash
             == [
-              60u8, 211u8, 121u8, 204u8, 136u8, 218u8, 4u8, 31u8, 43u8, 37u8, 11u8, 70u8, 24u8,
-              116u8, 87u8, 88u8, 62u8, 9u8, 146u8, 50u8, 35u8, 239u8, 133u8, 132u8, 118u8, 38u8,
-              44u8, 101u8, 169u8, 141u8, 56u8, 247u8,
+              200u8, 172u8, 37u8, 142u8, 57u8, 119u8, 96u8, 17u8, 59u8, 54u8, 220u8, 6u8, 11u8,
+              204u8, 252u8, 241u8, 37u8, 174u8, 60u8, 46u8, 185u8, 224u8, 142u8, 133u8, 245u8,
+              157u8, 77u8, 76u8, 79u8, 130u8, 57u8, 6u8,
             ]
           {
             self.client.storage().iter(block_hash).await
@@ -10226,7 +11187,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               145u8, 223u8, 203u8, 2u8, 137u8, 33u8, 22u8, 239u8, 175u8, 149u8, 254u8, 185u8, 0u8,
               139u8, 71u8, 134u8, 109u8, 95u8, 45u8, 75u8, 33u8, 228u8, 127u8, 67u8, 53u8, 119u8,
@@ -10245,7 +11211,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Voting<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               145u8, 223u8, 203u8, 2u8, 137u8, 33u8, 22u8, 239u8, 175u8, 149u8, 254u8, 185u8, 0u8,
               139u8, 71u8, 134u8, 109u8, 95u8, 45u8, 75u8, 33u8, 228u8, 127u8, 67u8, 53u8, 119u8,
@@ -10262,7 +11233,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ProposalCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalCount>()?
+          };
+          if runtime_storage_hash
             == [
               132u8, 145u8, 78u8, 218u8, 51u8, 189u8, 55u8, 172u8, 143u8, 33u8, 140u8, 99u8, 124u8,
               208u8, 57u8, 232u8, 154u8, 110u8, 32u8, 142u8, 24u8, 149u8, 109u8, 105u8, 30u8, 83u8,
@@ -10287,7 +11263,12 @@ pub mod api {
           ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 91u8, 140u8, 173u8, 238u8, 221u8, 4u8, 132u8, 238u8, 99u8, 195u8, 142u8, 10u8,
               35u8, 210u8, 227u8, 22u8, 72u8, 218u8, 222u8, 227u8, 51u8, 55u8, 31u8, 252u8, 78u8,
@@ -10312,7 +11293,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Prime>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Prime>()?
+          };
+          if runtime_storage_hash
             == [
               70u8, 101u8, 20u8, 160u8, 173u8, 87u8, 190u8, 85u8, 60u8, 249u8, 144u8, 77u8, 175u8,
               195u8, 51u8, 196u8, 234u8, 62u8, 243u8, 199u8, 126u8, 12u8, 88u8, 252u8, 1u8, 210u8,
@@ -10435,7 +11421,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Vote, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Vote>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Vote>()?
+          };
+          if runtime_call_hash
             == [
               245u8, 122u8, 160u8, 64u8, 234u8, 121u8, 191u8, 224u8, 12u8, 16u8, 153u8, 70u8, 41u8,
               236u8, 211u8, 145u8, 238u8, 112u8, 11u8, 94u8, 92u8, 160u8, 67u8, 176u8, 126u8,
@@ -10459,7 +11450,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveVoter, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveVoter>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveVoter>()?
+          };
+          if runtime_call_hash
             == [
               254u8, 46u8, 140u8, 4u8, 218u8, 45u8, 150u8, 72u8, 67u8, 131u8, 108u8, 201u8, 46u8,
               157u8, 104u8, 161u8, 53u8, 155u8, 130u8, 50u8, 88u8, 149u8, 255u8, 12u8, 17u8, 85u8,
@@ -10494,7 +11490,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SubmitCandidacy, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SubmitCandidacy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SubmitCandidacy>()?
+          };
+          if runtime_call_hash
             == [
               100u8, 38u8, 146u8, 5u8, 234u8, 101u8, 193u8, 9u8, 245u8, 237u8, 220u8, 21u8, 36u8,
               64u8, 205u8, 103u8, 11u8, 194u8, 18u8, 96u8, 44u8, 231u8, 125u8, 82u8, 63u8, 51u8,
@@ -10539,7 +11540,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RenounceCandidacy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RenounceCandidacy>()?
+          };
+          if runtime_call_hash
             == [
               184u8, 45u8, 220u8, 198u8, 21u8, 54u8, 15u8, 235u8, 192u8, 78u8, 96u8, 172u8, 12u8,
               152u8, 147u8, 183u8, 172u8, 85u8, 26u8, 243u8, 250u8, 248u8, 104u8, 76u8, 88u8,
@@ -10577,7 +11583,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveMember, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveMember>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveMember>()?
+          };
+          if runtime_call_hash
             == [
               59u8, 246u8, 128u8, 178u8, 45u8, 235u8, 111u8, 84u8, 111u8, 45u8, 207u8, 168u8,
               247u8, 13u8, 181u8, 209u8, 94u8, 224u8, 186u8, 92u8, 217u8, 7u8, 252u8, 131u8, 12u8,
@@ -10618,7 +11629,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CleanDefunctVoters>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CleanDefunctVoters>()?
+          };
+          if runtime_call_hash
             == [
               80u8, 248u8, 122u8, 6u8, 88u8, 255u8, 17u8, 206u8, 104u8, 208u8, 66u8, 191u8, 118u8,
               163u8, 154u8, 9u8, 37u8, 106u8, 232u8, 178u8, 17u8, 177u8, 225u8, 101u8, 76u8, 207u8,
@@ -10801,7 +11817,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               193u8, 166u8, 79u8, 96u8, 31u8, 4u8, 133u8, 133u8, 115u8, 236u8, 253u8, 177u8, 176u8,
               10u8, 50u8, 97u8, 254u8, 234u8, 169u8, 236u8, 77u8, 243u8, 173u8, 187u8, 129u8,
@@ -10834,7 +11855,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<RunnersUp>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<RunnersUp>()?
+          };
+          if runtime_storage_hash
             == [
               59u8, 65u8, 218u8, 225u8, 49u8, 140u8, 168u8, 143u8, 195u8, 106u8, 207u8, 181u8,
               157u8, 129u8, 140u8, 122u8, 145u8, 207u8, 179u8, 144u8, 146u8, 206u8, 204u8, 245u8,
@@ -10867,7 +11893,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Candidates>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Candidates>()?
+          };
+          if runtime_storage_hash
             == [
               172u8, 196u8, 249u8, 114u8, 195u8, 161u8, 43u8, 219u8, 208u8, 127u8, 144u8, 87u8,
               13u8, 253u8, 114u8, 209u8, 199u8, 65u8, 77u8, 7u8, 131u8, 166u8, 212u8, 94u8, 253u8,
@@ -10889,7 +11920,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ElectionRounds>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ElectionRounds>()?
+          };
+          if runtime_storage_hash
             == [
               144u8, 146u8, 10u8, 32u8, 149u8, 147u8, 59u8, 205u8, 61u8, 246u8, 28u8, 169u8, 130u8,
               136u8, 143u8, 104u8, 253u8, 86u8, 228u8, 68u8, 19u8, 184u8, 166u8, 214u8, 58u8,
@@ -10920,7 +11956,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               107u8, 14u8, 228u8, 167u8, 43u8, 105u8, 221u8, 70u8, 234u8, 157u8, 36u8, 16u8, 63u8,
               225u8, 89u8, 111u8, 201u8, 172u8, 98u8, 169u8, 232u8, 175u8, 172u8, 20u8, 223u8,
@@ -10945,7 +11986,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Voting<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Voting>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Voting>()?
+          };
+          if runtime_storage_hash
             == [
               107u8, 14u8, 228u8, 167u8, 43u8, 105u8, 221u8, 70u8, 234u8, 157u8, 36u8, 16u8, 63u8,
               225u8, 89u8, 111u8, 201u8, 172u8, 98u8, 169u8, 232u8, 175u8, 172u8, 20u8, 223u8,
@@ -10972,17 +12018,16 @@ pub mod api {
         pub fn pallet_id(
           &self,
         ) -> ::core::result::Result<[::core::primitive::u8; 8usize], ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "PalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "PalletId")?
             == [
               95u8, 63u8, 229u8, 200u8, 231u8, 11u8, 95u8, 106u8, 62u8, 240u8, 37u8, 146u8, 230u8,
               74u8, 169u8, 185u8, 160u8, 90u8, 136u8, 209u8, 127u8, 221u8, 173u8, 200u8, 243u8,
               198u8, 18u8, 226u8, 144u8, 188u8, 105u8, 230u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("PalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -10994,17 +12039,16 @@ pub mod api {
         pub fn candidacy_bond(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "CandidacyBond")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "CandidacyBond")?
             == [
               122u8, 97u8, 224u8, 48u8, 80u8, 63u8, 234u8, 219u8, 254u8, 180u8, 52u8, 125u8, 76u8,
               142u8, 9u8, 153u8, 238u8, 43u8, 188u8, 60u8, 233u8, 25u8, 155u8, 174u8, 42u8, 94u8,
               125u8, 2u8, 197u8, 114u8, 18u8, 8u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("CandidacyBond")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11019,17 +12063,16 @@ pub mod api {
         pub fn voting_bond_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "VotingBondBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "VotingBondBase")?
             == [
               166u8, 36u8, 134u8, 217u8, 10u8, 92u8, 149u8, 151u8, 220u8, 253u8, 150u8, 40u8, 91u8,
               118u8, 166u8, 125u8, 212u8, 42u8, 53u8, 31u8, 137u8, 195u8, 98u8, 106u8, 38u8, 200u8,
               145u8, 92u8, 171u8, 193u8, 105u8, 176u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("VotingBondBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11041,17 +12084,16 @@ pub mod api {
         pub fn voting_bond_factor(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "VotingBondFactor")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "VotingBondFactor")?
             == [
               151u8, 160u8, 118u8, 76u8, 123u8, 227u8, 127u8, 13u8, 168u8, 119u8, 38u8, 146u8,
               223u8, 36u8, 200u8, 104u8, 168u8, 113u8, 69u8, 25u8, 119u8, 230u8, 242u8, 176u8,
               191u8, 188u8, 1u8, 216u8, 25u8, 242u8, 234u8, 190u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("VotingBondFactor")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11063,17 +12105,16 @@ pub mod api {
         pub fn desired_members(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "DesiredMembers")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "DesiredMembers")?
             == [
               202u8, 93u8, 82u8, 184u8, 101u8, 152u8, 110u8, 247u8, 155u8, 43u8, 205u8, 219u8,
               41u8, 184u8, 141u8, 32u8, 33u8, 30u8, 129u8, 33u8, 132u8, 18u8, 172u8, 114u8, 226u8,
               81u8, 21u8, 55u8, 197u8, 42u8, 65u8, 162u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("DesiredMembers")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11085,17 +12126,16 @@ pub mod api {
         pub fn desired_runners_up(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "DesiredRunnersUp")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "DesiredRunnersUp")?
             == [
               126u8, 79u8, 206u8, 94u8, 16u8, 223u8, 112u8, 34u8, 160u8, 227u8, 74u8, 26u8, 14u8,
               191u8, 98u8, 119u8, 230u8, 187u8, 18u8, 37u8, 13u8, 143u8, 128u8, 62u8, 131u8, 158u8,
               138u8, 110u8, 16u8, 216u8, 42u8, 113u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("DesiredRunnersUp")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11109,17 +12149,16 @@ pub mod api {
         pub fn term_duration(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Elections", "TermDuration")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Elections", "TermDuration")?
             == [
               193u8, 236u8, 82u8, 251u8, 38u8, 164u8, 72u8, 149u8, 65u8, 240u8, 45u8, 82u8, 210u8,
               168u8, 68u8, 219u8, 11u8, 241u8, 118u8, 117u8, 248u8, 9u8, 1u8, 187u8, 98u8, 189u8,
               18u8, 119u8, 255u8, 89u8, 192u8, 231u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Elections")?;
+            let pallet = metadata.pallet("Elections")?;
             let constant = pallet.constant("TermDuration")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11217,7 +12256,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AddMember, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AddMember>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AddMember>()?
+          };
+          if runtime_call_hash
             == [
               1u8, 149u8, 115u8, 222u8, 93u8, 9u8, 208u8, 58u8, 22u8, 148u8, 215u8, 141u8, 204u8,
               48u8, 107u8, 210u8, 202u8, 165u8, 43u8, 159u8, 45u8, 161u8, 255u8, 127u8, 225u8,
@@ -11240,7 +12284,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveMember, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveMember>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveMember>()?
+          };
+          if runtime_call_hash
             == [
               137u8, 249u8, 148u8, 139u8, 147u8, 47u8, 226u8, 228u8, 139u8, 219u8, 109u8, 128u8,
               254u8, 51u8, 227u8, 154u8, 105u8, 91u8, 229u8, 69u8, 217u8, 241u8, 107u8, 229u8,
@@ -11266,7 +12315,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SwapMember, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SwapMember>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SwapMember>()?
+          };
+          if runtime_call_hash
             == [
               159u8, 62u8, 254u8, 117u8, 56u8, 185u8, 99u8, 29u8, 146u8, 210u8, 40u8, 77u8, 169u8,
               224u8, 215u8, 34u8, 106u8, 95u8, 204u8, 109u8, 72u8, 67u8, 11u8, 183u8, 33u8, 84u8,
@@ -11290,7 +12344,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ResetMembers, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ResetMembers>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ResetMembers>()?
+          };
+          if runtime_call_hash
             == [
               246u8, 84u8, 91u8, 191u8, 61u8, 245u8, 171u8, 80u8, 18u8, 120u8, 61u8, 86u8, 23u8,
               115u8, 161u8, 203u8, 128u8, 34u8, 166u8, 128u8, 33u8, 28u8, 229u8, 81u8, 103u8,
@@ -11315,7 +12374,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ChangeKey, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ChangeKey>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ChangeKey>()?
+          };
+          if runtime_call_hash
             == [
               198u8, 93u8, 41u8, 52u8, 241u8, 11u8, 225u8, 82u8, 30u8, 114u8, 111u8, 204u8, 13u8,
               31u8, 34u8, 82u8, 171u8, 58u8, 180u8, 65u8, 3u8, 246u8, 33u8, 167u8, 200u8, 23u8,
@@ -11338,7 +12402,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetPrime, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetPrime>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetPrime>()?
+          };
+          if runtime_call_hash
             == [
               185u8, 53u8, 61u8, 154u8, 234u8, 77u8, 195u8, 126u8, 19u8, 39u8, 78u8, 205u8, 109u8,
               210u8, 137u8, 245u8, 128u8, 110u8, 2u8, 201u8, 20u8, 153u8, 146u8, 177u8, 4u8, 144u8,
@@ -11360,7 +12429,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ClearPrime, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClearPrime>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClearPrime>()?
+          };
+          if runtime_call_hash
             == [
               186u8, 182u8, 225u8, 90u8, 71u8, 124u8, 69u8, 100u8, 234u8, 25u8, 53u8, 23u8, 182u8,
               32u8, 176u8, 81u8, 54u8, 140u8, 235u8, 126u8, 247u8, 7u8, 155u8, 62u8, 35u8, 135u8,
@@ -11456,7 +12530,12 @@ pub mod api {
           ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 91u8, 140u8, 173u8, 238u8, 221u8, 4u8, 132u8, 238u8, 99u8, 195u8, 142u8, 10u8,
               35u8, 210u8, 227u8, 22u8, 72u8, 218u8, 222u8, 227u8, 51u8, 55u8, 31u8, 252u8, 78u8,
@@ -11481,7 +12560,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Prime>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Prime>()?
+          };
+          if runtime_storage_hash
             == [
               70u8, 101u8, 20u8, 160u8, 173u8, 87u8, 190u8, 85u8, 60u8, 249u8, 144u8, 77u8, 175u8,
               195u8, 51u8, 196u8, 234u8, 62u8, 243u8, 199u8, 126u8, 12u8, 88u8, 252u8, 1u8, 210u8,
@@ -11579,7 +12663,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ProposeSpend, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ProposeSpend>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ProposeSpend>()?
+          };
+          if runtime_call_hash
             == [
               28u8, 133u8, 252u8, 219u8, 50u8, 86u8, 29u8, 221u8, 188u8, 4u8, 33u8, 236u8, 171u8,
               116u8, 77u8, 164u8, 7u8, 55u8, 138u8, 37u8, 51u8, 213u8, 224u8, 6u8, 25u8, 245u8,
@@ -11608,7 +12697,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RejectProposal, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RejectProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RejectProposal>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 238u8, 223u8, 212u8, 86u8, 178u8, 184u8, 150u8, 117u8, 91u8, 69u8, 30u8,
               196u8, 134u8, 56u8, 54u8, 236u8, 145u8, 202u8, 139u8, 135u8, 254u8, 80u8, 189u8,
@@ -11638,7 +12732,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ApproveProposal, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ApproveProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ApproveProposal>()?
+          };
+          if runtime_call_hash
             == [
               191u8, 81u8, 78u8, 230u8, 230u8, 192u8, 144u8, 232u8, 81u8, 70u8, 227u8, 212u8,
               194u8, 228u8, 231u8, 147u8, 57u8, 222u8, 156u8, 77u8, 173u8, 60u8, 92u8, 84u8, 255u8,
@@ -11673,7 +12772,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveApproval, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveApproval>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveApproval>()?
+          };
+          if runtime_call_hash
             == [
               235u8, 199u8, 214u8, 142u8, 168u8, 99u8, 226u8, 70u8, 161u8, 36u8, 122u8, 95u8,
               242u8, 2u8, 191u8, 163u8, 192u8, 26u8, 185u8, 75u8, 47u8, 155u8, 80u8, 175u8, 88u8,
@@ -11831,7 +12935,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<ProposalCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ProposalCount>()?
+          };
+          if runtime_storage_hash
             == [
               132u8, 145u8, 78u8, 218u8, 51u8, 189u8, 55u8, 172u8, 143u8, 33u8, 140u8, 99u8, 124u8,
               208u8, 57u8, 232u8, 154u8, 110u8, 32u8, 142u8, 24u8, 149u8, 109u8, 105u8, 30u8, 83u8,
@@ -11862,7 +12971,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proposals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proposals>()?
+          };
+          if runtime_storage_hash
             == [
               46u8, 242u8, 203u8, 56u8, 166u8, 200u8, 95u8, 110u8, 47u8, 71u8, 71u8, 45u8, 12u8,
               93u8, 222u8, 120u8, 40u8, 130u8, 29u8, 236u8, 189u8, 49u8, 115u8, 238u8, 135u8, 64u8,
@@ -11881,7 +12995,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Proposals<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Proposals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proposals>()?
+          };
+          if runtime_storage_hash
             == [
               46u8, 242u8, 203u8, 56u8, 166u8, 200u8, 95u8, 110u8, 47u8, 71u8, 71u8, 45u8, 12u8,
               93u8, 222u8, 120u8, 40u8, 130u8, 29u8, 236u8, 189u8, 49u8, 115u8, 238u8, 135u8, 64u8,
@@ -11901,7 +13020,12 @@ pub mod api {
           runtime_types::frame_support::storage::bounded_vec::BoundedVec<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Approvals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Approvals>()?
+          };
+          if runtime_storage_hash
             == [
               152u8, 185u8, 127u8, 54u8, 169u8, 155u8, 124u8, 22u8, 142u8, 132u8, 254u8, 197u8,
               162u8, 152u8, 15u8, 18u8, 192u8, 138u8, 196u8, 231u8, 234u8, 178u8, 111u8, 181u8,
@@ -11937,17 +13061,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "ProposalBond")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "ProposalBond")?
             == [
               254u8, 112u8, 56u8, 108u8, 71u8, 90u8, 128u8, 114u8, 54u8, 239u8, 87u8, 235u8, 71u8,
               56u8, 11u8, 132u8, 179u8, 134u8, 115u8, 139u8, 109u8, 136u8, 59u8, 69u8, 108u8,
               160u8, 18u8, 120u8, 34u8, 213u8, 166u8, 13u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("ProposalBond")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11959,17 +13082,16 @@ pub mod api {
         pub fn proposal_bond_minimum(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "ProposalBondMinimum")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "ProposalBondMinimum")?
             == [
               108u8, 126u8, 133u8, 208u8, 175u8, 179u8, 116u8, 159u8, 11u8, 209u8, 88u8, 51u8,
               93u8, 166u8, 108u8, 119u8, 161u8, 171u8, 185u8, 222u8, 54u8, 98u8, 16u8, 43u8, 41u8,
               161u8, 157u8, 62u8, 154u8, 134u8, 33u8, 45u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("ProposalBondMinimum")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -11984,17 +13106,16 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "ProposalBondMaximum")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "ProposalBondMaximum")?
             == [
               114u8, 103u8, 159u8, 88u8, 128u8, 1u8, 111u8, 41u8, 34u8, 158u8, 187u8, 20u8, 100u8,
               76u8, 69u8, 88u8, 43u8, 155u8, 226u8, 161u8, 63u8, 71u8, 65u8, 241u8, 175u8, 110u8,
               76u8, 206u8, 68u8, 103u8, 200u8, 165u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("ProposalBondMaximum")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12006,17 +13127,16 @@ pub mod api {
         pub fn spend_period(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "SpendPeriod")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "SpendPeriod")?
             == [
               71u8, 58u8, 201u8, 70u8, 240u8, 191u8, 67u8, 71u8, 12u8, 146u8, 142u8, 91u8, 114u8,
               44u8, 213u8, 89u8, 113u8, 124u8, 210u8, 82u8, 61u8, 48u8, 9u8, 121u8, 236u8, 143u8,
               99u8, 246u8, 5u8, 195u8, 15u8, 247u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("SpendPeriod")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12031,14 +13151,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().constant_hash("Treasury", "Burn")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "Burn")?
             == [
               179u8, 112u8, 148u8, 197u8, 209u8, 103u8, 231u8, 44u8, 227u8, 103u8, 105u8, 229u8,
               107u8, 183u8, 25u8, 151u8, 112u8, 20u8, 24u8, 1u8, 72u8, 183u8, 179u8, 243u8, 0u8,
               136u8, 204u8, 139u8, 164u8, 52u8, 22u8, 168u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("Burn")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12051,17 +13173,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "PalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "PalletId")?
             == [
               65u8, 140u8, 92u8, 164u8, 174u8, 209u8, 169u8, 31u8, 29u8, 55u8, 10u8, 151u8, 10u8,
               165u8, 68u8, 7u8, 110u8, 108u8, 233u8, 42u8, 19u8, 211u8, 98u8, 108u8, 73u8, 14u8,
               235u8, 97u8, 23u8, 118u8, 211u8, 21u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("PalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12075,17 +13196,16 @@ pub mod api {
         pub fn max_approvals(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Treasury", "MaxApprovals")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Treasury", "MaxApprovals")?
             == [
               90u8, 101u8, 189u8, 20u8, 137u8, 178u8, 7u8, 81u8, 148u8, 6u8, 59u8, 229u8, 228u8,
               66u8, 13u8, 179u8, 199u8, 159u8, 168u8, 227u8, 3u8, 76u8, 124u8, 35u8, 199u8, 142u8,
               79u8, 78u8, 254u8, 63u8, 2u8, 175u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Treasury")?;
+            let pallet = metadata.pallet("Treasury")?;
             let constant = pallet.constant("MaxApprovals")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12137,6 +13257,14 @@ pub mod api {
         const PALLET: &'static str = "Utility";
         const FUNCTION: &'static str = "dispatch_as";
       }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      pub struct ForceBatch {
+        pub calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
+      }
+      impl ::subxt::Call for ForceBatch {
+        const PALLET: &'static str = "Utility";
+        const FUNCTION: &'static str = "force_batch";
+      }
       pub struct TransactionApi<'a, T: ::subxt::Config, X> {
         client: &'a ::subxt::Client<T>,
         marker: ::core::marker::PhantomData<X>,
@@ -12178,11 +13306,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Batch, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Batch>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Batch>()?
+          };
+          if runtime_call_hash
             == [
-              66u8, 19u8, 140u8, 104u8, 182u8, 12u8, 125u8, 25u8, 82u8, 255u8, 18u8, 1u8, 187u8,
-              209u8, 255u8, 54u8, 186u8, 116u8, 235u8, 75u8, 197u8, 215u8, 217u8, 239u8, 235u8,
-              159u8, 248u8, 153u8, 2u8, 250u8, 74u8, 6u8,
+              62u8, 120u8, 223u8, 224u8, 130u8, 137u8, 9u8, 71u8, 50u8, 89u8, 178u8, 1u8, 149u8,
+              207u8, 108u8, 175u8, 245u8, 22u8, 161u8, 81u8, 93u8, 213u8, 107u8, 195u8, 10u8,
+              130u8, 127u8, 82u8, 203u8, 107u8, 45u8, 130u8,
             ]
           {
             let call = Batch { calls };
@@ -12212,11 +13345,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AsDerivative, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AsDerivative>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AsDerivative>()?
+          };
+          if runtime_call_hash
             == [
-              126u8, 177u8, 49u8, 49u8, 152u8, 152u8, 121u8, 17u8, 230u8, 166u8, 91u8, 162u8,
-              144u8, 5u8, 28u8, 89u8, 52u8, 122u8, 62u8, 13u8, 249u8, 8u8, 40u8, 245u8, 71u8, 96u8,
-              187u8, 192u8, 75u8, 199u8, 12u8, 224u8,
+              49u8, 129u8, 45u8, 71u8, 143u8, 237u8, 227u8, 171u8, 124u8, 186u8, 77u8, 17u8, 113u8,
+              43u8, 227u8, 241u8, 246u8, 69u8, 245u8, 179u8, 217u8, 140u8, 58u8, 32u8, 1u8, 221u8,
+              206u8, 250u8, 17u8, 223u8, 127u8, 227u8,
             ]
           {
             let call = AsDerivative {
@@ -12249,11 +13387,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, BatchAll, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<BatchAll>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<BatchAll>()?
+          };
+          if runtime_call_hash
             == [
-              73u8, 115u8, 52u8, 99u8, 128u8, 72u8, 218u8, 227u8, 165u8, 129u8, 217u8, 54u8, 40u8,
-              169u8, 226u8, 219u8, 246u8, 147u8, 153u8, 39u8, 112u8, 174u8, 233u8, 94u8, 187u8,
-              250u8, 45u8, 197u8, 217u8, 133u8, 6u8, 179u8,
+              28u8, 148u8, 100u8, 169u8, 48u8, 76u8, 117u8, 208u8, 240u8, 25u8, 160u8, 100u8, 96u8,
+              21u8, 235u8, 161u8, 139u8, 209u8, 40u8, 82u8, 57u8, 176u8, 234u8, 119u8, 11u8, 157u8,
+              232u8, 242u8, 252u8, 18u8, 250u8, 132u8,
             ]
           {
             let call = BatchAll { calls };
@@ -12280,17 +13423,61 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, DispatchAs, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<DispatchAs>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<DispatchAs>()?
+          };
+          if runtime_call_hash
             == [
-              10u8, 44u8, 88u8, 224u8, 1u8, 95u8, 152u8, 0u8, 97u8, 64u8, 234u8, 34u8, 201u8,
-              130u8, 36u8, 234u8, 247u8, 253u8, 135u8, 129u8, 222u8, 254u8, 87u8, 152u8, 182u8,
-              133u8, 106u8, 164u8, 129u8, 230u8, 134u8, 6u8,
+              135u8, 2u8, 184u8, 150u8, 30u8, 172u8, 49u8, 198u8, 67u8, 22u8, 198u8, 156u8, 48u8,
+              238u8, 63u8, 139u8, 217u8, 218u8, 118u8, 206u8, 35u8, 84u8, 226u8, 88u8, 5u8, 194u8,
+              98u8, 4u8, 245u8, 249u8, 184u8, 108u8,
             ]
           {
             let call = DispatchAs {
               as_origin: ::std::boxed::Box::new(as_origin),
               call: ::std::boxed::Box::new(call),
             };
+            Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+        #[doc = "Send a batch of dispatch calls."]
+        #[doc = "Unlike `batch`, it allows errors and won't interrupt."]
+        #[doc = ""]
+        #[doc = "May be called from any origin."]
+        #[doc = ""]
+        #[doc = "- `calls`: The calls to be dispatched from the same origin. The number of call must not"]
+        #[doc = "  exceed the constant: `batched_calls_limit` (available in constant metadata)."]
+        #[doc = ""]
+        #[doc = "If origin is root then call are dispatch without checking origin filter. (This includes"]
+        #[doc = "bypassing `frame_system::Config::BaseCallFilter`)."]
+        #[doc = ""]
+        #[doc = "# <weight>"]
+        #[doc = "- Complexity: O(C) where C is the number of calls to be batched."]
+        #[doc = "# </weight>"]
+        pub fn force_batch(
+          &self,
+          calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
+        ) -> Result<
+          ::subxt::SubmittableExtrinsic<'a, T, X, ForceBatch, DispatchError, root_mod::Event>,
+          ::subxt::BasicError,
+        > {
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceBatch>()?
+          };
+          if runtime_call_hash
+            == [
+              172u8, 106u8, 105u8, 88u8, 101u8, 110u8, 203u8, 148u8, 165u8, 72u8, 6u8, 127u8,
+              224u8, 28u8, 231u8, 209u8, 109u8, 149u8, 59u8, 224u8, 237u8, 240u8, 150u8, 229u8,
+              144u8, 221u8, 237u8, 226u8, 117u8, 157u8, 173u8, 90u8,
+            ]
+          {
+            let call = ForceBatch { calls };
             Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
           } else {
             Err(::subxt::MetadataError::IncompatibleMetadata.into())
@@ -12320,11 +13507,27 @@ pub mod api {
         const EVENT: &'static str = "BatchCompleted";
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      #[doc = "Batch of dispatches completed but has errors."]
+      pub struct BatchCompletedWithErrors;
+      impl ::subxt::Event for BatchCompletedWithErrors {
+        const PALLET: &'static str = "Utility";
+        const EVENT: &'static str = "BatchCompletedWithErrors";
+      }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       #[doc = "A single item within a Batch of dispatches has completed with no error."]
       pub struct ItemCompleted;
       impl ::subxt::Event for ItemCompleted {
         const PALLET: &'static str = "Utility";
         const EVENT: &'static str = "ItemCompleted";
+      }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      #[doc = "A single item within a Batch of dispatches has completed with error."]
+      pub struct ItemFailed {
+        pub error: runtime_types::sp_runtime::DispatchError,
+      }
+      impl ::subxt::Event for ItemFailed {
+        const PALLET: &'static str = "Utility";
+        const EVENT: &'static str = "ItemFailed";
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       #[doc = "A call was dispatched."]
@@ -12349,17 +13552,16 @@ pub mod api {
         pub fn batched_calls_limit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Utility", "batched_calls_limit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Utility", "batched_calls_limit")?
             == [
               230u8, 161u8, 6u8, 191u8, 162u8, 108u8, 149u8, 245u8, 68u8, 101u8, 120u8, 129u8,
               140u8, 51u8, 77u8, 97u8, 30u8, 155u8, 115u8, 70u8, 72u8, 235u8, 251u8, 192u8, 5u8,
               8u8, 188u8, 72u8, 132u8, 227u8, 44u8, 2u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Utility")?;
+            let pallet = metadata.pallet("Utility")?;
             let constant = pallet.constant("batched_calls_limit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -12568,7 +13770,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AddRegistrar, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AddRegistrar>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AddRegistrar>()?
+          };
+          if runtime_call_hash
             == [
               252u8, 233u8, 148u8, 186u8, 42u8, 127u8, 183u8, 107u8, 205u8, 34u8, 63u8, 170u8,
               82u8, 218u8, 141u8, 136u8, 174u8, 45u8, 3u8, 226u8, 175u8, 22u8, 18u8, 120u8, 70u8,
@@ -12607,7 +13814,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetIdentity, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetIdentity>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetIdentity>()?
+          };
+          if runtime_call_hash
             == [
               174u8, 5u8, 84u8, 201u8, 219u8, 147u8, 45u8, 241u8, 46u8, 192u8, 221u8, 20u8, 233u8,
               128u8, 206u8, 1u8, 71u8, 244u8, 153u8, 167u8, 150u8, 164u8, 16u8, 58u8, 51u8, 168u8,
@@ -12653,7 +13865,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetSubs, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetSubs>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetSubs>()?
+          };
+          if runtime_call_hash
             == [
               157u8, 141u8, 52u8, 45u8, 109u8, 252u8, 84u8, 0u8, 38u8, 209u8, 193u8, 212u8, 177u8,
               47u8, 219u8, 132u8, 254u8, 234u8, 43u8, 200u8, 104u8, 149u8, 250u8, 169u8, 119u8,
@@ -12690,7 +13907,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ClearIdentity, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClearIdentity>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClearIdentity>()?
+          };
+          if runtime_call_hash
             == [
               75u8, 44u8, 74u8, 122u8, 149u8, 202u8, 114u8, 230u8, 0u8, 255u8, 140u8, 122u8, 14u8,
               196u8, 205u8, 249u8, 220u8, 94u8, 216u8, 34u8, 63u8, 14u8, 8u8, 205u8, 74u8, 23u8,
@@ -12734,7 +13956,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RequestJudgement, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RequestJudgement>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RequestJudgement>()?
+          };
+          if runtime_call_hash
             == [
               90u8, 137u8, 162u8, 2u8, 124u8, 245u8, 7u8, 200u8, 235u8, 138u8, 217u8, 247u8, 77u8,
               87u8, 152u8, 2u8, 13u8, 175u8, 106u8, 202u8, 204u8, 113u8, 24u8, 127u8, 105u8, 136u8,
@@ -12771,7 +13998,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelRequest, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelRequest>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelRequest>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 44u8, 7u8, 70u8, 91u8, 44u8, 138u8, 219u8, 118u8, 67u8, 166u8, 133u8, 90u8,
               234u8, 248u8, 42u8, 108u8, 51u8, 229u8, 196u8, 74u8, 167u8, 40u8, 229u8, 168u8,
@@ -12805,7 +14037,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetFee, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetFee>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetFee>()?
+          };
+          if runtime_call_hash
             == [
               222u8, 115u8, 155u8, 44u8, 68u8, 179u8, 201u8, 247u8, 141u8, 226u8, 124u8, 20u8,
               188u8, 47u8, 190u8, 21u8, 212u8, 192u8, 213u8, 76u8, 241u8, 75u8, 87u8, 142u8, 157u8,
@@ -12839,7 +14076,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetAccountId, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetAccountId>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetAccountId>()?
+          };
+          if runtime_call_hash
             == [
               191u8, 243u8, 30u8, 116u8, 109u8, 235u8, 23u8, 106u8, 24u8, 23u8, 80u8, 203u8, 68u8,
               40u8, 116u8, 38u8, 68u8, 161u8, 219u8, 64u8, 249u8, 179u8, 203u8, 113u8, 55u8, 7u8,
@@ -12875,7 +14117,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetFields, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetFields>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetFields>()?
+          };
+          if runtime_call_hash
             == [
               253u8, 43u8, 154u8, 17u8, 161u8, 187u8, 72u8, 96u8, 20u8, 240u8, 97u8, 43u8, 242u8,
               79u8, 115u8, 38u8, 130u8, 243u8, 176u8, 46u8, 16u8, 126u8, 191u8, 32u8, 106u8, 200u8,
@@ -12919,7 +14166,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ProvideJudgement, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ProvideJudgement>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ProvideJudgement>()?
+          };
+          if runtime_call_hash
             == [
               212u8, 112u8, 44u8, 40u8, 54u8, 193u8, 162u8, 6u8, 65u8, 155u8, 136u8, 154u8, 138u8,
               42u8, 207u8, 177u8, 237u8, 105u8, 173u8, 128u8, 206u8, 40u8, 2u8, 243u8, 53u8, 76u8,
@@ -12965,7 +14217,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, KillIdentity, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<KillIdentity>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<KillIdentity>()?
+          };
+          if runtime_call_hash
             == [
               115u8, 146u8, 51u8, 149u8, 116u8, 66u8, 97u8, 195u8, 125u8, 83u8, 247u8, 65u8, 247u8,
               229u8, 125u8, 108u8, 166u8, 31u8, 244u8, 12u8, 244u8, 232u8, 16u8, 182u8, 158u8,
@@ -12996,7 +14253,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AddSub, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AddSub>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AddSub>()?
+          };
+          if runtime_call_hash
             == [
               193u8, 3u8, 191u8, 61u8, 212u8, 241u8, 217u8, 103u8, 157u8, 91u8, 230u8, 102u8, 88u8,
               180u8, 62u8, 103u8, 120u8, 42u8, 174u8, 81u8, 230u8, 178u8, 136u8, 158u8, 24u8,
@@ -13024,7 +14286,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RenameSub, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RenameSub>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RenameSub>()?
+          };
+          if runtime_call_hash
             == [
               40u8, 195u8, 42u8, 204u8, 68u8, 188u8, 133u8, 45u8, 31u8, 161u8, 135u8, 167u8, 204u8,
               31u8, 247u8, 237u8, 66u8, 140u8, 60u8, 230u8, 123u8, 157u8, 17u8, 97u8, 4u8, 159u8,
@@ -13054,7 +14321,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveSub, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveSub>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveSub>()?
+          };
+          if runtime_call_hash
             == [
               77u8, 21u8, 44u8, 30u8, 175u8, 255u8, 127u8, 34u8, 74u8, 239u8, 52u8, 210u8, 153u8,
               164u8, 17u8, 66u8, 42u8, 124u8, 98u8, 221u8, 209u8, 126u8, 255u8, 0u8, 241u8, 173u8,
@@ -13083,7 +14355,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, QuitSub, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<QuitSub>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<QuitSub>()?
+          };
+          if runtime_call_hash
             == [
               62u8, 57u8, 73u8, 72u8, 119u8, 216u8, 250u8, 155u8, 57u8, 169u8, 157u8, 44u8, 87u8,
               51u8, 63u8, 231u8, 77u8, 7u8, 0u8, 119u8, 244u8, 42u8, 179u8, 51u8, 254u8, 240u8,
@@ -13291,7 +14568,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<IdentityOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<IdentityOf>()?
+          };
+          if runtime_storage_hash
             == [
               225u8, 101u8, 83u8, 137u8, 207u8, 77u8, 139u8, 227u8, 36u8, 100u8, 14u8, 30u8, 197u8,
               65u8, 248u8, 227u8, 175u8, 19u8, 189u8, 86u8, 189u8, 244u8, 144u8, 137u8, 17u8,
@@ -13312,7 +14594,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, IdentityOf<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<IdentityOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<IdentityOf>()?
+          };
+          if runtime_storage_hash
             == [
               225u8, 101u8, 83u8, 137u8, 207u8, 77u8, 139u8, 227u8, 36u8, 100u8, 14u8, 30u8, 197u8,
               65u8, 248u8, 227u8, 175u8, 19u8, 189u8, 86u8, 189u8, 244u8, 144u8, 137u8, 17u8,
@@ -13337,7 +14624,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SuperOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SuperOf>()?
+          };
+          if runtime_storage_hash
             == [
               128u8, 234u8, 82u8, 152u8, 41u8, 4u8, 220u8, 41u8, 179u8, 131u8, 72u8, 121u8, 131u8,
               17u8, 40u8, 87u8, 186u8, 159u8, 209u8, 33u8, 97u8, 28u8, 236u8, 196u8, 217u8, 15u8,
@@ -13357,7 +14649,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SuperOf<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SuperOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SuperOf>()?
+          };
+          if runtime_storage_hash
             == [
               128u8, 234u8, 82u8, 152u8, 41u8, 4u8, 220u8, 41u8, 179u8, 131u8, 72u8, 121u8, 131u8,
               17u8, 40u8, 87u8, 186u8, 159u8, 209u8, 33u8, 97u8, 28u8, 236u8, 196u8, 217u8, 15u8,
@@ -13387,7 +14684,12 @@ pub mod api {
           ),
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SubsOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SubsOf>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 240u8, 238u8, 121u8, 194u8, 242u8, 139u8, 155u8, 32u8, 201u8, 123u8, 76u8,
               116u8, 219u8, 193u8, 45u8, 251u8, 212u8, 46u8, 194u8, 93u8, 30u8, 174u8, 133u8,
@@ -13414,7 +14716,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SubsOf<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SubsOf>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SubsOf>()?
+          };
+          if runtime_storage_hash
             == [
               136u8, 240u8, 238u8, 121u8, 194u8, 242u8, 139u8, 155u8, 32u8, 201u8, 123u8, 76u8,
               116u8, 219u8, 193u8, 45u8, 251u8, 212u8, 46u8, 194u8, 93u8, 30u8, 174u8, 133u8,
@@ -13444,7 +14751,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Registrars>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Registrars>()?
+          };
+          if runtime_storage_hash
             == [
               92u8, 161u8, 80u8, 77u8, 121u8, 65u8, 69u8, 26u8, 171u8, 158u8, 66u8, 36u8, 81u8,
               1u8, 79u8, 144u8, 188u8, 236u8, 88u8, 158u8, 84u8, 100u8, 71u8, 86u8, 20u8, 68u8,
@@ -13476,17 +14788,16 @@ pub mod api {
         pub fn basic_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "BasicDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "BasicDeposit")?
             == [
               44u8, 149u8, 62u8, 127u8, 92u8, 126u8, 105u8, 16u8, 121u8, 205u8, 102u8, 72u8, 58u8,
               169u8, 37u8, 202u8, 123u8, 113u8, 140u8, 158u8, 102u8, 185u8, 74u8, 143u8, 129u8,
               106u8, 189u8, 175u8, 27u8, 238u8, 248u8, 115u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("BasicDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13498,17 +14809,16 @@ pub mod api {
         pub fn field_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "FieldDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "FieldDeposit")?
             == [
               78u8, 139u8, 164u8, 76u8, 163u8, 107u8, 86u8, 111u8, 203u8, 20u8, 43u8, 74u8, 68u8,
               161u8, 21u8, 207u8, 185u8, 27u8, 44u8, 71u8, 198u8, 145u8, 215u8, 243u8, 76u8, 128u8,
               71u8, 163u8, 244u8, 67u8, 23u8, 111u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("FieldDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13522,17 +14832,16 @@ pub mod api {
         pub fn sub_account_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "SubAccountDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "SubAccountDeposit")?
             == [
               141u8, 204u8, 34u8, 34u8, 12u8, 5u8, 24u8, 58u8, 183u8, 149u8, 80u8, 205u8, 49u8,
               196u8, 230u8, 73u8, 62u8, 138u8, 163u8, 250u8, 31u8, 77u8, 95u8, 31u8, 210u8, 121u8,
               14u8, 86u8, 69u8, 7u8, 251u8, 33u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("SubAccountDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13544,17 +14853,16 @@ pub mod api {
         pub fn max_sub_accounts(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "MaxSubAccounts")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "MaxSubAccounts")?
             == [
               75u8, 1u8, 223u8, 132u8, 121u8, 0u8, 145u8, 246u8, 118u8, 222u8, 108u8, 45u8, 1u8,
               1u8, 238u8, 13u8, 162u8, 100u8, 2u8, 24u8, 108u8, 168u8, 44u8, 133u8, 240u8, 3u8,
               244u8, 76u8, 150u8, 248u8, 153u8, 144u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("MaxSubAccounts")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13567,17 +14875,16 @@ pub mod api {
         pub fn max_additional_fields(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "MaxAdditionalFields")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "MaxAdditionalFields")?
             == [
               52u8, 246u8, 245u8, 172u8, 242u8, 40u8, 79u8, 11u8, 106u8, 28u8, 59u8, 171u8, 135u8,
               210u8, 67u8, 174u8, 63u8, 72u8, 28u8, 214u8, 124u8, 140u8, 172u8, 255u8, 36u8, 40u8,
               51u8, 46u8, 207u8, 202u8, 248u8, 125u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("MaxAdditionalFields")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13590,17 +14897,16 @@ pub mod api {
         pub fn max_registrars(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Identity", "MaxRegistrars")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Identity", "MaxRegistrars")?
             == [
               172u8, 101u8, 183u8, 243u8, 249u8, 249u8, 95u8, 104u8, 100u8, 120u8, 13u8, 188u8,
               132u8, 255u8, 115u8, 90u8, 19u8, 111u8, 100u8, 17u8, 147u8, 179u8, 209u8, 41u8, 37u8,
               25u8, 180u8, 206u8, 120u8, 211u8, 188u8, 184u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Identity")?;
+            let pallet = metadata.pallet("Identity")?;
             let constant = pallet.constant("MaxRegistrars")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -13711,11 +15017,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SubmitUnsigned, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SubmitUnsigned>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SubmitUnsigned>()?
+          };
+          if runtime_call_hash
             == [
-              202u8, 104u8, 247u8, 250u8, 171u8, 119u8, 119u8, 96u8, 213u8, 119u8, 41u8, 116u8,
-              29u8, 99u8, 71u8, 203u8, 168u8, 212u8, 15u8, 10u8, 64u8, 126u8, 177u8, 56u8, 177u8,
-              42u8, 236u8, 124u8, 36u8, 94u8, 47u8, 27u8,
+              212u8, 126u8, 4u8, 62u8, 15u8, 223u8, 54u8, 80u8, 27u8, 96u8, 170u8, 169u8, 238u8,
+              149u8, 139u8, 190u8, 179u8, 158u8, 126u8, 191u8, 50u8, 201u8, 108u8, 200u8, 78u8,
+              139u8, 92u8, 69u8, 50u8, 239u8, 51u8, 18u8,
             ]
           {
             let call = SubmitUnsigned {
@@ -13746,10 +15057,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<SetMinimumUntrustedScore>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetMinimumUntrustedScore>()?
+          };
+          if runtime_call_hash
             == [
               207u8, 31u8, 247u8, 72u8, 55u8, 18u8, 99u8, 157u8, 155u8, 89u8, 59u8, 156u8, 254u8,
               3u8, 181u8, 85u8, 48u8, 42u8, 73u8, 243u8, 35u8, 90u8, 142u8, 14u8, 62u8, 48u8, 15u8,
@@ -13787,10 +15100,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .call_hash::<SetEmergencyElectionResult>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetEmergencyElectionResult>()?
+          };
+          if runtime_call_hash
             == [
               195u8, 164u8, 133u8, 193u8, 58u8, 154u8, 182u8, 83u8, 231u8, 217u8, 199u8, 27u8,
               239u8, 143u8, 60u8, 103u8, 139u8, 253u8, 49u8, 242u8, 8u8, 41u8, 160u8, 192u8, 123u8,
@@ -13821,11 +15136,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Submit, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Submit>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Submit>()?
+          };
+          if runtime_call_hash
             == [
-              192u8, 193u8, 242u8, 99u8, 80u8, 253u8, 100u8, 234u8, 199u8, 15u8, 119u8, 251u8,
-              94u8, 248u8, 110u8, 171u8, 216u8, 218u8, 60u8, 223u8, 227u8, 79u8, 174u8, 232u8,
-              251u8, 75u8, 17u8, 241u8, 15u8, 23u8, 11u8, 99u8,
+              2u8, 131u8, 162u8, 38u8, 102u8, 73u8, 144u8, 71u8, 200u8, 229u8, 140u8, 38u8, 58u8,
+              159u8, 59u8, 167u8, 91u8, 169u8, 22u8, 228u8, 127u8, 153u8, 125u8, 241u8, 60u8, 61u8,
+              103u8, 192u8, 95u8, 87u8, 81u8, 73u8,
             ]
           {
             let call = Submit {
@@ -13855,7 +15175,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<GovernanceFallback>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<GovernanceFallback>()?
+          };
+          if runtime_call_hash
             == [
               195u8, 190u8, 140u8, 94u8, 209u8, 100u8, 92u8, 194u8, 78u8, 226u8, 16u8, 168u8, 52u8,
               117u8, 88u8, 178u8, 84u8, 248u8, 117u8, 38u8, 152u8, 71u8, 37u8, 158u8, 77u8, 204u8,
@@ -14074,7 +15399,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Round>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Round>()?
+          };
+          if runtime_storage_hash
             == [
               16u8, 49u8, 176u8, 52u8, 202u8, 111u8, 120u8, 8u8, 217u8, 96u8, 35u8, 14u8, 233u8,
               130u8, 47u8, 98u8, 34u8, 44u8, 166u8, 188u8, 199u8, 210u8, 21u8, 19u8, 70u8, 96u8,
@@ -14099,7 +15429,12 @@ pub mod api {
           runtime_types::pallet_election_provider_multi_phase::Phase<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<CurrentPhase>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentPhase>()?
+          };
+          if runtime_storage_hash
             == [
               162u8, 177u8, 133u8, 63u8, 175u8, 78u8, 85u8, 0u8, 233u8, 84u8, 10u8, 250u8, 190u8,
               39u8, 101u8, 11u8, 52u8, 31u8, 129u8, 151u8, 63u8, 179u8, 120u8, 28u8, 70u8, 61u8,
@@ -14128,7 +15463,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<QueuedSolution>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<QueuedSolution>()?
+          };
+          if runtime_storage_hash
             == [
               145u8, 177u8, 147u8, 52u8, 30u8, 135u8, 33u8, 145u8, 204u8, 82u8, 1u8, 165u8, 208u8,
               39u8, 181u8, 2u8, 96u8, 236u8, 19u8, 144u8, 87u8, 197u8, 25u8, 164u8, 116u8, 0u8,
@@ -14153,7 +15493,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Snapshot>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Snapshot>()?
+          };
+          if runtime_storage_hash
             == [
               28u8, 163u8, 105u8, 94u8, 66u8, 226u8, 134u8, 29u8, 210u8, 211u8, 182u8, 236u8,
               180u8, 109u8, 203u8, 44u8, 1u8, 50u8, 112u8, 201u8, 200u8, 12u8, 88u8, 248u8, 253u8,
@@ -14176,7 +15521,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<DesiredTargets>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<DesiredTargets>()?
+          };
+          if runtime_storage_hash
             == [
               16u8, 247u8, 4u8, 181u8, 93u8, 79u8, 12u8, 212u8, 146u8, 167u8, 80u8, 58u8, 118u8,
               52u8, 68u8, 87u8, 90u8, 140u8, 31u8, 210u8, 2u8, 116u8, 220u8, 231u8, 115u8, 112u8,
@@ -14201,7 +15551,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SnapshotMetadata>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SnapshotMetadata>()?
+          };
+          if runtime_storage_hash
             == [
               240u8, 57u8, 126u8, 76u8, 84u8, 244u8, 120u8, 136u8, 164u8, 49u8, 185u8, 89u8, 126u8,
               18u8, 117u8, 235u8, 33u8, 226u8, 173u8, 254u8, 79u8, 194u8, 154u8, 123u8, 29u8,
@@ -14227,10 +15582,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<SignedSubmissionNextIndex>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SignedSubmissionNextIndex>()?
+          };
+          if runtime_storage_hash
             == [
               242u8, 11u8, 157u8, 105u8, 96u8, 7u8, 31u8, 20u8, 51u8, 141u8, 182u8, 180u8, 13u8,
               172u8, 155u8, 59u8, 42u8, 238u8, 115u8, 8u8, 6u8, 137u8, 45u8, 2u8, 123u8, 187u8,
@@ -14263,10 +15620,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<SignedSubmissionIndices>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SignedSubmissionIndices>()?
+          };
+          if runtime_storage_hash
             == [
               191u8, 143u8, 241u8, 251u8, 74u8, 9u8, 145u8, 136u8, 135u8, 76u8, 182u8, 85u8, 140u8,
               252u8, 58u8, 183u8, 217u8, 121u8, 213u8, 200u8, 167u8, 89u8, 15u8, 212u8, 62u8, 90u8,
@@ -14304,10 +15663,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<SignedSubmissionsMap>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SignedSubmissionsMap>()?
+          };
+          if runtime_storage_hash
             == [
               75u8, 2u8, 76u8, 74u8, 73u8, 167u8, 243u8, 1u8, 31u8, 26u8, 48u8, 196u8, 177u8, 21u8,
               233u8, 66u8, 251u8, 11u8, 11u8, 252u8, 63u8, 206u8, 115u8, 116u8, 73u8, 232u8, 241u8,
@@ -14334,10 +15695,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, SignedSubmissionsMap<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<SignedSubmissionsMap>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SignedSubmissionsMap>()?
+          };
+          if runtime_storage_hash
             == [
               75u8, 2u8, 76u8, 74u8, 73u8, 167u8, 243u8, 1u8, 31u8, 26u8, 48u8, 196u8, 177u8, 21u8,
               233u8, 66u8, 251u8, 11u8, 11u8, 252u8, 63u8, 206u8, 115u8, 116u8, 73u8, 232u8, 241u8,
@@ -14360,10 +15723,12 @@ pub mod api {
           ::core::option::Option<runtime_types::sp_npos_elections::ElectionScore>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<MinimumUntrustedScore>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MinimumUntrustedScore>()?
+          };
+          if runtime_storage_hash
             == [
               18u8, 171u8, 56u8, 63u8, 7u8, 1u8, 53u8, 42u8, 72u8, 35u8, 26u8, 124u8, 223u8, 95u8,
               170u8, 176u8, 134u8, 140u8, 66u8, 115u8, 51u8, 163u8, 202u8, 82u8, 189u8, 180u8,
@@ -14391,20 +15756,16 @@ pub mod api {
         pub fn unsigned_phase(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "UnsignedPhase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "UnsignedPhase")?
             == [
               252u8, 58u8, 254u8, 55u8, 124u8, 222u8, 252u8, 218u8, 73u8, 211u8, 18u8, 206u8,
               233u8, 17u8, 202u8, 176u8, 32u8, 189u8, 143u8, 185u8, 56u8, 120u8, 184u8, 158u8,
               10u8, 166u8, 193u8, 36u8, 118u8, 58u8, 239u8, 95u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("UnsignedPhase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14416,20 +15777,16 @@ pub mod api {
         pub fn signed_phase(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedPhase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedPhase")?
             == [
               63u8, 15u8, 168u8, 217u8, 6u8, 184u8, 197u8, 27u8, 10u8, 102u8, 5u8, 140u8, 61u8,
               101u8, 26u8, 255u8, 226u8, 2u8, 58u8, 242u8, 169u8, 115u8, 80u8, 199u8, 6u8, 8u8,
               212u8, 243u8, 171u8, 167u8, 102u8, 73u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedPhase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14445,20 +15802,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Perbill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "BetterSignedThreshold")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "BetterSignedThreshold")?
             == [
               77u8, 124u8, 224u8, 100u8, 113u8, 25u8, 159u8, 166u8, 136u8, 195u8, 84u8, 168u8,
               142u8, 209u8, 89u8, 249u8, 7u8, 218u8, 51u8, 240u8, 211u8, 135u8, 183u8, 192u8,
               194u8, 195u8, 107u8, 37u8, 23u8, 191u8, 254u8, 185u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("BetterSignedThreshold")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14474,20 +15827,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Perbill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "BetterUnsignedThreshold")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "BetterUnsignedThreshold")?
             == [
               38u8, 62u8, 189u8, 136u8, 151u8, 166u8, 34u8, 147u8, 119u8, 70u8, 126u8, 29u8, 200u8,
               206u8, 195u8, 24u8, 14u8, 80u8, 151u8, 132u8, 83u8, 135u8, 206u8, 68u8, 169u8, 75u8,
               1u8, 40u8, 186u8, 203u8, 226u8, 118u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("BetterUnsignedThreshold")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14502,20 +15851,16 @@ pub mod api {
         pub fn offchain_repeat(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "OffchainRepeat")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "OffchainRepeat")?
             == [
               198u8, 126u8, 79u8, 166u8, 112u8, 27u8, 163u8, 219u8, 1u8, 137u8, 210u8, 16u8, 193u8,
               225u8, 76u8, 219u8, 59u8, 101u8, 224u8, 90u8, 27u8, 177u8, 194u8, 232u8, 208u8, 85u8,
               113u8, 199u8, 80u8, 108u8, 187u8, 35u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("OffchainRepeat")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14527,49 +15872,17 @@ pub mod api {
         pub fn miner_tx_priority(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "MinerTxPriority")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "MinerTxPriority")?
             == [
               153u8, 173u8, 61u8, 171u8, 80u8, 43u8, 214u8, 150u8, 233u8, 153u8, 197u8, 226u8,
               116u8, 21u8, 156u8, 154u8, 131u8, 241u8, 214u8, 151u8, 136u8, 203u8, 251u8, 42u8,
               170u8, 221u8, 211u8, 97u8, 45u8, 93u8, 60u8, 5u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("MinerTxPriority")?;
-            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
-            Ok(value)
-          } else {
-            Err(::subxt::MetadataError::IncompatibleMetadata.into())
-          }
-        }
-        #[doc = " Maximum weight that the miner should consume."]
-        #[doc = ""]
-        #[doc = " The miner will ensure that the total weight of the unsigned solution will not exceed"]
-        #[doc = " this value, based on [`WeightInfo::submit_unsigned`]."]
-        pub fn miner_max_weight(
-          &self,
-        ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "MinerMaxWeight")?
-            == [
-              254u8, 247u8, 140u8, 71u8, 16u8, 78u8, 249u8, 248u8, 236u8, 102u8, 173u8, 111u8,
-              94u8, 114u8, 26u8, 60u8, 111u8, 204u8, 217u8, 23u8, 97u8, 152u8, 89u8, 200u8, 69u8,
-              151u8, 123u8, 217u8, 57u8, 100u8, 51u8, 174u8,
-            ]
-          {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
-            let constant = pallet.constant("MinerMaxWeight")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
           } else {
@@ -14586,20 +15899,16 @@ pub mod api {
         pub fn signed_max_submissions(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedMaxSubmissions")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedMaxSubmissions")?
             == [
               51u8, 141u8, 203u8, 103u8, 212u8, 173u8, 160u8, 148u8, 108u8, 30u8, 104u8, 248u8,
               65u8, 237u8, 167u8, 11u8, 102u8, 146u8, 117u8, 133u8, 0u8, 61u8, 129u8, 138u8, 157u8,
               221u8, 248u8, 33u8, 118u8, 182u8, 199u8, 248u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedMaxSubmissions")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14609,24 +15918,22 @@ pub mod api {
         }
         #[doc = " Maximum weight of a signed solution."]
         #[doc = ""]
-        #[doc = " This should probably be similar to [`Config::MinerMaxWeight`]."]
+        #[doc = " If [`Config::MinerConfig`] is being implemented to submit signed solutions (outside of"]
+        #[doc = " this pallet), then [`MinerConfig::solution_weight`] is used to compare against"]
+        #[doc = " this value."]
         pub fn signed_max_weight(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedMaxWeight")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedMaxWeight")?
             == [
               234u8, 71u8, 206u8, 32u8, 15u8, 21u8, 136u8, 148u8, 6u8, 164u8, 14u8, 127u8, 41u8,
               123u8, 232u8, 136u8, 10u8, 225u8, 10u8, 200u8, 147u8, 105u8, 247u8, 12u8, 63u8, 92u8,
               240u8, 48u8, 1u8, 227u8, 98u8, 145u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedMaxWeight")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14638,20 +15945,16 @@ pub mod api {
         pub fn signed_max_refunds(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedMaxRefunds")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedMaxRefunds")?
             == [
               86u8, 134u8, 190u8, 26u8, 28u8, 169u8, 156u8, 24u8, 50u8, 139u8, 26u8, 80u8, 81u8,
               111u8, 60u8, 175u8, 250u8, 7u8, 92u8, 177u8, 191u8, 226u8, 198u8, 12u8, 179u8, 243u8,
               38u8, 21u8, 212u8, 121u8, 52u8, 148u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedMaxRefunds")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14663,20 +15966,16 @@ pub mod api {
         pub fn signed_reward_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedRewardBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedRewardBase")?
             == [
               75u8, 6u8, 220u8, 82u8, 254u8, 68u8, 121u8, 240u8, 254u8, 11u8, 94u8, 125u8, 209u8,
               65u8, 179u8, 73u8, 144u8, 153u8, 20u8, 114u8, 77u8, 254u8, 191u8, 165u8, 207u8, 97u8,
               79u8, 55u8, 170u8, 200u8, 52u8, 117u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedRewardBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14688,20 +15987,16 @@ pub mod api {
         pub fn signed_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedDepositBase")?
             == [
               121u8, 17u8, 104u8, 106u8, 35u8, 174u8, 141u8, 187u8, 241u8, 60u8, 198u8, 238u8,
               16u8, 68u8, 144u8, 201u8, 72u8, 235u8, 241u8, 154u8, 190u8, 128u8, 160u8, 217u8,
               146u8, 149u8, 20u8, 161u8, 42u8, 117u8, 166u8, 143u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14713,20 +16008,16 @@ pub mod api {
         pub fn signed_deposit_byte(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedDepositByte")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedDepositByte")?
             == [
               126u8, 215u8, 223u8, 171u8, 235u8, 252u8, 251u8, 141u8, 37u8, 236u8, 85u8, 114u8,
               184u8, 68u8, 200u8, 136u8, 224u8, 187u8, 192u8, 34u8, 5u8, 52u8, 211u8, 24u8, 121u8,
               90u8, 101u8, 113u8, 3u8, 11u8, 120u8, 250u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedDepositByte")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14738,20 +16029,16 @@ pub mod api {
         pub fn signed_deposit_weight(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "SignedDepositWeight")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "SignedDepositWeight")?
             == [
               229u8, 168u8, 140u8, 127u8, 138u8, 107u8, 171u8, 116u8, 171u8, 63u8, 205u8, 84u8,
               202u8, 17u8, 134u8, 171u8, 204u8, 31u8, 54u8, 43u8, 138u8, 50u8, 55u8, 112u8, 27u8,
               103u8, 183u8, 209u8, 167u8, 214u8, 19u8, 95u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("SignedDepositWeight")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14765,20 +16052,16 @@ pub mod api {
         pub fn max_electing_voters(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "MaxElectingVoters")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "MaxElectingVoters")?
             == [
               202u8, 136u8, 180u8, 3u8, 16u8, 142u8, 77u8, 250u8, 154u8, 116u8, 78u8, 110u8, 72u8,
               135u8, 115u8, 120u8, 109u8, 12u8, 156u8, 129u8, 250u8, 120u8, 71u8, 221u8, 93u8,
               172u8, 53u8, 44u8, 192u8, 164u8, 213u8, 68u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("MaxElectingVoters")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -14790,49 +16073,17 @@ pub mod api {
         pub fn max_electable_targets(
           &self,
         ) -> ::core::result::Result<::core::primitive::u16, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "MaxElectableTargets")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("ElectionProviderMultiPhase", "MaxElectableTargets")?
             == [
               71u8, 15u8, 36u8, 77u8, 111u8, 52u8, 73u8, 94u8, 27u8, 213u8, 122u8, 58u8, 126u8,
               157u8, 17u8, 238u8, 168u8, 174u8, 0u8, 94u8, 15u8, 86u8, 206u8, 115u8, 222u8, 234u8,
               25u8, 195u8, 107u8, 138u8, 213u8, 39u8,
             ]
           {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
+            let pallet = metadata.pallet("ElectionProviderMultiPhase")?;
             let constant = pallet.constant("MaxElectableTargets")?;
-            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
-            Ok(value)
-          } else {
-            Err(::subxt::MetadataError::IncompatibleMetadata.into())
-          }
-        }
-        #[doc = " Maximum length (bytes) that the mined solution should consume."]
-        #[doc = ""]
-        #[doc = " The miner will ensure that the total length of the unsigned solution will not exceed"]
-        #[doc = " this value."]
-        pub fn miner_max_length(
-          &self,
-        ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("ElectionProviderMultiPhase", "MinerMaxLength")?
-            == [
-              131u8, 141u8, 170u8, 106u8, 200u8, 39u8, 188u8, 38u8, 159u8, 91u8, 130u8, 187u8,
-              164u8, 109u8, 34u8, 75u8, 198u8, 247u8, 204u8, 249u8, 246u8, 87u8, 217u8, 117u8,
-              113u8, 120u8, 57u8, 201u8, 210u8, 22u8, 108u8, 124u8,
-            ]
-          {
-            let pallet = self
-              .client
-              .metadata()
-              .pallet("ElectionProviderMultiPhase")?;
-            let constant = pallet.constant("MinerMaxLength")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
           } else {
@@ -14955,11 +16206,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AsRecovered, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AsRecovered>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AsRecovered>()?
+          };
+          if runtime_call_hash
             == [
-              132u8, 118u8, 52u8, 173u8, 142u8, 131u8, 91u8, 252u8, 10u8, 6u8, 88u8, 203u8, 175u8,
-              206u8, 154u8, 84u8, 15u8, 141u8, 108u8, 29u8, 105u8, 170u8, 234u8, 52u8, 91u8, 67u8,
-              255u8, 188u8, 49u8, 96u8, 218u8, 4u8,
+              83u8, 195u8, 84u8, 155u8, 76u8, 60u8, 44u8, 179u8, 237u8, 13u8, 119u8, 101u8, 210u8,
+              205u8, 67u8, 159u8, 191u8, 24u8, 144u8, 36u8, 35u8, 251u8, 125u8, 127u8, 239u8, 90u8,
+              195u8, 185u8, 246u8, 217u8, 255u8, 41u8,
             ]
           {
             let call = AsRecovered {
@@ -14987,7 +16243,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetRecovered, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetRecovered>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetRecovered>()?
+          };
+          if runtime_call_hash
             == [
               145u8, 211u8, 5u8, 219u8, 80u8, 212u8, 22u8, 115u8, 69u8, 211u8, 240u8, 126u8, 216u8,
               4u8, 114u8, 26u8, 147u8, 5u8, 237u8, 88u8, 6u8, 179u8, 250u8, 42u8, 83u8, 233u8,
@@ -15025,7 +16286,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CreateRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CreateRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CreateRecovery>()?
+          };
+          if runtime_call_hash
             == [
               30u8, 207u8, 200u8, 26u8, 124u8, 31u8, 40u8, 176u8, 79u8, 107u8, 133u8, 72u8, 76u8,
               70u8, 155u8, 50u8, 110u8, 160u8, 102u8, 67u8, 9u8, 250u8, 46u8, 30u8, 181u8, 5u8,
@@ -15060,7 +16326,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, InitiateRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<InitiateRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<InitiateRecovery>()?
+          };
+          if runtime_call_hash
             == [
               228u8, 181u8, 122u8, 254u8, 193u8, 183u8, 111u8, 155u8, 202u8, 61u8, 239u8, 164u8,
               32u8, 221u8, 33u8, 8u8, 222u8, 29u8, 129u8, 207u8, 57u8, 45u8, 204u8, 148u8, 146u8,
@@ -15093,7 +16364,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, VouchRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<VouchRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<VouchRecovery>()?
+          };
+          if runtime_call_hash
             == [
               76u8, 132u8, 48u8, 165u8, 92u8, 53u8, 80u8, 187u8, 6u8, 5u8, 164u8, 197u8, 187u8,
               6u8, 16u8, 215u8, 164u8, 74u8, 91u8, 60u8, 184u8, 187u8, 181u8, 199u8, 46u8, 39u8,
@@ -15122,7 +16398,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ClaimRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClaimRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClaimRecovery>()?
+          };
+          if runtime_call_hash
             == [
               195u8, 55u8, 70u8, 234u8, 141u8, 34u8, 39u8, 172u8, 212u8, 190u8, 54u8, 110u8, 176u8,
               52u8, 12u8, 130u8, 28u8, 230u8, 172u8, 91u8, 238u8, 206u8, 84u8, 88u8, 69u8, 211u8,
@@ -15153,7 +16434,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CloseRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CloseRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CloseRecovery>()?
+          };
+          if runtime_call_hash
             == [
               158u8, 40u8, 62u8, 3u8, 248u8, 215u8, 197u8, 16u8, 220u8, 255u8, 123u8, 25u8, 177u8,
               245u8, 224u8, 251u8, 33u8, 45u8, 144u8, 160u8, 223u8, 153u8, 169u8, 79u8, 23u8, 52u8,
@@ -15183,7 +16469,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveRecovery, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveRecovery>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveRecovery>()?
+          };
+          if runtime_call_hash
             == [
               14u8, 1u8, 44u8, 24u8, 242u8, 16u8, 67u8, 192u8, 79u8, 206u8, 104u8, 233u8, 91u8,
               202u8, 253u8, 100u8, 48u8, 78u8, 233u8, 24u8, 124u8, 176u8, 211u8, 87u8, 63u8, 110u8,
@@ -15210,7 +16501,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelRecovered, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelRecovered>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelRecovered>()?
+          };
+          if runtime_call_hash
             == [
               13u8, 254u8, 118u8, 22u8, 136u8, 186u8, 122u8, 67u8, 111u8, 61u8, 62u8, 61u8, 247u8,
               98u8, 120u8, 84u8, 252u8, 99u8, 206u8, 178u8, 230u8, 59u8, 23u8, 165u8, 85u8, 113u8,
@@ -15365,7 +16661,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Recoverable>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Recoverable>()?
+          };
+          if runtime_storage_hash
             == [
               30u8, 237u8, 102u8, 106u8, 155u8, 244u8, 76u8, 175u8, 148u8, 194u8, 185u8, 168u8,
               254u8, 122u8, 159u8, 243u8, 49u8, 194u8, 45u8, 193u8, 216u8, 200u8, 60u8, 247u8,
@@ -15384,7 +16685,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Recoverable<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Recoverable>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Recoverable>()?
+          };
+          if runtime_storage_hash
             == [
               30u8, 237u8, 102u8, 106u8, 155u8, 244u8, 76u8, 175u8, 148u8, 194u8, 185u8, 168u8,
               254u8, 122u8, 159u8, 243u8, 49u8, 194u8, 45u8, 193u8, 216u8, 200u8, 60u8, 247u8,
@@ -15417,7 +16723,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ActiveRecoveries>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ActiveRecoveries>()?
+          };
+          if runtime_storage_hash
             == [
               243u8, 90u8, 226u8, 64u8, 19u8, 99u8, 142u8, 84u8, 144u8, 49u8, 3u8, 89u8, 164u8,
               102u8, 32u8, 146u8, 113u8, 78u8, 127u8, 156u8, 27u8, 188u8, 254u8, 235u8, 10u8, 1u8,
@@ -15441,7 +16752,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, ActiveRecoveries<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ActiveRecoveries>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ActiveRecoveries>()?
+          };
+          if runtime_storage_hash
             == [
               243u8, 90u8, 226u8, 64u8, 19u8, 99u8, 142u8, 84u8, 144u8, 49u8, 3u8, 89u8, 164u8,
               102u8, 32u8, 146u8, 113u8, 78u8, 127u8, 156u8, 27u8, 188u8, 254u8, 235u8, 10u8, 1u8,
@@ -15464,7 +16780,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proxy>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proxy>()?
+          };
+          if runtime_storage_hash
             == [
               78u8, 154u8, 21u8, 65u8, 134u8, 175u8, 202u8, 96u8, 212u8, 82u8, 32u8, 12u8, 64u8,
               25u8, 228u8, 132u8, 146u8, 156u8, 63u8, 19u8, 131u8, 110u8, 80u8, 229u8, 254u8, 75u8,
@@ -15485,7 +16806,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Proxy<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Proxy>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proxy>()?
+          };
+          if runtime_storage_hash
             == [
               78u8, 154u8, 21u8, 65u8, 134u8, 175u8, 202u8, 96u8, 212u8, 82u8, 32u8, 12u8, 64u8,
               25u8, 228u8, 132u8, 146u8, 156u8, 63u8, 19u8, 131u8, 110u8, 80u8, 229u8, 254u8, 75u8,
@@ -15515,17 +16841,16 @@ pub mod api {
         pub fn config_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Recovery", "ConfigDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Recovery", "ConfigDepositBase")?
             == [
               17u8, 246u8, 238u8, 21u8, 29u8, 39u8, 134u8, 93u8, 72u8, 175u8, 146u8, 59u8, 23u8,
               72u8, 17u8, 191u8, 153u8, 199u8, 54u8, 141u8, 206u8, 113u8, 104u8, 152u8, 24u8,
               131u8, 56u8, 189u8, 234u8, 46u8, 68u8, 147u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Recovery")?;
+            let pallet = metadata.pallet("Recovery")?;
             let constant = pallet.constant("ConfigDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -15541,17 +16866,16 @@ pub mod api {
         pub fn friend_deposit_factor(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Recovery", "FriendDepositFactor")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Recovery", "FriendDepositFactor")?
             == [
               173u8, 112u8, 108u8, 42u8, 94u8, 199u8, 185u8, 172u8, 27u8, 107u8, 107u8, 50u8,
               251u8, 249u8, 221u8, 59u8, 192u8, 143u8, 255u8, 141u8, 92u8, 52u8, 88u8, 201u8,
               102u8, 216u8, 77u8, 75u8, 115u8, 52u8, 86u8, 26u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Recovery")?;
+            let pallet = metadata.pallet("Recovery")?;
             let constant = pallet.constant("FriendDepositFactor")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -15568,17 +16892,16 @@ pub mod api {
         pub fn max_friends(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Recovery", "MaxFriends")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Recovery", "MaxFriends")?
             == [
               58u8, 149u8, 88u8, 111u8, 186u8, 86u8, 87u8, 58u8, 101u8, 63u8, 135u8, 200u8, 238u8,
               239u8, 167u8, 83u8, 244u8, 220u8, 20u8, 159u8, 148u8, 69u8, 81u8, 75u8, 200u8, 212u8,
               220u8, 219u8, 159u8, 11u8, 90u8, 29u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Recovery")?;
+            let pallet = metadata.pallet("Recovery")?;
             let constant = pallet.constant("MaxFriends")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -15596,17 +16919,16 @@ pub mod api {
         pub fn recovery_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Recovery", "RecoveryDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Recovery", "RecoveryDeposit")?
             == [
               163u8, 168u8, 45u8, 178u8, 113u8, 109u8, 121u8, 191u8, 59u8, 214u8, 38u8, 25u8, 87u8,
               130u8, 161u8, 231u8, 182u8, 245u8, 32u8, 144u8, 117u8, 59u8, 131u8, 45u8, 115u8,
               46u8, 205u8, 182u8, 239u8, 72u8, 126u8, 157u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Recovery")?;
+            let pallet = metadata.pallet("Recovery")?;
             let constant = pallet.constant("RecoveryDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -15740,11 +17062,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Schedule, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Schedule>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Schedule>()?
+          };
+          if runtime_call_hash
             == [
-              47u8, 253u8, 140u8, 232u8, 118u8, 8u8, 187u8, 34u8, 191u8, 148u8, 214u8, 90u8, 9u8,
-              245u8, 198u8, 151u8, 61u8, 229u8, 231u8, 168u8, 200u8, 137u8, 175u8, 22u8, 252u8,
-              85u8, 116u8, 184u8, 254u8, 145u8, 233u8, 193u8,
+              202u8, 180u8, 13u8, 84u8, 34u8, 55u8, 33u8, 32u8, 250u8, 71u8, 129u8, 243u8, 153u8,
+              253u8, 245u8, 187u8, 177u8, 98u8, 234u8, 194u8, 9u8, 53u8, 140u8, 38u8, 29u8, 46u8,
+              146u8, 41u8, 141u8, 135u8, 131u8, 180u8,
             ]
           {
             let call = Schedule {
@@ -15767,7 +17094,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Cancel, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Cancel>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Cancel>()?
+          };
+          if runtime_call_hash
             == [
               118u8, 0u8, 188u8, 218u8, 148u8, 86u8, 139u8, 15u8, 3u8, 161u8, 6u8, 150u8, 46u8,
               32u8, 85u8, 179u8, 106u8, 113u8, 240u8, 115u8, 167u8, 114u8, 243u8, 69u8, 103u8,
@@ -15795,11 +17127,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ScheduleNamed, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ScheduleNamed>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ScheduleNamed>()?
+          };
+          if runtime_call_hash
             == [
-              28u8, 6u8, 32u8, 97u8, 64u8, 178u8, 120u8, 13u8, 221u8, 219u8, 18u8, 72u8, 207u8,
-              11u8, 22u8, 244u8, 129u8, 253u8, 238u8, 1u8, 210u8, 40u8, 182u8, 109u8, 102u8, 69u8,
-              248u8, 74u8, 48u8, 239u8, 57u8, 126u8,
+              236u8, 92u8, 79u8, 252u8, 16u8, 10u8, 86u8, 7u8, 225u8, 162u8, 180u8, 232u8, 107u8,
+              49u8, 207u8, 153u8, 138u8, 117u8, 29u8, 164u8, 123u8, 225u8, 152u8, 103u8, 104u8,
+              94u8, 92u8, 85u8, 178u8, 191u8, 103u8, 38u8,
             ]
           {
             let call = ScheduleNamed {
@@ -15822,7 +17159,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelNamed, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelNamed>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelNamed>()?
+          };
+          if runtime_call_hash
             == [
               118u8, 221u8, 232u8, 126u8, 67u8, 134u8, 33u8, 7u8, 224u8, 110u8, 181u8, 18u8, 57u8,
               39u8, 15u8, 64u8, 90u8, 132u8, 2u8, 238u8, 19u8, 241u8, 194u8, 120u8, 5u8, 109u8,
@@ -15853,11 +17195,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ScheduleAfter, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ScheduleAfter>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ScheduleAfter>()?
+          };
+          if runtime_call_hash
             == [
-              193u8, 228u8, 124u8, 83u8, 26u8, 34u8, 5u8, 63u8, 215u8, 225u8, 45u8, 117u8, 208u8,
-              196u8, 10u8, 132u8, 132u8, 186u8, 250u8, 127u8, 251u8, 90u8, 27u8, 0u8, 96u8, 146u8,
-              137u8, 115u8, 32u8, 171u8, 229u8, 65u8,
+              185u8, 222u8, 76u8, 196u8, 163u8, 2u8, 38u8, 212u8, 191u8, 60u8, 63u8, 3u8, 94u8,
+              50u8, 129u8, 220u8, 79u8, 24u8, 129u8, 80u8, 205u8, 157u8, 170u8, 200u8, 43u8, 177u8,
+              99u8, 60u8, 245u8, 44u8, 31u8, 194u8,
             ]
           {
             let call = ScheduleAfter {
@@ -15897,11 +17244,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ScheduleNamedAfter>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ScheduleNamedAfter>()?
+          };
+          if runtime_call_hash
             == [
-              110u8, 160u8, 185u8, 119u8, 78u8, 217u8, 65u8, 197u8, 98u8, 179u8, 6u8, 131u8, 130u8,
-              0u8, 206u8, 180u8, 251u8, 127u8, 150u8, 16u8, 200u8, 74u8, 45u8, 75u8, 252u8, 99u8,
-              121u8, 185u8, 238u8, 215u8, 122u8, 141u8,
+              183u8, 251u8, 128u8, 102u8, 239u8, 0u8, 142u8, 40u8, 31u8, 69u8, 210u8, 216u8, 28u8,
+              75u8, 55u8, 244u8, 126u8, 179u8, 175u8, 192u8, 212u8, 162u8, 77u8, 234u8, 200u8,
+              225u8, 179u8, 17u8, 22u8, 67u8, 91u8, 84u8,
             ]
           {
             let call = ScheduleNamedAfter {
@@ -16030,11 +17382,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Agenda>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Agenda>()?
+          };
+          if runtime_storage_hash
             == [
-              127u8, 55u8, 243u8, 136u8, 223u8, 53u8, 131u8, 118u8, 118u8, 195u8, 17u8, 75u8,
-              235u8, 22u8, 177u8, 239u8, 58u8, 157u8, 107u8, 122u8, 185u8, 221u8, 25u8, 102u8,
-              105u8, 150u8, 210u8, 215u8, 163u8, 133u8, 41u8, 197u8,
+              132u8, 10u8, 142u8, 255u8, 178u8, 71u8, 99u8, 165u8, 210u8, 70u8, 42u8, 162u8, 166u8,
+              174u8, 223u8, 150u8, 124u8, 16u8, 128u8, 180u8, 39u8, 214u8, 209u8, 203u8, 54u8,
+              197u8, 242u8, 163u8, 48u8, 130u8, 225u8, 83u8,
             ]
           {
             let entry = Agenda(_0);
@@ -16053,11 +17410,16 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Agenda<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Agenda>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Agenda>()?
+          };
+          if runtime_storage_hash
             == [
-              127u8, 55u8, 243u8, 136u8, 223u8, 53u8, 131u8, 118u8, 118u8, 195u8, 17u8, 75u8,
-              235u8, 22u8, 177u8, 239u8, 58u8, 157u8, 107u8, 122u8, 185u8, 221u8, 25u8, 102u8,
-              105u8, 150u8, 210u8, 215u8, 163u8, 133u8, 41u8, 197u8,
+              132u8, 10u8, 142u8, 255u8, 178u8, 71u8, 99u8, 165u8, 210u8, 70u8, 42u8, 162u8, 166u8,
+              174u8, 223u8, 150u8, 124u8, 16u8, 128u8, 180u8, 39u8, 214u8, 209u8, 203u8, 54u8,
+              197u8, 242u8, 163u8, 48u8, 130u8, 225u8, 83u8,
             ]
           {
             self.client.storage().iter(block_hash).await
@@ -16074,7 +17436,12 @@ pub mod api {
           ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Lookup>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Lookup>()?
+          };
+          if runtime_storage_hash
             == [
               56u8, 105u8, 156u8, 110u8, 251u8, 141u8, 219u8, 56u8, 131u8, 57u8, 180u8, 33u8, 48u8,
               30u8, 193u8, 194u8, 169u8, 182u8, 168u8, 43u8, 36u8, 202u8, 222u8, 182u8, 41u8,
@@ -16093,7 +17460,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Lookup<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Lookup>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Lookup>()?
+          };
+          if runtime_storage_hash
             == [
               56u8, 105u8, 156u8, 110u8, 251u8, 141u8, 219u8, 56u8, 131u8, 57u8, 180u8, 33u8, 48u8,
               30u8, 193u8, 194u8, 169u8, 182u8, 168u8, 43u8, 36u8, 202u8, 222u8, 182u8, 41u8,
@@ -16121,17 +17493,16 @@ pub mod api {
         pub fn maximum_weight(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Scheduler", "MaximumWeight")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Scheduler", "MaximumWeight")?
             == [
               28u8, 164u8, 203u8, 76u8, 243u8, 245u8, 58u8, 227u8, 123u8, 135u8, 202u8, 251u8,
               71u8, 170u8, 243u8, 180u8, 12u8, 28u8, 250u8, 36u8, 219u8, 234u8, 98u8, 100u8, 75u8,
               101u8, 46u8, 206u8, 204u8, 161u8, 188u8, 19u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Scheduler")?;
+            let pallet = metadata.pallet("Scheduler")?;
             let constant = pallet.constant("MaximumWeight")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -16144,17 +17515,16 @@ pub mod api {
         pub fn max_scheduled_per_block(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Scheduler", "MaxScheduledPerBlock")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Scheduler", "MaxScheduledPerBlock")?
             == [
               64u8, 25u8, 128u8, 202u8, 165u8, 97u8, 30u8, 196u8, 174u8, 132u8, 139u8, 223u8, 88u8,
               20u8, 228u8, 203u8, 253u8, 201u8, 83u8, 157u8, 161u8, 120u8, 187u8, 165u8, 4u8, 64u8,
               184u8, 34u8, 28u8, 129u8, 136u8, 13u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Scheduler")?;
+            let pallet = metadata.pallet("Scheduler")?;
             let constant = pallet.constant("MaxScheduledPerBlock")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -16313,11 +17683,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Proxy, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Proxy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Proxy>()?
+          };
+          if runtime_call_hash
             == [
-              212u8, 39u8, 106u8, 203u8, 151u8, 249u8, 241u8, 202u8, 155u8, 207u8, 83u8, 210u8,
-              129u8, 147u8, 152u8, 27u8, 41u8, 178u8, 70u8, 200u8, 45u8, 177u8, 44u8, 185u8, 151u8,
-              211u8, 77u8, 77u8, 4u8, 47u8, 161u8, 163u8,
+              111u8, 30u8, 96u8, 181u8, 28u8, 89u8, 200u8, 235u8, 242u8, 22u8, 77u8, 88u8, 142u8,
+              95u8, 164u8, 123u8, 13u8, 222u8, 63u8, 11u8, 113u8, 91u8, 7u8, 26u8, 153u8, 155u8,
+              248u8, 24u8, 60u8, 80u8, 101u8, 188u8,
             ]
           {
             let call = Proxy {
@@ -16352,7 +17727,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AddProxy, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AddProxy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AddProxy>()?
+          };
+          if runtime_call_hash
             == [
               243u8, 86u8, 149u8, 119u8, 119u8, 29u8, 5u8, 170u8, 85u8, 147u8, 150u8, 196u8, 37u8,
               89u8, 116u8, 90u8, 131u8, 86u8, 238u8, 5u8, 54u8, 103u8, 117u8, 144u8, 17u8, 159u8,
@@ -16389,7 +17769,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveProxy, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveProxy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveProxy>()?
+          };
+          if runtime_call_hash
             == [
               117u8, 84u8, 198u8, 80u8, 31u8, 149u8, 180u8, 104u8, 240u8, 86u8, 203u8, 95u8, 85u8,
               243u8, 102u8, 238u8, 229u8, 197u8, 121u8, 228u8, 29u8, 186u8, 2u8, 58u8, 209u8,
@@ -16422,7 +17807,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RemoveProxies, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveProxies>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveProxies>()?
+          };
+          if runtime_call_hash
             == [
               15u8, 237u8, 27u8, 166u8, 254u8, 218u8, 92u8, 5u8, 213u8, 239u8, 99u8, 59u8, 1u8,
               26u8, 73u8, 252u8, 81u8, 94u8, 214u8, 227u8, 169u8, 58u8, 40u8, 253u8, 187u8, 225u8,
@@ -16467,7 +17857,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Anonymous, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Anonymous>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Anonymous>()?
+          };
+          if runtime_call_hash
             == [
               141u8, 224u8, 159u8, 44u8, 53u8, 157u8, 240u8, 112u8, 181u8, 244u8, 207u8, 194u8,
               205u8, 27u8, 137u8, 190u8, 15u8, 199u8, 229u8, 236u8, 242u8, 209u8, 146u8, 46u8,
@@ -16515,7 +17910,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, KillAnonymous, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<KillAnonymous>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<KillAnonymous>()?
+          };
+          if runtime_call_hash
             == [
               81u8, 192u8, 68u8, 240u8, 126u8, 14u8, 34u8, 215u8, 48u8, 14u8, 17u8, 61u8, 214u8,
               45u8, 172u8, 98u8, 93u8, 82u8, 31u8, 188u8, 134u8, 149u8, 27u8, 78u8, 27u8, 127u8,
@@ -16563,7 +17963,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Announce, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Announce>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Announce>()?
+          };
+          if runtime_call_hash
             == [
               102u8, 8u8, 136u8, 179u8, 13u8, 47u8, 158u8, 24u8, 93u8, 196u8, 52u8, 22u8, 118u8,
               98u8, 17u8, 8u8, 12u8, 51u8, 181u8, 75u8, 215u8, 133u8, 201u8, 180u8, 231u8, 122u8,
@@ -16607,7 +18012,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveAnnouncement>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveAnnouncement>()?
+          };
+          if runtime_call_hash
             == [
               209u8, 156u8, 215u8, 188u8, 225u8, 230u8, 171u8, 228u8, 241u8, 105u8, 43u8, 183u8,
               234u8, 18u8, 170u8, 239u8, 232u8, 188u8, 37u8, 84u8, 156u8, 50u8, 241u8, 170u8, 9u8,
@@ -16651,7 +18061,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RejectAnnouncement>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RejectAnnouncement>()?
+          };
+          if runtime_call_hash
             == [
               26u8, 67u8, 197u8, 169u8, 243u8, 11u8, 94u8, 153u8, 50u8, 22u8, 176u8, 103u8, 88u8,
               2u8, 13u8, 10u8, 96u8, 7u8, 121u8, 148u8, 13u8, 96u8, 20u8, 67u8, 76u8, 51u8, 81u8,
@@ -16696,11 +18111,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ProxyAnnounced, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ProxyAnnounced>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ProxyAnnounced>()?
+          };
+          if runtime_call_hash
             == [
-              111u8, 70u8, 126u8, 13u8, 200u8, 249u8, 118u8, 88u8, 11u8, 24u8, 175u8, 36u8, 116u8,
-              248u8, 122u8, 8u8, 62u8, 215u8, 186u8, 120u8, 35u8, 129u8, 66u8, 210u8, 82u8, 28u8,
-              210u8, 241u8, 37u8, 55u8, 137u8, 161u8,
+              180u8, 62u8, 205u8, 29u8, 17u8, 129u8, 91u8, 183u8, 172u8, 195u8, 99u8, 50u8, 120u8,
+              175u8, 240u8, 244u8, 132u8, 254u8, 232u8, 180u8, 142u8, 127u8, 255u8, 27u8, 251u8,
+              238u8, 244u8, 35u8, 70u8, 138u8, 115u8, 89u8,
             ]
           {
             let call = ProxyAnnounced {
@@ -16847,7 +18267,12 @@ pub mod api {
           ),
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proxies>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proxies>()?
+          };
+          if runtime_storage_hash
             == [
               123u8, 125u8, 65u8, 252u8, 17u8, 156u8, 240u8, 152u8, 34u8, 63u8, 253u8, 92u8, 194u8,
               171u8, 72u8, 165u8, 112u8, 117u8, 85u8, 171u8, 120u8, 225u8, 77u8, 188u8, 6u8, 224u8,
@@ -16871,7 +18296,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Proxies<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Proxies>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proxies>()?
+          };
+          if runtime_storage_hash
             == [
               123u8, 125u8, 65u8, 252u8, 17u8, 156u8, 240u8, 152u8, 34u8, 63u8, 253u8, 92u8, 194u8,
               171u8, 72u8, 165u8, 112u8, 117u8, 85u8, 171u8, 120u8, 225u8, 77u8, 188u8, 6u8, 224u8,
@@ -16901,7 +18331,12 @@ pub mod api {
           ),
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Announcements>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Announcements>()?
+          };
+          if runtime_storage_hash
             == [
               247u8, 243u8, 109u8, 142u8, 99u8, 156u8, 61u8, 101u8, 200u8, 211u8, 158u8, 60u8,
               159u8, 232u8, 147u8, 125u8, 139u8, 150u8, 4u8, 129u8, 189u8, 117u8, 74u8, 32u8, 85u8,
@@ -16924,7 +18359,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Announcements<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Announcements>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Announcements>()?
+          };
+          if runtime_storage_hash
             == [
               247u8, 243u8, 109u8, 142u8, 99u8, 156u8, 61u8, 101u8, 200u8, 211u8, 158u8, 60u8,
               159u8, 232u8, 147u8, 125u8, 139u8, 150u8, 4u8, 129u8, 189u8, 117u8, 74u8, 32u8, 85u8,
@@ -16954,17 +18394,16 @@ pub mod api {
         pub fn proxy_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "ProxyDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "ProxyDepositBase")?
             == [
               247u8, 206u8, 22u8, 149u8, 164u8, 30u8, 134u8, 240u8, 216u8, 44u8, 118u8, 234u8, 5u8,
               161u8, 84u8, 84u8, 2u8, 40u8, 113u8, 170u8, 48u8, 31u8, 202u8, 181u8, 174u8, 246u8,
               44u8, 58u8, 107u8, 30u8, 7u8, 216u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("ProxyDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -16980,17 +18419,16 @@ pub mod api {
         pub fn proxy_deposit_factor(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "ProxyDepositFactor")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "ProxyDepositFactor")?
             == [
               186u8, 81u8, 123u8, 169u8, 153u8, 134u8, 167u8, 84u8, 81u8, 1u8, 90u8, 103u8, 139u8,
               107u8, 218u8, 91u8, 52u8, 125u8, 147u8, 95u8, 28u8, 88u8, 255u8, 186u8, 134u8, 120u8,
               245u8, 145u8, 167u8, 118u8, 196u8, 153u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("ProxyDepositFactor")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17002,17 +18440,16 @@ pub mod api {
         pub fn max_proxies(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "MaxProxies")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "MaxProxies")?
             == [
               249u8, 153u8, 224u8, 128u8, 161u8, 3u8, 39u8, 192u8, 120u8, 150u8, 184u8, 92u8,
               225u8, 222u8, 76u8, 172u8, 131u8, 87u8, 231u8, 128u8, 5u8, 62u8, 116u8, 112u8, 103u8,
               4u8, 39u8, 163u8, 71u8, 97u8, 221u8, 19u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("MaxProxies")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17024,17 +18461,16 @@ pub mod api {
         pub fn max_pending(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "MaxPending")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "MaxPending")?
             == [
               88u8, 148u8, 146u8, 152u8, 151u8, 208u8, 255u8, 193u8, 239u8, 105u8, 197u8, 153u8,
               151u8, 18u8, 86u8, 13u8, 242u8, 242u8, 59u8, 92u8, 107u8, 203u8, 102u8, 69u8, 147u8,
               147u8, 37u8, 83u8, 237u8, 9u8, 114u8, 196u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("MaxPending")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17049,17 +18485,16 @@ pub mod api {
         pub fn announcement_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "AnnouncementDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "AnnouncementDepositBase")?
             == [
               55u8, 170u8, 102u8, 61u8, 17u8, 188u8, 89u8, 54u8, 251u8, 84u8, 38u8, 21u8, 225u8,
               88u8, 189u8, 83u8, 50u8, 18u8, 249u8, 202u8, 26u8, 143u8, 237u8, 60u8, 89u8, 68u8,
               214u8, 0u8, 3u8, 119u8, 146u8, 230u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("AnnouncementDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17074,17 +18509,16 @@ pub mod api {
         pub fn announcement_deposit_factor(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Proxy", "AnnouncementDepositFactor")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Proxy", "AnnouncementDepositFactor")?
             == [
               1u8, 46u8, 178u8, 237u8, 21u8, 133u8, 2u8, 24u8, 158u8, 29u8, 166u8, 93u8, 131u8,
               42u8, 39u8, 75u8, 235u8, 132u8, 214u8, 125u8, 172u8, 81u8, 66u8, 141u8, 17u8, 217u8,
               13u8, 41u8, 125u8, 120u8, 41u8, 2u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Proxy")?;
+            let pallet = metadata.pallet("Proxy")?;
             let constant = pallet.constant("AnnouncementDepositFactor")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17195,11 +18629,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AsMultiThreshold1>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AsMultiThreshold1>()?
+          };
+          if runtime_call_hash
             == [
-              133u8, 125u8, 79u8, 146u8, 150u8, 77u8, 145u8, 24u8, 199u8, 114u8, 221u8, 155u8,
-              49u8, 164u8, 190u8, 118u8, 111u8, 209u8, 109u8, 139u8, 47u8, 29u8, 33u8, 173u8, 16u8,
-              151u8, 196u8, 44u8, 10u8, 14u8, 228u8, 28u8,
+              47u8, 66u8, 136u8, 19u8, 141u8, 90u8, 215u8, 145u8, 171u8, 74u8, 23u8, 162u8, 231u8,
+              179u8, 27u8, 144u8, 107u8, 232u8, 218u8, 76u8, 148u8, 117u8, 160u8, 177u8, 175u8,
+              78u8, 154u8, 126u8, 116u8, 65u8, 160u8, 169u8,
             ]
           {
             let call = AsMultiThreshold1 {
@@ -17270,11 +18709,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AsMulti, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AsMulti>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AsMulti>()?
+          };
+          if runtime_call_hash
             == [
-              46u8, 81u8, 199u8, 226u8, 108u8, 241u8, 76u8, 74u8, 25u8, 163u8, 249u8, 175u8, 16u8,
-              62u8, 99u8, 171u8, 114u8, 132u8, 188u8, 70u8, 16u8, 69u8, 210u8, 153u8, 62u8, 23u8,
-              78u8, 223u8, 107u8, 184u8, 150u8, 13u8,
+              11u8, 217u8, 6u8, 160u8, 62u8, 23u8, 72u8, 4u8, 178u8, 222u8, 108u8, 69u8, 180u8,
+              220u8, 198u8, 20u8, 6u8, 4u8, 187u8, 220u8, 185u8, 3u8, 103u8, 250u8, 90u8, 23u8,
+              76u8, 139u8, 137u8, 120u8, 158u8, 21u8,
             ]
           {
             let call = AsMulti {
@@ -17338,7 +18782,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ApproveAsMulti, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ApproveAsMulti>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ApproveAsMulti>()?
+          };
+          if runtime_call_hash
             == [
               114u8, 29u8, 118u8, 154u8, 91u8, 4u8, 127u8, 126u8, 190u8, 180u8, 57u8, 112u8, 72u8,
               8u8, 248u8, 126u8, 25u8, 190u8, 130u8, 86u8, 160u8, 164u8, 76u8, 64u8, 25u8, 175u8,
@@ -17393,7 +18842,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelAsMulti, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelAsMulti>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelAsMulti>()?
+          };
+          if runtime_call_hash
             == [
               195u8, 216u8, 37u8, 179u8, 9u8, 19u8, 238u8, 94u8, 156u8, 5u8, 120u8, 78u8, 129u8,
               99u8, 239u8, 142u8, 68u8, 12u8, 254u8, 46u8, 251u8, 8u8, 193u8, 43u8, 37u8, 68u8,
@@ -17525,7 +18979,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Multisigs>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Multisigs>()?
+          };
+          if runtime_storage_hash
             == [
               137u8, 130u8, 173u8, 65u8, 126u8, 244u8, 194u8, 167u8, 93u8, 174u8, 104u8, 131u8,
               115u8, 155u8, 93u8, 185u8, 54u8, 204u8, 155u8, 149u8, 184u8, 24u8, 111u8, 40u8,
@@ -17544,7 +19003,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Multisigs<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Multisigs>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Multisigs>()?
+          };
+          if runtime_storage_hash
             == [
               137u8, 130u8, 173u8, 65u8, 126u8, 244u8, 194u8, 167u8, 93u8, 174u8, 104u8, 131u8,
               115u8, 155u8, 93u8, 185u8, 54u8, 204u8, 155u8, 149u8, 184u8, 24u8, 111u8, 40u8,
@@ -17568,11 +19032,16 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Calls>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Calls>()?
+          };
+          if runtime_storage_hash
             == [
-              170u8, 40u8, 46u8, 91u8, 35u8, 29u8, 214u8, 169u8, 247u8, 145u8, 43u8, 147u8, 152u8,
-              120u8, 150u8, 202u8, 240u8, 179u8, 141u8, 111u8, 183u8, 82u8, 228u8, 87u8, 206u8,
-              0u8, 235u8, 52u8, 246u8, 169u8, 243u8, 33u8,
+              193u8, 8u8, 225u8, 7u8, 108u8, 255u8, 208u8, 31u8, 22u8, 62u8, 136u8, 75u8, 68u8,
+              185u8, 53u8, 38u8, 138u8, 176u8, 207u8, 65u8, 139u8, 216u8, 11u8, 35u8, 252u8, 142u8,
+              203u8, 181u8, 139u8, 55u8, 68u8, 211u8,
             ]
           {
             let entry = Calls(_0);
@@ -17586,11 +19055,16 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Calls<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Calls>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Calls>()?
+          };
+          if runtime_storage_hash
             == [
-              170u8, 40u8, 46u8, 91u8, 35u8, 29u8, 214u8, 169u8, 247u8, 145u8, 43u8, 147u8, 152u8,
-              120u8, 150u8, 202u8, 240u8, 179u8, 141u8, 111u8, 183u8, 82u8, 228u8, 87u8, 206u8,
-              0u8, 235u8, 52u8, 246u8, 169u8, 243u8, 33u8,
+              193u8, 8u8, 225u8, 7u8, 108u8, 255u8, 208u8, 31u8, 22u8, 62u8, 136u8, 75u8, 68u8,
+              185u8, 53u8, 38u8, 138u8, 176u8, 207u8, 65u8, 139u8, 216u8, 11u8, 35u8, 252u8, 142u8,
+              203u8, 181u8, 139u8, 55u8, 68u8, 211u8,
             ]
           {
             self.client.storage().iter(block_hash).await
@@ -17618,17 +19092,16 @@ pub mod api {
         pub fn deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Multisig", "DepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Multisig", "DepositBase")?
             == [
               22u8, 188u8, 23u8, 14u8, 137u8, 91u8, 232u8, 182u8, 29u8, 71u8, 123u8, 112u8, 219u8,
               91u8, 244u8, 96u8, 183u8, 117u8, 86u8, 122u8, 244u8, 23u8, 161u8, 182u8, 90u8, 159u8,
               143u8, 107u8, 160u8, 161u8, 226u8, 201u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Multisig")?;
+            let pallet = metadata.pallet("Multisig")?;
             let constant = pallet.constant("DepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17642,17 +19115,16 @@ pub mod api {
         pub fn deposit_factor(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Multisig", "DepositFactor")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Multisig", "DepositFactor")?
             == [
               168u8, 135u8, 117u8, 56u8, 13u8, 12u8, 179u8, 24u8, 150u8, 138u8, 97u8, 88u8, 249u8,
               135u8, 81u8, 242u8, 175u8, 17u8, 147u8, 89u8, 145u8, 86u8, 248u8, 140u8, 200u8,
               239u8, 128u8, 80u8, 129u8, 172u8, 240u8, 236u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Multisig")?;
+            let pallet = metadata.pallet("Multisig")?;
             let constant = pallet.constant("DepositFactor")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17664,17 +19136,16 @@ pub mod api {
         pub fn max_signatories(
           &self,
         ) -> ::core::result::Result<::core::primitive::u16, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Multisig", "MaxSignatories")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Multisig", "MaxSignatories")?
             == [
               139u8, 36u8, 140u8, 198u8, 176u8, 106u8, 89u8, 194u8, 33u8, 23u8, 60u8, 134u8, 143u8,
               24u8, 176u8, 64u8, 47u8, 109u8, 159u8, 134u8, 240u8, 231u8, 181u8, 146u8, 136u8,
               249u8, 175u8, 67u8, 41u8, 152u8, 90u8, 15u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Multisig")?;
+            let pallet = metadata.pallet("Multisig")?;
             let constant = pallet.constant("MaxSignatories")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -17820,7 +19291,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ProposeBounty, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ProposeBounty>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ProposeBounty>()?
+          };
+          if runtime_call_hash
             == [
               208u8, 22u8, 157u8, 134u8, 214u8, 95u8, 249u8, 10u8, 67u8, 223u8, 190u8, 192u8, 69u8,
               32u8, 7u8, 235u8, 205u8, 145u8, 90u8, 80u8, 60u8, 4u8, 16u8, 189u8, 59u8, 180u8,
@@ -17848,7 +19324,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ApproveBounty, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ApproveBounty>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ApproveBounty>()?
+          };
+          if runtime_call_hash
             == [
               127u8, 220u8, 25u8, 197u8, 19u8, 183u8, 177u8, 17u8, 164u8, 29u8, 250u8, 136u8,
               125u8, 90u8, 247u8, 177u8, 37u8, 180u8, 77u8, 75u8, 164u8, 32u8, 195u8, 207u8, 58u8,
@@ -17880,7 +19361,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ProposeCurator, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ProposeCurator>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ProposeCurator>()?
+          };
+          if runtime_call_hash
             == [
               189u8, 94u8, 10u8, 85u8, 139u8, 136u8, 154u8, 18u8, 84u8, 174u8, 183u8, 92u8, 98u8,
               90u8, 173u8, 177u8, 218u8, 104u8, 248u8, 99u8, 59u8, 45u8, 100u8, 163u8, 244u8, 25u8,
@@ -17922,7 +19408,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, UnassignCurator, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<UnassignCurator>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<UnassignCurator>()?
+          };
+          if runtime_call_hash
             == [
               156u8, 163u8, 248u8, 148u8, 22u8, 231u8, 232u8, 182u8, 48u8, 87u8, 85u8, 118u8,
               169u8, 249u8, 123u8, 199u8, 248u8, 206u8, 221u8, 196u8, 69u8, 69u8, 52u8, 116u8,
@@ -17950,7 +19441,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AcceptCurator, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AcceptCurator>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AcceptCurator>()?
+          };
+          if runtime_call_hash
             == [
               50u8, 149u8, 252u8, 40u8, 169u8, 113u8, 60u8, 153u8, 123u8, 146u8, 40u8, 196u8,
               176u8, 195u8, 95u8, 94u8, 14u8, 81u8, 136u8, 225u8, 24u8, 59u8, 87u8, 118u8, 77u8,
@@ -17985,7 +19481,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AwardBounty, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AwardBounty>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AwardBounty>()?
+          };
+          if runtime_call_hash
             == [
               22u8, 6u8, 78u8, 247u8, 133u8, 35u8, 24u8, 170u8, 12u8, 14u8, 157u8, 190u8, 0u8,
               89u8, 186u8, 31u8, 239u8, 160u8, 81u8, 169u8, 20u8, 30u8, 101u8, 147u8, 2u8, 148u8,
@@ -18017,7 +19518,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ClaimBounty, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClaimBounty>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClaimBounty>()?
+          };
+          if runtime_call_hash
             == [
               119u8, 9u8, 122u8, 55u8, 224u8, 139u8, 26u8, 186u8, 3u8, 178u8, 78u8, 41u8, 91u8,
               183u8, 222u8, 197u8, 189u8, 172u8, 154u8, 47u8, 2u8, 164u8, 141u8, 163u8, 211u8,
@@ -18047,7 +19553,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CloseBounty, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CloseBounty>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CloseBounty>()?
+          };
+          if runtime_call_hash
             == [
               119u8, 47u8, 246u8, 188u8, 235u8, 22u8, 53u8, 70u8, 182u8, 15u8, 247u8, 153u8, 208u8,
               191u8, 144u8, 132u8, 30u8, 200u8, 36u8, 186u8, 194u8, 225u8, 140u8, 160u8, 152u8,
@@ -18085,7 +19596,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ExtendBountyExpiry>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ExtendBountyExpiry>()?
+          };
+          if runtime_call_hash
             == [
               127u8, 142u8, 138u8, 230u8, 147u8, 187u8, 201u8, 210u8, 216u8, 61u8, 62u8, 125u8,
               168u8, 188u8, 16u8, 73u8, 157u8, 53u8, 165u8, 236u8, 181u8, 26u8, 28u8, 67u8, 59u8,
@@ -18253,7 +19769,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<BountyCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BountyCount>()?
+          };
+          if runtime_storage_hash
             == [
               5u8, 188u8, 134u8, 220u8, 64u8, 49u8, 188u8, 98u8, 185u8, 186u8, 230u8, 65u8, 247u8,
               199u8, 28u8, 178u8, 202u8, 193u8, 41u8, 83u8, 115u8, 253u8, 182u8, 123u8, 92u8,
@@ -18285,7 +19806,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Bounties>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Bounties>()?
+          };
+          if runtime_storage_hash
             == [
               27u8, 154u8, 97u8, 199u8, 230u8, 195u8, 155u8, 198u8, 4u8, 28u8, 5u8, 202u8, 175u8,
               11u8, 243u8, 166u8, 67u8, 231u8, 125u8, 203u8, 141u8, 168u8, 106u8, 218u8, 129u8,
@@ -18304,7 +19830,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Bounties<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Bounties>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Bounties>()?
+          };
+          if runtime_storage_hash
             == [
               27u8, 154u8, 97u8, 199u8, 230u8, 195u8, 155u8, 198u8, 4u8, 28u8, 5u8, 202u8, 175u8,
               11u8, 243u8, 166u8, 67u8, 231u8, 125u8, 203u8, 141u8, 168u8, 106u8, 218u8, 129u8,
@@ -18327,10 +19858,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<BountyDescriptions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BountyDescriptions>()?
+          };
+          if runtime_storage_hash
             == [
               41u8, 78u8, 19u8, 48u8, 241u8, 95u8, 175u8, 69u8, 236u8, 54u8, 84u8, 58u8, 69u8,
               28u8, 20u8, 20u8, 214u8, 138u8, 163u8, 252u8, 239u8, 116u8, 171u8, 136u8, 0u8, 159u8,
@@ -18351,10 +19884,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, BountyDescriptions<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<BountyDescriptions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BountyDescriptions>()?
+          };
+          if runtime_storage_hash
             == [
               41u8, 78u8, 19u8, 48u8, 241u8, 95u8, 175u8, 69u8, 236u8, 54u8, 84u8, 58u8, 69u8,
               28u8, 20u8, 20u8, 214u8, 138u8, 163u8, 252u8, 239u8, 116u8, 171u8, 136u8, 0u8, 159u8,
@@ -18374,7 +19909,12 @@ pub mod api {
           runtime_types::frame_support::storage::bounded_vec::BoundedVec<::core::primitive::u32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<BountyApprovals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BountyApprovals>()?
+          };
+          if runtime_storage_hash
             == [
               18u8, 142u8, 244u8, 64u8, 172u8, 62u8, 230u8, 114u8, 165u8, 158u8, 123u8, 163u8,
               35u8, 125u8, 218u8, 23u8, 113u8, 73u8, 233u8, 242u8, 181u8, 205u8, 60u8, 54u8, 64u8,
@@ -18406,17 +19946,16 @@ pub mod api {
         pub fn bounty_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "BountyDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "BountyDepositBase")?
             == [
               88u8, 94u8, 133u8, 207u8, 74u8, 165u8, 63u8, 193u8, 206u8, 172u8, 111u8, 56u8, 19u8,
               6u8, 234u8, 3u8, 42u8, 236u8, 51u8, 203u8, 30u8, 209u8, 3u8, 223u8, 11u8, 32u8,
               100u8, 71u8, 124u8, 67u8, 200u8, 169u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("BountyDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18428,17 +19967,16 @@ pub mod api {
         pub fn bounty_deposit_payout_delay(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "BountyDepositPayoutDelay")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "BountyDepositPayoutDelay")?
             == [
               74u8, 26u8, 71u8, 75u8, 12u8, 126u8, 190u8, 156u8, 173u8, 22u8, 100u8, 241u8, 114u8,
               231u8, 203u8, 94u8, 212u8, 193u8, 224u8, 208u8, 92u8, 104u8, 220u8, 126u8, 219u8,
               58u8, 116u8, 28u8, 139u8, 10u8, 89u8, 198u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("BountyDepositPayoutDelay")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18450,17 +19988,16 @@ pub mod api {
         pub fn bounty_update_period(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "BountyUpdatePeriod")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "BountyUpdatePeriod")?
             == [
               10u8, 209u8, 160u8, 42u8, 47u8, 204u8, 58u8, 28u8, 137u8, 252u8, 123u8, 123u8, 194u8,
               151u8, 43u8, 90u8, 0u8, 154u8, 132u8, 183u8, 50u8, 168u8, 204u8, 91u8, 235u8, 13u8,
               116u8, 219u8, 47u8, 215u8, 107u8, 136u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("BountyUpdatePeriod")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18478,17 +20015,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "CuratorDepositMultiplier")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "CuratorDepositMultiplier")?
             == [
               119u8, 126u8, 117u8, 41u8, 6u8, 165u8, 141u8, 28u8, 50u8, 24u8, 197u8, 238u8, 10u8,
               25u8, 186u8, 143u8, 77u8, 212u8, 156u8, 98u8, 147u8, 70u8, 188u8, 56u8, 23u8, 176u8,
               175u8, 248u8, 158u8, 34u8, 97u8, 39u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("CuratorDepositMultiplier")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18503,17 +20039,16 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "CuratorDepositMax")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "CuratorDepositMax")?
             == [
               51u8, 185u8, 139u8, 195u8, 121u8, 175u8, 131u8, 166u8, 67u8, 163u8, 190u8, 242u8,
               217u8, 208u8, 162u8, 212u8, 86u8, 66u8, 187u8, 166u8, 71u8, 49u8, 188u8, 148u8, 59u8,
               131u8, 21u8, 42u8, 204u8, 60u8, 26u8, 143u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("CuratorDepositMax")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18528,17 +20063,16 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "CuratorDepositMin")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "CuratorDepositMin")?
             == [
               0u8, 111u8, 137u8, 230u8, 236u8, 212u8, 236u8, 209u8, 93u8, 224u8, 59u8, 119u8,
               228u8, 148u8, 39u8, 5u8, 168u8, 6u8, 8u8, 171u8, 113u8, 238u8, 173u8, 199u8, 174u8,
               121u8, 165u8, 241u8, 36u8, 210u8, 53u8, 230u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("CuratorDepositMin")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18550,17 +20084,16 @@ pub mod api {
         pub fn bounty_value_minimum(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "BountyValueMinimum")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "BountyValueMinimum")?
             == [
               195u8, 34u8, 93u8, 166u8, 78u8, 216u8, 153u8, 236u8, 61u8, 95u8, 246u8, 135u8, 139u8,
               88u8, 254u8, 123u8, 156u8, 168u8, 68u8, 188u8, 237u8, 73u8, 126u8, 63u8, 136u8,
               201u8, 255u8, 190u8, 13u8, 32u8, 112u8, 166u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("BountyValueMinimum")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18572,17 +20105,16 @@ pub mod api {
         pub fn data_deposit_per_byte(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "DataDepositPerByte")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "DataDepositPerByte")?
             == [
               198u8, 151u8, 50u8, 145u8, 48u8, 23u8, 147u8, 159u8, 56u8, 9u8, 101u8, 96u8, 181u8,
               247u8, 159u8, 225u8, 27u8, 251u8, 34u8, 201u8, 96u8, 180u8, 154u8, 175u8, 146u8,
               135u8, 108u8, 215u8, 76u8, 38u8, 63u8, 43u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("DataDepositPerByte")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -18596,17 +20128,16 @@ pub mod api {
         pub fn maximum_reason_length(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Bounties", "MaximumReasonLength")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Bounties", "MaximumReasonLength")?
             == [
               137u8, 135u8, 60u8, 208u8, 169u8, 200u8, 219u8, 180u8, 48u8, 114u8, 22u8, 9u8, 163u8,
               54u8, 133u8, 198u8, 72u8, 186u8, 183u8, 134u8, 130u8, 198u8, 61u8, 79u8, 86u8, 218u8,
               212u8, 166u8, 195u8, 81u8, 58u8, 191u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Bounties")?;
+            let pallet = metadata.pallet("Bounties")?;
             let constant = pallet.constant("MaximumReasonLength")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -19022,7 +20553,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Create, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Create>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Create>()?
+          };
+          if runtime_call_hash
             == [
               177u8, 53u8, 93u8, 177u8, 53u8, 144u8, 26u8, 107u8, 113u8, 216u8, 184u8, 165u8, 86u8,
               202u8, 52u8, 65u8, 54u8, 154u8, 214u8, 0u8, 227u8, 34u8, 211u8, 56u8, 127u8, 133u8,
@@ -19071,7 +20607,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceCreate, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceCreate>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceCreate>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 61u8, 120u8, 5u8, 137u8, 5u8, 163u8, 103u8, 166u8, 245u8, 79u8, 241u8, 39u8,
               253u8, 6u8, 27u8, 119u8, 143u8, 41u8, 62u8, 104u8, 25u8, 250u8, 131u8, 165u8, 13u8,
@@ -19098,7 +20639,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Destroy, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Destroy>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Destroy>()?
+          };
+          if runtime_call_hash
             == [
               75u8, 150u8, 231u8, 156u8, 201u8, 102u8, 132u8, 29u8, 65u8, 54u8, 131u8, 27u8, 34u8,
               254u8, 226u8, 60u8, 139u8, 241u8, 76u8, 182u8, 174u8, 132u8, 119u8, 210u8, 13u8,
@@ -19135,7 +20681,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Mint, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Mint>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Mint>()?
+          };
+          if runtime_call_hash
             == [
               164u8, 54u8, 103u8, 58u8, 134u8, 74u8, 9u8, 117u8, 122u8, 38u8, 15u8, 13u8, 87u8,
               166u8, 147u8, 197u8, 188u8, 234u8, 151u8, 116u8, 141u8, 55u8, 0u8, 228u8, 162u8,
@@ -19179,7 +20730,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Burn, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Burn>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Burn>()?
+          };
+          if runtime_call_hash
             == [
               222u8, 243u8, 171u8, 102u8, 97u8, 197u8, 63u8, 37u8, 228u8, 27u8, 34u8, 49u8, 249u8,
               57u8, 147u8, 234u8, 62u8, 40u8, 202u8, 217u8, 104u8, 146u8, 103u8, 246u8, 101u8,
@@ -19222,7 +20778,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Transfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Transfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Transfer>()?
+          };
+          if runtime_call_hash
             == [
               196u8, 236u8, 190u8, 133u8, 96u8, 191u8, 156u8, 108u8, 241u8, 115u8, 38u8, 201u8,
               75u8, 96u8, 89u8, 57u8, 152u8, 108u8, 253u8, 197u8, 176u8, 229u8, 74u8, 26u8, 108u8,
@@ -19272,7 +20833,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<TransferKeepAlive>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<TransferKeepAlive>()?
+          };
+          if runtime_call_hash
             == [
               86u8, 157u8, 13u8, 38u8, 193u8, 245u8, 116u8, 84u8, 88u8, 88u8, 6u8, 210u8, 66u8,
               64u8, 119u8, 45u8, 16u8, 103u8, 172u8, 204u8, 150u8, 105u8, 170u8, 204u8, 126u8,
@@ -19320,7 +20886,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceTransfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceTransfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceTransfer>()?
+          };
+          if runtime_call_hash
             == [
               165u8, 181u8, 248u8, 151u8, 144u8, 58u8, 197u8, 151u8, 47u8, 125u8, 35u8, 26u8,
               239u8, 62u8, 196u8, 58u8, 111u8, 8u8, 216u8, 231u8, 83u8, 199u8, 100u8, 53u8, 237u8,
@@ -19359,7 +20930,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Freeze, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Freeze>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Freeze>()?
+          };
+          if runtime_call_hash
             == [
               123u8, 16u8, 113u8, 172u8, 109u8, 135u8, 224u8, 63u8, 69u8, 53u8, 210u8, 134u8,
               245u8, 12u8, 46u8, 71u8, 41u8, 200u8, 203u8, 49u8, 211u8, 209u8, 47u8, 44u8, 15u8,
@@ -19393,7 +20969,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Thaw, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Thaw>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Thaw>()?
+          };
+          if runtime_call_hash
             == [
               134u8, 33u8, 181u8, 219u8, 32u8, 188u8, 81u8, 158u8, 109u8, 165u8, 32u8, 28u8, 51u8,
               189u8, 65u8, 183u8, 188u8, 202u8, 227u8, 89u8, 35u8, 176u8, 232u8, 22u8, 187u8,
@@ -19422,7 +21003,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, FreezeAsset, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<FreezeAsset>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<FreezeAsset>()?
+          };
+          if runtime_call_hash
             == [
               143u8, 188u8, 2u8, 145u8, 109u8, 95u8, 170u8, 60u8, 163u8, 226u8, 99u8, 18u8, 106u8,
               64u8, 77u8, 168u8, 131u8, 87u8, 105u8, 203u8, 145u8, 97u8, 237u8, 194u8, 143u8,
@@ -19451,7 +21037,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ThawAsset, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ThawAsset>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ThawAsset>()?
+          };
+          if runtime_call_hash
             == [
               63u8, 222u8, 197u8, 201u8, 125u8, 210u8, 148u8, 180u8, 52u8, 93u8, 190u8, 63u8,
               195u8, 10u8, 15u8, 140u8, 154u8, 95u8, 5u8, 32u8, 36u8, 189u8, 85u8, 25u8, 167u8,
@@ -19492,7 +21083,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<TransferOwnership>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<TransferOwnership>()?
+          };
+          if runtime_call_hash
             == [
               225u8, 224u8, 250u8, 48u8, 241u8, 21u8, 169u8, 120u8, 74u8, 44u8, 146u8, 133u8,
               104u8, 35u8, 181u8, 70u8, 146u8, 22u8, 125u8, 247u8, 0u8, 249u8, 182u8, 88u8, 188u8,
@@ -19536,7 +21132,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetTeam, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetTeam>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetTeam>()?
+          };
+          if runtime_call_hash
             == [
               48u8, 54u8, 83u8, 165u8, 157u8, 96u8, 245u8, 73u8, 103u8, 153u8, 131u8, 136u8, 229u8,
               0u8, 185u8, 15u8, 4u8, 172u8, 32u8, 51u8, 186u8, 68u8, 231u8, 150u8, 93u8, 197u8,
@@ -19580,7 +21181,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetMetadata, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetMetadata>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetMetadata>()?
+          };
+          if runtime_call_hash
             == [
               173u8, 223u8, 227u8, 51u8, 239u8, 95u8, 222u8, 28u8, 190u8, 232u8, 231u8, 226u8,
               149u8, 147u8, 69u8, 135u8, 183u8, 147u8, 254u8, 80u8, 88u8, 101u8, 215u8, 250u8,
@@ -19616,7 +21222,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ClearMetadata, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClearMetadata>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClearMetadata>()?
+          };
+          if runtime_call_hash
             == [
               167u8, 244u8, 159u8, 98u8, 242u8, 73u8, 109u8, 217u8, 75u8, 20u8, 34u8, 94u8, 21u8,
               190u8, 179u8, 182u8, 156u8, 14u8, 19u8, 91u8, 36u8, 130u8, 88u8, 196u8, 21u8, 97u8,
@@ -19654,7 +21265,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceSetMetadata, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceSetMetadata>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceSetMetadata>()?
+          };
+          if runtime_call_hash
             == [
               30u8, 254u8, 44u8, 17u8, 82u8, 41u8, 93u8, 110u8, 113u8, 6u8, 75u8, 27u8, 7u8, 69u8,
               221u8, 148u8, 47u8, 106u8, 111u8, 144u8, 18u8, 79u8, 0u8, 17u8, 137u8, 229u8, 175u8,
@@ -19698,7 +21314,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceClearMetadata>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceClearMetadata>()?
+          };
+          if runtime_call_hash
             == [
               31u8, 209u8, 69u8, 120u8, 235u8, 248u8, 172u8, 247u8, 79u8, 199u8, 186u8, 52u8,
               254u8, 240u8, 76u8, 59u8, 74u8, 6u8, 136u8, 142u8, 240u8, 200u8, 235u8, 55u8, 96u8,
@@ -19759,7 +21380,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ForceAssetStatus, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceAssetStatus>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceAssetStatus>()?
+          };
+          if runtime_call_hash
             == [
               106u8, 151u8, 41u8, 11u8, 64u8, 231u8, 76u8, 156u8, 21u8, 121u8, 95u8, 59u8, 54u8,
               227u8, 61u8, 170u8, 255u8, 103u8, 80u8, 110u8, 35u8, 22u8, 144u8, 231u8, 205u8, 37u8,
@@ -19813,7 +21439,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ApproveTransfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ApproveTransfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ApproveTransfer>()?
+          };
+          if runtime_call_hash
             == [
               235u8, 25u8, 236u8, 240u8, 111u8, 162u8, 76u8, 234u8, 166u8, 166u8, 96u8, 247u8,
               253u8, 188u8, 193u8, 6u8, 100u8, 76u8, 26u8, 243u8, 44u8, 99u8, 80u8, 40u8, 21u8,
@@ -19854,7 +21485,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelApproval, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelApproval>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelApproval>()?
+          };
+          if runtime_call_hash
             == [
               25u8, 74u8, 134u8, 139u8, 239u8, 248u8, 159u8, 207u8, 76u8, 116u8, 101u8, 42u8,
               205u8, 187u8, 72u8, 94u8, 131u8, 61u8, 161u8, 91u8, 174u8, 89u8, 175u8, 215u8, 127u8,
@@ -19902,7 +21538,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ForceCancelApproval>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ForceCancelApproval>()?
+          };
+          if runtime_call_hash
             == [
               60u8, 95u8, 2u8, 69u8, 251u8, 122u8, 210u8, 164u8, 168u8, 182u8, 209u8, 36u8, 248u8,
               107u8, 252u8, 16u8, 250u8, 62u8, 229u8, 192u8, 60u8, 91u8, 43u8, 238u8, 135u8, 54u8,
@@ -19953,7 +21594,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, TransferApproved, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<TransferApproved>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<TransferApproved>()?
+          };
+          if runtime_call_hash
             == [
               229u8, 21u8, 50u8, 120u8, 75u8, 65u8, 189u8, 174u8, 54u8, 149u8, 4u8, 129u8, 20u8,
               123u8, 67u8, 244u8, 104u8, 71u8, 182u8, 150u8, 199u8, 79u8, 225u8, 137u8, 78u8, 29u8,
@@ -19987,7 +21633,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Touch, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Touch>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Touch>()?
+          };
+          if runtime_call_hash
             == [
               148u8, 89u8, 169u8, 34u8, 198u8, 67u8, 136u8, 9u8, 219u8, 214u8, 164u8, 144u8, 195u8,
               48u8, 75u8, 218u8, 231u8, 109u8, 253u8, 88u8, 23u8, 159u8, 184u8, 54u8, 249u8, 68u8,
@@ -20016,7 +21667,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Refund, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Refund>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Refund>()?
+          };
+          if runtime_call_hash
             == [
               72u8, 197u8, 177u8, 250u8, 20u8, 37u8, 39u8, 132u8, 62u8, 24u8, 167u8, 155u8, 79u8,
               88u8, 158u8, 209u8, 112u8, 40u8, 41u8, 83u8, 224u8, 224u8, 71u8, 115u8, 29u8, 84u8,
@@ -20346,7 +22002,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Asset>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Asset>()?
+          };
+          if runtime_storage_hash
             == [
               171u8, 171u8, 67u8, 144u8, 214u8, 143u8, 54u8, 233u8, 197u8, 111u8, 154u8, 139u8,
               7u8, 231u8, 194u8, 246u8, 190u8, 109u8, 168u8, 154u8, 247u8, 28u8, 227u8, 53u8,
@@ -20365,7 +22026,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Asset<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Asset>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Asset>()?
+          };
+          if runtime_storage_hash
             == [
               171u8, 171u8, 67u8, 144u8, 214u8, 143u8, 54u8, 233u8, 197u8, 111u8, 154u8, 139u8,
               7u8, 231u8, 194u8, 246u8, 190u8, 109u8, 168u8, 154u8, 247u8, 28u8, 227u8, 53u8,
@@ -20393,7 +22059,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               248u8, 123u8, 30u8, 144u8, 20u8, 252u8, 112u8, 37u8, 119u8, 116u8, 49u8, 243u8,
               179u8, 62u8, 68u8, 220u8, 48u8, 63u8, 37u8, 7u8, 108u8, 161u8, 238u8, 94u8, 236u8,
@@ -20412,7 +22083,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Account<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Account>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Account>()?
+          };
+          if runtime_storage_hash
             == [
               248u8, 123u8, 30u8, 144u8, 20u8, 252u8, 112u8, 37u8, 119u8, 116u8, 49u8, 243u8,
               179u8, 62u8, 68u8, 220u8, 48u8, 63u8, 37u8, 7u8, 108u8, 161u8, 238u8, 94u8, 236u8,
@@ -20442,7 +22118,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Approvals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Approvals>()?
+          };
+          if runtime_storage_hash
             == [
               237u8, 98u8, 160u8, 91u8, 202u8, 124u8, 226u8, 49u8, 184u8, 96u8, 90u8, 61u8, 79u8,
               66u8, 54u8, 237u8, 156u8, 232u8, 140u8, 67u8, 81u8, 55u8, 89u8, 132u8, 68u8, 125u8,
@@ -20463,7 +22144,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Approvals<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Approvals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Approvals>()?
+          };
+          if runtime_storage_hash
             == [
               237u8, 98u8, 160u8, 91u8, 202u8, 124u8, 226u8, 49u8, 184u8, 96u8, 90u8, 61u8, 79u8,
               66u8, 54u8, 237u8, 156u8, 232u8, 140u8, 67u8, 81u8, 55u8, 89u8, 132u8, 68u8, 125u8,
@@ -20487,7 +22173,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Metadata>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Metadata>()?
+          };
+          if runtime_storage_hash
             == [
               209u8, 23u8, 7u8, 106u8, 173u8, 10u8, 115u8, 39u8, 138u8, 26u8, 54u8, 230u8, 183u8,
               233u8, 249u8, 85u8, 76u8, 84u8, 184u8, 54u8, 114u8, 213u8, 38u8, 238u8, 109u8, 30u8,
@@ -20510,7 +22201,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Metadata<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Metadata>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Metadata>()?
+          };
+          if runtime_storage_hash
             == [
               209u8, 23u8, 7u8, 106u8, 173u8, 10u8, 115u8, 39u8, 138u8, 26u8, 54u8, 230u8, 183u8,
               233u8, 249u8, 85u8, 76u8, 84u8, 184u8, 54u8, 114u8, 213u8, 38u8, 238u8, 109u8, 30u8,
@@ -20537,17 +22233,16 @@ pub mod api {
         pub fn asset_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "AssetDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "AssetDeposit")?
             == [
               196u8, 149u8, 152u8, 62u8, 30u8, 176u8, 7u8, 237u8, 13u8, 154u8, 60u8, 252u8, 148u8,
               215u8, 52u8, 156u8, 49u8, 227u8, 164u8, 249u8, 68u8, 239u8, 14u8, 46u8, 26u8, 42u8,
               166u8, 172u8, 150u8, 246u8, 83u8, 43u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("AssetDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20560,17 +22255,16 @@ pub mod api {
         pub fn asset_account_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "AssetAccountDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "AssetAccountDeposit")?
             == [
               54u8, 185u8, 94u8, 153u8, 66u8, 56u8, 170u8, 214u8, 144u8, 152u8, 240u8, 43u8, 202u8,
               208u8, 128u8, 77u8, 141u8, 246u8, 9u8, 116u8, 217u8, 222u8, 251u8, 23u8, 120u8, 5u8,
               52u8, 111u8, 218u8, 134u8, 98u8, 15u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("AssetAccountDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20582,17 +22276,16 @@ pub mod api {
         pub fn metadata_deposit_base(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "MetadataDepositBase")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "MetadataDepositBase")?
             == [
               82u8, 220u8, 131u8, 1u8, 84u8, 159u8, 26u8, 23u8, 43u8, 188u8, 170u8, 143u8, 48u8,
               94u8, 36u8, 141u8, 106u8, 12u8, 161u8, 42u8, 60u8, 60u8, 139u8, 56u8, 9u8, 62u8,
               182u8, 35u8, 203u8, 184u8, 217u8, 9u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("MetadataDepositBase")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20605,17 +22298,16 @@ pub mod api {
         pub fn metadata_deposit_per_byte(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "MetadataDepositPerByte")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "MetadataDepositPerByte")?
             == [
               69u8, 210u8, 255u8, 182u8, 12u8, 79u8, 43u8, 46u8, 70u8, 71u8, 52u8, 30u8, 32u8,
               199u8, 55u8, 206u8, 250u8, 121u8, 54u8, 49u8, 211u8, 55u8, 221u8, 115u8, 136u8, 13u8,
               113u8, 134u8, 114u8, 93u8, 103u8, 90u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("MetadataDepositPerByte")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20627,17 +22319,16 @@ pub mod api {
         pub fn approval_deposit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "ApprovalDeposit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "ApprovalDeposit")?
             == [
               141u8, 236u8, 210u8, 24u8, 60u8, 44u8, 154u8, 161u8, 49u8, 60u8, 185u8, 224u8, 159u8,
               204u8, 188u8, 101u8, 116u8, 119u8, 181u8, 183u8, 193u8, 246u8, 90u8, 9u8, 30u8,
               178u8, 96u8, 129u8, 61u8, 74u8, 83u8, 160u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("ApprovalDeposit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20649,17 +22340,16 @@ pub mod api {
         pub fn string_limit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Assets", "StringLimit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Assets", "StringLimit")?
             == [
               64u8, 204u8, 1u8, 240u8, 39u8, 64u8, 238u8, 105u8, 253u8, 194u8, 239u8, 211u8, 82u8,
               163u8, 118u8, 129u8, 51u8, 252u8, 113u8, 145u8, 46u8, 73u8, 211u8, 136u8, 160u8,
               117u8, 90u8, 181u8, 166u8, 203u8, 244u8, 185u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Assets")?;
+            let pallet = metadata.pallet("Assets")?;
             let constant = pallet.constant("StringLimit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -20723,7 +22413,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Rebag, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Rebag>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Rebag>()?
+          };
+          if runtime_call_hash
             == [
               46u8, 138u8, 28u8, 6u8, 58u8, 153u8, 5u8, 41u8, 44u8, 7u8, 228u8, 72u8, 135u8, 184u8,
               185u8, 132u8, 146u8, 181u8, 47u8, 166u8, 149u8, 21u8, 155u8, 29u8, 159u8, 79u8, 83u8,
@@ -20751,7 +22446,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, PutInFrontOf, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<PutInFrontOf>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<PutInFrontOf>()?
+          };
+          if runtime_call_hash
             == [
               79u8, 254u8, 222u8, 19u8, 17u8, 80u8, 7u8, 68u8, 54u8, 9u8, 23u8, 133u8, 108u8, 29u8,
               166u8, 177u8, 230u8, 247u8, 226u8, 189u8, 3u8, 241u8, 100u8, 178u8, 234u8, 204u8,
@@ -20834,7 +22534,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_bags_list::list::Node>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ListNodes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ListNodes>()?
+          };
+          if runtime_storage_hash
             == [
               114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8, 214u8, 195u8, 15u8, 140u8, 174u8,
               89u8, 85u8, 191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8, 148u8, 141u8, 206u8,
@@ -20855,7 +22560,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ListNodes<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ListNodes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ListNodes>()?
+          };
+          if runtime_storage_hash
             == [
               114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8, 214u8, 195u8, 15u8, 140u8, 174u8,
               89u8, 85u8, 191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8, 148u8, 141u8, 206u8,
@@ -20872,10 +22582,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForListNodes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForListNodes>()?
+          };
+          if runtime_storage_hash
             == [
               156u8, 168u8, 97u8, 33u8, 84u8, 117u8, 220u8, 89u8, 62u8, 182u8, 24u8, 88u8, 231u8,
               244u8, 41u8, 19u8, 210u8, 131u8, 87u8, 0u8, 241u8, 230u8, 160u8, 142u8, 128u8, 153u8,
@@ -20903,7 +22615,12 @@ pub mod api {
           ::core::option::Option<runtime_types::pallet_bags_list::list::Bag>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ListBags>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ListBags>()?
+          };
+          if runtime_storage_hash
             == [
               117u8, 35u8, 42u8, 116u8, 5u8, 68u8, 168u8, 75u8, 112u8, 29u8, 54u8, 49u8, 169u8,
               103u8, 22u8, 163u8, 53u8, 122u8, 181u8, 32u8, 97u8, 41u8, 56u8, 89u8, 77u8, 200u8,
@@ -20924,7 +22641,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, ListBags<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ListBags>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ListBags>()?
+          };
+          if runtime_storage_hash
             == [
               117u8, 35u8, 42u8, 116u8, 5u8, 68u8, 168u8, 75u8, 112u8, 29u8, 54u8, 49u8, 169u8,
               103u8, 22u8, 163u8, 53u8, 122u8, 181u8, 32u8, 97u8, 41u8, 56u8, 89u8, 77u8, 200u8,
@@ -20994,17 +22716,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<::std::vec::Vec<::core::primitive::u64>, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("BagsList", "BagThresholds")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("BagsList", "BagThresholds")?
             == [
               80u8, 37u8, 123u8, 159u8, 45u8, 82u8, 154u8, 139u8, 22u8, 202u8, 109u8, 255u8, 123u8,
               120u8, 145u8, 135u8, 109u8, 82u8, 104u8, 199u8, 168u8, 41u8, 74u8, 48u8, 148u8,
               250u8, 126u8, 195u8, 219u8, 125u8, 200u8, 236u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("BagsList")?;
+            let pallet = metadata.pallet("BagsList")?;
             let constant = pallet.constant("BagThresholds")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -21080,7 +22801,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, NotePreimage, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<NotePreimage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<NotePreimage>()?
+          };
+          if runtime_call_hash
             == [
               116u8, 66u8, 88u8, 251u8, 187u8, 86u8, 82u8, 136u8, 215u8, 82u8, 240u8, 255u8, 70u8,
               190u8, 116u8, 187u8, 232u8, 168u8, 125u8, 234u8, 8u8, 21u8, 247u8, 195u8, 167u8,
@@ -21101,7 +22827,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, UnnotePreimage, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<UnnotePreimage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<UnnotePreimage>()?
+          };
+          if runtime_call_hash
             == [
               162u8, 195u8, 220u8, 134u8, 147u8, 150u8, 145u8, 130u8, 231u8, 104u8, 83u8, 70u8,
               42u8, 90u8, 248u8, 61u8, 223u8, 63u8, 162u8, 219u8, 92u8, 248u8, 179u8, 99u8, 158u8,
@@ -21125,7 +22856,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RequestPreimage, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RequestPreimage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RequestPreimage>()?
+          };
+          if runtime_call_hash
             == [
               186u8, 108u8, 235u8, 145u8, 104u8, 29u8, 22u8, 33u8, 21u8, 121u8, 32u8, 75u8, 141u8,
               125u8, 205u8, 186u8, 210u8, 184u8, 134u8, 248u8, 74u8, 175u8, 104u8, 91u8, 247u8,
@@ -21155,7 +22891,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<UnrequestPreimage>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<UnrequestPreimage>()?
+          };
+          if runtime_call_hash
             == [
               160u8, 6u8, 6u8, 198u8, 77u8, 37u8, 28u8, 86u8, 240u8, 160u8, 128u8, 123u8, 144u8,
               150u8, 150u8, 60u8, 107u8, 148u8, 189u8, 192u8, 125u8, 25u8, 55u8, 212u8, 193u8,
@@ -21252,7 +22993,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<StatusFor>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StatusFor>()?
+          };
+          if runtime_storage_hash
             == [
               239u8, 53u8, 52u8, 248u8, 196u8, 74u8, 99u8, 113u8, 135u8, 186u8, 100u8, 46u8, 246u8,
               245u8, 160u8, 102u8, 81u8, 96u8, 85u8, 11u8, 27u8, 53u8, 139u8, 8u8, 18u8, 208u8,
@@ -21271,7 +23017,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, StatusFor<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<StatusFor>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StatusFor>()?
+          };
+          if runtime_storage_hash
             == [
               239u8, 53u8, 52u8, 248u8, 196u8, 74u8, 99u8, 113u8, 135u8, 186u8, 100u8, 46u8, 246u8,
               245u8, 160u8, 102u8, 81u8, 96u8, 85u8, 11u8, 27u8, 53u8, 139u8, 8u8, 18u8, 208u8,
@@ -21294,7 +23045,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<PreimageFor>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PreimageFor>()?
+          };
+          if runtime_storage_hash
             == [
               153u8, 48u8, 185u8, 144u8, 57u8, 68u8, 133u8, 92u8, 225u8, 172u8, 36u8, 62u8, 152u8,
               162u8, 15u8, 139u8, 140u8, 82u8, 118u8, 63u8, 31u8, 158u8, 197u8, 26u8, 141u8, 210u8,
@@ -21313,7 +23069,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, PreimageFor<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<PreimageFor>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PreimageFor>()?
+          };
+          if runtime_storage_hash
             == [
               153u8, 48u8, 185u8, 144u8, 57u8, 68u8, 133u8, 92u8, 225u8, 172u8, 36u8, 62u8, 152u8,
               162u8, 15u8, 139u8, 140u8, 82u8, 118u8, 63u8, 31u8, 158u8, 197u8, 26u8, 141u8, 210u8,
@@ -21407,11 +23168,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Sudo, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Sudo>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Sudo>()?
+          };
+          if runtime_call_hash
             == [
-              19u8, 76u8, 239u8, 150u8, 136u8, 203u8, 221u8, 201u8, 15u8, 63u8, 188u8, 51u8, 7u8,
-              34u8, 14u8, 177u8, 221u8, 206u8, 15u8, 227u8, 74u8, 34u8, 41u8, 127u8, 27u8, 43u8,
-              203u8, 144u8, 243u8, 156u8, 22u8, 227u8,
+              45u8, 27u8, 116u8, 179u8, 23u8, 164u8, 200u8, 34u8, 54u8, 34u8, 110u8, 106u8, 84u8,
+              26u8, 236u8, 45u8, 125u8, 24u8, 197u8, 39u8, 89u8, 136u8, 235u8, 192u8, 62u8, 110u8,
+              127u8, 249u8, 48u8, 10u8, 89u8, 159u8,
             ]
           {
             let call = Sudo {
@@ -21447,11 +23213,16 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SudoUncheckedWeight>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SudoUncheckedWeight>()?
+          };
+          if runtime_call_hash
             == [
-              81u8, 245u8, 151u8, 72u8, 173u8, 23u8, 3u8, 130u8, 125u8, 17u8, 168u8, 230u8, 220u8,
-              132u8, 135u8, 252u8, 192u8, 90u8, 9u8, 124u8, 51u8, 193u8, 174u8, 100u8, 9u8, 36u8,
-              192u8, 221u8, 203u8, 133u8, 165u8, 151u8,
+              100u8, 130u8, 85u8, 59u8, 44u8, 185u8, 8u8, 114u8, 164u8, 211u8, 127u8, 229u8, 88u8,
+              121u8, 175u8, 107u8, 18u8, 63u8, 240u8, 228u8, 247u8, 203u8, 129u8, 92u8, 174u8,
+              241u8, 28u8, 60u8, 128u8, 165u8, 118u8, 170u8,
             ]
           {
             let call = SudoUncheckedWeight {
@@ -21483,7 +23254,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetKey, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetKey>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetKey>()?
+          };
+          if runtime_call_hash
             == [
               142u8, 228u8, 169u8, 153u8, 89u8, 247u8, 116u8, 76u8, 245u8, 199u8, 2u8, 131u8,
               195u8, 249u8, 201u8, 178u8, 212u8, 253u8, 144u8, 48u8, 172u8, 25u8, 184u8, 72u8,
@@ -21518,11 +23294,16 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SudoAs, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SudoAs>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SudoAs>()?
+          };
+          if runtime_call_hash
             == [
-              167u8, 16u8, 21u8, 115u8, 177u8, 178u8, 73u8, 15u8, 255u8, 8u8, 91u8, 115u8, 75u8,
-              140u8, 17u8, 141u8, 71u8, 122u8, 189u8, 197u8, 248u8, 71u8, 158u8, 103u8, 28u8, 60u8,
-              74u8, 8u8, 57u8, 58u8, 227u8, 190u8,
+              1u8, 41u8, 104u8, 252u8, 129u8, 161u8, 135u8, 13u8, 154u8, 9u8, 89u8, 29u8, 94u8,
+              238u8, 222u8, 115u8, 155u8, 214u8, 138u8, 37u8, 49u8, 73u8, 110u8, 207u8, 209u8,
+              189u8, 154u8, 128u8, 36u8, 179u8, 175u8, 202u8,
             ]
           {
             let call = SudoAs {
@@ -21593,7 +23374,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Key>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Key>()?
+          };
+          if runtime_storage_hash
             == [
               222u8, 90u8, 158u8, 233u8, 184u8, 23u8, 141u8, 135u8, 81u8, 187u8, 47u8, 100u8, 30u8,
               81u8, 239u8, 197u8, 249u8, 253u8, 73u8, 207u8, 161u8, 141u8, 174u8, 59u8, 74u8,
@@ -21691,7 +23477,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Transfer, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Transfer>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Transfer>()?
+          };
+          if runtime_call_hash
             == [
               249u8, 171u8, 167u8, 176u8, 37u8, 143u8, 148u8, 188u8, 68u8, 123u8, 34u8, 49u8,
               112u8, 184u8, 182u8, 117u8, 120u8, 216u8, 59u8, 95u8, 233u8, 108u8, 47u8, 184u8,
@@ -21726,7 +23517,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Withdrawal, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Withdrawal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Withdrawal>()?
+          };
+          if runtime_call_hash
             == [
               175u8, 10u8, 232u8, 2u8, 26u8, 95u8, 245u8, 59u8, 112u8, 205u8, 189u8, 217u8, 232u8,
               73u8, 249u8, 95u8, 95u8, 208u8, 186u8, 20u8, 14u8, 178u8, 100u8, 162u8, 96u8, 252u8,
@@ -21770,7 +23566,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Swap, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Swap>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Swap>()?
+          };
+          if runtime_call_hash
             == [
               148u8, 33u8, 223u8, 130u8, 253u8, 132u8, 185u8, 61u8, 110u8, 71u8, 68u8, 137u8,
               208u8, 1u8, 44u8, 232u8, 179u8, 187u8, 47u8, 239u8, 171u8, 164u8, 57u8, 202u8, 170u8,
@@ -21806,7 +23607,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelSwap, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelSwap>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelSwap>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 23u8, 73u8, 248u8, 0u8, 168u8, 254u8, 228u8, 251u8, 67u8, 110u8, 123u8, 224u8,
               204u8, 169u8, 106u8, 40u8, 181u8, 63u8, 230u8, 87u8, 154u8, 201u8, 172u8, 137u8,
@@ -21947,7 +23753,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Stake, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Stake>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Stake>()?
+          };
+          if runtime_call_hash
             == [
               70u8, 58u8, 132u8, 122u8, 246u8, 179u8, 208u8, 135u8, 203u8, 6u8, 97u8, 41u8, 166u8,
               251u8, 21u8, 17u8, 130u8, 179u8, 36u8, 232u8, 38u8, 95u8, 5u8, 127u8, 115u8, 230u8,
@@ -21980,7 +23791,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Unstake, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Unstake>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Unstake>()?
+          };
+          if runtime_call_hash
             == [
               55u8, 64u8, 16u8, 184u8, 39u8, 92u8, 173u8, 57u8, 2u8, 179u8, 228u8, 27u8, 47u8,
               177u8, 136u8, 48u8, 235u8, 180u8, 102u8, 54u8, 113u8, 125u8, 33u8, 126u8, 225u8,
@@ -22182,7 +23998,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::u128>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<StakingPool>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StakingPool>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 243u8, 208u8, 130u8, 181u8, 45u8, 28u8, 22u8, 124u8, 172u8, 110u8, 28u8,
               146u8, 155u8, 91u8, 140u8, 199u8, 6u8, 1u8, 59u8, 83u8, 51u8, 213u8, 252u8, 74u8,
@@ -22201,7 +24022,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, StakingPool<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<StakingPool>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StakingPool>()?
+          };
+          if runtime_storage_hash
             == [
               105u8, 243u8, 208u8, 130u8, 181u8, 45u8, 28u8, 22u8, 124u8, 172u8, 110u8, 28u8,
               146u8, 155u8, 91u8, 140u8, 199u8, 6u8, 1u8, 59u8, 83u8, 51u8, 213u8, 252u8, 74u8,
@@ -22224,10 +24050,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<StakingPeriodRewards>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StakingPeriodRewards>()?
+          };
+          if runtime_storage_hash
             == [
               137u8, 13u8, 229u8, 42u8, 4u8, 66u8, 15u8, 164u8, 62u8, 61u8, 218u8, 111u8, 242u8,
               7u8, 169u8, 91u8, 147u8, 17u8, 144u8, 64u8, 181u8, 142u8, 124u8, 174u8, 155u8, 140u8,
@@ -22255,10 +24083,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<StakingCurrencyMeta>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StakingCurrencyMeta>()?
+          };
+          if runtime_storage_hash
             == [
               230u8, 10u8, 175u8, 219u8, 223u8, 157u8, 19u8, 2u8, 9u8, 79u8, 3u8, 29u8, 91u8,
               195u8, 52u8, 117u8, 162u8, 209u8, 119u8, 45u8, 233u8, 162u8, 241u8, 253u8, 116u8,
@@ -22279,10 +24109,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, StakingCurrencyMeta<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<StakingCurrencyMeta>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StakingCurrencyMeta>()?
+          };
+          if runtime_storage_hash
             == [
               230u8, 10u8, 175u8, 219u8, 223u8, 157u8, 19u8, 2u8, 9u8, 79u8, 3u8, 29u8, 91u8,
               195u8, 52u8, 117u8, 162u8, 209u8, 119u8, 45u8, 233u8, 162u8, 241u8, 253u8, 116u8,
@@ -22302,7 +24134,12 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Percent,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnstakeFee>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnstakeFee>()?
+          };
+          if runtime_storage_hash
             == [
               83u8, 134u8, 72u8, 101u8, 153u8, 97u8, 113u8, 209u8, 216u8, 225u8, 196u8, 239u8,
               36u8, 177u8, 206u8, 8u8, 91u8, 36u8, 8u8, 91u8, 77u8, 129u8, 146u8, 252u8, 35u8,
@@ -22324,10 +24161,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<InterestCompoundLastSession>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<InterestCompoundLastSession>()?
+          };
+          if runtime_storage_hash
             == [
               94u8, 238u8, 28u8, 234u8, 156u8, 4u8, 143u8, 154u8, 98u8, 115u8, 129u8, 128u8, 22u8,
               121u8, 123u8, 203u8, 74u8, 129u8, 96u8, 156u8, 4u8, 148u8, 178u8, 204u8, 95u8, 35u8,
@@ -22356,7 +24195,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<UnstakeQueue>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<UnstakeQueue>()?
+          };
+          if runtime_storage_hash
             == [
               71u8, 25u8, 207u8, 154u8, 45u8, 116u8, 50u8, 51u8, 142u8, 58u8, 184u8, 215u8, 137u8,
               91u8, 98u8, 68u8, 188u8, 102u8, 191u8, 171u8, 102u8, 198u8, 106u8, 225u8, 212u8,
@@ -22379,10 +24223,12 @@ pub mod api {
           _0: &::core::primitive::u64,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::option::Option<()>, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<PendingStoredSessions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PendingStoredSessions>()?
+          };
+          if runtime_storage_hash
             == [
               5u8, 99u8, 214u8, 65u8, 109u8, 137u8, 233u8, 154u8, 52u8, 95u8, 154u8, 161u8, 225u8,
               96u8, 115u8, 44u8, 176u8, 120u8, 67u8, 104u8, 130u8, 141u8, 42u8, 179u8, 91u8, 156u8,
@@ -22403,10 +24249,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, PendingStoredSessions<'a>>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<PendingStoredSessions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PendingStoredSessions>()?
+          };
+          if runtime_storage_hash
             == [
               5u8, 99u8, 214u8, 65u8, 109u8, 137u8, 233u8, 154u8, 52u8, 95u8, 154u8, 161u8, 225u8,
               96u8, 115u8, 44u8, 176u8, 120u8, 67u8, 104u8, 130u8, 141u8, 42u8, 179u8, 91u8, 156u8,
@@ -22423,10 +24271,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForPendingStoredSessions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForPendingStoredSessions>()?
+          };
+          if runtime_storage_hash
             == [
               35u8, 175u8, 239u8, 114u8, 60u8, 172u8, 74u8, 190u8, 161u8, 48u8, 216u8, 61u8, 90u8,
               191u8, 0u8, 166u8, 20u8, 17u8, 169u8, 58u8, 227u8, 68u8, 108u8, 190u8, 80u8, 24u8,
@@ -22451,7 +24301,12 @@ pub mod api {
           _1: &runtime_types::tidefi_primitives::CurrencyId,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<SessionTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SessionTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               171u8, 248u8, 193u8, 89u8, 112u8, 202u8, 106u8, 214u8, 97u8, 212u8, 163u8, 147u8,
               6u8, 109u8, 44u8, 89u8, 6u8, 93u8, 51u8, 74u8, 154u8, 1u8, 16u8, 60u8, 100u8, 189u8,
@@ -22477,7 +24332,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, SessionTotalFees<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SessionTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SessionTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               171u8, 248u8, 193u8, 89u8, 112u8, 202u8, 106u8, 214u8, 97u8, 212u8, 163u8, 147u8,
               6u8, 109u8, 44u8, 89u8, 6u8, 93u8, 51u8, 74u8, 154u8, 1u8, 16u8, 60u8, 100u8, 189u8,
@@ -22503,7 +24363,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AccountStakes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountStakes>()?
+          };
+          if runtime_storage_hash
             == [
               57u8, 33u8, 88u8, 36u8, 240u8, 242u8, 239u8, 109u8, 228u8, 215u8, 57u8, 164u8, 88u8,
               166u8, 10u8, 47u8, 6u8, 22u8, 0u8, 78u8, 17u8, 225u8, 145u8, 8u8, 247u8, 190u8,
@@ -22526,7 +24391,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, AccountStakes<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<AccountStakes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountStakes>()?
+          };
+          if runtime_storage_hash
             == [
               57u8, 33u8, 88u8, 36u8, 240u8, 242u8, 239u8, 109u8, 228u8, 215u8, 57u8, 164u8, 88u8,
               166u8, 10u8, 47u8, 6u8, 22u8, 0u8, 78u8, 17u8, 225u8, 145u8, 8u8, 247u8, 190u8,
@@ -22543,10 +24413,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForAccountStakes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForAccountStakes>()?
+          };
+          if runtime_storage_hash
             == [
               7u8, 163u8, 221u8, 232u8, 98u8, 2u8, 117u8, 118u8, 59u8, 175u8, 84u8, 96u8, 250u8,
               136u8, 106u8, 165u8, 207u8, 84u8, 10u8, 132u8, 75u8, 159u8, 16u8, 24u8, 251u8, 115u8,
@@ -22579,17 +24451,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TidefiStaking", "StakePalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TidefiStaking", "StakePalletId")?
             == [
               248u8, 63u8, 221u8, 219u8, 141u8, 9u8, 35u8, 48u8, 9u8, 234u8, 48u8, 141u8, 212u8,
               246u8, 61u8, 217u8, 211u8, 140u8, 228u8, 213u8, 165u8, 106u8, 209u8, 174u8, 202u8,
               2u8, 215u8, 64u8, 102u8, 80u8, 250u8, 81u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TidefiStaking")?;
+            let pallet = metadata.pallet("TidefiStaking")?;
             let constant = pallet.constant("StakePalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -22601,17 +24472,16 @@ pub mod api {
         pub fn unstake_queue_cap(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TidefiStaking", "UnstakeQueueCap")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TidefiStaking", "UnstakeQueueCap")?
             == [
               243u8, 48u8, 226u8, 212u8, 203u8, 59u8, 160u8, 201u8, 144u8, 102u8, 253u8, 225u8,
               84u8, 89u8, 17u8, 164u8, 74u8, 98u8, 129u8, 153u8, 73u8, 88u8, 133u8, 162u8, 50u8,
               22u8, 18u8, 121u8, 237u8, 128u8, 118u8, 237u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TidefiStaking")?;
+            let pallet = metadata.pallet("TidefiStaking")?;
             let constant = pallet.constant("UnstakeQueueCap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -22623,17 +24493,16 @@ pub mod api {
         pub fn stake_account_cap(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TidefiStaking", "StakeAccountCap")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TidefiStaking", "StakeAccountCap")?
             == [
               47u8, 174u8, 80u8, 98u8, 158u8, 107u8, 1u8, 112u8, 161u8, 232u8, 132u8, 70u8, 137u8,
               224u8, 65u8, 238u8, 206u8, 119u8, 13u8, 69u8, 231u8, 54u8, 100u8, 244u8, 96u8, 195u8,
               55u8, 81u8, 118u8, 132u8, 216u8, 202u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TidefiStaking")?;
+            let pallet = metadata.pallet("TidefiStaking")?;
             let constant = pallet.constant("StakeAccountCap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -22645,17 +24514,16 @@ pub mod api {
         pub fn staking_reward_cap(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TidefiStaking", "StakingRewardCap")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TidefiStaking", "StakingRewardCap")?
             == [
               77u8, 110u8, 80u8, 227u8, 112u8, 232u8, 107u8, 127u8, 64u8, 41u8, 215u8, 246u8,
               146u8, 251u8, 221u8, 235u8, 147u8, 70u8, 112u8, 135u8, 104u8, 223u8, 151u8, 1u8,
               116u8, 159u8, 151u8, 44u8, 147u8, 7u8, 204u8, 115u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TidefiStaking")?;
+            let pallet = metadata.pallet("TidefiStaking")?;
             let constant = pallet.constant("StakingRewardCap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -22667,17 +24535,16 @@ pub mod api {
         pub fn blocks_force_unstake(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("TidefiStaking", "BlocksForceUnstake")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("TidefiStaking", "BlocksForceUnstake")?
             == [
               123u8, 212u8, 125u8, 102u8, 81u8, 36u8, 180u8, 98u8, 11u8, 38u8, 238u8, 219u8, 88u8,
               68u8, 11u8, 187u8, 43u8, 173u8, 51u8, 131u8, 24u8, 98u8, 37u8, 23u8, 243u8, 247u8,
               137u8, 220u8, 95u8, 213u8, 6u8, 125u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("TidefiStaking")?;
+            let pallet = metadata.pallet("TidefiStaking")?;
             let constant = pallet.constant("BlocksForceUnstake")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -22779,7 +24646,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SubmitProposal, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SubmitProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SubmitProposal>()?
+          };
+          if runtime_call_hash
             == [
               52u8, 199u8, 140u8, 220u8, 208u8, 109u8, 232u8, 131u8, 178u8, 127u8, 24u8, 244u8,
               131u8, 186u8, 90u8, 228u8, 61u8, 65u8, 136u8, 223u8, 133u8, 150u8, 150u8, 116u8,
@@ -22807,7 +24679,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AcknowledgeProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AcknowledgeProposal>()?
+          };
+          if runtime_call_hash
             == [
               8u8, 113u8, 230u8, 63u8, 66u8, 165u8, 96u8, 5u8, 150u8, 79u8, 216u8, 13u8, 59u8,
               17u8, 87u8, 185u8, 106u8, 43u8, 175u8, 232u8, 216u8, 28u8, 134u8, 130u8, 32u8, 64u8,
@@ -22835,7 +24712,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AcknowledgeBurned>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AcknowledgeBurned>()?
+          };
+          if runtime_call_hash
             == [
               21u8, 156u8, 250u8, 33u8, 124u8, 17u8, 102u8, 233u8, 190u8, 51u8, 119u8, 75u8, 163u8,
               80u8, 131u8, 51u8, 231u8, 188u8, 38u8, 95u8, 28u8, 251u8, 199u8, 121u8, 232u8, 250u8,
@@ -22856,7 +24738,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, RejectProposal, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RejectProposal>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RejectProposal>()?
+          };
+          if runtime_call_hash
             == [
               219u8, 71u8, 63u8, 145u8, 54u8, 15u8, 165u8, 217u8, 185u8, 77u8, 144u8, 242u8, 45u8,
               59u8, 122u8, 78u8, 225u8, 143u8, 50u8, 115u8, 207u8, 65u8, 167u8, 24u8, 205u8, 249u8,
@@ -22884,7 +24771,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<EvalProposalState>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<EvalProposalState>()?
+          };
+          if runtime_call_hash
             == [
               141u8, 121u8, 161u8, 48u8, 230u8, 119u8, 229u8, 3u8, 6u8, 165u8, 26u8, 55u8, 168u8,
               10u8, 11u8, 221u8, 141u8, 58u8, 169u8, 102u8, 13u8, 9u8, 115u8, 166u8, 18u8, 51u8,
@@ -22908,7 +24800,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SubmitPublicKeys, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SubmitPublicKeys>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SubmitPublicKeys>()?
+          };
+          if runtime_call_hash
             == [
               139u8, 152u8, 46u8, 122u8, 242u8, 233u8, 158u8, 131u8, 137u8, 106u8, 81u8, 43u8,
               147u8, 13u8, 63u8, 140u8, 119u8, 73u8, 154u8, 227u8, 156u8, 59u8, 248u8, 113u8,
@@ -23198,7 +25095,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<QuorumStatus>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<QuorumStatus>()?
+          };
+          if runtime_storage_hash
             == [
               255u8, 225u8, 178u8, 148u8, 251u8, 238u8, 120u8, 92u8, 149u8, 19u8, 87u8, 123u8,
               34u8, 78u8, 115u8, 177u8, 228u8, 167u8, 7u8, 104u8, 229u8, 228u8, 23u8, 97u8, 29u8,
@@ -23227,7 +25129,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<PublicKeys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PublicKeys>()?
+          };
+          if runtime_storage_hash
             == [
               8u8, 228u8, 182u8, 161u8, 233u8, 9u8, 160u8, 151u8, 110u8, 163u8, 65u8, 58u8, 51u8,
               189u8, 240u8, 214u8, 200u8, 171u8, 195u8, 30u8, 34u8, 77u8, 72u8, 171u8, 20u8, 63u8,
@@ -23250,7 +25157,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, PublicKeys<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<PublicKeys>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<PublicKeys>()?
+          };
+          if runtime_storage_hash
             == [
               8u8, 228u8, 182u8, 161u8, 233u8, 9u8, 160u8, 151u8, 110u8, 163u8, 65u8, 58u8, 51u8,
               189u8, 240u8, 214u8, 200u8, 171u8, 195u8, 30u8, 34u8, 77u8, 72u8, 171u8, 20u8, 63u8,
@@ -23280,7 +25192,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AccountWatchList>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountWatchList>()?
+          };
+          if runtime_storage_hash
             == [
               174u8, 196u8, 201u8, 93u8, 92u8, 140u8, 123u8, 59u8, 117u8, 169u8, 188u8, 180u8,
               138u8, 35u8, 219u8, 66u8, 84u8, 191u8, 104u8, 236u8, 9u8, 226u8, 194u8, 14u8, 173u8,
@@ -23301,7 +25218,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, AccountWatchList<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AccountWatchList>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountWatchList>()?
+          };
+          if runtime_storage_hash
             == [
               174u8, 196u8, 201u8, 93u8, 92u8, 140u8, 123u8, 59u8, 117u8, 169u8, 188u8, 180u8,
               138u8, 35u8, 219u8, 66u8, 84u8, 191u8, 104u8, 236u8, 9u8, 226u8, 194u8, 14u8, 173u8,
@@ -23318,7 +25240,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u16, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<Threshold>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Threshold>()?
+          };
+          if runtime_storage_hash
             == [
               187u8, 94u8, 201u8, 176u8, 84u8, 172u8, 174u8, 31u8, 217u8, 88u8, 244u8, 16u8, 46u8,
               124u8, 225u8, 21u8, 104u8, 160u8, 41u8, 5u8, 181u8, 119u8, 38u8, 214u8, 47u8, 37u8,
@@ -23354,7 +25281,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Proposals>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Proposals>()?
+          };
+          if runtime_storage_hash
             == [
               9u8, 83u8, 67u8, 190u8, 195u8, 12u8, 162u8, 56u8, 34u8, 14u8, 120u8, 255u8, 221u8,
               46u8, 205u8, 102u8, 163u8, 5u8, 94u8, 73u8, 213u8, 70u8, 61u8, 96u8, 148u8, 83u8,
@@ -23387,7 +25319,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Votes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Votes>()?
+          };
+          if runtime_storage_hash
             == [
               95u8, 80u8, 46u8, 105u8, 48u8, 95u8, 129u8, 201u8, 49u8, 122u8, 162u8, 178u8, 4u8,
               246u8, 185u8, 73u8, 0u8, 61u8, 97u8, 135u8, 72u8, 77u8, 224u8, 178u8, 136u8, 27u8,
@@ -23406,7 +25343,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Votes<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Votes>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Votes>()?
+          };
+          if runtime_storage_hash
             == [
               95u8, 80u8, 46u8, 105u8, 48u8, 95u8, 129u8, 201u8, 49u8, 122u8, 162u8, 178u8, 4u8,
               246u8, 185u8, 73u8, 0u8, 61u8, 97u8, 135u8, 72u8, 77u8, 224u8, 178u8, 136u8, 27u8,
@@ -23427,7 +25369,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::bool>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               1u8, 142u8, 116u8, 45u8, 231u8, 82u8, 67u8, 117u8, 92u8, 142u8, 101u8, 229u8, 45u8,
               231u8, 133u8, 219u8, 28u8, 94u8, 169u8, 77u8, 91u8, 74u8, 159u8, 181u8, 78u8, 60u8,
@@ -23446,7 +25393,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Members<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Members>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Members>()?
+          };
+          if runtime_storage_hash
             == [
               1u8, 142u8, 116u8, 45u8, 231u8, 82u8, 67u8, 117u8, 92u8, 142u8, 101u8, 229u8, 45u8,
               231u8, 133u8, 219u8, 28u8, 94u8, 169u8, 77u8, 91u8, 74u8, 159u8, 181u8, 78u8, 60u8,
@@ -23463,7 +25415,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<CounterForMembers>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForMembers>()?
+          };
+          if runtime_storage_hash
             == [
               221u8, 156u8, 131u8, 217u8, 72u8, 128u8, 25u8, 153u8, 178u8, 127u8, 192u8, 96u8,
               233u8, 215u8, 31u8, 91u8, 8u8, 250u8, 201u8, 36u8, 62u8, 229u8, 67u8, 66u8, 24u8,
@@ -23495,7 +25452,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<BurnedQueue>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<BurnedQueue>()?
+          };
+          if runtime_storage_hash
             == [
               142u8, 8u8, 231u8, 219u8, 185u8, 178u8, 232u8, 73u8, 198u8, 52u8, 14u8, 177u8, 241u8,
               246u8, 192u8, 143u8, 122u8, 37u8, 29u8, 218u8, 239u8, 105u8, 113u8, 99u8, 34u8, 13u8,
@@ -23528,17 +25490,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "QuorumPalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "QuorumPalletId")?
             == [
               90u8, 135u8, 198u8, 183u8, 254u8, 132u8, 216u8, 167u8, 69u8, 168u8, 20u8, 167u8,
               216u8, 173u8, 119u8, 235u8, 50u8, 185u8, 231u8, 48u8, 164u8, 68u8, 75u8, 205u8,
               183u8, 62u8, 134u8, 171u8, 193u8, 75u8, 77u8, 7u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("QuorumPalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23550,17 +25511,16 @@ pub mod api {
         pub fn proposals_cap(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "ProposalsCap")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "ProposalsCap")?
             == [
               163u8, 228u8, 62u8, 244u8, 127u8, 145u8, 228u8, 199u8, 14u8, 3u8, 88u8, 114u8, 246u8,
               40u8, 243u8, 40u8, 78u8, 48u8, 66u8, 11u8, 86u8, 199u8, 104u8, 136u8, 64u8, 215u8,
               222u8, 96u8, 26u8, 93u8, 177u8, 228u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("ProposalsCap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23572,17 +25532,16 @@ pub mod api {
         pub fn burned_cap(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "BurnedCap")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "BurnedCap")?
             == [
               129u8, 113u8, 67u8, 193u8, 27u8, 208u8, 176u8, 99u8, 91u8, 203u8, 78u8, 95u8, 169u8,
               208u8, 101u8, 91u8, 52u8, 15u8, 145u8, 82u8, 127u8, 71u8, 126u8, 171u8, 90u8, 217u8,
               136u8, 223u8, 1u8, 84u8, 205u8, 202u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("BurnedCap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23594,17 +25553,16 @@ pub mod api {
         pub fn proposal_lifetime(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "ProposalLifetime")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "ProposalLifetime")?
             == [
               145u8, 49u8, 8u8, 49u8, 149u8, 236u8, 204u8, 80u8, 37u8, 50u8, 238u8, 134u8, 185u8,
               38u8, 37u8, 104u8, 118u8, 69u8, 140u8, 90u8, 164u8, 39u8, 104u8, 129u8, 40u8, 208u8,
               177u8, 49u8, 255u8, 47u8, 209u8, 135u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("ProposalLifetime")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23616,17 +25574,16 @@ pub mod api {
         pub fn string_limit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "StringLimit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "StringLimit")?
             == [
               125u8, 85u8, 67u8, 30u8, 6u8, 25u8, 161u8, 15u8, 136u8, 186u8, 218u8, 241u8, 180u8,
               149u8, 205u8, 114u8, 61u8, 169u8, 236u8, 124u8, 214u8, 246u8, 180u8, 77u8, 208u8,
               1u8, 252u8, 232u8, 246u8, 244u8, 3u8, 220u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("StringLimit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23638,17 +25595,16 @@ pub mod api {
         pub fn votes_limit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "VotesLimit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "VotesLimit")?
             == [
               247u8, 33u8, 159u8, 89u8, 51u8, 158u8, 218u8, 10u8, 224u8, 255u8, 175u8, 194u8,
               147u8, 71u8, 138u8, 130u8, 80u8, 249u8, 41u8, 120u8, 59u8, 50u8, 84u8, 71u8, 96u8,
               27u8, 81u8, 142u8, 126u8, 225u8, 216u8, 60u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("VotesLimit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23660,17 +25616,16 @@ pub mod api {
         pub fn watch_list_limit(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "WatchListLimit")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "WatchListLimit")?
             == [
               104u8, 149u8, 246u8, 48u8, 31u8, 1u8, 85u8, 68u8, 180u8, 57u8, 0u8, 30u8, 50u8,
               234u8, 183u8, 229u8, 44u8, 59u8, 49u8, 186u8, 198u8, 125u8, 107u8, 89u8, 58u8, 147u8,
               203u8, 0u8, 64u8, 154u8, 172u8, 24u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("WatchListLimit")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23682,17 +25637,16 @@ pub mod api {
         pub fn pubkey_limit_per_asset(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Quorum", "PubkeyLimitPerAsset")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Quorum", "PubkeyLimitPerAsset")?
             == [
               135u8, 236u8, 100u8, 126u8, 182u8, 4u8, 124u8, 148u8, 43u8, 35u8, 109u8, 94u8, 157u8,
               29u8, 40u8, 133u8, 132u8, 176u8, 182u8, 47u8, 227u8, 187u8, 82u8, 97u8, 99u8, 75u8,
               132u8, 86u8, 100u8, 37u8, 201u8, 51u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Quorum")?;
+            let pallet = metadata.pallet("Quorum")?;
             let constant = pallet.constant("PubkeyLimitPerAsset")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -23798,7 +25752,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ConfirmSwap, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ConfirmSwap>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ConfirmSwap>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 123u8, 188u8, 70u8, 194u8, 117u8, 9u8, 185u8, 33u8, 165u8, 0u8, 45u8, 119u8,
               119u8, 241u8, 155u8, 23u8, 89u8, 2u8, 50u8, 141u8, 13u8, 191u8, 160u8, 244u8, 21u8,
@@ -23828,7 +25787,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, CancelSwap, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<CancelSwap>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<CancelSwap>()?
+          };
+          if runtime_call_hash
             == [
               153u8, 23u8, 73u8, 248u8, 0u8, 168u8, 254u8, 228u8, 251u8, 67u8, 110u8, 123u8, 224u8,
               204u8, 169u8, 106u8, 40u8, 181u8, 63u8, 230u8, 87u8, 154u8, 201u8, 172u8, 137u8,
@@ -23858,7 +25822,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetAccountId, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetAccountId>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetAccountId>()?
+          };
+          if runtime_call_hash
             == [
               17u8, 189u8, 74u8, 124u8, 198u8, 73u8, 40u8, 53u8, 190u8, 58u8, 190u8, 97u8, 236u8,
               249u8, 78u8, 199u8, 247u8, 10u8, 12u8, 203u8, 254u8, 169u8, 28u8, 120u8, 132u8,
@@ -23885,7 +25854,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetStatus, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetStatus>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetStatus>()?
+          };
+          if runtime_call_hash
             == [
               40u8, 18u8, 96u8, 211u8, 27u8, 129u8, 165u8, 25u8, 168u8, 194u8, 220u8, 67u8, 29u8,
               222u8, 14u8, 98u8, 176u8, 94u8, 74u8, 64u8, 131u8, 50u8, 36u8, 77u8, 126u8, 4u8,
@@ -23912,7 +25886,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, ImAlive, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ImAlive>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ImAlive>()?
+          };
+          if runtime_call_hash
             == [
               244u8, 72u8, 46u8, 11u8, 24u8, 11u8, 83u8, 10u8, 149u8, 10u8, 112u8, 154u8, 246u8,
               148u8, 47u8, 92u8, 3u8, 221u8, 149u8, 15u8, 162u8, 250u8, 162u8, 140u8, 175u8, 198u8,
@@ -23937,7 +25916,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, AddMarketMaker, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<AddMarketMaker>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<AddMarketMaker>()?
+          };
+          if runtime_call_hash
             == [
               123u8, 174u8, 71u8, 173u8, 24u8, 36u8, 131u8, 179u8, 86u8, 16u8, 31u8, 64u8, 35u8,
               155u8, 196u8, 250u8, 44u8, 254u8, 4u8, 125u8, 93u8, 172u8, 194u8, 186u8, 8u8, 200u8,
@@ -23971,7 +25955,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<RemoveMarketMaker>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<RemoveMarketMaker>()?
+          };
+          if runtime_call_hash
             == [
               66u8, 137u8, 150u8, 52u8, 178u8, 233u8, 219u8, 56u8, 127u8, 181u8, 38u8, 186u8, 37u8,
               92u8, 125u8, 221u8, 65u8, 232u8, 233u8, 139u8, 228u8, 100u8, 76u8, 2u8, 189u8, 125u8,
@@ -24143,7 +26132,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::bool, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<OracleStatus>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<OracleStatus>()?
+          };
+          if runtime_storage_hash
             == [
               56u8, 32u8, 98u8, 152u8, 217u8, 177u8, 213u8, 201u8, 180u8, 222u8, 65u8, 41u8, 44u8,
               117u8, 167u8, 2u8, 40u8, 172u8, 126u8, 174u8, 88u8, 85u8, 64u8, 164u8, 28u8, 25u8,
@@ -24165,7 +26159,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<LastSeen>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<LastSeen>()?
+          };
+          if runtime_storage_hash
             == [
               134u8, 5u8, 100u8, 67u8, 201u8, 190u8, 178u8, 192u8, 90u8, 111u8, 187u8, 197u8,
               190u8, 150u8, 14u8, 167u8, 240u8, 94u8, 217u8, 197u8, 57u8, 107u8, 77u8, 7u8, 254u8,
@@ -24190,7 +26189,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<OracleAccountId>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<OracleAccountId>()?
+          };
+          if runtime_storage_hash
             == [
               71u8, 226u8, 119u8, 12u8, 46u8, 173u8, 230u8, 239u8, 61u8, 67u8, 7u8, 64u8, 238u8,
               107u8, 239u8, 117u8, 91u8, 51u8, 196u8, 200u8, 141u8, 149u8, 97u8, 123u8, 125u8,
@@ -24217,7 +26221,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<Swaps>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Swaps>()?
+          };
+          if runtime_storage_hash
             == [
               239u8, 81u8, 217u8, 176u8, 100u8, 126u8, 68u8, 91u8, 152u8, 2u8, 130u8, 110u8, 34u8,
               98u8, 80u8, 65u8, 239u8, 239u8, 36u8, 158u8, 161u8, 161u8, 134u8, 16u8, 42u8, 174u8,
@@ -24236,7 +26245,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, Swaps<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Swaps>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Swaps>()?
+          };
+          if runtime_storage_hash
             == [
               239u8, 81u8, 217u8, 176u8, 100u8, 126u8, 68u8, 91u8, 152u8, 2u8, 130u8, 110u8, 34u8,
               98u8, 80u8, 65u8, 239u8, 239u8, 36u8, 158u8, 161u8, 161u8, 134u8, 16u8, 42u8, 174u8,
@@ -24262,7 +26276,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AccountSwaps>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountSwaps>()?
+          };
+          if runtime_storage_hash
             == [
               185u8, 106u8, 56u8, 42u8, 128u8, 234u8, 74u8, 227u8, 37u8, 203u8, 230u8, 253u8, 92u8,
               22u8, 210u8, 1u8, 107u8, 246u8, 151u8, 1u8, 92u8, 71u8, 133u8, 105u8, 86u8, 11u8,
@@ -24281,7 +26300,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, AccountSwaps<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<AccountSwaps>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountSwaps>()?
+          };
+          if runtime_storage_hash
             == [
               185u8, 106u8, 56u8, 42u8, 128u8, 234u8, 74u8, 227u8, 37u8, 203u8, 230u8, 253u8, 92u8,
               22u8, 210u8, 1u8, 107u8, 246u8, 151u8, 1u8, 92u8, 71u8, 133u8, 105u8, 86u8, 11u8,
@@ -24298,10 +26322,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<CounterForAccountSwaps>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CounterForAccountSwaps>()?
+          };
+          if runtime_storage_hash
             == [
               177u8, 21u8, 126u8, 159u8, 199u8, 171u8, 185u8, 50u8, 160u8, 100u8, 179u8, 164u8,
               239u8, 125u8, 187u8, 174u8, 188u8, 84u8, 62u8, 135u8, 188u8, 211u8, 5u8, 108u8,
@@ -24327,7 +26353,12 @@ pub mod api {
           ::core::option::Option<::core::primitive::bool>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<MarketMakers>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MarketMakers>()?
+          };
+          if runtime_storage_hash
             == [
               15u8, 216u8, 103u8, 226u8, 4u8, 2u8, 208u8, 122u8, 207u8, 53u8, 98u8, 115u8, 28u8,
               94u8, 33u8, 248u8, 11u8, 164u8, 75u8, 164u8, 170u8, 57u8, 227u8, 9u8, 102u8, 20u8,
@@ -24346,7 +26377,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, MarketMakers<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<MarketMakers>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<MarketMakers>()?
+          };
+          if runtime_storage_hash
             == [
               15u8, 216u8, 103u8, 226u8, 4u8, 2u8, 208u8, 122u8, 207u8, 53u8, 98u8, 115u8, 28u8,
               94u8, 33u8, 248u8, 11u8, 164u8, 75u8, 164u8, 170u8, 57u8, 227u8, 9u8, 102u8, 20u8,
@@ -24374,17 +26410,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Oracle", "OraclePalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Oracle", "OraclePalletId")?
             == [
               118u8, 28u8, 207u8, 90u8, 219u8, 159u8, 93u8, 160u8, 143u8, 60u8, 185u8, 47u8, 154u8,
               239u8, 74u8, 64u8, 107u8, 30u8, 152u8, 173u8, 140u8, 78u8, 94u8, 127u8, 134u8, 92u8,
               49u8, 246u8, 251u8, 4u8, 59u8, 8u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Oracle")?;
+            let pallet = metadata.pallet("Oracle")?;
             let constant = pallet.constant("OraclePalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -24396,17 +26431,16 @@ pub mod api {
         pub fn swap_limit_by_account(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Oracle", "SwapLimitByAccount")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Oracle", "SwapLimitByAccount")?
             == [
               138u8, 200u8, 130u8, 35u8, 156u8, 128u8, 113u8, 46u8, 168u8, 174u8, 175u8, 195u8,
               113u8, 131u8, 79u8, 181u8, 140u8, 144u8, 202u8, 236u8, 44u8, 78u8, 219u8, 156u8,
               47u8, 106u8, 232u8, 185u8, 231u8, 80u8, 13u8, 179u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Oracle")?;
+            let pallet = metadata.pallet("Oracle")?;
             let constant = pallet.constant("SwapLimitByAccount")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -24469,7 +26503,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetStatus, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetStatus>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetStatus>()?
+          };
+          if runtime_call_hash
             == [
               37u8, 52u8, 200u8, 34u8, 10u8, 106u8, 78u8, 33u8, 106u8, 254u8, 7u8, 133u8, 72u8,
               22u8, 62u8, 49u8, 70u8, 78u8, 254u8, 220u8, 120u8, 174u8, 61u8, 148u8, 24u8, 114u8,
@@ -24547,7 +26586,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::primitive_types::U256, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<Nonce>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<Nonce>()?
+          };
+          if runtime_storage_hash
             == [
               48u8, 69u8, 145u8, 100u8, 190u8, 5u8, 103u8, 11u8, 67u8, 188u8, 137u8, 74u8, 44u8,
               182u8, 100u8, 83u8, 94u8, 56u8, 185u8, 11u8, 220u8, 81u8, 123u8, 54u8, 174u8, 106u8,
@@ -24570,7 +26614,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::tidefi_primitives::StatusCode, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<ChainStatus>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ChainStatus>()?
+          };
+          if runtime_storage_hash
             == [
               249u8, 33u8, 147u8, 229u8, 33u8, 198u8, 151u8, 38u8, 125u8, 32u8, 29u8, 221u8, 247u8,
               31u8, 177u8, 185u8, 26u8, 178u8, 152u8, 30u8, 250u8, 150u8, 143u8, 157u8, 246u8,
@@ -24593,7 +26642,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<CurrentBlockCount>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentBlockCount>()?
+          };
+          if runtime_storage_hash
             == [
               173u8, 100u8, 174u8, 19u8, 53u8, 125u8, 67u8, 128u8, 205u8, 156u8, 38u8, 62u8, 68u8,
               142u8, 4u8, 209u8, 22u8, 212u8, 208u8, 252u8, 227u8, 93u8, 83u8, 135u8, 133u8, 231u8,
@@ -24669,7 +26723,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<ClaimSunriseRewards>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClaimSunriseRewards>()?
+          };
+          if runtime_call_hash
             == [
               221u8, 129u8, 69u8, 129u8, 216u8, 203u8, 162u8, 247u8, 150u8, 16u8, 187u8, 182u8,
               71u8, 55u8, 127u8, 191u8, 245u8, 157u8, 204u8, 33u8, 200u8, 230u8, 155u8, 87u8,
@@ -24894,7 +26953,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<ActiveEra>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<ActiveEra>()?
+          };
+          if runtime_storage_hash
             == [
               11u8, 138u8, 166u8, 252u8, 74u8, 157u8, 111u8, 86u8, 135u8, 194u8, 143u8, 147u8,
               188u8, 36u8, 140u8, 58u8, 148u8, 163u8, 27u8, 86u8, 85u8, 158u8, 106u8, 226u8, 186u8,
@@ -24917,7 +26981,12 @@ pub mod api {
           >,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SunrisePools>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SunrisePools>()?
+          };
+          if runtime_storage_hash
             == [
               180u8, 0u8, 199u8, 243u8, 204u8, 164u8, 44u8, 92u8, 187u8, 2u8, 146u8, 189u8, 33u8,
               237u8, 85u8, 97u8, 124u8, 194u8, 70u8, 167u8, 36u8, 49u8, 82u8, 242u8, 229u8, 55u8,
@@ -24939,7 +27008,12 @@ pub mod api {
           &self,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<CurrentSession>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<CurrentSession>()?
+          };
+          if runtime_storage_hash
             == [
               232u8, 78u8, 2u8, 113u8, 156u8, 246u8, 134u8, 200u8, 38u8, 70u8, 106u8, 140u8, 29u8,
               2u8, 39u8, 16u8, 73u8, 20u8, 141u8, 8u8, 195u8, 202u8, 13u8, 46u8, 95u8, 94u8, 28u8,
@@ -24965,7 +27039,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::tidefi_primitives::Fee, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<EraTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EraTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               148u8, 128u8, 187u8, 228u8, 29u8, 224u8, 11u8, 91u8, 188u8, 234u8, 235u8, 118u8,
               115u8, 210u8, 155u8, 237u8, 231u8, 230u8, 113u8, 5u8, 71u8, 152u8, 203u8, 6u8, 63u8,
@@ -24989,7 +27068,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, EraTotalFees<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<EraTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<EraTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               148u8, 128u8, 187u8, 228u8, 29u8, 224u8, 11u8, 91u8, 188u8, 234u8, 235u8, 118u8,
               115u8, 210u8, 155u8, 237u8, 231u8, 230u8, 113u8, 5u8, 71u8, 152u8, 203u8, 6u8, 63u8,
@@ -25007,7 +27091,12 @@ pub mod api {
           _0: &::core::primitive::u64,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::option::Option<()>, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<StoredSessions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StoredSessions>()?
+          };
+          if runtime_storage_hash
             == [
               118u8, 5u8, 194u8, 229u8, 0u8, 196u8, 206u8, 207u8, 197u8, 254u8, 167u8, 92u8, 67u8,
               85u8, 24u8, 202u8, 14u8, 245u8, 64u8, 113u8, 245u8, 28u8, 198u8, 97u8, 213u8, 93u8,
@@ -25026,7 +27115,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, StoredSessions<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<StoredSessions>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<StoredSessions>()?
+          };
+          if runtime_storage_hash
             == [
               118u8, 5u8, 194u8, 229u8, 0u8, 196u8, 206u8, 207u8, 197u8, 254u8, 167u8, 92u8, 67u8,
               85u8, 24u8, 202u8, 14u8, 245u8, 64u8, 113u8, 245u8, 28u8, 198u8, 97u8, 213u8, 93u8,
@@ -25055,7 +27149,12 @@ pub mod api {
           runtime_types::sp_arithmetic::fixed_point::FixedU128,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<OrderBookPrice>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<OrderBookPrice>()?
+          };
+          if runtime_storage_hash
             == [
               85u8, 84u8, 16u8, 178u8, 163u8, 141u8, 231u8, 173u8, 213u8, 45u8, 212u8, 230u8,
               143u8, 198u8, 100u8, 127u8, 220u8, 198u8, 6u8, 96u8, 126u8, 63u8, 183u8, 217u8, 44u8,
@@ -25085,7 +27184,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, OrderBookPrice<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<OrderBookPrice>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<OrderBookPrice>()?
+          };
+          if runtime_storage_hash
             == [
               85u8, 84u8, 16u8, 178u8, 163u8, 141u8, 231u8, 173u8, 213u8, 45u8, 212u8, 230u8,
               143u8, 198u8, 100u8, 127u8, 220u8, 198u8, 6u8, 96u8, 126u8, 63u8, 183u8, 217u8, 44u8,
@@ -25106,7 +27210,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<runtime_types::tidefi_primitives::Fee, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SessionTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SessionTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               18u8, 82u8, 131u8, 54u8, 128u8, 129u8, 83u8, 247u8, 72u8, 75u8, 234u8, 236u8, 9u8,
               164u8, 11u8, 124u8, 52u8, 252u8, 74u8, 77u8, 164u8, 110u8, 156u8, 138u8, 187u8, 29u8,
@@ -25132,7 +27241,12 @@ pub mod api {
           ::subxt::KeyIter<'a, T, SessionTotalFees<'a>>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<SessionTotalFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SessionTotalFees>()?
+          };
+          if runtime_storage_hash
             == [
               18u8, 82u8, 131u8, 54u8, 128u8, 129u8, 83u8, 247u8, 72u8, 75u8, 234u8, 236u8, 9u8,
               164u8, 11u8, 124u8, 52u8, 252u8, 74u8, 77u8, 164u8, 110u8, 156u8, 138u8, 187u8, 29u8,
@@ -25157,7 +27271,12 @@ pub mod api {
           )>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().storage_hash::<AccountFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountFees>()?
+          };
+          if runtime_storage_hash
             == [
               58u8, 221u8, 146u8, 183u8, 123u8, 159u8, 208u8, 241u8, 138u8, 139u8, 165u8, 150u8,
               242u8, 147u8, 75u8, 40u8, 16u8, 176u8, 147u8, 229u8, 234u8, 46u8, 72u8, 198u8, 110u8,
@@ -25180,7 +27299,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, AccountFees<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<AccountFees>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AccountFees>()?
+          };
+          if runtime_storage_hash
             == [
               58u8, 221u8, 146u8, 183u8, 123u8, 159u8, 208u8, 241u8, 138u8, 139u8, 165u8, 150u8,
               242u8, 147u8, 75u8, 40u8, 16u8, 176u8, 147u8, 229u8, 234u8, 46u8, 72u8, 198u8, 110u8,
@@ -25199,7 +27323,12 @@ pub mod api {
           _1: &::core::primitive::u32,
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
-          if self.client.metadata().storage_hash::<SunriseRewards>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SunriseRewards>()?
+          };
+          if runtime_storage_hash
             == [
               60u8, 101u8, 145u8, 238u8, 69u8, 95u8, 145u8, 68u8, 184u8, 138u8, 235u8, 216u8, 14u8,
               243u8, 219u8, 17u8, 37u8, 235u8, 189u8, 244u8, 211u8, 185u8, 113u8, 26u8, 185u8,
@@ -25222,7 +27351,12 @@ pub mod api {
           block_hash: ::core::option::Option<T::Hash>,
         ) -> ::core::result::Result<::subxt::KeyIter<'a, T, SunriseRewards<'a>>, ::subxt::BasicError>
         {
-          if self.client.metadata().storage_hash::<SunriseRewards>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<SunriseRewards>()?
+          };
+          if runtime_storage_hash
             == [
               60u8, 101u8, 145u8, 238u8, 69u8, 95u8, 145u8, 68u8, 184u8, 138u8, 235u8, 216u8, 14u8,
               243u8, 219u8, 17u8, 37u8, 235u8, 189u8, 244u8, 211u8, 185u8, 113u8, 26u8, 185u8,
@@ -25250,17 +27384,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "FeesPalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "FeesPalletId")?
             == [
               230u8, 70u8, 183u8, 43u8, 11u8, 254u8, 43u8, 175u8, 108u8, 39u8, 247u8, 248u8, 174u8,
               240u8, 20u8, 159u8, 245u8, 126u8, 63u8, 31u8, 110u8, 200u8, 169u8, 229u8, 57u8, 52u8,
               180u8, 58u8, 156u8, 87u8, 47u8, 149u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("FeesPalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25272,17 +27405,16 @@ pub mod api {
         pub fn sessions_per_era(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "SessionsPerEra")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "SessionsPerEra")?
             == [
               36u8, 111u8, 81u8, 132u8, 61u8, 231u8, 194u8, 186u8, 130u8, 209u8, 45u8, 20u8, 229u8,
               220u8, 40u8, 22u8, 195u8, 63u8, 143u8, 26u8, 211u8, 87u8, 88u8, 155u8, 102u8, 155u8,
               4u8, 29u8, 229u8, 250u8, 41u8, 46u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("SessionsPerEra")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25294,17 +27426,16 @@ pub mod api {
         pub fn sessions_archive(
           &self,
         ) -> ::core::result::Result<::core::primitive::u64, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "SessionsArchive")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "SessionsArchive")?
             == [
               148u8, 148u8, 202u8, 26u8, 123u8, 23u8, 138u8, 32u8, 107u8, 241u8, 22u8, 126u8,
               211u8, 188u8, 100u8, 150u8, 1u8, 248u8, 108u8, 7u8, 219u8, 168u8, 113u8, 88u8, 252u8,
               9u8, 198u8, 150u8, 250u8, 235u8, 56u8, 92u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("SessionsArchive")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25316,17 +27447,16 @@ pub mod api {
         pub fn blocks_per_session(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "BlocksPerSession")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "BlocksPerSession")?
             == [
               52u8, 203u8, 248u8, 94u8, 80u8, 242u8, 36u8, 166u8, 234u8, 85u8, 207u8, 47u8, 216u8,
               225u8, 221u8, 219u8, 145u8, 35u8, 78u8, 245u8, 198u8, 236u8, 22u8, 112u8, 144u8,
               130u8, 243u8, 248u8, 159u8, 236u8, 248u8, 53u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("BlocksPerSession")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25338,17 +27468,16 @@ pub mod api {
         pub fn blocks_sunrise_claims(
           &self,
         ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "BlocksSunriseClaims")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "BlocksSunriseClaims")?
             == [
               192u8, 118u8, 118u8, 195u8, 64u8, 137u8, 50u8, 126u8, 8u8, 65u8, 197u8, 31u8, 236u8,
               167u8, 52u8, 158u8, 33u8, 149u8, 37u8, 212u8, 60u8, 119u8, 149u8, 253u8, 212u8, 12u8,
               249u8, 52u8, 197u8, 195u8, 119u8, 57u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("BlocksSunriseClaims")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25363,14 +27492,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().constant_hash("Fees", "FeeAmount")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "FeeAmount")?
             == [
               30u8, 33u8, 110u8, 229u8, 96u8, 177u8, 149u8, 130u8, 143u8, 12u8, 237u8, 99u8, 48u8,
               64u8, 136u8, 22u8, 239u8, 112u8, 243u8, 191u8, 42u8, 135u8, 133u8, 57u8, 117u8,
               180u8, 78u8, 99u8, 158u8, 176u8, 109u8, 157u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("FeeAmount")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25385,17 +27516,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "MarketMakerFeeAmount")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "MarketMakerFeeAmount")?
             == [
               97u8, 26u8, 133u8, 37u8, 194u8, 237u8, 32u8, 16u8, 99u8, 207u8, 40u8, 234u8, 198u8,
               97u8, 34u8, 114u8, 54u8, 46u8, 159u8, 146u8, 242u8, 94u8, 163u8, 18u8, 162u8, 201u8,
               160u8, 88u8, 252u8, 15u8, 199u8, 41u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("MarketMakerFeeAmount")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25410,17 +27540,16 @@ pub mod api {
           runtime_types::sp_arithmetic::per_things::Permill,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .constant_hash("Fees", "MarketMakerLimitFeeAmount")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Fees", "MarketMakerLimitFeeAmount")?
             == [
               229u8, 75u8, 198u8, 230u8, 67u8, 10u8, 93u8, 235u8, 173u8, 197u8, 125u8, 30u8, 30u8,
               215u8, 84u8, 78u8, 35u8, 74u8, 130u8, 217u8, 94u8, 153u8, 48u8, 254u8, 8u8, 95u8,
               121u8, 113u8, 104u8, 59u8, 149u8, 230u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("Fees")?;
+            let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("MarketMakerLimitFeeAmount")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -25496,7 +27625,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, Register, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<Register>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<Register>()?
+          };
+          if runtime_call_hash
             == [
               133u8, 60u8, 151u8, 161u8, 208u8, 50u8, 49u8, 51u8, 178u8, 15u8, 36u8, 115u8, 202u8,
               250u8, 155u8, 77u8, 166u8, 242u8, 4u8, 26u8, 29u8, 152u8, 61u8, 86u8, 51u8, 23u8,
@@ -25531,7 +27665,12 @@ pub mod api {
           ::subxt::SubmittableExtrinsic<'a, T, X, SetStatus, DispatchError, root_mod::Event>,
           ::subxt::BasicError,
         > {
-          if self.client.metadata().call_hash::<SetStatus>()?
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<SetStatus>()?
+          };
+          if runtime_call_hash
             == [
               168u8, 109u8, 74u8, 241u8, 142u8, 168u8, 184u8, 93u8, 53u8, 250u8, 193u8, 17u8,
               191u8, 200u8, 75u8, 138u8, 14u8, 57u8, 82u8, 156u8, 11u8, 221u8, 116u8, 125u8, 87u8,
@@ -25596,10 +27735,12 @@ pub mod api {
           ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           ::subxt::BasicError,
         > {
-          if self
-            .client
-            .metadata()
-            .storage_hash::<AssetRegistryAccountId>()?
+          let runtime_storage_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.storage_hash::<AssetRegistryAccountId>()?
+          };
+          if runtime_storage_hash
             == [
               51u8, 207u8, 28u8, 62u8, 67u8, 65u8, 128u8, 204u8, 10u8, 78u8, 33u8, 115u8, 221u8,
               27u8, 67u8, 26u8, 188u8, 165u8, 185u8, 45u8, 212u8, 171u8, 0u8, 74u8, 40u8, 31u8,
@@ -25628,17 +27769,16 @@ pub mod api {
           &self,
         ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
         {
-          if self
-            .client
-            .metadata()
-            .constant_hash("AssetRegistry", "AssetRegistryPalletId")?
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("AssetRegistry", "AssetRegistryPalletId")?
             == [
               148u8, 125u8, 242u8, 19u8, 98u8, 220u8, 38u8, 128u8, 72u8, 157u8, 228u8, 205u8,
               144u8, 196u8, 7u8, 220u8, 26u8, 251u8, 208u8, 234u8, 138u8, 84u8, 182u8, 255u8,
               253u8, 90u8, 128u8, 146u8, 225u8, 66u8, 41u8, 104u8,
             ]
           {
-            let pallet = self.client.metadata().pallet("AssetRegistry")?;
+            let pallet = metadata.pallet("AssetRegistry")?;
             let constant = pallet.constant("AssetRegistryPalletId")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
@@ -27336,6 +29476,9 @@ pub mod api {
           #[codec(index = 2)]
           #[doc = "A given equivocation report is valid but already previously reported."]
           DuplicateOffenceReport,
+          #[codec(index = 3)]
+          #[doc = "Submitted configuration is invalid."]
+          InvalidConfiguration,
         }
       }
     }
@@ -27347,6 +29490,17 @@ pub mod api {
         pub struct Bag {
           pub head: ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
           pub tail: ::core::option::Option<::subxt::sp_core::crypto::AccountId32>,
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        pub enum ListError {
+          #[codec(index = 0)]
+          Duplicate,
+          #[codec(index = 1)]
+          NotHeavier,
+          #[codec(index = 2)]
+          NotInSameBag,
+          #[codec(index = 3)]
+          NodeNotFound,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub struct Node {
@@ -27388,14 +29542,8 @@ pub mod api {
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub enum Error {
           #[codec(index = 0)]
-          #[doc = "Attempted to place node in front of a node in another bag."]
-          NotInSameBag,
-          #[codec(index = 1)]
-          #[doc = "Id not found in list."]
-          IdNotFound,
-          #[codec(index = 2)]
-          #[doc = "An Id does not have a greater score than another Id."]
-          NotHeavier,
+          #[doc = "A error in the list interface implementation."]
+          List(runtime_types::pallet_bags_list::list::ListError),
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub enum Event {
@@ -30170,54 +32318,90 @@ pub mod api {
           #[doc = "Invalid request ID."]
           InvalidRequestId,
           #[codec(index = 3)]
-          #[doc = "Invalid request status."]
-          InvalidRequestStatus,
+          #[doc = "Invalid swap request status."]
+          InvalidSwapRequestStatus,
           #[codec(index = 4)]
-          #[doc = "Invalid market maker status."]
-          InvalidMarketMakerRequest,
+          #[doc = "Invalid market maker swap request status."]
+          InvalidMarketMakerSwapRequestStatus,
           #[codec(index = 5)]
+          #[doc = "Market maker buy token does not match swap sell token"]
+          MarketMakerBuyTokenNotMatchSwapSellToken,
+          #[codec(index = 6)]
+          #[doc = "Market maker has not enough token to sell"]
+          MarketMakerHasNotEnoughTokenToSell,
+          #[codec(index = 7)]
           #[doc = "Invalid market maker request ID, includes an index in the SwapConfirmation list"]
           InvalidMarketMakerRequestId { index: ::core::primitive::u8 },
-          #[codec(index = 6)]
+          #[codec(index = 8)]
           #[doc = "There is a conflict in the request."]
           Conflict,
-          #[codec(index = 7)]
+          #[codec(index = 9)]
           #[doc = "Unable to transfer token."]
           TransferFailed,
-          #[codec(index = 8)]
+          #[codec(index = 10)]
           #[doc = "Unable to burn token."]
-          BurnFailed,
-          #[codec(index = 9)]
+          TraderCannotDepositBuyTokens,
+          #[codec(index = 11)]
           #[doc = "Unable to mint token."]
           MintFailed,
-          #[codec(index = 10)]
+          #[codec(index = 12)]
           #[doc = "Unable to release funds."]
           ReleaseFailed,
-          #[codec(index = 11)]
-          #[doc = "Unable to take or calculate network fees."]
-          FeesFailed,
-          #[codec(index = 12)]
+          #[codec(index = 13)]
+          #[doc = "Unable to register trade swap network fees."]
+          SwapFeeRegistrationFailed,
+          #[codec(index = 14)]
+          #[doc = "Unable to register market maker swap network fees."]
+          MarketMakerSwapFeeRegistrationFailed,
+          #[codec(index = 15)]
           #[doc = "Unknown Asset."]
           UnknownAsset,
-          #[codec(index = 13)]
-          #[doc = "No Funds available for this Asset Id."]
-          NoFunds,
-          #[codec(index = 14)]
-          #[doc = "Swap overflow"]
-          Overflow,
-          #[codec(index = 15)]
-          #[doc = "Market maker overflow"]
-          MarketMakerOverflow,
           #[codec(index = 16)]
-          #[doc = "Market Makers do not have enough funds"]
-          MarketMakerNoFunds,
+          #[doc = "No Funds available for this Asset Id."]
+          TraderHasNotEnoughTokenToSell,
           #[codec(index = 17)]
+          #[doc = "Request contains offer that is less than swap lower bound"]
+          OfferIsLessThanSwapLowerBound { index: ::core::primitive::u8 },
+          #[codec(index = 18)]
+          #[doc = "Request contains offer that is greater than swap upper bound"]
+          OfferIsGreaterThanSwapUpperBound { index: ::core::primitive::u8 },
+          #[codec(index = 19)]
+          #[doc = "Swap overflow"]
+          TraderCannotOversell,
+          #[codec(index = 20)]
+          #[doc = "Request contains offer that is less than market maker swap lower bound"]
+          OfferIsLessThanMarketMakerSwapLowerBound { index: ::core::primitive::u8 },
+          #[codec(index = 21)]
+          #[doc = "Request contains offer that is greater than market maker swap upper bound"]
+          OfferIsGreaterThanMarketMakerSwapUpperBound { index: ::core::primitive::u8 },
+          #[codec(index = 22)]
+          #[doc = "Market Makers do not have enough funds left to sell"]
+          MarketMakerHasNotEnoughTokenLeftToSell,
+          #[codec(index = 23)]
           #[doc = "Market Makers cannot deposit source funds of the trade"]
           MarketMakerCantDeposit,
-          #[codec(index = 18)]
+          #[codec(index = 24)]
+          #[doc = "Delete trader's swap request from Swaps failed"]
+          DeleteSwapFailed,
+          #[codec(index = 25)]
+          #[doc = "Delete market maker swap request from Swaps failed"]
+          DeleteMarketMakerSwapFailed,
+          #[codec(index = 26)]
+          #[doc = "Release trader's unswapped funds failed"]
+          ReleaseUnswappedFundsFailed,
+          #[codec(index = 27)]
+          #[doc = "Release market maker's unswapped funds failed"]
+          ReleaseMarketMakerUnswappedFundsFailed,
+          #[codec(index = 28)]
+          #[doc = "Update trader's swap request status in AccountSwaps failed"]
+          UpdateAccountSwapRequestStatusFailed,
+          #[codec(index = 29)]
+          #[doc = "Update market maker's swap request status in AccountSwaps failed"]
+          UpdateMarketMakerAccountSwapRequestStatusFailed,
+          #[codec(index = 30)]
           #[doc = "Swaps cap reached for this account id"]
           SwapOverflow,
-          #[codec(index = 19)]
+          #[codec(index = 31)]
           #[doc = "Unknown Error."]
           UnknownError,
         }
@@ -32658,6 +34842,24 @@ pub mod api {
             as_origin: ::std::boxed::Box<runtime_types::lagoon_runtime::OriginCaller>,
             call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
+          #[codec(index = 4)]
+          #[doc = "Send a batch of dispatch calls."]
+          #[doc = "Unlike `batch`, it allows errors and won't interrupt."]
+          #[doc = ""]
+          #[doc = "May be called from any origin."]
+          #[doc = ""]
+          #[doc = "- `calls`: The calls to be dispatched from the same origin. The number of call must not"]
+          #[doc = "  exceed the constant: `batched_calls_limit` (available in constant metadata)."]
+          #[doc = ""]
+          #[doc = "If origin is root then call are dispatch without checking origin filter. (This includes"]
+          #[doc = "bypassing `frame_system::Config::BaseCallFilter`)."]
+          #[doc = ""]
+          #[doc = "# <weight>"]
+          #[doc = "- Complexity: O(C) where C is the number of calls to be batched."]
+          #[doc = "# </weight>"]
+          force_batch {
+            calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
+          },
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub enum Error {
@@ -32678,9 +34880,17 @@ pub mod api {
           #[doc = "Batch of dispatches completed fully with no error."]
           BatchCompleted,
           #[codec(index = 2)]
+          #[doc = "Batch of dispatches completed but has errors."]
+          BatchCompletedWithErrors,
+          #[codec(index = 3)]
           #[doc = "A single item within a Batch of dispatches has completed with no error."]
           ItemCompleted,
-          #[codec(index = 3)]
+          #[codec(index = 4)]
+          #[doc = "A single item within a Batch of dispatches has completed with error."]
+          ItemFailed {
+            error: runtime_types::sp_runtime::DispatchError,
+          },
+          #[codec(index = 5)]
           #[doc = "A call was dispatched."]
           DispatchedAs {
             result: ::core::result::Result<(), runtime_types::sp_runtime::DispatchError>,
@@ -32763,6 +34973,34 @@ pub mod api {
             c: (::core::primitive::u64, ::core::primitive::u64),
             allowed_slots: runtime_types::sp_consensus_babe::AllowedSlots,
           },
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        pub enum PreDigest {
+          #[codec(index = 1)]
+          Primary(runtime_types::sp_consensus_babe::digests::PrimaryPreDigest),
+          #[codec(index = 2)]
+          SecondaryPlain(runtime_types::sp_consensus_babe::digests::SecondaryPlainPreDigest),
+          #[codec(index = 3)]
+          SecondaryVRF(runtime_types::sp_consensus_babe::digests::SecondaryVRFPreDigest),
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        pub struct PrimaryPreDigest {
+          pub authority_index: ::core::primitive::u32,
+          pub slot: runtime_types::sp_consensus_slots::Slot,
+          pub vrf_output: [::core::primitive::u8; 32usize],
+          pub vrf_proof: [::core::primitive::u8; 64usize],
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        pub struct SecondaryPlainPreDigest {
+          pub authority_index: ::core::primitive::u32,
+          pub slot: runtime_types::sp_consensus_slots::Slot,
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        pub struct SecondaryVRFPreDigest {
+          pub authority_index: ::core::primitive::u32,
+          pub slot: runtime_types::sp_consensus_slots::Slot,
+          pub vrf_output: [::core::primitive::u8; 32usize],
+          pub vrf_proof: [::core::primitive::u8; 64usize],
         }
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
@@ -33776,6 +36014,14 @@ pub mod api {
     pub client: ::subxt::Client<T>,
     marker: ::core::marker::PhantomData<X>,
   }
+  impl<T: ::subxt::Config, X> Clone for RuntimeApi<T, X> {
+    fn clone(&self) -> Self {
+      Self {
+        client: self.client.clone(),
+        marker: ::core::marker::PhantomData,
+      }
+    }
+  }
   impl<T, X> ::core::convert::From<::subxt::Client<T>> for RuntimeApi<T, X>
   where
     T: ::subxt::Config,
@@ -33794,11 +36040,16 @@ pub mod api {
     X: ::subxt::extrinsic::ExtrinsicParams<T>,
   {
     pub fn validate_metadata(&'a self) -> Result<(), ::subxt::MetadataError> {
-      if self.client.metadata().metadata_hash(&PALLETS)
+      let runtime_metadata_hash = {
+        let locked_metadata = self.client.metadata();
+        let metadata = locked_metadata.read();
+        metadata.metadata_hash(&PALLETS)
+      };
+      if runtime_metadata_hash
         != [
-          153u8, 31u8, 221u8, 145u8, 72u8, 167u8, 31u8, 91u8, 150u8, 0u8, 184u8, 227u8, 86u8,
-          179u8, 44u8, 214u8, 208u8, 219u8, 106u8, 81u8, 109u8, 44u8, 120u8, 192u8, 251u8, 180u8,
-          58u8, 9u8, 102u8, 211u8, 3u8, 201u8,
+          87u8, 232u8, 110u8, 131u8, 107u8, 65u8, 80u8, 106u8, 37u8, 84u8, 228u8, 222u8, 14u8,
+          82u8, 233u8, 114u8, 200u8, 144u8, 137u8, 12u8, 37u8, 52u8, 76u8, 215u8, 108u8, 208u8,
+          48u8, 208u8, 18u8, 233u8, 149u8, 122u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
@@ -33835,7 +36086,7 @@ pub mod api {
     pub async fn at(
       &self,
       block_hash: T::Hash,
-    ) -> Result<::subxt::events::Events<'a, T, Event>, ::subxt::BasicError> {
+    ) -> Result<::subxt::events::Events<T, Event>, ::subxt::BasicError> {
       ::subxt::events::at::<T, Event>(self.client, block_hash).await
     }
     pub async fn subscribe(
