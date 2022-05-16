@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["NextConfigDescriptor",""]]});
+initSidebarItems({"enum":[["NextConfigDescriptor",""],["PreDigest",""]],"struct":[["PrimaryPreDigest",""],["SecondaryPlainPreDigest",""],["SecondaryVRFPreDigest",""]]});

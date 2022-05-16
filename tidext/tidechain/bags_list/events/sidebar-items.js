@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Rebagged",""]]});
+initSidebarItems({"struct":[["Rebagged","Moved an account from one bag to another."]]});

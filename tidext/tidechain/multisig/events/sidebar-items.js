@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["MultisigApproval",""],["MultisigCancelled",""],["MultisigExecuted",""],["NewMultisig",""]]});
+initSidebarItems({"struct":[["MultisigApproval","A multisig operation has been approved by someone."],["MultisigCancelled","A multisig operation has been cancelled."],["MultisigExecuted","A multisig operation has been executed."],["NewMultisig","A new multisig operation has begun."]]});

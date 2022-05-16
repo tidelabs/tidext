@@ -373,7 +373,7 @@
             .<span class="ident">runtime</span>()
             .<span class="ident">tx</span>()
             .#<span class="ident">pallet_name</span>()
-            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)
+            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)<span class="question-mark">?</span>
             .<span class="ident">sign_and_submit_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
             .<span class="kw">await</span><span class="question-mark">?</span>;
           <span class="prelude-val">Ok</span>(())
@@ -390,7 +390,7 @@
             .<span class="ident">runtime</span>()
             .<span class="ident">tx</span>()
             .#<span class="ident">pallet_name</span>()
-            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)
+            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)<span class="question-mark">?</span>
             .<span class="ident">sign_and_submit_then_watch_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>)
             .<span class="kw">await</span><span class="question-mark">?</span>
             .<span class="ident">wait_for_finalized_success</span>()
@@ -411,7 +411,7 @@
             .<span class="ident">runtime</span>()
             .<span class="ident">tx</span>()
             .#<span class="ident">pallet_name</span>()
-            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)
+            .#<span class="ident">function_name</span>(#<span class="ident">all_params_token</span>)<span class="question-mark">?</span>
             .<span class="ident">create_signed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">signer</span>, <span class="ident">Default::default</span>())
             .<span class="kw">await</span><span class="question-mark">?</span>;
           <span class="kw">let</span> <span class="ident">bytes</span>: <span class="ident">Bytes</span> <span class="op">=</span> <span class="ident">extrinsic</span>.<span class="ident">encode</span>().<span class="ident">into</span>();

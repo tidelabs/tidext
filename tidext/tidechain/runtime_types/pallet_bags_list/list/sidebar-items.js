@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Bag",""],["Node",""]]});
+initSidebarItems({"enum":[["ListError",""]],"struct":[["Bag",""],["Node",""]]});

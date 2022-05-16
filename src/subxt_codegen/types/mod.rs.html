@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;50ba1ec&#x2F;codegen&#x2F;src&#x2F;types&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;355105f&#x2F;codegen&#x2F;src&#x2F;types&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a class="sidebar-logo" href="../../../subxt_codegen/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></div>
         </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></a><nav class="sub"><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
@@ -266,6 +266,19 @@
 <span id="264">264</span>
 <span id="265">265</span>
 <span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -295,6 +308,7 @@
     <span class="ident">Span</span>,
     <span class="ident">TokenStream</span>,
 };
+<span class="kw">use</span> <span class="ident">proc_macro_error::abort_call_site</span>;
 <span class="kw">use</span> <span class="ident">quote</span>::{
     <span class="ident">quote</span>,
     <span class="ident">ToTokens</span>,
@@ -316,7 +330,10 @@
         <span class="ident">CompositeDefFieldType</span>,
         <span class="ident">CompositeDefFields</span>,
     },
-    <span class="ident">derives::GeneratedTypeDerives</span>,
+    <span class="ident">derives</span>::{
+        <span class="ident">Derives</span>,
+        <span class="ident">DerivesRegistry</span>,
+    },
     <span class="ident">type_def::TypeDefGen</span>,
     <span class="ident">type_def_params::TypeDefParameters</span>,
     <span class="ident">type_path</span>::{
@@ -339,7 +356,7 @@
     <span class="doccomment">/// User defined overrides for generated types.</span>
     <span class="ident">type_substitutes</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">syn::TypePath</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Set of derives with which to annotate generated types.</span>
-    <span class="ident">derives</span>: <span class="ident">GeneratedTypeDerives</span>,
+    <span class="ident">derives</span>: <span class="ident">DerivesRegistry</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">TypeGenerator</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
@@ -348,7 +365,7 @@
         <span class="ident">type_registry</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">PortableRegistry</span>,
         <span class="ident">root_mod</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
         <span class="ident">type_substitutes</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">syn::TypePath</span><span class="op">&gt;</span>,
-        <span class="ident">derives</span>: <span class="ident">GeneratedTypeDerives</span>,
+        <span class="ident">derives</span>: <span class="ident">DerivesRegistry</span>,
     ) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">root_mod_ident</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">root_mod</span>, <span class="ident">Span::call_site</span>());
         <span class="self">Self</span> {
@@ -360,7 +377,7 @@
     }
 
     <span class="doccomment">/// Generate a module containing all types defined in the supplied type registry.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_types_mod</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_types_mod</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Module</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">root_mod</span> <span class="op">=</span>
             <span class="ident">Module::new</span>(<span class="self">self</span>.<span class="ident">types_mod_ident</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">types_mod_ident</span>.<span class="ident">clone</span>());
 
@@ -387,7 +404,7 @@
         <span class="ident">id</span>: <span class="ident">u32</span>,
         <span class="ident">path</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
         <span class="ident">root_mod_ident</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>,
-        <span class="ident">module</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
+        <span class="ident">module</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Module</span>,
     ) {
         <span class="kw">let</span> <span class="ident">joined_path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">join</span>(<span class="string">&quot;::&quot;</span>);
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">type_substitutes</span>.<span class="ident">contains_key</span>(<span class="kw-2">&amp;</span><span class="ident">joined_path</span>) {
@@ -483,22 +500,31 @@
         }
     }
 
-    <span class="doccomment">/// Returns the derives with which all generated type will be decorated.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">derives</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">GeneratedTypeDerives</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">derives</span>
+    <span class="doccomment">/// Returns the derives to be applied to all generated types.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default_derives</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Derives</span> {
+        <span class="self">self</span>.<span class="ident">derives</span>.<span class="ident">default_derives</span>()
+    }
+
+    <span class="doccomment">/// Returns the derives to be applied to a generated type.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">type_derives</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">Type</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>) -&gt; <span class="ident">Derives</span> {
+        <span class="kw">let</span> <span class="ident">joined_path</span> <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">path</span>().<span class="ident">segments</span>().<span class="ident">join</span>(<span class="string">&quot;::&quot;</span>);
+        <span class="kw">let</span> <span class="ident">ty_path</span>: <span class="ident">syn::TypePath</span> <span class="op">=</span> <span class="ident">syn::parse_str</span>(<span class="kw-2">&amp;</span><span class="ident">joined_path</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+            <span class="macro">abort_call_site!</span>(<span class="string">&quot;&#39;{}&#39; is an invalid type path: {:?}&quot;</span>, <span class="ident">joined_path</span>, <span class="ident">e</span>,)
+        });
+        <span class="self">self</span>.<span class="ident">derives</span>.<span class="ident">resolve</span>(<span class="kw-2">&amp;</span><span class="ident">ty_path</span>)
     }
 }
 
 <span class="doccomment">/// Represents a Rust `mod`, containing generated types and child `mod`s.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Module</span> {
     <span class="ident">name</span>: <span class="ident">Ident</span>,
     <span class="ident">root_mod</span>: <span class="ident">Ident</span>,
-    <span class="ident">children</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">types</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">scale_info::Path</span><span class="op">&lt;</span><span class="ident">scale_info::form::PortableForm</span><span class="op">&gt;</span>, <span class="ident">TypeDefGen</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">children</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">Ident</span>, <span class="ident">Module</span><span class="op">&gt;</span>,
+    <span class="ident">types</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">scale_info::Path</span><span class="op">&lt;</span><span class="ident">scale_info::form::PortableForm</span><span class="op">&gt;</span>, <span class="ident">TypeDefGen</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">Module</span> {
     <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;mut</span> <span class="ident">TokenStream</span>) {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span>;
         <span class="kw">let</span> <span class="ident">root_mod</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">root_mod</span>;
@@ -516,7 +542,7 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">Module</span> {
     <span class="doccomment">/// Create a new [`Module`], with a reference to the root `mod` for resolving type paths.</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="ident">Ident</span>, <span class="ident">root_mod</span>: <span class="ident">Ident</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {

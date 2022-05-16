@@ -330,8 +330,6 @@
 <span id="328">328</span>
 <span id="329">329</span>
 <span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -502,10 +500,10 @@
   }
 
   <span class="doccomment">/// Try to launch a new stronghold instance with the provided path and location</span>
-  <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_from_stronghold_path</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+  <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_from_stronghold_path</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>, <span class="ident">V</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
     <span class="ident">stronghold_path</span>: <span class="ident">P</span>,
     <span class="ident">keypair_location</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Location</span><span class="op">&gt;</span>,
-    <span class="ident">passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="ident">passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>,
   ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">default_keypair_location</span> <span class="op">=</span> <span class="ident">keypair_location</span>.<span class="ident">unwrap_or</span>(<span class="ident">Location::Generic</span> {
       <span class="ident">vault_path</span>: <span class="string">b&quot;tidext&quot;</span>.<span class="ident">to_vec</span>(),
@@ -541,7 +539,7 @@
 <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">init_stronghold_from_seed</span>(
   <span class="ident">keypair_location</span>: <span class="kw-2">&amp;</span><span class="ident">Location</span>,
   <span class="ident">mnemonic_or_seed</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-  <span class="ident">passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+  <span class="ident">seed_passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stronghold</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
   <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">std::sync::mpsc::channel</span>();
   <span class="ident">std::thread::spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
@@ -557,7 +555,7 @@
   <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ProcResult::Sr25519Generate</span>(<span class="ident">ResultMessage::Error</span>(<span class="ident">stronghold_error</span>)) <span class="op">=</span> <span class="ident">stronghold</span>
     .<span class="ident">runtime_exec</span>(<span class="ident">Procedure::Sr25519Generate</span> {
       <span class="ident">mnemonic_or_seed</span>,
-      <span class="ident">passphrase</span>,
+      <span class="ident">passphrase</span>: <span class="ident">seed_passphrase</span>,
       <span class="ident">output</span>: <span class="ident">keypair_location</span>.<span class="ident">clone</span>(),
       <span class="ident">hint</span>: [<span class="number">0u8</span>; <span class="number">24</span>].<span class="ident">into</span>(),
     })
@@ -570,9 +568,9 @@
 }
 
 <span class="doccomment">/// Initialize a new stronghold instance from the provided snapshot path and passphrase</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">init_stronghold_from_path</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span><span class="op">&gt;</span>(
+<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">init_stronghold_from_path</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>, <span class="ident">T</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>(
   <span class="ident">stronghold_path</span>: <span class="ident">P</span>,
-  <span class="ident">passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+  <span class="ident">passphrase</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stronghold</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
   <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">std::sync::mpsc::channel</span>();
   <span class="ident">std::thread::spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
@@ -586,9 +584,7 @@
   <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">stronghold</span>, <span class="ident">system</span>) <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>();
 
   <span class="kw">let</span> <span class="ident">stronghold_path</span> <span class="op">=</span> <span class="ident">stronghold_path</span>.<span class="ident">as_ref</span>();
-  <span class="kw">let</span> <span class="ident">encryption_key</span> <span class="op">=</span> <span class="ident">passphrase</span>
-    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">as_bytes</span>().<span class="ident">to_vec</span>())
-    .<span class="ident">unwrap_or_default</span>();
+  <span class="kw">let</span> <span class="ident">encryption_key</span> <span class="op">=</span> <span class="ident">passphrase</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">as_ref</span>().<span class="ident">to_vec</span>()).<span class="ident">unwrap_or_default</span>();
 
   <span class="kw">if</span> <span class="ident">stronghold_path</span>.<span class="ident">exists</span>() {
     <span class="kw">if</span> <span class="kw">let</span> <span class="ident">ResultMessage::Error</span>(<span class="ident">stronghold_error</span>) <span class="op">=</span> <span class="ident">stronghold</span>

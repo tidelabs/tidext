@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;50ba1ec&#x2F;subxt&#x2F;src&#x2F;client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;355105f&#x2F;subxt&#x2F;src&#x2F;client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a class="sidebar-logo" href="../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.png" alt="logo"></div>
         </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../subxt/index.html"><img class="rust-logo" src="../../rust-logo.png" alt="logo"></a><nav class="sub"><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
@@ -358,6 +358,55 @@
 <span id="356">356</span>
 <span id="357">357</span>
 <span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
+<span id="405">405</span>
+<span id="406">406</span>
+<span id="407">407</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -384,10 +433,12 @@
     <span class="ident">rpc</span>::{<span class="ident">Rpc</span>, <span class="ident">RpcClient</span>, <span class="ident">RuntimeVersion</span>, <span class="ident">SystemProperties</span>},
     <span class="ident">storage::StorageClient</span>,
     <span class="ident">transaction::TransactionProgress</span>,
+    <span class="ident">updates::UpdateClient</span>,
     <span class="ident">Call</span>, <span class="ident">Config</span>, <span class="ident">Encoded</span>, <span class="ident">Metadata</span>,
 };
 <span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Compact</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>};
 <span class="kw">use</span> <span class="ident">derivative::Derivative</span>;
+<span class="kw">use</span> <span class="ident">parking_lot::RwLock</span>;
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
 
 <span class="doccomment">/// ClientBuilder for constructing a Client.</span>
@@ -395,6 +446,7 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClientBuilder</span> {
     <span class="ident">url</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="ident">client</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RpcClient</span><span class="op">&gt;</span>,
+    <span class="ident">metadata</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span>,
     <span class="ident">page_size</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
 }
 
@@ -404,6 +456,7 @@
         <span class="self">Self</span> {
             <span class="ident">url</span>: <span class="prelude-val">None</span>,
             <span class="ident">client</span>: <span class="prelude-val">None</span>,
+            <span class="ident">metadata</span>: <span class="prelude-val">None</span>,
             <span class="ident">page_size</span>: <span class="prelude-val">None</span>,
         }
     }
@@ -426,6 +479,15 @@
         <span class="self">self</span>
     }
 
+    <span class="doccomment">/// Set the metadata.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// *Note:* Metadata will no longer be downloaded from the runtime node.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;integration-tests&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_metadata</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">metadata</span>: <span class="ident">Metadata</span>) -&gt; <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">metadata</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">metadata</span>);
+        <span class="self">self</span>
+    }
+
     <span class="doccomment">/// Creates a new Client.</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span> {
@@ -435,21 +497,25 @@
             <span class="ident"><span class="kw">crate</span>::rpc::ws_client</span>(<span class="ident">url</span>).<span class="kw">await</span><span class="question-mark">?</span>
         };
         <span class="kw">let</span> <span class="ident">rpc</span> <span class="op">=</span> <span class="ident">Rpc::new</span>(<span class="ident">client</span>);
-        <span class="kw">let</span> (<span class="ident">metadata</span>, <span class="ident">genesis_hash</span>, <span class="ident">runtime_version</span>, <span class="ident">properties</span>) <span class="op">=</span> <span class="ident">future::join4</span>(
-            <span class="ident">rpc</span>.<span class="ident">metadata</span>(),
+        <span class="kw">let</span> (<span class="ident">genesis_hash</span>, <span class="ident">runtime_version</span>, <span class="ident">properties</span>) <span class="op">=</span> <span class="ident">future::join3</span>(
             <span class="ident">rpc</span>.<span class="ident">genesis_hash</span>(),
             <span class="ident">rpc</span>.<span class="ident">runtime_version</span>(<span class="prelude-val">None</span>),
             <span class="ident">rpc</span>.<span class="ident">system_properties</span>(),
         )
         .<span class="kw">await</span>;
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">metadata</span><span class="question-mark">?</span>;
+
+        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">metadata</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">metadata</span> {
+            <span class="ident">metadata</span>
+        } <span class="kw">else</span> {
+            <span class="ident">rpc</span>.<span class="ident">metadata</span>().<span class="kw">await</span><span class="question-mark">?</span>
+        };
 
         <span class="prelude-val">Ok</span>(<span class="ident">Client</span> {
             <span class="ident">rpc</span>,
             <span class="ident">genesis_hash</span>: <span class="ident">genesis_hash</span><span class="question-mark">?</span>,
-            <span class="ident">metadata</span>: <span class="ident">Arc::new</span>(<span class="ident">metadata</span>),
+            <span class="ident">metadata</span>: <span class="ident">Arc::new</span>(<span class="ident">RwLock::new</span>(<span class="ident">metadata</span>)),
             <span class="ident">properties</span>: <span class="ident">properties</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">Default::default</span>()),
-            <span class="ident">runtime_version</span>: <span class="ident">runtime_version</span><span class="question-mark">?</span>,
+            <span class="ident">runtime_version</span>: <span class="ident">Arc::new</span>(<span class="ident">RwLock::new</span>(<span class="ident">runtime_version</span><span class="question-mark">?</span>)),
             <span class="ident">iter_page_size</span>: <span class="self">self</span>.<span class="ident">page_size</span>.<span class="ident">unwrap_or</span>(<span class="number">10</span>),
         })
     }
@@ -461,9 +527,9 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
     <span class="ident">rpc</span>: <span class="ident">Rpc</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
     <span class="ident">genesis_hash</span>: <span class="ident">T::Hash</span>,
-    <span class="ident">metadata</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span>,
+    <span class="ident">metadata</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">properties</span>: <span class="ident">SystemProperties</span>,
-    <span class="ident">runtime_version</span>: <span class="ident">RuntimeVersion</span>,
+    <span class="ident">runtime_version</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">RuntimeVersion</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">iter_page_size</span>: <span class="ident">u32</span>,
 }
 
@@ -488,8 +554,8 @@
     }
 
     <span class="doccomment">/// Returns the chain metadata.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Metadata</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">metadata</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="ident">Arc::clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>)
     }
 
     <span class="doccomment">/// Returns the properties defined in the chain spec as a JSON object.</span>
@@ -511,7 +577,16 @@
 
     <span class="doccomment">/// Create a client for accessing runtime storage</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">storage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">StorageClient</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">StorageClient::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rpc</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>, <span class="self">self</span>.<span class="ident">iter_page_size</span>)
+        <span class="ident">StorageClient::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rpc</span>, <span class="self">self</span>.<span class="ident">metadata</span>(), <span class="self">self</span>.<span class="ident">iter_page_size</span>)
+    }
+
+    <span class="doccomment">/// Create a wrapper for performing runtime updates on this client.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">updates</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">UpdateClient</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+        <span class="ident">UpdateClient::new</span>(
+            <span class="self">self</span>.<span class="ident">rpc</span>.<span class="ident">clone</span>(),
+            <span class="self">self</span>.<span class="ident">metadata</span>(),
+            <span class="self">self</span>.<span class="ident">runtime_version</span>.<span class="ident">clone</span>(),
+        )
     }
 
     <span class="doccomment">/// Convert the client to a runtime api wrapper for custom runtime access.</span>
@@ -520,6 +595,11 @@
     <span class="doccomment">/// to the target runtime.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_runtime_api</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">R</span> {
         <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="doccomment">/// Returns the client&#39;s Runtime Version.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">runtime_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">RuntimeVersion</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="ident">Arc::clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">runtime_version</span>)
     }
 }
 
@@ -577,6 +657,8 @@
 
         <span class="comment">// Get a hash of the extrinsic (we&#39;ll need this later).</span>
         <span class="kw">let</span> <span class="ident">ext_hash</span> <span class="op">=</span> <span class="ident">T::Hashing::hash_of</span>(<span class="kw-2">&amp;</span><span class="ident">extrinsic</span>);
+
+        <span class="macro">tracing::info!</span>(<span class="string">&quot;xt hash: {}&quot;</span>, <span class="ident">hex::encode</span>(<span class="ident">ext_hash</span>.<span class="ident">encode</span>()));
 
         <span class="comment">// Submit and watch for transaction progress.</span>
         <span class="kw">let</span> <span class="ident">sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">watch_extrinsic</span>(<span class="ident">extrinsic</span>).<span class="kw">await</span><span class="question-mark">?</span>;
@@ -640,7 +722,9 @@
         <span class="comment">// 2. SCALE encode call data to bytes (pallet u8, call u8, call params).</span>
         <span class="kw">let</span> <span class="ident">call_data</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>().<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
+            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
             <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">index</span>());
             <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">call_index</span>::<span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
             <span class="self">self</span>.<span class="ident">call</span>.<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bytes</span>);
@@ -648,12 +732,22 @@
         };
 
         <span class="comment">// 3. Construct our custom additional/extra params.</span>
-        <span class="kw">let</span> <span class="ident">additional_and_extra_params</span> <span class="op">=</span> <span class="ident">X::new</span>(
-            <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">runtime_version</span>.<span class="ident">spec_version</span>,
-            <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">runtime_version</span>.<span class="ident">transaction_version</span>,
-            <span class="ident">account_nonce</span>,
-            <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">genesis_hash</span>,
-            <span class="ident">other_params</span>,
+        <span class="kw">let</span> <span class="ident">additional_and_extra_params</span> <span class="op">=</span> {
+            <span class="comment">// Obtain spec version and transaction version from the runtime version of the client.</span>
+            <span class="kw">let</span> <span class="ident">locked_runtime</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">runtime_version</span>();
+            <span class="kw">let</span> <span class="ident">runtime</span> <span class="op">=</span> <span class="ident">locked_runtime</span>.<span class="ident">read</span>();
+            <span class="ident">X::new</span>(
+                <span class="ident">runtime</span>.<span class="ident">spec_version</span>,
+                <span class="ident">runtime</span>.<span class="ident">transaction_version</span>,
+                <span class="ident">account_nonce</span>,
+                <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">genesis_hash</span>,
+                <span class="ident">other_params</span>,
+            )
+        };
+
+        <span class="macro">tracing::debug!</span>(
+            <span class="string">&quot;additional_and_extra_params: {:?}&quot;</span>,
+            <span class="ident">additional_and_extra_params</span>
         );
 
         <span class="comment">// 4. Construct signature. This is compatible with the Encode impl</span>
@@ -671,6 +765,8 @@
                 <span class="ident">signer</span>.<span class="ident">sign</span>(<span class="kw-2">&amp;</span><span class="ident">bytes</span>)
             }
         };
+
+        <span class="macro">tracing::info!</span>(<span class="string">&quot;xt signature: {}&quot;</span>, <span class="ident">hex::encode</span>(<span class="ident">signature</span>.<span class="ident">encode</span>()));
 
         <span class="comment">// 5. Encode extrinsic, now that we have the parts we need. This is compatible</span>
         <span class="comment">//    with the Encode impl for UncheckedExtrinsic (protocol version 4).</span>
@@ -706,7 +802,9 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_unsigned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Encoded</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">call_data</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>().<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
+            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
             <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">index</span>());
             <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">call_index</span>::<span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
             <span class="self">self</span>.<span class="ident">call</span>.<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bytes</span>);

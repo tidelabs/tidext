@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AsDerivative",""],["Batch",""],["BatchAll",""],["DispatchAs",""],["TransactionApi",""]]});
+initSidebarItems({"struct":[["AsDerivative",""],["Batch",""],["BatchAll",""],["DispatchAs",""],["ForceBatch",""],["TransactionApi",""]]});

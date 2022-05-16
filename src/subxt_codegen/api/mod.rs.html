@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;50ba1ec&#x2F;codegen&#x2F;src&#x2F;api&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;git&#x2F;checkouts&#x2F;subxt-7867b11699a3996e&#x2F;355105f&#x2F;codegen&#x2F;src&#x2F;api&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a class="sidebar-logo" href="../../../subxt_codegen/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></div>
         </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../rust-logo.png" alt="logo"></a><nav class="sub"><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
@@ -424,6 +424,39 @@
 <span id="422">422</span>
 <span id="423">423</span>
 <span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -441,21 +474,6 @@
 <span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
 <span class="doccomment">//! Generate code for submitting extrinsics and query storage of a Substrate runtime.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Note</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! By default the codegen will search for the `System` pallet&#39;s `Account` storage item, which is</span>
-<span class="doccomment">//! the conventional location where an account&#39;s index (aka nonce) is stored.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If this `System::Account` storage item is discovered, then it is assumed that:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!   1. The type of the storage item is a `struct` (aka a composite type)</span>
-<span class="doccomment">//!   2. There exists a field called `nonce` which contains the account index.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! These assumptions are based on the fact that the `frame_system::AccountInfo` type is the default</span>
-<span class="doccomment">//! configured type, and that the vast majority of chain configurations will use this.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If either of these conditions are not satisfied, the codegen will fail.</span>
 
 <span class="kw">mod</span> <span class="ident">calls</span>;
 <span class="kw">mod</span> <span class="ident">constants</span>;
@@ -463,7 +481,9 @@
 <span class="kw">mod</span> <span class="ident">events</span>;
 <span class="kw">mod</span> <span class="ident">storage</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::GeneratedTypeDerives</span>;
+<span class="kw">use</span> <span class="ident">subxt_metadata::get_metadata_per_pallet_hash</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::DerivesRegistry</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">ir</span>,
     <span class="ident">types</span>::{
@@ -492,15 +512,12 @@
     <span class="ident">path</span>,
     <span class="ident">string::ToString</span>,
 };
-<span class="kw">use</span> <span class="ident">syn</span>::{
-    <span class="ident">parse_quote</span>,
-    <span class="ident">punctuated::Punctuated</span>,
-};
+<span class="kw">use</span> <span class="ident">syn::parse_quote</span>;
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_runtime_api</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(
     <span class="ident">item_mod</span>: <span class="ident">syn::ItemMod</span>,
     <span class="ident">path</span>: <span class="ident">P</span>,
-    <span class="ident">generated_type_derives</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">syn::Path</span>, <span class="macro">syn::Token!</span>[,]<span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="ident">derives</span>: <span class="ident">DerivesRegistry</span>,
 ) -&gt; <span class="ident">TokenStream2</span>
 <span class="kw">where</span>
     <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">path::Path</span><span class="op">&gt;</span>,
@@ -515,11 +532,6 @@
 
     <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">frame_metadata::RuntimeMetadataPrefixed::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">bytes</span>[..])
         .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">abort_call_site!</span>(<span class="string">&quot;Failed to decode metadata: {}&quot;</span>, <span class="ident">e</span>));
-
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">derives</span> <span class="op">=</span> <span class="ident">GeneratedTypeDerives::default</span>();
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">user_derives</span>) <span class="op">=</span> <span class="ident">generated_type_derives</span> {
-        <span class="ident">derives</span>.<span class="ident">append</span>(<span class="ident">user_derives</span>.<span class="ident">iter</span>().<span class="ident">cloned</span>())
-    }
 
     <span class="kw">let</span> <span class="ident">generator</span> <span class="op">=</span> <span class="ident">RuntimeGenerator::new</span>(<span class="ident">metadata</span>);
     <span class="ident">generator</span>.<span class="ident">generate_runtime</span>(<span class="ident">item_mod</span>, <span class="ident">derives</span>)
@@ -540,9 +552,10 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_runtime</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">item_mod</span>: <span class="ident">syn::ItemMod</span>,
-        <span class="ident">derives</span>: <span class="ident">GeneratedTypeDerives</span>,
+        <span class="ident">derives</span>: <span class="ident">DerivesRegistry</span>,
     ) -&gt; <span class="ident">TokenStream2</span> {
         <span class="kw">let</span> <span class="ident">item_mod_ir</span> <span class="op">=</span> <span class="ident">ir::ItemMod::from</span>(<span class="ident">item_mod</span>);
+        <span class="kw">let</span> <span class="ident">default_derives</span> <span class="op">=</span> <span class="ident">derives</span>.<span class="ident">default_derives</span>();
 
         <span class="comment">// some hardcoded default type substitutes, can be overridden by user</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">type_substitutes</span> <span class="op">=</span> [
@@ -607,9 +620,28 @@
             })
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
 
+        <span class="comment">// Pallet names and their length are used to create PALLETS array.</span>
+        <span class="comment">// The array is used to identify the pallets composing the metadata for</span>
+        <span class="comment">// validation of just those pallets.</span>
+        <span class="kw">let</span> <span class="ident">pallet_names</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>
+            .<span class="ident">metadata</span>
+            .<span class="ident">pallets</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">pallet</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">pallet</span>.<span class="ident">name</span>)
+            .<span class="ident">collect</span>();
+        <span class="kw">let</span> <span class="ident">pallet_names_len</span> <span class="op">=</span> <span class="ident">pallet_names</span>.<span class="ident">len</span>();
+
+        <span class="kw">let</span> <span class="ident">metadata_hash</span> <span class="op">=</span> <span class="ident">get_metadata_per_pallet_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>, <span class="kw-2">&amp;</span><span class="ident">pallet_names</span>);
+
         <span class="kw">let</span> <span class="ident">modules</span> <span class="op">=</span> <span class="ident">pallets_with_mod_names</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">mod_name</span>)<span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">calls</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">calls</span>) <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">calls</span> {
-                <span class="ident">calls::generate_calls</span>(<span class="kw-2">&amp;</span><span class="ident">type_gen</span>, <span class="ident">pallet</span>, <span class="ident">calls</span>, <span class="ident">types_mod_ident</span>)
+                <span class="ident">calls::generate_calls</span>(
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>,
+                    <span class="kw-2">&amp;</span><span class="ident">type_gen</span>,
+                    <span class="ident">pallet</span>,
+                    <span class="ident">calls</span>,
+                    <span class="ident">types_mod_ident</span>,
+                )
             } <span class="kw">else</span> {
                 <span class="macro">quote!</span>()
             };
@@ -621,13 +653,20 @@
             };
 
             <span class="kw">let</span> <span class="ident">storage_mod</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">storage</span>) <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">storage</span> {
-                <span class="ident">storage::generate_storage</span>(<span class="kw-2">&amp;</span><span class="ident">type_gen</span>, <span class="ident">pallet</span>, <span class="ident">storage</span>, <span class="ident">types_mod_ident</span>)
+                <span class="ident">storage::generate_storage</span>(
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>,
+                    <span class="kw-2">&amp;</span><span class="ident">type_gen</span>,
+                    <span class="ident">pallet</span>,
+                    <span class="ident">storage</span>,
+                    <span class="ident">types_mod_ident</span>,
+                )
             } <span class="kw">else</span> {
                 <span class="macro">quote!</span>()
             };
 
             <span class="kw">let</span> <span class="ident">constants_mod</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">pallet</span>.<span class="ident">constants</span>.<span class="ident">is_empty</span>() {
                 <span class="ident">constants::generate_constants</span>(
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>,
                     <span class="kw-2">&amp;</span><span class="ident">type_gen</span>,
                     <span class="ident">pallet</span>,
                     <span class="kw-2">&amp;</span><span class="ident">pallet</span>.<span class="ident">constants</span>,
@@ -663,31 +702,33 @@
         });
 
         <span class="kw">let</span> <span class="ident">outer_event</span> <span class="op">=</span> <span class="macro">quote!</span> {
-            #<span class="ident">derives</span>
+            #<span class="ident">default_derives</span>
             <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Event</span> {
                 #( #<span class="ident">outer_event_variants</span> )<span class="op">*</span>
             }
         };
 
         <span class="kw">let</span> <span class="ident">mod_ident</span> <span class="op">=</span> <span class="ident">item_mod_ir</span>.<span class="ident">ident</span>;
-        <span class="kw">let</span> <span class="ident">pallets_with_constants</span> <span class="op">=</span>
-            <span class="ident">pallets_with_mod_names</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
-                    (<span class="op">!</span><span class="ident">pallet</span>.<span class="ident">constants</span>.<span class="ident">is_empty</span>()).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
-                });
-        <span class="kw">let</span> <span class="ident">pallets_with_storage</span> <span class="op">=</span>
-            <span class="ident">pallets_with_mod_names</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
-                    <span class="ident">pallet</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
-                });
-        <span class="kw">let</span> <span class="ident">pallets_with_calls</span> <span class="op">=</span>
-            <span class="ident">pallets_with_mod_names</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
-                    <span class="ident">pallet</span>.<span class="ident">calls</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
-                });
+        <span class="kw">let</span> <span class="ident">pallets_with_constants</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">pallets_with_mod_names</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
+                (<span class="op">!</span><span class="ident">pallet</span>.<span class="ident">constants</span>.<span class="ident">is_empty</span>()).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
+            })
+            .<span class="ident">collect</span>();
+
+        <span class="kw">let</span> <span class="ident">pallets_with_storage</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">pallets_with_mod_names</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
+                <span class="ident">pallet</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
+            })
+            .<span class="ident">collect</span>();
+
+        <span class="kw">let</span> <span class="ident">pallets_with_calls</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">pallets_with_mod_names</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">filter_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">pallet_mod_name</span>)<span class="op">|</span> {
+                <span class="ident">pallet</span>.<span class="ident">calls</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">pallet_mod_name</span>)
+            })
+            .<span class="ident">collect</span>();
 
         <span class="kw">let</span> <span class="ident">has_module_error_impl</span> <span class="op">=</span>
             <span class="ident">errors::generate_has_module_error_impl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>, <span class="ident">types_mod_ident</span>);
@@ -697,6 +738,8 @@
             <span class="kw">pub</span> <span class="kw">mod</span> #<span class="ident">mod_ident</span> {
                 <span class="comment">// Make it easy to access the root via `root_mod` at different levels:</span>
                 <span class="kw">use</span> <span class="kw">super</span>::#<span class="ident">mod_ident</span> <span class="kw">as</span> <span class="ident">root_mod</span>;
+                <span class="comment">// Identify the pallets composing the static metadata by name.</span>
+                <span class="kw">pub</span> <span class="kw">static</span> <span class="ident">PALLETS</span>: [<span class="kw-2">&amp;</span><span class="ident">str</span>; #<span class="ident">pallet_names_len</span>] <span class="op">=</span> [ #(#<span class="ident">pallet_names</span>,)<span class="op">*</span> ];
 
                 #<span class="ident">outer_event</span>
                 #( #<span class="ident">modules</span> )<span class="op">*</span>
@@ -710,6 +753,12 @@
                 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span><span class="op">&gt;</span> {
                     <span class="kw">pub</span> <span class="ident">client</span>: <span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
                     <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">X</span><span class="op">&gt;</span>,
+                }
+
+                <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">::subxt::Config</span>, <span class="ident">X</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> {
+                    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
+                        <span class="self">Self</span> { <span class="ident">client</span>: <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">clone</span>(), <span class="ident">marker</span>: <span class="ident">::core::marker::PhantomData</span> }
+                    }
                 }
 
                 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span> <span class="ident">::core::convert::From</span><span class="op">&lt;</span><span class="ident">::subxt::Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RuntimeApi</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">X</span><span class="op">&gt;</span>
@@ -727,6 +776,19 @@
                     <span class="ident">T</span>: <span class="ident">::subxt::Config</span>,
                     <span class="ident">X</span>: <span class="ident">::subxt::extrinsic::ExtrinsicParams</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
                 {
+                    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">validate_metadata</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">::subxt::MetadataError</span><span class="op">&gt;</span> {
+                        <span class="kw">let</span> <span class="ident">runtime_metadata_hash</span> <span class="op">=</span> {
+                            <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
+                            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+                            <span class="ident">metadata</span>.<span class="ident">metadata_hash</span>(<span class="kw-2">&amp;</span><span class="ident">PALLETS</span>)
+                        };
+                        <span class="kw">if</span> <span class="ident">runtime_metadata_hash</span> <span class="op">!</span><span class="op">=</span> [ #(#<span class="ident">metadata_hash</span>,)<span class="op">*</span> ] {
+                            <span class="prelude-val">Err</span>(<span class="ident">::subxt::MetadataError::IncompatibleMetadata</span>)
+                        } <span class="kw">else</span> {
+                            <span class="prelude-val">Ok</span>(())
+                        }
+                    }
+
                     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">constants</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) -&gt; <span class="ident">ConstantsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
                         <span class="ident">ConstantsApi</span> { <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">client</span> }
                     }
@@ -749,7 +811,7 @@
                 }
 
                 <span class="kw">impl</span> <span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">::subxt::Config</span><span class="op">&gt;</span> <span class="ident">EventsApi</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_hash</span>: <span class="ident">T::Hash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::Events</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
+                    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">block_hash</span>: <span class="ident">T::Hash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">::subxt::events::Events</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
                         <span class="ident">::subxt::events::at</span>::<span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Event</span><span class="op">&gt;</span>(<span class="self">self</span>.<span class="ident">client</span>, <span class="ident">block_hash</span>).<span class="kw">await</span>
                     }
 
@@ -810,12 +872,13 @@
     }
 }
 
+<span class="doccomment">/// Return a vector of tuples of variant names and corresponding struct definitions.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_structs_from_variants</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span><span class="op">&gt;</span>(
     <span class="ident">type_gen</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TypeGenerator</span>,
     <span class="ident">type_id</span>: <span class="ident">u32</span>,
     <span class="ident">variant_to_struct_name</span>: <span class="ident">F</span>,
     <span class="ident">error_message_type_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">CompositeDef</span><span class="op">&gt;</span>
+) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">CompositeDef</span>)<span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">std::borrow::Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>,
 {
@@ -832,13 +895,16 @@
                     <span class="kw-2">&amp;</span>[],
                     <span class="ident">type_gen</span>,
                 );
-                <span class="ident">CompositeDef::struct_def</span>(
+                <span class="kw">let</span> <span class="ident">struct_def</span> <span class="op">=</span> <span class="ident">CompositeDef::struct_def</span>(
+                    <span class="kw-2">&amp;</span><span class="ident">ty</span>,
                     <span class="ident">struct_name</span>.<span class="ident">as_ref</span>(),
                     <span class="ident">Default::default</span>(),
                     <span class="ident">fields</span>,
                     <span class="prelude-val">Some</span>(<span class="macro">parse_quote!</span>(<span class="kw">pub</span>)),
                     <span class="ident">type_gen</span>,
-                )
+                    <span class="ident">var</span>.<span class="ident">docs</span>(),
+                );
+                (<span class="ident">var</span>.<span class="ident">name</span>().<span class="ident">to_string</span>(), <span class="ident">struct_def</span>)
             })
             .<span class="ident">collect</span>()
     } <span class="kw">else</span> {

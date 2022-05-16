@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["UpdateClient","Client wrapper for performing runtime updates."]]});
