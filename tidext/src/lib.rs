@@ -244,10 +244,14 @@ mod client {
     #[tidext::consts = "market_maker_fee_amount"]
     fn swap_fee_market_maker(&self) -> Result<Permill, Error>;
 
-    /// Submit batch call for the current signer
+    /// Send a batch of dispatch calls for the current signer
     #[tidext::pallet = "utility"]
     #[tidext::substitute_fn = "batch"]
     fn submit_batch(&self, calls: Vec<TidechainCall>);
+
+    /// Send a batch of dispatch calls for the current signer. Unlike `submit_batch` it allows error and won't interrupt.
+    #[tidext::pallet = "utility"]
+    fn force_batch(&self, calls: Vec<TidechainCall>);
   }
 
   // Custom implementation of our client
