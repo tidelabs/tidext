@@ -1402,9 +1402,9 @@ pub mod api {
           let metadata = locked_metadata.read();
           if metadata.constant_hash("System", "Version")?
             == [
-              143u8, 163u8, 46u8, 7u8, 227u8, 61u8, 208u8, 87u8, 232u8, 226u8, 73u8, 52u8, 76u8,
-              114u8, 76u8, 61u8, 83u8, 4u8, 246u8, 231u8, 155u8, 2u8, 108u8, 3u8, 15u8, 14u8, 68u8,
-              185u8, 151u8, 151u8, 240u8, 76u8,
+              149u8, 124u8, 0u8, 112u8, 10u8, 178u8, 23u8, 188u8, 167u8, 129u8, 223u8, 189u8, 34u8,
+              128u8, 93u8, 30u8, 220u8, 71u8, 3u8, 217u8, 8u8, 232u8, 91u8, 184u8, 22u8, 38u8, 6u8,
+              146u8, 45u8, 248u8, 129u8, 210u8,
             ]
           {
             let pallet = metadata.pallet("System")?;
@@ -30874,6 +30874,12 @@ pub mod api {
           #[codec(index = 7)]
           #[doc = "Balance overflow"]
           BalanceOverflow,
+          #[codec(index = 8)]
+          #[doc = "Invalid USDT value in the order book"]
+          InvalidUsdtValue,
+          #[codec(index = 9)]
+          #[doc = "Invalid TDFY value in the order book"]
+          InvalidTdfyValue,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub enum Event {
@@ -32402,6 +32408,9 @@ pub mod api {
           #[doc = "Swaps cap reached for this account id"]
           SwapOverflow,
           #[codec(index = 31)]
+          #[doc = "Unable to calculate slippage"]
+          SlippageOverflow,
+          #[codec(index = 32)]
           #[doc = "Unknown Error."]
           UnknownError,
         }
@@ -32915,12 +32924,15 @@ pub mod api {
           #[doc = "Members cap reached"]
           MembersOverflow,
           #[codec(index = 17)]
-          #[doc = "Votes cap reached for this proposal"]
-          VotesOverflow,
+          #[doc = "Votes for cap reached for this proposal"]
+          VotesForOverflow,
           #[codec(index = 18)]
+          #[doc = "Votes against cap reached for this proposal"]
+          VotesAgainstOverflow,
+          #[codec(index = 19)]
           #[doc = "Public keys cap reached for this asset id"]
           PublicKeysOverflow,
-          #[codec(index = 19)]
+          #[codec(index = 20)]
           UnknownError,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
@@ -36047,9 +36059,9 @@ pub mod api {
       };
       if runtime_metadata_hash
         != [
-          87u8, 232u8, 110u8, 131u8, 107u8, 65u8, 80u8, 106u8, 37u8, 84u8, 228u8, 222u8, 14u8,
-          82u8, 233u8, 114u8, 200u8, 144u8, 137u8, 12u8, 37u8, 52u8, 76u8, 215u8, 108u8, 208u8,
-          48u8, 208u8, 18u8, 233u8, 149u8, 122u8,
+          87u8, 69u8, 151u8, 20u8, 201u8, 170u8, 69u8, 209u8, 193u8, 28u8, 97u8, 130u8, 65u8,
+          134u8, 172u8, 93u8, 21u8, 27u8, 252u8, 118u8, 148u8, 29u8, 30u8, 176u8, 210u8, 70u8,
+          167u8, 90u8, 135u8, 128u8, 145u8, 200u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
