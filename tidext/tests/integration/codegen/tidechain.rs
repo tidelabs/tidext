@@ -1402,9 +1402,9 @@ pub mod api {
           let metadata = locked_metadata.read();
           if metadata.constant_hash("System", "Version")?
             == [
-              149u8, 124u8, 0u8, 112u8, 10u8, 178u8, 23u8, 188u8, 167u8, 129u8, 223u8, 189u8, 34u8,
-              128u8, 93u8, 30u8, 220u8, 71u8, 3u8, 217u8, 8u8, 232u8, 91u8, 184u8, 22u8, 38u8, 6u8,
-              146u8, 45u8, 248u8, 129u8, 210u8,
+              235u8, 42u8, 76u8, 248u8, 4u8, 35u8, 118u8, 79u8, 116u8, 83u8, 150u8, 7u8, 211u8,
+              83u8, 102u8, 9u8, 56u8, 17u8, 19u8, 175u8, 40u8, 2u8, 47u8, 45u8, 39u8, 21u8, 109u8,
+              218u8, 21u8, 43u8, 237u8, 206u8,
             ]
           {
             let pallet = metadata.pallet("System")?;
@@ -32413,6 +32413,9 @@ pub mod api {
           #[codec(index = 32)]
           #[doc = "Unknown Error."]
           UnknownError,
+          #[codec(index = 33)]
+          #[doc = "Arithmetic error"]
+          ArithmeticError,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         pub enum Event {
@@ -36059,9 +36062,9 @@ pub mod api {
       };
       if runtime_metadata_hash
         != [
-          87u8, 69u8, 151u8, 20u8, 201u8, 170u8, 69u8, 209u8, 193u8, 28u8, 97u8, 130u8, 65u8,
-          134u8, 172u8, 93u8, 21u8, 27u8, 252u8, 118u8, 148u8, 29u8, 30u8, 176u8, 210u8, 70u8,
-          167u8, 90u8, 135u8, 128u8, 145u8, 200u8,
+          184u8, 180u8, 51u8, 241u8, 24u8, 212u8, 182u8, 29u8, 226u8, 72u8, 12u8, 246u8, 137u8,
+          87u8, 156u8, 134u8, 32u8, 164u8, 53u8, 41u8, 9u8, 150u8, 68u8, 34u8, 197u8, 111u8, 18u8,
+          46u8, 164u8, 33u8, 173u8, 79u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
