@@ -83,7 +83,7 @@ macro_rules! latest_block {
 }
 
 /// Health status of the node the client is currently connected
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NodeHealth {
   /// Number of connected peers

@@ -29,8 +29,8 @@ async fn tx_basic_transfer() -> Result<(), Error> {
   let cxt = test_context().await;
   let mut client = cxt.node_proc.client().clone();
 
-  client.set_signer(charlie.clone());
-  assert_eq!(client.signer.account_id(), charlie.account_id());
+  client.set_signer(Some(charlie.clone()));
+  assert_eq!(client.account_id(), Some(charlie.account_id()));
 
   let alice_pre = client
     .balance(alice.account_id(), Asset::Tdfy.currency_id())
