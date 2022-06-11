@@ -145,7 +145,7 @@ mod client {
   #[tidext::client]
   pub struct Client {
     pub runtime_api: Arc<TidechainRuntimeApi>,
-    pub signer: TidefiKeyring,
+    pub signer: Option<TidefiKeyring>,
   }
 
   // Automatic implementation of subxt functions, because we are lazy.
@@ -258,7 +258,7 @@ mod client {
   #[tidext::custom]
   impl Client {
     /// Set new signer for the client
-    pub fn set_signer(&mut self, signer: TidefiKeyring) {
+    pub fn set_signer(&mut self, signer: Option<TidefiKeyring>) {
       self.signer = signer;
     }
 
@@ -268,8 +268,13 @@ mod client {
     }
 
     /// Return account id for current signer
-    pub fn account_id(&self) -> &AccountId {
-      self.signer.account_id()
+    pub fn account_id(&self) -> Option<&AccountId> {
+      self.signer().map(|signer| signer.account_id()).ok()
+    }
+
+    /// Return signer if set
+    pub fn signer(&self) -> Result<&TidefiKeyring, Error> {
+      self.signer.as_ref().ok_or(Error::NoSignerAvailable)
     }
 
     /// Return a list of all stakes for the `AccountId` with optional `CurrencyId`
@@ -368,6 +373,21 @@ mod client {
           Ok(query_storage!(self, assets, asset, &wrapped_token)?.map_or(0, |asset| asset.supply))
         }
       }
+    }
+
+    #[cfg(feature = "decoder")]
+    /// Extrinsic decoder
+    /// This function is unstable and may be updated anytime with breaking changes.
+    pub async fn decode_extrinsic(
+      &self,
+      data: &mut &[u8],
+    ) -> Result<tidext_decoder::Extrinsic<'static>, Error> {
+      let locked_metadata = self.runtime().client.metadata();
+      let metadata = locked_metadata.read();
+      let extrinsic_decoder = tidext_decoder::DecoderBuilder::new(metadata.runtime_metadata())
+        .with_default_custom_type_decodes()
+        .build()?;
+      Ok(extrinsic_decoder.decode_extrinsic(data)?.into_owned())
     }
   }
 }

@@ -120,7 +120,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .tx()
             .#pallet_name()
             .#function_name(#all_params_token)?
-            .sign_and_submit_default(&self.signer)
+            .sign_and_submit_default(self.signer()?)
             .await?;
           Ok(())
         }
@@ -137,7 +137,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .tx()
             .#pallet_name()
             .#function_name(#all_params_token)?
-            .sign_and_submit_then_watch_default(&self.signer)
+            .sign_and_submit_then_watch_default(self.signer()?)
             .await?
             .wait_for_finalized_success()
             .await
@@ -158,7 +158,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .tx()
             .#pallet_name()
             .#function_name(#all_params_token)?
-            .create_signed(&self.signer, Default::default())
+            .create_signed(self.signer()?, Default::default())
             .await?;
           let bytes: Bytes = extrinsic.encode().into();
           Ok(format!("0x{}", hex::encode(bytes.to_vec()).as_str()))
@@ -197,19 +197,19 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           Default::default()
         }
 
-        /// Set the tidechain RPC address
+        /// Set the tidechain RPC address (optional)
         pub fn set_url<P: Into<String>>(mut self, url: P) -> Self {
           self.rpc_url = url.into();
           self
         }
 
-        /// Set the tidechain signer
+        /// Set the tidechain signer (optional)
         pub fn set_signer(mut self, signer: TidefiKeyring) -> Self {
           self.signer = Some(signer);
           self
         }
 
-        /// Initialize a new [`Client`], you must set a [`signer`] first
+        /// Initialize a new [`Client`]
         pub async fn build(self) -> Result<Client, Error> {
           let ws_client = WsClientBuilder::default()
             .max_notifs_per_subscription(4096)
@@ -226,16 +226,10 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
               .to_runtime_api(),
           );
 
-          if let Some(signer) = self.signer {
-            return Ok(Client {
-              signer,
-              runtime_api,
-            });
-          }
-
-          Err(Error::Other(
-            "Unable to build the client. Make sure to set a signer.".to_string(),
-          ))
+          return Ok(Client {
+            signer: self.signer,
+            runtime_api,
+          });
         }
       }
 

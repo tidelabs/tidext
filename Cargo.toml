@@ -1,6 +1,7 @@
 [workspace]
 members = [
    "tidext",
+   "decoder",
    "macro",
    "examples",
    "bindings/node", 

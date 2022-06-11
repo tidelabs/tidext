@@ -43,7 +43,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .await?;
 
   // we should probably set keys on each start (it delete all the old-ones)
-  if client.is_quorum_member(client.account_id()).await? {
+  if client
+    .is_quorum_member(client.account_id().unwrap())
+    .await?
+  {
     let all_assets_pubkey = Asset::iter()
       .map(|asset| (asset.id(), "pubkey".as_bytes().to_vec()))
       .collect();

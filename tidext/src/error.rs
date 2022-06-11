@@ -46,6 +46,11 @@ pub enum Error {
   NetworkError(String),
   #[error("channel closed")]
   ChannelClosed,
+  #[cfg(feature = "decoder")]
+  #[error("decode error: {0}")]
+  DecodeError(#[from] tidext_decoder::Error),
+  #[error("No signer available, use `set_signer()` first")]
+  NoSignerAvailable,
 }
 
 impl From<&str> for Error {

@@ -6,7 +6,7 @@ edition = "2021"
 publish = false
 
 [dependencies]
-tidext = { path = "../tidext" }
+tidext = { path = "../tidext", features = [ "decoder" ] }
 tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 
 tokio = { version = "1", features = [ "full" ], default-features = false }

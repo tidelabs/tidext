@@ -171,12 +171,21 @@ impl Client {
   }
 
   fn get_account_id(&self) -> Vec<u8> {
-    let account_id: [u8; 32] = self.inner.account_id().clone().into();
+    let account_id: [u8; 32] = self
+      .inner
+      .account_id()
+      .expect("No signer found")
+      .clone()
+      .into();
     account_id.to_vec()
   }
 
   fn get_account_id_ss58(&self) -> String {
-    self.inner.account_id().to_string()
+    self
+      .inner
+      .account_id()
+      .expect("No signer found")
+      .to_string()
   }
 
   fn get_regular_swap_fee<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
@@ -289,7 +298,7 @@ impl Client {
       let id: [u8; 32] = id[0..32][..].try_into().expect("invalid account id value");
       AccountId::from(id)
     } else {
-      self.inner.account_id().clone()
+      self.inner.account_id().expect("No signer found").clone()
     };
 
     let client = self.inner.clone();

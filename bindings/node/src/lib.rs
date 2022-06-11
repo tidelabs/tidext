@@ -144,13 +144,17 @@ impl Client {
 
   #[napi]
   pub async fn get_account_id(&self) -> Buffer {
-    let id = self.inner.account_id();
+    let id = self.inner.account_id().expect("No signer found");
     Buffer::from(id.as_ref())
   }
 
   #[napi]
   pub async fn get_account_id_ss58(&self) -> String {
-    self.inner.account_id().to_string()
+    self
+      .inner
+      .account_id()
+      .expect("No signer found")
+      .to_string()
   }
 
   #[napi]
@@ -279,7 +283,7 @@ impl Client {
       let id: [u8; 32] = id[0..32][..].try_into().expect("invalid account id value");
       AccountId::from(id)
     } else {
-      self.inner.account_id().clone()
+      self.inner.account_id().expect("No signer found").clone()
     };
 
     let token_balance = self
