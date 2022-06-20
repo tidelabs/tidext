@@ -392,7 +392,7 @@
 <span class="kw">use</span> <span class="ident">parity_scale_codec</span>::{<span class="ident">Compact</span>, <span class="ident">Decode</span>};
 <span class="kw">use</span> <span class="ident">scale_info</span>::{<span class="ident">form::PortableForm</span>, <span class="ident">IntoPortable</span>, <span class="ident">TypeInfo</span>};
 <span class="kw">use</span> <span class="ident">scale_value::Value</span>;
-<span class="kw">use</span> <span class="ident">serde::Serialize</span>;
+<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">borrow::Cow</span>, <span class="ident">collections::HashMap</span>, <span class="ident">fmt::Debug</span>};
 
 <span class="kw">use</span> <span class="ident">scale_info::Path</span>;
@@ -434,7 +434,7 @@
 }
 
 <span class="doccomment">/// The result of successfully decoding an extrinsic.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Extrinsic</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
   <span class="doccomment">/// Decoded call data and associated type information about the call.</span>
   <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">borrow</span>)]</span>
@@ -458,7 +458,7 @@
 }
 
 <span class="doccomment">/// Decoded call data and associated type information.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CallData</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
   <span class="doccomment">/// The name of the pallet</span>
   <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">borrow</span>)]</span>
@@ -481,7 +481,7 @@
 }
 
 <span class="doccomment">/// The signature information embedded in an extrinsic.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExtrinsicSignature</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
   <span class="doccomment">/// Address the extrinsic is being sent from</span>
   <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">with</span> <span class="op">=</span> <span class="string">&quot;util::RemoteAddress&quot;</span>)]</span>
