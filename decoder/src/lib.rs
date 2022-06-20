@@ -18,7 +18,7 @@ use env_types::CustomTypeDecoder;
 use parity_scale_codec::{Compact, Decode};
 use scale_info::{form::PortableForm, IntoPortable, TypeInfo};
 use scale_value::Value;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::{borrow::Cow, collections::HashMap, fmt::Debug};
 
 use scale_info::Path;
@@ -60,7 +60,7 @@ impl From<&Path<PortableForm>> for PathKey {
 }
 
 /// The result of successfully decoding an extrinsic.
-#[derive(Serialize, Debug, Clone, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct Extrinsic<'a> {
   /// Decoded call data and associated type information about the call.
   #[serde(borrow)]
@@ -84,7 +84,7 @@ impl<'a> Extrinsic<'a> {
 }
 
 /// Decoded call data and associated type information.
-#[derive(Serialize, Debug, Clone, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct CallData<'a> {
   /// The name of the pallet
   #[serde(borrow)]
@@ -107,7 +107,7 @@ impl<'a> CallData<'a> {
 }
 
 /// The signature information embedded in an extrinsic.
-#[derive(Serialize, Debug, Clone, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]
 pub struct ExtrinsicSignature<'a> {
   /// Address the extrinsic is being sent from
   #[serde(with = "util::RemoteAddress")]
