@@ -33,6 +33,8 @@ impl Config for TidechainConfig {
 
 #[subxt::subxt(runtime_metadata_path = "res/tidechain_metadata.scale")]
 pub mod tidechain {
+  #[subxt(substitute_type = "frame_support::PalletId")]
+  use frame_support::PalletId;
   #[subxt(substitute_type = "sp_arithmetic::per_things::Percent")]
   use sp_runtime::Percent;
   #[subxt(substitute_type = "sp_arithmetic::per_things::Permill")]
