@@ -160,8 +160,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .#function_name(#all_params_token)?
             .create_signed(self.signer()?, Default::default())
             .await?;
-          let bytes: Bytes = extrinsic.encode().into();
-          Ok(format!("0x{}", hex::encode(bytes.to_vec()).as_str()))
+          Ok(format!("0x{}", hex::encode(extrinsic.encoded()).as_str()))
         }
       )
     }
