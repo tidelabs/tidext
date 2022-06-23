@@ -106,7 +106,6 @@ use std::sync::Arc;
 pub use subxt::{extrinsic::Signer, Error as SubstrateSubxtError};
 use subxt::{
   rpc::{rpc_params, ClientT},
-  sp_core::Bytes,
   PolkadotExtrinsicParams,
 };
 pub use subxt_impl::{tidechain, TidechainConfig};
