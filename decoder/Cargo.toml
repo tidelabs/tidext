@@ -13,7 +13,7 @@ thiserror = "1.0"
 log = "0.4"
 hex = "0.4"
 frame-metadata = { version = "15", features = ["v14", "std"]}
-scale-value = { git = "https://github.com/paritytech/scale-value", features = [ "serde" ] }
+scale-value = { version = "0.2", features = [ "serde" ] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["preserve_order", "arbitrary_precision"] }
 tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
