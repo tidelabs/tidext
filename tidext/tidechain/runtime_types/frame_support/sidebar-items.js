@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["dispatch",""],["storage",""],["traits",""],["weights",""]],"struct":[["PalletId",""]]});
+initSidebarItems({"mod":[["dispatch",""],["traits",""],["weights",""]],"struct":[["PalletId",""]]});

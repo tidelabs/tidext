@@ -69,6 +69,8 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -104,36 +106,38 @@
 
 <span class="attribute">#[<span class="ident">subxt::subxt</span>(<span class="ident">runtime_metadata_path</span> <span class="op">=</span> <span class="string">&quot;res/tidechain_metadata.scale&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">tidechain</span> {
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;frame_support::PalletId&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">frame_support::PalletId</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;sp_arithmetic::per_things::Percent&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">sp_runtime::Percent</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;sp_arithmetic::per_things::Permill&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">sp_runtime::Permill</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ComplianceLevel&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::ComplianceLevel</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::CurrencyId&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::CurrencyId</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Mint&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::Mint</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::OracleImAlive&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::OracleImAlive</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ProposalType&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::ProposalType</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ProposalVotes&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::ProposalVotes</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Stake&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::Stake</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapConfirmation&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::SwapConfirmation</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapStatus&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::SwapStatus</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapType&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::SwapType</span>;
-  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Withdrawal&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">tidefi_primitives::Withdrawal</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;sp_runtime::bounded::bounded_vec::BoundedVec&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::Vec</span>;
   <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;frame_support::storage::bounded_vec::BoundedVec&quot;</span>)]</span>
-  <span class="kw">use</span> <span class="ident">Vec</span>;
+  <span class="kw">use</span> <span class="ident">::Vec</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;frame_support::PalletId&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::frame_support::PalletId</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;sp_arithmetic::per_things::Percent&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::sp_runtime::Percent</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;sp_arithmetic::per_things::Permill&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::sp_runtime::Permill</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ComplianceLevel&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::ComplianceLevel</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::CurrencyId&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::CurrencyId</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Mint&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::Mint</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::OracleImAlive&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::OracleImAlive</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ProposalType&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::ProposalType</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::ProposalVotes&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::ProposalVotes</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Stake&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::Stake</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapConfirmation&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::SwapConfirmation</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapStatus&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::SwapStatus</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::SwapType&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::SwapType</span>;
+  <span class="attribute">#[<span class="ident">subxt</span>(<span class="ident">substitute_type</span> <span class="op">=</span> <span class="string">&quot;tidefi_primitives::Withdrawal&quot;</span>)]</span>
+  <span class="kw">use</span> <span class="ident">::tidefi_primitives::Withdrawal</span>;
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="tidext" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/355105f/codegen/src/api/storage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/5c2ac00/codegen/src/api/storage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../subxt_codegen/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -328,6 +328,80 @@
 <span id="323">323</span>
 <span id="324">324</span>
 <span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -348,7 +422,6 @@
 <span class="kw">use</span> <span class="ident">frame_metadata</span>::{
     <span class="ident">v14::RuntimeMetadataV14</span>,
     <span class="ident">PalletMetadata</span>,
-    <span class="ident">PalletStorageMetadata</span>,
     <span class="ident">StorageEntryMetadata</span>,
     <span class="ident">StorageEntryModifier</span>,
     <span class="ident">StorageEntryType</span>,
@@ -366,13 +439,51 @@
     <span class="ident">TypeDef</span>,
 };
 
+<span class="doccomment">/// Generate storage from the provided pallet&#39;s metadata.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The function creates a new module named `storage` under the pallet&#39;s module.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// pub mod PalletName {</span>
+<span class="doccomment">///     pub mod storage {</span>
+<span class="doccomment">///     ...</span>
+<span class="doccomment">///     }</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The function generates the storage as rust structs that implement the `subxt::StorageEntry`</span>
+<span class="doccomment">/// trait to uniquely identify the storage&#39;s identity when creating the extrinsic.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// pub struct StorageName {</span>
+<span class="doccomment">///      pub storage_param: type,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// impl ::subxt::StorageEntry for StorageName {</span>
+<span class="doccomment">/// ...</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Storages are extracted from the API and wrapped into the generated `StorageApi` of</span>
+<span class="doccomment">/// each module.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Arguments</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// - `metadata` - Runtime metadata from which the storages are generated.</span>
+<span class="doccomment">/// - `type_gen` - The type generator containing all types defined by metadata.</span>
+<span class="doccomment">/// - `pallet` - Pallet metadata from which the storages are generated.</span>
+<span class="doccomment">/// - `types_mod_ident` - The ident of the base module that we can use to access the generated types from.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">generate_storage</span>(
     <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">RuntimeMetadataV14</span>,
     <span class="ident">type_gen</span>: <span class="kw-2">&amp;</span><span class="ident">TypeGenerator</span>,
     <span class="ident">pallet</span>: <span class="kw-2">&amp;</span><span class="ident">PalletMetadata</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-    <span class="ident">storage</span>: <span class="kw-2">&amp;</span><span class="ident">PalletStorageMetadata</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
     <span class="ident">types_mod_ident</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>,
 ) -&gt; <span class="ident">TokenStream2</span> {
+    <span class="kw">let</span> <span class="ident">storage</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">storage</span>) <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">storage</span> {
+        <span class="ident">storage</span>
+    } <span class="kw">else</span> {
+        <span class="kw">return</span> <span class="macro">quote!</span>()
+    };
+
     <span class="kw">let</span> (<span class="ident">storage_structs</span>, <span class="ident">storage_fns</span>): (<span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>) <span class="op">=</span> <span class="ident">storage</span>
         .<span class="ident">entries</span>
         .<span class="ident">iter</span>()
@@ -459,13 +570,21 @@
                             <span class="prelude-val">None</span> =&gt; <span class="macro">quote!</span>(#<span class="ident">t</span>),
                         }
                     });
-
-                    <span class="kw">let</span> <span class="ident">entry_struct</span> <span class="op">=</span> <span class="macro">quote!</span> {
-                        <span class="kw">pub</span> <span class="kw">struct</span> #<span class="ident">entry_struct_ident</span> <span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>( #( <span class="kw">pub</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> #<span class="ident">field_types</span> ),<span class="op">*</span> );
-
+                    <span class="comment">// There cannot be a reference without a parameter.</span>
+                    <span class="kw">let</span> <span class="ident">should_ref</span> <span class="op">=</span> <span class="op">!</span><span class="ident">fields</span>.<span class="ident">is_empty</span>();
+                    <span class="kw">let</span> (<span class="ident">entry_struct</span>, <span class="ident">constructor</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">should_ref</span> {
+                        (
+                            <span class="macro">quote!</span> {
+                                <span class="kw">pub</span> <span class="kw">struct</span> #<span class="ident">entry_struct_ident</span> <span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>( #( <span class="kw">pub</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> #<span class="ident">field_types</span> ),<span class="op">*</span> );
+                            },
+                            <span class="macro">quote!</span>( #<span class="ident">entry_struct_ident</span>( #( #<span class="ident">field_names</span> ),<span class="op">*</span> ) ),
+                        )
+                    } <span class="kw">else</span> {
+                        (
+                            <span class="macro">quote!</span>( <span class="kw">pub</span> <span class="kw">struct</span> #<span class="ident">entry_struct_ident</span>; ),
+                            <span class="macro">quote!</span>( #<span class="ident">entry_struct_ident</span> ),
+                        )
                     };
-                    <span class="kw">let</span> <span class="ident">constructor</span> <span class="op">=</span>
-                        <span class="macro">quote!</span>( #<span class="ident">entry_struct_ident</span>( #( #<span class="ident">field_names</span> ),<span class="op">*</span> ) );
 
                     <span class="kw">let</span> <span class="ident">key_impl</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">hashers</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="ident">fields</span>.<span class="ident">len</span>() {
                         <span class="comment">// If the number of hashers matches the number of fields, we&#39;re dealing with</span>
@@ -507,7 +626,7 @@
                         )
                     };
 
-                    (<span class="ident">fields</span>, <span class="ident">entry_struct</span>, <span class="ident">constructor</span>, <span class="ident">key_impl</span>, <span class="bool-val">true</span>)
+                    (<span class="ident">fields</span>, <span class="ident">entry_struct</span>, <span class="ident">constructor</span>, <span class="ident">key_impl</span>, <span class="ident">should_ref</span>)
                 }
                 <span class="kw">_</span> =&gt; {
                     <span class="kw">let</span> (<span class="ident">lifetime_param</span>, <span class="ident">lifetime_ref</span>) <span class="op">=</span> (<span class="macro">quote!</span>(<span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>), <span class="macro">quote!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span>));
@@ -570,12 +689,6 @@
         }
     };
 
-    <span class="kw">let</span> (<span class="ident">lifetime_param</span>, <span class="ident">reference</span>, <span class="ident">anon_lifetime</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">should_ref</span> {
-        (<span class="macro">quote!</span>(<span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>), <span class="macro">quote!</span>(<span class="kw-2">&amp;</span>), <span class="macro">quote!</span>(<span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>))
-    } <span class="kw">else</span> {
-        (<span class="macro">quote!</span>(), <span class="macro">quote!</span>(), <span class="macro">quote!</span>())
-    };
-
     <span class="kw">let</span> <span class="ident">storage_entry_impl</span> <span class="op">=</span> <span class="macro">quote!</span> (
         <span class="kw">const</span> <span class="ident">PALLET</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> #<span class="ident">pallet_name</span>;
         <span class="kw">const</span> <span class="ident">STORAGE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> #<span class="ident">storage_name</span>;
@@ -585,6 +698,10 @@
         }
     );
 
+    <span class="kw">let</span> <span class="ident">anon_lifetime</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">should_ref</span> {
+        <span class="bool-val">true</span> =&gt; <span class="macro">quote!</span>(<span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>),
+        <span class="bool-val">false</span> =&gt; <span class="macro">quote!</span>(),
+    };
     <span class="kw">let</span> <span class="ident">storage_entry_type</span> <span class="op">=</span> <span class="macro">quote!</span> {
         #<span class="ident">entry_struct</span>
         <span class="kw">impl</span> <span class="ident">::subxt::StorageEntry</span> <span class="kw">for</span> #<span class="ident">entry_struct_ident</span> #<span class="ident">anon_lifetime</span> {
@@ -594,22 +711,38 @@
 
     <span class="kw">let</span> <span class="ident">docs</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">storage_entry</span>.<span class="ident">docs</span>;
     <span class="kw">let</span> <span class="ident">docs_token</span> <span class="op">=</span> <span class="macro">quote!</span> { #( <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> #<span class="ident">docs</span> ]</span> )<span class="op">*</span> };
+
+    <span class="kw">let</span> <span class="ident">lifetime_param</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">should_ref</span> {
+        <span class="bool-val">true</span> =&gt; <span class="macro">quote!</span>(<span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>),
+        <span class="bool-val">false</span> =&gt; <span class="macro">quote!</span>(),
+    };
     <span class="kw">let</span> <span class="ident">client_iter_fn</span> <span class="op">=</span> <span class="kw">if</span> <span class="macro">matches!</span>(<span class="ident">storage_entry</span>.<span class="ident">ty</span>, <span class="ident">StorageEntryType::Map</span> { .. }) {
         <span class="macro">quote!</span> (
             #<span class="ident">docs_token</span>
-            <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> #<span class="ident">fn_name_iter</span>(
+            <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">fn_name_iter</span>(
                 <span class="kw-2">&amp;</span><span class="self">self</span>,
                 <span class="ident">block_hash</span>: <span class="ident">::core::option::Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span>,
-            ) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span><span class="ident">::subxt::KeyIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, #<span class="ident">entry_struct_ident</span> #<span class="ident">lifetime_param</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">runtime_storage_hash</span> <span class="op">=</span> {
-                    <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
-                    <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
-                    <span class="ident">metadata</span>.<span class="ident">storage_hash</span>::<span class="op">&lt;</span>#<span class="ident">entry_struct_ident</span><span class="op">&gt;</span>()<span class="question-mark">?</span>
-                };
-                <span class="kw">if</span> <span class="ident">runtime_storage_hash</span> <span class="op">==</span> [#(#<span class="ident">storage_hash</span>,)<span class="kw-2">*</span>] {
-                    <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">storage</span>().<span class="ident">iter</span>(<span class="ident">block_hash</span>).<span class="kw">await</span>
-                } <span class="kw">else</span> {
-                    <span class="prelude-val">Err</span>(<span class="ident">::subxt::MetadataError::IncompatibleMetadata</span>.<span class="ident">into</span>())
+            ) -&gt; <span class="kw">impl</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span>
+                <span class="ident">Output</span> <span class="op">=</span> <span class="ident">::core::result::Result</span><span class="op">&lt;</span><span class="ident">::subxt::KeyIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>, #<span class="ident">entry_struct_ident</span> #<span class="ident">lifetime_param</span><span class="op">&gt;</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span>
+            <span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;a</span> {
+                <span class="comment">// Instead of an async fn which borrows all of self,</span>
+                <span class="comment">// we make sure that the returned future only borrows</span>
+                <span class="comment">// client, which allows you to chain calls a little better.</span>
+                <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>;
+                <span class="kw">async</span> <span class="kw">move</span> {
+                    <span class="kw">let</span> <span class="ident">runtime_storage_hash</span> <span class="op">=</span> {
+                        <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">metadata</span>();
+                        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+                        <span class="kw">match</span> <span class="ident">metadata</span>.<span class="ident">storage_hash</span>::<span class="op">&lt;</span>#<span class="ident">entry_struct_ident</span><span class="op">&gt;</span>() {
+                            <span class="prelude-val">Ok</span>(<span class="ident">hash</span>) =&gt; <span class="ident">hash</span>,
+                            <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>.<span class="ident">into</span>())
+                        }
+                    };
+                    <span class="kw">if</span> <span class="ident">runtime_storage_hash</span> <span class="op">==</span> [#(#<span class="ident">storage_hash</span>,)<span class="kw-2">*</span>] {
+                        <span class="ident">client</span>.<span class="ident">storage</span>().<span class="ident">iter</span>(<span class="ident">block_hash</span>).<span class="kw">await</span>
+                    } <span class="kw">else</span> {
+                        <span class="prelude-val">Err</span>(<span class="ident">::subxt::MetadataError::IncompatibleMetadata</span>.<span class="ident">into</span>())
+                    }
                 }
             }
         )
@@ -617,6 +750,10 @@
         <span class="macro">quote!</span>()
     };
 
+    <span class="kw">let</span> <span class="ident">key_args_ref</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">should_ref</span> {
+        <span class="bool-val">true</span> =&gt; <span class="macro">quote!</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span>),
+        <span class="bool-val">false</span> =&gt; <span class="macro">quote!</span>(),
+    };
     <span class="kw">let</span> <span class="ident">key_args</span> <span class="op">=</span> <span class="ident">fields</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">field_name</span>, <span class="ident">field_type</span>)<span class="op">|</span> {
         <span class="comment">// The field type is translated from `std::vec::Vec&lt;T&gt;` to `[T]`, if the</span>
         <span class="comment">// interface should generate a reference. In such cases, the vector ultimately is</span>
@@ -625,26 +762,37 @@
             <span class="prelude-val">Some</span>(<span class="ident">ty</span>) <span class="kw">if</span> <span class="ident">should_ref</span> =&gt; <span class="macro">quote!</span>([#<span class="ident">ty</span>]),
             <span class="kw">_</span> =&gt; <span class="macro">quote!</span>(#<span class="ident">field_type</span>),
         };
-        <span class="macro">quote!</span>( #<span class="ident">field_name</span>: #<span class="ident">reference</span> #<span class="ident">field_ty</span> )
+        <span class="macro">quote!</span>( #<span class="ident">field_name</span>: #<span class="ident">key_args_ref</span> #<span class="ident">field_ty</span> )
     });
 
     <span class="kw">let</span> <span class="ident">client_fns</span> <span class="op">=</span> <span class="macro">quote!</span> {
         #<span class="ident">docs_token</span>
-        <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> #<span class="ident">fn_name</span>(
+        <span class="kw">pub</span> <span class="kw">fn</span> #<span class="ident">fn_name</span>(
             <span class="kw-2">&amp;</span><span class="self">self</span>,
             #( #<span class="ident">key_args</span>, )<span class="op">*</span>
             <span class="ident">block_hash</span>: <span class="ident">::core::option::Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span>,
-        ) -&gt; <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">return_ty</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">runtime_storage_hash</span> <span class="op">=</span> {
-                <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
-                <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
-                <span class="ident">metadata</span>.<span class="ident">storage_hash</span>::<span class="op">&lt;</span>#<span class="ident">entry_struct_ident</span><span class="op">&gt;</span>()<span class="question-mark">?</span>
-            };
-            <span class="kw">if</span> <span class="ident">runtime_storage_hash</span> <span class="op">==</span> [#(#<span class="ident">storage_hash</span>,)<span class="kw-2">*</span>] {
-                <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> #<span class="ident">constructor</span>;
-                <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">storage</span>().#<span class="ident">fetch</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>, <span class="ident">block_hash</span>).<span class="kw">await</span>
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Err</span>(<span class="ident">::subxt::MetadataError::IncompatibleMetadata</span>.<span class="ident">into</span>())
+        ) -&gt; <span class="kw">impl</span> <span class="ident">::core::future::Future</span><span class="op">&lt;</span>
+            <span class="ident">Output</span> <span class="op">=</span> <span class="ident">::core::result::Result</span><span class="op">&lt;</span>#<span class="ident">return_ty</span>, <span class="ident">::subxt::BasicError</span><span class="op">&gt;</span>
+        <span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;a</span> {
+            <span class="comment">// Instead of an async fn which borrows all of self,</span>
+            <span class="comment">// we make sure that the returned future only borrows</span>
+            <span class="comment">// client, which allows you to chain calls a little better.</span>
+            <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>;
+            <span class="kw">async</span> <span class="kw">move</span> {
+                <span class="kw">let</span> <span class="ident">runtime_storage_hash</span> <span class="op">=</span> {
+                    <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">metadata</span>();
+                    <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+                    <span class="kw">match</span> <span class="ident">metadata</span>.<span class="ident">storage_hash</span>::<span class="op">&lt;</span>#<span class="ident">entry_struct_ident</span><span class="op">&gt;</span>() {
+                        <span class="prelude-val">Ok</span>(<span class="ident">hash</span>) =&gt; <span class="ident">hash</span>,
+                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">e</span>.<span class="ident">into</span>())
+                    }
+                };
+                <span class="kw">if</span> <span class="ident">runtime_storage_hash</span> <span class="op">==</span> [#(#<span class="ident">storage_hash</span>,)<span class="kw-2">*</span>] {
+                    <span class="kw">let</span> <span class="ident">entry</span> <span class="op">=</span> #<span class="ident">constructor</span>;
+                    <span class="ident">client</span>.<span class="ident">storage</span>().#<span class="ident">fetch</span>(<span class="kw-2">&amp;</span><span class="ident">entry</span>, <span class="ident">block_hash</span>).<span class="kw">await</span>
+                } <span class="kw">else</span> {
+                    <span class="prelude-val">Err</span>(<span class="ident">::subxt::MetadataError::IncompatibleMetadata</span>.<span class="ident">into</span>())
+                }
             }
         }
 

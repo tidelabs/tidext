@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-client-transport-0.13.1/src/ws/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-client-transport-0.14.0/src/ws/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../jsonrpsee_client_transport/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -577,6 +577,32 @@
 <span id="572">572</span>
 <span id="573">573</span>
 <span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">//</span>
 <span class="comment">// Permission is hereby granted, free of charge, to any</span>
@@ -610,11 +636,13 @@
 <span class="kw">use</span> <span class="ident">std::time::Duration</span>;
 
 <span class="kw">use</span> <span class="ident">futures_util::io</span>::{<span class="ident">BufReader</span>, <span class="ident">BufWriter</span>};
-<span class="kw">use</span> <span class="ident">jsonrpsee_core::client</span>::{<span class="ident">CertificateStore</span>, <span class="ident">TransportReceiverT</span>, <span class="ident">TransportSenderT</span>};
+<span class="kw">use</span> <span class="ident">jsonrpsee_core::client</span>::{<span class="ident">CertificateStore</span>, <span class="ident">ReceivedMessage</span>, <span class="ident">TransportReceiverT</span>, <span class="ident">TransportSenderT</span>};
 <span class="kw">use</span> <span class="ident">jsonrpsee_core::TEN_MB_SIZE_BYTES</span>;
 <span class="kw">use</span> <span class="ident">jsonrpsee_core</span>::{<span class="ident">async_trait</span>, <span class="ident">Cow</span>};
-<span class="kw">use</span> <span class="ident">soketto::connection</span>;
+<span class="kw">use</span> <span class="ident">soketto::connection::Error::Utf8</span>;
+<span class="kw">use</span> <span class="ident">soketto::data::ByteSlice125</span>;
 <span class="kw">use</span> <span class="ident">soketto::handshake::client</span>::{<span class="ident">Client</span> <span class="kw">as</span> <span class="ident">WsHandshakeClient</span>, <span class="ident">ServerResponse</span>};
+<span class="kw">use</span> <span class="ident">soketto</span>::{<span class="ident">connection</span>, <span class="ident">Data</span>, <span class="ident">Incoming</span>};
 <span class="kw">use</span> <span class="ident">stream::EitherStream</span>;
 <span class="kw">use</span> <span class="ident">thiserror::Error</span>;
 <span class="kw">use</span> <span class="ident">tokio::net::TcpStream</span>;
@@ -774,6 +802,20 @@
 		<span class="prelude-val">Ok</span>(())
 	}
 
+	<span class="doccomment">/// Sends out a ping request. Returns a `Future` that finishes when the request has been</span>
+	<span class="doccomment">/// successfully sent.</span>
+	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">send_ping</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="macro">tracing::debug!</span>(<span class="string">&quot;send ping&quot;</span>);
+		<span class="comment">// Submit empty slice as &quot;optional&quot; parameter.</span>
+		<span class="kw">let</span> <span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[];
+		<span class="comment">// Byte slice fails if the provided slice is larger than 125 bytes.</span>
+		<span class="kw">let</span> <span class="ident">byte_slice</span> <span class="op">=</span> <span class="ident">ByteSlice125::try_from</span>(<span class="ident">slice</span>).<span class="ident">expect</span>(<span class="string">&quot;Empty slice should fit into ByteSlice125&quot;</span>);
+
+		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">send_ping</span>(<span class="ident">byte_slice</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">flush</span>().<span class="kw">await</span><span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(())
+	}
+
 	<span class="doccomment">/// Send a close message and close the connection.</span>
 	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">WsError</span><span class="op">&gt;</span> {
 		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">close</span>().<span class="kw">await</span>.<span class="ident">map_err</span>(<span class="ident">Into::into</span>)
@@ -785,11 +827,21 @@
 	<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">WsError</span>;
 
 	<span class="doccomment">/// Returns a `Future` resolving when the server sent us something back.</span>
-	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">receive</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
-		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">receive_data</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-		<span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::from_utf8</span>(<span class="ident">message</span>).<span class="ident">expect</span>(<span class="string">&quot;Found invalid UTF-8&quot;</span>);
-		<span class="prelude-val">Ok</span>(<span class="ident">s</span>)
+	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">receive</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ReceivedMessage</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="kw">loop</span> {
+			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">message</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+			<span class="kw">let</span> <span class="ident">recv</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">receive</span>(<span class="kw-2">&amp;mut</span> <span class="ident">message</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+
+			<span class="kw">match</span> <span class="ident">recv</span> {
+				<span class="ident">Incoming::Data</span>(<span class="ident">Data::Text</span>(<span class="kw">_</span>)) =&gt; {
+					<span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">String::from_utf8</span>(<span class="ident">message</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">WsError::Connection</span>(<span class="ident">Utf8</span>(<span class="ident">err</span>.<span class="ident">utf8_error</span>())))<span class="question-mark">?</span>;
+					<span class="kw">break</span> <span class="prelude-val">Ok</span>(<span class="ident">ReceivedMessage::Text</span>(<span class="ident">s</span>));
+				}
+				<span class="ident">Incoming::Data</span>(<span class="ident">Data::Binary</span>(<span class="kw">_</span>)) =&gt; <span class="kw">break</span> <span class="prelude-val">Ok</span>(<span class="ident">ReceivedMessage::Bytes</span>(<span class="ident">message</span>)),
+				<span class="ident">Incoming::Pong</span>(<span class="kw">_</span>) =&gt; <span class="kw">break</span> <span class="prelude-val">Ok</span>(<span class="ident">ReceivedMessage::Pong</span>),
+				<span class="kw">_</span> =&gt; <span class="kw">continue</span>,
+			}
+		}
 	}
 }
 

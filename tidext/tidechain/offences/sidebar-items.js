@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["events",""],["storage",""]],"type":[["Event",""]]});
+initSidebarItems({"mod":[["events",""],["storage",""]],"type":[["Event","Events type."]]});

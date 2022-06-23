@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/scale-value-782fcae0d5547c40/4d30d60/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/scale-value-782fcae0d5547c40/a42a78f/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scale_value/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -206,6 +206,40 @@
 <span id="201">201</span>
 <span id="202">202</span>
 <span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2022 Parity Technologies (UK) Ltd. (admin@parity.io)</span>
 <span class="comment">// This file is a part of the scale-value crate.</span>
 <span class="comment">//</span>
@@ -233,10 +267,18 @@
 <span class="doccomment">//! and from [`Value`]s, or serialize/deserialize them to/from other formats like JSON.</span>
 
 <span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="comment">// BitVec only supports u64 BitStore if `target_pointer_width = &quot;64&quot;`.</span>
+<span class="comment">// Turn this into a feature so it can be tested, and use to avoid using</span>
+<span class="comment">// this store type on 32bit architectures.</span>
+<span class="attribute">#![<span class="ident">cfg_attr</span>(
+    <span class="ident">not</span>(<span class="ident">target_pointer_width</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>),
+    <span class="ident">feature</span>(<span class="number">32bit_target</span>)
+)]</span>
 
 <span class="kw">mod</span> <span class="ident">scale_impls</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">serde_impls</span>;
+<span class="kw">mod</span> <span class="ident">string_impls</span>;
 <span class="kw">mod</span> <span class="ident">value</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">value</span>::{<span class="ident">BitSequence</span>, <span class="ident">Composite</span>, <span class="ident">Primitive</span>, <span class="ident">Value</span>, <span class="ident">ValueDef</span>, <span class="ident">Variant</span>};
@@ -407,6 +449,32 @@
 		<span class="ident">buf</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
 	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EncodeError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
 		<span class="ident"><span class="kw">crate</span>::scale_impls::encode_value_as_type</span>(<span class="ident">value</span>, <span class="ident">ty_id</span>, <span class="ident">types</span>, <span class="ident">buf</span>)
+	}
+}
+
+<span class="doccomment">/// Converting a [`crate::Value`] to or from strings.</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">stringify</span> {
+	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;from_string&quot;</span>)]</span>
+	<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::string_impls::ParseError</span>;
+
+	<span class="doccomment">/// Attempt to parse a string into a [`crate::Value&lt;()&gt;`], returning a tuple</span>
+	<span class="doccomment">/// consisting of a result (either the value or a [`ParseError`] containing</span>
+	<span class="doccomment">/// location and error information) and the remainder of the string that wasn&#39;t</span>
+	<span class="doccomment">/// parsed.</span>
+	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;from_string&quot;</span>)]</span>
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; (<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::Value</span><span class="op">&lt;</span>()<span class="op">&gt;</span>, <span class="ident">ParseError</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+		<span class="ident"><span class="kw">crate</span>::string_impls::from_str</span>(<span class="ident">s</span>)
+	}
+
+	<span class="doccomment">/// Identical to calling `to_string()` on the [`crate::Value`], but here just</span>
+	<span class="doccomment">/// to make it a little more obvious that this is the inverse of [`from_str`].</span>
+	<span class="doccomment">///</span>
+	<span class="doccomment">/// # Panics</span>
+	<span class="doccomment">///</span>
+	<span class="doccomment">/// Panics if a `Primitive::U256`/`Primitive::I256` are a part of the value,</span>
+	<span class="doccomment">/// since we cannot properly format and parse those at the moment.</span>
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_string</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::Value</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">String</span> {
+		<span class="ident">v</span>.<span class="ident">to_string</span>()
 	}
 }
 </code></pre></div>

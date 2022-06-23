@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ethabi-17.0.0/src/encoder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encoder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ethabi-17.1.0/src/encoder.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encoder.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../ethabi/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -848,6 +848,37 @@
 <span id="843">843</span>
 <span id="844">844</span>
 <span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
+<span id="861">861</span>
+<span id="862">862</span>
+<span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2015-2020 Parity Technologies</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
@@ -862,15 +893,22 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::no_std_prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">util::pad_u32</span>, <span class="ident">Bytes</span>, <span class="ident">Token</span>, <span class="ident">Word</span>};
 
-<span class="kw">fn</span> <span class="ident">pad_bytes</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">pad_u32</span>(<span class="ident">bytes</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>)];
-	<span class="ident">result</span>.<span class="ident">extend</span>(<span class="ident">pad_fixed_bytes</span>(<span class="ident">bytes</span>));
-	<span class="ident">result</span>
+<span class="kw">fn</span> <span class="ident">pad_bytes_len</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">u32</span> {
+	<span class="comment">// &quot;+ 1&quot; because len is also appended</span>
+	((<span class="ident">bytes</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">31</span>) <span class="op">/</span> <span class="number">32</span>) <span class="kw">as</span> <span class="ident">u32</span> <span class="op">+</span> <span class="number">1</span>
 }
 
-<span class="kw">fn</span> <span class="ident">pad_fixed_bytes</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">pad_bytes_append</span>(<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
+	<span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">pad_u32</span>(<span class="ident">bytes</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>));
+	<span class="ident">fixed_bytes_append</span>(<span class="ident">data</span>, <span class="ident">bytes</span>);
+}
+
+<span class="kw">fn</span> <span class="ident">fixed_bytes_len</span>(<span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">u32</span> {
+	((<span class="ident">bytes</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">31</span>) <span class="op">/</span> <span class="number">32</span>) <span class="kw">as</span> <span class="ident">u32</span>
+}
+
+<span class="kw">fn</span> <span class="ident">fixed_bytes_append</span>(<span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>, <span class="ident">bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) {
 	<span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="ident">bytes</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">31</span>) <span class="op">/</span> <span class="number">32</span>;
-	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">len</span>);
 	<span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">len</span> {
 		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">padded</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">32</span>];
 
@@ -886,143 +924,138 @@
 		<span class="ident">padded</span>[..<span class="ident">to_copy</span>].<span class="ident">copy_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">bytes</span>[<span class="ident">offset</span>..<span class="ident">offset</span> <span class="op">+</span> <span class="ident">to_copy</span>]);
 		<span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">padded</span>);
 	}
-
-	<span class="ident">result</span>
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">enum</span> <span class="ident">Mediate</span> {
-	<span class="ident">Raw</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>),
-	<span class="ident">Prefixed</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>),
-	<span class="ident">PrefixedArray</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&gt;</span>),
-	<span class="ident">PrefixedArrayWithLength</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&gt;</span>),
-	<span class="ident">RawTuple</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&gt;</span>),
-	<span class="ident">PrefixedTuple</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&gt;</span>),
+<span class="kw">enum</span> <span class="ident">Mediate</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+	<span class="comment">// head</span>
+	<span class="ident">Raw</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Token</span>),
+	<span class="ident">RawArray</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>),
+
+	<span class="comment">// head + tail</span>
+	<span class="ident">Prefixed</span>(<span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Token</span>),
+	<span class="ident">PrefixedArray</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>),
+	<span class="ident">PrefixedArrayWithLength</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Mediate</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>),
 }
 
-<span class="kw">impl</span> <span class="ident">Mediate</span> {
+<span class="kw">impl</span> <span class="ident">Mediate</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
 	<span class="kw">fn</span> <span class="ident">head_len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-		<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-			<span class="ident">Mediate::Raw</span>(<span class="kw-2">ref</span> <span class="ident">raw</span>) =&gt; <span class="number">32</span> <span class="op">*</span> <span class="ident">raw</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>,
-			<span class="ident">Mediate::RawTuple</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">mediate</span><span class="op">|</span> <span class="ident">mediate</span>.<span class="ident">head_len</span>()).<span class="ident">sum</span>(),
-			<span class="ident">Mediate::Prefixed</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedArray</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedTuple</span>(<span class="kw">_</span>) =&gt; <span class="number">32</span>,
+		<span class="kw">match</span> <span class="self">self</span> {
+			<span class="ident">Mediate::Raw</span>(<span class="ident">len</span>, <span class="kw">_</span>) =&gt; <span class="number">32</span> <span class="op">*</span> <span class="ident">len</span>,
+			<span class="ident">Mediate::RawArray</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">mediate</span><span class="op">|</span> <span class="ident">mediate</span>.<span class="ident">head_len</span>()).<span class="ident">sum</span>(),
+			<span class="ident">Mediate::Prefixed</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::PrefixedArray</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw">_</span>) =&gt; <span class="number">32</span>,
 		}
 	}
 
 	<span class="kw">fn</span> <span class="ident">tail_len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
-		<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-			<span class="ident">Mediate::Raw</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::RawTuple</span>(<span class="kw">_</span>) =&gt; <span class="number">0</span>,
-			<span class="ident">Mediate::Prefixed</span>(<span class="kw-2">ref</span> <span class="ident">pre</span>) =&gt; <span class="ident">pre</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="number">32</span>,
+		<span class="kw">match</span> <span class="self">self</span> {
+			<span class="ident">Mediate::Raw</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::RawArray</span>(<span class="kw">_</span>) =&gt; <span class="number">0</span>,
+			<span class="ident">Mediate::Prefixed</span>(<span class="ident">len</span>, <span class="kw">_</span>) =&gt; <span class="number">32</span> <span class="op">*</span> <span class="ident">len</span>,
 			<span class="ident">Mediate::PrefixedArray</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">m</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>() <span class="op">+</span> <span class="ident">m</span>.<span class="ident">tail_len</span>()),
 			<span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; {
 				<span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">32</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">m</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>() <span class="op">+</span> <span class="ident">m</span>.<span class="ident">tail_len</span>())
 			}
-			<span class="ident">Mediate::PrefixedTuple</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">m</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>() <span class="op">+</span> <span class="ident">m</span>.<span class="ident">tail_len</span>()),
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">head</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">suffix_offset</span>: <span class="ident">u32</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
+	<span class="kw">fn</span> <span class="ident">head_append</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">acc</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>, <span class="ident">suffix_offset</span>: <span class="ident">u32</span>) {
 		<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-			<span class="ident">Mediate::Raw</span>(<span class="kw-2">ref</span> <span class="ident">raw</span>) =&gt; <span class="ident">raw</span>.<span class="ident">clone</span>(),
-			<span class="ident">Mediate::RawTuple</span>(<span class="kw-2">ref</span> <span class="ident">raw</span>) =&gt; <span class="ident">raw</span>.<span class="ident">iter</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">mediate</span><span class="op">|</span> <span class="ident">mediate</span>.<span class="ident">head</span>(<span class="number">0</span>)).<span class="ident">collect</span>(),
-			<span class="ident">Mediate::Prefixed</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedArray</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw">_</span>)
-			<span class="op">|</span> <span class="ident">Mediate::PrefixedTuple</span>(<span class="kw">_</span>) =&gt; <span class="macro">vec!</span>[<span class="ident">pad_u32</span>(<span class="ident">suffix_offset</span>)],
+			<span class="ident">Mediate::Raw</span>(<span class="kw">_</span>, <span class="ident">raw</span>) =&gt; <span class="ident">encode_token_append</span>(<span class="ident">acc</span>, <span class="ident">raw</span>),
+			<span class="ident">Mediate::RawArray</span>(<span class="kw-2">ref</span> <span class="ident">raw</span>) =&gt; <span class="ident">raw</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">mediate</span><span class="op">|</span> <span class="ident">mediate</span>.<span class="ident">head_append</span>(<span class="ident">acc</span>, <span class="number">0</span>)),
+			<span class="ident">Mediate::Prefixed</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::PrefixedArray</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw">_</span>) =&gt; {
+				<span class="ident">acc</span>.<span class="ident">push</span>(<span class="ident">pad_u32</span>(<span class="ident">suffix_offset</span>))
+			}
 		}
 	}
 
-	<span class="kw">fn</span> <span class="ident">tail</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
+	<span class="kw">fn</span> <span class="ident">tail_append</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">acc</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>) {
 		<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-			<span class="ident">Mediate::Raw</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::RawTuple</span>(<span class="kw">_</span>) =&gt; <span class="macro">vec!</span>[],
-			<span class="ident">Mediate::PrefixedTuple</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>),
-			<span class="ident">Mediate::Prefixed</span>(<span class="kw-2">ref</span> <span class="ident">raw</span>) =&gt; <span class="ident">raw</span>.<span class="ident">clone</span>(),
-			<span class="ident">Mediate::PrefixedArray</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>),
+			<span class="ident">Mediate::Raw</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">|</span> <span class="ident">Mediate::RawArray</span>(<span class="kw">_</span>) =&gt; {}
+			<span class="ident">Mediate::Prefixed</span>(<span class="kw">_</span>, <span class="ident">raw</span>) =&gt; <span class="ident">encode_token_append</span>(<span class="ident">acc</span>, <span class="ident">raw</span>),
+			<span class="ident">Mediate::PrefixedArray</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; <span class="ident">encode_head_tail_append</span>(<span class="ident">acc</span>, <span class="ident">mediates</span>),
 			<span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="kw-2">ref</span> <span class="ident">mediates</span>) =&gt; {
-				<span class="comment">// + 32 added to offset represents len of the array prepanded to tail</span>
-				<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">pad_u32</span>(<span class="ident">mediates</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>)];
+				<span class="comment">// + 32 added to offset represents len of the array prepended to tail</span>
+				<span class="ident">acc</span>.<span class="ident">push</span>(<span class="ident">pad_u32</span>(<span class="ident">mediates</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>));
+				<span class="ident">encode_head_tail_append</span>(<span class="ident">acc</span>, <span class="ident">mediates</span>);
+			}
+		};
+	}
+}
 
-				<span class="kw">let</span> <span class="ident">head_tail</span> <span class="op">=</span> <span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>);
+<span class="doccomment">/// Encodes vector of tokens into ABI compliant vector of bytes.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="ident">tokens</span>: <span class="kw-2">&amp;</span>[<span class="ident">Token</span>]) -&gt; <span class="ident">Bytes</span> {
+	<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">mediate_token</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
 
-				<span class="ident">result</span>.<span class="ident">extend</span>(<span class="ident">head_tail</span>);
-				<span class="ident">result</span>
+	<span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>).<span class="ident">into_iter</span>().<span class="ident">flatten</span>().<span class="ident">collect</span>()
+}
+
+<span class="kw">fn</span> <span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>: <span class="kw-2">&amp;</span>[<span class="ident">Mediate</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
+	<span class="kw">let</span> (<span class="ident">heads_len</span>, <span class="ident">tails_len</span>) <span class="op">=</span>
+		<span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>((<span class="number">0</span>, <span class="number">0</span>), <span class="op">|</span>(<span class="ident">head_acc</span>, <span class="ident">tail_acc</span>), <span class="ident">m</span><span class="op">|</span> (<span class="ident">head_acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>(), <span class="ident">tail_acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">tail_len</span>()));
+
+	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>((<span class="ident">heads_len</span> <span class="op">+</span> <span class="ident">tails_len</span>) <span class="kw">as</span> <span class="ident">usize</span>);
+	<span class="ident">encode_head_tail_append</span>(<span class="kw-2">&amp;mut</span> <span class="ident">result</span>, <span class="ident">mediates</span>);
+
+	<span class="ident">result</span>
+}
+
+<span class="kw">fn</span> <span class="ident">encode_head_tail_append</span>(<span class="ident">acc</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>, <span class="ident">mediates</span>: <span class="kw-2">&amp;</span>[<span class="ident">Mediate</span>]) {
+	<span class="kw">let</span> <span class="ident">heads_len</span> <span class="op">=</span> <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">head_acc</span>, <span class="ident">m</span><span class="op">|</span> <span class="ident">head_acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>());
+
+	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">heads_len</span>;
+	<span class="kw">for</span> <span class="ident">mediate</span> <span class="kw">in</span> <span class="ident">mediates</span> {
+		<span class="ident">mediate</span>.<span class="ident">head_append</span>(<span class="ident">acc</span>, <span class="ident">offset</span>);
+		<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">mediate</span>.<span class="ident">tail_len</span>();
+	}
+
+	<span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> <span class="ident">m</span>.<span class="ident">tail_append</span>(<span class="ident">acc</span>));
+}
+
+<span class="kw">fn</span> <span class="ident">mediate_token</span>(<span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">Token</span>) -&gt; <span class="ident">Mediate</span> {
+	<span class="kw">match</span> <span class="ident">token</span> {
+		<span class="ident">Token::Address</span>(<span class="kw">_</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="number">1</span>, <span class="ident">token</span>),
+		<span class="ident">Token::Bytes</span>(<span class="ident">bytes</span>) =&gt; <span class="ident">Mediate::Prefixed</span>(<span class="ident">pad_bytes_len</span>(<span class="ident">bytes</span>), <span class="ident">token</span>),
+		<span class="ident">Token::String</span>(<span class="ident">s</span>) =&gt; <span class="ident">Mediate::Prefixed</span>(<span class="ident">pad_bytes_len</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>()), <span class="ident">token</span>),
+		<span class="ident">Token::FixedBytes</span>(<span class="ident">bytes</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="ident">fixed_bytes_len</span>(<span class="ident">bytes</span>), <span class="ident">token</span>),
+		<span class="ident">Token::Int</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Token::Uint</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">Token::Bool</span>(<span class="kw">_</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="number">1</span>, <span class="ident">token</span>),
+		<span class="ident">Token::Array</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) =&gt; {
+			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">mediate_token</span>).<span class="ident">collect</span>();
+
+			<span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="ident">mediates</span>)
+		}
+		<span class="ident">Token::FixedArray</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) <span class="op">|</span> <span class="ident">Token::Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) =&gt; {
+			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">mediate_token</span>).<span class="ident">collect</span>();
+
+			<span class="kw">if</span> <span class="ident">token</span>.<span class="ident">is_dynamic</span>() {
+				<span class="ident">Mediate::PrefixedArray</span>(<span class="ident">mediates</span>)
+			} <span class="kw">else</span> {
+				<span class="ident">Mediate::RawArray</span>(<span class="ident">mediates</span>)
 			}
 		}
 	}
 }
 
-<span class="kw">fn</span> <span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>: <span class="kw-2">&amp;</span>[<span class="ident">Mediate</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">heads_len</span> <span class="op">=</span> <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">m</span><span class="op">|</span> <span class="ident">acc</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">head_len</span>());
-
-	<span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">result</span>, <span class="ident">len</span>) <span class="op">=</span>
-		<span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>((<span class="ident">Vec::with_capacity</span>(<span class="ident">heads_len</span> <span class="kw">as</span> <span class="ident">usize</span>), <span class="ident">heads_len</span>), <span class="op">|</span>(<span class="kw-2">mut</span> <span class="ident">acc</span>, <span class="ident">offset</span>), <span class="ident">m</span><span class="op">|</span> {
-			<span class="ident">acc</span>.<span class="ident">extend</span>(<span class="ident">m</span>.<span class="ident">head</span>(<span class="ident">offset</span>));
-			(<span class="ident">acc</span>, <span class="ident">offset</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">tail_len</span>())
-		});
-
-	<span class="kw">let</span> <span class="ident">tails</span> <span class="op">=</span> <span class="ident">mediates</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="ident">Vec::with_capacity</span>((<span class="ident">len</span> <span class="op">-</span> <span class="ident">heads_len</span>) <span class="kw">as</span> <span class="ident">usize</span>), <span class="op">|</span><span class="kw-2">mut</span> <span class="ident">acc</span>, <span class="ident">m</span><span class="op">|</span> {
-		<span class="ident">acc</span>.<span class="ident">extend</span>(<span class="ident">m</span>.<span class="ident">tail</span>());
-		<span class="ident">acc</span>
-	});
-
-	<span class="ident">result</span>.<span class="ident">extend</span>(<span class="ident">tails</span>);
-	<span class="ident">result</span>
-}
-
-<span class="doccomment">/// Encodes vector of tokens into ABI compliant vector of bytes.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="ident">tokens</span>: <span class="kw-2">&amp;</span>[<span class="ident">Token</span>]) -&gt; <span class="ident">Bytes</span> {
-	<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">encode_token</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-
-	<span class="ident">encode_head_tail</span>(<span class="ident">mediates</span>).<span class="ident">iter</span>().<span class="ident">flat_map</span>(<span class="op">|</span><span class="ident">word</span><span class="op">|</span> <span class="ident">word</span>.<span class="ident">to_vec</span>()).<span class="ident">collect</span>()
-}
-
-<span class="kw">fn</span> <span class="ident">encode_token</span>(<span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">Token</span>) -&gt; <span class="ident">Mediate</span> {
+<span class="kw">fn</span> <span class="ident">encode_token_append</span>(<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Word</span><span class="op">&gt;</span>, <span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">Token</span>) {
 	<span class="kw">match</span> <span class="kw-2">*</span><span class="ident">token</span> {
 		<span class="ident">Token::Address</span>(<span class="kw-2">ref</span> <span class="ident">address</span>) =&gt; {
 			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">padded</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">32</span>];
 			<span class="ident">padded</span>[<span class="number">12</span>..].<span class="ident">copy_from_slice</span>(<span class="ident">address</span>.<span class="ident">as_ref</span>());
-			<span class="ident">Mediate::Raw</span>(<span class="macro">vec!</span>[<span class="ident">padded</span>])
+			<span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">padded</span>);
 		}
-		<span class="ident">Token::Bytes</span>(<span class="kw-2">ref</span> <span class="ident">bytes</span>) =&gt; <span class="ident">Mediate::Prefixed</span>(<span class="ident">pad_bytes</span>(<span class="ident">bytes</span>)),
-		<span class="ident">Token::String</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) =&gt; <span class="ident">Mediate::Prefixed</span>(<span class="ident">pad_bytes</span>(<span class="ident">s</span>.<span class="ident">as_bytes</span>())),
-		<span class="ident">Token::FixedBytes</span>(<span class="kw-2">ref</span> <span class="ident">bytes</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="ident">pad_fixed_bytes</span>(<span class="ident">bytes</span>)),
-		<span class="ident">Token::Int</span>(<span class="ident">int</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="macro">vec!</span>[<span class="ident">int</span>.<span class="ident">into</span>()]),
-		<span class="ident">Token::Uint</span>(<span class="ident">uint</span>) =&gt; <span class="ident">Mediate::Raw</span>(<span class="macro">vec!</span>[<span class="ident">uint</span>.<span class="ident">into</span>()]),
+		<span class="ident">Token::Bytes</span>(<span class="kw-2">ref</span> <span class="ident">bytes</span>) =&gt; <span class="ident">pad_bytes_append</span>(<span class="ident">data</span>, <span class="ident">bytes</span>),
+		<span class="ident">Token::String</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) =&gt; <span class="ident">pad_bytes_append</span>(<span class="ident">data</span>, <span class="ident">s</span>.<span class="ident">as_bytes</span>()),
+		<span class="ident">Token::FixedBytes</span>(<span class="kw-2">ref</span> <span class="ident">bytes</span>) =&gt; <span class="ident">fixed_bytes_append</span>(<span class="ident">data</span>, <span class="ident">bytes</span>),
+		<span class="ident">Token::Int</span>(<span class="ident">int</span>) =&gt; <span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">int</span>.<span class="ident">into</span>()),
+		<span class="ident">Token::Uint</span>(<span class="ident">uint</span>) =&gt; <span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">uint</span>.<span class="ident">into</span>()),
 		<span class="ident">Token::Bool</span>(<span class="ident">b</span>) =&gt; {
 			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">value</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">32</span>];
 			<span class="kw">if</span> <span class="ident">b</span> {
 				<span class="ident">value</span>[<span class="number">31</span>] <span class="op">=</span> <span class="number">1</span>;
 			}
-			<span class="ident">Mediate::Raw</span>(<span class="macro">vec!</span>[<span class="ident">value</span>])
+			<span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">value</span>);
 		}
-		<span class="ident">Token::Array</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) =&gt; {
-			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">encode_token</span>).<span class="ident">collect</span>();
-
-			<span class="ident">Mediate::PrefixedArrayWithLength</span>(<span class="ident">mediates</span>)
-		}
-		<span class="ident">Token::FixedArray</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) =&gt; {
-			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">encode_token</span>).<span class="ident">collect</span>();
-
-			<span class="kw">if</span> <span class="ident">token</span>.<span class="ident">is_dynamic</span>() {
-				<span class="ident">Mediate::PrefixedArray</span>(<span class="ident">mediates</span>)
-			} <span class="kw">else</span> {
-				<span class="ident">Mediate::Raw</span>(<span class="ident">encode_head_tail</span>(<span class="kw-2">&amp;</span><span class="ident">mediates</span>))
-			}
-		}
-		<span class="ident">Token::Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) <span class="kw">if</span> <span class="ident">token</span>.<span class="ident">is_dynamic</span>() =&gt; {
-			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">encode_token</span>).<span class="ident">collect</span>();
-
-			<span class="ident">Mediate::PrefixedTuple</span>(<span class="ident">mediates</span>)
-		}
-		<span class="ident">Token::Tuple</span>(<span class="kw-2">ref</span> <span class="ident">tokens</span>) =&gt; {
-			<span class="kw">let</span> <span class="ident">mediates</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">encode_token</span>).<span class="ident">collect</span>();
-
-			<span class="ident">Mediate::RawTuple</span>(<span class="ident">mediates</span>)
-		}
-	}
+		<span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unhandled nested token: {:?}&quot;</span>, <span class="ident">token</span>),
+	};
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
@@ -1209,6 +1242,35 @@
 			0000000000000000000000002222222222222222222222222222222222222222
 			0000000000000000000000003333333333333333333333333333333333333333
 			0000000000000000000000004444444444444444444444444444444444444444
+		&quot;</span>
+		)
+		.<span class="ident">to_vec</span>();
+		<span class="macro">assert_eq!</span>(<span class="ident">encoded</span>, <span class="ident">expected</span>);
+	}
+
+	<span class="attribute">#[<span class="ident">test</span>]</span>
+	<span class="kw">fn</span> <span class="ident">encode_fixed_array_of_static_tuples_followed_by_dynamic_type</span>() {
+		<span class="kw">let</span> <span class="ident">tuple1</span> <span class="op">=</span> <span class="ident">Token::Tuple</span>(<span class="macro">vec!</span>[
+			<span class="ident">Token::Uint</span>(<span class="number">93523141</span>.<span class="ident">into</span>()),
+			<span class="ident">Token::Uint</span>(<span class="number">352332135</span>.<span class="ident">into</span>()),
+			<span class="ident">Token::Address</span>([<span class="number">0x44u8</span>; <span class="number">20</span>].<span class="ident">into</span>()),
+		]);
+		<span class="kw">let</span> <span class="ident">tuple2</span> <span class="op">=</span>
+			<span class="ident">Token::Tuple</span>(<span class="macro">vec!</span>[<span class="ident">Token::Uint</span>(<span class="number">12411</span>.<span class="ident">into</span>()), <span class="ident">Token::Uint</span>(<span class="number">451</span>.<span class="ident">into</span>()), <span class="ident">Token::Address</span>([<span class="number">0x22u8</span>; <span class="number">20</span>].<span class="ident">into</span>())]);
+		<span class="kw">let</span> <span class="ident">fixed</span> <span class="op">=</span> <span class="ident">Token::FixedArray</span>(<span class="macro">vec!</span>[<span class="ident">tuple1</span>, <span class="ident">tuple2</span>]);
+		<span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">Token::String</span>(<span class="string">&quot;gavofyork&quot;</span>.<span class="ident">to_owned</span>());
+		<span class="kw">let</span> <span class="ident">encoded</span> <span class="op">=</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span>[<span class="ident">fixed</span>, <span class="ident">s</span>]);
+		<span class="kw">let</span> <span class="ident">expected</span> <span class="op">=</span> <span class="macro">hex!</span>(
+			<span class="string">&quot;
+			0000000000000000000000000000000000000000000000000000000005930cc5
+			0000000000000000000000000000000000000000000000000000000015002967
+			0000000000000000000000004444444444444444444444444444444444444444
+			000000000000000000000000000000000000000000000000000000000000307b
+			00000000000000000000000000000000000000000000000000000000000001c3
+			0000000000000000000000002222222222222222222222222222222222222222
+			00000000000000000000000000000000000000000000000000000000000000e0
+			0000000000000000000000000000000000000000000000000000000000000009
+			6761766f66796f726b0000000000000000000000000000000000000000000000
 		&quot;</span>
 		)
 		.<span class="ident">to_vec</span>();

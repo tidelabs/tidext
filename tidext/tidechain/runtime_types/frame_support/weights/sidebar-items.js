@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["DispatchClass",""],["Pays",""]],"struct":[["DispatchInfo",""],["PerDispatchClass",""],["RuntimeDbWeight",""],["WeightToFeeCoefficient",""]]});
+initSidebarItems({"enum":[["DispatchClass",""],["Pays",""]],"struct":[["DispatchInfo",""],["PerDispatchClass",""],["RuntimeDbWeight",""]]});

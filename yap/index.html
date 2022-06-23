@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This small, zero-dependency crate helps you to parse input strings and slices by building on the [`Iterator`] interface."><meta name="keywords" content="rust, rustlang, rust-lang, yap"><title>yap - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../yap/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../yap/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate yap</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.7.2</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#traits">Traits</a></li></ul></div></section><div id="sidebar-vars" data-name="yap" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../yap/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">yap</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/yap/lib.rs.html#1-117">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This small, zero-dependency crate helps you to parse input strings and slices by building on the <a href="https://doc.rust-lang.org/1.61.0/core/iter/traits/iterator/trait.Iterator.html" title="Iterator"><code>Iterator</code></a>
+interface.</p>
+<p>The aim of this crate is to provide the sorts of functions you’d come to expect from a parser
+combinator library, but without immersing you into a world of parser combinators, and forcing you
+to use a novel return type, library-provided errors or parser-combinator based control flow. It hopes
+to sacrifice conciseness in exchange for simplicity.</p>
+<p><strong>Some specific features/goals:</strong></p>
+<ul>
+<li>Lots of examples. Every function provided comes with example usage.</li>
+<li>Prioritise simplicity at the cost of verbosity.</li>
+<li>Be iterator-centric. Where applicable, combinators return iterators, so you can lean on the <a href="https://doc.rust-lang.org/1.61.0/core/iter/traits/iterator/trait.Iterator.html" title="Iterator"><code>Iterator</code></a>
+interface to parse as much or as little as you want from the input, and collect up the output however
+you wish.</li>
+<li>Allow user defined errors to be returned anywhere that it might make sense. Some functions have <code>_err</code>
+variants incase you need error information when they don’t otherwise hand back errors for simplicity.</li>
+<li>Location information should always be available, so that you can tell users where something went wrong.
+see <a href="trait.Tokens.html#method.offset" title="Tokens::offset"><code>Tokens::offset</code></a></li>
+<li>Backtracking by default. Coming from Haskell’s Parsec, this feels like the sensible default. It means that
+if one of the provided parsing functions fails to parse what you asked for, it won’t consume any input
+trying.</li>
+<li>Expose all of the “low level” functions. You can save and rewind to locations as needed (see <a href="trait.Tokens.html#tymethod.location" title="Tokens::location"><code>Tokens::location</code></a>),
+and implement any of the provided functions using these primitives.</li>
+<li>Aims to be “fairly quick”. Avoids allocations (and allows you to do the same via the iterator-centric interface).
+If you need “as fast as you can get”, there are probably quicker alternatives.</li>
+</ul>
+<p>Have a look at the <a href="trait.Tokens.html" title="Tokens"><code>Tokens</code></a> trait for all of the parsing methods made available, and examples for each.</p>
+<p>Have a look in the <code>examples</code> folder for more in depth examples.</p>
+<h2 id="example"><a href="#example">Example</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">yap</span>::{
+    <span class="comment">// This trait has all of the parsing methods on it:</span>
+    <span class="ident">Tokens</span>,
+    <span class="comment">// Allows you to use `.into_tokens()` on strings and slices,</span>
+    <span class="comment">// to get an instance of the above:</span>
+    <span class="ident">IntoTokens</span>
+};
+
+<span class="comment">// Step 1: convert our input into something implementing `Tokens`</span>
+<span class="comment">// ================================================================</span>
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="string">&quot;10 + 2 x 12-4,foobar&quot;</span>.<span class="ident">into_tokens</span>();
+
+<span class="comment">// Step 2: Parse some things from our tokens</span>
+<span class="comment">// =========================================</span>
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>,<span class="ident">Debug</span>)]</span>
+<span class="kw">enum</span> <span class="ident">Op</span> { <span class="ident">Plus</span>, <span class="ident">Minus</span>, <span class="ident">Multiply</span> }
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>,<span class="ident">Debug</span>)]</span>
+<span class="kw">enum</span> <span class="ident">OpOrDigit</span> { <span class="ident">Op</span>(<span class="ident">Op</span>), <span class="ident">Digit</span>(<span class="ident">u32</span>) }
+
+<span class="comment">// The `Tokens` trait builds on `Iterator`, so we get a `next` method.</span>
+<span class="kw">fn</span> <span class="ident">parse_op</span>(<span class="ident">t</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">Tokens</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">char</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Op</span><span class="op">&gt;</span> {
+    <span class="kw">match</span> <span class="ident">t</span>.<span class="ident">next</span>()<span class="question-mark">?</span> {
+        <span class="string">&#39;-&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">Op::Minus</span>),
+        <span class="string">&#39;+&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">Op::Plus</span>),
+        <span class="string">&#39;x&#39;</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">Op::Multiply</span>),
+        <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>
+    }
+}
+
+<span class="comment">// We also get other useful functions..</span>
+<span class="kw">fn</span> <span class="ident">parse_digits</span>(<span class="ident">t</span>: <span class="kw-2">&amp;mut</span> <span class="kw">impl</span> <span class="ident">Tokens</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">=</span><span class="ident">char</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">s</span>: <span class="ident">String</span> <span class="op">=</span> <span class="ident">t</span>
+        .<span class="ident">tokens_while</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">is_digit</span>(<span class="number">10</span>))
+        .<span class="ident">collect</span>();
+    <span class="ident">s</span>.<span class="ident">parse</span>().<span class="ident">ok</span>()
+}
+
+<span class="comment">// As well as combinator functions like `sep_by_all` and `surrounded_by`..</span>
+<span class="kw">let</span> <span class="ident">op_or_digit</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">sep_by_all</span>(
+    <span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">surrounded_by</span>(
+        <span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">parse_digits</span>(<span class="ident">t</span>).<span class="ident">map</span>(<span class="ident">OpOrDigit::Digit</span>),
+        <span class="op">|</span><span class="ident">t</span><span class="op">|</span> { <span class="ident">t</span>.<span class="ident">skip_tokens_while</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">is_ascii_whitespace</span>()); }
+    ),
+    <span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">parse_op</span>(<span class="ident">t</span>).<span class="ident">map</span>(<span class="ident">OpOrDigit::Op</span>)
+);
+
+<span class="comment">// Now we&#39;ve parsed our input into OpOrDigits, let&#39;s calculate the result..</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_op</span> <span class="op">=</span> <span class="ident">Op::Plus</span>;
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_digit</span> <span class="op">=</span> <span class="number">0</span>;
+<span class="kw">for</span> <span class="ident">d</span> <span class="kw">in</span> <span class="ident">op_or_digit</span> {
+    <span class="kw">match</span> <span class="ident">d</span> {
+        <span class="ident">OpOrDigit::Op</span>(<span class="ident">op</span>) =&gt; {
+            <span class="ident">current_op</span> <span class="op">=</span> <span class="ident">op</span>
+        },
+        <span class="ident">OpOrDigit::Digit</span>(<span class="ident">n</span>) =&gt; {
+            <span class="kw">match</span> <span class="ident">current_op</span> {
+                <span class="ident">Op::Plus</span> =&gt; { <span class="ident">current_digit</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span> },
+                <span class="ident">Op::Minus</span> =&gt; { <span class="ident">current_digit</span> <span class="op">-</span><span class="op">=</span> <span class="ident">n</span> },
+                <span class="ident">Op::Multiply</span> =&gt; { <span class="ident">current_digit</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">n</span> },
+            }
+        },
+    }
+}
+<span class="macro">assert_eq!</span>(<span class="ident">current_digit</span>, <span class="number">140</span>);
+
+<span class="comment">// Step 3: do whatever you like with the rest of the input!</span>
+<span class="comment">// ========================================================</span>
+
+<span class="comment">// This is available on the concrete type that strings</span>
+<span class="comment">// are converted into (rather than on the `Tokens` trait):</span>
+<span class="kw">let</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">remaining</span>();
+
+<span class="macro">assert_eq!</span>(<span class="ident">remaining</span>, <span class="string">&quot;,foobar&quot;</span>);</code></pre></div>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="types/index.html" title="yap::types mod">types</a></div><div class="item-right docblock-short"><p>This module contains types which implement the <a href="trait.Tokens.html" title="Tokens"><code>Tokens</code></a> interface. You
+won’t often need to import this module unless you wish to explicitly name
+the types in question.</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.one_of.html" title="yap::one_of macro">one_of</a></div><div class="item-right docblock-short"><p>Pass the provided tokens into each expression, one after the other.
+Return the first not-<code>None</code> result.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.IntoTokens.html" title="yap::IntoTokens trait">IntoTokens</a></div><div class="item-right docblock-short"><p>A trait that is implemented by anything which can be converted into an
+object implementing the <a href="trait.Tokens.html" title="Tokens"><code>Tokens</code></a> trait.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.TokenLocation.html" title="yap::TokenLocation trait">TokenLocation</a></div><div class="item-right docblock-short"><p>Calling <a href="trait.Tokens.html#tymethod.location" title="Tokens::location()"><code>Tokens::location()</code></a> returns an object that implements this trait.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Tokens.html" title="yap::Tokens trait">Tokens</a></div><div class="item-right docblock-short"><p>The tokens trait builds on the <a href="https://doc.rust-lang.org/1.61.0/core/iter/traits/iterator/trait.Iterator.html" title="Iterator"><code>Iterator</code></a> trait, and adds a bunch of useful methods
+for parsing tokens from the underlying iterable type.</p>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="yap" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
+</body></html>

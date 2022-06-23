@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/355105f/codegen/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/5c2ac00/codegen/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../subxt_codegen/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -37,6 +37,43 @@
 <span id="32">32</span>
 <span id="33">33</span>
 <span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -54,6 +91,43 @@
 <span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
 <span class="doccomment">//! Library to generate an API for a Substrate runtime from its metadata.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Generated Structure</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! The API generator logic:</span>
+<span class="doccomment">//! - At the root there is the `item_mod` provided (ie `pub mod api {}`)</span>
+<span class="doccomment">//! - Pallets are represented by a child module (ie `pub mod PalletName {}`) of the root</span>
+<span class="doccomment">//! - Each pallet exposes as child modules (if applicable):</span>
+<span class="doccomment">//!   - Calls (`pub mod calls {}`)</span>
+<span class="doccomment">//!   - Events (`pub mod events {}`)</span>
+<span class="doccomment">//!   - Storage (`pub mod storage {}`)</span>
+<span class="doccomment">//!   - Constants (`pub mod constants {}`)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Example</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```no_run</span>
+<span class="doccomment">//! use std::fs;</span>
+<span class="doccomment">//! use codec::Decode;</span>
+<span class="doccomment">//! use frame_metadata::RuntimeMetadataPrefixed;</span>
+<span class="doccomment">//! use subxt_codegen::DerivesRegistry;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! let encoded = fs::read(&quot;../artifacts/polkadot_metadata.scale&quot;).unwrap();</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! // Runtime metadata obtained from a node.</span>
+<span class="doccomment">//! let metadata = &lt;RuntimeMetadataPrefixed as Decode&gt;::decode(&amp;mut &amp;*encoded).unwrap();</span>
+<span class="doccomment">//! // Module under which the API is generated.</span>
+<span class="doccomment">//! let item_mod = syn::parse_quote!(</span>
+<span class="doccomment">//!     pub mod api {}</span>
+<span class="doccomment">//! );</span>
+<span class="doccomment">//! // Default module derivatives.</span>
+<span class="doccomment">//! let mut derives = DerivesRegistry::default();</span>
+<span class="doccomment">//! // Generate the Runtime API.</span>
+<span class="doccomment">//! let generator = subxt_codegen::RuntimeGenerator::new(metadata);</span>
+<span class="doccomment">//! let runtime_api = generator.generate_runtime(item_mod, derives);</span>
+<span class="doccomment">//! println!(&quot;{}&quot;, runtime_api);</span>
+<span class="doccomment">//! ```</span>
+
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">unused_crate_dependencies</span>)]</span>
 
 <span class="kw">mod</span> <span class="ident">api</span>;
 <span class="kw">mod</span> <span class="ident">ir</span>;

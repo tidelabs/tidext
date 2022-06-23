@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["calls",""],["constants",""],["events",""],["storage",""]],"type":[["Event",""]]});
+initSidebarItems({"mod":[["calls","Identity pallet declaration."],["constants",""],["events",""],["storage",""]],"type":[["Event","The event emitted by this pallet."]]});

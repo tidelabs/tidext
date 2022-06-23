@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/355105f/subxt/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/5c2ac00/subxt/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -410,6 +410,93 @@
 <span id="405">405</span>
 <span id="406">406</span>
 <span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
+<span id="414">414</span>
+<span id="415">415</span>
+<span id="416">416</span>
+<span id="417">417</span>
+<span id="418">418</span>
+<span id="419">419</span>
+<span id="420">420</span>
+<span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
+<span id="481">481</span>
+<span id="482">482</span>
+<span id="483">483</span>
+<span id="484">484</span>
+<span id="485">485</span>
+<span id="486">486</span>
+<span id="487">487</span>
+<span id="488">488</span>
+<span id="489">489</span>
+<span id="490">490</span>
+<span id="491">491</span>
+<span id="492">492</span>
+<span id="493">493</span>
+<span id="494">494</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
 <span class="comment">// This file is part of subxt.</span>
 <span class="comment">//</span>
@@ -427,8 +514,8 @@
 <span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
 <span class="kw">use</span> <span class="ident">futures::future</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::traits::Hash</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::traits::SignedExtension</span>;
+<span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">traits::Hash</span>, <span class="ident">ApplyExtrinsicResult</span>};
 
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">error</span>::{<span class="ident">BasicError</span>, <span class="ident">HasModuleError</span>},
@@ -491,7 +578,24 @@
         <span class="self">self</span>
     }
 
-    <span class="doccomment">/// Creates a new Client.</span>
+    <span class="doccomment">/// Builder for [Client].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```no_run</span>
+    <span class="doccomment">/// use subxt::{ClientBuilder, DefaultConfig};</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// #[tokio::main]</span>
+    <span class="doccomment">/// async fn main() {</span>
+    <span class="doccomment">///     // Build the client.</span>
+    <span class="doccomment">///     let client = ClientBuilder::new()</span>
+    <span class="doccomment">///          .set_url(&quot;wss://rpc.polkadot.io:443&quot;)</span>
+    <span class="doccomment">///          .build::&lt;DefaultConfig&gt;()</span>
+    <span class="doccomment">///          .await</span>
+    <span class="doccomment">///          .unwrap();</span>
+    <span class="doccomment">///     // Use the client...</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">client</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span> {
             <span class="ident">client</span>
@@ -584,6 +688,34 @@
     }
 
     <span class="doccomment">/// Create a wrapper for performing runtime updates on this client.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Note</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The update client is intended to be used in the background for</span>
+    <span class="doccomment">/// performing runtime updates, while the API is still in use.</span>
+    <span class="doccomment">/// Without performing runtime updates the submitted extrinsics may fail.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```no_run</span>
+    <span class="doccomment">/// # use subxt::{ClientBuilder, DefaultConfig};</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # #[tokio::main]</span>
+    <span class="doccomment">/// # async fn main() {</span>
+    <span class="doccomment">/// #    let client = ClientBuilder::new()</span>
+    <span class="doccomment">/// #         .set_url(&quot;wss://rpc.polkadot.io:443&quot;)</span>
+    <span class="doccomment">/// #         .build::&lt;DefaultConfig&gt;()</span>
+    <span class="doccomment">/// #         .await</span>
+    <span class="doccomment">/// #         .unwrap();</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// let update_client = client.updates();</span>
+    <span class="doccomment">/// // Spawn a new background task to handle runtime updates.</span>
+    <span class="doccomment">/// tokio::spawn(async move {</span>
+    <span class="doccomment">///     let result = update_client.perform_runtime_updates().await;</span>
+    <span class="doccomment">///     println!(&quot;Runtime update finished with result={:?}&quot;, result);</span>
+    <span class="doccomment">/// });</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">updates</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">UpdateClient</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">UpdateClient::new</span>(
             <span class="self">self</span>.<span class="ident">rpc</span>.<span class="ident">clone</span>(),
@@ -636,7 +768,7 @@
     <span class="doccomment">/// Returns a [`TransactionProgress`], which can be used to track the status of the transaction</span>
     <span class="doccomment">/// and obtain details about it, once it has made it into a block.</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">sign_and_submit_then_watch_default</span>(
-        <span class="self">self</span>,
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">signer</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransactionProgress</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -651,22 +783,14 @@
     <span class="doccomment">/// Returns a [`TransactionProgress`], which can be used to track the status of the transaction</span>
     <span class="doccomment">/// and obtain details about it, once it has made it into a block.</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">sign_and_submit_then_watch</span>(
-        <span class="self">self</span>,
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">signer</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
         <span class="ident">other_params</span>: <span class="ident">X::OtherParams</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransactionProgress</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-        <span class="comment">// Sign the call data to create our extrinsic.</span>
-        <span class="kw">let</span> <span class="ident">extrinsic</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">create_signed</span>(<span class="ident">signer</span>, <span class="ident">other_params</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-
-        <span class="comment">// Get a hash of the extrinsic (we&#39;ll need this later).</span>
-        <span class="kw">let</span> <span class="ident">ext_hash</span> <span class="op">=</span> <span class="ident">T::Hashing::hash_of</span>(<span class="kw-2">&amp;</span><span class="ident">extrinsic</span>);
-
-        <span class="macro">tracing::info!</span>(<span class="string">&quot;xt hash: {}&quot;</span>, <span class="ident">hex::encode</span>(<span class="ident">ext_hash</span>.<span class="ident">encode</span>()));
-
-        <span class="comment">// Submit and watch for transaction progress.</span>
-        <span class="kw">let</span> <span class="ident">sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">watch_extrinsic</span>(<span class="ident">extrinsic</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-
-        <span class="prelude-val">Ok</span>(<span class="ident">TransactionProgress::new</span>(<span class="ident">sub</span>, <span class="self">self</span>.<span class="ident">client</span>, <span class="ident">ext_hash</span>))
+        <span class="self">self</span>.<span class="ident">create_signed</span>(<span class="ident">signer</span>, <span class="ident">other_params</span>)
+            .<span class="kw">await</span><span class="question-mark">?</span>
+            .<span class="ident">submit_and_watch</span>()
+            .<span class="kw">await</span>
     }
 
     <span class="doccomment">/// Creates and signs an extrinsic and submits to the chain for block inclusion. Passes</span>
@@ -680,7 +804,7 @@
     <span class="doccomment">/// Success does not mean the extrinsic has been included in the block, just that it is valid</span>
     <span class="doccomment">/// and has been included in the transaction pool.</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">sign_and_submit_default</span>(
-        <span class="self">self</span>,
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">signer</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Hash</span>, <span class="ident">BasicError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
@@ -698,12 +822,26 @@
     <span class="doccomment">/// Success does not mean the extrinsic has been included in the block, just that it is valid</span>
     <span class="doccomment">/// and has been included in the transaction pool.</span>
     <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">sign_and_submit</span>(
-        <span class="self">self</span>,
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">signer</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
         <span class="ident">other_params</span>: <span class="ident">X::OtherParams</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Hash</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">extrinsic</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">create_signed</span>(<span class="ident">signer</span>, <span class="ident">other_params</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">submit_extrinsic</span>(<span class="ident">extrinsic</span>).<span class="kw">await</span>
+        <span class="self">self</span>.<span class="ident">create_signed</span>(<span class="ident">signer</span>, <span class="ident">other_params</span>)
+            .<span class="kw">await</span><span class="question-mark">?</span>
+            .<span class="ident">submit</span>()
+            .<span class="kw">await</span>
+    }
+
+    <span class="doccomment">/// Return the SCALE encoded bytes representing the call data of the transaction.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
+        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
+        <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
+        <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">index</span>());
+        <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">call_index</span>::<span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
+        <span class="self">self</span>.<span class="ident">call</span>.<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bytes</span>);
+        <span class="prelude-val">Ok</span>(<span class="ident">bytes</span>)
     }
 
     <span class="doccomment">/// Creates a returns a raw signed extrinsic, without submitting it.</span>
@@ -711,7 +849,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">signer</span>: <span class="kw-2">&amp;</span>(<span class="kw">dyn</span> <span class="ident">Signer</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span>),
         <span class="ident">other_params</span>: <span class="ident">X::OtherParams</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Encoded</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SignedSubmittableExtrinsic</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
         <span class="comment">// 1. Get nonce</span>
         <span class="kw">let</span> <span class="ident">account_nonce</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">nonce</span>) <span class="op">=</span> <span class="ident">signer</span>.<span class="ident">nonce</span>() {
             <span class="ident">nonce</span>
@@ -723,16 +861,7 @@
         };
 
         <span class="comment">// 2. SCALE encode call data to bytes (pallet u8, call u8, call params).</span>
-        <span class="kw">let</span> <span class="ident">call_data</span> <span class="op">=</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
-            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
-            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
-            <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">index</span>());
-            <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">call_index</span>::<span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
-            <span class="self">self</span>.<span class="ident">call</span>.<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bytes</span>);
-            <span class="ident">Encoded</span>(<span class="ident">bytes</span>)
-        };
+        <span class="kw">let</span> <span class="ident">call_data</span> <span class="op">=</span> <span class="ident">Encoded</span>(<span class="self">self</span>.<span class="ident">call_data</span>()<span class="question-mark">?</span>);
 
         <span class="comment">// 3. Construct our custom additional/extra params.</span>
         <span class="kw">let</span> <span class="ident">additional_and_extra_params</span> <span class="op">=</span> {
@@ -798,23 +927,68 @@
 
         <span class="comment">// Wrap in Encoded to ensure that any more &quot;encode&quot; calls leave it in the right state.</span>
         <span class="comment">// maybe we can just return the raw bytes..</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">Encoded</span>(<span class="ident">extrinsic</span>))
+        <span class="prelude-val">Ok</span>(<span class="ident">SignedSubmittableExtrinsic</span> {
+            <span class="ident">client</span>: <span class="self">self</span>.<span class="ident">client</span>,
+            <span class="ident">encoded</span>: <span class="ident">Encoded</span>(<span class="ident">extrinsic</span>),
+            <span class="ident">marker</span>: <span class="self">self</span>.<span class="ident">marker</span>,
+        })
+    }
+}
+
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SignedSubmittableExtrinsic</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">X</span>, <span class="ident">E</span>: <span class="ident">Decode</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span><span class="op">&gt;</span> {
+    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;client</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">encoded</span>: <span class="ident">Encoded</span>,
+    <span class="ident">marker</span>: <span class="ident">std::marker::PhantomData</span><span class="op">&lt;</span>(<span class="ident">X</span>, <span class="ident">E</span>, <span class="ident">Evs</span>)<span class="op">&gt;</span>,
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span> <span class="ident">SignedSubmittableExtrinsic</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">X</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">Config</span>,
+    <span class="ident">X</span>: <span class="ident">ExtrinsicParams</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">E</span>: <span class="ident">Decode</span> <span class="op">+</span> <span class="ident">HasModuleError</span>,
+    <span class="ident">Evs</span>: <span class="ident">Decode</span>,
+{
+    <span class="doccomment">/// Submits the extrinsic to the chain.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Returns a [`TransactionProgress`], which can be used to track the status of the transaction</span>
+    <span class="doccomment">/// and obtain details about it, once it has made it into a block.</span>
+    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">submit_and_watch</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransactionProgress</span><span class="op">&lt;</span><span class="lifetime">&#39;client</span>, <span class="ident">T</span>, <span class="ident">E</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+        <span class="comment">// Get a hash of the extrinsic (we&#39;ll need this later).</span>
+        <span class="kw">let</span> <span class="ident">ext_hash</span> <span class="op">=</span> <span class="ident">T::Hashing::hash_of</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">encoded</span>);
+
+        <span class="comment">// Submit and watch for transaction progress.</span>
+        <span class="kw">let</span> <span class="ident">sub</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">watch_extrinsic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">encoded</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+
+        <span class="prelude-val">Ok</span>(<span class="ident">TransactionProgress::new</span>(<span class="ident">sub</span>, <span class="self">self</span>.<span class="ident">client</span>, <span class="ident">ext_hash</span>))
     }
 
-    <span class="doccomment">/// Creates a unsigned extrinsic.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_unsigned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Encoded</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">call_data</span> <span class="op">=</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="ident">locked_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">metadata</span>();
-            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">locked_metadata</span>.<span class="ident">read</span>();
-            <span class="kw">let</span> <span class="ident">pallet</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">pallet</span>(<span class="ident">C::PALLET</span>)<span class="question-mark">?</span>;
-            <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">index</span>());
-            <span class="ident">bytes</span>.<span class="ident">push</span>(<span class="ident">pallet</span>.<span class="ident">call_index</span>::<span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>()<span class="question-mark">?</span>);
-            <span class="self">self</span>.<span class="ident">call</span>.<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">bytes</span>);
-            <span class="ident">Encoded</span>(<span class="ident">bytes</span>)
-        };
+    <span class="doccomment">/// Submits the extrinsic to the chain for block inclusion.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Returns `Ok` with the extrinsic hash if it is valid extrinsic.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Note</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Success does not mean the extrinsic has been included in the block, just that it is valid</span>
+    <span class="doccomment">/// and has been included in the transaction pool.</span>
+    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">submit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Hash</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">submit_extrinsic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">encoded</span>).<span class="kw">await</span>
+    }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">call_data</span>)
+    <span class="doccomment">/// Submits the extrinsic to the dry_run RPC, to test if it would succeed.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Returns `Ok` with an [`ApplyExtrinsicResult`], which is the result of applying of an extrinsic.</span>
+    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">dry_run</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ApplyExtrinsicResult</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">dry_run</span>(<span class="self">self</span>.<span class="ident">encoded</span>(), <span class="ident">at</span>).<span class="kw">await</span>
+    }
+
+    <span class="doccomment">/// Returns the SCALE encoded extrinsic bytes.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encoded</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">encoded</span>.<span class="number">0</span>
     }
 }
 </code></pre></div>

@@ -1,0 +1,4 @@
+(function() {var implementors = {};
+implementors["pallet_transaction_payment"] = [{"text":"impl <a class=\"trait\" href=\"sp_runtime/traits/trait.Get.html\" title=\"trait sp_runtime::traits::Get\">Get</a>&lt;<a class=\"struct\" href=\"sp_arithmetic/fixed_point/struct.FixedU128.html\" title=\"struct sp_arithmetic::fixed_point::FixedU128\">FixedU128</a>&gt; for <a class=\"struct\" href=\"pallet_transaction_payment/pallet/struct.NextFeeMultiplierOnEmpty.html\" title=\"struct pallet_transaction_payment::pallet::NextFeeMultiplierOnEmpty\">NextFeeMultiplierOnEmpty</a>","synthetic":false,"types":["pallet_transaction_payment::pallet::NextFeeMultiplierOnEmpty"]}];
+implementors["sp_runtime"] = [];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

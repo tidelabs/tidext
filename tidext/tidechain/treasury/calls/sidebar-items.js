@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ApproveProposal",""],["ProposeSpend",""],["RejectProposal",""],["RemoveApproval",""],["TransactionApi",""]]});
+initSidebarItems({"struct":[["ApproveProposal",""],["ProposeSpend",""],["RejectProposal",""],["RemoveApproval",""],["Spend",""],["TransactionApi",""]]});

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["constants",""],["storage",""]]});
+initSidebarItems({"mod":[["constants",""],["events",""],["storage",""]],"type":[["Event","The event emitted by this pallet."]]});
