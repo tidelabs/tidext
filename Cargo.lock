@@ -3196,21 +3196,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "scale-value"
-version = "0.2.0"
-source = "git+https://github.com/paritytech/scale-value#a42a78f8d6ab1fb5ff7feb9fe486e75832899abf"
-dependencies = [
- "bitvec",
- "either",
- "frame-metadata",
- "parity-scale-codec",
- "scale-info",
- "serde",
- "thiserror",
- "yap",
-]
-
-[[package]]
 name = "schannel"
 version = "0.1.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4041,7 +4026,7 @@ dependencies = [
  "parity-scale-codec",
  "parking_lot 0.12.1",
  "scale-info",
- "scale-value 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "scale-value",
  "serde",
  "serde_json",
  "sp-core",
@@ -4246,7 +4231,7 @@ dependencies = [
  "log",
  "parity-scale-codec",
  "scale-info",
- "scale-value 0.2.0 (git+https://github.com/paritytech/scale-value)",
+ "scale-value",
  "serde",
  "serde_json",
  "sp-core",
