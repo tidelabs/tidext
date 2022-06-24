@@ -55,7 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let extrinsic_cursor = &mut &*extrinsic_bytes;
 
   let decoded_extrinsic = client.decode_extrinsic(extrinsic_cursor).await?;
-  debug!("decoded_extrinsic {}", decoded_extrinsic.to_json()?);
+  debug!("decoded_extrinsic {:?}", decoded_extrinsic);
 
   Ok(())
 }
