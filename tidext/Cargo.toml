@@ -11,7 +11,7 @@ dev = [ "sp-keyring", "another" ]
 keyring-stronghold = [ "iota_stronghold", "actix" ]
 keyring-stronghold_ex = [ "ex_client" ]
 test = ["which", "env_logger", "sp-keyring"]
-decoder = [ "tidext-decoder" ]
+decoder = [ "subxt/decoder" ]
 another = []
 
 [dependencies]
@@ -52,9 +52,6 @@ which = { version = "4.2.2", optional = true }
 env_logger = { version = "0.8.3", optional = true }
 
 tidext-macro = { path = "../macro" }
-
-# decoder
-tidext-decoder = { path = "../decoder", optional = true }
 
 [dev-dependencies]
 tidext = { path = ".", features = ["test"] }

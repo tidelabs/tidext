@@ -377,16 +377,10 @@ mod client {
     #[cfg(feature = "decoder")]
     /// Extrinsic decoder
     /// This function is unstable and may be updated anytime with breaking changes.
-    pub async fn decode_extrinsic(
-      &self,
-      data: &mut &[u8],
-    ) -> Result<tidext_decoder::Extrinsic<'static>, Error> {
-      let locked_metadata = self.runtime().client.metadata();
-      let metadata = locked_metadata.read();
-      let extrinsic_decoder = tidext_decoder::DecoderBuilder::new(metadata.runtime_metadata())
-        .with_default_custom_type_decodes()
-        .build()?;
-      Ok(extrinsic_decoder.decode_extrinsic(data)?.into_owned())
+    pub async fn decode_extrinsic(&self, data: &mut &[u8]) -> Result<subxt::Extrinsic, Error> {
+      let metadata = self.runtime().client.metadata();
+      let locked_metadata = metadata.read();
+      locked_metadata.decode_extrinsic(data).map_err(Into::into)
     }
   }
 }

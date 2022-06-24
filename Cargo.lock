@@ -4015,7 +4015,7 @@ checksum = "6bdef32e8150c2a081110b42772ffe7d7c9032b606bc226c8260fd97e0976601"
 [[package]]
 name = "subxt"
 version = "0.22.0"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#5c2ac00b9ad1d454f368f7634f95bd02652bf07d"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#ff37576bcb2c2da21c7902fcb3c3441c55491348"
 dependencies = [
  "bitvec",
  "derivative",
@@ -4034,13 +4034,14 @@ dependencies = [
  "subxt-macro",
  "subxt-metadata",
  "thiserror",
+ "tidefi-primitives",
  "tracing",
 ]
 
 [[package]]
 name = "subxt-codegen"
 version = "0.22.0"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#5c2ac00b9ad1d454f368f7634f95bd02652bf07d"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#ff37576bcb2c2da21c7902fcb3c3441c55491348"
 dependencies = [
  "darling",
  "frame-metadata",
@@ -4057,7 +4058,7 @@ dependencies = [
 [[package]]
 name = "subxt-macro"
 version = "0.22.0"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#5c2ac00b9ad1d454f368f7634f95bd02652bf07d"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#ff37576bcb2c2da21c7902fcb3c3441c55491348"
 dependencies = [
  "darling",
  "proc-macro-error",
@@ -4068,7 +4069,7 @@ dependencies = [
 [[package]]
 name = "subxt-metadata"
 version = "0.22.0"
-source = "git+https://github.com/tidelabs/subxt?branch=tidechain#5c2ac00b9ad1d454f368f7634f95bd02652bf07d"
+source = "git+https://github.com/tidelabs/subxt?branch=tidechain#ff37576bcb2c2da21c7902fcb3c3441c55491348"
 dependencies = [
  "frame-metadata",
  "parity-scale-codec",
@@ -4216,28 +4217,9 @@ dependencies = [
  "thiserror",
  "tidefi-primitives",
  "tidext",
- "tidext-decoder",
  "tidext-macro",
  "tokio",
  "which",
-]
-
-[[package]]
-name = "tidext-decoder"
-version = "0.1.0"
-dependencies = [
- "frame-metadata",
- "hex",
- "log",
- "parity-scale-codec",
- "scale-info",
- "scale-value",
- "serde",
- "serde_json",
- "sp-core",
- "sp-runtime",
- "thiserror",
- "tidefi-primitives",
 ]
 
 [[package]]
