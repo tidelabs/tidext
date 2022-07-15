@@ -17,7 +17,10 @@
 #![cfg(feature = "keyring-stronghold")]
 use crate::{Error, TidechainConfig};
 use std::{fmt, path::Path, sync::Arc};
-use stronghold::{Location, ProcResult, Procedure, ResultMessage, Stronghold};
+use stronghold::{
+  procedures::{BIP39Recover, KeyType, PublicKey, Sr25519Sign},
+  KeyProvider, Location, SnapshotPath, Stronghold,
+};
 use subxt::{
   sp_core::{
     crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
@@ -32,6 +35,8 @@ pub use iota_stronghold as stronghold;
 pub type TidefiPairSigner = PairSigner<TidechainConfig, StrongholdSigner>;
 /// Tidefi keyring
 pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
+
+const CLIENT_PATH: Vec<u8> = Vec::new();
 
 /// Stronghold signer instance.
 #[derive(Clone)]
@@ -56,28 +61,47 @@ impl Pair for StrongholdSigner {
     let stronghold = self.stronghold.clone();
     let message = message.to_vec();
     let keypair_location = self.keypair_location.clone();
-    let sig = match futures::executor::block_on(stronghold.runtime_exec(Procedure::Sr25519Sign {
-      keypair: keypair_location,
+
+    let client = stronghold
+      .load_client(CLIENT_PATH)
+      .expect("Failed to load client from stronghold");
+
+    let proc = Sr25519Sign {
       msg: message,
-    })) {
-      ProcResult::Sr25519Sign(ResultMessage::Ok(sig)) => sig,
-      r => panic!("unexpected result: {:?}", r),
+      private_key: keypair_location,
     };
-    sig.inner().clone()
+
+    let sig = match client.execute_procedure(proc) {
+      Ok(sig) => sig,
+      e => panic!("Failed to sign message: {:?}", e),
+    };
+
+    Signature::from_raw(sig)
   }
 
   /// Get public key pair
   fn public(&self) -> Self::Public {
     let stronghold = self.stronghold.clone();
     let keypair_location = self.keypair_location.clone();
-    let pk =
-      match futures::executor::block_on(stronghold.runtime_exec(Procedure::Sr25519PublicKey {
-        keypair: keypair_location,
-      })) {
-        ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => pk,
-        r => panic!("unexpected result: {:?}", r),
-      };
-    *pk.inner()
+
+    let client = stronghold
+      .load_client(CLIENT_PATH)
+      .expect("Failed to load client from stronghold");
+
+    let proc = PublicKey {
+      ty: KeyType::Sr25519,
+      private_key: keypair_location,
+    };
+
+    let res = match client.execute_procedure(proc) {
+      Ok(pk) => pk,
+      e => panic!("Failed to get public key: {:?}", e),
+    };
+
+    let mut pk = [0u8; 32];
+    pk.copy_from_slice(&res);
+
+    Public::from_raw(pk)
   }
 
   // These functions are not used by the the signer, this is why they are `unimplemented`.
@@ -178,11 +202,8 @@ where
       record_path: b"default".to_vec(),
     });
 
-    get_signer_from_stronghold(
-      init_stronghold_from_path(stronghold_path, passphrase).await?,
-      &default_keypair_location,
-    )
-    .await
+    let stronghold = init_stronghold_from_path(stronghold_path, passphrase).await?;
+    get_signer_from_stronghold(stronghold, &default_keypair_location).await
   }
 
   /// Try to launch a new stronghold instance with the provided seed and location
@@ -195,11 +216,8 @@ where
       record_path: b"default".to_vec(),
     });
 
-    get_signer_from_stronghold(
-      init_stronghold_from_seed(&default_keypair_location, Some(seed), None).await?,
-      &default_keypair_location,
-    )
-    .await
+    let stronghold = init_stronghold_from_seed(&default_keypair_location, Some(seed), None).await?;
+    get_signer_from_stronghold(stronghold, &default_keypair_location).await
   }
 }
 
@@ -209,30 +227,21 @@ pub async fn init_stronghold_from_seed(
   mnemonic_or_seed: Option<String>,
   seed_passphrase: Option<String>,
 ) -> Result<Stronghold, Error> {
-  let (tx, rx) = std::sync::mpsc::channel();
-  std::thread::spawn(move || {
-    let system = actix::System::new();
-    let stronghold = system
-      .block_on(Stronghold::init_stronghold_system(vec![], vec![]))
-      .unwrap();
-    tx.send(stronghold).unwrap();
-    system.run().expect("actix system run failed");
-  });
-  let stronghold = rx.recv().unwrap();
+  let stronghold = Stronghold::default();
 
-  if let ProcResult::Sr25519Generate(ResultMessage::Error(stronghold_error)) = stronghold
-    .runtime_exec(Procedure::Sr25519Generate {
-      mnemonic_or_seed,
-      passphrase: seed_passphrase,
-      output: keypair_location.clone(),
-      hint: [0u8; 24].into(),
-    })
-    .await
-  {
-    Err(Error::Stronghold(stronghold_error))
-  } else {
-    Ok(stronghold)
-  }
+  let client = stronghold.create_client(CLIENT_PATH)?;
+
+  let proc = BIP39Recover {
+    passphrase: seed_passphrase,
+    mnemonic: mnemonic_or_seed,
+    ty: KeyType::Sr25519,
+    output: keypair_location.clone(),
+  };
+
+  client.execute_procedure(proc)?;
+  stronghold.write_client(CLIENT_PATH)?;
+
+  Ok(stronghold)
 }
 
 /// Initialize a new stronghold instance from the provided snapshot path and passphrase
@@ -240,34 +249,17 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
   stronghold_path: P,
   passphrase: Option<T>,
 ) -> Result<Stronghold, Error> {
-  let (tx, rx) = std::sync::mpsc::channel();
-  std::thread::spawn(move || {
-    let system = actix::System::new();
-    let stronghold = system
-      .block_on(Stronghold::init_stronghold_system(vec![], vec![]))
-      .unwrap();
-    tx.send((stronghold, actix::System::current())).unwrap();
-    system.run().expect("actix system run failed");
-  });
-  let (mut stronghold, system) = rx.recv().unwrap();
+  let stronghold = Stronghold::default();
 
-  let stronghold_path = stronghold_path.as_ref();
   let encryption_key = passphrase.map(|s| s.as_ref().to_vec()).unwrap_or_default();
+  // let key = hash_blake2b(encryption_key);
+  let keyprovider = KeyProvider::try_from(encryption_key)
+    .map_err(|e| Error::Stronghold(format!(" failed to derive key from passphrase {:?}", e)))?;
 
-  if stronghold_path.exists() {
-    if let ResultMessage::Error(stronghold_error) = stronghold
-      .read_snapshot(
-        Vec::new(),
-        None,
-        &encryption_key,
-        None,
-        Some(stronghold_path.to_path_buf()),
-      )
-      .await
-    {
-      system.stop();
-      return Err(Error::Stronghold(stronghold_error));
-    };
+  if stronghold_path.as_ref().exists() {
+    let snapshot_path = SnapshotPath::from_path(stronghold_path);
+
+    stronghold.load_client_from_snapshot(CLIENT_PATH, &keyprovider, &snapshot_path)?;
   } else {
     return Err(Error::Stronghold("Invalid snapshot path".to_string()));
   }
@@ -284,18 +276,25 @@ where
   T: subxt::Config,
   T::AccountId: From<[u8; 32]>,
 {
-  match stronghold
-    .runtime_exec(Procedure::Sr25519PublicKey {
-      keypair: keypair_location.clone(),
-    })
-    .await
-  {
-    ProcResult::Sr25519PublicKey(ResultMessage::Ok(pk)) => Ok(TidextKeyring::new(
-      T::AccountId::from(pk.inner().0),
-      stronghold,
-      keypair_location.clone(),
-    )),
-    _ => Err(Error::Stronghold("Invalid public key".into())),
+  let client = stronghold.load_client(CLIENT_PATH)?;
+
+  let proc = PublicKey {
+    ty: KeyType::Sr25519,
+    private_key: keypair_location.clone(),
+  };
+
+  match client.execute_procedure(proc) {
+    Ok(pk) => {
+      let mut key = [0u8; 32];
+      key.copy_from_slice(&pk);
+
+      Ok(TidextKeyring::new(
+        T::AccountId::from(key),
+        stronghold,
+        keypair_location.clone(),
+      ))
+    }
+    _ => Err(Error::Stronghold("Invalid public Key".into())),
   }
 }
 

@@ -25,7 +25,7 @@ use pyo3::{
 use tidext::{
   init_stronghold_from_seed,
   primitives::AccountId,
-  stronghold::{Location, ResultMessage},
+  stronghold::{ClientError, KeyProvider, Location, SnapshotPath},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Error, Permill,
   TidefiKeyring,
 };
@@ -75,12 +75,12 @@ fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   key
 }
 
-fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
-  match status {
-    ResultMessage::Ok(v) => Ok(v),
-    ResultMessage::Error(e) => Err(e),
-  }
-}
+// fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
+//   match status {
+//     ResultMessage::Ok(v) => Ok(v),
+//     ResultMessage::Error(e) => Err(e),
+//   }
+// }
 
 #[pyclass]
 pub struct Currency {
@@ -141,13 +141,14 @@ async fn try_build(
       TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
         .await?
     } else {
-      let mut stronghold = init_stronghold_from_seed(&location, None, None).await?;
-      let res = stronghold
-        .write_all_to_snapshot(password, None, Some(stronghold_path))
-        .await;
-      if let Err(e) = stronghold_response_to_result(res) {
-        return Err(Error::Stronghold(e));
-      }
+      let stronghold = init_stronghold_from_seed(&location, None, None).await?;
+
+      let snapshot_path = SnapshotPath::named(stronghold_path);
+      let key_provider = KeyProvider::try_from(password.clone()).map_err(|e| {
+        ClientError::Provider(format!("Couldn't build a key from the password: {:?}", e))
+      })?;
+
+      stronghold.commit(&snapshot_path, &key_provider)?;
 
       TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location)).await?
     })

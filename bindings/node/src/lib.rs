@@ -23,7 +23,7 @@ use napi::bindgen_prelude::{Buffer, Error, Result, Status};
 use tidext::{
   init_stronghold_from_seed,
   primitives::AccountId,
-  stronghold::{Location, ResultMessage},
+  stronghold::{KeyProvider, Location, SnapshotPath},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill, TidefiKeyring,
 };
 use zeroize::Zeroize;
@@ -46,12 +46,12 @@ fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   key
 }
 
-fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
-  match status {
-    ResultMessage::Ok(v) => Ok(v),
-    ResultMessage::Error(e) => Err(e),
-  }
-}
+// fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
+//   match status {
+//     ResultMessage::Ok(v) => Ok(v),
+//     ResultMessage::Error(e) => Err(e),
+//   }
+// }
 
 #[napi(object)]
 pub struct Currency {
@@ -104,15 +104,16 @@ async fn try_build(
         .await
         .map_err(err_mapper)?
     } else {
-      let mut stronghold = init_stronghold_from_seed(&location, None, None)
+      let stronghold = init_stronghold_from_seed(&location, None, None)
         .await
         .map_err(err_mapper)?;
-      let res = stronghold
-        .write_all_to_snapshot(password, None, Some(stronghold_path))
-        .await;
-      if let Err(e) = stronghold_response_to_result(res) {
-        return Err(err_mapper(e));
-      }
+
+      let snapshot_path = SnapshotPath::named(stronghold_path);
+      let key_provider = KeyProvider::try_from(password.clone()).map_err(err_mapper)?;
+
+      stronghold
+        .commit(&snapshot_path, &key_provider)
+        .map_err(err_mapper)?;
 
       TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location))
         .await
