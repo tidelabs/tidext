@@ -253,8 +253,8 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
 
   let encryption_key = passphrase.map(|s| s.as_ref().to_vec()).unwrap_or_default();
   // let key = hash_blake2b(encryption_key);
-  let keyprovider = KeyProvider::try_from(encryption_key)
-    .map_err(|e| Error::Stronghold(format!(" failed to derive key from passphrase {:?}", e)))?;
+  let keyprovider = KeyProvider::from_password_truncated(encryption_key)
+    .map_err(|e| Error::Stronghold(format!("Failed to derive key from passphrase {:?}", e)))?;
 
   if stronghold_path.as_ref().exists() {
     let snapshot_path = SnapshotPath::from_path(stronghold_path);
