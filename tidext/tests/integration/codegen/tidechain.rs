@@ -1,7 +1,7 @@
 #[allow(dead_code, unused_imports, non_camel_case_types)]
 pub mod api {
   use super::api as root_mod;
-  pub static PALLETS: [&str; 38usize] = [
+  pub static PALLETS: [&str; 39usize] = [
     "System",
     "Babe",
     "Timestamp",
@@ -40,6 +40,7 @@ pub mod api {
     "Security",
     "Fees",
     "AssetRegistry",
+    "Sunrise",
   ];
   #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
   pub enum Event {
@@ -109,6 +110,8 @@ pub mod api {
     Fees(fees::Event),
     #[codec(index = 56)]
     AssetRegistry(asset_registry::Event),
+    #[codec(index = 57)]
+    Sunrise(sunrise::Event),
   }
   pub mod system {
     use super::root_mod;
@@ -1155,9 +1158,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                253u8, 135u8, 5u8, 33u8, 9u8, 217u8, 126u8, 202u8, 70u8, 22u8, 248u8, 214u8, 63u8,
-                204u8, 129u8, 70u8, 236u8, 86u8, 220u8, 118u8, 87u8, 250u8, 141u8, 10u8, 88u8,
-                40u8, 87u8, 73u8, 232u8, 129u8, 9u8, 125u8,
+                66u8, 214u8, 139u8, 234u8, 226u8, 136u8, 71u8, 135u8, 78u8, 207u8, 95u8, 98u8,
+                89u8, 213u8, 240u8, 107u8, 145u8, 168u8, 182u8, 242u8, 125u8, 124u8, 145u8, 57u8,
+                95u8, 82u8, 145u8, 193u8, 171u8, 84u8, 98u8, 83u8,
               ]
             {
               let entry = Events;
@@ -1528,9 +1531,9 @@ pub mod api {
           let metadata = locked_metadata.read();
           if metadata.constant_hash("System", "Version")?
             == [
-              128u8, 88u8, 164u8, 15u8, 112u8, 229u8, 234u8, 125u8, 170u8, 236u8, 80u8, 166u8,
-              174u8, 200u8, 139u8, 250u8, 83u8, 223u8, 246u8, 66u8, 56u8, 135u8, 209u8, 220u8,
-              217u8, 27u8, 3u8, 58u8, 50u8, 145u8, 75u8, 224u8,
+              35u8, 36u8, 28u8, 11u8, 129u8, 85u8, 114u8, 221u8, 240u8, 50u8, 37u8, 6u8, 21u8,
+              125u8, 246u8, 66u8, 139u8, 111u8, 233u8, 179u8, 157u8, 17u8, 188u8, 62u8, 87u8, 61u8,
+              206u8, 52u8, 55u8, 93u8, 48u8, 51u8,
             ]
           {
             let pallet = metadata.pallet("System")?;
@@ -10785,9 +10788,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              6u8, 234u8, 46u8, 231u8, 17u8, 187u8, 221u8, 253u8, 133u8, 86u8, 91u8, 28u8, 117u8,
-              149u8, 26u8, 86u8, 95u8, 127u8, 178u8, 213u8, 7u8, 194u8, 219u8, 2u8, 57u8, 167u8,
-              25u8, 91u8, 252u8, 216u8, 18u8, 172u8,
+              29u8, 40u8, 246u8, 240u8, 122u8, 141u8, 67u8, 122u8, 125u8, 90u8, 114u8, 99u8, 93u8,
+              107u8, 9u8, 113u8, 147u8, 68u8, 162u8, 173u8, 149u8, 27u8, 31u8, 202u8, 51u8, 41u8,
+              106u8, 197u8, 131u8, 28u8, 95u8, 112u8,
             ]
           {
             let call = Execute {
@@ -10842,9 +10845,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              244u8, 203u8, 120u8, 120u8, 94u8, 168u8, 41u8, 98u8, 154u8, 204u8, 119u8, 254u8,
-              240u8, 171u8, 31u8, 73u8, 161u8, 248u8, 53u8, 180u8, 137u8, 63u8, 243u8, 171u8, 59u8,
-              254u8, 250u8, 189u8, 79u8, 86u8, 107u8, 225u8,
+              113u8, 44u8, 214u8, 235u8, 205u8, 10u8, 226u8, 15u8, 137u8, 55u8, 236u8, 141u8,
+              135u8, 101u8, 197u8, 148u8, 191u8, 186u8, 137u8, 109u8, 72u8, 230u8, 226u8, 4u8,
+              192u8, 230u8, 104u8, 111u8, 52u8, 175u8, 216u8, 216u8,
             ]
           {
             let call = Propose {
@@ -11227,9 +11230,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                252u8, 83u8, 57u8, 247u8, 83u8, 127u8, 207u8, 164u8, 229u8, 13u8, 200u8, 20u8,
-                26u8, 7u8, 11u8, 47u8, 61u8, 60u8, 123u8, 119u8, 145u8, 225u8, 69u8, 60u8, 113u8,
-                250u8, 52u8, 41u8, 77u8, 144u8, 211u8, 219u8,
+                29u8, 83u8, 240u8, 221u8, 153u8, 100u8, 160u8, 245u8, 81u8, 99u8, 254u8, 197u8,
+                68u8, 92u8, 49u8, 40u8, 230u8, 3u8, 96u8, 157u8, 95u8, 251u8, 114u8, 180u8, 164u8,
+                184u8, 73u8, 64u8, 186u8, 175u8, 81u8, 151u8,
               ]
             {
               let entry = ProposalOf(_0);
@@ -11261,9 +11264,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                252u8, 83u8, 57u8, 247u8, 83u8, 127u8, 207u8, 164u8, 229u8, 13u8, 200u8, 20u8,
-                26u8, 7u8, 11u8, 47u8, 61u8, 60u8, 123u8, 119u8, 145u8, 225u8, 69u8, 60u8, 113u8,
-                250u8, 52u8, 41u8, 77u8, 144u8, 211u8, 219u8,
+                29u8, 83u8, 240u8, 221u8, 153u8, 100u8, 160u8, 245u8, 81u8, 99u8, 254u8, 197u8,
+                68u8, 92u8, 49u8, 40u8, 230u8, 3u8, 96u8, 157u8, 95u8, 251u8, 114u8, 180u8, 164u8,
+                184u8, 73u8, 64u8, 186u8, 175u8, 81u8, 151u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -11621,9 +11624,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              6u8, 234u8, 46u8, 231u8, 17u8, 187u8, 221u8, 253u8, 133u8, 86u8, 91u8, 28u8, 117u8,
-              149u8, 26u8, 86u8, 95u8, 127u8, 178u8, 213u8, 7u8, 194u8, 219u8, 2u8, 57u8, 167u8,
-              25u8, 91u8, 252u8, 216u8, 18u8, 172u8,
+              29u8, 40u8, 246u8, 240u8, 122u8, 141u8, 67u8, 122u8, 125u8, 90u8, 114u8, 99u8, 93u8,
+              107u8, 9u8, 113u8, 147u8, 68u8, 162u8, 173u8, 149u8, 27u8, 31u8, 202u8, 51u8, 41u8,
+              106u8, 197u8, 131u8, 28u8, 95u8, 112u8,
             ]
           {
             let call = Execute {
@@ -11678,9 +11681,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              244u8, 203u8, 120u8, 120u8, 94u8, 168u8, 41u8, 98u8, 154u8, 204u8, 119u8, 254u8,
-              240u8, 171u8, 31u8, 73u8, 161u8, 248u8, 53u8, 180u8, 137u8, 63u8, 243u8, 171u8, 59u8,
-              254u8, 250u8, 189u8, 79u8, 86u8, 107u8, 225u8,
+              113u8, 44u8, 214u8, 235u8, 205u8, 10u8, 226u8, 15u8, 137u8, 55u8, 236u8, 141u8,
+              135u8, 101u8, 197u8, 148u8, 191u8, 186u8, 137u8, 109u8, 72u8, 230u8, 226u8, 4u8,
+              192u8, 230u8, 104u8, 111u8, 52u8, 175u8, 216u8, 216u8,
             ]
           {
             let call = Propose {
@@ -12063,9 +12066,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                252u8, 83u8, 57u8, 247u8, 83u8, 127u8, 207u8, 164u8, 229u8, 13u8, 200u8, 20u8,
-                26u8, 7u8, 11u8, 47u8, 61u8, 60u8, 123u8, 119u8, 145u8, 225u8, 69u8, 60u8, 113u8,
-                250u8, 52u8, 41u8, 77u8, 144u8, 211u8, 219u8,
+                29u8, 83u8, 240u8, 221u8, 153u8, 100u8, 160u8, 245u8, 81u8, 99u8, 254u8, 197u8,
+                68u8, 92u8, 49u8, 40u8, 230u8, 3u8, 96u8, 157u8, 95u8, 251u8, 114u8, 180u8, 164u8,
+                184u8, 73u8, 64u8, 186u8, 175u8, 81u8, 151u8,
               ]
             {
               let entry = ProposalOf(_0);
@@ -12097,9 +12100,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                252u8, 83u8, 57u8, 247u8, 83u8, 127u8, 207u8, 164u8, 229u8, 13u8, 200u8, 20u8,
-                26u8, 7u8, 11u8, 47u8, 61u8, 60u8, 123u8, 119u8, 145u8, 225u8, 69u8, 60u8, 113u8,
-                250u8, 52u8, 41u8, 77u8, 144u8, 211u8, 219u8,
+                29u8, 83u8, 240u8, 221u8, 153u8, 100u8, 160u8, 245u8, 81u8, 99u8, 254u8, 197u8,
+                68u8, 92u8, 49u8, 40u8, 230u8, 3u8, 96u8, 157u8, 95u8, 251u8, 114u8, 180u8, 164u8,
+                184u8, 73u8, 64u8, 186u8, 175u8, 81u8, 151u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -14419,9 +14422,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              187u8, 222u8, 149u8, 117u8, 134u8, 234u8, 39u8, 76u8, 66u8, 151u8, 85u8, 109u8,
-              155u8, 188u8, 222u8, 44u8, 104u8, 28u8, 133u8, 175u8, 3u8, 65u8, 125u8, 77u8, 121u8,
-              0u8, 220u8, 77u8, 102u8, 211u8, 76u8, 86u8,
+              245u8, 127u8, 105u8, 215u8, 75u8, 82u8, 211u8, 174u8, 197u8, 42u8, 82u8, 189u8, 7u8,
+              83u8, 0u8, 216u8, 156u8, 103u8, 172u8, 204u8, 210u8, 230u8, 51u8, 188u8, 58u8, 74u8,
+              120u8, 32u8, 52u8, 211u8, 189u8, 9u8,
             ]
           {
             let call = Batch { calls };
@@ -14458,9 +14461,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              143u8, 118u8, 161u8, 227u8, 111u8, 5u8, 151u8, 248u8, 60u8, 197u8, 105u8, 162u8,
-              15u8, 176u8, 228u8, 86u8, 97u8, 189u8, 106u8, 200u8, 199u8, 86u8, 66u8, 64u8, 161u8,
-              126u8, 108u8, 58u8, 157u8, 61u8, 180u8, 231u8,
+              21u8, 211u8, 112u8, 41u8, 201u8, 61u8, 109u8, 70u8, 35u8, 144u8, 52u8, 87u8, 155u8,
+              103u8, 108u8, 7u8, 8u8, 138u8, 143u8, 67u8, 224u8, 196u8, 49u8, 12u8, 200u8, 177u8,
+              31u8, 4u8, 245u8, 99u8, 192u8, 121u8,
             ]
           {
             let call = AsDerivative {
@@ -14500,9 +14503,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              4u8, 137u8, 163u8, 127u8, 55u8, 204u8, 99u8, 159u8, 240u8, 140u8, 33u8, 250u8, 95u8,
-              115u8, 39u8, 166u8, 189u8, 130u8, 152u8, 75u8, 96u8, 38u8, 162u8, 205u8, 8u8, 91u8,
-              137u8, 210u8, 23u8, 222u8, 79u8, 80u8,
+              211u8, 180u8, 62u8, 180u8, 185u8, 218u8, 72u8, 231u8, 163u8, 151u8, 32u8, 50u8, 68u8,
+              96u8, 209u8, 223u8, 158u8, 75u8, 252u8, 3u8, 75u8, 61u8, 84u8, 121u8, 40u8, 3u8,
+              147u8, 68u8, 87u8, 62u8, 62u8, 113u8,
             ]
           {
             let call = BatchAll { calls };
@@ -14536,9 +14539,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              254u8, 33u8, 233u8, 213u8, 166u8, 32u8, 138u8, 199u8, 118u8, 109u8, 192u8, 240u8,
-              227u8, 46u8, 160u8, 59u8, 62u8, 112u8, 250u8, 131u8, 36u8, 101u8, 169u8, 3u8, 194u8,
-              184u8, 38u8, 46u8, 240u8, 29u8, 124u8, 119u8,
+              55u8, 32u8, 235u8, 46u8, 111u8, 114u8, 241u8, 144u8, 105u8, 161u8, 59u8, 229u8,
+              251u8, 103u8, 52u8, 180u8, 150u8, 133u8, 118u8, 249u8, 108u8, 106u8, 79u8, 239u8,
+              113u8, 215u8, 3u8, 184u8, 109u8, 62u8, 61u8, 54u8,
             ]
           {
             let call = DispatchAs {
@@ -14578,9 +14581,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              186u8, 235u8, 140u8, 106u8, 7u8, 149u8, 186u8, 42u8, 35u8, 190u8, 144u8, 170u8,
-              203u8, 11u8, 16u8, 244u8, 157u8, 192u8, 168u8, 135u8, 135u8, 34u8, 178u8, 34u8, 74u8,
-              78u8, 117u8, 231u8, 152u8, 204u8, 249u8, 103u8,
+              228u8, 171u8, 202u8, 185u8, 15u8, 235u8, 191u8, 177u8, 197u8, 153u8, 210u8, 79u8,
+              16u8, 90u8, 8u8, 106u8, 185u8, 27u8, 195u8, 101u8, 108u8, 186u8, 246u8, 31u8, 59u8,
+              172u8, 41u8, 248u8, 169u8, 251u8, 105u8, 85u8,
             ]
           {
             let call = ForceBatch { calls };
@@ -17448,9 +17451,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              66u8, 47u8, 81u8, 43u8, 72u8, 106u8, 147u8, 58u8, 188u8, 198u8, 100u8, 166u8, 14u8,
-              238u8, 42u8, 177u8, 0u8, 59u8, 70u8, 75u8, 73u8, 245u8, 150u8, 208u8, 63u8, 11u8,
-              27u8, 103u8, 134u8, 15u8, 28u8, 127u8,
+              86u8, 50u8, 242u8, 10u8, 55u8, 45u8, 50u8, 253u8, 195u8, 35u8, 215u8, 250u8, 156u8,
+              9u8, 98u8, 50u8, 61u8, 18u8, 232u8, 107u8, 63u8, 241u8, 129u8, 223u8, 98u8, 39u8,
+              215u8, 45u8, 127u8, 83u8, 24u8, 219u8,
             ]
           {
             let call = AsRecovered {
@@ -18355,9 +18358,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              240u8, 187u8, 12u8, 191u8, 76u8, 104u8, 165u8, 182u8, 145u8, 61u8, 230u8, 94u8,
-              211u8, 240u8, 106u8, 165u8, 195u8, 196u8, 41u8, 139u8, 252u8, 206u8, 82u8, 10u8,
-              85u8, 98u8, 98u8, 19u8, 183u8, 112u8, 174u8, 70u8,
+              81u8, 101u8, 253u8, 185u8, 157u8, 74u8, 81u8, 223u8, 1u8, 36u8, 56u8, 99u8, 109u8,
+              81u8, 248u8, 127u8, 108u8, 245u8, 42u8, 215u8, 17u8, 53u8, 39u8, 144u8, 57u8, 102u8,
+              96u8, 182u8, 219u8, 128u8, 43u8, 162u8,
             ]
           {
             let call = Schedule {
@@ -18420,9 +18423,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              51u8, 122u8, 237u8, 62u8, 69u8, 164u8, 115u8, 142u8, 109u8, 66u8, 21u8, 97u8, 235u8,
-              99u8, 89u8, 46u8, 225u8, 106u8, 159u8, 238u8, 21u8, 221u8, 175u8, 7u8, 164u8, 132u8,
-              174u8, 55u8, 121u8, 82u8, 47u8, 115u8,
+              10u8, 82u8, 247u8, 159u8, 206u8, 26u8, 4u8, 225u8, 166u8, 149u8, 64u8, 45u8, 37u8,
+              233u8, 159u8, 156u8, 249u8, 20u8, 205u8, 34u8, 200u8, 57u8, 186u8, 114u8, 75u8, 80u8,
+              187u8, 61u8, 35u8, 187u8, 139u8, 253u8,
             ]
           {
             let call = ScheduleNamed {
@@ -18488,9 +18491,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              157u8, 159u8, 156u8, 145u8, 159u8, 31u8, 159u8, 179u8, 154u8, 78u8, 167u8, 26u8,
-              86u8, 69u8, 27u8, 111u8, 218u8, 61u8, 86u8, 181u8, 108u8, 172u8, 172u8, 140u8, 44u8,
-              83u8, 35u8, 94u8, 154u8, 199u8, 46u8, 101u8,
+              35u8, 206u8, 7u8, 199u8, 168u8, 84u8, 201u8, 137u8, 26u8, 215u8, 239u8, 100u8, 30u8,
+              19u8, 96u8, 43u8, 48u8, 158u8, 54u8, 123u8, 42u8, 134u8, 254u8, 155u8, 152u8, 37u8,
+              81u8, 209u8, 244u8, 82u8, 152u8, 129u8,
             ]
           {
             let call = ScheduleAfter {
@@ -18537,9 +18540,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              134u8, 195u8, 145u8, 35u8, 245u8, 90u8, 202u8, 233u8, 215u8, 153u8, 119u8, 182u8,
-              130u8, 240u8, 252u8, 217u8, 13u8, 5u8, 221u8, 65u8, 73u8, 72u8, 138u8, 179u8, 248u8,
-              178u8, 230u8, 173u8, 110u8, 10u8, 252u8, 209u8,
+              197u8, 215u8, 153u8, 77u8, 3u8, 238u8, 97u8, 153u8, 142u8, 202u8, 163u8, 157u8, 1u8,
+              165u8, 110u8, 185u8, 165u8, 220u8, 23u8, 158u8, 229u8, 53u8, 118u8, 174u8, 145u8,
+              224u8, 226u8, 94u8, 231u8, 11u8, 188u8, 182u8,
             ]
           {
             let call = ScheduleNamedAfter {
@@ -18683,9 +18686,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                130u8, 72u8, 232u8, 164u8, 39u8, 30u8, 248u8, 175u8, 96u8, 94u8, 198u8, 245u8,
-                39u8, 242u8, 93u8, 114u8, 181u8, 16u8, 108u8, 65u8, 184u8, 118u8, 26u8, 68u8,
-                136u8, 237u8, 133u8, 157u8, 10u8, 38u8, 54u8, 235u8,
+                251u8, 46u8, 87u8, 31u8, 177u8, 203u8, 76u8, 96u8, 157u8, 237u8, 152u8, 116u8,
+                234u8, 0u8, 128u8, 151u8, 81u8, 107u8, 246u8, 158u8, 145u8, 126u8, 112u8, 95u8,
+                146u8, 47u8, 187u8, 62u8, 100u8, 14u8, 185u8, 193u8,
               ]
             {
               let entry = Agenda(_0);
@@ -18714,9 +18717,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                130u8, 72u8, 232u8, 164u8, 39u8, 30u8, 248u8, 175u8, 96u8, 94u8, 198u8, 245u8,
-                39u8, 242u8, 93u8, 114u8, 181u8, 16u8, 108u8, 65u8, 184u8, 118u8, 26u8, 68u8,
-                136u8, 237u8, 133u8, 157u8, 10u8, 38u8, 54u8, 235u8,
+                251u8, 46u8, 87u8, 31u8, 177u8, 203u8, 76u8, 96u8, 157u8, 237u8, 152u8, 116u8,
+                234u8, 0u8, 128u8, 151u8, 81u8, 107u8, 246u8, 158u8, 145u8, 126u8, 112u8, 95u8,
+                146u8, 47u8, 187u8, 62u8, 100u8, 14u8, 185u8, 193u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -19004,9 +19007,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              216u8, 208u8, 217u8, 73u8, 45u8, 179u8, 90u8, 242u8, 225u8, 250u8, 76u8, 67u8, 224u8,
-              135u8, 112u8, 54u8, 224u8, 147u8, 101u8, 16u8, 119u8, 61u8, 192u8, 129u8, 66u8, 82u8,
-              79u8, 152u8, 173u8, 89u8, 51u8, 253u8,
+              244u8, 243u8, 195u8, 215u8, 241u8, 236u8, 137u8, 33u8, 208u8, 231u8, 139u8, 26u8,
+              100u8, 96u8, 27u8, 235u8, 129u8, 198u8, 25u8, 14u8, 149u8, 166u8, 223u8, 129u8,
+              153u8, 66u8, 0u8, 22u8, 78u8, 119u8, 96u8, 127u8,
             ]
           {
             let call = Proxy {
@@ -19432,9 +19435,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              132u8, 233u8, 66u8, 105u8, 18u8, 24u8, 212u8, 175u8, 63u8, 66u8, 144u8, 161u8, 164u8,
-              165u8, 160u8, 57u8, 57u8, 117u8, 67u8, 27u8, 53u8, 95u8, 125u8, 133u8, 87u8, 254u8,
-              68u8, 51u8, 91u8, 104u8, 107u8, 229u8,
+              29u8, 188u8, 220u8, 61u8, 48u8, 173u8, 174u8, 210u8, 226u8, 89u8, 25u8, 244u8, 133u8,
+              110u8, 5u8, 95u8, 155u8, 79u8, 9u8, 81u8, 228u8, 195u8, 207u8, 182u8, 146u8, 115u8,
+              97u8, 161u8, 53u8, 20u8, 127u8, 59u8,
             ]
           {
             let call = ProxyAnnounced {
@@ -19980,9 +19983,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              35u8, 161u8, 66u8, 215u8, 69u8, 216u8, 135u8, 68u8, 219u8, 243u8, 112u8, 158u8,
-              161u8, 204u8, 113u8, 81u8, 51u8, 218u8, 59u8, 116u8, 120u8, 13u8, 105u8, 71u8, 140u8,
-              109u8, 211u8, 160u8, 211u8, 108u8, 252u8, 188u8,
+              72u8, 59u8, 132u8, 99u8, 181u8, 10u8, 106u8, 143u8, 120u8, 191u8, 170u8, 115u8,
+              154u8, 134u8, 67u8, 107u8, 74u8, 177u8, 115u8, 197u8, 220u8, 0u8, 78u8, 10u8, 48u8,
+              4u8, 88u8, 14u8, 197u8, 8u8, 122u8, 29u8,
             ]
           {
             let call = AsMultiThreshold1 {
@@ -20060,9 +20063,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              82u8, 10u8, 172u8, 249u8, 206u8, 126u8, 232u8, 99u8, 52u8, 69u8, 197u8, 76u8, 211u8,
-              24u8, 229u8, 131u8, 249u8, 140u8, 21u8, 219u8, 200u8, 59u8, 123u8, 107u8, 74u8,
-              114u8, 94u8, 11u8, 127u8, 124u8, 78u8, 123u8,
+              215u8, 137u8, 11u8, 100u8, 20u8, 29u8, 81u8, 166u8, 179u8, 63u8, 31u8, 170u8, 3u8,
+              245u8, 160u8, 84u8, 111u8, 203u8, 107u8, 216u8, 94u8, 29u8, 47u8, 64u8, 185u8, 214u8,
+              142u8, 96u8, 129u8, 223u8, 42u8, 53u8,
             ]
           {
             let call = AsMulti {
@@ -20409,9 +20412,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                201u8, 61u8, 46u8, 132u8, 43u8, 199u8, 70u8, 15u8, 119u8, 13u8, 233u8, 82u8, 160u8,
-                13u8, 35u8, 155u8, 126u8, 238u8, 58u8, 84u8, 133u8, 224u8, 230u8, 135u8, 196u8,
-                248u8, 226u8, 141u8, 68u8, 202u8, 77u8, 104u8,
+                241u8, 0u8, 162u8, 62u8, 179u8, 241u8, 137u8, 75u8, 162u8, 66u8, 231u8, 220u8,
+                138u8, 237u8, 239u8, 79u8, 163u8, 243u8, 20u8, 1u8, 2u8, 175u8, 202u8, 152u8,
+                125u8, 216u8, 172u8, 251u8, 40u8, 166u8, 114u8, 253u8,
               ]
             {
               let entry = Calls(_0);
@@ -20439,9 +20442,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                201u8, 61u8, 46u8, 132u8, 43u8, 199u8, 70u8, 15u8, 119u8, 13u8, 233u8, 82u8, 160u8,
-                13u8, 35u8, 155u8, 126u8, 238u8, 58u8, 84u8, 133u8, 224u8, 230u8, 135u8, 196u8,
-                248u8, 226u8, 141u8, 68u8, 202u8, 77u8, 104u8,
+                241u8, 0u8, 162u8, 62u8, 179u8, 241u8, 137u8, 75u8, 162u8, 66u8, 231u8, 220u8,
+                138u8, 237u8, 239u8, 79u8, 163u8, 243u8, 20u8, 1u8, 2u8, 175u8, 202u8, 152u8,
+                125u8, 216u8, 172u8, 251u8, 40u8, 166u8, 114u8, 253u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -24757,9 +24760,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              159u8, 136u8, 171u8, 170u8, 153u8, 36u8, 21u8, 53u8, 147u8, 202u8, 162u8, 211u8,
-              109u8, 112u8, 77u8, 23u8, 39u8, 139u8, 188u8, 0u8, 125u8, 48u8, 85u8, 113u8, 234u8,
-              119u8, 196u8, 219u8, 66u8, 215u8, 15u8, 46u8,
+              193u8, 42u8, 129u8, 28u8, 191u8, 57u8, 158u8, 136u8, 58u8, 49u8, 95u8, 160u8, 93u8,
+              117u8, 140u8, 225u8, 31u8, 102u8, 173u8, 78u8, 16u8, 44u8, 201u8, 121u8, 137u8,
+              125u8, 204u8, 208u8, 229u8, 238u8, 124u8, 106u8,
             ]
           {
             let call = Sudo {
@@ -24802,9 +24805,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              194u8, 224u8, 37u8, 229u8, 15u8, 214u8, 35u8, 178u8, 183u8, 136u8, 41u8, 26u8, 13u8,
-              186u8, 230u8, 57u8, 196u8, 237u8, 205u8, 67u8, 186u8, 18u8, 249u8, 226u8, 23u8,
-              213u8, 66u8, 50u8, 10u8, 2u8, 21u8, 206u8,
+              96u8, 1u8, 244u8, 167u8, 175u8, 189u8, 231u8, 241u8, 91u8, 129u8, 80u8, 161u8, 17u8,
+              255u8, 93u8, 209u8, 242u8, 168u8, 72u8, 225u8, 157u8, 41u8, 48u8, 68u8, 152u8, 141u8,
+              114u8, 165u8, 99u8, 10u8, 120u8, 87u8,
             ]
           {
             let call = SudoUncheckedWeight {
@@ -24883,9 +24886,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              145u8, 242u8, 228u8, 176u8, 199u8, 182u8, 228u8, 34u8, 243u8, 13u8, 242u8, 228u8,
-              56u8, 102u8, 135u8, 254u8, 73u8, 214u8, 18u8, 209u8, 42u8, 4u8, 169u8, 27u8, 160u8,
-              153u8, 173u8, 60u8, 100u8, 166u8, 22u8, 30u8,
+              154u8, 233u8, 227u8, 109u8, 164u8, 190u8, 204u8, 101u8, 170u8, 123u8, 93u8, 124u8,
+              70u8, 13u8, 187u8, 117u8, 130u8, 77u8, 210u8, 135u8, 237u8, 85u8, 145u8, 227u8,
+              210u8, 221u8, 190u8, 223u8, 73u8, 194u8, 173u8, 201u8,
             ]
           {
             let call = SudoAs {
@@ -25035,6 +25038,19 @@ pub mod api {
       impl ::subxt::Call for CancelSwap {
         const PALLET: &'static str = "Tidefi";
         const FUNCTION: &'static str = "cancel_swap";
+      }
+      #[derive(
+        :: subxt :: codec :: CompactAs,
+        :: subxt :: codec :: Decode,
+        :: subxt :: codec :: Encode,
+        Debug,
+      )]
+      pub struct ClaimSunriseRewards {
+        pub era_index: ::core::primitive::u32,
+      }
+      impl ::subxt::Call for ClaimSunriseRewards {
+        const PALLET: &'static str = "Tidefi";
+        const FUNCTION: &'static str = "claim_sunrise_rewards";
       }
       pub struct TransactionApi<'a, T: ::subxt::Config, X> {
         client: &'a ::subxt::Client<T>,
@@ -25212,6 +25228,45 @@ pub mod api {
             ]
           {
             let call = CancelSwap { request_id };
+            Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+        #[doc = "Claim available sunrise rewards"]
+        #[doc = ""]
+        #[doc = "- `era_index`: Era to claim rewards"]
+        #[doc = ""]
+        #[doc = "Emits `RewardsClaimed` event when successful."]
+        #[doc = ""]
+        #[doc = "Weight: `O(1)`"]
+        pub fn claim_sunrise_rewards(
+          &self,
+          era_index: ::core::primitive::u32,
+        ) -> Result<
+          ::subxt::SubmittableExtrinsic<
+            'a,
+            T,
+            X,
+            ClaimSunriseRewards,
+            DispatchError,
+            root_mod::Event,
+          >,
+          ::subxt::BasicError,
+        > {
+          let runtime_call_hash = {
+            let locked_metadata = self.client.metadata();
+            let metadata = locked_metadata.read();
+            metadata.call_hash::<ClaimSunriseRewards>()?
+          };
+          if runtime_call_hash
+            == [
+              221u8, 129u8, 69u8, 129u8, 216u8, 203u8, 162u8, 247u8, 150u8, 16u8, 187u8, 182u8,
+              71u8, 55u8, 127u8, 191u8, 245u8, 157u8, 204u8, 33u8, 200u8, 230u8, 155u8, 87u8,
+              104u8, 52u8, 162u8, 43u8, 8u8, 151u8, 212u8, 238u8,
+            ]
+          {
+            let call = ClaimSunriseRewards { era_index };
             Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
           } else {
             Err(::subxt::MetadataError::IncompatibleMetadata.into())
@@ -26349,9 +26404,9 @@ pub mod api {
           };
           if runtime_call_hash
             == [
-              52u8, 199u8, 140u8, 220u8, 208u8, 109u8, 232u8, 131u8, 178u8, 127u8, 24u8, 244u8,
-              131u8, 186u8, 90u8, 228u8, 61u8, 65u8, 136u8, 223u8, 133u8, 150u8, 150u8, 116u8,
-              33u8, 153u8, 231u8, 168u8, 254u8, 62u8, 239u8, 17u8,
+              241u8, 35u8, 149u8, 75u8, 163u8, 44u8, 40u8, 62u8, 237u8, 155u8, 79u8, 29u8, 137u8,
+              32u8, 168u8, 162u8, 72u8, 79u8, 215u8, 36u8, 192u8, 190u8, 252u8, 218u8, 236u8,
+              183u8, 78u8, 36u8, 56u8, 27u8, 62u8, 146u8,
             ]
           {
             let call = SubmitProposal { proposal };
@@ -27030,9 +27085,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                9u8, 83u8, 67u8, 190u8, 195u8, 12u8, 162u8, 56u8, 34u8, 14u8, 120u8, 255u8, 221u8,
-                46u8, 205u8, 102u8, 163u8, 5u8, 94u8, 73u8, 213u8, 70u8, 61u8, 96u8, 148u8, 83u8,
-                202u8, 252u8, 11u8, 232u8, 12u8, 118u8,
+                17u8, 185u8, 65u8, 108u8, 150u8, 251u8, 68u8, 223u8, 156u8, 76u8, 150u8, 98u8,
+                22u8, 170u8, 5u8, 83u8, 112u8, 160u8, 206u8, 10u8, 121u8, 213u8, 123u8, 5u8, 50u8,
+                28u8, 105u8, 173u8, 99u8, 146u8, 76u8, 17u8,
               ]
             {
               let entry = Proposals;
@@ -27479,12 +27534,12 @@ pub mod api {
         const FUNCTION: &'static str = "set_status";
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
-      pub struct ImAlive {
-        pub im_alive: runtime_types::tidefi_primitives::OracleImAlive,
+      pub struct UpdateAssetsValue {
+        pub value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
       }
-      impl ::subxt::Call for ImAlive {
+      impl ::subxt::Call for UpdateAssetsValue {
         const PALLET: &'static str = "Oracle";
-        const FUNCTION: &'static str = "im_alive";
+        const FUNCTION: &'static str = "update_assets_value";
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub struct AddMarketMaker {
@@ -27653,33 +27708,62 @@ pub mod api {
             Err(::subxt::MetadataError::IncompatibleMetadata.into())
           }
         }
-        #[doc = "Change Oracle status."]
+        #[doc = "Update assets values."]
         #[doc = ""]
-        #[doc = "- `is_enabled`: Is the oracle enabled?"]
+        #[doc = "- `value`: How many TDFY required for 1 Asset."]
         #[doc = ""]
-        #[doc = "Emits `StatusChanged` event when successful."]
+        #[doc = "The value should be formatted with TDFY decimals (12)"]
+        #[doc = ""]
+        #[doc = "Example:"]
+        #[doc = ""]
+        #[doc = "If the Bitcoin price is 0.001815 BTC (for 1 TDFY)"]
+        #[doc = "You get 550.9641873278 TDFY for 1 BTC"]
+        #[doc = ""]
+        #[doc = "The value should be: `vec![(2, 550_964_187_327_800)]`"]
+        #[doc = ""]
+        #[doc = "***"]
+        #[doc = ""]
+        #[doc = "If the ETH price is 0.03133 ETH (for 1 TDFY)"]
+        #[doc = "You get 31.9182891796999 TDFY for 1 ETH"]
+        #[doc = ""]
+        #[doc = "The value sent should be: `vec![(4, 31_918_289_179_699)]`"]
+        #[doc = ""]
+        #[doc = "***"]
+        #[doc = ""]
+        #[doc = "If the USDT price is 33.650000 USDT (for 1 TDFY)"]
+        #[doc = "You get 0.029717682000 TDFY for 1 USDT"]
+        #[doc = ""]
+        #[doc = "The value sent should be: `vec![(4, 29_717_682_020)]`"]
         #[doc = ""]
         #[doc = "Weight: `O(1)`"]
-        pub fn im_alive(
+        #[doc = ""]
+        pub fn update_assets_value(
           &self,
-          im_alive: runtime_types::tidefi_primitives::OracleImAlive,
+          value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
         ) -> Result<
-          ::subxt::SubmittableExtrinsic<'a, T, X, ImAlive, DispatchError, root_mod::Event>,
+          ::subxt::SubmittableExtrinsic<
+            'a,
+            T,
+            X,
+            UpdateAssetsValue,
+            DispatchError,
+            root_mod::Event,
+          >,
           ::subxt::BasicError,
         > {
           let runtime_call_hash = {
             let locked_metadata = self.client.metadata();
             let metadata = locked_metadata.read();
-            metadata.call_hash::<ImAlive>()?
+            metadata.call_hash::<UpdateAssetsValue>()?
           };
           if runtime_call_hash
             == [
-              244u8, 72u8, 46u8, 11u8, 24u8, 11u8, 83u8, 10u8, 149u8, 10u8, 112u8, 154u8, 246u8,
-              148u8, 47u8, 92u8, 3u8, 221u8, 149u8, 15u8, 162u8, 250u8, 162u8, 140u8, 175u8, 198u8,
-              92u8, 99u8, 10u8, 112u8, 208u8, 208u8,
+              5u8, 166u8, 162u8, 191u8, 99u8, 51u8, 36u8, 17u8, 138u8, 178u8, 239u8, 75u8, 88u8,
+              249u8, 190u8, 158u8, 128u8, 21u8, 65u8, 138u8, 39u8, 223u8, 205u8, 54u8, 28u8, 188u8,
+              164u8, 28u8, 30u8, 122u8, 100u8, 91u8,
             ]
           {
-            let call = ImAlive { im_alive };
+            let call = UpdateAssetsValue { value };
             Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
           } else {
             Err(::subxt::MetadataError::IncompatibleMetadata.into())
@@ -28541,80 +28625,6 @@ pub mod api {
   pub mod fees {
     use super::root_mod;
     use super::runtime_types;
-    #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
-    pub mod calls {
-      use super::root_mod;
-      use super::runtime_types;
-      type DispatchError = runtime_types::sp_runtime::DispatchError;
-      #[derive(
-        :: subxt :: codec :: CompactAs,
-        :: subxt :: codec :: Decode,
-        :: subxt :: codec :: Encode,
-        Debug,
-      )]
-      pub struct ClaimSunriseRewards {
-        pub era_index: ::core::primitive::u32,
-      }
-      impl ::subxt::Call for ClaimSunriseRewards {
-        const PALLET: &'static str = "Fees";
-        const FUNCTION: &'static str = "claim_sunrise_rewards";
-      }
-      pub struct TransactionApi<'a, T: ::subxt::Config, X> {
-        client: &'a ::subxt::Client<T>,
-        marker: ::core::marker::PhantomData<X>,
-      }
-      impl<'a, T, X> TransactionApi<'a, T, X>
-      where
-        T: ::subxt::Config,
-        X: ::subxt::extrinsic::ExtrinsicParams<T>,
-      {
-        pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-          Self {
-            client,
-            marker: ::core::marker::PhantomData,
-          }
-        }
-        #[doc = "Claim available sunrise rewards"]
-        #[doc = ""]
-        #[doc = "- `era_index`: Era to claim rewards"]
-        #[doc = ""]
-        #[doc = "Emits `SunriseRewardsClaimed` event when successful."]
-        #[doc = ""]
-        #[doc = "Weight: `O(1)`"]
-        pub fn claim_sunrise_rewards(
-          &self,
-          era_index: ::core::primitive::u32,
-        ) -> Result<
-          ::subxt::SubmittableExtrinsic<
-            'a,
-            T,
-            X,
-            ClaimSunriseRewards,
-            DispatchError,
-            root_mod::Event,
-          >,
-          ::subxt::BasicError,
-        > {
-          let runtime_call_hash = {
-            let locked_metadata = self.client.metadata();
-            let metadata = locked_metadata.read();
-            metadata.call_hash::<ClaimSunriseRewards>()?
-          };
-          if runtime_call_hash
-            == [
-              221u8, 129u8, 69u8, 129u8, 216u8, 203u8, 162u8, 247u8, 150u8, 16u8, 187u8, 182u8,
-              71u8, 55u8, 127u8, 191u8, 245u8, 157u8, 204u8, 33u8, 200u8, 230u8, 155u8, 87u8,
-              104u8, 52u8, 162u8, 43u8, 8u8, 151u8, 212u8, 238u8,
-            ]
-          {
-            let call = ClaimSunriseRewards { era_index };
-            Ok(::subxt::SubmittableExtrinsic::new(self.client, call))
-          } else {
-            Err(::subxt::MetadataError::IncompatibleMetadata.into())
-          }
-        }
-      }
-    }
     #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted\n\t\t\tby this pallet.\n\t\t\t"]
     pub type Event = runtime_types::pallet_fees::pallet::Event;
     pub mod events {
@@ -28664,27 +28674,6 @@ pub mod api {
         const PALLET: &'static str = "Fees";
         const EVENT: &'static str = "EraEnded";
       }
-      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
-      pub struct SunriseRewarded {
-        pub era_index: ::core::primitive::u32,
-        pub pool_id: ::core::primitive::u8,
-        pub account_id: ::subxt::sp_core::crypto::AccountId32,
-        pub reward: ::core::primitive::u128,
-      }
-      impl ::subxt::Event for SunriseRewarded {
-        const PALLET: &'static str = "Fees";
-        const EVENT: &'static str = "SunriseRewarded";
-      }
-      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
-      pub struct SunriseClaimed {
-        pub era_index: ::core::primitive::u32,
-        pub account_id: ::subxt::sp_core::crypto::AccountId32,
-        pub reward: ::core::primitive::u128,
-      }
-      impl ::subxt::Event for SunriseClaimed {
-        const PALLET: &'static str = "Fees";
-        const EVENT: &'static str = "SunriseClaimed";
-      }
     }
     pub mod storage {
       use super::runtime_types;
@@ -28693,17 +28682,6 @@ pub mod api {
         const PALLET: &'static str = "Fees";
         const STORAGE: &'static str = "ActiveEra";
         type Value = runtime_types::tidefi_primitives::ActiveEraInfo<::core::primitive::u32>;
-        fn key(&self) -> ::subxt::StorageEntryKey {
-          ::subxt::StorageEntryKey::Plain
-        }
-      }
-      pub struct SunrisePools;
-      impl ::subxt::StorageEntry for SunrisePools {
-        const PALLET: &'static str = "Fees";
-        const STORAGE: &'static str = "SunrisePools";
-        type Value = runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
-          runtime_types::tidefi_primitives::SunriseSwapPool,
-        >;
         fn key(&self) -> ::subxt::StorageEntryKey {
           ::subxt::StorageEntryKey::Plain
         }
@@ -28744,21 +28722,6 @@ pub mod api {
           )])
         }
       }
-      pub struct OrderBookPrice<'a>(
-        pub &'a runtime_types::tidefi_primitives::CurrencyId,
-        pub &'a runtime_types::tidefi_primitives::CurrencyId,
-      );
-      impl ::subxt::StorageEntry for OrderBookPrice<'_> {
-        const PALLET: &'static str = "Fees";
-        const STORAGE: &'static str = "OrderBookPrice";
-        type Value = runtime_types::sp_arithmetic::fixed_point::FixedU128;
-        fn key(&self) -> ::subxt::StorageEntryKey {
-          ::subxt::StorageEntryKey::Map(vec![
-            ::subxt::StorageMapKey::new(&self.0, ::subxt::StorageHasher::Blake2_128Concat),
-            ::subxt::StorageMapKey::new(&self.1, ::subxt::StorageHasher::Blake2_128Concat),
-          ])
-        }
-      }
       pub struct SessionTotalFees<'a>(
         pub &'a ::core::primitive::u64,
         pub &'a runtime_types::tidefi_primitives::CurrencyId,
@@ -28785,21 +28748,6 @@ pub mod api {
           runtime_types::tidefi_primitives::CurrencyId,
           runtime_types::tidefi_primitives::Fee,
         )>;
-        fn key(&self) -> ::subxt::StorageEntryKey {
-          ::subxt::StorageEntryKey::Map(vec![
-            ::subxt::StorageMapKey::new(&self.0, ::subxt::StorageHasher::Blake2_128Concat),
-            ::subxt::StorageMapKey::new(&self.1, ::subxt::StorageHasher::Blake2_128Concat),
-          ])
-        }
-      }
-      pub struct SunriseRewards<'a>(
-        pub &'a ::subxt::sp_core::crypto::AccountId32,
-        pub &'a ::core::primitive::u32,
-      );
-      impl ::subxt::StorageEntry for SunriseRewards<'_> {
-        const PALLET: &'static str = "Fees";
-        const STORAGE: &'static str = "SunriseRewards";
-        type Value = ::core::primitive::u128;
         fn key(&self) -> ::subxt::StorageEntryKey {
           ::subxt::StorageEntryKey::Map(vec![
             ::subxt::StorageMapKey::new(&self.0, ::subxt::StorageHasher::Blake2_128Concat),
@@ -28847,42 +28795,6 @@ pub mod api {
             {
               let entry = ActiveEra;
               client.storage().fetch(&entry, block_hash).await
-            } else {
-              Err(::subxt::MetadataError::IncompatibleMetadata.into())
-            }
-          }
-        }
-        #[doc = " The active sunrise tier availables."]
-        pub fn sunrise_pools(
-          &self,
-          block_hash: ::core::option::Option<T::Hash>,
-        ) -> impl ::core::future::Future<
-          Output = ::core::result::Result<
-            runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
-              runtime_types::tidefi_primitives::SunriseSwapPool,
-            >,
-            ::subxt::BasicError,
-          >,
-        > + 'a {
-          let client = self.client;
-          async move {
-            let runtime_storage_hash = {
-              let locked_metadata = client.metadata();
-              let metadata = locked_metadata.read();
-              match metadata.storage_hash::<SunrisePools>() {
-                Ok(hash) => hash,
-                Err(e) => return Err(e.into()),
-              }
-            };
-            if runtime_storage_hash
-              == [
-                180u8, 0u8, 199u8, 243u8, 204u8, 164u8, 44u8, 92u8, 187u8, 2u8, 146u8, 189u8, 33u8,
-                237u8, 85u8, 97u8, 124u8, 194u8, 70u8, 167u8, 36u8, 49u8, 82u8, 242u8, 229u8, 55u8,
-                48u8, 161u8, 184u8, 101u8, 224u8, 49u8,
-              ]
-            {
-              let entry = SunrisePools;
-              client.storage().fetch_or_default(&entry, block_hash).await
             } else {
               Err(::subxt::MetadataError::IncompatibleMetadata.into())
             }
@@ -28944,9 +28856,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                148u8, 128u8, 187u8, 228u8, 29u8, 224u8, 11u8, 91u8, 188u8, 234u8, 235u8, 118u8,
-                115u8, 210u8, 155u8, 237u8, 231u8, 230u8, 113u8, 5u8, 71u8, 152u8, 203u8, 6u8,
-                63u8, 46u8, 227u8, 133u8, 72u8, 49u8, 134u8, 141u8,
+                95u8, 58u8, 65u8, 174u8, 9u8, 252u8, 87u8, 177u8, 2u8, 38u8, 37u8, 52u8, 22u8,
+                41u8, 212u8, 28u8, 140u8, 122u8, 17u8, 72u8, 187u8, 8u8, 47u8, 60u8, 136u8, 154u8,
+                199u8, 132u8, 103u8, 36u8, 186u8, 6u8,
               ]
             {
               let entry = EraTotalFees(_0, _1);
@@ -28979,9 +28891,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                148u8, 128u8, 187u8, 228u8, 29u8, 224u8, 11u8, 91u8, 188u8, 234u8, 235u8, 118u8,
-                115u8, 210u8, 155u8, 237u8, 231u8, 230u8, 113u8, 5u8, 71u8, 152u8, 203u8, 6u8,
-                63u8, 46u8, 227u8, 133u8, 72u8, 49u8, 134u8, 141u8,
+                95u8, 58u8, 65u8, 174u8, 9u8, 252u8, 87u8, 177u8, 2u8, 38u8, 37u8, 52u8, 22u8,
+                41u8, 212u8, 28u8, 140u8, 122u8, 17u8, 72u8, 187u8, 8u8, 47u8, 60u8, 136u8, 154u8,
+                199u8, 132u8, 103u8, 36u8, 186u8, 6u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -29055,89 +28967,6 @@ pub mod api {
             }
           }
         }
-        #[doc = " Tdfy price of the orderbook reported by oracle every X minutes at the current market price."]
-        #[doc = " We keep in sync order book of USDT values for our sunrise pool."]
-        #[doc = ""]
-        #[doc = " CurrencyId → USDT"]
-        #[doc = " USDT → TDFY"]
-        #[doc = ""]
-        #[doc = " To get current TDFY USDT value;"]
-        #[doc = ""]
-        pub fn order_book_price(
-          &self,
-          _0: &'a runtime_types::tidefi_primitives::CurrencyId,
-          _1: &'a runtime_types::tidefi_primitives::CurrencyId,
-          block_hash: ::core::option::Option<T::Hash>,
-        ) -> impl ::core::future::Future<
-          Output = ::core::result::Result<
-            runtime_types::sp_arithmetic::fixed_point::FixedU128,
-            ::subxt::BasicError,
-          >,
-        > + 'a {
-          let client = self.client;
-          async move {
-            let runtime_storage_hash = {
-              let locked_metadata = client.metadata();
-              let metadata = locked_metadata.read();
-              match metadata.storage_hash::<OrderBookPrice>() {
-                Ok(hash) => hash,
-                Err(e) => return Err(e.into()),
-              }
-            };
-            if runtime_storage_hash
-              == [
-                85u8, 84u8, 16u8, 178u8, 163u8, 141u8, 231u8, 173u8, 213u8, 45u8, 212u8, 230u8,
-                143u8, 198u8, 100u8, 127u8, 220u8, 198u8, 6u8, 96u8, 126u8, 63u8, 183u8, 217u8,
-                44u8, 91u8, 170u8, 64u8, 161u8, 184u8, 97u8, 58u8,
-              ]
-            {
-              let entry = OrderBookPrice(_0, _1);
-              client.storage().fetch_or_default(&entry, block_hash).await
-            } else {
-              Err(::subxt::MetadataError::IncompatibleMetadata.into())
-            }
-          }
-        }
-        #[doc = " Tdfy price of the orderbook reported by oracle every X minutes at the current market price."]
-        #[doc = " We keep in sync order book of USDT values for our sunrise pool."]
-        #[doc = ""]
-        #[doc = " CurrencyId → USDT"]
-        #[doc = " USDT → TDFY"]
-        #[doc = ""]
-        #[doc = " To get current TDFY USDT value;"]
-        #[doc = ""]
-        pub fn order_book_price_iter(
-          &self,
-          block_hash: ::core::option::Option<T::Hash>,
-        ) -> impl ::core::future::Future<
-          Output = ::core::result::Result<
-            ::subxt::KeyIter<'a, T, OrderBookPrice<'a>>,
-            ::subxt::BasicError,
-          >,
-        > + 'a {
-          let client = self.client;
-          async move {
-            let runtime_storage_hash = {
-              let locked_metadata = client.metadata();
-              let metadata = locked_metadata.read();
-              match metadata.storage_hash::<OrderBookPrice>() {
-                Ok(hash) => hash,
-                Err(e) => return Err(e.into()),
-              }
-            };
-            if runtime_storage_hash
-              == [
-                85u8, 84u8, 16u8, 178u8, 163u8, 141u8, 231u8, 173u8, 213u8, 45u8, 212u8, 230u8,
-                143u8, 198u8, 100u8, 127u8, 220u8, 198u8, 6u8, 96u8, 126u8, 63u8, 183u8, 217u8,
-                44u8, 91u8, 170u8, 64u8, 161u8, 184u8, 97u8, 58u8,
-              ]
-            {
-              client.storage().iter(block_hash).await
-            } else {
-              Err(::subxt::MetadataError::IncompatibleMetadata.into())
-            }
-          }
-        }
         #[doc = " The total fees for the session."]
         #[doc = " If total hasn't been set or has been removed then 0 stake is returned."]
         pub fn session_total_fees(
@@ -29163,9 +28992,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                18u8, 82u8, 131u8, 54u8, 128u8, 129u8, 83u8, 247u8, 72u8, 75u8, 234u8, 236u8, 9u8,
-                164u8, 11u8, 124u8, 52u8, 252u8, 74u8, 77u8, 164u8, 110u8, 156u8, 138u8, 187u8,
-                29u8, 230u8, 201u8, 121u8, 42u8, 249u8, 4u8,
+                217u8, 232u8, 121u8, 124u8, 148u8, 157u8, 15u8, 29u8, 246u8, 135u8, 36u8, 174u8,
+                108u8, 95u8, 68u8, 141u8, 95u8, 96u8, 42u8, 0u8, 88u8, 254u8, 120u8, 176u8, 12u8,
+                169u8, 194u8, 200u8, 86u8, 63u8, 197u8, 143u8,
               ]
             {
               let entry = SessionTotalFees(_0, _1);
@@ -29198,9 +29027,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                18u8, 82u8, 131u8, 54u8, 128u8, 129u8, 83u8, 247u8, 72u8, 75u8, 234u8, 236u8, 9u8,
-                164u8, 11u8, 124u8, 52u8, 252u8, 74u8, 77u8, 164u8, 110u8, 156u8, 138u8, 187u8,
-                29u8, 230u8, 201u8, 121u8, 42u8, 249u8, 4u8,
+                217u8, 232u8, 121u8, 124u8, 148u8, 157u8, 15u8, 29u8, 246u8, 135u8, 36u8, 174u8,
+                108u8, 95u8, 68u8, 141u8, 95u8, 96u8, 42u8, 0u8, 88u8, 254u8, 120u8, 176u8, 12u8,
+                169u8, 194u8, 200u8, 86u8, 63u8, 197u8, 143u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -29236,9 +29065,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                58u8, 221u8, 146u8, 183u8, 123u8, 159u8, 208u8, 241u8, 138u8, 139u8, 165u8, 150u8,
-                242u8, 147u8, 75u8, 40u8, 16u8, 176u8, 147u8, 229u8, 234u8, 46u8, 72u8, 198u8,
-                110u8, 84u8, 193u8, 93u8, 206u8, 162u8, 134u8, 98u8,
+                22u8, 46u8, 164u8, 248u8, 61u8, 78u8, 43u8, 182u8, 82u8, 50u8, 113u8, 188u8, 176u8,
+                4u8, 50u8, 49u8, 160u8, 146u8, 253u8, 15u8, 56u8, 183u8, 250u8, 46u8, 237u8, 87u8,
+                81u8, 84u8, 236u8, 85u8, 26u8, 78u8,
               ]
             {
               let entry = AccountFees(_0, _1);
@@ -29270,75 +29099,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                58u8, 221u8, 146u8, 183u8, 123u8, 159u8, 208u8, 241u8, 138u8, 139u8, 165u8, 150u8,
-                242u8, 147u8, 75u8, 40u8, 16u8, 176u8, 147u8, 229u8, 234u8, 46u8, 72u8, 198u8,
-                110u8, 84u8, 193u8, 93u8, 206u8, 162u8, 134u8, 98u8,
-              ]
-            {
-              client.storage().iter(block_hash).await
-            } else {
-              Err(::subxt::MetadataError::IncompatibleMetadata.into())
-            }
-          }
-        }
-        #[doc = " Account fees for current era"]
-        pub fn sunrise_rewards(
-          &self,
-          _0: &'a ::subxt::sp_core::crypto::AccountId32,
-          _1: &'a ::core::primitive::u32,
-          block_hash: ::core::option::Option<T::Hash>,
-        ) -> impl ::core::future::Future<
-          Output = ::core::result::Result<::core::primitive::u128, ::subxt::BasicError>,
-        > + 'a {
-          let client = self.client;
-          async move {
-            let runtime_storage_hash = {
-              let locked_metadata = client.metadata();
-              let metadata = locked_metadata.read();
-              match metadata.storage_hash::<SunriseRewards>() {
-                Ok(hash) => hash,
-                Err(e) => return Err(e.into()),
-              }
-            };
-            if runtime_storage_hash
-              == [
-                60u8, 101u8, 145u8, 238u8, 69u8, 95u8, 145u8, 68u8, 184u8, 138u8, 235u8, 216u8,
-                14u8, 243u8, 219u8, 17u8, 37u8, 235u8, 189u8, 244u8, 211u8, 185u8, 113u8, 26u8,
-                185u8, 139u8, 109u8, 31u8, 20u8, 190u8, 40u8, 108u8,
-              ]
-            {
-              let entry = SunriseRewards(_0, _1);
-              client.storage().fetch_or_default(&entry, block_hash).await
-            } else {
-              Err(::subxt::MetadataError::IncompatibleMetadata.into())
-            }
-          }
-        }
-        #[doc = " Account fees for current era"]
-        pub fn sunrise_rewards_iter(
-          &self,
-          block_hash: ::core::option::Option<T::Hash>,
-        ) -> impl ::core::future::Future<
-          Output = ::core::result::Result<
-            ::subxt::KeyIter<'a, T, SunriseRewards<'a>>,
-            ::subxt::BasicError,
-          >,
-        > + 'a {
-          let client = self.client;
-          async move {
-            let runtime_storage_hash = {
-              let locked_metadata = client.metadata();
-              let metadata = locked_metadata.read();
-              match metadata.storage_hash::<SunriseRewards>() {
-                Ok(hash) => hash,
-                Err(e) => return Err(e.into()),
-              }
-            };
-            if runtime_storage_hash
-              == [
-                60u8, 101u8, 145u8, 238u8, 69u8, 95u8, 145u8, 68u8, 184u8, 138u8, 235u8, 216u8,
-                14u8, 243u8, 219u8, 17u8, 37u8, 235u8, 189u8, 244u8, 211u8, 185u8, 113u8, 26u8,
-                185u8, 139u8, 109u8, 31u8, 20u8, 190u8, 40u8, 108u8,
+                22u8, 46u8, 164u8, 248u8, 61u8, 78u8, 43u8, 182u8, 82u8, 50u8, 113u8, 188u8, 176u8,
+                4u8, 50u8, 49u8, 160u8, 146u8, 253u8, 15u8, 56u8, 183u8, 250u8, 46u8, 237u8, 87u8,
+                81u8, 84u8, 236u8, 85u8, 26u8, 78u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -29437,27 +29200,6 @@ pub mod api {
           {
             let pallet = metadata.pallet("Fees")?;
             let constant = pallet.constant("BlocksPerSession")?;
-            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
-            Ok(value)
-          } else {
-            Err(::subxt::MetadataError::IncompatibleMetadata.into())
-          }
-        }
-        #[doc = " Number of blocks to wait before allowing users to claim their sunrise rewards, after an era is completed."]
-        pub fn blocks_sunrise_claims(
-          &self,
-        ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
-          let locked_metadata = self.client.metadata();
-          let metadata = locked_metadata.read();
-          if metadata.constant_hash("Fees", "BlocksSunriseClaims")?
-            == [
-              192u8, 118u8, 118u8, 195u8, 64u8, 137u8, 50u8, 126u8, 8u8, 65u8, 197u8, 31u8, 236u8,
-              167u8, 52u8, 158u8, 33u8, 149u8, 37u8, 212u8, 60u8, 119u8, 149u8, 253u8, 212u8, 12u8,
-              249u8, 52u8, 197u8, 195u8, 119u8, 57u8,
-            ]
-          {
-            let pallet = metadata.pallet("Fees")?;
-            let constant = pallet.constant("BlocksSunriseClaims")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
           } else {
@@ -29769,6 +29511,390 @@ pub mod api {
           {
             let pallet = metadata.pallet("AssetRegistry")?;
             let constant = pallet.constant("AssetRegistryPalletId")?;
+            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+            Ok(value)
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+      }
+    }
+  }
+  pub mod sunrise {
+    use super::root_mod;
+    use super::runtime_types;
+    #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted\n\t\t\tby this pallet.\n\t\t\t"]
+    pub type Event = runtime_types::pallet_sunrise::pallet::Event;
+    pub mod events {
+      use super::runtime_types;
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      pub struct SunriseRewarded {
+        pub era_index: ::core::primitive::u32,
+        pub pool_id: ::core::primitive::u8,
+        pub account_id: ::subxt::sp_core::crypto::AccountId32,
+        pub reward: ::core::primitive::u128,
+      }
+      impl ::subxt::Event for SunriseRewarded {
+        const PALLET: &'static str = "Sunrise";
+        const EVENT: &'static str = "SunriseRewarded";
+      }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      pub struct SunriseClaimed {
+        pub era_index: ::core::primitive::u32,
+        pub account_id: ::subxt::sp_core::crypto::AccountId32,
+        pub reward: ::core::primitive::u128,
+      }
+      impl ::subxt::Event for SunriseClaimed {
+        const PALLET: &'static str = "Sunrise";
+        const EVENT: &'static str = "SunriseClaimed";
+      }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      pub struct OnboardingRebatesApplied {
+        pub account_id: ::subxt::sp_core::crypto::AccountId32,
+        pub currency_id: runtime_types::tidefi_primitives::CurrencyId,
+        pub initial_amount: ::core::primitive::u128,
+        pub rebate: ::core::primitive::u128,
+      }
+      impl ::subxt::Event for OnboardingRebatesApplied {
+        const PALLET: &'static str = "Sunrise";
+        const EVENT: &'static str = "OnboardingRebatesApplied";
+      }
+    }
+    pub mod storage {
+      use super::runtime_types;
+      pub struct Pools;
+      impl ::subxt::StorageEntry for Pools {
+        const PALLET: &'static str = "Sunrise";
+        const STORAGE: &'static str = "Pools";
+        type Value = runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+          runtime_types::tidefi_primitives::SunriseSwapPool,
+        >;
+        fn key(&self) -> ::subxt::StorageEntryKey {
+          ::subxt::StorageEntryKey::Plain
+        }
+      }
+      pub struct Onboarding;
+      impl ::subxt::StorageEntry for Onboarding {
+        const PALLET: &'static str = "Sunrise";
+        const STORAGE: &'static str = "Onboarding";
+        type Value = runtime_types::tidefi_primitives::OnboardingRebates;
+        fn key(&self) -> ::subxt::StorageEntryKey {
+          ::subxt::StorageEntryKey::Plain
+        }
+      }
+      pub struct ExchangeRateInTdfy<'a>(pub &'a ::core::primitive::u32);
+      impl ::subxt::StorageEntry for ExchangeRateInTdfy<'_> {
+        const PALLET: &'static str = "Sunrise";
+        const STORAGE: &'static str = "ExchangeRateInTdfy";
+        type Value = runtime_types::sp_arithmetic::fixed_point::FixedU128;
+        fn key(&self) -> ::subxt::StorageEntryKey {
+          ::subxt::StorageEntryKey::Map(vec![::subxt::StorageMapKey::new(
+            &self.0,
+            ::subxt::StorageHasher::Blake2_128Concat,
+          )])
+        }
+      }
+      pub struct Rewards<'a>(
+        pub &'a ::subxt::sp_core::crypto::AccountId32,
+        pub &'a ::core::primitive::u32,
+      );
+      impl ::subxt::StorageEntry for Rewards<'_> {
+        const PALLET: &'static str = "Sunrise";
+        const STORAGE: &'static str = "Rewards";
+        type Value = ::core::primitive::u128;
+        fn key(&self) -> ::subxt::StorageEntryKey {
+          ::subxt::StorageEntryKey::Map(vec![
+            ::subxt::StorageMapKey::new(&self.0, ::subxt::StorageHasher::Blake2_128Concat),
+            ::subxt::StorageMapKey::new(&self.1, ::subxt::StorageHasher::Blake2_128Concat),
+          ])
+        }
+      }
+      pub struct StorageApi<'a, T: ::subxt::Config> {
+        client: &'a ::subxt::Client<T>,
+      }
+      impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+        pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+          Self { client }
+        }
+        #[doc = " The active sunrise tier availables."]
+        pub fn pools(
+          &self,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<
+            runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+              runtime_types::tidefi_primitives::SunriseSwapPool,
+            >,
+            ::subxt::BasicError,
+          >,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<Pools>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                155u8, 143u8, 88u8, 51u8, 210u8, 122u8, 34u8, 201u8, 176u8, 144u8, 207u8, 244u8,
+                121u8, 252u8, 98u8, 26u8, 234u8, 105u8, 129u8, 7u8, 0u8, 6u8, 118u8, 21u8, 252u8,
+                247u8, 247u8, 101u8, 44u8, 190u8, 23u8, 74u8,
+              ]
+            {
+              let entry = Pools;
+              client.storage().fetch_or_default(&entry, block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " The active onboarding rebates (gas refunds on-deposit)"]
+        pub fn onboarding(
+          &self,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<
+            runtime_types::tidefi_primitives::OnboardingRebates,
+            ::subxt::BasicError,
+          >,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<Onboarding>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                1u8, 32u8, 65u8, 165u8, 117u8, 174u8, 173u8, 27u8, 58u8, 182u8, 144u8, 116u8,
+                220u8, 214u8, 128u8, 244u8, 131u8, 89u8, 201u8, 69u8, 14u8, 233u8, 59u8, 231u8,
+                241u8, 105u8, 15u8, 43u8, 157u8, 229u8, 53u8, 106u8,
+              ]
+            {
+              let entry = Onboarding;
+              client.storage().fetch_or_default(&entry, block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " TDFY price of each wrapped asset, reported by Oracle every X blocks."]
+        #[doc = ""]
+        #[doc = " Exchange rate for 1 `AssetId` vs 1 TDFY"]
+        pub fn exchange_rate_in_tdfy(
+          &self,
+          _0: &'a ::core::primitive::u32,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<
+            runtime_types::sp_arithmetic::fixed_point::FixedU128,
+            ::subxt::BasicError,
+          >,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<ExchangeRateInTdfy>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                202u8, 190u8, 249u8, 197u8, 142u8, 147u8, 196u8, 124u8, 250u8, 11u8, 181u8, 134u8,
+                59u8, 73u8, 181u8, 53u8, 154u8, 36u8, 150u8, 149u8, 248u8, 144u8, 220u8, 28u8,
+                136u8, 54u8, 32u8, 109u8, 78u8, 218u8, 82u8, 106u8,
+              ]
+            {
+              let entry = ExchangeRateInTdfy(_0);
+              client.storage().fetch_or_default(&entry, block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " TDFY price of each wrapped asset, reported by Oracle every X blocks."]
+        #[doc = ""]
+        #[doc = " Exchange rate for 1 `AssetId` vs 1 TDFY"]
+        pub fn exchange_rate_in_tdfy_iter(
+          &self,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<
+            ::subxt::KeyIter<'a, T, ExchangeRateInTdfy<'a>>,
+            ::subxt::BasicError,
+          >,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<ExchangeRateInTdfy>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                202u8, 190u8, 249u8, 197u8, 142u8, 147u8, 196u8, 124u8, 250u8, 11u8, 181u8, 134u8,
+                59u8, 73u8, 181u8, 53u8, 154u8, 36u8, 150u8, 149u8, 248u8, 144u8, 220u8, 28u8,
+                136u8, 54u8, 32u8, 109u8, 78u8, 218u8, 82u8, 106u8,
+              ]
+            {
+              client.storage().iter(block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " Account fees for current era"]
+        pub fn rewards(
+          &self,
+          _0: &'a ::subxt::sp_core::crypto::AccountId32,
+          _1: &'a ::core::primitive::u32,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<::core::primitive::u128, ::subxt::BasicError>,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<Rewards>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                217u8, 108u8, 111u8, 138u8, 166u8, 220u8, 149u8, 231u8, 128u8, 93u8, 203u8, 137u8,
+                63u8, 200u8, 236u8, 207u8, 229u8, 101u8, 170u8, 59u8, 108u8, 250u8, 185u8, 108u8,
+                224u8, 28u8, 203u8, 80u8, 237u8, 73u8, 237u8, 141u8,
+              ]
+            {
+              let entry = Rewards(_0, _1);
+              client.storage().fetch_or_default(&entry, block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " Account fees for current era"]
+        pub fn rewards_iter(
+          &self,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<
+            ::subxt::KeyIter<'a, T, Rewards<'a>>,
+            ::subxt::BasicError,
+          >,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<Rewards>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                217u8, 108u8, 111u8, 138u8, 166u8, 220u8, 149u8, 231u8, 128u8, 93u8, 203u8, 137u8,
+                63u8, 200u8, 236u8, 207u8, 229u8, 101u8, 170u8, 59u8, 108u8, 250u8, 185u8, 108u8,
+                224u8, 28u8, 203u8, 80u8, 237u8, 73u8, 237u8, 141u8,
+              ]
+            {
+              client.storage().iter(block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+      }
+    }
+    pub mod constants {
+      use super::runtime_types;
+      pub struct ConstantsApi<'a, T: ::subxt::Config> {
+        client: &'a ::subxt::Client<T>,
+      }
+      impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
+        pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+          Self { client }
+        }
+        #[doc = " Pallet ID"]
+        pub fn sunrise_pallet_id(
+          &self,
+        ) -> ::core::result::Result<runtime_types::frame_support::PalletId, ::subxt::BasicError>
+        {
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Sunrise", "SunrisePalletId")?
+            == [
+              8u8, 7u8, 226u8, 243u8, 107u8, 65u8, 221u8, 204u8, 28u8, 16u8, 212u8, 5u8, 101u8,
+              64u8, 215u8, 54u8, 110u8, 133u8, 82u8, 45u8, 59u8, 51u8, 214u8, 88u8, 98u8, 213u8,
+              214u8, 140u8, 45u8, 161u8, 66u8, 129u8,
+            ]
+          {
+            let pallet = metadata.pallet("Sunrise")?;
+            let constant = pallet.constant("SunrisePalletId")?;
+            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+            Ok(value)
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+        #[doc = " Number of blocks to wait before allowing users to claim their sunrise rewards, after an era is completed."]
+        pub fn cooldown(
+          &self,
+        ) -> ::core::result::Result<::core::primitive::u32, ::subxt::BasicError> {
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Sunrise", "Cooldown")?
+            == [
+              139u8, 232u8, 17u8, 58u8, 79u8, 120u8, 191u8, 49u8, 137u8, 184u8, 24u8, 33u8, 253u8,
+              69u8, 31u8, 221u8, 195u8, 152u8, 241u8, 118u8, 218u8, 240u8, 98u8, 88u8, 30u8, 127u8,
+              155u8, 203u8, 70u8, 78u8, 16u8, 194u8,
+            ]
+          {
+            let pallet = metadata.pallet("Sunrise")?;
+            let constant = pallet.constant("Cooldown")?;
+            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+            Ok(value)
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+        #[doc = " Maximum rewards for sunrise pool before the applied rewards."]
+        #[doc = " Example, 10_000_000_000_000_000 with a 125% rewards,"]
+        #[doc = " the maximum applied will be `12_500_000_000_000_000` TDFY"]
+        pub fn maximum_reward_per_swap(
+          &self,
+        ) -> ::core::result::Result<::core::primitive::u128, ::subxt::BasicError> {
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Sunrise", "MaximumRewardPerSwap")?
+            == [
+              121u8, 25u8, 119u8, 133u8, 185u8, 105u8, 28u8, 176u8, 35u8, 173u8, 63u8, 211u8,
+              236u8, 209u8, 191u8, 49u8, 170u8, 164u8, 202u8, 223u8, 216u8, 75u8, 182u8, 197u8,
+              6u8, 103u8, 217u8, 127u8, 139u8, 35u8, 238u8, 175u8,
+            ]
+          {
+            let pallet = metadata.pallet("Sunrise")?;
+            let constant = pallet.constant("MaximumRewardPerSwap")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
           } else {
@@ -30334,8 +30460,6 @@ pub mod api {
         Oracle(runtime_types::pallet_oracle::pallet::Call),
         #[codec(index = 54)]
         Security(runtime_types::pallet_security::pallet::Call),
-        #[codec(index = 55)]
-        Fees(runtime_types::pallet_fees::pallet::Call),
         #[codec(index = 56)]
         AssetRegistry(runtime_types::pallet_asset_registry::pallet::Call),
       }
@@ -30409,6 +30533,8 @@ pub mod api {
         Fees(runtime_types::pallet_fees::pallet::Event),
         #[codec(index = 56)]
         AssetRegistry(runtime_types::pallet_asset_registry::pallet::Event),
+        #[codec(index = 57)]
+        Sunrise(runtime_types::pallet_sunrise::pallet::Event),
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub enum OriginCaller {
@@ -32852,52 +32978,15 @@ pub mod api {
       pub mod pallet {
         use super::runtime_types;
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
-        #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
-        pub enum Call {
-          #[codec(index = 0)]
-          #[doc = "Claim available sunrise rewards"]
-          #[doc = ""]
-          #[doc = "- `era_index`: Era to claim rewards"]
-          #[doc = ""]
-          #[doc = "Emits `SunriseRewardsClaimed` event when successful."]
-          #[doc = ""]
-          #[doc = "Weight: `O(1)`"]
-          claim_sunrise_rewards { era_index: ::core::primitive::u32 },
-        }
-        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         #[doc = "\n\t\t\tCustom [dispatch errors](https://docs.substrate.io/v3/runtime/events-and-errors)\n\t\t\tof this pallet.\n\t\t\t"]
         pub enum Error {
           #[codec(index = 0)]
-          #[doc = "Invalid sunrise pool"]
-          InvalidSunrisePool,
-          #[codec(index = 1)]
-          #[doc = "There is no rewards available for this account on this era"]
-          NoRewardsAvailable,
-          #[codec(index = 2)]
-          #[doc = "Invalid era"]
-          InvalidEra,
-          #[codec(index = 3)]
-          #[doc = "Invalid asset"]
-          InvalidAsset,
-          #[codec(index = 4)]
-          #[doc = "There is no active Era"]
-          NoActiveEra,
-          #[codec(index = 5)]
-          #[doc = "There is no active Era start block"]
-          NoActiveEraStartBlock,
-          #[codec(index = 6)]
-          #[doc = "Era is not ready to be claimed yet, try again later"]
-          EraNotReady,
-          #[codec(index = 7)]
           #[doc = "Account fees overflow"]
           AccountFeeOverflow,
-          #[codec(index = 8)]
+          #[codec(index = 1)]
           #[doc = "Balance overflow"]
           BalanceOverflow,
-          #[codec(index = 9)]
-          #[doc = "Invalid USDT value in the order book"]
-          InvalidUsdtValue,
-          #[codec(index = 10)]
+          #[codec(index = 2)]
           #[doc = "Invalid TDFY value in the order book"]
           InvalidTdfyValue,
         }
@@ -32919,19 +33008,6 @@ pub mod api {
           EraStarted { era_index: ::core::primitive::u32 },
           #[codec(index = 3)]
           EraEnded { era_index: ::core::primitive::u32 },
-          #[codec(index = 4)]
-          SunriseRewarded {
-            era_index: ::core::primitive::u32,
-            pool_id: ::core::primitive::u8,
-            account_id: ::subxt::sp_core::crypto::AccountId32,
-            reward: ::core::primitive::u128,
-          },
-          #[codec(index = 5)]
-          SunriseClaimed {
-            era_index: ::core::primitive::u32,
-            account_id: ::subxt::sp_core::crypto::AccountId32,
-            reward: ::core::primitive::u128,
-          },
         }
       }
     }
@@ -34330,15 +34406,37 @@ pub mod api {
           #[doc = "Weight: `O(1)`"]
           set_status { is_enabled: ::core::primitive::bool },
           #[codec(index = 4)]
-          #[doc = "Change Oracle status."]
+          #[doc = "Update assets values."]
           #[doc = ""]
-          #[doc = "- `is_enabled`: Is the oracle enabled?"]
+          #[doc = "- `value`: How many TDFY required for 1 Asset."]
           #[doc = ""]
-          #[doc = "Emits `StatusChanged` event when successful."]
+          #[doc = "The value should be formatted with TDFY decimals (12)"]
+          #[doc = ""]
+          #[doc = "Example:"]
+          #[doc = ""]
+          #[doc = "If the Bitcoin price is 0.001815 BTC (for 1 TDFY)"]
+          #[doc = "You get 550.9641873278 TDFY for 1 BTC"]
+          #[doc = ""]
+          #[doc = "The value should be: `vec![(2, 550_964_187_327_800)]`"]
+          #[doc = ""]
+          #[doc = "***"]
+          #[doc = ""]
+          #[doc = "If the ETH price is 0.03133 ETH (for 1 TDFY)"]
+          #[doc = "You get 31.9182891796999 TDFY for 1 ETH"]
+          #[doc = ""]
+          #[doc = "The value sent should be: `vec![(4, 31_918_289_179_699)]`"]
+          #[doc = ""]
+          #[doc = "***"]
+          #[doc = ""]
+          #[doc = "If the USDT price is 33.650000 USDT (for 1 TDFY)"]
+          #[doc = "You get 0.029717682000 TDFY for 1 USDT"]
+          #[doc = ""]
+          #[doc = "The value sent should be: `vec![(4, 29_717_682_020)]`"]
           #[doc = ""]
           #[doc = "Weight: `O(1)`"]
-          im_alive {
-            im_alive: runtime_types::tidefi_primitives::OracleImAlive,
+          #[doc = ""]
+          update_assets_value {
+            value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
           },
           #[codec(index = 5)]
           #[doc = "Add market maker to the local storage"]
@@ -36452,6 +36550,58 @@ pub mod api {
         }
       }
     }
+    pub mod pallet_sunrise {
+      use super::runtime_types;
+      pub mod pallet {
+        use super::runtime_types;
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        #[doc = "\n\t\t\tCustom [dispatch errors](https://docs.substrate.io/v3/runtime/events-and-errors)\n\t\t\tof this pallet.\n\t\t\t"]
+        pub enum Error {
+          #[codec(index = 0)]
+          #[doc = "Invalid sunrise pool"]
+          InvalidSunrisePool,
+          #[codec(index = 1)]
+          #[doc = "Invalid asset"]
+          InvalidAsset,
+          #[codec(index = 2)]
+          #[doc = "Balance overflow"]
+          BalanceOverflow,
+          #[codec(index = 3)]
+          #[doc = "Invalid TDFY value in the order book"]
+          InvalidTdfyValue,
+          #[codec(index = 4)]
+          #[doc = "There is no rewards available for this account on this era"]
+          NoRewardsAvailable,
+          #[codec(index = 5)]
+          #[doc = "There is no rebates available to process the gas refund"]
+          NoRebatesAvailable,
+        }
+        #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+        #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted\n\t\t\tby this pallet.\n\t\t\t"]
+        pub enum Event {
+          #[codec(index = 0)]
+          SunriseRewarded {
+            era_index: ::core::primitive::u32,
+            pool_id: ::core::primitive::u8,
+            account_id: ::subxt::sp_core::crypto::AccountId32,
+            reward: ::core::primitive::u128,
+          },
+          #[codec(index = 1)]
+          SunriseClaimed {
+            era_index: ::core::primitive::u32,
+            account_id: ::subxt::sp_core::crypto::AccountId32,
+            reward: ::core::primitive::u128,
+          },
+          #[codec(index = 2)]
+          OnboardingRebatesApplied {
+            account_id: ::subxt::sp_core::crypto::AccountId32,
+            currency_id: runtime_types::tidefi_primitives::CurrencyId,
+            initial_amount: ::core::primitive::u128,
+            rebate: ::core::primitive::u128,
+          },
+        }
+      }
+    }
     pub mod pallet_tidefi {
       use super::runtime_types;
       pub mod pallet {
@@ -36523,6 +36673,15 @@ pub mod api {
           #[doc = ""]
           #[doc = "Weight: `O(1)`"]
           cancel_swap { request_id: ::subxt::sp_core::H256 },
+          #[codec(index = 4)]
+          #[doc = "Claim available sunrise rewards"]
+          #[doc = ""]
+          #[doc = "- `era_index`: Era to claim rewards"]
+          #[doc = ""]
+          #[doc = "Emits `RewardsClaimed` event when successful."]
+          #[doc = ""]
+          #[doc = "Weight: `O(1)`"]
+          claim_sunrise_rewards { era_index: ::core::primitive::u32 },
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         #[doc = "\n\t\t\tCustom [dispatch errors](https://docs.substrate.io/v3/runtime/events-and-errors)\n\t\t\tof this pallet.\n\t\t\t"]
@@ -36560,6 +36719,15 @@ pub mod api {
           #[codec(index = 10)]
           #[doc = "Oracle is paused. Trading is not allowed"]
           OraclePaused,
+          #[codec(index = 11)]
+          #[doc = "No active era"]
+          NoActiveEra,
+          #[codec(index = 12)]
+          #[doc = "Era is not ready to be claimed yet, try again later"]
+          EraNotReady,
+          #[codec(index = 13)]
+          #[doc = "Invalid era"]
+          InvalidEra,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted\n\t\t\tby this pallet.\n\t\t\t"]
@@ -38039,23 +38207,21 @@ pub mod api {
       pub struct Fee {
         pub amount: ::core::primitive::u128,
         pub fee: ::core::primitive::u128,
-        pub fee_usdt: ::core::primitive::u128,
+        pub fee_tdfy: ::core::primitive::u128,
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub struct Mint<_0, _1> {
         pub account_id: _0,
         pub currency_id: runtime_types::tidefi_primitives::CurrencyId,
         pub mint_amount: ::core::primitive::u128,
+        pub gas_amount: ::core::option::Option<::core::primitive::u128>,
         pub transaction_id: _1,
         pub compliance_level: runtime_types::tidefi_primitives::ComplianceLevel,
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
-      pub struct OracleImAlive {
-        pub usdt_value: ::std::vec::Vec<(
-          runtime_types::tidefi_primitives::CurrencyId,
-          ::core::primitive::u128,
-        )>,
-        pub tdfy_value: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u128)>,
+      pub struct OnboardingRebates {
+        pub initial_amount: ::core::primitive::u128,
+        pub available_amount: ::core::primitive::u128,
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub enum ProposalStatus {
@@ -38107,7 +38273,7 @@ pub mod api {
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub struct SunriseSwapPool {
         pub id: ::core::primitive::u8,
-        pub minimum_usdt_value: ::core::primitive::u128,
+        pub minimum_tdfy_value: ::core::primitive::u128,
         pub transactions_remaining: ::core::primitive::u32,
         pub balance: ::core::primitive::u128,
         pub rebates: runtime_types::sp_arithmetic::fixed_point::FixedU128,
@@ -38229,9 +38395,9 @@ pub mod api {
       };
       if runtime_metadata_hash
         != [
-          194u8, 235u8, 208u8, 185u8, 218u8, 237u8, 114u8, 60u8, 238u8, 110u8, 76u8, 169u8, 174u8,
-          138u8, 165u8, 4u8, 161u8, 237u8, 83u8, 83u8, 234u8, 146u8, 70u8, 232u8, 242u8, 100u8,
-          221u8, 86u8, 250u8, 188u8, 73u8, 142u8,
+          206u8, 47u8, 182u8, 202u8, 120u8, 212u8, 209u8, 13u8, 120u8, 200u8, 27u8, 119u8, 135u8,
+          38u8, 120u8, 17u8, 74u8, 183u8, 82u8, 234u8, 115u8, 79u8, 22u8, 168u8, 93u8, 170u8,
+          145u8, 229u8, 83u8, 169u8, 172u8, 51u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
@@ -38380,6 +38546,9 @@ pub mod api {
     pub fn asset_registry(&self) -> asset_registry::constants::ConstantsApi<'a, T> {
       asset_registry::constants::ConstantsApi::new(self.client)
     }
+    pub fn sunrise(&self) -> sunrise::constants::ConstantsApi<'a, T> {
+      sunrise::constants::ConstantsApi::new(self.client)
+    }
   }
   pub struct StorageApi<'a, T: ::subxt::Config> {
     client: &'a ::subxt::Client<T>,
@@ -38495,6 +38664,9 @@ pub mod api {
     pub fn asset_registry(&self) -> asset_registry::storage::StorageApi<'a, T> {
       asset_registry::storage::StorageApi::new(self.client)
     }
+    pub fn sunrise(&self) -> sunrise::storage::StorageApi<'a, T> {
+      sunrise::storage::StorageApi::new(self.client)
+    }
   }
   pub struct TransactionApi<'a, T: ::subxt::Config, X> {
     client: &'a ::subxt::Client<T>,
@@ -38602,9 +38774,6 @@ pub mod api {
     }
     pub fn security(&self) -> security::calls::TransactionApi<'a, T, X> {
       security::calls::TransactionApi::new(self.client)
-    }
-    pub fn fees(&self) -> fees::calls::TransactionApi<'a, T, X> {
-      fees::calls::TransactionApi::new(self.client)
     }
     pub fn asset_registry(&self) -> asset_registry::calls::TransactionApi<'a, T, X> {
       asset_registry::calls::TransactionApi::new(self.client)

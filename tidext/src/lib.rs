@@ -98,7 +98,7 @@ use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
 pub use parity_scale_codec::{Decode, Encode};
 use primitives::{
   AccountId, Balance, BalanceInfo, BlockNumber, CurrencyBalance, CurrencyId, CurrencyMetadata,
-  Hash, Stake, SwapType,
+  EraIndex, Hash, Stake, SwapType,
 };
 use sp_runtime::MultiAddress;
 pub use sp_runtime::Permill;
@@ -251,6 +251,10 @@ mod client {
     /// Send a batch of dispatch calls for the current signer. Unlike `submit_batch` it allows error and won't interrupt.
     #[tidext::pallet = "utility"]
     fn force_batch(&self, calls: Vec<TidechainCall>);
+
+    /// Claim available sunrise rewards for the `era_index`.
+    #[tidext::pallet = "tidefi"]
+    fn claim_sunrise_rewards(&self, era_index: EraIndex);
   }
 
   // Custom implementation of our client
