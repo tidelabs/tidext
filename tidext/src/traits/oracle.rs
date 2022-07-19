@@ -16,7 +16,7 @@
 
 use crate::{Client, Error};
 use async_trait::async_trait;
-use tidefi_primitives::{AccountId, Hash, OracleImAlive, SwapConfirmation};
+use tidefi_primitives::{AccountId, AssetId, Balance, Hash, SwapConfirmation};
 
 /// An extension trait for `Client` that provides a variety of convenient Oracle functions.
 #[async_trait]
@@ -43,18 +43,42 @@ pub trait OracleExt {
   /// Cancel swap
   async fn cancel_swap(&self, request_id: Hash) -> Result<(), Error>;
 
-  /// I'm alive
-  async fn im_alive(&self, im_alive: OracleImAlive) -> Result<(), Error>;
+  /// Update assets value for the sunrise pool
+  /// It should represent how many TDFY's for 1 `AssetId`.
+  ///
+  /// The value should always be formatted with TDFY decimals (12)
+  ///
+  /// ## Example:
+  ///
+  /// If the Bitcoin price is 0.001815 BTC (for 1 TDFY)
+  /// You get 550.9641873278 TDFY for 1 BTC
+  ///
+  /// The value should be: `vec![(2, 550_964_187_327_800)]`
+  ///
+  /// ***
+  ///
+  /// If the ETH price is 0.03133 ETH (for 1 TDFY)
+  /// You get 31.9182891796999 TDFY for 1 ETH
+  ///
+  /// The value sent should be: `vec![(4, 31_918_289_179_699)]`
+  ///
+  /// ***
+  ///
+  /// If the USDT price is 33.650000 USDT (for 1 TDFY)
+  /// You get 0.029717682000 TDFY for 1 USDT
+  ///
+  /// The value sent should be: `vec![(4, 29_717_682_020)]`
+  async fn update_assets_value(&self, values: Vec<(AssetId, Balance)>) -> Result<(), Error>;
 }
 
 #[async_trait]
 impl OracleExt for Client {
-  async fn im_alive(&self, im_alive: OracleImAlive) -> Result<(), Error> {
+  async fn update_assets_value(&self, values: Vec<(AssetId, Balance)>) -> Result<(), Error> {
     self
       .runtime()
       .tx()
       .oracle()
-      .im_alive(im_alive)?
+      .update_assets_value(values)?
       .sign_and_submit_default(self.signer()?)
       .await?;
     Ok(())
