@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["EraEnded",""],["EraStarted",""],["FeesPercentageUpdated",""],["SessionEnded",""],["SunriseClaimed",""],["SunriseRewarded",""]]});
+initSidebarItems({"struct":[["EraEnded",""],["EraStarted",""],["FeesPercentageUpdated",""],["SessionEnded",""]]});

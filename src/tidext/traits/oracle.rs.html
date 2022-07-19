@@ -135,6 +135,30 @@
 <span id="130">130</span>
 <span id="131">131</span>
 <span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -153,7 +177,7 @@
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Client</span>, <span class="ident">Error</span>};
 <span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">tidefi_primitives</span>::{<span class="ident">AccountId</span>, <span class="ident">Hash</span>, <span class="ident">OracleImAlive</span>, <span class="ident">SwapConfirmation</span>};
+<span class="kw">use</span> <span class="ident">tidefi_primitives</span>::{<span class="ident">AccountId</span>, <span class="ident">AssetId</span>, <span class="ident">Balance</span>, <span class="ident">Hash</span>, <span class="ident">SwapConfirmation</span>};
 
 <span class="doccomment">/// An extension trait for `Client` that provides a variety of convenient Oracle functions.</span>
 <span class="attribute">#[<span class="ident">async_trait</span>]</span>
@@ -180,18 +204,42 @@
   <span class="doccomment">/// Cancel swap</span>
   <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">cancel_swap</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">request_id</span>: <span class="ident">Hash</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
 
-  <span class="doccomment">/// I&#39;m alive</span>
-  <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">im_alive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">im_alive</span>: <span class="ident">OracleImAlive</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
+  <span class="doccomment">/// Update assets value for the sunrise pool</span>
+  <span class="doccomment">/// It should represent how many TDFY&#39;s for 1 `AssetId`.</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// The value should always be formatted with TDFY decimals (12)</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// ## Example:</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// If the Bitcoin price is 0.001815 BTC (for 1 TDFY)</span>
+  <span class="doccomment">/// You get 550.9641873278 TDFY for 1 BTC</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// The value should be: `vec![(2, 550_964_187_327_800)]`</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// ***</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// If the ETH price is 0.03133 ETH (for 1 TDFY)</span>
+  <span class="doccomment">/// You get 31.9182891796999 TDFY for 1 ETH</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// The value sent should be: `vec![(4, 31_918_289_179_699)]`</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// ***</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// If the USDT price is 33.650000 USDT (for 1 TDFY)</span>
+  <span class="doccomment">/// You get 0.029717682000 TDFY for 1 USDT</span>
+  <span class="doccomment">///</span>
+  <span class="doccomment">/// The value sent should be: `vec![(4, 29_717_682_020)]`</span>
+  <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">update_assets_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">values</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AssetId</span>, <span class="ident">Balance</span>)<span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span>;
 }
 
 <span class="attribute">#[<span class="ident">async_trait</span>]</span>
 <span class="kw">impl</span> <span class="ident">OracleExt</span> <span class="kw">for</span> <span class="ident">Client</span> {
-  <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">im_alive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">im_alive</span>: <span class="ident">OracleImAlive</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+  <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">update_assets_value</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">values</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">AssetId</span>, <span class="ident">Balance</span>)<span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="self">self</span>
       .<span class="ident">runtime</span>()
       .<span class="ident">tx</span>()
       .<span class="ident">oracle</span>()
-      .<span class="ident">im_alive</span>(<span class="ident">im_alive</span>)<span class="question-mark">?</span>
+      .<span class="ident">update_assets_value</span>(<span class="ident">values</span>)<span class="question-mark">?</span>
       .<span class="ident">sign_and_submit_default</span>(<span class="self">self</span>.<span class="ident">signer</span>()<span class="question-mark">?</span>)
       .<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())

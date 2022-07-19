@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CancelSwap",""],["Swap",""],["TransactionApi",""],["Transfer",""],["Withdrawal",""]]});
+initSidebarItems({"struct":[["CancelSwap",""],["ClaimSunriseRewards",""],["Swap",""],["TransactionApi",""],["Transfer",""],["Withdrawal",""]]});

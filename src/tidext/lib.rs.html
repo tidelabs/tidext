@@ -389,6 +389,10 @@
 <span id="384">384</span>
 <span id="385">385</span>
 <span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -489,7 +493,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">parity_scale_codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
 <span class="kw">use</span> <span class="ident">primitives</span>::{
   <span class="ident">AccountId</span>, <span class="ident">Balance</span>, <span class="ident">BalanceInfo</span>, <span class="ident">BlockNumber</span>, <span class="ident">CurrencyBalance</span>, <span class="ident">CurrencyId</span>, <span class="ident">CurrencyMetadata</span>,
-  <span class="ident">Hash</span>, <span class="ident">Stake</span>, <span class="ident">SwapType</span>,
+  <span class="ident">EraIndex</span>, <span class="ident">Hash</span>, <span class="ident">Stake</span>, <span class="ident">SwapType</span>,
 };
 <span class="kw">use</span> <span class="ident">sp_runtime::MultiAddress</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::Permill</span>;
@@ -642,6 +646,10 @@
     <span class="doccomment">/// Send a batch of dispatch calls for the current signer. Unlike `submit_batch` it allows error and won&#39;t interrupt.</span>
     <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;utility&quot;</span>]</span>
     <span class="kw">fn</span> <span class="ident">force_batch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">calls</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TidechainCall</span><span class="op">&gt;</span>);
+
+    <span class="doccomment">/// Claim available sunrise rewards for the `era_index`.</span>
+    <span class="attribute">#[<span class="ident">tidext::pallet</span> <span class="op">=</span> <span class="string">&quot;tidefi&quot;</span>]</span>
+    <span class="kw">fn</span> <span class="ident">claim_sunrise_rewards</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">era_index</span>: <span class="ident">EraIndex</span>);
   }
 
   <span class="comment">// Custom implementation of our client</span>
