@@ -1158,9 +1158,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                66u8, 214u8, 139u8, 234u8, 226u8, 136u8, 71u8, 135u8, 78u8, 207u8, 95u8, 98u8,
-                89u8, 213u8, 240u8, 107u8, 145u8, 168u8, 182u8, 242u8, 125u8, 124u8, 145u8, 57u8,
-                95u8, 82u8, 145u8, 193u8, 171u8, 84u8, 98u8, 83u8,
+                175u8, 68u8, 99u8, 31u8, 162u8, 179u8, 29u8, 19u8, 144u8, 40u8, 7u8, 21u8, 218u8,
+                30u8, 222u8, 18u8, 128u8, 176u8, 213u8, 194u8, 213u8, 31u8, 107u8, 216u8, 171u8,
+                133u8, 1u8, 105u8, 101u8, 164u8, 150u8, 47u8,
               ]
             {
               let entry = Events;
@@ -29530,7 +29530,7 @@ pub mod api {
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub struct SunriseRewarded {
         pub era_index: ::core::primitive::u32,
-        pub pool_id: ::core::primitive::u8,
+        pub pool_id: ::core::option::Option<::core::primitive::u8>,
         pub account_id: ::subxt::sp_core::crypto::AccountId32,
         pub reward: ::core::primitive::u128,
       }
@@ -29569,6 +29569,15 @@ pub mod api {
         type Value = runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
           runtime_types::tidefi_primitives::SunriseSwapPool,
         >;
+        fn key(&self) -> ::subxt::StorageEntryKey {
+          ::subxt::StorageEntryKey::Plain
+        }
+      }
+      pub struct PoolsLeftOverBalance;
+      impl ::subxt::StorageEntry for PoolsLeftOverBalance {
+        const PALLET: &'static str = "Sunrise";
+        const STORAGE: &'static str = "PoolsLeftOverBalance";
+        type Value = ::core::primitive::u128;
         fn key(&self) -> ::subxt::StorageEntryKey {
           ::subxt::StorageEntryKey::Plain
         }
@@ -29646,6 +29655,37 @@ pub mod api {
               ]
             {
               let entry = Pools;
+              client.storage().fetch_or_default(&entry, block_hash).await
+            } else {
+              Err(::subxt::MetadataError::IncompatibleMetadata.into())
+            }
+          }
+        }
+        #[doc = " The balance available as left-over from the pools."]
+        pub fn pools_left_over_balance(
+          &self,
+          block_hash: ::core::option::Option<T::Hash>,
+        ) -> impl ::core::future::Future<
+          Output = ::core::result::Result<::core::primitive::u128, ::subxt::BasicError>,
+        > + 'a {
+          let client = self.client;
+          async move {
+            let runtime_storage_hash = {
+              let locked_metadata = client.metadata();
+              let metadata = locked_metadata.read();
+              match metadata.storage_hash::<PoolsLeftOverBalance>() {
+                Ok(hash) => hash,
+                Err(e) => return Err(e.into()),
+              }
+            };
+            if runtime_storage_hash
+              == [
+                90u8, 141u8, 207u8, 195u8, 193u8, 3u8, 43u8, 15u8, 177u8, 23u8, 50u8, 226u8, 235u8,
+                50u8, 125u8, 166u8, 163u8, 219u8, 135u8, 195u8, 239u8, 12u8, 133u8, 17u8, 117u8,
+                96u8, 26u8, 138u8, 149u8, 252u8, 217u8, 52u8,
+              ]
+            {
+              let entry = PoolsLeftOverBalance;
               client.storage().fetch_or_default(&entry, block_hash).await
             } else {
               Err(::subxt::MetadataError::IncompatibleMetadata.into())
@@ -29895,6 +29935,30 @@ pub mod api {
           {
             let pallet = metadata.pallet("Sunrise")?;
             let constant = pallet.constant("MaximumRewardPerSwap")?;
+            let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
+            Ok(value)
+          } else {
+            Err(::subxt::MetadataError::IncompatibleMetadata.into())
+          }
+        }
+        #[doc = " For each tier, leftover funds will be allocated to to this tier"]
+        pub fn leftover_swap_rebates(
+          &self,
+        ) -> ::core::result::Result<
+          runtime_types::sp_arithmetic::fixed_point::FixedU128,
+          ::subxt::BasicError,
+        > {
+          let locked_metadata = self.client.metadata();
+          let metadata = locked_metadata.read();
+          if metadata.constant_hash("Sunrise", "LeftoverSwapRebates")?
+            == [
+              171u8, 194u8, 91u8, 65u8, 222u8, 12u8, 130u8, 52u8, 41u8, 242u8, 44u8, 235u8, 91u8,
+              72u8, 40u8, 146u8, 195u8, 206u8, 92u8, 237u8, 88u8, 183u8, 187u8, 115u8, 196u8, 92u8,
+              19u8, 201u8, 124u8, 253u8, 233u8, 13u8,
+            ]
+          {
+            let pallet = metadata.pallet("Sunrise")?;
+            let constant = pallet.constant("LeftoverSwapRebates")?;
             let value = ::subxt::codec::Decode::decode(&mut &constant.value[..])?;
             Ok(value)
           } else {
@@ -35094,6 +35158,9 @@ pub mod api {
           PublicKeysOverflow,
           #[codec(index = 20)]
           UnknownError,
+          #[codec(index = 21)]
+          #[doc = "Invalid asset"]
+          InvalidAsset,
         }
         #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
         #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/v3/runtime/events-and-errors) emitted\n\t\t\tby this pallet.\n\t\t\t"]
@@ -36582,7 +36649,7 @@ pub mod api {
           #[codec(index = 0)]
           SunriseRewarded {
             era_index: ::core::primitive::u32,
-            pool_id: ::core::primitive::u8,
+            pool_id: ::core::option::Option<::core::primitive::u8>,
             account_id: ::subxt::sp_core::crypto::AccountId32,
             reward: ::core::primitive::u128,
           },
@@ -38395,9 +38462,9 @@ pub mod api {
       };
       if runtime_metadata_hash
         != [
-          206u8, 47u8, 182u8, 202u8, 120u8, 212u8, 209u8, 13u8, 120u8, 200u8, 27u8, 119u8, 135u8,
-          38u8, 120u8, 17u8, 74u8, 183u8, 82u8, 234u8, 115u8, 79u8, 22u8, 168u8, 93u8, 170u8,
-          145u8, 229u8, 83u8, 169u8, 172u8, 51u8,
+          26u8, 185u8, 213u8, 94u8, 10u8, 120u8, 153u8, 202u8, 164u8, 144u8, 155u8, 73u8, 123u8,
+          19u8, 116u8, 109u8, 145u8, 217u8, 55u8, 198u8, 39u8, 145u8, 144u8, 39u8, 215u8, 99u8,
+          185u8, 103u8, 60u8, 118u8, 212u8, 251u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
