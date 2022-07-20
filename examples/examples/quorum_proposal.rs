@@ -41,6 +41,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
       account_id: AccountKeyring::Alice.to_account_id(),
       currency_id: CurrencyId::Wrapped(assets::USDT),
       mint_amount: 10010,
+      gas_amount: None,
       transaction_id: Vec::new(),
       compliance_level: ComplianceLevel::Green,
     }))
