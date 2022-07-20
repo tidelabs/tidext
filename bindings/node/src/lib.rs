@@ -63,6 +63,7 @@ pub struct Currency {
 #[napi]
 pub struct Builder {
   url: String,
+  client_path: Vec<u8>,
   snapshot_path: String,
   password: String,
 }
@@ -71,8 +72,9 @@ pub struct Builder {
 impl Builder {
   /// Initializes the Builder.
   #[napi(constructor)]
-  pub fn new(url: String, snapshot_path: String, password: String) -> Self {
+  pub fn new(url: String, client_path: Vec<u8>, snapshot_path: String, password: String) -> Self {
     Self {
+      client_path,
       url,
       snapshot_path,
       password,
@@ -85,7 +87,14 @@ impl Builder {
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
     let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
 
-    let r = try_build(&self.url, stronghold_path, location, &password).await;
+    let r = try_build(
+      &self.url,
+      self.client_path.clone(),
+      stronghold_path,
+      location,
+      &password,
+    )
+    .await;
 
     password.zeroize();
 
@@ -95,17 +104,23 @@ impl Builder {
 
 async fn try_build(
   url: &str,
+  client_path: Vec<u8>,
   stronghold_path: PathBuf,
   location: Location,
   password: &Vec<u8>,
 ) -> Result<Client> {
   let builder = SubstrateClientBuilder::new()
     .set_signer(if stronghold_path.exists() {
-      TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
-        .await
-        .map_err(err_mapper)?
+      TidefiKeyring::try_from_stronghold_path(
+        client_path.clone(),
+        &stronghold_path,
+        Some(location),
+        Some(&password),
+      )
+      .await
+      .map_err(err_mapper)?
     } else {
-      let stronghold = init_stronghold_from_seed(&location, None, None)
+      let stronghold = init_stronghold_from_seed(client_path.clone(), &location, None, None)
         .await
         .map_err(err_mapper)?;
 
@@ -117,7 +132,7 @@ async fn try_build(
         .commit_with_keyprovider(&snapshot_path, &key_provider)
         .map_err(err_mapper)?;
 
-      TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location))
+      TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))
         .await
         .map_err(err_mapper)?
     })

@@ -36,13 +36,12 @@ pub type TidefiPairSigner = PairSigner<TidechainConfig, StrongholdSigner>;
 /// Tidefi keyring
 pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
 
-const CLIENT_PATH: Vec<u8> = Vec::new();
-
 /// Stronghold signer instance.
 #[derive(Clone)]
 pub struct StrongholdSigner {
   keypair_location: Location,
   stronghold: Arc<Stronghold>,
+  client_path: Vec<u8>,
 }
 
 impl CryptoType for StrongholdSigner {
@@ -63,7 +62,7 @@ impl Pair for StrongholdSigner {
     let keypair_location = self.keypair_location.clone();
 
     let client = stronghold
-      .load_client(CLIENT_PATH)
+      .load_client(self.client_path.clone())
       .expect("Failed to load client from stronghold");
 
     let proc = Sr25519Sign {
@@ -85,7 +84,7 @@ impl Pair for StrongholdSigner {
     let keypair_location = self.keypair_location.clone();
 
     let client = stronghold
-      .load_client(CLIENT_PATH)
+      .load_client(self.client_path.clone())
       .expect("Failed to load client from stronghold");
 
     let proc = PublicKey {
@@ -168,6 +167,7 @@ where
   pub fn new(
     account_id: T::AccountId,
     stronghold: Stronghold,
+    client_path: Vec<u8>,
     keypair_location: Location,
   ) -> TidextKeyring<T> {
     TidextKeyring {
@@ -175,11 +175,13 @@ where
       pair_signer: Arc::new(TidefiPairSigner::new(StrongholdSigner {
         keypair_location,
         stronghold: Arc::new(stronghold),
+        client_path,
       })),
     }
   }
   /// Try to get signer from existing stronghold instance
   pub async fn try_from_stronghold_instance(
+    client_path: Vec<u8>,
     stronghold: Stronghold,
     keypair_location: Option<Location>,
   ) -> Result<Self, Error> {
@@ -188,11 +190,12 @@ where
       record_path: b"default".to_vec(),
     });
 
-    get_signer_from_stronghold(stronghold, &default_keypair_location).await
+    get_signer_from_stronghold(client_path, stronghold, &default_keypair_location).await
   }
 
   /// Try to launch a new stronghold instance with the provided path and location
   pub async fn try_from_stronghold_path<P: AsRef<Path>, V: AsRef<Vec<u8>>>(
+    client_path: Vec<u8>,
     stronghold_path: P,
     keypair_location: Option<Location>,
     passphrase: Option<V>,
@@ -202,12 +205,14 @@ where
       record_path: b"default".to_vec(),
     });
 
-    let stronghold = init_stronghold_from_path(stronghold_path, passphrase).await?;
-    get_signer_from_stronghold(stronghold, &default_keypair_location).await
+    let stronghold =
+      init_stronghold_from_path(client_path.clone(), stronghold_path, passphrase).await?;
+    get_signer_from_stronghold(client_path, stronghold, &default_keypair_location).await
   }
 
   /// Try to launch a new stronghold instance with the provided seed and location
   pub async fn try_from_seed(
+    client_path: Vec<u8>,
     seed: String,
     keypair_location: Option<Location>,
   ) -> Result<Self, Error> {
@@ -216,20 +221,27 @@ where
       record_path: b"default".to_vec(),
     });
 
-    let stronghold = init_stronghold_from_seed(&default_keypair_location, Some(seed), None).await?;
-    get_signer_from_stronghold(stronghold, &default_keypair_location).await
+    let stronghold = init_stronghold_from_seed(
+      client_path.clone(),
+      &default_keypair_location,
+      Some(seed),
+      None,
+    )
+    .await?;
+    get_signer_from_stronghold(client_path, stronghold, &default_keypair_location).await
   }
 }
 
 /// Initialize a new stronghold instance from the `sr25519` mnemonic or raw seed
 pub async fn init_stronghold_from_seed(
+  client_path: Vec<u8>,
   keypair_location: &Location,
   mnemonic_or_seed: Option<String>,
   seed_passphrase: Option<String>,
 ) -> Result<Stronghold, Error> {
   let stronghold = Stronghold::default();
 
-  let client = stronghold.create_client(CLIENT_PATH)?;
+  let client = stronghold.create_client(client_path.clone())?;
 
   let proc = BIP39Recover {
     passphrase: seed_passphrase,
@@ -239,15 +251,16 @@ pub async fn init_stronghold_from_seed(
   };
 
   client.execute_procedure(proc)?;
-  stronghold.write_client(CLIENT_PATH)?;
+  stronghold.write_client(client_path)?;
 
   Ok(stronghold)
 }
 
 // TODO: use `commit` and store keyprovider in snapshot state.
-// TODO: use a real client_path.
+
 /// Initialize a new stronghold instance from the provided snapshot path and passphrase
 pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
+  client_path: Vec<u8>,
   stronghold_path: P,
   passphrase: Option<T>,
 ) -> Result<Stronghold, Error> {
@@ -261,7 +274,7 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
   if stronghold_path.as_ref().exists() {
     let snapshot_path = SnapshotPath::from_path(stronghold_path);
 
-    stronghold.load_client_from_snapshot(CLIENT_PATH, &keyprovider, &snapshot_path)?;
+    stronghold.load_client_from_snapshot(client_path, &keyprovider, &snapshot_path)?;
   } else {
     return Err(Error::Stronghold("Invalid snapshot path".to_string()));
   }
@@ -271,6 +284,7 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
 
 /// Try to get signer details for an existing stronghold instance at the specific location
 pub async fn get_signer_from_stronghold<T>(
+  client_path: Vec<u8>,
   stronghold: Stronghold,
   keypair_location: &Location,
 ) -> Result<TidextKeyring<T>, Error>
@@ -278,7 +292,7 @@ where
   T: subxt::Config,
   T::AccountId: From<[u8; 32]>,
 {
-  let client = stronghold.load_client(CLIENT_PATH)?;
+  let client = stronghold.load_client(client_path.clone())?;
 
   let proc = PublicKey {
     ty: KeyType::Sr25519,
@@ -293,6 +307,7 @@ where
       Ok(TidextKeyring::new(
         T::AccountId::from(key),
         stronghold,
+        client_path,
         keypair_location.clone(),
       ))
     }
@@ -309,12 +324,13 @@ mod test {
 
   #[tokio::test]
   async fn test_get_pair() {
+    let client_path = b"client_path".to_vec();
     let mnemonic = "plug math bacon find roast scrap shrug exchange announce october exclude plate";
-    let mnemonic_pair = TidefiKeyring::try_from_seed(mnemonic.into(), None)
+    let mnemonic_pair = TidefiKeyring::try_from_seed(client_path.clone(), mnemonic.into(), None)
       .await
       .expect("Unable to intialize pair signer");
     let seed = "0x9abdf3e8edda03c1708bcd5bc3353e91efd503fd9105ff0ee68a7cbc66b740d8";
-    let seed_pair = TidefiKeyring::try_from_seed(seed.into(), None)
+    let seed_pair = TidefiKeyring::try_from_seed(client_path, seed.into(), None)
       .await
       .expect("Unable to intialize pair signer");
     assert_eq!(mnemonic_pair.account_id(), seed_pair.account_id())

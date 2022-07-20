@@ -94,6 +94,7 @@ pub struct Currency {
 #[pyclass]
 pub struct Builder {
   url: String,
+  client_path: Vec<u8>,
   snapshot_path: String,
   password: String,
 }
@@ -102,8 +103,9 @@ pub struct Builder {
 impl Builder {
   #[new]
   /// The client builder constructor.
-  fn new(url: String, snapshot_path: String, password: String) -> Self {
+  fn new(url: String, client_path: Vec<u8>, snapshot_path: String, password: String) -> Self {
     Self {
+      client_path,
       url,
       snapshot_path,
       password,
@@ -113,10 +115,11 @@ impl Builder {
   fn build<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let url = self.url.clone();
     let stronghold_path = self.snapshot_path.clone().into();
+    let client_path = self.client_path.clone().into();
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
     let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
     pyo3_asyncio::tokio::future_into_py(py, async move {
-      let client = try_build(&url, stronghold_path, location, &password)
+      let client = try_build(&url, stronghold_path, client_path, location, &password)
         .await
         .map(|client| {
           password.zeroize();
@@ -134,15 +137,22 @@ impl Builder {
 async fn try_build(
   url: &str,
   stronghold_path: PathBuf,
+  client_path: Vec<u8>,
   location: Location,
   password: &Vec<u8>,
 ) -> Result<Client, Error> {
   let builder = SubstrateClientBuilder::new()
     .set_signer(if stronghold_path.exists() {
-      TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
-        .await?
+      TidefiKeyring::try_from_stronghold_path(
+        client_path.clone(),
+        &stronghold_path,
+        Some(location),
+        Some(&password),
+      )
+      .await?
     } else {
-      let stronghold = init_stronghold_from_seed(&location, None, None).await?;
+      let stronghold =
+        init_stronghold_from_seed(client_path.clone(), &location, None, None).await?;
 
       let snapshot_path = SnapshotPath::named(stronghold_path);
       let key_provider = KeyProvider::try_from(password.clone()).map_err(|e| {
@@ -152,7 +162,7 @@ async fn try_build(
       // TODO: use `commit` and store keyprovider in snapshot state.
       stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
 
-      TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location)).await?
+      TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location)).await?
     })
     .set_url(url);
 
