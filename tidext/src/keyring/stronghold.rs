@@ -244,6 +244,8 @@ pub async fn init_stronghold_from_seed(
   Ok(stronghold)
 }
 
+// TODO: use `commit` and store keyprovider in snapshot state.
+// TODO: use a real client_path.
 /// Initialize a new stronghold instance from the provided snapshot path and passphrase
 pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
   stronghold_path: P,
@@ -253,7 +255,7 @@ pub async fn init_stronghold_from_path<P: AsRef<Path>, T: AsRef<Vec<u8>>>(
 
   let encryption_key = passphrase.map(|s| s.as_ref().to_vec()).unwrap_or_default();
   // let key = hash_blake2b(encryption_key);
-  let keyprovider = KeyProvider::from_password_truncated(encryption_key)
+  let keyprovider = KeyProvider::with_passphrase_truncated(encryption_key)
     .map_err(|e| Error::Stronghold(format!("Failed to derive key from passphrase {:?}", e)))?;
 
   if stronghold_path.as_ref().exists() {

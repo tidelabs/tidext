@@ -37,6 +37,7 @@ fn err_mapper<T: std::fmt::Display>(e: T) -> Error {
   Error::new(Status::GenericFailure, format!("{}", e))
 }
 
+// TODO: Use Argon2 with a stronger salt and more rounds or use the Stronghold KeyProvider directly.
 fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   let mut dk = [0; 64];
   // safe to unwrap (rounds > 0)
@@ -111,8 +112,9 @@ async fn try_build(
       let snapshot_path = SnapshotPath::named(stronghold_path);
       let key_provider = KeyProvider::try_from(password.clone()).map_err(err_mapper)?;
 
+      // TODO: use `commit` and store keyprovider in snapshot state.
       stronghold
-        .commit(&snapshot_path, &key_provider)
+        .commit_with_keyprovider(&snapshot_path, &key_provider)
         .map_err(err_mapper)?;
 
       TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location))

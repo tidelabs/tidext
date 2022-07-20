@@ -66,6 +66,7 @@ fn to_python_error(error: Error) -> PyErr {
   }
 }
 
+// TODO: Use Argon2 with a stronger salt and more rounds or use the Stronghold KeyProvider directly.
 fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   let mut dk = [0; 64];
   // safe to unwrap (rounds > 0)
@@ -148,7 +149,8 @@ async fn try_build(
         ClientError::Provider(format!("Couldn't build a key from the password: {:?}", e))
       })?;
 
-      stronghold.commit(&snapshot_path, &key_provider)?;
+      // TODO: use `commit` and store keyprovider in snapshot state.
+      stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
 
       TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location)).await?
     })
