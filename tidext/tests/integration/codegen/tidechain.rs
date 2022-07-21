@@ -28654,9 +28654,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                57u8, 33u8, 88u8, 36u8, 240u8, 242u8, 239u8, 109u8, 228u8, 215u8, 57u8, 164u8,
-                88u8, 166u8, 10u8, 47u8, 6u8, 22u8, 0u8, 78u8, 17u8, 225u8, 145u8, 8u8, 247u8,
-                190u8, 220u8, 250u8, 161u8, 95u8, 159u8, 53u8,
+                252u8, 248u8, 247u8, 139u8, 128u8, 248u8, 244u8, 77u8, 159u8, 131u8, 240u8, 137u8,
+                51u8, 50u8, 68u8, 83u8, 160u8, 126u8, 222u8, 46u8, 111u8, 219u8, 138u8, 49u8,
+                196u8, 110u8, 20u8, 28u8, 88u8, 101u8, 14u8, 39u8,
               ]
             {
               let entry = AccountStakes(_0);
@@ -28688,9 +28688,9 @@ pub mod api {
             };
             if runtime_storage_hash
               == [
-                57u8, 33u8, 88u8, 36u8, 240u8, 242u8, 239u8, 109u8, 228u8, 215u8, 57u8, 164u8,
-                88u8, 166u8, 10u8, 47u8, 6u8, 22u8, 0u8, 78u8, 17u8, 225u8, 145u8, 8u8, 247u8,
-                190u8, 220u8, 250u8, 161u8, 95u8, 159u8, 53u8,
+                252u8, 248u8, 247u8, 139u8, 128u8, 248u8, 244u8, 77u8, 159u8, 131u8, 240u8, 137u8,
+                51u8, 50u8, 68u8, 83u8, 160u8, 126u8, 222u8, 46u8, 111u8, 219u8, 138u8, 49u8,
+                196u8, 110u8, 20u8, 28u8, 88u8, 101u8, 14u8, 39u8,
               ]
             {
               client.storage().iter(block_hash).await
@@ -41570,11 +41570,19 @@ pub mod api {
         pub initial_balance: _0,
         pub principal: _0,
         pub duration: _1,
+        pub status: runtime_types::tidefi_primitives::StakeStatus<_1>,
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub struct StakeCurrencyMeta<_0> {
         pub minimum_amount: _0,
         pub maximum_amount: _0,
+      }
+      #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
+      pub enum StakeStatus<_0> {
+        #[codec(index = 0)]
+        Staked,
+        #[codec(index = 1)]
+        PendingUnlock(_0),
       }
       #[derive(:: subxt :: codec :: Decode, :: subxt :: codec :: Encode, Debug)]
       pub enum StatusCode {
@@ -41708,9 +41716,9 @@ pub mod api {
       };
       if runtime_metadata_hash
         != [
-          62u8, 131u8, 221u8, 223u8, 232u8, 192u8, 68u8, 183u8, 232u8, 24u8, 206u8, 221u8, 132u8,
-          58u8, 234u8, 114u8, 254u8, 205u8, 15u8, 169u8, 183u8, 131u8, 187u8, 123u8, 174u8, 154u8,
-          11u8, 24u8, 241u8, 84u8, 239u8, 217u8,
+          56u8, 39u8, 146u8, 82u8, 254u8, 233u8, 22u8, 23u8, 223u8, 7u8, 203u8, 173u8, 26u8, 157u8,
+          228u8, 183u8, 120u8, 126u8, 186u8, 40u8, 204u8, 183u8, 150u8, 23u8, 248u8, 134u8, 68u8,
+          215u8, 58u8, 82u8, 70u8, 13u8,
         ]
       {
         Err(::subxt::MetadataError::IncompatibleMetadata)
