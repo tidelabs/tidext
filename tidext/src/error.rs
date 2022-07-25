@@ -36,7 +36,10 @@ pub enum Error {
   Stronghold(String),
   #[cfg(feature = "keyring-stronghold")]
   #[error("stronghold engine error: {0}")]
-  StrongholdEngine(#[from] iota_stronghold::Error),
+  StrongholdClient(#[from] iota_stronghold::types::ClientError),
+  #[cfg(feature = "keyring-stronghold")]
+  #[error("stronghold procedure error: {0}")]
+  StrongholdProcedure(#[from] iota_stronghold::procedures::ProcedureError),
   #[cfg(feature = "keyring-stronghold_ex")]
   #[error("stronghold engine error: {0}")]
   ClientExError(#[from] ex_client::Error),

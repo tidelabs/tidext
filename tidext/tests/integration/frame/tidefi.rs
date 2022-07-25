@@ -22,9 +22,14 @@ use tidext::{primitives::assets::Asset, Error, Signer, TidefiKeyring};
 async fn tx_basic_transfer() -> Result<(), Error> {
   // 10 tides
   let transfer_amount = Asset::Tdfy.saturating_mul(10);
+  let client_path = b"client_path".to_vec();
 
-  let alice = TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None).await?;
-  let charlie = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None).await?;
+  let alice =
+    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
+      .await?;
+  let charlie =
+    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Charlie.to_seed(), None)
+      .await?;
 
   let cxt = test_context().await;
   let mut client = cxt.node_proc.client().clone();
