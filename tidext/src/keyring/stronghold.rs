@@ -18,7 +18,7 @@
 use crate::{Error, TidechainConfig};
 use std::{fmt, path::Path, sync::Arc};
 use stronghold::{
-  procedures::{BIP39Recover, KeyType, PublicKey, Sr25519Sign},
+  procedures::{BIP39Recover, GenerateKey, KeyType, PublicKey, Sr25519Sign},
   KeyProvider, Location, SnapshotPath, Stronghold,
 };
 use subxt::{
@@ -437,7 +437,7 @@ where
   T::AccountId: From<[u8; 32]>,
 {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    f.debug_struct("TidextKeyring").finish()
+    f.debug_struct("EphemeralKeyring").finish()
   }
 }
 
@@ -448,44 +448,49 @@ where
 {
   /// Create new EphemeralSigner from `AccountId` with keypair stored on the given `Location`.
   pub fn new(
-    account_id: T::AccountId,
     client_path: Vec<u8>,
     keypair_location: Location,
-  ) -> EphemeralSigner<T> {
-    let stronghold = Stronghold::default();
+  ) -> Result<EphemeralSigner<T>, Error> {
+    let (stronghold, account_id) =
+      init_ephemeral_stronghold(client_path.clone(), &keypair_location)?;
 
-    EphemeralSigner {
-      account_id,
+    let mut buffer = [0u8; 32];
+    buffer.copy_from_slice(&account_id);
+
+    Ok(EphemeralSigner {
+      account_id: buffer.into(),
       pair_signer: Arc::new(EphemeralPairSigner::new(EphemeralStrongholdSigner {
         keypair_location,
         stronghold: Arc::new(stronghold),
         client_path,
       })),
-    }
+    })
   }
 }
 
 /// Initialize the ephemeral stronghold client with a seed.
-pub async fn init_ephemeral_from_seed(
+pub fn init_ephemeral_stronghold(
   client_path: Vec<u8>,
   keypair_location: &Location,
-  mnemonic_or_seed: Option<String>,
-  seed_passphrase: Option<String>,
-) -> Result<Stronghold, Error> {
+) -> Result<(Stronghold, Vec<u8>), Error> {
   let stronghold = Stronghold::default();
 
-  let client = stronghold.create_client(client_path.clone())?;
-
-  let proc = BIP39Recover {
-    passphrase: seed_passphrase,
-    mnemonic: mnemonic_or_seed,
+  let client = stronghold.create_client(client_path)?;
+  let proc0 = GenerateKey {
     ty: KeyType::Sr25519,
     output: keypair_location.clone(),
   };
 
-  client.execute_procedure(proc)?;
+  let proc1 = PublicKey {
+    ty: KeyType::Sr25519,
+    private_key: keypair_location.clone(),
+  };
 
-  Ok(stronghold)
+  client.execute_procedure(proc0)?;
+
+  let res = client.execute_procedure(proc1)?;
+
+  Ok((stronghold, res))
 }
 
 #[cfg(test)]
