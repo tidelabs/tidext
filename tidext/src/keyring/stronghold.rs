@@ -35,10 +35,6 @@ pub use iota_stronghold as stronghold;
 pub type TidefiPairSigner = PairSigner<TidechainConfig, StrongholdSigner>;
 /// Tidefi keyring
 pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
-/// Ephemeral Stronghold pair signer.
-pub type EphemeralPairSigner = PairSigner<TidechainConfig, EphemeralStrongholdSigner>;
-/// Ephemeral Tidefi keyring
-pub type EphemeralKeyring = EphemeralSigner<TidechainConfig>;
 
 /// Stronghold signer instance.
 #[derive(Clone)]
@@ -46,21 +42,10 @@ pub struct StrongholdSigner {
   keypair_location: Location,
   stronghold: Arc<Stronghold>,
   client_path: Vec<u8>,
-}
-
-/// Ephemeral Stronghold signer instance.
-#[derive(Clone)]
-pub struct EphemeralStrongholdSigner {
-  keypair_location: Location,
-  stronghold: Arc<Stronghold>,
-  client_path: Vec<u8>,
+  is_ephemeral: bool,
 }
 
 impl CryptoType for StrongholdSigner {
-  type Pair = Self;
-}
-
-impl CryptoType for EphemeralStrongholdSigner {
   type Pair = Self;
 }
 
@@ -77,9 +62,15 @@ impl Pair for StrongholdSigner {
     let message = message.to_vec();
     let keypair_location = self.keypair_location.clone();
 
-    let client = stronghold
-      .load_client(self.client_path.clone())
-      .expect("Failed to load client from stronghold");
+    let client = if self.is_ephemeral {
+      stronghold
+        .get_client(self.client_path.clone())
+        .expect("Failed to load client from stronghold")
+    } else {
+      stronghold
+        .load_client(self.client_path.clone())
+        .expect("Failed to load client from stronghold")
+    };
 
     let proc = Sr25519Sign {
       msg: message,
@@ -99,98 +90,15 @@ impl Pair for StrongholdSigner {
     let stronghold = self.stronghold.clone();
     let keypair_location = self.keypair_location.clone();
 
-    let client = stronghold
-      .load_client(self.client_path.clone())
-      .expect("Failed to load client from stronghold");
-
-    let proc = PublicKey {
-      ty: KeyType::Sr25519,
-      private_key: keypair_location,
+    let client = if self.is_ephemeral {
+      stronghold
+        .get_client(self.client_path.clone())
+        .expect("Failed to load client from stronghold")
+    } else {
+      stronghold
+        .load_client(self.client_path.clone())
+        .expect("Failed to load client from stronghold")
     };
-
-    let res = match client.execute_procedure(proc) {
-      Ok(pk) => pk,
-      e => panic!("Failed to get public key: {:?}", e),
-    };
-
-    let mut pk = [0u8; 32];
-    pk.copy_from_slice(&res);
-
-    Public::from_raw(pk)
-  }
-
-  // These functions are not used by the the signer, this is why they are `unimplemented`.
-  fn generate_with_phrase(_password: Option<&str>) -> (Self, String, Self::Seed) {
-    unimplemented!()
-  }
-  fn from_phrase(
-    _phrase: &str,
-    _password: Option<&str>,
-  ) -> Result<(Self, Self::Seed), SecretStringError> {
-    unimplemented!()
-  }
-  fn derive<Iter: Iterator<Item = DeriveJunction>>(
-    &self,
-    _path: Iter,
-    _seed: Option<Self::Seed>,
-  ) -> Result<(Self, Option<Self::Seed>), Self::DeriveError> {
-    unimplemented!()
-  }
-  fn from_seed(_seed: &Self::Seed) -> Self {
-    unimplemented!()
-  }
-  fn from_seed_slice(_seed: &[u8]) -> Result<Self, SecretStringError> {
-    unimplemented!()
-  }
-  fn to_raw_vec(&self) -> Vec<u8> {
-    unimplemented!()
-  }
-  fn verify<M: AsRef<[u8]>>(_sig: &Self::Signature, _message: M, _pubkey: &Self::Public) -> bool {
-    unimplemented!()
-  }
-  fn verify_weak<P: AsRef<[u8]>, M: AsRef<[u8]>>(_sig: &[u8], _message: M, _pubkey: P) -> bool {
-    unimplemented!()
-  }
-}
-
-/// Ephemeral Stronghold cryptographic PKI key pair type
-impl Pair for EphemeralStrongholdSigner {
-  type Public = Public;
-  type Seed = Vec<u8>;
-  type Signature = Signature;
-  type DeriveError = String;
-
-  /// Sign message
-  fn sign(&self, message: &[u8]) -> Self::Signature {
-    let stronghold = self.stronghold.clone();
-    let message = message.to_vec();
-    let keypair_location = self.keypair_location.clone();
-
-    let client = stronghold
-      .get_client(self.client_path.clone())
-      .expect("Failed to load client from stronghold");
-
-    let proc = Sr25519Sign {
-      msg: message,
-      private_key: keypair_location,
-    };
-
-    let sig = match client.execute_procedure(proc) {
-      Ok(sig) => sig,
-      e => panic!("Failed to sign message: {:?}", e),
-    };
-
-    Signature::from_raw(sig)
-  }
-
-  /// Get public key pair
-  fn public(&self) -> Self::Public {
-    let stronghold = self.stronghold.clone();
-    let keypair_location = self.keypair_location.clone();
-
-    let client = stronghold
-      .get_client(self.client_path.clone())
-      .expect("Failed to load client from stronghold");
 
     let proc = PublicKey {
       ty: KeyType::Sr25519,
@@ -274,6 +182,7 @@ where
     stronghold: Stronghold,
     client_path: Vec<u8>,
     keypair_location: Location,
+    is_ephemeral: bool,
   ) -> TidextKeyring<T> {
     TidextKeyring {
       account_id,
@@ -281,6 +190,7 @@ where
         keypair_location,
         stronghold: Arc::new(stronghold),
         client_path,
+        is_ephemeral,
       })),
     }
   }
@@ -334,6 +244,29 @@ where
     )
     .await?;
     get_signer_from_stronghold(client_path, stronghold, &default_keypair_location).await
+  }
+
+  pub fn try_with_ephemeral_stronghold(
+    client_path: Vec<u8>,
+    keypair_location: Option<Location>,
+  ) -> Result<Self, Error> {
+    let default_keypair_location = keypair_location.unwrap_or(Location::Generic {
+      vault_path: b"tidext".to_vec(),
+      record_path: b"default".to_vec(),
+    });
+
+    let (stronghold, buff) = init_ephemeral_stronghold(&client_path, &default_keypair_location)?;
+
+    let mut account_id = [0u8; 32];
+    account_id.copy_from_slice(&buff);
+
+    Ok(Self::new(
+      account_id.into(),
+      stronghold,
+      client_path,
+      default_keypair_location,
+      true,
+    ))
   }
 }
 
@@ -414,63 +347,16 @@ where
         stronghold,
         client_path,
         keypair_location.clone(),
+        false,
       ))
     }
     _ => Err(Error::Stronghold("Invalid public Key".into())),
   }
 }
 
-/// Tidefi keyring backed with a stronghold pair signer.
-#[derive(Clone)]
-pub struct EphemeralSigner<T>
-where
-  T: subxt::Config,
-  T::AccountId: From<[u8; 32]>,
-{
-  pub(super) account_id: T::AccountId,
-  pub(super) pair_signer: Arc<EphemeralPairSigner>,
-}
-
-impl<T> fmt::Debug for EphemeralSigner<T>
-where
-  T: subxt::Config,
-  T::AccountId: From<[u8; 32]>,
-{
-  fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-    f.debug_struct("EphemeralKeyring").finish()
-  }
-}
-
-impl<T> EphemeralSigner<T>
-where
-  T: subxt::Config,
-  T::AccountId: From<[u8; 32]>,
-{
-  /// Create new EphemeralSigner from `AccountId` with keypair stored on the given `Location`.
-  pub fn new(
-    client_path: Vec<u8>,
-    keypair_location: Location,
-  ) -> Result<EphemeralSigner<T>, Error> {
-    let (stronghold, account_id) =
-      init_ephemeral_stronghold(client_path.clone(), &keypair_location)?;
-
-    let mut buffer = [0u8; 32];
-    buffer.copy_from_slice(&account_id);
-
-    Ok(EphemeralSigner {
-      account_id: buffer.into(),
-      pair_signer: Arc::new(EphemeralPairSigner::new(EphemeralStrongholdSigner {
-        keypair_location,
-        stronghold: Arc::new(stronghold),
-        client_path,
-      })),
-    })
-  }
-}
-
 /// Initialize the ephemeral stronghold client with a seed.
 pub fn init_ephemeral_stronghold(
-  client_path: Vec<u8>,
+  client_path: &Vec<u8>,
   keypair_location: &Location,
 ) -> Result<(Stronghold, Vec<u8>), Error> {
   let stronghold = Stronghold::default();

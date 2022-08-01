@@ -62,34 +62,3 @@ where
     self.pair_signer.sign(signer_payload).into()
   }
 }
-
-#[cfg(feature = "keyring-stronghold")]
-impl<T> Signer<T> for EphemeralSigner<T>
-where
-  T: subxt::Config,
-  T::AccountId: From<[u8; 32]>,
-  T::Index: From<tidefi_primitives::Index>,
-  T::AccountId: From<tidefi_primitives::AccountId>,
-  T::Address: From<sp_runtime::MultiAddress<sp_runtime::AccountId32, u32>>,
-  T::Signature: From<sp_runtime::MultiSignature>,
-{
-  /// Optionally returns a nonce.
-  fn nonce(&self) -> Option<T::Index> {
-    self.pair_signer.nonce().map(|nonce| nonce.into())
-  }
-
-  /// Return the account ID.
-  fn account_id(&self) -> &T::AccountId {
-    &self.account_id
-  }
-
-  /// Return the "from" address.
-  fn address(&self) -> T::Address {
-    self.pair_signer.address().into()
-  }
-
-  /// Takes a signer payload for an extrinsic, and returns a signature based on it.
-  fn sign(&self, signer_payload: &[u8]) -> T::Signature {
-    self.pair_signer.sign(signer_payload).into()
-  }
-}
