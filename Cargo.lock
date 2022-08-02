@@ -1614,7 +1614,7 @@ dependencies = [
 [[package]]
 name = "iota_stronghold"
 version = "0.8.1"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "bincode",
  "hkdf",
@@ -3630,7 +3630,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "stronghold-derive"
 version = "0.3.1"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3640,7 +3640,7 @@ dependencies = [
 [[package]]
 name = "stronghold-rlu"
 version = "0.4.3"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "atom",
  "lazy_static",
@@ -3652,7 +3652,7 @@ dependencies = [
 [[package]]
 name = "stronghold-runtime"
 version = "0.5.2"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "dirs",
  "iota-crypto 0.12.1 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -3670,7 +3670,7 @@ dependencies = [
 [[package]]
 name = "stronghold-utils"
 version = "0.4.1"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "rand 0.8.5",
  "stronghold-derive",
@@ -3679,7 +3679,7 @@ dependencies = [
 [[package]]
 name = "stronghold_engine"
 version = "0.5.3"
-source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#15bc0d32d764195b5f9a60fef76b90ac0355d487"
+source = "git+https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs?branch=feat/update-stronghold#b8da6e8577d4fe39fc9fa621a1a5d2ecb6c61c6f"
 dependencies = [
  "anyhow",
  "dirs-next",
