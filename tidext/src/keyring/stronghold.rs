@@ -247,6 +247,7 @@ where
   }
 
   pub fn try_with_ephemeral_stronghold(
+    stronghold: Stronghold,
     client_path: Vec<u8>,
     keypair_location: Option<Location>,
   ) -> Result<Self, Error> {
@@ -255,7 +256,8 @@ where
       record_path: b"default".to_vec(),
     });
 
-    let (stronghold, buff) = init_ephemeral_stronghold(&client_path, &default_keypair_location)?;
+    let (stronghold, buff) =
+      init_ephemeral_stronghold(stronghold, &client_path, &default_keypair_location)?;
 
     let mut account_id = [0u8; 32];
     account_id.copy_from_slice(&buff);
@@ -356,11 +358,10 @@ where
 
 /// Initialize the ephemeral stronghold client with a seed.
 pub fn init_ephemeral_stronghold(
+  stronghold: Stronghold,
   client_path: &Vec<u8>,
   keypair_location: &Location,
 ) -> Result<(Stronghold, Vec<u8>), Error> {
-  let stronghold = Stronghold::default();
-
   let client = stronghold.create_client(client_path)?;
   let proc0 = GenerateKey {
     ty: KeyType::Sr25519,
