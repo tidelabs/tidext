@@ -148,11 +148,9 @@ async fn try_build(
         &stronghold_path,
         Some(location),
         Some(&password),
-      )
-      .await?
+      )?
     } else {
-      let stronghold =
-        init_stronghold_from_seed(client_path.clone(), &location, None, None).await?;
+      let stronghold = init_stronghold_from_seed(client_path.clone(), &location, None, None)?;
 
       let snapshot_path = SnapshotPath::named(stronghold_path);
       let key_provider = KeyProvider::try_from(password.clone()).map_err(|e| {
@@ -162,7 +160,7 @@ async fn try_build(
       // TODO: use `commit` and store keyprovider in snapshot state.
       stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
 
-      TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location)).await?
+      TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))?
     })
     .set_url(url);
 

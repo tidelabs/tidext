@@ -34,8 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let client_path = b"client".to_vec();
 
   // init signer
-  let signer =
-    TidefiKeyring::try_from_seed(client_path, AccountKeyring::Charlie.to_seed(), None).await?;
+  let signer = TidefiKeyring::try_from_seed(client_path, AccountKeyring::Charlie.to_seed(), None)?;
 
   // init client
   let client = ClientBuilder::new()

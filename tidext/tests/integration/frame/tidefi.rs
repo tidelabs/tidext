@@ -25,11 +25,9 @@ async fn tx_basic_transfer() -> Result<(), Error> {
   let client_path = b"client_path".to_vec();
 
   let alice =
-    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
-      .await?;
+    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)?;
   let charlie =
-    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Charlie.to_seed(), None)
-      .await?;
+    TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Charlie.to_seed(), None)?;
 
   let cxt = test_context().await;
   let mut client = cxt.node_proc.client().clone();

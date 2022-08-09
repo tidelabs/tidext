@@ -148,7 +148,6 @@ impl TestNodeProcessBuilder {
       let result = ClientBuilder::new()
         .set_signer(
           TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
-            .await
             .map_err(|err| err.to_string())?,
         )
         .set_url(ws_url.clone())

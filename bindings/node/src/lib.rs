@@ -117,11 +117,9 @@ async fn try_build(
         Some(location),
         Some(&password),
       )
-      .await
       .map_err(err_mapper)?
     } else {
       let stronghold = init_stronghold_from_seed(client_path.clone(), &location, None, None)
-        .await
         .map_err(err_mapper)?;
 
       let snapshot_path = SnapshotPath::named(stronghold_path);
@@ -133,7 +131,6 @@ async fn try_build(
         .map_err(err_mapper)?;
 
       TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))
-        .await
         .map_err(err_mapper)?
     })
     .set_url(url);
