@@ -37,7 +37,7 @@ pallet-transaction-payment-rpc-runtime-api = { git = "https://github.com/tidelab
 tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 
 # Stronghold
-iota_stronghold = { git = "https://tributary.semantic-network.tech/semnet/Libs/stronghold.rs", branch = "feat/update-stronghold", optional = true }
+iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # jsonrpsee
 jsonrpsee = { version = "0.14", features = ["macros", "ws-client", "client-ws-transport"] }
