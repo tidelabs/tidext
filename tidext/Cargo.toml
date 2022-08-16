@@ -8,8 +8,7 @@ edition = "2021"
 default = [ "production" ]
 production = ["keyring-stronghold"]
 dev = [ "sp-keyring", "another" ]
-keyring-stronghold = [ "iota_stronghold", "actix" ]
-keyring-stronghold_ex = [ "ex_client" ]
+keyring-stronghold = [ "iota_stronghold" ]
 test = ["which", "env_logger", "sp-keyring"]
 decoder = [ "subxt/decoder" ]
 another = []
@@ -21,7 +20,6 @@ thiserror = "1.0"
 log = "0.4"
 futures = "0.3"
 hex = "0.4"
-actix = { version = "0.13", optional = true }
 num-bigint = "0.4.2"
 async-trait = "0.1.40"
 parity-scale-codec = { version = "3" }
@@ -40,9 +38,6 @@ tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "
 
 # Stronghold
 iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
-
-# ex_client stronghold variant
-ex_client = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # jsonrpsee
 jsonrpsee = { version = "0.14", features = ["macros", "ws-client", "client-ws-transport"] }

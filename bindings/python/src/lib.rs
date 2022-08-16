@@ -25,7 +25,7 @@ use pyo3::{
 use tidext::{
   init_stronghold_from_seed,
   primitives::AccountId,
-  stronghold::{Location, ResultMessage},
+  stronghold::{ClientError, KeyProvider, Location, SnapshotPath},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Error, Permill,
   TidefiKeyring,
 };
@@ -66,6 +66,7 @@ fn to_python_error(error: Error) -> PyErr {
   }
 }
 
+// TODO: Use Argon2 with a stronger salt and more rounds or use the Stronghold KeyProvider directly.
 fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   let mut dk = [0; 64];
   // safe to unwrap (rounds > 0)
@@ -75,12 +76,12 @@ fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
   key
 }
 
-fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
-  match status {
-    ResultMessage::Ok(v) => Ok(v),
-    ResultMessage::Error(e) => Err(e),
-  }
-}
+// fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
+//   match status {
+//     ResultMessage::Ok(v) => Ok(v),
+//     ResultMessage::Error(e) => Err(e),
+//   }
+// }
 
 #[pyclass]
 pub struct Currency {
@@ -93,6 +94,7 @@ pub struct Currency {
 #[pyclass]
 pub struct Builder {
   url: String,
+  client_path: Vec<u8>,
   snapshot_path: String,
   password: String,
 }
@@ -101,8 +103,9 @@ pub struct Builder {
 impl Builder {
   #[new]
   /// The client builder constructor.
-  fn new(url: String, snapshot_path: String, password: String) -> Self {
+  fn new(url: String, client_path: Vec<u8>, snapshot_path: String, password: String) -> Self {
     Self {
+      client_path,
       url,
       snapshot_path,
       password,
@@ -112,10 +115,11 @@ impl Builder {
   fn build<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let url = self.url.clone();
     let stronghold_path = self.snapshot_path.clone().into();
+    let client_path = self.client_path.clone().into();
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
     let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
     pyo3_asyncio::tokio::future_into_py(py, async move {
-      let client = try_build(&url, stronghold_path, location, &password)
+      let client = try_build(&url, stronghold_path, client_path, location, &password)
         .await
         .map(|client| {
           password.zeroize();
@@ -133,23 +137,30 @@ impl Builder {
 async fn try_build(
   url: &str,
   stronghold_path: PathBuf,
+  client_path: Vec<u8>,
   location: Location,
   password: &Vec<u8>,
 ) -> Result<Client, Error> {
   let builder = SubstrateClientBuilder::new()
     .set_signer(if stronghold_path.exists() {
-      TidefiKeyring::try_from_stronghold_path(&stronghold_path, Some(location), Some(&password))
-        .await?
+      TidefiKeyring::try_from_stronghold_path(
+        client_path.clone(),
+        &stronghold_path,
+        Some(location),
+        Some(&password),
+      )?
     } else {
-      let mut stronghold = init_stronghold_from_seed(&location, None, None).await?;
-      let res = stronghold
-        .write_all_to_snapshot(password, None, Some(stronghold_path))
-        .await;
-      if let Err(e) = stronghold_response_to_result(res) {
-        return Err(Error::Stronghold(e));
-      }
+      let stronghold = init_stronghold_from_seed(client_path.clone(), &location, None, None)?;
 
-      TidefiKeyring::try_from_stronghold_instance(stronghold, Some(location)).await?
+      let snapshot_path = SnapshotPath::named(stronghold_path);
+      let key_provider = KeyProvider::try_from(password.clone()).map_err(|e| {
+        ClientError::Provider(format!("Couldn't build a key from the password: {:?}", e))
+      })?;
+
+      // TODO: use `commit` and store keyprovider in snapshot state.
+      stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
+
+      TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))?
     })
     .set_url(url);
 

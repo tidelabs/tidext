@@ -32,8 +32,10 @@ extern crate log;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init logger
   helpers::init_logger()?;
+  let client_path = b"client".to_vec();
+
   // init signer
-  let signer = TidefiKeyring::try_from_seed(AccountKeyring::Charlie.to_seed(), None).await?;
+  let signer = TidefiKeyring::try_from_seed(client_path, AccountKeyring::Charlie.to_seed(), None)?;
   // init client
   let client = ClientBuilder::new()
     .set_signer(signer)

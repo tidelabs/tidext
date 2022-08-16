@@ -132,6 +132,7 @@ impl TestNodeProcessBuilder {
       )
     })?;
     // wait for rpc to be initialized
+    let client_path = b"client_path".to_vec();
     const MAX_ATTEMPTS: u32 = 6;
     let mut attempts = 1;
     let mut wait_secs = 1;
@@ -146,8 +147,7 @@ impl TestNodeProcessBuilder {
       // test keyring as well
       let result = ClientBuilder::new()
         .set_signer(
-          TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed(), None)
-            .await
+          TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
             .map_err(|err| err.to_string())?,
         )
         .set_url(ws_url.clone())

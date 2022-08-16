@@ -36,16 +36,16 @@
 //! ```no_run
 //! use tidext::TidefiKeyring;
 //!
-//! TidefiKeyring::try_from_seed("sr25519 raw seed or mnemonic", None)
-//!   .await?;
+//! TidefiKeyring::try_from_seed("sr25519 raw seed or mnemonic", None)?;
+//!
 //! ```
 //!
 //! ## Initialize stronghold signer from existing snapshot
 //! ```no_run
 //! use tidext::TidefiKeyring;
 //!
-//! TidefiKeyring::try_from_stronghold_path("~/.stronghold", None, Some("stronghold password"))
-//!   .await?;
+//! TidefiKeyring::try_from_stronghold_path("~/.stronghold", None, Some("stronghold password"))?;
+//!   
 //! ```
 //!
 //! ## Initialize stronghold signer from existing stronghold instance
@@ -56,8 +56,8 @@
 //! // This should run into a separate thread, see examples for more details
 //! let stronghold = Stronghold::init_stronghold_system(vec![], vec![]);
 //!
-//! TidefiKeyring::try_from_stronghold_instance(stronghold, None)
-//!   .await?;
+//! TidefiKeyring::try_from_stronghold_instance(stronghold, None)?;
+//!   
 //! ```
 //!
 //! # Tidext client
