@@ -7,10 +7,6 @@ export type CurrencyId = number | undefined | null
 
 export type BalanceInfo = string
 
-export type CurrencyId = number | undefined | null
-
-export type BalanceInfo = string
-
 export interface NodeHealth {
   /** Number of connected peers */
   peers: number
@@ -57,11 +53,11 @@ export class Client {
   getRegularSwapFee(): Promise<number>
   getMarketMakerSwapFee(): Promise<number>
   extrinsicCost(extrinsic: string): Promise<BalanceInfo>
-  submitSignedExtrinsic(extrinsic: string): Promise<void>
+  submitSignedExtrinsic(extrinsic: string): Promise<Buffer>
   unstakeExtrinsic(stakeId: Buffer, forceUnstake: boolean): Promise<string>
   stakeExtrinsic(tokenId: CurrencyId, amount: BalanceInfo, duration: number): Promise<string>
   swapExtrinsic(fromTokenId: CurrencyId, toTokenId: CurrencyId, fromAmount: BalanceInfo, toAmount: BalanceInfo, swapType: SwapType, slippageTolerance: number): Promise<string>
-  cancelSwapExtrinsic(requestId: string): Promise<string>
+  cancelSwapExtrinsic(requestId: Buffer): Promise<string>
   transferExtrinsic(tokenId: CurrencyId, amount: BalanceInfo, destination: Buffer): Promise<string>
   balance(tokenId: CurrencyId, accountId?: Buffer | undefined | null): Promise<CurrencyBalance>
   totalStakeFor(currencyId: CurrencyId): Promise<BalanceInfo>

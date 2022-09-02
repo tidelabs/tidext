@@ -12,7 +12,6 @@ doc = false
 [dependencies]
 tidext = { path = "../../tidext" }
 zeroize = "1.5"
-hex = "0.4"
 sp-core = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
 iota-crypto = { git = "https://github.com/tidelabs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
 futures = "0.3"

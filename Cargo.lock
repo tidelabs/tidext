@@ -2062,7 +2062,6 @@ dependencies = [
 name = "nodejs-tidext"
 version = "0.0.0"
 dependencies = [
- "hex",
  "iota-crypto",
  "napi",
  "napi-build",
@@ -2607,7 +2606,6 @@ name = "python-tidext"
 version = "0.1.0"
 dependencies = [
  "futures",
- "hex",
  "iota-crypto",
  "pyo3",
  "pyo3-asyncio",
