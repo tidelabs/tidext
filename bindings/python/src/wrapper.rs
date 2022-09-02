@@ -129,6 +129,11 @@ impl From<SwapType> for PrimitiveSwapType {
 }
 
 pub fn to_hash(hex: String) -> PyResult<Hash> {
+  let hex = if let Some(hex) = hex.strip_prefix("0x") {
+    hex
+  } else {
+    hex.as_str()
+  };
   let b = hex::decode(&hex)
     .map_err(|e| PyRuntimeError::new_err(format!("invalid hash, must be a hex string: {e}")))?;
 
@@ -137,4 +142,8 @@ pub fn to_hash(hex: String) -> PyResult<Hash> {
     .map_err(|_| PyRuntimeError::new_err("hash must represent 32 bytes"))?;
 
   Ok(sp_core::H256(hash))
+}
+
+pub fn hash_to_string(hash: Hash) -> String {
+  hex::encode(hash.0)
 }

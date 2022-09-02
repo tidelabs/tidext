@@ -53,7 +53,7 @@ export class Client {
   getRegularSwapFee(): Promise<number>
   getMarketMakerSwapFee(): Promise<number>
   extrinsicCost(extrinsic: string): Promise<BalanceInfo>
-  submitSignedExtrinsic(extrinsic: string): Promise<void>
+  submitSignedExtrinsic(extrinsic: string): Promise<string>
   unstakeExtrinsic(stakeId: Buffer, forceUnstake: boolean): Promise<string>
   stakeExtrinsic(tokenId: CurrencyId, amount: BalanceInfo, duration: number): Promise<string>
   swapExtrinsic(fromTokenId: CurrencyId, toTokenId: CurrencyId, fromAmount: BalanceInfo, toAmount: BalanceInfo, swapType: SwapType, slippageTolerance: number): Promise<string>

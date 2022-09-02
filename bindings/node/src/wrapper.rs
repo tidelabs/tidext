@@ -126,6 +126,12 @@ impl From<SwapType> for PrimitiveSwapType {
 }
 
 pub fn to_hash(hex: String) -> Result<Hash> {
+  let hex = if let Some(hex) = hex.strip_prefix("0x") {
+    hex
+  } else {
+    hex.as_str()
+  };
+
   let b = hex::decode(&hex).map_err(|e| {
     Error::new(
       Status::InvalidArg,
@@ -138,4 +144,8 @@ pub fn to_hash(hex: String) -> Result<Hash> {
     .map_err(|_| Error::new(Status::InvalidArg, "hash must represent 32 bytes".into()))?;
 
   Ok(sp_core::H256(hash))
+}
+
+pub fn hash_to_string(hash: Hash) -> String {
+  hex::encode(hash.0)
 }

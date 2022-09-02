@@ -223,7 +223,7 @@ impl Client {
       py,
       client
         .submit_signed_extrinsic(extrinsic)
-        .map_ok(|hash| hash.0.to_vec())
+        .map_ok(wrapper::hash_to_string)
     )
   }
 

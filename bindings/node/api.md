@@ -41,7 +41,7 @@ Gets the swap percentage fee registered on-chain for a market maker.
 
 Gets the cost (gas fee) of the extrinsic on-chain. It is always in TDFY.
 
-### async submitSignedExtrinsic(extrinsic: string): Buffer
+### async submitSignedExtrinsic(extrinsic: string): string
 
 Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeExtrinsic], [swapExtrinsic], [cancelSwapExtrinsic], [transferExtrinsic] and [withdrawalExtrinsic] APIs.
 
@@ -50,31 +50,31 @@ Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeE
 [swapextrinsic]: #async-swapextrinsicfromTokenId-number-toTokenId-number-fromamount-number-toamount-number-swaptype-slippagetolerance-number-string
 [cancelswapextrinsic]: #async-cancelswapextrinsicrequestId-string-string
 [transferextrinsic]: #async-transferextrinsictokenId-number-amount-number-destination-Buffer-string
-[withdrawalextrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer
+[withdrawalextrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer-string
 
 Returns a hash that can be used later to cancel a swap or unstake.
 
 ### async unstakeExtrinsic(stakeId: Buffer, forceUnstake: boolean): string
 
-Generates an unstake extrinsic associated with the given stake id (the return value of [submitSignedExtrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer)). Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates an unstake extrinsic associated with the given stake id (the return value of [submitSignedExtrinsic](#async-submitsignedextrinsicextrinsic-string-string)). Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 ### async stakeExtrinsic(tokenId: number, amount: number, duration: number): string
 
-Generates a stake extrinsic with the given token, amount and duration. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates a stake extrinsic with the given token, amount and duration. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 ### async swapExtrinsic(fromTokenId: number, toTokenId: number, fromAmount: number, toAmount: number, swapType, slippageTolerance: number): string
 
-Generates a swap extrinsic with the given from and to values. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates a swap extrinsic with the given from and to values. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 > : This API does not work yet, the `swapType` argument isn't implemented.
 
 ### async cancelSwapExtrinsic(requestId: string): string
 
-Generates a cancel swap extrinsic for the given requestId hex string. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates a cancel swap extrinsic for the given requestId hex string. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 ### async transferExtrinsic(tokenId: number, amount: number, destination: Buffer): string
 
-Generates an extrinsic to send _amount_ of the given _tokenId_ to the _destination_ account id. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates an extrinsic to send _amount_ of the given _tokenId_ to the _destination_ account id. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 ### async balance(tokenId: number, accountId: Buffer | None): [Balance](#balance)
 
@@ -99,9 +99,9 @@ Returns information for all assets registered on chain.
 
 Requests a withdrawal of the specified amount of the token, depositing to the provided external address.
 
-### async withdrawalExtrinsic(tokenId: number, amount: number, externalAddress: Buffer)
+### async withdrawalExtrinsic(tokenId: number, amount: number, externalAddress: Buffer): string
 
-Generates an extrinsic to withdrawal the specified amount of the token. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates an extrinsic to withdrawal the specified amount of the token. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-string).
 
 ## NodeHealth
 

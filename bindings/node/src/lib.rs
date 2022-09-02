@@ -203,12 +203,12 @@ impl Client {
   }
 
   #[napi]
-  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<()> {
+  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<String> {
     self
       .inner
       .submit_signed_extrinsic(extrinsic)
       .await
-      .map(|_| ())
+      .map(wrapper::hash_to_string)
       .map_err(err_mapper)
   }
 
