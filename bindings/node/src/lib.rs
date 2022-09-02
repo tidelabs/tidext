@@ -268,6 +268,15 @@ impl Client {
   }
 
   #[napi]
+  pub async fn cancel_swap_extrinsic(&self, request_id: String) -> Result<String> {
+    self
+      .inner
+      .cancel_swap_extrinsic(wrapper::to_hash(request_id)?)
+      .await
+      .map_err(err_mapper)
+  }
+
+  #[napi]
   pub async fn transfer_extrinsic(
     &self,
     token_id: wrapper::CurrencyId,

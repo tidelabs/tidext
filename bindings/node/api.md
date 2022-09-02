@@ -43,11 +43,12 @@ Gets the cost (gas fee) of the extrinsic on-chain. It is always in TDFY.
 
 ### async submitSignedExtrinsic(extrinsic: string): Buffer
 
-Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeExtrinsic], [swapExtrinsic], [transferExtrinsic] and [withdrawalExtrinsic] APIs.
+Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeExtrinsic], [swapExtrinsic], [cancelSwapExtrinsic], [transferExtrinsic] and [withdrawalExtrinsic] APIs.
 
 [unstakeextrinsic]: #async-unstakeextrinsicstakeid-Buffer-forceunstake-boolean-string
 [stakeextrinsic]: #async-stakeextrinsictokenId-number-amount-number-duration-number-string
 [swapextrinsic]: #async-swapextrinsicfromTokenId-number-toTokenId-number-fromamount-number-toamount-number-swaptype-slippagetolerance-number-string
+[cancelswapextrinsic]: #async-cancelswapextrinsicrequestId-string-string
 [transferextrinsic]: #async-transferextrinsictokenId-number-amount-number-destination-Buffer-string
 [withdrawalextrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer
 
@@ -65,7 +66,11 @@ Generates a stake extrinsic with the given token, amount and duration. Note that
 
 Generates a swap extrinsic with the given from and to values. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
 
-> : This API does not work yet, the `swapType` argument wasn't implemented.
+> : This API does not work yet, the `swapType` argument isn't implemented.
+
+### async cancelSwapExtrinsic(requestId: string): string
+
+Generates a cancel swap extrinsic for the given requestId hex string. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
 
 ### async transferExtrinsic(tokenId: number, amount: number, destination: Buffer): string
 
