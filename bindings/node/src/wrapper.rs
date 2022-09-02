@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use napi::bindgen_prelude::Buffer;
 use napi::Status;
 use napi::{bindgen_prelude::ToNapiValue, Error, Result};
 use tidefi_primitives::Hash;
@@ -126,13 +125,17 @@ impl From<SwapType> for PrimitiveSwapType {
   }
 }
 
-pub fn to_hash(arg: Buffer) -> Result<Hash> {
-  let hash: [u8; 32] = Vec::from(arg)
+pub fn to_hash(hex: String) -> Result<Hash> {
+  let b = hex::decode(&hex).map_err(|e| {
+    Error::new(
+      Status::InvalidArg,
+      format!("invalid hash, must be a hex string: {e}"),
+    )
+  })?;
+
+  let hash: [u8; 32] = b
     .try_into()
     .map_err(|_| Error::new(Status::InvalidArg, "hash must represent 32 bytes".into()))?;
-  Ok(sp_core::H256(hash))
-}
 
-pub fn hash_to_buffer(hash: Hash) -> Buffer {
-  Buffer::from(hash.0.to_vec())
+  Ok(sp_core::H256(hash))
 }

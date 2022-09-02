@@ -48,7 +48,7 @@ Submits an extrinsic. You can generate one using the [unstake_extrinsic], [stake
 [unstake_extrinsic]: #async-unstake_extrinsicstake_id-bytearray-force_unstake-bool-str
 [stake_extrinsic]: #async-stake_extrinsictoken_id-int-amount-int-duration-int-str
 [swap_extrinsic]: #async-swap_extrinsicfrom_token_id-int-to_token_id-int-from_amount-int-to_amount-int-swap_type-slippage_tolerance-int-str
-[cancel_swap_extrinsic]: #async-cancel_swap_extrinsicrequest_id-bytearray-str
+[cancel_swap_extrinsic]: #async-cancel_swap_extrinsicrequest_id-str-str
 [transfer_extrinsic]: #async-transfer_extrinsictoken_id-int-amount-int-destination-bytearray-str
 [withdrawal_extrinsic]: #async-withdrawal_extrinsictoken_id-int-amount-int-external_address-bytearray
 
@@ -68,9 +68,9 @@ Generates a swap extrinsic with the given from and to values. Note that you must
 
 > : This API does not work yet, the `swap_type` argument wasn't implemented.
 
-### async cancel_swap_extrinsic(request_id: bytearray): str
+### async cancel_swap_extrinsic(request_id: str): str
 
-Generates a cancel swap extrinsic for the given requestId returned by [submit_signed_extrinsic](#async-submit_signed_extrinsicextrinsic-str-bytearray). Note that you must [submit the extrinsic](#async-submit_signed_extrinsicextrinsic-str-bytearray).
+Generates a cancel swap extrinsic for the given requestId hex string. Note that you must [submit the extrinsic](#async-submit_signed_extrinsicextrinsic-str-bytearray).
 
 ### async transfer_extrinsic(token_id: int, amount: int, destination: bytearray): str
 

@@ -278,7 +278,7 @@ impl Client {
     )
   }
 
-  fn cancel_swap_extrinsic<'p>(&self, py: Python<'p>, request_id: Vec<u8>) -> PyResult<&'p PyAny> {
+  fn cancel_swap_extrinsic<'p>(&self, py: Python<'p>, request_id: String) -> PyResult<&'p PyAny> {
     let client = self.inner.clone();
     python_future!(
       py,

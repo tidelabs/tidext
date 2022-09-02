@@ -203,12 +203,12 @@ impl Client {
   }
 
   #[napi]
-  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<Buffer> {
+  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<()> {
     self
       .inner
       .submit_signed_extrinsic(extrinsic)
       .await
-      .map(wrapper::hash_to_buffer)
+      .map(|_| ())
       .map_err(err_mapper)
   }
 
@@ -268,7 +268,7 @@ impl Client {
   }
 
   #[napi]
-  pub async fn cancel_swap_extrinsic(&self, request_id: Buffer) -> Result<String> {
+  pub async fn cancel_swap_extrinsic(&self, request_id: String) -> Result<String> {
     self
       .inner
       .cancel_swap_extrinsic(wrapper::to_hash(request_id)?)

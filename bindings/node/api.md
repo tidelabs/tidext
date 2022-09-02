@@ -48,7 +48,7 @@ Submits an extrinsic. You can generate one using the [unstakeExtrinsic], [stakeE
 [unstakeextrinsic]: #async-unstakeextrinsicstakeid-Buffer-forceunstake-boolean-string
 [stakeextrinsic]: #async-stakeextrinsictokenId-number-amount-number-duration-number-string
 [swapextrinsic]: #async-swapextrinsicfromTokenId-number-toTokenId-number-fromamount-number-toamount-number-swaptype-slippagetolerance-number-string
-[cancelswapextrinsic]: #async-cancelswapextrinsicrequestId-Buffer-string
+[cancelswapextrinsic]: #async-cancelswapextrinsicrequestId-string-string
 [transferextrinsic]: #async-transferextrinsictokenId-number-amount-number-destination-Buffer-string
 [withdrawalextrinsic]: #async-withdrawalextrinsictokenId-number-amount-number-externalAddress-Buffer
 
@@ -68,9 +68,9 @@ Generates a swap extrinsic with the given from and to values. Note that you must
 
 > : This API does not work yet, the `swapType` argument isn't implemented.
 
-### async cancelSwapExtrinsic(requestId: Buffer): string
+### async cancelSwapExtrinsic(requestId: string): string
 
-Generates a cancel swap extrinsic for the given requestId returned by [submitSignedExtrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer). Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
+Generates a cancel swap extrinsic for the given requestId hex string. Note that you must [submit the extrinsic](#async-submitsignedextrinsicextrinsic-string-Buffer).
 
 ### async transferExtrinsic(tokenId: number, amount: number, destination: Buffer): string
 
