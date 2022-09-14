@@ -1609,7 +1609,7 @@ dependencies = [
 [[package]]
 name = "iota_stronghold"
 version = "0.8.1"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "bincode",
  "hkdf",
@@ -3630,7 +3630,7 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "stronghold-derive"
 version = "0.3.1"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3640,7 +3640,7 @@ dependencies = [
 [[package]]
 name = "stronghold-rlu"
 version = "0.4.3"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "atom",
  "lazy_static",
@@ -3652,7 +3652,7 @@ dependencies = [
 [[package]]
 name = "stronghold-runtime"
 version = "0.5.2"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "dirs",
  "iota-crypto",
@@ -3670,7 +3670,7 @@ dependencies = [
 [[package]]
 name = "stronghold-utils"
 version = "0.4.1"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "rand 0.8.5",
  "stronghold-derive",
@@ -3679,7 +3679,7 @@ dependencies = [
 [[package]]
 name = "stronghold_engine"
 version = "0.5.3"
-source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#e3ca7c85be9753134b38a8a5ee3bab2ad7667e87"
+source = "git+https://github.com/tidelabs/stronghold.rs?branch=dev#69f20334d7fadec044485e67cd19747e5513b2b0"
 dependencies = [
  "anyhow",
  "dirs-next",
