@@ -115,7 +115,7 @@ impl Builder {
   fn build<'p>(&self, py: Python<'p>) -> PyResult<&'p PyAny> {
     let url = self.url.clone();
     let stronghold_path = self.snapshot_path.clone().into();
-    let client_path = self.client_path.clone().into();
+    let client_path = self.client_path.clone();
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
     let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
     pyo3_asyncio::tokio::future_into_py(py, async move {
