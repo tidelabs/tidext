@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["BatchResponse","A future representing a pending batch RPC request. Resolves to a vector of JSON RPC value."],["Ipc","Unix Domain Sockets (IPC) transport."],["SingleResponse","A future representing a pending RPC request. Resolves to a JSON RPC output."]]});

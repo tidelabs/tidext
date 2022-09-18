@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["buffer",""],["file_memory",""],["frag","This module provides functionality to allocate memory with higher randomness on returned addresses."],["noncontiguous_memory",""],["ram_memory",""]]});

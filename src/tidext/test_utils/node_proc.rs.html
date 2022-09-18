@@ -351,6 +351,7 @@
       )
     })<span class="question-mark">?</span>;
     <span class="comment">// wait for rpc to be initialized</span>
+    <span class="kw">let</span> <span class="ident">client_path</span> <span class="op">=</span> <span class="string">b&quot;client_path&quot;</span>.<span class="ident">to_vec</span>();
     <span class="kw">const</span> <span class="ident">MAX_ATTEMPTS</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">6</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">attempts</span> <span class="op">=</span> <span class="number">1</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">wait_secs</span> <span class="op">=</span> <span class="number">1</span>;
@@ -365,8 +366,7 @@
       <span class="comment">// test keyring as well</span>
       <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">ClientBuilder::new</span>()
         .<span class="ident">set_signer</span>(
-          <span class="ident">TidefiKeyring::try_from_seed</span>(<span class="ident">AccountKeyring::Alice</span>.<span class="ident">to_seed</span>(), <span class="prelude-val">None</span>)
-            .<span class="kw">await</span>
+          <span class="ident">TidefiKeyring::try_from_seed</span>(<span class="ident">client_path</span>.<span class="ident">clone</span>(), <span class="ident">AccountKeyring::Alice</span>.<span class="ident">to_seed</span>(), <span class="prelude-val">None</span>)
             .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">to_string</span>())<span class="question-mark">?</span>,
         )
         .<span class="ident">set_url</span>(<span class="ident">ws_url</span>.<span class="ident">clone</span>())

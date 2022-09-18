@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Md","A message digest algorithm."],["MdRef","A reference to an [`Md`]."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ReadGuard","Provides a read guard over inner value. The inner data can be derefed. [`ReadGuard`] only returns immutable data types."]]});

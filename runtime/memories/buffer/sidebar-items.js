@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Buffer","GuardedMemory is used when we want to store sensitive non encrypted data This shall always be short lived"],["Ref",""],["RefMut",""]]});

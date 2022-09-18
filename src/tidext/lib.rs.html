@@ -431,16 +431,16 @@
 <span class="doccomment">//! ```no_run</span>
 <span class="doccomment">//! use tidext::TidefiKeyring;</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! TidefiKeyring::try_from_seed(&quot;sr25519 raw seed or mnemonic&quot;, None)</span>
-<span class="doccomment">//!   .await?;</span>
+<span class="doccomment">//! TidefiKeyring::try_from_seed(&quot;sr25519 raw seed or mnemonic&quot;, None)?;</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Initialize stronghold signer from existing snapshot</span>
 <span class="doccomment">//! ```no_run</span>
 <span class="doccomment">//! use tidext::TidefiKeyring;</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! TidefiKeyring::try_from_stronghold_path(&quot;~/.stronghold&quot;, None, Some(&quot;stronghold password&quot;))</span>
-<span class="doccomment">//!   .await?;</span>
+<span class="doccomment">//! TidefiKeyring::try_from_stronghold_path(&quot;~/.stronghold&quot;, None, Some(&quot;stronghold password&quot;))?;</span>
+<span class="doccomment">//!   </span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Initialize stronghold signer from existing stronghold instance</span>
@@ -451,8 +451,8 @@
 <span class="doccomment">//! // This should run into a separate thread, see examples for more details</span>
 <span class="doccomment">//! let stronghold = Stronghold::init_stronghold_system(vec![], vec![]);</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! TidefiKeyring::try_from_stronghold_instance(stronghold, None)</span>
-<span class="doccomment">//!   .await?;</span>
+<span class="doccomment">//! TidefiKeyring::try_from_stronghold_instance(stronghold, None)?;</span>
+<span class="doccomment">//!   </span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Tidext client</span>

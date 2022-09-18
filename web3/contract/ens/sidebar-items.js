@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["public_resolver","Public Resolver ENS contract interface."],["registry","ENS Registry contract interface."],["reverse_resolver","Reverse Resolver ENS contract interface."]],"struct":[["Ens","Ethereum Name Service interface."]]});

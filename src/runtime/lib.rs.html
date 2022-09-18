@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/stronghold.rs-a2780944325bf155/4011b70/engine/runtime/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/stronghold.rs-a2780944325bf155/69f2033/engine/runtime/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../runtime/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -31,34 +31,86 @@
 <span id="26">26</span>
 <span id="27">27</span>
 <span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020-2021 IOTA Stiftung</span>
 <span class="comment">// SPDX-License-Identifier: Apache-2.0</span>
 
-<span class="attribute">#![<span class="ident">no_std</span>]</span>
+<span class="comment">// No std maybe for later</span>
+<span class="comment">// #![no_std]</span>
 
-<span class="doccomment">//! Stronghold Protected-access Memory Runtime.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! These modules contain an interface for allocating and protecting</span>
-<span class="doccomment">//! the memory of secrets in Stronghold.  Data is protected from being accessed</span>
-<span class="doccomment">//! outside of a limited scope. Instead it must be accessed via the</span>
-<span class="doccomment">//! provided interfaces.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Memory allocations are protected by guard pages before and after the</span>
-<span class="doccomment">//! allocation, an underflow canary, and are zeroed out when freed.</span>
-
-<span class="kw">mod</span> <span class="ident">allocator</span>;
 <span class="kw">mod</span> <span class="ident">boxed</span>;
-<span class="kw">mod</span> <span class="ident">guarded</span>;
-<span class="kw">mod</span> <span class="ident">guarded_vec</span>;
-<span class="kw">mod</span> <span class="ident">secret</span>;
-<span class="kw">mod</span> <span class="ident">sodium</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">locked_memory</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">memories</span>;
 <span class="kw">mod</span> <span class="ident">types</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">utils</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">allocator::ZeroingAlloc</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">guarded::Guarded</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">guarded_vec::GuardedVec</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">secret::Secret</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">thiserror::Error</span> <span class="kw">as</span> <span class="ident">DeriveError</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">types::Bytes</span>;
+
+<span class="doccomment">/// The memory types of this crate shall return this message when trying to debug them</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEBUG_MSG</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;Content of Locked Memory is hidden&quot;</span>;
+
+<span class="doccomment">/// The different types of Error that may be encountered while using this crate</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">DeriveError</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MemoryError</span> {
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Encryption Error&quot;</span>)]</span>
+    <span class="ident">EncryptionError</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Decryption Error&quot;</span>)]</span>
+    <span class="ident">DecryptionError</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Illegal non-contiguous size&quot;</span>)]</span>
+    <span class="ident">NCSizeNotAllowed</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Error while refreshing non-contiguous memory&quot;</span>)]</span>
+    <span class="ident">NCRefreshError</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Lock unavailable&quot;</span>)]</span>
+    <span class="ident">LockNotAvailable</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;File System Error&quot;</span>)]</span>
+    <span class="ident">FileSystemError</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Illegal zero-sized value provided&quot;</span>)]</span>
+    <span class="ident">ZeroSizedNotAllowed</span>,
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Failed to allocate memory ({0})&quot;</span>)]</span>
+    <span class="ident">Allocation</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Intended operation failed: ({0})&quot;</span>)]</span>
+    <span class="ident">Operation</span>(<span class="ident">String</span>),
+
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Illegal tentative of using zeroized memory&quot;</span>)]</span>
+    <span class="ident">IllegalZeroizedUsage</span>,
+}
+
+<span class="doccomment">/// A simple trait to force the types to call `zeroize()` when dropping</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ZeroizeOnDrop</span> {}
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="runtime" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
 </body></html>

@@ -8,7 +8,7 @@
 client used by Tidefi, Quorums and Oracle.</p>
 <p>Currently this client is geared toward <a href="../subxt/index.html" title="subxt"><code>subxt</code></a> implementation.</p>
 <ul>
-<li><strong>Signer</strong> — <a href="../iota_stronghold/interface/struct.Stronghold.html"><code>Stronghold</code></a> is aggressively feature gated so your
+<li><strong>Signer</strong> — <a href="../iota_stronghold/types/stronghold/struct.Stronghold.html"><code>Stronghold</code></a> is aggressively feature gated so your
 client can use regular signer for testing purpose.</li>
 </ul>
 <h2 id="stronghold-signer"><a href="#stronghold-signer">Stronghold signer</a></h2>
@@ -20,13 +20,13 @@ of memory safety and process integrity.</p>
 <h3 id="initialize-stronghold-signer-from-seed"><a href="#initialize-stronghold-signer-from-seed">Initialize stronghold signer from seed</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">tidext::TidefiKeyring</span>;
 
-<span class="ident">TidefiKeyring::try_from_seed</span>(<span class="string">&quot;sr25519 raw seed or mnemonic&quot;</span>, <span class="prelude-val">None</span>)
-  .<span class="kw">await</span><span class="question-mark">?</span>;</code></pre></div>
+<span class="ident">TidefiKeyring::try_from_seed</span>(<span class="string">&quot;sr25519 raw seed or mnemonic&quot;</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+</code></pre></div>
 <h3 id="initialize-stronghold-signer-from-existing-snapshot"><a href="#initialize-stronghold-signer-from-existing-snapshot">Initialize stronghold signer from existing snapshot</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">tidext::TidefiKeyring</span>;
 
-<span class="ident">TidefiKeyring::try_from_stronghold_path</span>(<span class="string">&quot;~/.stronghold&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;stronghold password&quot;</span>))
-  .<span class="kw">await</span><span class="question-mark">?</span>;</code></pre></div>
+<span class="ident">TidefiKeyring::try_from_stronghold_path</span>(<span class="string">&quot;~/.stronghold&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="string">&quot;stronghold password&quot;</span>))<span class="question-mark">?</span>;
+   </code></pre></div>
 <h3 id="initialize-stronghold-signer-from-existing-stronghold-instance"><a href="#initialize-stronghold-signer-from-existing-stronghold-instance">Initialize stronghold signer from existing stronghold instance</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">tidext::TidefiKeyring</span>;
 <span class="kw">use</span> <span class="ident">iota_stronghold::Stronghold</span>;
@@ -34,8 +34,8 @@ of memory safety and process integrity.</p>
 <span class="comment">// This should run into a separate thread, see examples for more details</span>
 <span class="kw">let</span> <span class="ident">stronghold</span> <span class="op">=</span> <span class="ident">Stronghold::init_stronghold_system</span>(<span class="macro">vec!</span>[], <span class="macro">vec!</span>[]);
 
-<span class="ident">TidefiKeyring::try_from_stronghold_instance</span>(<span class="ident">stronghold</span>, <span class="prelude-val">None</span>)
-  .<span class="kw">await</span><span class="question-mark">?</span>;</code></pre></div>
+<span class="ident">TidefiKeyring::try_from_stronghold_instance</span>(<span class="ident">stronghold</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+   </code></pre></div>
 <h2 id="tidext-client"><a href="#tidext-client">Tidext client</a></h2>
 <p>All functions are directly generated from <a href="tidechain/index.html" title="tidechain"><code>tidechain</code></a> metadata with <a href="../subxt/index.html" title="subxt"><code>subxt</code></a></p>
 <h3 id="basic-usage"><a href="#basic-usage">Basic usage</a></h3>
@@ -85,6 +85,7 @@ as well as actually signing a SCALE encoded payload. Optionally, a
 signer can also provide the nonce for the transaction to use.</p>
 </div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_signer_from_stronghold.html" title="tidext::get_signer_from_stronghold fn">get_signer_from_stronghold</a></div><div class="item-right docblock-short"><p>Try to get signer details for an existing stronghold instance at the specific location</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.init_ephemeral_stronghold.html" title="tidext::init_ephemeral_stronghold fn">init_ephemeral_stronghold</a></div><div class="item-right docblock-short"><p>Initialize the ephemeral stronghold client with a seed.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.init_stronghold_from_path.html" title="tidext::init_stronghold_from_path fn">init_stronghold_from_path</a></div><div class="item-right docblock-short"><p>Initialize a new stronghold instance from the provided snapshot path and passphrase</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.init_stronghold_from_seed.html" title="tidext::init_stronghold_from_seed fn">init_stronghold_from_seed</a></div><div class="item-right docblock-short"><p>Initialize a new stronghold instance from the <code>sr25519</code> mnemonic or raw seed</p>
 </div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>

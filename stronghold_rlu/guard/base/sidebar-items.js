@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BaseGuard","A basic guard type for storing a [`MutexGuard`]"]]});

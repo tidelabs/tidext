@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["blake2b",""],["sha",""]],"trait":[["Digest","The `Digest` trait specifies an interface common for digest functions."]],"type":[["Output","Output of a [`Digest`] function"]]});
+initSidebarItems({"mod":[["blake2b",""],["sha",""]],"trait":[["Digest","Convinience wrapper trait covering functionality of cryptographic hash functions with fixed output size."]],"type":[["Output","Output array of [`OutputSizeUser`] implementors."]]});

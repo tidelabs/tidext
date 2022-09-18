@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["FileMemory","Data is stored into files in clear or encrypted. Basic security of this file includes files access control and"]]});

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/bitvec-1.0.0/src/index.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>index.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/bitvec-1.0.1/src/index.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>index.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../bitvec/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -1302,6 +1302,56 @@
 <span id="1297">1297</span>
 <span id="1298">1298</span>
 <span id="1299">1299</span>
+<span id="1300">1300</span>
+<span id="1301">1301</span>
+<span id="1302">1302</span>
+<span id="1303">1303</span>
+<span id="1304">1304</span>
+<span id="1305">1305</span>
+<span id="1306">1306</span>
+<span id="1307">1307</span>
+<span id="1308">1308</span>
+<span id="1309">1309</span>
+<span id="1310">1310</span>
+<span id="1311">1311</span>
+<span id="1312">1312</span>
+<span id="1313">1313</span>
+<span id="1314">1314</span>
+<span id="1315">1315</span>
+<span id="1316">1316</span>
+<span id="1317">1317</span>
+<span id="1318">1318</span>
+<span id="1319">1319</span>
+<span id="1320">1320</span>
+<span id="1321">1321</span>
+<span id="1322">1322</span>
+<span id="1323">1323</span>
+<span id="1324">1324</span>
+<span id="1325">1325</span>
+<span id="1326">1326</span>
+<span id="1327">1327</span>
+<span id="1328">1328</span>
+<span id="1329">1329</span>
+<span id="1330">1330</span>
+<span id="1331">1331</span>
+<span id="1332">1332</span>
+<span id="1333">1333</span>
+<span id="1334">1334</span>
+<span id="1335">1335</span>
+<span id="1336">1336</span>
+<span id="1337">1337</span>
+<span id="1338">1338</span>
+<span id="1339">1339</span>
+<span id="1340">1340</span>
+<span id="1341">1341</span>
+<span id="1342">1342</span>
+<span id="1343">1343</span>
+<span id="1344">1344</span>
+<span id="1345">1345</span>
+<span id="1346">1346</span>
+<span id="1347">1347</span>
+<span id="1348">1348</span>
+<span id="1349">1349</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../doc/index.md&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">core</span>::{
@@ -1370,6 +1420,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This returns `idx`, either marked as a valid `BitIdx` or an invalid</span>
 	<span class="doccomment">/// `BitIdxError` by whether it is within the valid range `0 .. R::BITS`.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">idx</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">BitIdxError</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
 		<span class="kw">if</span> <span class="ident">idx</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u8</span> {
 			<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">BitIdxError::new</span>(<span class="ident">idx</span>));
@@ -1393,6 +1444,7 @@
 	<span class="doccomment">/// If the `idx` value is outside the valid range, then the program is</span>
 	<span class="doccomment">/// incorrect. Debug builds will panic; release builds do not inspect the</span>
 	<span class="doccomment">/// value or specify a behavior.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_unchecked</span>(<span class="ident">idx</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
 		<span class="macro">debug_assert!</span>(
 			<span class="ident">idx</span> <span class="op">&lt;</span> <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u8</span>,
@@ -1407,6 +1459,7 @@
 	}
 
 	<span class="doccomment">/// Removes the index wrapper, leaving the internal counter.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
 		<span class="self">self</span>.<span class="ident">idx</span>
@@ -1422,6 +1475,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// - `.0`: The next index after `self`.</span>
 	<span class="doccomment">/// - `.1`: Indicates whether the new index is in the next memory address.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">next</span>(<span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="ident">bool</span>) {
 		<span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">idx</span> <span class="op">+</span> <span class="number">1</span>;
 		(
@@ -1441,6 +1495,7 @@
 	<span class="doccomment">/// - `.0`: The previous index before `self`.</span>
 	<span class="doccomment">/// - `.1`: Indicates whether the new index is in the previous memory</span>
 	<span class="doccomment">///   address.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prev</span>(<span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="ident">bool</span>) {
 		<span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">idx</span>.<span class="ident">wrapping_sub</span>(<span class="number">1</span>);
 		(
@@ -1455,6 +1510,7 @@
 	<span class="doccomment">/// constructor for a position counter.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`O::at::&lt;R&gt;`]: crate::order::BitOrder::at</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">BitPos</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 	<span class="kw">where</span> <span class="ident">O</span>: <span class="ident">BitOrder</span> {
@@ -1467,6 +1523,7 @@
 	<span class="doccomment">/// constructor for a bit selector.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`O::select::&lt;R&gt;`]: crate::order::BitOrder::select</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">select</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 	<span class="kw">where</span> <span class="ident">O</span>: <span class="ident">BitOrder</span> {
@@ -1478,6 +1535,7 @@
 	<span class="doccomment">/// This is a type-cast over [`Self::select`].</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`Self::select`]: Self::select</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mask</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 	<span class="kw">where</span> <span class="ident">O</span>: <span class="ident">BitOrder</span> {
@@ -1509,6 +1567,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`RangeBounds`]: core::ops::RangeBounds</span>
 	<span class="doccomment">/// [`Range&lt;BitIdx&lt;R&gt;&gt;`]: core::ops::Range</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span>(
 		<span class="self">self</span>,
 		<span class="ident">upto</span>: <span class="ident">BitEnd</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
@@ -1522,6 +1581,7 @@
 	}
 
 	<span class="doccomment">/// Iterates over all possible index values.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range_all</span>() -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
 	<span class="op">+</span> <span class="ident">DoubleEndedIterator</span>
 	<span class="op">+</span> <span class="ident">ExactSizeIterator</span>
@@ -1594,6 +1654,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">BitIdx</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{:0&gt;1$b}&quot;</span>, <span class="self">self</span>.<span class="ident">idx</span>, <span class="ident">R::INDX</span> <span class="kw">as</span> <span class="ident">usize</span>)
 	}
@@ -1602,6 +1663,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitIdx</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitIdx&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>)
 	}
@@ -1610,6 +1672,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitIdx</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Binary::fmt</span>(<span class="self">self</span>, <span class="ident">fmt</span>)
 	}
@@ -1660,6 +1723,7 @@
 	}
 
 	<span class="doccomment">/// Removes the error wrapper, leaving the internal counter.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
 		<span class="self">self</span>.<span class="ident">err</span>
@@ -1669,6 +1733,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitIdxError</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitIdxError&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>.<span class="ident">err</span>)
 	}
@@ -1678,6 +1743,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitIdxError</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(
 			<span class="ident">fmt</span>,
@@ -1730,6 +1796,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This returns `Some(end)` when it is in the valid range `0 ..= R::BITS`,</span>
 	<span class="doccomment">/// and `None` when it is not.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">end</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
 		<span class="kw">if</span> <span class="ident">end</span> <span class="op">&gt;</span> <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u8</span> {
 			<span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -1767,6 +1834,7 @@
 	}
 
 	<span class="doccomment">/// Removes the tail wrapper, leaving the internal counter.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
 		<span class="self">self</span>.<span class="ident">end</span>
@@ -1791,6 +1859,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`RangeBounds`]: core::ops::RangeBounds</span>
 	<span class="doccomment">/// [`Range&lt;BitEnd&lt;R&gt;&gt;`]: core::ops::Range</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range_from</span>(
 		<span class="ident">from</span>: <span class="ident">BitIdx</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
 	) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
@@ -1854,6 +1923,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">BitEnd</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{:0&gt;1$b}&quot;</span>, <span class="self">self</span>.<span class="ident">end</span>, <span class="ident">R::INDX</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>)
 	}
@@ -1862,6 +1932,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitEnd</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitEnd&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>)
 	}
@@ -1870,6 +1941,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitEnd</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Binary::fmt</span>(<span class="self">self</span>, <span class="ident">fmt</span>)
 	}
@@ -1914,6 +1986,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This returns `Some(pos)` when it is in the valid range `0 .. R::BITS`,</span>
 	<span class="doccomment">/// and `None` when it is not.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">pos</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
 		<span class="kw">if</span> <span class="ident">pos</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u8</span> {
 			<span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -1938,6 +2011,7 @@
 	<span class="doccomment">/// If the `pos` value is outside the valid range, then the program is</span>
 	<span class="doccomment">/// incorrect. Debug builds will panic; release builds do not inspect the</span>
 	<span class="doccomment">/// value or specify a behavior.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_unchecked</span>(<span class="ident">pos</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
 		<span class="macro">debug_assert!</span>(
 			<span class="ident">pos</span> <span class="op">&lt;</span> <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">u8</span>,
@@ -1952,6 +2026,7 @@
 	}
 
 	<span class="doccomment">/// Removes the position wrapper, leaving the internal counter.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
 		<span class="self">self</span>.<span class="ident">pos</span>
@@ -1960,6 +2035,7 @@
 	<span class="doccomment">/// Computes the bit selector corresponding to `self`.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This is always `1 &lt;&lt; self.pos`.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">select</span>(<span class="self">self</span>) -&gt; <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
 		<span class="kw">unsafe</span> { <span class="ident">BitSel::new_unchecked</span>(<span class="ident">R::ONE</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">pos</span>) }
 	}
@@ -1969,6 +2045,7 @@
 	<span class="doccomment">/// This is a type-cast over [`Self::select`].</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`Self::select`]: Self::select</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mask</span>(<span class="self">self</span>) -&gt; <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
 		<span class="self">self</span>.<span class="ident">select</span>().<span class="ident">mask</span>()
@@ -1987,6 +2064,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">BitPos</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{:0&gt;1$b}&quot;</span>, <span class="self">self</span>.<span class="ident">pos</span>, <span class="ident">R::INDX</span> <span class="kw">as</span> <span class="ident">usize</span>)
 	}
@@ -1995,6 +2073,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitPos</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitPos&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>)
 	}
@@ -2003,6 +2082,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitPos</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Binary::fmt</span>(<span class="self">self</span>, <span class="ident">fmt</span>)
 	}
@@ -2032,6 +2112,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This returns `Some(sel)` when it is a power of two (exactly one bit set</span>
 	<span class="doccomment">/// and all others cleared), and `None` when it is not.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">sel</span>: <span class="ident">R</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
 		<span class="kw">if</span> <span class="ident">sel</span>.<span class="ident">count_ones</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
 			<span class="kw">return</span> <span class="prelude-val">None</span>;
@@ -2054,6 +2135,7 @@
 	<span class="doccomment">/// If the `sel` value has zero or multiple bits set, then it is invalid to</span>
 	<span class="doccomment">/// be used as a `BitSel` and the program is incorrect. Debug builds will</span>
 	<span class="doccomment">/// panic; release builds do not inspect the value or specify a behavior.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_unchecked</span>(<span class="ident">sel</span>: <span class="ident">R</span>) -&gt; <span class="self">Self</span> {
 		<span class="macro">debug_assert!</span>(
 			<span class="ident">sel</span>.<span class="ident">count_ones</span>() <span class="op">==</span> <span class="number">1</span>,
@@ -2065,18 +2147,21 @@
 	}
 
 	<span class="doccomment">/// Removes the one-hot selection wrapper, leaving the internal mask.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">R</span> {
 		<span class="self">self</span>.<span class="ident">sel</span>
 	}
 
 	<span class="doccomment">/// Computes a bit-mask for `self`. This is a type-cast.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mask</span>(<span class="self">self</span>) -&gt; <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
 		<span class="ident">BitMask::new</span>(<span class="self">self</span>.<span class="ident">sel</span>)
 	}
 
 	<span class="doccomment">/// Iterates over all possible selector values.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range_all</span>() -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
 	<span class="op">+</span> <span class="ident">DoubleEndedIterator</span>
 	<span class="op">+</span> <span class="ident">ExactSizeIterator</span>
@@ -2088,6 +2173,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{:0&gt;1$b}&quot;</span>, <span class="self">self</span>.<span class="ident">sel</span>, <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">usize</span>)
 	}
@@ -2096,6 +2182,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitSel&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>)
 	}
@@ -2104,6 +2191,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Binary::fmt</span>(<span class="self">self</span>, <span class="ident">fmt</span>)
 	}
@@ -2150,11 +2238,13 @@
 	<span class="doccomment">/// the caller’s context.</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`BitSel`]: crate::index::BitSel</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mask</span>: <span class="ident">R</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">Self</span> { <span class="ident">mask</span> }
 	}
 
 	<span class="doccomment">/// Removes the mask wrapper, leaving the internal value.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_inner</span>(<span class="self">self</span>) -&gt; <span class="ident">R</span> {
 		<span class="self">self</span>.<span class="ident">mask</span>
@@ -2170,6 +2260,7 @@
 	<span class="doccomment">/// ## Returns</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// Whether `self` has set the bit that `sel` indicates.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">test</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sel</span>: <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
 		<span class="self">self</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">sel</span>.<span class="ident">sel</span> <span class="op">!</span><span class="op">=</span> <span class="ident">R::ZERO</span>
 	}
@@ -2184,6 +2275,7 @@
 	<span class="doccomment">/// ## Effects</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// The `sel` bit is set in the mask.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">sel</span>: <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) {
 		<span class="self">self</span>.<span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">sel</span>.<span class="ident">sel</span>;
 	}
@@ -2198,6 +2290,7 @@
 	<span class="doccomment">/// ## Returns</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// A new bit-mask with `sel` activated.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">combine</span>(<span class="self">self</span>, <span class="ident">sel</span>: <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">Self</span> {
 			<span class="ident">mask</span>: <span class="self">self</span>.<span class="ident">mask</span> <span class="op">|</span> <span class="ident">sel</span>.<span class="ident">sel</span>,
@@ -2208,6 +2301,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Binary</span> <span class="kw">for</span> <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;{:0&gt;1$b}&quot;</span>, <span class="self">self</span>.<span class="ident">mask</span>, <span class="ident">bits_of</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="ident">usize</span>)
 	}
@@ -2216,6 +2310,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BitMask&lt;{}&gt;({})&quot;</span>, <span class="ident">any::type_name</span>::<span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>(), <span class="self">self</span>)
 	}
@@ -2224,6 +2319,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Binary::fmt</span>(<span class="self">self</span>, <span class="ident">fmt</span>)
 	}
@@ -2232,6 +2328,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Sum</span><span class="op">&lt;</span><span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BitMask</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>
 <span class="kw">where</span> <span class="ident">R</span>: <span class="ident">BitRegister</span>
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">sum</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>(<span class="ident">iter</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span>
 	<span class="kw">where</span> <span class="ident">I</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">BitSel</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
 		<span class="ident">iter</span>.<span class="ident">fold</span>(<span class="ident"><span class="self">Self</span>::ZERO</span>, <span class="ident"><span class="self">Self</span>::combine</span>)
@@ -2243,6 +2340,7 @@
 {
 	<span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">bitand</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">R</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
 		<span class="self">Self</span> {
 			<span class="ident">mask</span>: <span class="self">self</span>.<span class="ident">mask</span> <span class="op">&amp;</span> <span class="ident">rhs</span>,
@@ -2255,6 +2353,7 @@
 {
 	<span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">R</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
 		<span class="self">Self</span> {
 			<span class="ident">mask</span>: <span class="self">self</span>.<span class="ident">mask</span> <span class="op">|</span> <span class="ident">rhs</span>,
@@ -2267,6 +2366,7 @@
 {
 	<span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
 		<span class="self">Self</span> { <span class="ident">mask</span>: <span class="op">!</span><span class="self">self</span>.<span class="ident">mask</span> }
 	}

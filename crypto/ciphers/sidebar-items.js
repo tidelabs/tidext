@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["chacha",""],["traits",""]]});
+initSidebarItems({"mod":[["aes_gcm",""],["aes_kw",""],["chacha",""],["traits",""]]});

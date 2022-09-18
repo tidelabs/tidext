@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Claim",""],["ClaimFor",""],["TransactionApi",""],["UpdateVestingSchedules",""],["VestedTransfer",""]]});

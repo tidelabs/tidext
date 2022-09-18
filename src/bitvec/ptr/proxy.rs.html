@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/bitvec-1.0.0/src/ptr/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/bitvec-1.0.1/src/ptr/proxy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>proxy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../bitvec/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -455,6 +455,29 @@
 <span id="450">450</span>
 <span id="451">451</span>
 <span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../../doc/ptr/proxy.md&quot;</span>)]</span>
 
 <span class="kw">use</span> <span class="ident">core</span>::{
@@ -537,6 +560,7 @@
 	<span class="doccomment">/// This is equivalent to (and is!) dereferencing a raw pointer. The pointer</span>
 	<span class="doccomment">/// must be well-constructed, refer to a live memory location in the program</span>
 	<span class="doccomment">/// context, and not be aliased beyond its typing indicators.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_bitptr</span>(<span class="ident">bitptr</span>: <span class="ident">BitPtr</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">T</span>, <span class="ident">O</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
 		<span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">bitptr</span>.<span class="ident">read</span>();
 		<span class="self">Self</span> {
@@ -551,6 +575,7 @@
 	<span class="doccomment">/// ## Original</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// The syntax `&amp;val as *T`.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_bitptr</span>(<span class="self">self</span>) -&gt; <span class="ident">BitPtr</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">T</span>, <span class="ident">O</span><span class="op">&gt;</span> {
 		<span class="self">self</span>.<span class="ident">bitptr</span>
@@ -582,6 +607,7 @@
 	<span class="doccomment">/// ## Original</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`mem::replace`](core::mem::replace)</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">replace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">src</span>: <span class="ident">bool</span>) -&gt; <span class="ident">bool</span> {
 		<span class="ident">mem::replace</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>, <span class="ident">src</span>)
 	}
@@ -591,6 +617,7 @@
 	<span class="doccomment">/// ## Original</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// [`mem::swap`](core::mem::swap)</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">swap</span><span class="op">&lt;</span><span class="ident">T2</span>, <span class="ident">O2</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;mut</span> <span class="ident">BitRef</span><span class="op">&lt;</span><span class="ident">Mut</span>, <span class="ident">T2</span>, <span class="ident">O2</span><span class="op">&gt;</span>)
 	<span class="kw">where</span>
 		<span class="ident">T2</span>: <span class="ident">BitStore</span>,
@@ -604,6 +631,7 @@
 	<span class="doccomment">/// This function writes `value` directly into the proxied location,</span>
 	<span class="doccomment">/// bypassing the cache and destroying the proxy. This eliminates the second</span>
 	<span class="doccomment">/// write done in the destructor, and allows code to be slightly faster.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">commit</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) {
 		<span class="kw">unsafe</span> {
 			<span class="self">self</span>.<span class="ident">bitptr</span>.<span class="ident">write</span>(<span class="ident">value</span>);
@@ -615,6 +643,7 @@
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// This does not write into the proxied location; that is deferred until</span>
 	<span class="doccomment">/// the proxy destructor runs.</span>
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) {
 		<span class="self">self</span>.<span class="ident">data</span> <span class="op">=</span> <span class="ident">value</span>;
 	}
@@ -626,6 +655,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">Self</span> { ..<span class="kw-2">*</span><span class="self">self</span> }
 	}
@@ -646,6 +676,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">cmp::Ordering</span> {
 		<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">data</span>)
 	}
@@ -688,6 +719,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">BitRef</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">M</span>, <span class="ident">T</span>, <span class="ident">O</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
 		<span class="ident">other</span> <span class="op">==</span> <span class="self">self</span>
 	}
@@ -713,6 +745,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">BitRef</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">M</span>, <span class="ident">T</span>, <span class="ident">O</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
 		<span class="ident">other</span> <span class="op">==</span> <span class="kw-2">*</span><span class="self">self</span>
 	}
@@ -729,6 +762,7 @@
 	<span class="ident">O1</span>: <span class="ident">BitOrder</span>,
 	<span class="ident">O2</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">partial_cmp</span>(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		<span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">BitRef</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">M2</span>, <span class="ident">T2</span>, <span class="ident">O2</span><span class="op">&gt;</span>,
@@ -744,6 +778,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">cmp::Ordering</span><span class="op">&gt;</span> {
 		<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">partial_cmp</span>(<span class="ident">other</span>)
 	}
@@ -756,6 +791,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="op">&amp;&amp;</span><span class="ident">bool</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">cmp::Ordering</span><span class="op">&gt;</span> {
 		<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">partial_cmp</span>(<span class="kw-2">*</span><span class="ident">other</span>)
 	}
@@ -768,6 +804,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">bool</span> {
 		<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
 	}
@@ -779,6 +816,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">as_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">bool</span> {
 		<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>
 	}
@@ -790,6 +828,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">bitptr</span>.<span class="ident">span_unchecked</span>(<span class="number">1</span>) }
 			.<span class="ident">render</span>(<span class="ident">fmt</span>, <span class="string">&quot;Ref&quot;</span>, <span class="kw-2">&amp;</span>[(<span class="string">&quot;bit&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Debug</span>)])
@@ -803,6 +842,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Display::fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="ident">fmt</span>)
 	}
@@ -815,6 +855,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
 		<span class="ident">Pointer::fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">bitptr</span>, <span class="ident">fmt</span>)
 	}
@@ -827,6 +868,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>)
 	<span class="kw">where</span> <span class="ident">H</span>: <span class="ident">Hasher</span> {
 		<span class="self">self</span>.<span class="ident">bitptr</span>.<span class="ident">hash</span>(<span class="ident">state</span>);
@@ -863,6 +905,7 @@
 {
 	<span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">bool</span>;
 
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
 		<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
 	}
@@ -873,6 +916,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
 		<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>
 	}
@@ -884,6 +928,7 @@
 	<span class="ident">T</span>: <span class="ident">BitStore</span>,
 	<span class="ident">O</span>: <span class="ident">BitOrder</span>,
 {
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
 		<span class="comment">//  `Drop` cannot specialize on type parameters, but only mutable</span>
 		<span class="comment">//  proxies can commit to memory.</span>
@@ -903,6 +948,7 @@
 {
 	<span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">bool</span>;
 
+	<span class="attribute">#[<span class="ident">inline</span>]</span>
 	<span class="kw">fn</span> <span class="ident">not</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
 		<span class="op">!</span><span class="self">self</span>.<span class="ident">data</span>
 	}
