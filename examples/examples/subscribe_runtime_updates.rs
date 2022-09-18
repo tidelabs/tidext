@@ -54,7 +54,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   for _ in 0..10 {
     client
       .transfer(
-        AccountKeyring::Bob.to_account_id().into(),
+        AccountKeyring::Bob.to_account_id(),
         CurrencyId::Tdfy,
         1_000_000_000_000,
       )
