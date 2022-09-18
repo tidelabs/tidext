@@ -254,6 +254,7 @@ impl Client {
     )
   }
 
+  #[allow(clippy::too_many_arguments)]
   fn swap_extrinsic<'p>(
     &self,
     py: Python<'p>,
