@@ -25,8 +25,8 @@ async-trait = "0.1.40"
 parity-scale-codec = { version = "3" }
 
 # Internal fork of `subxt` with few patches, branched for better `diff` and cherry picking
-subxt = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
-subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
+subxt = { git = "https://github.com/tidelabs/subxt", branch = "fix/decoder"}
+subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "fix/decoder"}
 
 sp-keyring = { git = "https://github.com/tidelabs/substrate", branch = "tidechain", optional = true }
 sp-runtime = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
