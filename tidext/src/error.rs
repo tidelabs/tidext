@@ -23,7 +23,7 @@ pub enum Error {
   #[error("json error: {0}")]
   Json(#[from] serde_json::Error),
   #[error("tidechain error: {0}")]
-  Substrate(#[from] subxt::BasicError),
+  Substrate(#[from] subxt::Error),
   #[error("dispatch error: {0}")]
   DispatchError(String),
   #[error("codec error: {0}")]

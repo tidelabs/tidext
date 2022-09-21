@@ -5,13 +5,15 @@ authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 edition = "2021"
 
 [features]
-default = [ "production" ]
+default = [ "production", "tidechain-native", "lagoon-native" ]
 production = ["keyring-stronghold"]
 dev = [ "sp-keyring", "another" ]
 keyring-stronghold = [ "iota_stronghold" ]
 test = ["which", "env_logger", "sp-keyring"]
 decoder = [ "subxt/decoder" ]
 another = []
+tidechain-native = [ "tidext-macro/tidechain-native" ]
+lagoon-native = [ "tidext-macro/lagoon-native" ]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
@@ -40,7 +42,7 @@ tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "
 iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
 
 # jsonrpsee
-jsonrpsee = { version = "0.14", features = ["macros", "ws-client", "client-ws-transport"] }
+jsonrpsee = { version = "0.15.1", features = ["macros", "ws-client", "client-ws-transport"] }
 
 # test module dependencies
 which = { version = "4.2.2", optional = true }

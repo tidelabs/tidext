@@ -22,11 +22,11 @@ use stronghold::{
   KeyProvider, Location, SnapshotPath, Stronghold,
 };
 use subxt::{
-  sp_core::{
+  ext::sp_core::{
     crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
     sr25519::{Public, Signature},
   },
-  PairSigner,
+  tx::PairSigner,
 };
 
 pub use iota_stronghold as stronghold;

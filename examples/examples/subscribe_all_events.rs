@@ -57,13 +57,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Or we can dynamically decode events:
     debug!("Dynamic event details: {:?}", block_hash);
-    for event in events.iter_raw() {
+    for event in events.iter() {
       let event = event?;
       let is_asset_transfer = event
         .as_event::<tidechain::tidefi::events::Transfer>()?
         .is_some();
-      let pallet = event.pallet;
-      let variant = event.variant;
+      let pallet = event.pallet_name();
+      let variant = event.variant_name();
       debug!(
         " {}::{} (is asset transfer? {})",
         pallet, variant, is_asset_transfer

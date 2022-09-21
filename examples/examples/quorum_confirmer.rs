@@ -70,17 +70,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
       for (proposal_id, _initial_block, proposal_type) in proposals {
         match proposal_type {
           ProposalType::Mint(_mint_details) => {
-            all_calls.push(TidechainCall::Quorum(QuorumCall::reject_proposal {
+            all_calls.push(TidechainCall::Quorum(QuorumCall::RejectProposal {
               proposal: proposal_id,
             }))
           }
           ProposalType::Withdrawal(_withdrawal_details) => {
-            all_calls.push(TidechainCall::Quorum(QuorumCall::acknowledge_proposal {
+            all_calls.push(TidechainCall::Quorum(QuorumCall::AcknowledgeProposal {
               proposal: proposal_id,
             }))
           }
           ProposalType::UpdateConfiguration(_members, _threshold) => {
-            all_calls.push(TidechainCall::Quorum(QuorumCall::acknowledge_proposal {
+            all_calls.push(TidechainCall::Quorum(QuorumCall::AcknowledgeProposal {
               proposal: proposal_id,
             }))
           }

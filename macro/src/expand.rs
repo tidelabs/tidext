@@ -83,9 +83,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
         ) #result_type {
           self
             .runtime()
-            .client
             .rpc()
-            .client
             .request(#request_ident, #params)
             .await
             .map_err(Into::into)
@@ -100,12 +98,17 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           &self,
           #(#args,)*
         ) #result_type {
-          self
-            .runtime()
-            .constants()
-            .#pallet_name()
-            .#const_call()
-            .map_err(Into::into)
+          with_runtime! {
+            self,
+            current_runtime,
+            {
+              self
+              .runtime()
+              .constants()
+              .at(&current_runtime.constants().#pallet_name().#const_call())
+              .map_err(Into::into)
+            }
+          }
         }
       )
     } else {
@@ -115,13 +118,18 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           &self,
           #(#args,)*
         ) -> Result<(), Error> {
-          self
-            .runtime()
-            .tx()
-            .#pallet_name()
-            .#function_name(#all_params_token)?
-            .sign_and_submit_default(self.signer()?)
-            .await?;
+          with_runtime! {
+            self,
+            current_runtime,
+            {
+              self
+              .runtime()
+              .tx()
+              .sign_and_submit_default(&current_runtime.tx().#pallet_name().#function_name(#all_params_token), self.signer()?)
+              .await?
+            }
+          };
+
           Ok(())
         }
 
@@ -132,16 +140,20 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           &self,
           #(#args,)*
         ) -> Result<(), Error> {
-          let hash = self
-            .runtime()
-            .tx()
-            .#pallet_name()
-            .#function_name(#all_params_token)?
-            .sign_and_submit_then_watch_default(self.signer()?)
-            .await?
-            .wait_for_finalized_success()
-            .await
-            .map_err(|err| Error::DispatchError(err.to_string()))?;
+
+          with_runtime! {
+            self,
+            current_runtime,
+            {
+              self
+              .runtime()
+              .tx()
+              .sign_and_submit_then_watch_default(&current_runtime.tx().#pallet_name().#function_name(#all_params_token), self.signer()?)
+              .await?
+            }
+          }
+          .wait_for_finalized_success()
+          .await?;
 
           Ok(())
         }
@@ -153,13 +165,17 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           &self,
           #(#args,)*
         ) -> Result<String, Error> {
-          let extrinsic = self
-            .runtime()
-            .tx()
-            .#pallet_name()
-            .#function_name(#all_params_token)?
-            .create_signed(self.signer()?, Default::default())
-            .await?;
+          let extrinsic = with_runtime! {
+            self,
+            current_runtime,
+            {
+              self
+              .runtime()
+              .tx()
+              .create_signed(&current_runtime.tx().#pallet_name().#function_name(#all_params_token), self.signer()?, Default::default())
+              .await?
+            }
+          };
           Ok(format!("0x{}", hex::encode(extrinsic.encoded()).as_str()))
         }
       )
@@ -170,7 +186,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
     #client_mod_vis mod #client_mod {
       use super::*;
       use jsonrpsee::ws_client::WsClientBuilder;
-      use subxt::ClientBuilder as SubstrateClientBuilder;
+      use subxt::OnlineClient;
       use std::time::Duration;
 
       /// Tidechain [`Client`] builder
@@ -178,6 +194,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
       pub struct #client_builder_struct_name {
         pub rpc_url: String,
         pub signer: Option<TidefiKeyring>,
+        pub runtime: Option<TidefiRuntime>,
       }
 
       impl Default for #client_builder_struct_name {
@@ -185,6 +202,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           Self {
             rpc_url: "ws://127.0.0.1:9944".into(),
             signer: None,
+            runtime: None,
           }
         }
       }
@@ -208,6 +226,12 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           self
         }
 
+        /// Set the runtime
+        pub fn set_runtime(mut self, runtime: TidefiRuntime) -> Self {
+          self.runtime = Some(runtime);
+          self
+        }
+
         /// Initialize a new [`Client`]
         pub async fn build(self) -> Result<Client, Error> {
           let ws_client = WsClientBuilder::default()
@@ -217,17 +241,40 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             .await
             .map_err(|err| Error::Other(err.to_string()))?;
 
-          let runtime_api = Arc::new(
-            SubstrateClientBuilder::new()
-              .set_client(ws_client)
-              .build()
+          let client = Arc::new(
+            subxt::OnlineClient::<TidechainConfig>::from_rpc_client(ws_client)
               .await?
-              .to_runtime_api(),
           );
+
+          #[cfg(feature = "tidechain-native")]
+          let default_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
+
+          #[cfg(feature = "lagoon-native")]
+          let default_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
+
+          let runtime_type = match self.runtime {
+            Some(runtime) => runtime,
+            None => {
+              if self.rpc_url == "wss://rpc.tidefi.io:443" {
+                #[cfg(feature = "lagoon-native")]
+                let default_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
+
+                #[cfg(feature = "tidechain-native")]
+                let default_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
+
+                default_runtime
+              } else {
+                default_runtime
+              }
+            }
+          };
+
+          log::debug!("Tidext Runtime: {}", runtime_type);
 
           return Ok(Client {
             signer: self.signer,
-            runtime_api,
+            runtime_type,
+            client,
           });
         }
       }

@@ -690,7 +690,7 @@ pub mod api {
           ::subxt::metadata::DecodeStaticType<
             ::std::vec::Vec<
               runtime_types::frame_system::EventRecord<
-                runtime_types::tidechain_runtime::Event,
+                runtime_types::lagoon_runtime::Event,
                 ::subxt::ext::sp_core::H256,
               >,
             >,
@@ -5779,7 +5779,7 @@ pub mod api {
       type DispatchError = runtime_types::sp_runtime::DispatchError;
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct SetKeys {
-        pub keys: runtime_types::tidechain_runtime::SessionKeys,
+        pub keys: runtime_types::lagoon_runtime::SessionKeys,
         pub proof: ::std::vec::Vec<::core::primitive::u8>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
@@ -5802,7 +5802,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn set_keys(
           &self,
-          keys: runtime_types::tidechain_runtime::SessionKeys,
+          keys: runtime_types::lagoon_runtime::SessionKeys,
           proof: ::std::vec::Vec<::core::primitive::u8>,
         ) -> ::subxt::tx::StaticTxPayload<SetKeys> {
           ::subxt::tx::StaticTxPayload::new(
@@ -5941,7 +5941,7 @@ pub mod api {
           ::subxt::metadata::DecodeStaticType<
             ::std::vec::Vec<(
               ::subxt::ext::sp_core::crypto::AccountId32,
-              runtime_types::tidechain_runtime::SessionKeys,
+              runtime_types::lagoon_runtime::SessionKeys,
             )>,
           >,
           ::subxt::storage::address::Yes,
@@ -5988,7 +5988,7 @@ pub mod api {
           &self,
           _0: impl ::std::borrow::Borrow<::subxt::ext::sp_core::crypto::AccountId32>,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::SessionKeys>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::SessionKeys>,
           ::subxt::storage::address::Yes,
           (),
           ::subxt::storage::address::Yes,
@@ -6011,7 +6011,7 @@ pub mod api {
         pub fn next_keys_root(
           &self,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::SessionKeys>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::SessionKeys>,
           (),
           (),
           ::subxt::storage::address::Yes,
@@ -8425,7 +8425,7 @@ pub mod api {
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct Execute {
-        pub proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
         #[codec(compact)]
         pub length_bound: ::core::primitive::u32,
       }
@@ -8433,7 +8433,7 @@ pub mod api {
       pub struct Propose {
         #[codec(compact)]
         pub threshold: ::core::primitive::u32,
-        pub proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
         #[codec(compact)]
         pub length_bound: ::core::primitive::u32,
       }
@@ -8526,7 +8526,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn execute(
           &self,
-          proposal: runtime_types::tidechain_runtime::Call,
+          proposal: runtime_types::lagoon_runtime::Call,
           length_bound: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<Execute> {
           ::subxt::tx::StaticTxPayload::new(
@@ -8573,7 +8573,7 @@ pub mod api {
         pub fn propose(
           &self,
           threshold: ::core::primitive::u32,
-          proposal: runtime_types::tidechain_runtime::Call,
+          proposal: runtime_types::lagoon_runtime::Call,
           length_bound: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<Propose> {
           ::subxt::tx::StaticTxPayload::new(
@@ -8827,7 +8827,7 @@ pub mod api {
           &self,
           _0: impl ::std::borrow::Borrow<::subxt::ext::sp_core::H256>,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::Call>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::Call>,
           ::subxt::storage::address::Yes,
           (),
           ::subxt::storage::address::Yes,
@@ -8850,7 +8850,7 @@ pub mod api {
         pub fn proposal_of_root(
           &self,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::Call>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::Call>,
           (),
           (),
           ::subxt::storage::address::Yes,
@@ -9001,7 +9001,7 @@ pub mod api {
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct Execute {
-        pub proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
         #[codec(compact)]
         pub length_bound: ::core::primitive::u32,
       }
@@ -9009,7 +9009,7 @@ pub mod api {
       pub struct Propose {
         #[codec(compact)]
         pub threshold: ::core::primitive::u32,
-        pub proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
         #[codec(compact)]
         pub length_bound: ::core::primitive::u32,
       }
@@ -9102,7 +9102,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn execute(
           &self,
-          proposal: runtime_types::tidechain_runtime::Call,
+          proposal: runtime_types::lagoon_runtime::Call,
           length_bound: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<Execute> {
           ::subxt::tx::StaticTxPayload::new(
@@ -9149,7 +9149,7 @@ pub mod api {
         pub fn propose(
           &self,
           threshold: ::core::primitive::u32,
-          proposal: runtime_types::tidechain_runtime::Call,
+          proposal: runtime_types::lagoon_runtime::Call,
           length_bound: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<Propose> {
           ::subxt::tx::StaticTxPayload::new(
@@ -9403,7 +9403,7 @@ pub mod api {
           &self,
           _0: impl ::std::borrow::Borrow<::subxt::ext::sp_core::H256>,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::Call>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::Call>,
           ::subxt::storage::address::Yes,
           (),
           ::subxt::storage::address::Yes,
@@ -9426,7 +9426,7 @@ pub mod api {
         pub fn proposal_of_root(
           &self,
         ) -> ::subxt::storage::address::StaticStorageAddress<
-          ::subxt::metadata::DecodeStaticType<runtime_types::tidechain_runtime::Call>,
+          ::subxt::metadata::DecodeStaticType<runtime_types::lagoon_runtime::Call>,
           (),
           (),
           ::subxt::storage::address::Yes,
@@ -10951,25 +10951,25 @@ pub mod api {
       type DispatchError = runtime_types::sp_runtime::DispatchError;
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct Batch {
-        pub calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+        pub calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct AsDerivative {
         pub index: ::core::primitive::u16,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct BatchAll {
-        pub calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+        pub calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct DispatchAs {
-        pub as_origin: ::std::boxed::Box<runtime_types::tidechain_runtime::OriginCaller>,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub as_origin: ::std::boxed::Box<runtime_types::lagoon_runtime::OriginCaller>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct ForceBatch {
-        pub calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+        pub calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
       }
       pub struct TransactionApi;
       impl TransactionApi {
@@ -10994,7 +10994,7 @@ pub mod api {
         #[doc = "event is deposited."]
         pub fn batch(
           &self,
-          calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+          calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
         ) -> ::subxt::tx::StaticTxPayload<Batch> {
           ::subxt::tx::StaticTxPayload::new(
             "Utility",
@@ -11023,7 +11023,7 @@ pub mod api {
         pub fn as_derivative(
           &self,
           index: ::core::primitive::u16,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<AsDerivative> {
           ::subxt::tx::StaticTxPayload::new(
             "Utility",
@@ -11055,7 +11055,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn batch_all(
           &self,
-          calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+          calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
         ) -> ::subxt::tx::StaticTxPayload<BatchAll> {
           ::subxt::tx::StaticTxPayload::new(
             "Utility",
@@ -11080,8 +11080,8 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn dispatch_as(
           &self,
-          as_origin: runtime_types::tidechain_runtime::OriginCaller,
-          call: runtime_types::tidechain_runtime::Call,
+          as_origin: runtime_types::lagoon_runtime::OriginCaller,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<DispatchAs> {
           ::subxt::tx::StaticTxPayload::new(
             "Utility",
@@ -11113,7 +11113,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn force_batch(
           &self,
-          calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+          calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
         ) -> ::subxt::tx::StaticTxPayload<ForceBatch> {
           ::subxt::tx::StaticTxPayload::new(
             "Utility",
@@ -12218,7 +12218,7 @@ pub mod api {
       pub struct SubmitUnsigned {
         pub raw_solution: ::std::boxed::Box<
           runtime_types::pallet_election_provider_multi_phase::RawSolution<
-            runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+            runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
           >,
         >,
         pub witness: runtime_types::pallet_election_provider_multi_phase::SolutionOrSnapshotSize,
@@ -12239,7 +12239,7 @@ pub mod api {
       pub struct Submit {
         pub raw_solution: ::std::boxed::Box<
           runtime_types::pallet_election_provider_multi_phase::RawSolution<
-            runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+            runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
           >,
         >,
       }
@@ -12267,7 +12267,7 @@ pub mod api {
         pub fn submit_unsigned(
           &self,
           raw_solution: runtime_types::pallet_election_provider_multi_phase::RawSolution<
-            runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+            runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
           >,
           witness: runtime_types::pallet_election_provider_multi_phase::SolutionOrSnapshotSize,
         ) -> ::subxt::tx::StaticTxPayload<SubmitUnsigned> {
@@ -12343,7 +12343,7 @@ pub mod api {
         pub fn submit(
           &self,
           raw_solution: runtime_types::pallet_election_provider_multi_phase::RawSolution<
-            runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+            runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
           >,
         ) -> ::subxt::tx::StaticTxPayload<Submit> {
           ::subxt::tx::StaticTxPayload::new(
@@ -12682,7 +12682,7 @@ pub mod api {
             runtime_types::pallet_election_provider_multi_phase::signed::SignedSubmission<
               ::subxt::ext::sp_core::crypto::AccountId32,
               ::core::primitive::u128,
-              runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+              runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
             >,
           >,
           ::subxt::storage::address::Yes,
@@ -12717,7 +12717,7 @@ pub mod api {
             runtime_types::pallet_election_provider_multi_phase::signed::SignedSubmission<
               ::subxt::ext::sp_core::crypto::AccountId32,
               ::core::primitive::u128,
-              runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+              runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
             >,
           >,
           (),
@@ -13035,7 +13035,7 @@ pub mod api {
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct AsRecovered {
         pub account: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct SetRecovered {
@@ -13084,7 +13084,7 @@ pub mod api {
         pub fn as_recovered(
           &self,
           account: ::subxt::ext::sp_core::crypto::AccountId32,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<AsRecovered> {
           ::subxt::tx::StaticTxPayload::new(
             "Recovery",
@@ -13668,7 +13668,7 @@ pub mod api {
         pub priority: ::core::primitive::u8,
         pub call: ::std::boxed::Box<
           runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         >,
@@ -13687,7 +13687,7 @@ pub mod api {
         pub priority: ::core::primitive::u8,
         pub call: ::std::boxed::Box<
           runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         >,
@@ -13704,7 +13704,7 @@ pub mod api {
         pub priority: ::core::primitive::u8,
         pub call: ::std::boxed::Box<
           runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         >,
@@ -13718,7 +13718,7 @@ pub mod api {
         pub priority: ::core::primitive::u8,
         pub call: ::std::boxed::Box<
           runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         >,
@@ -13732,7 +13732,7 @@ pub mod api {
           maybe_periodic: ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           priority: ::core::primitive::u8,
           call: runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         ) -> ::subxt::tx::StaticTxPayload<Schedule> {
@@ -13777,7 +13777,7 @@ pub mod api {
           maybe_periodic: ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           priority: ::core::primitive::u8,
           call: runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         ) -> ::subxt::tx::StaticTxPayload<ScheduleNamed> {
@@ -13825,7 +13825,7 @@ pub mod api {
           maybe_periodic: ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           priority: ::core::primitive::u8,
           call: runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         ) -> ::subxt::tx::StaticTxPayload<ScheduleAfter> {
@@ -13857,7 +13857,7 @@ pub mod api {
           maybe_periodic: ::core::option::Option<(::core::primitive::u32, ::core::primitive::u32)>,
           priority: ::core::primitive::u8,
           call: runtime_types::frame_support::traits::schedule::MaybeHashed<
-            runtime_types::tidechain_runtime::Call,
+            runtime_types::lagoon_runtime::Call,
             ::subxt::ext::sp_core::H256,
           >,
         ) -> ::subxt::tx::StaticTxPayload<ScheduleNamedAfter> {
@@ -13941,11 +13941,11 @@ pub mod api {
               ::core::option::Option<
                 runtime_types::pallet_scheduler::ScheduledV3<
                   runtime_types::frame_support::traits::schedule::MaybeHashed<
-                    runtime_types::tidechain_runtime::Call,
+                    runtime_types::lagoon_runtime::Call,
                     ::subxt::ext::sp_core::H256,
                   >,
                   ::core::primitive::u32,
-                  runtime_types::tidechain_runtime::OriginCaller,
+                  runtime_types::lagoon_runtime::OriginCaller,
                   ::subxt::ext::sp_core::crypto::AccountId32,
                 >,
               >,
@@ -13978,11 +13978,11 @@ pub mod api {
               ::core::option::Option<
                 runtime_types::pallet_scheduler::ScheduledV3<
                   runtime_types::frame_support::traits::schedule::MaybeHashed<
-                    runtime_types::tidechain_runtime::Call,
+                    runtime_types::lagoon_runtime::Call,
                     ::subxt::ext::sp_core::H256,
                   >,
                   ::core::primitive::u32,
-                  runtime_types::tidechain_runtime::OriginCaller,
+                  runtime_types::lagoon_runtime::OriginCaller,
                   ::subxt::ext::sp_core::crypto::AccountId32,
                 >,
               >,
@@ -14102,33 +14102,33 @@ pub mod api {
       pub struct Proxy {
         pub real: ::subxt::ext::sp_core::crypto::AccountId32,
         pub force_proxy_type:
-          ::core::option::Option<runtime_types::tidechain_runtime::config::proxy::ProxyType>,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+          ::core::option::Option<runtime_types::lagoon_runtime::config::proxy::ProxyType>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct AddProxy {
         pub delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub delay: ::core::primitive::u32,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct RemoveProxy {
         pub delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub delay: ::core::primitive::u32,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct RemoveProxies;
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct Anonymous {
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub delay: ::core::primitive::u32,
         pub index: ::core::primitive::u16,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct KillAnonymous {
         pub spawner: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub index: ::core::primitive::u16,
         #[codec(compact)]
         pub height: ::core::primitive::u32,
@@ -14155,8 +14155,8 @@ pub mod api {
         pub delegate: ::subxt::ext::sp_core::crypto::AccountId32,
         pub real: ::subxt::ext::sp_core::crypto::AccountId32,
         pub force_proxy_type:
-          ::core::option::Option<runtime_types::tidechain_runtime::config::proxy::ProxyType>,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+          ::core::option::Option<runtime_types::lagoon_runtime::config::proxy::ProxyType>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       pub struct TransactionApi;
       impl TransactionApi {
@@ -14179,9 +14179,9 @@ pub mod api {
           &self,
           real: ::subxt::ext::sp_core::crypto::AccountId32,
           force_proxy_type: ::core::option::Option<
-            runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            runtime_types::lagoon_runtime::config::proxy::ProxyType,
           >,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<Proxy> {
           ::subxt::tx::StaticTxPayload::new(
             "Proxy",
@@ -14214,7 +14214,7 @@ pub mod api {
         pub fn add_proxy(
           &self,
           delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-          proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+          proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
           delay: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<AddProxy> {
           ::subxt::tx::StaticTxPayload::new(
@@ -14246,7 +14246,7 @@ pub mod api {
         pub fn remove_proxy(
           &self,
           delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-          proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+          proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
           delay: ::core::primitive::u32,
         ) -> ::subxt::tx::StaticTxPayload<RemoveProxy> {
           ::subxt::tx::StaticTxPayload::new(
@@ -14311,7 +14311,7 @@ pub mod api {
         #[doc = "TODO: Might be over counting 1 read"]
         pub fn anonymous(
           &self,
-          proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+          proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
           delay: ::core::primitive::u32,
           index: ::core::primitive::u16,
         ) -> ::subxt::tx::StaticTxPayload<Anonymous> {
@@ -14353,7 +14353,7 @@ pub mod api {
         pub fn kill_anonymous(
           &self,
           spawner: ::subxt::ext::sp_core::crypto::AccountId32,
-          proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+          proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
           index: ::core::primitive::u16,
           height: ::core::primitive::u32,
           ext_index: ::core::primitive::u32,
@@ -14501,9 +14501,9 @@ pub mod api {
           delegate: ::subxt::ext::sp_core::crypto::AccountId32,
           real: ::subxt::ext::sp_core::crypto::AccountId32,
           force_proxy_type: ::core::option::Option<
-            runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            runtime_types::lagoon_runtime::config::proxy::ProxyType,
           >,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<ProxyAnnounced> {
           ::subxt::tx::StaticTxPayload::new(
             "Proxy",
@@ -14542,7 +14542,7 @@ pub mod api {
       pub struct AnonymousCreated {
         pub anonymous: ::subxt::ext::sp_core::crypto::AccountId32,
         pub who: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub disambiguation_index: ::core::primitive::u16,
       }
       impl ::subxt::events::StaticEvent for AnonymousCreated {
@@ -14565,7 +14565,7 @@ pub mod api {
       pub struct ProxyAdded {
         pub delegator: ::subxt::ext::sp_core::crypto::AccountId32,
         pub delegatee: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub delay: ::core::primitive::u32,
       }
       impl ::subxt::events::StaticEvent for ProxyAdded {
@@ -14577,7 +14577,7 @@ pub mod api {
       pub struct ProxyRemoved {
         pub delegator: ::subxt::ext::sp_core::crypto::AccountId32,
         pub delegatee: ::subxt::ext::sp_core::crypto::AccountId32,
-        pub proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+        pub proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
         pub delay: ::core::primitive::u32,
       }
       impl ::subxt::events::StaticEvent for ProxyRemoved {
@@ -14599,7 +14599,7 @@ pub mod api {
             runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
               runtime_types::pallet_proxy::ProxyDefinition<
                 ::subxt::ext::sp_core::crypto::AccountId32,
-                runtime_types::tidechain_runtime::config::proxy::ProxyType,
+                runtime_types::lagoon_runtime::config::proxy::ProxyType,
                 ::core::primitive::u32,
               >,
             >,
@@ -14632,7 +14632,7 @@ pub mod api {
             runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
               runtime_types::pallet_proxy::ProxyDefinition<
                 ::subxt::ext::sp_core::crypto::AccountId32,
-                runtime_types::tidechain_runtime::config::proxy::ProxyType,
+                runtime_types::lagoon_runtime::config::proxy::ProxyType,
                 ::core::primitive::u32,
               >,
             >,
@@ -14844,7 +14844,7 @@ pub mod api {
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct AsMultiThreshold1 {
         pub other_signatories: ::std::vec::Vec<::subxt::ext::sp_core::crypto::AccountId32>,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct AsMulti {
@@ -14852,7 +14852,7 @@ pub mod api {
         pub other_signatories: ::std::vec::Vec<::subxt::ext::sp_core::crypto::AccountId32>,
         pub maybe_timepoint:
           ::core::option::Option<runtime_types::pallet_multisig::Timepoint<::core::primitive::u32>>,
-        pub call: ::subxt::utils::WrapperKeepOpaque<runtime_types::tidechain_runtime::Call>,
+        pub call: ::subxt::utils::WrapperKeepOpaque<runtime_types::lagoon_runtime::Call>,
         pub store_call: ::core::primitive::bool,
         pub max_weight: ::core::primitive::u64,
       }
@@ -14893,7 +14893,7 @@ pub mod api {
         pub fn as_multi_threshold_1(
           &self,
           other_signatories: ::std::vec::Vec<::subxt::ext::sp_core::crypto::AccountId32>,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<AsMultiThreshold1> {
           ::subxt::tx::StaticTxPayload::new(
             "Multisig",
@@ -14961,7 +14961,7 @@ pub mod api {
           maybe_timepoint: ::core::option::Option<
             runtime_types::pallet_multisig::Timepoint<::core::primitive::u32>,
           >,
-          call: ::subxt::utils::WrapperKeepOpaque<runtime_types::tidechain_runtime::Call>,
+          call: ::subxt::utils::WrapperKeepOpaque<runtime_types::lagoon_runtime::Call>,
           store_call: ::core::primitive::bool,
           max_weight: ::core::primitive::u64,
         ) -> ::subxt::tx::StaticTxPayload<AsMulti> {
@@ -15221,7 +15221,7 @@ pub mod api {
           _0: impl ::std::borrow::Borrow<[::core::primitive::u8; 32usize]>,
         ) -> ::subxt::storage::address::StaticStorageAddress<
           ::subxt::metadata::DecodeStaticType<(
-            ::subxt::utils::WrapperKeepOpaque<runtime_types::tidechain_runtime::Call>,
+            ::subxt::utils::WrapperKeepOpaque<runtime_types::lagoon_runtime::Call>,
             ::subxt::ext::sp_core::crypto::AccountId32,
             ::core::primitive::u128,
           )>,
@@ -15247,7 +15247,7 @@ pub mod api {
           &self,
         ) -> ::subxt::storage::address::StaticStorageAddress<
           ::subxt::metadata::DecodeStaticType<(
-            ::subxt::utils::WrapperKeepOpaque<runtime_types::tidechain_runtime::Call>,
+            ::subxt::utils::WrapperKeepOpaque<runtime_types::lagoon_runtime::Call>,
             ::subxt::ext::sp_core::crypto::AccountId32,
             ::core::primitive::u128,
           )>,
@@ -18299,11 +18299,11 @@ pub mod api {
       type DispatchError = runtime_types::sp_runtime::DispatchError;
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct Sudo {
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
       pub struct SudoUncheckedWeight {
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
         pub weight: ::core::primitive::u64,
       }
       #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
@@ -18319,7 +18319,7 @@ pub mod api {
           ::subxt::ext::sp_core::crypto::AccountId32,
           ::core::primitive::u32,
         >,
-        pub call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+        pub call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
       }
       pub struct TransactionApi;
       impl TransactionApi {
@@ -18335,7 +18335,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn sudo(
           &self,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<Sudo> {
           ::subxt::tx::StaticTxPayload::new(
             "Sudo",
@@ -18362,7 +18362,7 @@ pub mod api {
         #[doc = "# </weight>"]
         pub fn sudo_unchecked_weight(
           &self,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
           weight: ::core::primitive::u64,
         ) -> ::subxt::tx::StaticTxPayload<SudoUncheckedWeight> {
           ::subxt::tx::StaticTxPayload::new(
@@ -18424,7 +18424,7 @@ pub mod api {
             ::subxt::ext::sp_core::crypto::AccountId32,
             ::core::primitive::u32,
           >,
-          call: runtime_types::tidechain_runtime::Call,
+          call: runtime_types::lagoon_runtime::Call,
         ) -> ::subxt::tx::StaticTxPayload<SudoAs> {
           ::subxt::tx::StaticTxPayload::new(
             "Sudo",
@@ -22304,6 +22304,337 @@ pub mod api {
         Initialization,
       }
     }
+    pub mod lagoon_runtime {
+      use super::runtime_types;
+      pub mod config {
+        use super::runtime_types;
+        pub mod consensus {
+          use super::runtime_types;
+          #[derive(
+            :: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug,
+          )]
+          pub struct NposCompactSolution16 {
+            pub votes1: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u16)>,
+            pub votes2: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              (
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ),
+              ::core::primitive::u16,
+            )>,
+            pub votes3: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 2usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes4: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 3usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes5: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 4usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes6: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 5usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes7: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 6usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes8: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 7usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes9: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 8usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes10: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 9usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes11: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 10usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes12: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 11usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes13: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 12usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes14: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 13usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes15: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 14usize],
+              ::core::primitive::u16,
+            )>,
+            pub votes16: ::std::vec::Vec<(
+              ::core::primitive::u32,
+              [(
+                ::core::primitive::u16,
+                runtime_types::sp_arithmetic::per_things::PerU16,
+              ); 15usize],
+              ::core::primitive::u16,
+            )>,
+          }
+        }
+        pub mod proxy {
+          use super::runtime_types;
+          #[derive(
+            :: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug,
+          )]
+          pub enum ProxyType {
+            #[codec(index = 0)]
+            Any,
+            #[codec(index = 1)]
+            NonTransfer,
+            #[codec(index = 2)]
+            Governance,
+            #[codec(index = 3)]
+            Staking,
+          }
+        }
+      }
+      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
+      pub enum Call {
+        #[codec(index = 0)]
+        System(runtime_types::frame_system::pallet::Call),
+        #[codec(index = 1)]
+        Babe(runtime_types::pallet_babe::pallet::Call),
+        #[codec(index = 2)]
+        Timestamp(runtime_types::pallet_timestamp::pallet::Call),
+        #[codec(index = 3)]
+        Indices(runtime_types::pallet_indices::pallet::Call),
+        #[codec(index = 4)]
+        Balances(runtime_types::pallet_balances::pallet::Call),
+        #[codec(index = 6)]
+        Authorship(runtime_types::pallet_authorship::pallet::Call),
+        #[codec(index = 7)]
+        Staking(runtime_types::pallet_staking::pallet::pallet::Call),
+        #[codec(index = 10)]
+        Session(runtime_types::pallet_session::pallet::Call),
+        #[codec(index = 11)]
+        Grandpa(runtime_types::pallet_grandpa::pallet::Call),
+        #[codec(index = 12)]
+        ImOnline(runtime_types::pallet_im_online::pallet::Call),
+        #[codec(index = 14)]
+        Democracy(runtime_types::pallet_democracy::pallet::Call),
+        #[codec(index = 15)]
+        Council(runtime_types::pallet_collective::pallet::Call),
+        #[codec(index = 16)]
+        TechnicalCommittee(runtime_types::pallet_collective::pallet::Call),
+        #[codec(index = 17)]
+        Elections(runtime_types::pallet_elections_phragmen::pallet::Call),
+        #[codec(index = 18)]
+        TechnicalMembership(runtime_types::pallet_membership::pallet::Call),
+        #[codec(index = 19)]
+        Treasury(runtime_types::pallet_treasury::pallet::Call),
+        #[codec(index = 20)]
+        Utility(runtime_types::pallet_utility::pallet::Call),
+        #[codec(index = 21)]
+        Identity(runtime_types::pallet_identity::pallet::Call),
+        #[codec(index = 22)]
+        ElectionProviderMultiPhase(
+          runtime_types::pallet_election_provider_multi_phase::pallet::Call,
+        ),
+        #[codec(index = 23)]
+        Recovery(runtime_types::pallet_recovery::pallet::Call),
+        #[codec(index = 24)]
+        Scheduler(runtime_types::pallet_scheduler::pallet::Call),
+        #[codec(index = 25)]
+        Proxy(runtime_types::pallet_proxy::pallet::Call),
+        #[codec(index = 26)]
+        Multisig(runtime_types::pallet_multisig::pallet::Call),
+        #[codec(index = 27)]
+        Bounties(runtime_types::pallet_bounties::pallet::Call),
+        #[codec(index = 28)]
+        Assets(runtime_types::pallet_assets::pallet::Call),
+        #[codec(index = 29)]
+        BagsList(runtime_types::pallet_bags_list::pallet::Call),
+        #[codec(index = 30)]
+        Preimage(runtime_types::pallet_preimage::pallet::Call),
+        #[codec(index = 31)]
+        Sudo(runtime_types::pallet_sudo::pallet::Call),
+        #[codec(index = 50)]
+        Tidefi(runtime_types::pallet_tidefi::pallet::Call),
+        #[codec(index = 51)]
+        TidefiStaking(runtime_types::pallet_tidefi_stake::pallet::Call),
+        #[codec(index = 52)]
+        Quorum(runtime_types::pallet_quorum::pallet::Call),
+        #[codec(index = 53)]
+        Oracle(runtime_types::pallet_oracle::pallet::Call),
+        #[codec(index = 54)]
+        Security(runtime_types::pallet_security::pallet::Call),
+        #[codec(index = 56)]
+        AssetRegistry(runtime_types::pallet_asset_registry::pallet::Call),
+        #[codec(index = 58)]
+        Vesting(runtime_types::pallet_vesting::module::Call),
+      }
+      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
+      pub enum Event {
+        #[codec(index = 0)]
+        System(runtime_types::frame_system::pallet::Event),
+        #[codec(index = 3)]
+        Indices(runtime_types::pallet_indices::pallet::Event),
+        #[codec(index = 4)]
+        Balances(runtime_types::pallet_balances::pallet::Event),
+        #[codec(index = 5)]
+        TransactionPayment(runtime_types::pallet_transaction_payment::pallet::Event),
+        #[codec(index = 7)]
+        Staking(runtime_types::pallet_staking::pallet::pallet::Event),
+        #[codec(index = 8)]
+        Offences(runtime_types::pallet_offences::pallet::Event),
+        #[codec(index = 10)]
+        Session(runtime_types::pallet_session::pallet::Event),
+        #[codec(index = 11)]
+        Grandpa(runtime_types::pallet_grandpa::pallet::Event),
+        #[codec(index = 12)]
+        ImOnline(runtime_types::pallet_im_online::pallet::Event),
+        #[codec(index = 14)]
+        Democracy(runtime_types::pallet_democracy::pallet::Event),
+        #[codec(index = 15)]
+        Council(runtime_types::pallet_collective::pallet::Event),
+        #[codec(index = 16)]
+        TechnicalCommittee(runtime_types::pallet_collective::pallet::Event),
+        #[codec(index = 17)]
+        Elections(runtime_types::pallet_elections_phragmen::pallet::Event),
+        #[codec(index = 18)]
+        TechnicalMembership(runtime_types::pallet_membership::pallet::Event),
+        #[codec(index = 19)]
+        Treasury(runtime_types::pallet_treasury::pallet::Event),
+        #[codec(index = 20)]
+        Utility(runtime_types::pallet_utility::pallet::Event),
+        #[codec(index = 21)]
+        Identity(runtime_types::pallet_identity::pallet::Event),
+        #[codec(index = 22)]
+        ElectionProviderMultiPhase(
+          runtime_types::pallet_election_provider_multi_phase::pallet::Event,
+        ),
+        #[codec(index = 23)]
+        Recovery(runtime_types::pallet_recovery::pallet::Event),
+        #[codec(index = 24)]
+        Scheduler(runtime_types::pallet_scheduler::pallet::Event),
+        #[codec(index = 25)]
+        Proxy(runtime_types::pallet_proxy::pallet::Event),
+        #[codec(index = 26)]
+        Multisig(runtime_types::pallet_multisig::pallet::Event),
+        #[codec(index = 27)]
+        Bounties(runtime_types::pallet_bounties::pallet::Event),
+        #[codec(index = 28)]
+        Assets(runtime_types::pallet_assets::pallet::Event),
+        #[codec(index = 29)]
+        BagsList(runtime_types::pallet_bags_list::pallet::Event),
+        #[codec(index = 30)]
+        Preimage(runtime_types::pallet_preimage::pallet::Event),
+        #[codec(index = 31)]
+        Sudo(runtime_types::pallet_sudo::pallet::Event),
+        #[codec(index = 50)]
+        Tidefi(runtime_types::pallet_tidefi::pallet::Event),
+        #[codec(index = 51)]
+        TidefiStaking(runtime_types::pallet_tidefi_stake::pallet::Event),
+        #[codec(index = 52)]
+        Quorum(runtime_types::pallet_quorum::pallet::Event),
+        #[codec(index = 53)]
+        Oracle(runtime_types::pallet_oracle::pallet::Event),
+        #[codec(index = 54)]
+        Security(runtime_types::pallet_security::pallet::Event),
+        #[codec(index = 55)]
+        Fees(runtime_types::pallet_fees::pallet::Event),
+        #[codec(index = 56)]
+        AssetRegistry(runtime_types::pallet_asset_registry::pallet::Event),
+        #[codec(index = 57)]
+        Sunrise(runtime_types::pallet_sunrise::pallet::Event),
+        #[codec(index = 58)]
+        Vesting(runtime_types::pallet_vesting::module::Event),
+      }
+      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
+      pub enum OriginCaller {
+        #[codec(index = 0)]
+        system(
+          runtime_types::frame_support::dispatch::RawOrigin<
+            ::subxt::ext::sp_core::crypto::AccountId32,
+          >,
+        ),
+        #[codec(index = 15)]
+        Council(
+          runtime_types::pallet_collective::RawOrigin<::subxt::ext::sp_core::crypto::AccountId32>,
+        ),
+        #[codec(index = 16)]
+        TechnicalCommittee(
+          runtime_types::pallet_collective::RawOrigin<::subxt::ext::sp_core::crypto::AccountId32>,
+        ),
+        #[codec(index = 3)]
+        Void(runtime_types::sp_core::Void),
+      }
+      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
+      pub struct Runtime;
+      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
+      pub struct SessionKeys {
+        pub grandpa: runtime_types::sp_finality_grandpa::app::Public,
+        pub babe: runtime_types::sp_consensus_babe::app::Public,
+        pub im_online: runtime_types::pallet_im_online::sr25519::app_sr25519::Public,
+        pub authority_discovery: runtime_types::sp_authority_discovery::app::Public,
+      }
+    }
     pub mod pallet_asset_registry {
       use super::runtime_types;
       pub mod pallet {
@@ -24010,7 +24341,7 @@ pub mod api {
           #[doc = "- 1 event"]
           #[doc = "# </weight>"]
           execute {
-            proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
             #[codec(compact)]
             length_bound: ::core::primitive::u32,
           },
@@ -24045,7 +24376,7 @@ pub mod api {
           propose {
             #[codec(compact)]
             threshold: ::core::primitive::u32,
-            proposal: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            proposal: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
             #[codec(compact)]
             length_bound: ::core::primitive::u32,
           },
@@ -24959,7 +25290,7 @@ pub mod api {
           submit_unsigned {
             raw_solution: ::std::boxed::Box<
               runtime_types::pallet_election_provider_multi_phase::RawSolution<
-                runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+                runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
               >,
             >,
             witness: runtime_types::pallet_election_provider_multi_phase::SolutionOrSnapshotSize,
@@ -25002,7 +25333,7 @@ pub mod api {
           submit {
             raw_solution: ::std::boxed::Box<
               runtime_types::pallet_election_provider_multi_phase::RawSolution<
-                runtime_types::tidechain_runtime::config::consensus::NposCompactSolution16,
+                runtime_types::lagoon_runtime::config::consensus::NposCompactSolution16,
               >,
             >,
           },
@@ -26546,7 +26877,7 @@ pub mod api {
           #[doc = "# </weight>"]
           as_multi_threshold_1 {
             other_signatories: ::std::vec::Vec<::subxt::ext::sp_core::crypto::AccountId32>,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 1)]
           #[doc = "Register approval for a dispatch to be made from a deterministic composite account if"]
@@ -26600,7 +26931,7 @@ pub mod api {
             maybe_timepoint: ::core::option::Option<
               runtime_types::pallet_multisig::Timepoint<::core::primitive::u32>,
             >,
-            call: ::subxt::utils::WrapperKeepOpaque<runtime_types::tidechain_runtime::Call>,
+            call: ::subxt::utils::WrapperKeepOpaque<runtime_types::lagoon_runtime::Call>,
             store_call: ::core::primitive::bool,
             max_weight: ::core::primitive::u64,
           },
@@ -27152,8 +27483,8 @@ pub mod api {
           proxy {
             real: ::subxt::ext::sp_core::crypto::AccountId32,
             force_proxy_type:
-              ::core::option::Option<runtime_types::tidechain_runtime::config::proxy::ProxyType>,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+              ::core::option::Option<runtime_types::lagoon_runtime::config::proxy::ProxyType>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 1)]
           #[doc = "Register a proxy account for the sender that is able to make calls on its behalf."]
@@ -27171,7 +27502,7 @@ pub mod api {
           #[doc = "# </weight>"]
           add_proxy {
             delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             delay: ::core::primitive::u32,
           },
           #[codec(index = 2)]
@@ -27188,7 +27519,7 @@ pub mod api {
           #[doc = "# </weight>"]
           remove_proxy {
             delegate: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             delay: ::core::primitive::u32,
           },
           #[codec(index = 3)]
@@ -27228,7 +27559,7 @@ pub mod api {
           #[doc = "# </weight>"]
           #[doc = "TODO: Might be over counting 1 read"]
           anonymous {
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             delay: ::core::primitive::u32,
             index: ::core::primitive::u16,
           },
@@ -27255,7 +27586,7 @@ pub mod api {
           #[doc = "# </weight>"]
           kill_anonymous {
             spawner: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             index: ::core::primitive::u16,
             #[codec(compact)]
             height: ::core::primitive::u32,
@@ -27352,8 +27683,8 @@ pub mod api {
             delegate: ::subxt::ext::sp_core::crypto::AccountId32,
             real: ::subxt::ext::sp_core::crypto::AccountId32,
             force_proxy_type:
-              ::core::option::Option<runtime_types::tidechain_runtime::config::proxy::ProxyType>,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+              ::core::option::Option<runtime_types::lagoon_runtime::config::proxy::ProxyType>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
         }
         #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
@@ -27398,7 +27729,7 @@ pub mod api {
           AnonymousCreated {
             anonymous: ::subxt::ext::sp_core::crypto::AccountId32,
             who: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             disambiguation_index: ::core::primitive::u16,
           },
           #[codec(index = 2)]
@@ -27413,7 +27744,7 @@ pub mod api {
           ProxyAdded {
             delegator: ::subxt::ext::sp_core::crypto::AccountId32,
             delegatee: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             delay: ::core::primitive::u32,
           },
           #[codec(index = 4)]
@@ -27421,7 +27752,7 @@ pub mod api {
           ProxyRemoved {
             delegator: ::subxt::ext::sp_core::crypto::AccountId32,
             delegatee: ::subxt::ext::sp_core::crypto::AccountId32,
-            proxy_type: runtime_types::tidechain_runtime::config::proxy::ProxyType,
+            proxy_type: runtime_types::lagoon_runtime::config::proxy::ProxyType,
             delay: ::core::primitive::u32,
           },
         }
@@ -27657,7 +27988,7 @@ pub mod api {
           #[doc = "- `call`: The call you want to make with the recovered account."]
           as_recovered {
             account: ::subxt::ext::sp_core::crypto::AccountId32,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 1)]
           #[doc = "Allow ROOT to bypass the recovery process and set an a rescuer account"]
@@ -27901,7 +28232,7 @@ pub mod api {
             priority: ::core::primitive::u8,
             call: ::std::boxed::Box<
               runtime_types::frame_support::traits::schedule::MaybeHashed<
-                runtime_types::tidechain_runtime::Call,
+                runtime_types::lagoon_runtime::Call,
                 ::subxt::ext::sp_core::H256,
               >,
             >,
@@ -27922,7 +28253,7 @@ pub mod api {
             priority: ::core::primitive::u8,
             call: ::std::boxed::Box<
               runtime_types::frame_support::traits::schedule::MaybeHashed<
-                runtime_types::tidechain_runtime::Call,
+                runtime_types::lagoon_runtime::Call,
                 ::subxt::ext::sp_core::H256,
               >,
             >,
@@ -27945,7 +28276,7 @@ pub mod api {
             priority: ::core::primitive::u8,
             call: ::std::boxed::Box<
               runtime_types::frame_support::traits::schedule::MaybeHashed<
-                runtime_types::tidechain_runtime::Call,
+                runtime_types::lagoon_runtime::Call,
                 ::subxt::ext::sp_core::H256,
               >,
             >,
@@ -27964,7 +28295,7 @@ pub mod api {
             priority: ::core::primitive::u8,
             call: ::std::boxed::Box<
               runtime_types::frame_support::traits::schedule::MaybeHashed<
-                runtime_types::tidechain_runtime::Call,
+                runtime_types::lagoon_runtime::Call,
                 ::subxt::ext::sp_core::H256,
               >,
             >,
@@ -28093,7 +28424,7 @@ pub mod api {
           #[doc = "- DbWrites per key id: `KeyOwner`"]
           #[doc = "# </weight>"]
           set_keys {
-            keys: runtime_types::tidechain_runtime::SessionKeys,
+            keys: runtime_types::lagoon_runtime::SessionKeys,
             proof: ::std::vec::Vec<::core::primitive::u8>,
           },
           #[codec(index = 1)]
@@ -28943,7 +29274,7 @@ pub mod api {
           #[doc = "- Weight of derivative `call` execution + 10,000."]
           #[doc = "# </weight>"]
           sudo {
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 1)]
           #[doc = "Authenticates the sudo key and dispatches a function call with `Root` origin."]
@@ -28957,7 +29288,7 @@ pub mod api {
           #[doc = "- The weight of this call is defined by the caller."]
           #[doc = "# </weight>"]
           sudo_unchecked_weight {
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
             weight: ::core::primitive::u64,
           },
           #[codec(index = 2)]
@@ -28994,7 +29325,7 @@ pub mod api {
               ::subxt::ext::sp_core::crypto::AccountId32,
               ::core::primitive::u32,
             >,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
         }
         #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
@@ -29601,7 +29932,7 @@ pub mod api {
           #[doc = "and the error of the failed call. If all were successful, then the `BatchCompleted`"]
           #[doc = "event is deposited."]
           batch {
-            calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+            calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 1)]
           #[doc = "Send a call through an indexed pseudonym of the sender."]
@@ -29619,7 +29950,7 @@ pub mod api {
           #[doc = "The dispatch origin for this call must be _Signed_."]
           as_derivative {
             index: ::core::primitive::u16,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 2)]
           #[doc = "Send a batch of dispatch calls and atomically execute them."]
@@ -29637,7 +29968,7 @@ pub mod api {
           #[doc = "- Complexity: O(C) where C is the number of calls to be batched."]
           #[doc = "# </weight>"]
           batch_all {
-            calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+            calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 3)]
           #[doc = "Dispatches a function call with a provided origin."]
@@ -29651,8 +29982,8 @@ pub mod api {
           #[doc = "- Weight of derivative `call` execution + T::WeightInfo::dispatch_as()."]
           #[doc = "# </weight>"]
           dispatch_as {
-            as_origin: ::std::boxed::Box<runtime_types::tidechain_runtime::OriginCaller>,
-            call: ::std::boxed::Box<runtime_types::tidechain_runtime::Call>,
+            as_origin: ::std::boxed::Box<runtime_types::lagoon_runtime::OriginCaller>,
+            call: ::std::boxed::Box<runtime_types::lagoon_runtime::Call>,
           },
           #[codec(index = 4)]
           #[doc = "Send a batch of dispatch calls."]
@@ -29670,7 +30001,7 @@ pub mod api {
           #[doc = "- Complexity: O(C) where C is the number of calls to be batched."]
           #[doc = "# </weight>"]
           force_batch {
-            calls: ::std::vec::Vec<runtime_types::tidechain_runtime::Call>,
+            calls: ::std::vec::Vec<runtime_types::lagoon_runtime::Call>,
           },
         }
         #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
@@ -30771,337 +31102,6 @@ pub mod api {
         pub apis: ::std::vec::Vec<([::core::primitive::u8; 8usize], ::core::primitive::u32)>,
         pub transaction_version: ::core::primitive::u32,
         pub state_version: ::core::primitive::u8,
-      }
-    }
-    pub mod tidechain_runtime {
-      use super::runtime_types;
-      pub mod config {
-        use super::runtime_types;
-        pub mod consensus {
-          use super::runtime_types;
-          #[derive(
-            :: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug,
-          )]
-          pub struct NposCompactSolution16 {
-            pub votes1: ::std::vec::Vec<(::core::primitive::u32, ::core::primitive::u16)>,
-            pub votes2: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              (
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ),
-              ::core::primitive::u16,
-            )>,
-            pub votes3: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 2usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes4: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 3usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes5: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 4usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes6: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 5usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes7: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 6usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes8: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 7usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes9: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 8usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes10: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 9usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes11: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 10usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes12: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 11usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes13: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 12usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes14: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 13usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes15: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 14usize],
-              ::core::primitive::u16,
-            )>,
-            pub votes16: ::std::vec::Vec<(
-              ::core::primitive::u32,
-              [(
-                ::core::primitive::u16,
-                runtime_types::sp_arithmetic::per_things::PerU16,
-              ); 15usize],
-              ::core::primitive::u16,
-            )>,
-          }
-        }
-        pub mod proxy {
-          use super::runtime_types;
-          #[derive(
-            :: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug,
-          )]
-          pub enum ProxyType {
-            #[codec(index = 0)]
-            Any,
-            #[codec(index = 1)]
-            NonTransfer,
-            #[codec(index = 2)]
-            Governance,
-            #[codec(index = 3)]
-            Staking,
-          }
-        }
-      }
-      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
-      pub enum Call {
-        #[codec(index = 0)]
-        System(runtime_types::frame_system::pallet::Call),
-        #[codec(index = 1)]
-        Babe(runtime_types::pallet_babe::pallet::Call),
-        #[codec(index = 2)]
-        Timestamp(runtime_types::pallet_timestamp::pallet::Call),
-        #[codec(index = 3)]
-        Indices(runtime_types::pallet_indices::pallet::Call),
-        #[codec(index = 4)]
-        Balances(runtime_types::pallet_balances::pallet::Call),
-        #[codec(index = 6)]
-        Authorship(runtime_types::pallet_authorship::pallet::Call),
-        #[codec(index = 7)]
-        Staking(runtime_types::pallet_staking::pallet::pallet::Call),
-        #[codec(index = 10)]
-        Session(runtime_types::pallet_session::pallet::Call),
-        #[codec(index = 11)]
-        Grandpa(runtime_types::pallet_grandpa::pallet::Call),
-        #[codec(index = 12)]
-        ImOnline(runtime_types::pallet_im_online::pallet::Call),
-        #[codec(index = 14)]
-        Democracy(runtime_types::pallet_democracy::pallet::Call),
-        #[codec(index = 15)]
-        Council(runtime_types::pallet_collective::pallet::Call),
-        #[codec(index = 16)]
-        TechnicalCommittee(runtime_types::pallet_collective::pallet::Call),
-        #[codec(index = 17)]
-        Elections(runtime_types::pallet_elections_phragmen::pallet::Call),
-        #[codec(index = 18)]
-        TechnicalMembership(runtime_types::pallet_membership::pallet::Call),
-        #[codec(index = 19)]
-        Treasury(runtime_types::pallet_treasury::pallet::Call),
-        #[codec(index = 20)]
-        Utility(runtime_types::pallet_utility::pallet::Call),
-        #[codec(index = 21)]
-        Identity(runtime_types::pallet_identity::pallet::Call),
-        #[codec(index = 22)]
-        ElectionProviderMultiPhase(
-          runtime_types::pallet_election_provider_multi_phase::pallet::Call,
-        ),
-        #[codec(index = 23)]
-        Recovery(runtime_types::pallet_recovery::pallet::Call),
-        #[codec(index = 24)]
-        Scheduler(runtime_types::pallet_scheduler::pallet::Call),
-        #[codec(index = 25)]
-        Proxy(runtime_types::pallet_proxy::pallet::Call),
-        #[codec(index = 26)]
-        Multisig(runtime_types::pallet_multisig::pallet::Call),
-        #[codec(index = 27)]
-        Bounties(runtime_types::pallet_bounties::pallet::Call),
-        #[codec(index = 28)]
-        Assets(runtime_types::pallet_assets::pallet::Call),
-        #[codec(index = 29)]
-        BagsList(runtime_types::pallet_bags_list::pallet::Call),
-        #[codec(index = 30)]
-        Preimage(runtime_types::pallet_preimage::pallet::Call),
-        #[codec(index = 31)]
-        Sudo(runtime_types::pallet_sudo::pallet::Call),
-        #[codec(index = 50)]
-        Tidefi(runtime_types::pallet_tidefi::pallet::Call),
-        #[codec(index = 51)]
-        TidefiStaking(runtime_types::pallet_tidefi_stake::pallet::Call),
-        #[codec(index = 52)]
-        Quorum(runtime_types::pallet_quorum::pallet::Call),
-        #[codec(index = 53)]
-        Oracle(runtime_types::pallet_oracle::pallet::Call),
-        #[codec(index = 54)]
-        Security(runtime_types::pallet_security::pallet::Call),
-        #[codec(index = 56)]
-        AssetRegistry(runtime_types::pallet_asset_registry::pallet::Call),
-        #[codec(index = 58)]
-        Vesting(runtime_types::pallet_vesting::module::Call),
-      }
-      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
-      pub enum Event {
-        #[codec(index = 0)]
-        System(runtime_types::frame_system::pallet::Event),
-        #[codec(index = 3)]
-        Indices(runtime_types::pallet_indices::pallet::Event),
-        #[codec(index = 4)]
-        Balances(runtime_types::pallet_balances::pallet::Event),
-        #[codec(index = 5)]
-        TransactionPayment(runtime_types::pallet_transaction_payment::pallet::Event),
-        #[codec(index = 7)]
-        Staking(runtime_types::pallet_staking::pallet::pallet::Event),
-        #[codec(index = 8)]
-        Offences(runtime_types::pallet_offences::pallet::Event),
-        #[codec(index = 10)]
-        Session(runtime_types::pallet_session::pallet::Event),
-        #[codec(index = 11)]
-        Grandpa(runtime_types::pallet_grandpa::pallet::Event),
-        #[codec(index = 12)]
-        ImOnline(runtime_types::pallet_im_online::pallet::Event),
-        #[codec(index = 14)]
-        Democracy(runtime_types::pallet_democracy::pallet::Event),
-        #[codec(index = 15)]
-        Council(runtime_types::pallet_collective::pallet::Event),
-        #[codec(index = 16)]
-        TechnicalCommittee(runtime_types::pallet_collective::pallet::Event),
-        #[codec(index = 17)]
-        Elections(runtime_types::pallet_elections_phragmen::pallet::Event),
-        #[codec(index = 18)]
-        TechnicalMembership(runtime_types::pallet_membership::pallet::Event),
-        #[codec(index = 19)]
-        Treasury(runtime_types::pallet_treasury::pallet::Event),
-        #[codec(index = 20)]
-        Utility(runtime_types::pallet_utility::pallet::Event),
-        #[codec(index = 21)]
-        Identity(runtime_types::pallet_identity::pallet::Event),
-        #[codec(index = 22)]
-        ElectionProviderMultiPhase(
-          runtime_types::pallet_election_provider_multi_phase::pallet::Event,
-        ),
-        #[codec(index = 23)]
-        Recovery(runtime_types::pallet_recovery::pallet::Event),
-        #[codec(index = 24)]
-        Scheduler(runtime_types::pallet_scheduler::pallet::Event),
-        #[codec(index = 25)]
-        Proxy(runtime_types::pallet_proxy::pallet::Event),
-        #[codec(index = 26)]
-        Multisig(runtime_types::pallet_multisig::pallet::Event),
-        #[codec(index = 27)]
-        Bounties(runtime_types::pallet_bounties::pallet::Event),
-        #[codec(index = 28)]
-        Assets(runtime_types::pallet_assets::pallet::Event),
-        #[codec(index = 29)]
-        BagsList(runtime_types::pallet_bags_list::pallet::Event),
-        #[codec(index = 30)]
-        Preimage(runtime_types::pallet_preimage::pallet::Event),
-        #[codec(index = 31)]
-        Sudo(runtime_types::pallet_sudo::pallet::Event),
-        #[codec(index = 50)]
-        Tidefi(runtime_types::pallet_tidefi::pallet::Event),
-        #[codec(index = 51)]
-        TidefiStaking(runtime_types::pallet_tidefi_stake::pallet::Event),
-        #[codec(index = 52)]
-        Quorum(runtime_types::pallet_quorum::pallet::Event),
-        #[codec(index = 53)]
-        Oracle(runtime_types::pallet_oracle::pallet::Event),
-        #[codec(index = 54)]
-        Security(runtime_types::pallet_security::pallet::Event),
-        #[codec(index = 55)]
-        Fees(runtime_types::pallet_fees::pallet::Event),
-        #[codec(index = 56)]
-        AssetRegistry(runtime_types::pallet_asset_registry::pallet::Event),
-        #[codec(index = 57)]
-        Sunrise(runtime_types::pallet_sunrise::pallet::Event),
-        #[codec(index = 58)]
-        Vesting(runtime_types::pallet_vesting::module::Event),
-      }
-      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
-      pub enum OriginCaller {
-        #[codec(index = 0)]
-        system(
-          runtime_types::frame_support::dispatch::RawOrigin<
-            ::subxt::ext::sp_core::crypto::AccountId32,
-          >,
-        ),
-        #[codec(index = 15)]
-        Council(
-          runtime_types::pallet_collective::RawOrigin<::subxt::ext::sp_core::crypto::AccountId32>,
-        ),
-        #[codec(index = 16)]
-        TechnicalCommittee(
-          runtime_types::pallet_collective::RawOrigin<::subxt::ext::sp_core::crypto::AccountId32>,
-        ),
-        #[codec(index = 3)]
-        Void(runtime_types::sp_core::Void),
-      }
-      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
-      pub struct Runtime;
-      #[derive(:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Debug)]
-      pub struct SessionKeys {
-        pub grandpa: runtime_types::sp_finality_grandpa::app::Public,
-        pub babe: runtime_types::sp_consensus_babe::app::Public,
-        pub im_online: runtime_types::pallet_im_online::sr25519::app_sr25519::Public,
-        pub authority_discovery: runtime_types::sp_authority_discovery::app::Public,
       }
     }
     pub mod tidefi_primitives {
