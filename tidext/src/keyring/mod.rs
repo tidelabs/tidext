@@ -16,7 +16,7 @@
 
 //! Tidext official keyring.
 use crate::Signer;
-use subxt::sp_core::sr25519;
+use subxt::ext::sp_core::sr25519;
 
 #[cfg_attr(feature = "keyring-stronghold", path = "stronghold.rs")]
 #[cfg_attr(

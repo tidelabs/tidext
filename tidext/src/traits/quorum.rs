@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{Client, Error};
+use crate::{with_runtime, Client, Error};
 use async_trait::async_trait;
 use tidefi_primitives::{
   AccountId, AssetId, BlockNumber, Hash, ProposalType, ProposalVotes, Withdrawal,
@@ -85,99 +85,153 @@ impl QuorumExt for Client {
     )>,
     Error,
   > {
-    let proposals = self.runtime().storage().quorum().proposals(None).await?;
+    let proposals = with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .storage()
+        .fetch(&current_runtime.storage().quorum().proposals(), None)
+        .await?
+        .unwrap_or_default()
+      }
+    };
     Ok(proposals)
   }
 
   async fn get_burned_queue(
     &self,
   ) -> Result<Vec<(Hash, Withdrawal<AccountId, BlockNumber, Vec<u8>>)>, Error> {
-    let proposals = self.runtime().storage().quorum().burned_queue(None).await?;
-    Ok(proposals)
+    let queue = with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .storage()
+        .fetch(&current_runtime.storage().quorum().burned_queue(), None)
+        .await?
+        .unwrap_or_default()
+      }
+    };
+    Ok(queue)
   }
 
   async fn get_proposal(
     &self,
     proposal: Hash,
   ) -> Result<Option<ProposalVotes<BlockNumber, Vec<AccountId>>>, Error> {
-    let proposals = self
-      .runtime()
-      .storage()
-      .quorum()
-      .votes(&proposal, None)
-      .await?;
-    Ok(proposals)
+    let proposal = with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .storage()
+        .fetch(&current_runtime.storage().quorum().votes(proposal), None)
+        .await?
+      }
+    };
+    Ok(proposal)
   }
 
   async fn submit_proposal(
     &self,
     proposal: ProposalType<AccountId, BlockNumber, Vec<u8>, Vec<AccountId>>,
   ) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .quorum()
-      .submit_proposal(proposal)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().quorum().submit_proposal(proposal), self.signer()?)
+        .await?
+      }
+    };
+
     Ok(())
   }
 
   async fn acknowledge_proposal(&self, proposal: Hash) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .quorum()
-      .acknowledge_proposal(proposal)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().quorum().acknowledge_proposal(proposal), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn acknowledge_burned(&self, proposal: Hash) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .quorum()
-      .acknowledge_burned(proposal)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().quorum().acknowledge_burned(proposal), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn reject_proposal(&self, proposal: Hash) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .quorum()
-      .reject_proposal(proposal)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().quorum().reject_proposal(proposal), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn submit_public_keys(&self, public_keys: Vec<(AssetId, Vec<u8>)>) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .quorum()
-      .submit_public_keys(public_keys)?
-      .sign_and_submit_then_watch_default(self.signer()?)
-      .await?
-      .wait_for_finalized_success()
-      .await
-      .map_err(|err| Error::QuorumInit(err.to_string()))?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_then_watch_default(&current_runtime.tx().quorum().submit_public_keys(public_keys), self.signer()?)
+        .await?
+      }
+    }
+    .wait_for_finalized_success()
+    .await
+    .map_err(|err| Error::QuorumInit(err.to_string()))?;
+
     Ok(())
   }
 
   async fn is_quorum_member(&self, account_id: &AccountId) -> Result<bool, Error> {
-    let is_member = self
-      .runtime()
-      .storage()
-      .quorum()
-      .members(account_id, None)
-      .await?
-      .unwrap_or(false);
+    let is_member = with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .storage()
+        .fetch(&current_runtime.storage().quorum().members(account_id), None)
+        .await?
+        .unwrap_or(false)
+      }
+    };
     Ok(is_member)
   }
 }

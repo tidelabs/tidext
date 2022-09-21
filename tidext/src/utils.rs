@@ -16,6 +16,24 @@
 
 use serde::{Deserialize, Serialize};
 
+#[macro_export]
+macro_rules! with_runtime {
+	{
+		$self:ident,
+		$client:ident,
+		{
+			$( $code:tt )*
+		}
+	} => {
+		match $self.runtime_type() {
+			#[cfg(feature = "tidechain-native")]
+			$crate::TidefiRuntime::Tidechain($client) => { $( $code )* },
+			#[cfg(feature = "lagoon-native")]
+			$crate::TidefiRuntime::Lagoon($client) => { $( $code )* },
+		}
+	}
+}
+
 /// Make RPC call to Tidechain
 ///
 /// # Example
@@ -36,36 +54,10 @@ macro_rules! make_rpc_call {
   ($self:ident, $call:literal, $res:ty, $($params: expr),*) => {{
     $self
       .runtime()
-      .client
       .rpc()
-      .client
       .request::<$res>(&format!("{}", $call), rpc_params![$($params),*])
       .await
   }};
-}
-
-/// Query Tidechain storage
-///
-/// # Example
-///
-/// ```no_run
-/// use tidext::{query_storage, primitives::CurrencyId};
-///
-/// let tdfy_staking_pool = query_storage!(
-///   client_instance,
-///   tidefi_staking,
-///   staking_pool,
-///   &CurrencyId::Tdfy
-/// )?;
-/// ```
-#[macro_export]
-macro_rules! query_storage {
-  ($self:ident, $pallet:ident, $item:ident, $($params: expr),*) => {{
-    $self.runtime().storage().$pallet().$item($($params),*, None).await
-  }};
-  ($self:ident, $pallet:ident, $item:ident) => {{
-   $self.runtime().storage().$pallet().$item(None).await
- }};
 }
 
 /// Get latest Tidechain block
@@ -74,7 +66,6 @@ macro_rules! latest_block {
   ($self:ident) => {{
     $self
       .runtime()
-      .client
       .rpc()
       .block_hash(None)
       .await?
