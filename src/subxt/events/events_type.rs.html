@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/ff37576/subxt/src/events/events_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>events_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/events/events_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>events_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -819,347 +819,72 @@
 <span id="814">814</span>
 <span id="815">815</span>
 <span id="816">816</span>
-<span id="817">817</span>
-<span id="818">818</span>
-<span id="819">819</span>
-<span id="820">820</span>
-<span id="821">821</span>
-<span id="822">822</span>
-<span id="823">823</span>
-<span id="824">824</span>
-<span id="825">825</span>
-<span id="826">826</span>
-<span id="827">827</span>
-<span id="828">828</span>
-<span id="829">829</span>
-<span id="830">830</span>
-<span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
-<span id="839">839</span>
-<span id="840">840</span>
-<span id="841">841</span>
-<span id="842">842</span>
-<span id="843">843</span>
-<span id="844">844</span>
-<span id="845">845</span>
-<span id="846">846</span>
-<span id="847">847</span>
-<span id="848">848</span>
-<span id="849">849</span>
-<span id="850">850</span>
-<span id="851">851</span>
-<span id="852">852</span>
-<span id="853">853</span>
-<span id="854">854</span>
-<span id="855">855</span>
-<span id="856">856</span>
-<span id="857">857</span>
-<span id="858">858</span>
-<span id="859">859</span>
-<span id="860">860</span>
-<span id="861">861</span>
-<span id="862">862</span>
-<span id="863">863</span>
-<span id="864">864</span>
-<span id="865">865</span>
-<span id="866">866</span>
-<span id="867">867</span>
-<span id="868">868</span>
-<span id="869">869</span>
-<span id="870">870</span>
-<span id="871">871</span>
-<span id="872">872</span>
-<span id="873">873</span>
-<span id="874">874</span>
-<span id="875">875</span>
-<span id="876">876</span>
-<span id="877">877</span>
-<span id="878">878</span>
-<span id="879">879</span>
-<span id="880">880</span>
-<span id="881">881</span>
-<span id="882">882</span>
-<span id="883">883</span>
-<span id="884">884</span>
-<span id="885">885</span>
-<span id="886">886</span>
-<span id="887">887</span>
-<span id="888">888</span>
-<span id="889">889</span>
-<span id="890">890</span>
-<span id="891">891</span>
-<span id="892">892</span>
-<span id="893">893</span>
-<span id="894">894</span>
-<span id="895">895</span>
-<span id="896">896</span>
-<span id="897">897</span>
-<span id="898">898</span>
-<span id="899">899</span>
-<span id="900">900</span>
-<span id="901">901</span>
-<span id="902">902</span>
-<span id="903">903</span>
-<span id="904">904</span>
-<span id="905">905</span>
-<span id="906">906</span>
-<span id="907">907</span>
-<span id="908">908</span>
-<span id="909">909</span>
-<span id="910">910</span>
-<span id="911">911</span>
-<span id="912">912</span>
-<span id="913">913</span>
-<span id="914">914</span>
-<span id="915">915</span>
-<span id="916">916</span>
-<span id="917">917</span>
-<span id="918">918</span>
-<span id="919">919</span>
-<span id="920">920</span>
-<span id="921">921</span>
-<span id="922">922</span>
-<span id="923">923</span>
-<span id="924">924</span>
-<span id="925">925</span>
-<span id="926">926</span>
-<span id="927">927</span>
-<span id="928">928</span>
-<span id="929">929</span>
-<span id="930">930</span>
-<span id="931">931</span>
-<span id="932">932</span>
-<span id="933">933</span>
-<span id="934">934</span>
-<span id="935">935</span>
-<span id="936">936</span>
-<span id="937">937</span>
-<span id="938">938</span>
-<span id="939">939</span>
-<span id="940">940</span>
-<span id="941">941</span>
-<span id="942">942</span>
-<span id="943">943</span>
-<span id="944">944</span>
-<span id="945">945</span>
-<span id="946">946</span>
-<span id="947">947</span>
-<span id="948">948</span>
-<span id="949">949</span>
-<span id="950">950</span>
-<span id="951">951</span>
-<span id="952">952</span>
-<span id="953">953</span>
-<span id="954">954</span>
-<span id="955">955</span>
-<span id="956">956</span>
-<span id="957">957</span>
-<span id="958">958</span>
-<span id="959">959</span>
-<span id="960">960</span>
-<span id="961">961</span>
-<span id="962">962</span>
-<span id="963">963</span>
-<span id="964">964</span>
-<span id="965">965</span>
-<span id="966">966</span>
-<span id="967">967</span>
-<span id="968">968</span>
-<span id="969">969</span>
-<span id="970">970</span>
-<span id="971">971</span>
-<span id="972">972</span>
-<span id="973">973</span>
-<span id="974">974</span>
-<span id="975">975</span>
-<span id="976">976</span>
-<span id="977">977</span>
-<span id="978">978</span>
-<span id="979">979</span>
-<span id="980">980</span>
-<span id="981">981</span>
-<span id="982">982</span>
-<span id="983">983</span>
-<span id="984">984</span>
-<span id="985">985</span>
-<span id="986">986</span>
-<span id="987">987</span>
-<span id="988">988</span>
-<span id="989">989</span>
-<span id="990">990</span>
-<span id="991">991</span>
-<span id="992">992</span>
-<span id="993">993</span>
-<span id="994">994</span>
-<span id="995">995</span>
-<span id="996">996</span>
-<span id="997">997</span>
-<span id="998">998</span>
-<span id="999">999</span>
-<span id="1000">1000</span>
-<span id="1001">1001</span>
-<span id="1002">1002</span>
-<span id="1003">1003</span>
-<span id="1004">1004</span>
-<span id="1005">1005</span>
-<span id="1006">1006</span>
-<span id="1007">1007</span>
-<span id="1008">1008</span>
-<span id="1009">1009</span>
-<span id="1010">1010</span>
-<span id="1011">1011</span>
-<span id="1012">1012</span>
-<span id="1013">1013</span>
-<span id="1014">1014</span>
-<span id="1015">1015</span>
-<span id="1016">1016</span>
-<span id="1017">1017</span>
-<span id="1018">1018</span>
-<span id="1019">1019</span>
-<span id="1020">1020</span>
-<span id="1021">1021</span>
-<span id="1022">1022</span>
-<span id="1023">1023</span>
-<span id="1024">1024</span>
-<span id="1025">1025</span>
-<span id="1026">1026</span>
-<span id="1027">1027</span>
-<span id="1028">1028</span>
-<span id="1029">1029</span>
-<span id="1030">1030</span>
-<span id="1031">1031</span>
-<span id="1032">1032</span>
-<span id="1033">1033</span>
-<span id="1034">1034</span>
-<span id="1035">1035</span>
-<span id="1036">1036</span>
-<span id="1037">1037</span>
-<span id="1038">1038</span>
-<span id="1039">1039</span>
-<span id="1040">1040</span>
-<span id="1041">1041</span>
-<span id="1042">1042</span>
-<span id="1043">1043</span>
-<span id="1044">1044</span>
-<span id="1045">1045</span>
-<span id="1046">1046</span>
-<span id="1047">1047</span>
-<span id="1048">1048</span>
-<span id="1049">1049</span>
-<span id="1050">1050</span>
-<span id="1051">1051</span>
-<span id="1052">1052</span>
-<span id="1053">1053</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of subxt.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
-<span class="comment">//</span>
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="comment">// This file is dual-licensed as Apache-2.0 or GPL-3.0.</span>
+<span class="comment">// see LICENSE for license details.</span>
 
 <span class="doccomment">//! A representation of a block of events.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">error::BasicError</span>,
-    <span class="ident">Client</span>,
-    <span class="ident">Config</span>,
-    <span class="ident">Event</span>,
-    <span class="ident">Metadata</span>,
+<span class="kw">use</span> <span class="kw">super</span>::{
     <span class="ident">Phase</span>,
+    <span class="ident">StaticEvent</span>,
+};
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">error::Error</span>,
+    <span class="ident">metadata::EventMetadata</span>,
+    <span class="ident">Config</span>,
+    <span class="ident">Metadata</span>,
 };
 <span class="kw">use</span> <span class="ident">codec</span>::{
     <span class="ident">Compact</span>,
     <span class="ident">Decode</span>,
     <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">CodecError</span>,
-    <span class="ident">Input</span>,
 };
 <span class="kw">use</span> <span class="ident">derivative::Derivative</span>;
-<span class="kw">use</span> <span class="ident">parking_lot::RwLock</span>;
-<span class="kw">use</span> <span class="ident">sp_core</span>::{
-    <span class="ident">storage::StorageKey</span>,
-    <span class="ident">twox_128</span>,
-};
 <span class="kw">use</span> <span class="ident">std::sync::Arc</span>;
-
-<span class="doccomment">/// Obtain events at some block hash. The generic parameter is what we</span>
-<span class="doccomment">/// will attempt to decode each event into if using [`Events::iter()`],</span>
-<span class="doccomment">/// and is expected to be the outermost event enum that contains all of</span>
-<span class="doccomment">/// the possible events across all pallets.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Note:** This function is hidden from the documentation</span>
-<span class="doccomment">/// and is exposed only to be called via the codegen. Thus, prefer to use</span>
-<span class="doccomment">/// `api.events().at(block_hash)` over calling this directly.</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">at</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span><span class="op">&gt;</span>(
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;_</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">block_hash</span>: <span class="ident">T::Hash</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="ident">client</span>
-        .<span class="ident">rpc</span>()
-        .<span class="ident">storage</span>(<span class="kw-2">&amp;</span><span class="ident">system_events_key</span>(), <span class="prelude-val">Some</span>(<span class="ident">block_hash</span>))
-        .<span class="kw">await</span><span class="question-mark">?</span>
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="number">0</span>)
-        .<span class="ident">unwrap_or_else</span>(<span class="ident">Vec::new</span>);
-
-    <span class="comment">// event_bytes is a SCALE encoded vector of events. So, pluck the</span>
-    <span class="comment">// compact encoded length from the front, leaving the remaining bytes</span>
-    <span class="comment">// for our iterating to decode.</span>
-    <span class="comment">//</span>
-    <span class="comment">// Note: if we get no bytes back, avoid an error reading vec length</span>
-    <span class="comment">// and default to 0 events.</span>
-    <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">event_bytes</span>;
-    <span class="kw">let</span> <span class="ident">num_events</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Compact</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">cursor</span>).<span class="ident">unwrap_or</span>(<span class="ident">Compact</span>(<span class="number">0</span>)).<span class="number">0</span>;
-    <span class="kw">let</span> <span class="ident">event_bytes_len</span> <span class="op">=</span> <span class="ident">event_bytes</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="ident">remaining_len</span> <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-    <span class="ident">event_bytes</span>.<span class="ident">drain</span>(<span class="number">0</span>..<span class="ident">event_bytes_len</span> <span class="op">-</span> <span class="ident">remaining_len</span>);
-
-    <span class="prelude-val">Ok</span>(<span class="ident">Events</span> {
-        <span class="ident">metadata</span>: <span class="ident">client</span>.<span class="ident">metadata</span>(),
-        <span class="ident">block_hash</span>,
-        <span class="ident">event_bytes</span>,
-        <span class="ident">num_events</span>,
-        <span class="ident">_event_type</span>: <span class="ident">std::marker::PhantomData</span>,
-    })
-}
-
-<span class="comment">// The storage key needed to access events.</span>
-<span class="kw">fn</span> <span class="ident">system_events_key</span>() -&gt; <span class="ident">StorageKey</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">storage_key</span> <span class="op">=</span> <span class="ident">twox_128</span>(<span class="string">b&quot;System&quot;</span>).<span class="ident">to_vec</span>();
-    <span class="ident">storage_key</span>.<span class="ident">extend</span>(<span class="ident">twox_128</span>(<span class="string">b&quot;Events&quot;</span>).<span class="ident">to_vec</span>());
-    <span class="ident">StorageKey</span>(<span class="ident">storage_key</span>)
-}
 
 <span class="doccomment">/// A collection of events obtained from a block, bundled with the necessary</span>
 <span class="doccomment">/// information needed to decode and iterate over them.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Derivative</span>)]</span>
 <span class="attribute">#[<span class="ident">derivative</span>(<span class="ident">Debug</span>(<span class="ident">bound</span> <span class="op">=</span> <span class="string">&quot;&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span><span class="op">&gt;</span> {
-    <span class="ident">metadata</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> {
+    <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
     <span class="ident">block_hash</span>: <span class="ident">T::Hash</span>,
     <span class="comment">// Note; raw event bytes are prefixed with a Compact&lt;u32&gt; containing</span>
-    <span class="comment">// the number of events to be decoded. We should have stripped that off</span>
-    <span class="comment">// before storing the bytes here.</span>
-    <span class="ident">event_bytes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="comment">// the number of events to be decoded. The start_idx reflects that, so</span>
+    <span class="comment">// that we can skip over those bytes when decoding them</span>
+    <span class="ident">event_bytes</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
+    <span class="ident">start_idx</span>: <span class="ident">usize</span>,
     <span class="ident">num_events</span>: <span class="ident">u32</span>,
-    <span class="ident">_event_type</span>: <span class="ident">std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">Evs</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span><span class="op">&gt;</span> <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span> <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(
+        <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
+        <span class="ident">block_hash</span>: <span class="ident">T::Hash</span>,
+        <span class="ident">event_bytes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    ) -&gt; <span class="self">Self</span> {
+        <span class="comment">// event_bytes is a SCALE encoded vector of events. So, pluck the</span>
+        <span class="comment">// compact encoded length from the front, leaving the remaining bytes</span>
+        <span class="comment">// for our iterating to decode.</span>
+        <span class="comment">//</span>
+        <span class="comment">// Note: if we get no bytes back, avoid an error reading vec length</span>
+        <span class="comment">// and default to 0 events.</span>
+        <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">event_bytes</span>;
+        <span class="kw">let</span> <span class="ident">num_events</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Compact</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">cursor</span>).<span class="ident">unwrap_or</span>(<span class="ident">Compact</span>(<span class="number">0</span>)).<span class="number">0</span>;
+
+        <span class="comment">// Start decoding after the compact encoded bytes.</span>
+        <span class="kw">let</span> <span class="ident">start_idx</span> <span class="op">=</span> <span class="ident">event_bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
+
+        <span class="self">Self</span> {
+            <span class="ident">metadata</span>,
+            <span class="ident">block_hash</span>,
+            <span class="ident">event_bytes</span>: <span class="ident">event_bytes</span>.<span class="ident">into</span>(),
+            <span class="ident">start_idx</span>,
+            <span class="ident">num_events</span>,
+        }
+    }
+
     <span class="doccomment">/// The number of events.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="ident">num_events</span>
@@ -1176,147 +901,42 @@
         <span class="self">self</span>.<span class="ident">block_hash</span>
     }
 
-    <span class="doccomment">/// Iterate over the events, statically decoding them as we go.</span>
-    <span class="doccomment">/// If an event is encountered that cannot be statically decoded,</span>
-    <span class="doccomment">/// a [`codec::Error`] will be returned.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// If the generated code does not know about all of the pallets that exist</span>
-    <span class="doccomment">/// in the runtime being targeted, it may not know about all of the</span>
-    <span class="doccomment">/// events either, and so this method should be avoided in favout of [`Events::iter_raw()`],</span>
-    <span class="doccomment">/// which uses runtime metadata to skip over unknown events.</span>
+    <span class="doccomment">/// Iterate over all of the events, using metadata to dynamically</span>
+    <span class="doccomment">/// decode them as we go, and returning the raw bytes and other associated</span>
+    <span class="doccomment">/// details. If an error occurs, all subsequent iterations return `None`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span> {
-        <span class="kw">let</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">event_bytes</span>;
+    ) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EventDetails</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
+        <span class="comment">// The event bytes ignoring the compact encoded length on the front:</span>
+        <span class="kw">let</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">event_bytes</span>.<span class="ident">clone</span>();
+        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">metadata</span>.<span class="ident">clone</span>();
+        <span class="kw">let</span> <span class="ident">num_events</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">num_events</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">start_idx</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="ident">std::iter::from_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">event_bytes</span>[<span class="ident">pos</span>..];
-            <span class="kw">let</span> <span class="ident">start_len</span> <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-
-            <span class="kw">if</span> <span class="ident">start_len</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">num_events</span> <span class="op">==</span> <span class="ident">index</span> {
+            <span class="kw">if</span> <span class="ident">event_bytes</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">pos</span> <span class="op">|</span><span class="op">|</span> <span class="ident">num_events</span> <span class="op">==</span> <span class="ident">index</span> {
                 <span class="prelude-val">None</span>
             } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">decode_one_event</span> <span class="op">=</span> <span class="op">|</span><span class="op">|</span> -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">phase</span> <span class="op">=</span> <span class="ident">Phase::decode</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">ev</span> <span class="op">=</span> <span class="ident">Evs::decode</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">_topics</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">cursor</span>)<span class="question-mark">?</span>;
-                    <span class="prelude-val">Ok</span>((<span class="ident">phase</span>, <span class="ident">ev</span>))
-                };
-                <span class="kw">match</span> <span class="ident">decode_one_event</span>() {
-                    <span class="prelude-val">Ok</span>((<span class="ident">phase</span>, <span class="ident">event</span>)) =&gt; {
+                <span class="kw">match</span> <span class="ident">EventDetails::decode_from</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(
+                    <span class="ident">metadata</span>.<span class="ident">clone</span>(),
+                    <span class="ident">event_bytes</span>.<span class="ident">clone</span>(),
+                    <span class="ident">pos</span>,
+                    <span class="ident">index</span>,
+                ) {
+                    <span class="prelude-val">Ok</span>(<span class="ident">event_details</span>) =&gt; {
                         <span class="comment">// Skip over decoded bytes in next iteration:</span>
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">start_len</span> <span class="op">-</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-                        <span class="comment">// Gather the event details before incrementing the index for the next iter.</span>
-                        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">EventDetails</span> {
-                            <span class="ident">phase</span>,
-                            <span class="ident">index</span>,
-                            <span class="ident">event</span>,
-                        }));
+                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">event_details</span>.<span class="ident">bytes</span>().<span class="ident">len</span>();
+                        <span class="comment">// Increment the index:</span>
                         <span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">res</span>
+                        <span class="comment">// Return the event details:</span>
+                        <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">event_details</span>))
                     }
                     <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
                         <span class="comment">// By setting the position to the &quot;end&quot; of the event bytes,</span>
                         <span class="comment">// the cursor len will become 0 and the iterator will return `None`</span>
                         <span class="comment">// from now on:</span>
                         <span class="ident">pos</span> <span class="op">=</span> <span class="ident">event_bytes</span>.<span class="ident">len</span>();
-                        <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>))
-                    }
-                }
-            }
-        })
-    }
-
-    <span class="doccomment">/// Iterate over all of the events, using metadata to dynamically</span>
-    <span class="doccomment">/// decode them as we go, and returning the raw bytes and other associated</span>
-    <span class="doccomment">/// details. If an error occurs, all subsequent iterations return `None`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This method is safe to use even if you do not statically know about</span>
-    <span class="doccomment">/// all of the possible events; it splits events up using the metadata</span>
-    <span class="doccomment">/// obtained at runtime, which does.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_raw</span>(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawEventDetails</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span> {
-        <span class="kw">let</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">event_bytes</span>;
-
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> {
-            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">metadata</span>.<span class="ident">read</span>();
-            <span class="ident">metadata</span>.<span class="ident">clone</span>()
-        };
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="ident">std::iter::from_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">event_bytes</span>[<span class="ident">pos</span>..];
-            <span class="kw">let</span> <span class="ident">start_len</span> <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-
-            <span class="kw">if</span> <span class="ident">start_len</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">num_events</span> <span class="op">==</span> <span class="ident">index</span> {
-                <span class="prelude-val">None</span>
-            } <span class="kw">else</span> {
-                <span class="kw">match</span> <span class="ident">decode_raw_event_details</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">metadata</span>, <span class="ident">index</span>, <span class="ident">cursor</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">raw_event</span>) =&gt; {
-                        <span class="comment">// Skip over decoded bytes in next iteration:</span>
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">start_len</span> <span class="op">-</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-                        <span class="comment">// Increment the index:</span>
-                        <span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="comment">// Return the event details:</span>
-                        <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">raw_event</span>))
-                    }
-                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                        <span class="comment">// By setting the position to the &quot;end&quot; of the event bytes,</span>
-                        <span class="comment">// the cursor len will become 0 and the iterator will return `None`</span>
-                        <span class="comment">// from now on:</span>
-                        <span class="ident">pos</span> <span class="op">=</span> <span class="ident">event_bytes</span>.<span class="ident">len</span>();
-                        <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>))
-                    }
-                }
-            }
-        })
-    }
-
-    <span class="doccomment">/// Iterate over all of the events, using metadata to dynamically</span>
-    <span class="doccomment">/// decode them as we go, and returning the raw bytes and other associated</span>
-    <span class="doccomment">/// details. If an error occurs, all subsequent iterations return `None`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This method is safe to use even if you do not statically know about</span>
-    <span class="doccomment">/// all of the possible events; it splits events up using the metadata</span>
-    <span class="doccomment">/// obtained at runtime, which does.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Unlike [`Events::iter_raw()`] this consumes `self`, which can be useful</span>
-    <span class="doccomment">/// if you need to store the iterator somewhere and avoid lifetime issues.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_iter_raw</span>(
-        <span class="self">self</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawEventDetails</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;a</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> {
-            <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">metadata</span>.<span class="ident">read</span>();
-            <span class="ident">metadata</span>.<span class="ident">clone</span>()
-        };
-
-        <span class="ident">std::iter::from_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">event_bytes</span>[<span class="ident">pos</span>..];
-            <span class="kw">let</span> <span class="ident">start_len</span> <span class="op">=</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-
-            <span class="kw">if</span> <span class="ident">start_len</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">num_events</span> <span class="op">==</span> <span class="ident">index</span> {
-                <span class="prelude-val">None</span>
-            } <span class="kw">else</span> {
-                <span class="kw">match</span> <span class="ident">decode_raw_event_details</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">metadata</span>, <span class="ident">index</span>, <span class="ident">cursor</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">raw_event</span>) =&gt; {
-                        <span class="comment">// Skip over decoded bytes in next iteration:</span>
-                        <span class="ident">pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">start_len</span> <span class="op">-</span> <span class="ident">cursor</span>.<span class="ident">len</span>();
-                        <span class="comment">// Increment the index:</span>
-                        <span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                        <span class="comment">// Return the event details:</span>
-                        <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">raw_event</span>))
-                    }
-                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                        <span class="comment">// By setting the position to the &quot;end&quot; of the event bytes,</span>
-                        <span class="comment">// the cursor len will become 0 and the iterator will return `None`</span>
-                        <span class="comment">// from now on:</span>
-                        <span class="ident">pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">event_bytes</span>.<span class="ident">len</span>();
                         <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>))
                     }
                 }
@@ -1327,11 +947,8 @@
     <span class="doccomment">/// Iterate through the events using metadata to dynamically decode and skip</span>
     <span class="doccomment">/// them, and return only those which should decode to the provided `Ev` type.</span>
     <span class="doccomment">/// If an error occurs, all subsequent iterations return `None`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// **Note:** This method internally uses [`Events::iter_raw()`], so it is safe to</span>
-    <span class="doccomment">/// use even if you do not statically know about all of the possible events.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident">Event</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ev</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span> {
-        <span class="self">self</span>.<span class="ident">iter_raw</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">ev</span><span class="op">|</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident">StaticEvent</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ev</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span> {
+        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">ev</span><span class="op">|</span> {
             <span class="ident">ev</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">ev</span><span class="op">|</span> <span class="ident">ev</span>.<span class="ident">as_event</span>::<span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span>().<span class="ident">map_err</span>(<span class="ident">Into::into</span>))
                 .<span class="ident">transpose</span>()
         })
@@ -1339,136 +956,209 @@
 
     <span class="doccomment">/// Iterate through the events using metadata to dynamically decode and skip</span>
     <span class="doccomment">/// them, and return the first event found which decodes to the provided `Ev` type.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// **Note:** This method internally uses [`Events::iter_raw()`], so it is safe to</span>
-    <span class="doccomment">/// use even if you do not statically know about all of the possible events.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_first</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident">Event</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_first</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident">StaticEvent</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">find</span>::<span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span>().<span class="ident">next</span>().<span class="ident">transpose</span>()
     }
 
     <span class="doccomment">/// Find an event that decodes to the type provided. Returns true if it was found.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// **Note:** This method internally uses [`Events::iter_raw()`], so it is safe to</span>
-    <span class="doccomment">/// use even if you do not statically know about all of the possible events.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident"><span class="kw">crate</span>::Event</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">has</span><span class="op">&lt;</span><span class="ident">Ev</span>: <span class="ident">StaticEvent</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">find</span>::<span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span>().<span class="ident">next</span>().<span class="ident">transpose</span>()<span class="question-mark">?</span>.<span class="ident">is_some</span>())
     }
 }
 
-<span class="doccomment">/// A decoded event and associated details.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">Evs</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// During which [`Phase`] was the event produced?</span>
-    <span class="kw">pub</span> <span class="ident">phase</span>: <span class="ident">Phase</span>,
-    <span class="doccomment">/// What index is this event in the stored events for this block.</span>
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// The event itself.</span>
-    <span class="kw">pub</span> <span class="ident">event</span>: <span class="ident">Evs</span>,
+<span class="doccomment">/// The event details.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventDetails</span> {
+    <span class="ident">phase</span>: <span class="ident">Phase</span>,
+    <span class="ident">index</span>: <span class="ident">u32</span>,
+    <span class="ident">all_bytes</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
+    <span class="comment">// start of the bytes (phase, pallet/variant index and then fields and then topic to follow).</span>
+    <span class="ident">start_idx</span>: <span class="ident">usize</span>,
+    <span class="comment">// start of the fields (ie after phase nad pallet/variant index).</span>
+    <span class="ident">fields_start_idx</span>: <span class="ident">usize</span>,
+    <span class="comment">// end of the fields.</span>
+    <span class="ident">fields_end_idx</span>: <span class="ident">usize</span>,
+    <span class="comment">// end of everything (fields + topics)</span>
+    <span class="ident">end_idx</span>: <span class="ident">usize</span>,
+    <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
 }
 
-<span class="doccomment">/// A Value which has been decoded from some raw bytes.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">DecodedValue</span> <span class="op">=</span> <span class="ident">scale_value::Value</span><span class="op">&lt;</span><span class="ident">scale_value::scale::TypeId</span><span class="op">&gt;</span>;
+<span class="kw">impl</span> <span class="ident">EventDetails</span> {
+    <span class="comment">// Attempt to dynamically decode a single event from our events input.</span>
+    <span class="kw">fn</span> <span class="ident">decode_from</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span>(
+        <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
+        <span class="ident">all_bytes</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
+        <span class="ident">start_idx</span>: <span class="ident">usize</span>,
+        <span class="ident">index</span>: <span class="ident">u32</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EventDetails</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="ident">all_bytes</span>[<span class="ident">start_idx</span>..];
 
-<span class="doccomment">/// The raw bytes for an event with associated details about</span>
-<span class="doccomment">/// where and when it was emitted.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RawEventDetails</span> {
+        <span class="kw">let</span> <span class="ident">phase</span> <span class="op">=</span> <span class="ident">Phase::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">pallet_index</span> <span class="op">=</span> <span class="ident">u8::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">variant_index</span> <span class="op">=</span> <span class="ident">u8::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+
+        <span class="kw">let</span> <span class="ident">fields_start_idx</span> <span class="op">=</span> <span class="ident">all_bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">input</span>.<span class="ident">len</span>();
+
+        <span class="comment">// Get metadata for the event:</span>
+        <span class="kw">let</span> <span class="ident">event_metadata</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">event</span>(<span class="ident">pallet_index</span>, <span class="ident">variant_index</span>)<span class="question-mark">?</span>;
+        <span class="macro">tracing::debug!</span>(
+            <span class="string">&quot;Decoding Event &#39;{}::{}&#39;&quot;</span>,
+            <span class="ident">event_metadata</span>.<span class="ident">pallet</span>(),
+            <span class="ident">event_metadata</span>.<span class="ident">event</span>()
+        );
+
+        <span class="comment">// Skip over the bytes belonging to this event.</span>
+        <span class="kw">for</span> <span class="ident">field_metadata</span> <span class="kw">in</span> <span class="ident">event_metadata</span>.<span class="ident">fields</span>() {
+            <span class="comment">// Skip over the bytes for this field:</span>
+            <span class="ident">scale_decode::decode</span>(
+                <span class="ident">input</span>,
+                <span class="ident">field_metadata</span>.<span class="ident">type_id</span>(),
+                <span class="kw-2">&amp;</span><span class="ident">metadata</span>.<span class="ident">runtime_metadata</span>().<span class="ident">types</span>,
+                <span class="ident">scale_decode::visitor::IgnoreVisitor</span>,
+            )<span class="question-mark">?</span>;
+        }
+
+        <span class="comment">// the end of the field bytes.</span>
+        <span class="kw">let</span> <span class="ident">fields_end_idx</span> <span class="op">=</span> <span class="ident">all_bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">input</span>.<span class="ident">len</span>();
+
+        <span class="comment">// topics come after the event data in EventRecord. They aren&#39;t used for</span>
+        <span class="comment">// anything at the moment, so just decode and throw them away.</span>
+        <span class="kw">let</span> <span class="ident">_topics</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+
+        <span class="comment">// what bytes did we skip over in total, including topics.</span>
+        <span class="kw">let</span> <span class="ident">end_idx</span> <span class="op">=</span> <span class="ident">all_bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">input</span>.<span class="ident">len</span>();
+
+        <span class="prelude-val">Ok</span>(<span class="ident">EventDetails</span> {
+            <span class="ident">phase</span>,
+            <span class="ident">index</span>,
+            <span class="ident">start_idx</span>,
+            <span class="ident">fields_start_idx</span>,
+            <span class="ident">fields_end_idx</span>,
+            <span class="ident">end_idx</span>,
+            <span class="ident">all_bytes</span>,
+            <span class="ident">metadata</span>,
+        })
+    }
+
     <span class="doccomment">/// When was the event produced?</span>
-    <span class="kw">pub</span> <span class="ident">phase</span>: <span class="ident">Phase</span>,
-    <span class="doccomment">/// What index is this event in the stored events for this block.</span>
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// The name of the pallet from whence the Event originated.</span>
-    <span class="kw">pub</span> <span class="ident">pallet</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The index of the pallet from whence the Event originated.</span>
-    <span class="kw">pub</span> <span class="ident">pallet_index</span>: <span class="ident">u8</span>,
-    <span class="doccomment">/// The name of the pallet Event variant.</span>
-    <span class="kw">pub</span> <span class="ident">variant</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// The index of the pallet Event variant.</span>
-    <span class="kw">pub</span> <span class="ident">variant_index</span>: <span class="ident">u8</span>,
-    <span class="doccomment">/// The bytes representing the fields contained within the event.</span>
-    <span class="kw">pub</span> <span class="ident">bytes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Generic values representing each field of the event.</span>
-    <span class="kw">pub</span> <span class="ident">fields</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DecodedValue</span><span class="op">&gt;</span>,
-}
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">phase</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Phase</span> {
+        <span class="self">self</span>.<span class="ident">phase</span>
+    }
 
-<span class="kw">impl</span> <span class="ident">RawEventDetails</span> {
-    <span class="doccomment">/// Attempt to decode this [`RawEventDetails`] into a specific event.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_event</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Event</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>, <span class="ident">CodecError</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">pallet</span> <span class="op">==</span> <span class="ident">E::PALLET</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">variant</span> <span class="op">==</span> <span class="ident">E::EVENT</span> {
-            <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">E::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">bytes</span>[..])<span class="question-mark">?</span>))
+    <span class="doccomment">/// What index is this event in the stored events for this block.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="self">self</span>.<span class="ident">index</span>
+    }
+
+    <span class="doccomment">/// The index of the pallet that the event originated from.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pallet_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
+        <span class="comment">// Note: never panics; we expect these bytes to exist</span>
+        <span class="comment">// in order that the EventDetails could be created.</span>
+        <span class="self">self</span>.<span class="ident">all_bytes</span>[<span class="self">self</span>.<span class="ident">fields_start_idx</span> <span class="op">-</span> <span class="number">2</span>]
+    }
+
+    <span class="doccomment">/// The index of the event variant that the event originated from.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">variant_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
+        <span class="comment">// Note: never panics; we expect these bytes to exist</span>
+        <span class="comment">// in order that the EventDetails could be created.</span>
+        <span class="self">self</span>.<span class="ident">all_bytes</span>[<span class="self">self</span>.<span class="ident">fields_start_idx</span> <span class="op">-</span> <span class="number">1</span>]
+    }
+
+    <span class="doccomment">/// The name of the pallet from whence the Event originated.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pallet_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
+        <span class="self">self</span>.<span class="ident">event_metadata</span>().<span class="ident">pallet</span>()
+    }
+
+    <span class="doccomment">/// The name of the event (ie the name of the variant that it corresponds to).</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">variant_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
+        <span class="self">self</span>.<span class="ident">event_metadata</span>().<span class="ident">event</span>()
+    }
+
+    <span class="doccomment">/// Fetch the metadata for this event.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">event_metadata</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">EventMetadata</span> {
+        <span class="self">self</span>.<span class="ident">metadata</span>
+            .<span class="ident">event</span>(<span class="self">self</span>.<span class="ident">pallet_index</span>(), <span class="self">self</span>.<span class="ident">variant_index</span>())
+            .<span class="ident">expect</span>(<span class="string">&quot;this must exist in order to have produced the EventDetails&quot;</span>)
+    }
+
+    <span class="doccomment">/// Return _all_ of the bytes representing this event, which include, in order:</span>
+    <span class="doccomment">/// - The phase.</span>
+    <span class="doccomment">/// - Pallet and event index.</span>
+    <span class="doccomment">/// - Event fields.</span>
+    <span class="doccomment">/// - Event Topics.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">all_bytes</span>[<span class="self">self</span>.<span class="ident">start_idx</span>..<span class="self">self</span>.<span class="ident">end_idx</span>]
+    }
+
+    <span class="doccomment">/// Return the bytes representing the fields stored in this event.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">field_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">all_bytes</span>[<span class="self">self</span>.<span class="ident">fields_start_idx</span>..<span class="self">self</span>.<span class="ident">fields_end_idx</span>]
+    }
+
+    <span class="doccomment">/// Decode and provide the event fields back in the form of a [`scale_value::Composite`]</span>
+    <span class="doccomment">/// type which represents the named or unnamed fields that were</span>
+    <span class="doccomment">/// present in the event.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">field_values</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">scale_value::Composite</span><span class="op">&lt;</span><span class="ident">scale_value::scale::TypeId</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">field_bytes</span>();
+        <span class="kw">let</span> <span class="ident">event_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">event_metadata</span>();
+
+        <span class="comment">// If the first field has a name, we assume that the rest do too (it&#39;ll either</span>
+        <span class="comment">// be a named struct or a tuple type). If no fields, assume unnamed.</span>
+        <span class="kw">let</span> <span class="ident">is_named</span> <span class="op">=</span> <span class="ident">event_metadata</span>
+            .<span class="ident">fields</span>()
+            .<span class="ident">get</span>(<span class="number">0</span>)
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">fm</span><span class="op">|</span> <span class="ident">fm</span>.<span class="ident">name</span>().<span class="ident">is_some</span>())
+            .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>);
+
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">is_named</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_values</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+            <span class="kw">for</span> <span class="ident">field_metadata</span> <span class="kw">in</span> <span class="ident">event_metadata</span>.<span class="ident">fields</span>() {
+                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">scale_value::scale::decode_as_type</span>(
+                    <span class="ident">bytes</span>,
+                    <span class="ident">field_metadata</span>.<span class="ident">type_id</span>(),
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>.<span class="ident">runtime_metadata</span>().<span class="ident">types</span>,
+                )<span class="question-mark">?</span>;
+                <span class="ident">event_values</span>.<span class="ident">push</span>(<span class="ident">value</span>);
+            }
+
+            <span class="prelude-val">Ok</span>(<span class="ident">scale_value::Composite::Unnamed</span>(<span class="ident">event_values</span>))
+        } <span class="kw">else</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_values</span> <span class="op">=</span> <span class="macro">vec!</span>[];
+            <span class="kw">for</span> <span class="ident">field_metadata</span> <span class="kw">in</span> <span class="ident">event_metadata</span>.<span class="ident">fields</span>() {
+                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">scale_value::scale::decode_as_type</span>(
+                    <span class="ident">bytes</span>,
+                    <span class="ident">field_metadata</span>.<span class="ident">type_id</span>(),
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">metadata</span>.<span class="ident">runtime_metadata</span>().<span class="ident">types</span>,
+                )<span class="question-mark">?</span>;
+                <span class="ident">event_values</span>
+                    .<span class="ident">push</span>((<span class="ident">field_metadata</span>.<span class="ident">name</span>().<span class="ident">unwrap_or_default</span>().<span class="ident">to_string</span>(), <span class="ident">value</span>));
+            }
+
+            <span class="prelude-val">Ok</span>(<span class="ident">scale_value::Composite::Named</span>(<span class="ident">event_values</span>))
+        }
+    }
+
+    <span class="doccomment">/// Attempt to decode these [`EventDetails`] into a specific static event.</span>
+    <span class="doccomment">/// This targets the fields within the event directly. You can also attempt to</span>
+    <span class="doccomment">/// decode the entirety of the event type (including the pallet and event</span>
+    <span class="doccomment">/// variants) using [`EventDetails::as_root_event()`].</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_event</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">StaticEvent</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>, <span class="ident">CodecError</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">ev_metadata</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">event_metadata</span>();
+        <span class="kw">if</span> <span class="ident">ev_metadata</span>.<span class="ident">pallet</span>() <span class="op">==</span> <span class="ident">E::PALLET</span> <span class="op">&amp;&amp;</span> <span class="ident">ev_metadata</span>.<span class="ident">event</span>() <span class="op">==</span> <span class="ident">E::EVENT</span> {
+            <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">E::decode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">field_bytes</span>())<span class="question-mark">?</span>))
         } <span class="kw">else</span> {
             <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>)
         }
     }
-}
 
-<span class="comment">// Attempt to dynamically decode a single event from our events input.</span>
-<span class="kw">fn</span> <span class="ident">decode_raw_event_details</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span>(
-    <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">Metadata</span>,
-    <span class="ident">index</span>: <span class="ident">u32</span>,
-    <span class="ident">input</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RawEventDetails</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-    <span class="comment">// Decode basic event details:</span>
-    <span class="kw">let</span> <span class="ident">phase</span> <span class="op">=</span> <span class="ident">Phase::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">pallet_index</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_byte</span>()<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">variant_index</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">read_byte</span>()<span class="question-mark">?</span>;
-    <span class="macro">tracing::debug!</span>(
-        <span class="string">&quot;phase {:?}, pallet_index {}, event_variant: {}&quot;</span>,
-        <span class="ident">phase</span>,
-        <span class="ident">pallet_index</span>,
-        <span class="ident">variant_index</span>
-    );
-    <span class="macro">tracing::debug!</span>(<span class="string">&quot;remaining input: {}&quot;</span>, <span class="ident">hex::encode</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>));
-
-    <span class="comment">// Get metadata for the event:</span>
-    <span class="kw">let</span> <span class="ident">event_metadata</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">event</span>(<span class="ident">pallet_index</span>, <span class="ident">variant_index</span>)<span class="question-mark">?</span>;
-    <span class="macro">tracing::debug!</span>(
-        <span class="string">&quot;Decoding Event &#39;{}::{}&#39;&quot;</span>,
-        <span class="ident">event_metadata</span>.<span class="ident">pallet</span>(),
-        <span class="ident">event_metadata</span>.<span class="ident">event</span>()
-    );
-
-    <span class="comment">// Use metadata to figure out which bytes belong to this event:</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_fields</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="ident">event_metadata</span>.<span class="ident">variant</span>().<span class="ident">fields</span>() {
-        <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="ident">arg</span>.<span class="ident">ty</span>().<span class="ident">id</span>();
-        <span class="kw">let</span> <span class="ident">all_bytes</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">input</span>;
-        <span class="comment">// consume some bytes for each event field, moving the cursor forward:</span>
-
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">decode_as_type</span>(<span class="ident">type_id</span>, <span class="ident">input</span>)<span class="question-mark">?</span>;
-
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>))]</span>
-        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">scale_value::scale::decode_as_type</span>(
-            <span class="ident">input</span>,
-            <span class="ident">type_id</span>,
-            <span class="kw-2">&amp;</span><span class="ident">metadata</span>.<span class="ident">runtime_metadata</span>().<span class="ident">types</span>,
-        )<span class="question-mark">?</span>;
-
-        <span class="ident">event_fields</span>.<span class="ident">push</span>(<span class="ident">value</span>);
-
-        <span class="comment">// count how many bytes were consumed based on remaining length:</span>
-        <span class="kw">let</span> <span class="ident">consumed_len</span> <span class="op">=</span> <span class="ident">all_bytes</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="ident">input</span>.<span class="ident">len</span>();
-        <span class="comment">// move those consumed bytes to the output vec unaltered:</span>
-        <span class="ident">event_bytes</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">all_bytes</span>[<span class="number">0</span>..<span class="ident">consumed_len</span>]);
+    <span class="doccomment">/// Attempt to decode these [`EventDetails`] into a root event type (which includes</span>
+    <span class="doccomment">/// the pallet and event enum variants as well as the event fields). A compatible</span>
+    <span class="doccomment">/// type for this is exposed via static codegen as a root level `Event` type.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_root_event</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Decode</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">E</span>, <span class="ident">CodecError</span><span class="op">&gt;</span> {
+        <span class="ident">E::decode</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">bytes</span>())
     }
-
-    <span class="comment">// topics come after the event data in EventRecord. They aren&#39;t used for</span>
-    <span class="comment">// anything at the moment, so just decode and throw them away.</span>
-    <span class="kw">let</span> <span class="ident">topics</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">T::Hash</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-    <span class="macro">tracing::debug!</span>(<span class="string">&quot;topics: {:?}&quot;</span>, <span class="ident">topics</span>);
-
-    <span class="prelude-val">Ok</span>(<span class="ident">RawEventDetails</span> {
-        <span class="ident">phase</span>,
-        <span class="ident">index</span>,
-        <span class="ident">pallet_index</span>,
-        <span class="ident">pallet</span>: <span class="ident">event_metadata</span>.<span class="ident">pallet</span>().<span class="ident">to_string</span>(),
-        <span class="ident">variant_index</span>,
-        <span class="ident">variant</span>: <span class="ident">event_metadata</span>.<span class="ident">event</span>().<span class="ident">to_string</span>(),
-        <span class="ident">bytes</span>: <span class="ident">event_bytes</span>,
-        <span class="ident">fields</span>: <span class="ident">event_fields</span>,
-    })
 }
 
 <span class="doccomment">/// Event related test utilities used outside this module.</span>
@@ -1477,8 +1167,7 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="kw">crate</span>::{
         <span class="ident">Config</span>,
-        <span class="ident">DefaultConfig</span>,
-        <span class="ident">Phase</span>,
+        <span class="ident">SubstrateConfig</span>,
     };
     <span class="kw">use</span> <span class="ident">codec::Encode</span>;
     <span class="kw">use</span> <span class="ident">frame_metadata</span>::{
@@ -1497,7 +1186,7 @@
     <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 
     <span class="doccomment">/// An &quot;outer&quot; events enum containing exactly one event.</span>
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Encode</span>, <span class="ident">Decode</span>, <span class="ident">TypeInfo</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
     <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Ev</span><span class="op">&gt;</span> {
         <span class="ident">Test</span>(<span class="ident">Ev</span>),
     }
@@ -1508,7 +1197,7 @@
     <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventRecord</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Encode</span><span class="op">&gt;</span> {
         <span class="ident">phase</span>: <span class="ident">Phase</span>,
         <span class="ident">event</span>: <span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>,
-        <span class="ident">topics</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">DefaultConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Hash</span><span class="op">&gt;</span>,
+        <span class="ident">topics</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">SubstrateConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Hash</span><span class="op">&gt;</span>,
     }
 
     <span class="doccomment">/// Build an EventRecord, which encoded events in the format expected</span>
@@ -1551,9 +1240,9 @@
     <span class="doccomment">/// Build an `Events` object for test purposes, based on the details provided,</span>
     <span class="doccomment">/// and with a default block hash.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">events</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Decode</span> <span class="op">+</span> <span class="ident">Encode</span><span class="op">&gt;</span>(
-        <span class="ident">metadata</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
         <span class="ident">event_records</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventRecord</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">DefaultConfig</span>, <span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">SubstrateConfig</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">num_events</span> <span class="op">=</span> <span class="ident">event_records</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="kw">for</span> <span class="ident">ev</span> <span class="kw">in</span> <span class="ident">event_records</span> {
@@ -1564,18 +1253,19 @@
 
     <span class="doccomment">/// Much like [`events`], but takes pre-encoded events and event count, so that we can</span>
     <span class="doccomment">/// mess with the bytes in tests if we need to.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">events_raw</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Decode</span> <span class="op">+</span> <span class="ident">Encode</span><span class="op">&gt;</span>(
-        <span class="ident">metadata</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">events_raw</span>(
+        <span class="ident">metadata</span>: <span class="ident">Metadata</span>,
         <span class="ident">event_bytes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
         <span class="ident">num_events</span>: <span class="ident">u32</span>,
-    ) -&gt; <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">DefaultConfig</span>, <span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">Events</span> {
-            <span class="ident">block_hash</span>: <span class="op">&lt;</span><span class="ident">DefaultConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Hash::default</span>(),
-            <span class="ident">event_bytes</span>,
+    ) -&gt; <span class="ident">Events</span><span class="op">&lt;</span><span class="ident">SubstrateConfig</span><span class="op">&gt;</span> {
+        <span class="comment">// Prepend compact encoded length to event bytes:</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">all_event_bytes</span> <span class="op">=</span> <span class="ident">Compact</span>(<span class="ident">num_events</span>).<span class="ident">encode</span>();
+        <span class="ident">all_event_bytes</span>.<span class="ident">extend</span>(<span class="ident">event_bytes</span>);
+        <span class="ident">Events::new</span>(
             <span class="ident">metadata</span>,
-            <span class="ident">num_events</span>,
-            <span class="ident">_event_type</span>: <span class="ident">std::marker::PhantomData</span>,
-        }
+            <span class="op">&lt;</span><span class="ident">SubstrateConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Hash::default</span>(),
+            <span class="ident">all_event_bytes</span>,
+        )
     }
 }
 
@@ -1586,18 +1276,16 @@
             <span class="ident">event_record</span>,
             <span class="ident">events</span>,
             <span class="ident">events_raw</span>,
-            <span class="ident">AllEvents</span>,
         },
         <span class="kw-2">*</span>,
     };
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Phase</span>;
     <span class="kw">use</span> <span class="ident">codec::Encode</span>;
     <span class="kw">use</span> <span class="ident">scale_info::TypeInfo</span>;
     <span class="kw">use</span> <span class="ident">scale_value::Value</span>;
 
     <span class="doccomment">/// Build a fake wrapped metadata.</span>
-    <span class="kw">fn</span> <span class="ident">metadata</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TypeInfo</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>() -&gt; <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">Arc::new</span>(<span class="ident">RwLock::new</span>(<span class="ident">test_utils::metadata</span>::<span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>()))
+    <span class="kw">fn</span> <span class="ident">metadata</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TypeInfo</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>() -&gt; <span class="ident">Metadata</span> {
+        <span class="ident">test_utils::metadata</span>::<span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>()
     }
 
     <span class="doccomment">/// [`RawEventDetails`] can be annoying to test, because it contains</span>
@@ -1619,168 +1307,42 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">assert_raw_events_match</span>(
         <span class="comment">// Just for convenience, pass in the metadata type constructed</span>
         <span class="comment">// by the `metadata` function above to simplify caller code.</span>
-        <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">RwLock</span><span class="op">&lt;</span><span class="ident">Metadata</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">actual</span>: <span class="ident">RawEventDetails</span>,
+        <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">Metadata</span>,
+        <span class="ident">actual</span>: <span class="ident">EventDetails</span>,
         <span class="ident">expected</span>: <span class="ident">TestRawEventDetails</span>,
     ) {
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">read</span>();
         <span class="kw">let</span> <span class="ident">types</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">metadata</span>.<span class="ident">runtime_metadata</span>().<span class="ident">types</span>;
 
         <span class="comment">// Make sure that the bytes handed back line up with the fields handed back;</span>
         <span class="comment">// encode the fields back into bytes and they should be equal.</span>
+        <span class="kw">let</span> <span class="ident">actual_fields</span> <span class="op">=</span> <span class="ident">actual</span>.<span class="ident">field_values</span>().<span class="ident">expect</span>(<span class="string">&quot;can decode field values (1)&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">actual_bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">actual</span>.<span class="ident">fields</span> {
+        <span class="kw">for</span> <span class="ident">field</span> <span class="kw">in</span> <span class="ident">actual_fields</span>.<span class="ident">into_values</span>() {
             <span class="ident">scale_value::scale::encode_as_type</span>(
-                <span class="ident">field</span>.<span class="ident">clone</span>(),
+                <span class="kw-2">&amp;</span><span class="ident">field</span>,
                 <span class="ident">field</span>.<span class="ident">context</span>,
                 <span class="ident">types</span>,
                 <span class="kw-2">&amp;mut</span> <span class="ident">actual_bytes</span>,
             )
             .<span class="ident">expect</span>(<span class="string">&quot;should be able to encode properly&quot;</span>);
         }
-        <span class="macro">assert_eq!</span>(<span class="ident">actual_bytes</span>, <span class="ident">actual</span>.<span class="ident">bytes</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual_bytes</span>, <span class="ident">actual</span>.<span class="ident">field_bytes</span>());
 
         <span class="kw">let</span> <span class="ident">actual_fields_no_context</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">actual</span>
-            .<span class="ident">fields</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">remove_context</span>())
+            .<span class="ident">field_values</span>()
+            .<span class="ident">expect</span>(<span class="string">&quot;can decode field values (2)&quot;</span>)
+            .<span class="ident">into_values</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">value</span><span class="op">|</span> <span class="ident">value</span>.<span class="ident">remove_context</span>())
             .<span class="ident">collect</span>();
 
         <span class="comment">// Check each of the other fields:</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">phase</span>, <span class="ident">expected</span>.<span class="ident">phase</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">index</span>, <span class="ident">expected</span>.<span class="ident">index</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">pallet</span>, <span class="ident">expected</span>.<span class="ident">pallet</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">pallet_index</span>, <span class="ident">expected</span>.<span class="ident">pallet_index</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">variant</span>, <span class="ident">expected</span>.<span class="ident">variant</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">variant_index</span>, <span class="ident">expected</span>.<span class="ident">variant_index</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">phase</span>(), <span class="ident">expected</span>.<span class="ident">phase</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">index</span>(), <span class="ident">expected</span>.<span class="ident">index</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">pallet_name</span>(), <span class="ident">expected</span>.<span class="ident">pallet</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">pallet_index</span>(), <span class="ident">expected</span>.<span class="ident">pallet_index</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">variant_name</span>(), <span class="ident">expected</span>.<span class="ident">variant</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">actual</span>.<span class="ident">variant_index</span>(), <span class="ident">expected</span>.<span class="ident">variant_index</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">actual_fields_no_context</span>, <span class="ident">expected</span>.<span class="ident">fields</span>);
-    }
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">statically_decode_single_event</span>() {
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">TypeInfo</span>)]</span>
-        <span class="kw">enum</span> <span class="ident">Event</span> {
-            <span class="ident">A</span>(<span class="ident">u8</span>),
-        }
-
-        <span class="comment">// Create fake metadata that knows about our single event, above:</span>
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">metadata</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>();
-        <span class="comment">// Encode our events in the format we expect back from a node, and</span>
-        <span class="comment">// construct an Events object to iterate them:</span>
-        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">events</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>(
-            <span class="ident">metadata</span>,
-            <span class="macro">vec!</span>[<span class="ident">event_record</span>(<span class="ident">Phase::Finalization</span>, <span class="ident">Event::A</span>(<span class="number">1</span>))],
-        );
-
-        <span class="kw">let</span> <span class="ident">event_details</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">event_details</span>,
-            <span class="macro">vec!</span>[<span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">0</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::Finalization</span>,
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="number">1</span>))
-            }]
-        );
-    }
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">statically_decode_multiple_events</span>() {
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">TypeInfo</span>)]</span>
-        <span class="kw">enum</span> <span class="ident">Event</span> {
-            <span class="ident">A</span>(<span class="ident">u8</span>),
-            <span class="ident">B</span>(<span class="ident">bool</span>),
-        }
-
-        <span class="comment">// Create fake metadata that knows about our single event, above:</span>
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">metadata</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>();
-
-        <span class="comment">// Encode our events in the format we expect back from a node, and</span>
-        <span class="comment">// construst an Events object to iterate them:</span>
-        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">events</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>(
-            <span class="ident">metadata</span>,
-            <span class="macro">vec!</span>[
-                <span class="ident">event_record</span>(<span class="ident">Phase::Initialization</span>, <span class="ident">Event::A</span>(<span class="number">1</span>)),
-                <span class="ident">event_record</span>(<span class="ident">Phase::ApplyExtrinsic</span>(<span class="number">123</span>), <span class="ident">Event::B</span>(<span class="bool-val">true</span>)),
-                <span class="ident">event_record</span>(<span class="ident">Phase::Finalization</span>, <span class="ident">Event::A</span>(<span class="number">234</span>)),
-            ],
-        );
-
-        <span class="kw">let</span> <span class="ident">event_details</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">event_details</span>,
-            <span class="macro">vec!</span>[
-                <span class="ident">EventDetails</span> {
-                    <span class="ident">index</span>: <span class="number">0</span>,
-                    <span class="ident">phase</span>: <span class="ident">Phase::Initialization</span>,
-                    <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="number">1</span>))
-                },
-                <span class="ident">EventDetails</span> {
-                    <span class="ident">index</span>: <span class="number">1</span>,
-                    <span class="ident">phase</span>: <span class="ident">Phase::ApplyExtrinsic</span>(<span class="number">123</span>),
-                    <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::B</span>(<span class="bool-val">true</span>))
-                },
-                <span class="ident">EventDetails</span> {
-                    <span class="ident">index</span>: <span class="number">2</span>,
-                    <span class="ident">phase</span>: <span class="ident">Phase::Finalization</span>,
-                    <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="number">234</span>))
-                },
-            ]
-        );
-    }
-
-    <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="kw">fn</span> <span class="ident">statically_decode_multiple_events_until_error</span>() {
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">TypeInfo</span>)]</span>
-        <span class="kw">enum</span> <span class="ident">Event</span> {
-            <span class="ident">A</span>(<span class="ident">u8</span>),
-            <span class="ident">B</span>(<span class="ident">bool</span>),
-        }
-
-        <span class="comment">// Create fake metadata that knows about our single event, above:</span>
-        <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">metadata</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>();
-
-        <span class="comment">// Encode 2 events:</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_bytes</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="ident">event_record</span>(<span class="ident">Phase::Initialization</span>, <span class="ident">Event::A</span>(<span class="number">1</span>)).<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">event_bytes</span>);
-        <span class="ident">event_record</span>(<span class="ident">Phase::ApplyExtrinsic</span>(<span class="number">123</span>), <span class="ident">Event::B</span>(<span class="bool-val">true</span>))
-            .<span class="ident">encode_to</span>(<span class="kw-2">&amp;mut</span> <span class="ident">event_bytes</span>);
-
-        <span class="comment">// Push a few naff bytes to the end (a broken third event):</span>
-        <span class="ident">event_bytes</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span>[<span class="number">3</span>, <span class="number">127</span>, <span class="number">45</span>, <span class="number">0</span>, <span class="number">2</span>]);
-
-        <span class="comment">// Encode our events in the format we expect back from a node, and</span>
-        <span class="comment">// construst an Events object to iterate them:</span>
-        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">events_raw</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>(
-            <span class="ident">metadata</span>,
-            <span class="ident">event_bytes</span>,
-            <span class="number">3</span>, <span class="comment">// 2 &quot;good&quot; events, and then it&#39;ll hit the naff bytes.</span>
-        );
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">events_iter</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
-            <span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">0</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::Initialization</span>,
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="number">1</span>))
-            }
-        );
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
-            <span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">1</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::ApplyExtrinsic</span>(<span class="number">123</span>),
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::B</span>(<span class="bool-val">true</span>))
-            }
-        );
-
-        <span class="comment">// We&#39;ll hit an error trying to decode the third event:</span>
-        <span class="macro">assert!</span>(<span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">is_err</span>());
-        <span class="comment">// ... and then &quot;None&quot; from then on.</span>
-        <span class="macro">assert!</span>(<span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
-        <span class="macro">assert!</span>(<span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1801,7 +1363,7 @@
             <span class="macro">vec!</span>[<span class="ident">event_record</span>(<span class="ident">Phase::ApplyExtrinsic</span>(<span class="number">123</span>), <span class="ident">event</span>)],
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
             <span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
@@ -1813,7 +1375,7 @@
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
                 <span class="ident">fields</span>: <span class="macro">vec!</span>[
-                    <span class="ident">Value::uint</span>(<span class="number">1u8</span>),
+                    <span class="ident">Value::u128</span>(<span class="number">1</span>),
                     <span class="ident">Value::bool</span>(<span class="bool-val">true</span>),
                     <span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::string</span>(<span class="string">&quot;Hi&quot;</span>)]),
                 ],
@@ -1848,7 +1410,7 @@
             ],
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
 
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
@@ -1860,7 +1422,7 @@
                 <span class="ident">pallet_index</span>: <span class="number">0</span>,
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
-                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">1u8</span>)],
+                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>)],
             },
         );
         <span class="ident">assert_raw_events_match</span>(
@@ -1886,7 +1448,7 @@
                 <span class="ident">pallet_index</span>: <span class="number">0</span>,
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
-                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">234u8</span>)],
+                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">234</span>)],
             },
         );
         <span class="macro">assert!</span>(<span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
@@ -1914,13 +1476,13 @@
 
         <span class="comment">// Encode our events in the format we expect back from a node, and</span>
         <span class="comment">// construst an Events object to iterate them:</span>
-        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">events_raw</span>::<span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span>(
+        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">events_raw</span>(
             <span class="ident">metadata</span>.<span class="ident">clone</span>(),
             <span class="ident">event_bytes</span>,
             <span class="number">3</span>, <span class="comment">// 2 &quot;good&quot; events, and then it&#39;ll hit the naff bytes.</span>
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">events_iter</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">events_iter</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
             <span class="ident">events_iter</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
@@ -1931,7 +1493,7 @@
                 <span class="ident">pallet_index</span>: <span class="number">0</span>,
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
-                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">1u8</span>)],
+                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>)],
             },
         );
         <span class="ident">assert_raw_events_match</span>(
@@ -1972,20 +1534,8 @@
             <span class="macro">vec!</span>[<span class="ident">event_record</span>(<span class="ident">Phase::Finalization</span>, <span class="ident">Event::A</span>(<span class="number">1</span>))],
         );
 
-        <span class="comment">// Statically decode:</span>
-        <span class="kw">let</span> <span class="ident">event_details</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">event_details</span>,
-            <span class="macro">vec!</span>[<span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">0</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::Finalization</span>,
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="number">1</span>))
-            }]
-        );
-
         <span class="comment">// Dynamically decode:</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
             <span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
@@ -1996,7 +1546,7 @@
                 <span class="ident">pallet_index</span>: <span class="number">0</span>,
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
-                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">1u8</span>)],
+                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>)],
             },
         );
         <span class="macro">assert!</span>(<span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
@@ -2025,20 +1575,8 @@
             )],
         );
 
-        <span class="comment">// Statically decode:</span>
-        <span class="kw">let</span> <span class="ident">event_details</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">event_details</span>,
-            <span class="macro">vec!</span>[<span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">0</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::Finalization</span>,
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="ident">CompactWrapper</span>(<span class="number">1</span>)))
-            }]
-        );
-
         <span class="comment">// Dynamically decode:</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
             <span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),
@@ -2049,7 +1587,7 @@
                 <span class="ident">pallet_index</span>: <span class="number">0</span>,
                 <span class="ident">variant</span>: <span class="string">&quot;A&quot;</span>.<span class="ident">to_string</span>(),
                 <span class="ident">variant_index</span>: <span class="number">0</span>,
-                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">1u8</span>)])],
+                <span class="ident">fields</span>: <span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>)],
             },
         );
         <span class="macro">assert!</span>(<span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">is_none</span>());
@@ -2057,7 +1595,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">event_containing_explicit_index</span>() {
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">TypeInfo</span>)]</span>
+        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">TypeInfo</span>)]</span>
         <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u8</span>)]</span>
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">trivial_numeric_casts</span>, <span class="ident">clippy::unnecessary_cast</span>)]</span> <span class="comment">// required because the Encode derive produces a warning otherwise</span>
         <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MyType</span> {
@@ -2079,20 +1617,8 @@
             <span class="macro">vec!</span>[<span class="ident">event_record</span>(<span class="ident">Phase::Finalization</span>, <span class="ident">Event::A</span>(<span class="ident">MyType::B</span>))],
         );
 
-        <span class="comment">// Statically decode:</span>
-        <span class="kw">let</span> <span class="ident">event_details</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventDetails</span><span class="op">&lt;</span><span class="ident">AllEvents</span><span class="op">&lt;</span><span class="ident">Event</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-            <span class="ident">events</span>.<span class="ident">iter</span>().<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-        <span class="macro">assert_eq!</span>(
-            <span class="ident">event_details</span>,
-            <span class="macro">vec!</span>[<span class="ident">EventDetails</span> {
-                <span class="ident">index</span>: <span class="number">0</span>,
-                <span class="ident">phase</span>: <span class="ident">Phase::Finalization</span>,
-                <span class="ident">event</span>: <span class="ident">AllEvents::Test</span>(<span class="ident">Event::A</span>(<span class="ident">MyType::B</span>))
-            }]
-        );
-
         <span class="comment">// Dynamically decode:</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter_raw</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">event_details</span> <span class="op">=</span> <span class="ident">events</span>.<span class="ident">iter</span>();
         <span class="ident">assert_raw_events_match</span>(
             <span class="kw-2">&amp;</span><span class="ident">metadata</span>,
             <span class="ident">event_details</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>(),

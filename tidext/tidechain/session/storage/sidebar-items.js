@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CurrentIndex",""],["DisabledValidators",""],["KeyOwner",""],["NextKeys",""],["QueuedChanged",""],["QueuedKeys",""],["StorageApi",""],["Validators",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

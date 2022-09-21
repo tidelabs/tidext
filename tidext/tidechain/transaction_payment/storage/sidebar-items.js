@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NextFeeMultiplier",""],["StorageApi",""],["StorageVersion",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-proc-macros-0.14.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-proc-macros-0.15.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../jsonrpsee_proc_macros/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -370,6 +370,12 @@
 <span id="365">365</span>
 <span id="366">366</span>
 <span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">//</span>
 <span class="comment">// Permission is hereby granted, free of charge, to any</span>
@@ -421,13 +427,14 @@
 <span class="doccomment">/// type that implements `Client` or `SubscriptionClient` (depending on whether trait has</span>
 <span class="doccomment">/// subscriptions methods or not), namely `HttpClient` and `WsClient`.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// For servers, it will generate a trait mostly equivalent to the input, with two main</span>
-<span class="doccomment">/// differences:</span>
+<span class="doccomment">/// For servers, it will generate a trait mostly equivalent to the input, with the following differences:</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// - The trait will have one additional (already implemented) method, `into_rpc`, which turns any object that</span>
 <span class="doccomment">///   implements the server trait into an `RpcModule`.</span>
-<span class="doccomment">/// - For subscription methods, there will be one additional argument inserted right after `&amp;self`: `subscription_sink:</span>
-<span class="doccomment">///   PendingSubscription`. It should be used accept or reject a pending subscription.</span>
+<span class="doccomment">/// - For subscription methods:</span>
+<span class="doccomment">///   - There will be one additional argument inserted right after `&amp;self`: `subscription_sink: SubscriptionSink`.</span>
+<span class="doccomment">///   It should be used to accept or reject a subscription and send data back to subscribers.</span>
+<span class="doccomment">///   - The return type of the subscription method is `SubscriptionResult` for improved ergonomics.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Since this macro can generate up to two traits, both server and client traits will have</span>
 <span class="doccomment">/// a new name. For the `Foo` trait, server trait will be named `FooServer`, and client,</span>
@@ -470,8 +477,8 @@
 <span class="doccomment">///     async fn async_method(&amp;self, param_a: u8, param_b: String) -&gt; u16;</span>
 <span class="doccomment">///     fn sync_method(&amp;self) -&gt; String;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">///     // Note that `subscription_sink` was added automatically.</span>
-<span class="doccomment">///     fn sub(&amp;self, subscription_sink: PendingSubscription);</span>
+<span class="doccomment">///     // Note that `subscription_sink` and `SubscriptionResult` were added automatically.</span>
+<span class="doccomment">///     fn sub(&amp;self, subscription_sink: SubscriptionResult) -&gt; SubscriptionResult;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     fn into_rpc(self) -&gt; Result&lt;Self, jsonrpsee::core::Error&gt; {</span>
 <span class="doccomment">///         // Actual implementation stripped, but inside we will create</span>
@@ -516,6 +523,10 @@
 <span class="doccomment">///   implementation&#39;s methods conveniently.</span>
 <span class="doccomment">/// - `namespace`: add a prefix to all the methods and subscriptions in this RPC. For example, with namespace `foo` and</span>
 <span class="doccomment">///   method `spam`, the resulting method name will be `foo_spam`.</span>
+<span class="doccomment">/// - `server_bounds`: replace *all* auto-generated trait bounds with the user-defined ones for the server</span>
+<span class="doccomment">///   implementation.</span>
+<span class="doccomment">/// - `client_bounds`: replace *all* auto-generated trait bounds with the user-defined ones for the client</span>
+<span class="doccomment">///   implementation.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// **Trait requirements:**</span>
 <span class="doccomment">///</span>
@@ -586,7 +597,8 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// // RPC is put into a separate module to clearly show names of generated entities.</span>
 <span class="doccomment">/// mod rpc_impl {</span>
-<span class="doccomment">///     use jsonrpsee::{proc_macros::rpc, core::async_trait, core::RpcResult, ws_server::PendingSubscription};</span>
+<span class="doccomment">///     use jsonrpsee::{proc_macros::rpc, core::async_trait, core::RpcResult, ws_server::SubscriptionSink};</span>
+<span class="doccomment">///     use jsonrpsee::types::SubscriptionResult;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///     // Generate both server and client implementations, prepend all the methods with `foo_` prefix.</span>
 <span class="doccomment">///     #[rpc(client, server, namespace = &quot;foo&quot;)]</span>
@@ -658,21 +670,21 @@
 <span class="doccomment">///</span>
 <span class="doccomment">///         // The stream API can be used to pipe items from the underlying stream</span>
 <span class="doccomment">///         // as subscription responses.</span>
-<span class="doccomment">///         fn sub_override_notif_method(&amp;self, pending: PendingSubscription) {</span>
-<span class="doccomment">///             let mut sink = pending.accept().unwrap();     </span>
+<span class="doccomment">///         fn sub_override_notif_method(&amp;self, mut sink: SubscriptionSink) -&gt; SubscriptionResult {</span>
 <span class="doccomment">///             tokio::spawn(async move {</span>
 <span class="doccomment">///                 let stream = futures_util::stream::iter([&quot;one&quot;, &quot;two&quot;, &quot;three&quot;]);</span>
 <span class="doccomment">///                 sink.pipe_from_stream(stream).await;</span>
 <span class="doccomment">///             });</span>
+<span class="doccomment">///             Ok(())</span>
 <span class="doccomment">///         }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">///         // We could&#39;ve spawned a `tokio` future that yields values while our program works,</span>
 <span class="doccomment">///         // but for simplicity of the example we will only send two values and then close</span>
 <span class="doccomment">///         // the subscription.</span>
-<span class="doccomment">///         fn sub(&amp;self, pending: PendingSubscription) {</span>
-<span class="doccomment">///             let mut sink = pending.accept().unwrap();</span>
+<span class="doccomment">///         fn sub(&amp;self, mut sink: SubscriptionSink) -&gt; SubscriptionResult {</span>
 <span class="doccomment">///             let _ = sink.send(&amp;&quot;Response_A&quot;);</span>
 <span class="doccomment">///             let _ = sink.send(&amp;&quot;Response_B&quot;);</span>
+<span class="doccomment">///             Ok(())</span>
 <span class="doccomment">///         }</span>
 <span class="doccomment">///     }</span>
 <span class="doccomment">/// }</span>

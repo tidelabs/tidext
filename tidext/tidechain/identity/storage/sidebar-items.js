@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["IdentityOf",""],["Registrars",""],["StorageApi",""],["SubsOf",""],["SuperOf",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

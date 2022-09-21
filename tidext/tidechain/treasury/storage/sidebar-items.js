@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Approvals",""],["ProposalCount",""],["Proposals",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

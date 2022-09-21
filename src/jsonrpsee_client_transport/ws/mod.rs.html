@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-client-transport-0.14.0/src/ws/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-client-transport-0.15.1/src/ws/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../jsonrpsee_client_transport/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -603,6 +603,10 @@
 <span id="598">598</span>
 <span id="599">599</span>
 <span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">//</span>
 <span class="comment">// Permission is hereby granted, free of charge, to any</span>
@@ -647,7 +651,7 @@
 <span class="kw">use</span> <span class="ident">thiserror::Error</span>;
 <span class="kw">use</span> <span class="ident">tokio::net::TcpStream</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">http</span>::{<span class="ident">uri::InvalidUri</span>, <span class="ident">Uri</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">http</span>::{<span class="ident">uri::InvalidUri</span>, <span class="ident">HeaderMap</span>, <span class="ident">HeaderValue</span>, <span class="ident">Uri</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">soketto::handshake::client::Header</span>;
 
 <span class="doccomment">/// Sending end of WebSocket transport.</span>
@@ -664,33 +668,32 @@
 
 <span class="doccomment">/// Builder for a WebSocket transport [`Sender`] and [&#39;Receiver`] pair.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WsTransportClientBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WsTransportClientBuilder</span> {
 	<span class="doccomment">/// What certificate store to use</span>
 	<span class="kw">pub</span> <span class="ident">certificate_store</span>: <span class="ident">CertificateStore</span>,
 	<span class="doccomment">/// Timeout for the connection.</span>
 	<span class="kw">pub</span> <span class="ident">connection_timeout</span>: <span class="ident">Duration</span>,
-	<span class="doccomment">/// Custom headers to pass during the HTTP handshake. If `None`, no</span>
-	<span class="doccomment">/// custom header is passed.</span>
-	<span class="kw">pub</span> <span class="ident">headers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Header</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+	<span class="doccomment">/// Custom headers to pass during the HTTP handshake.</span>
+	<span class="kw">pub</span> <span class="ident">headers</span>: <span class="ident">http::HeaderMap</span>,
 	<span class="doccomment">/// Max payload size</span>
 	<span class="kw">pub</span> <span class="ident">max_request_body_size</span>: <span class="ident">u32</span>,
 	<span class="doccomment">/// Max number of redirections.</span>
 	<span class="kw">pub</span> <span class="ident">max_redirections</span>: <span class="ident">usize</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">WsTransportClientBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">WsTransportClientBuilder</span> {
 	<span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
 		<span class="self">Self</span> {
 			<span class="ident">certificate_store</span>: <span class="ident">CertificateStore::Native</span>,
 			<span class="ident">max_request_body_size</span>: <span class="ident">TEN_MB_SIZE_BYTES</span>,
 			<span class="ident">connection_timeout</span>: <span class="ident">Duration::from_secs</span>(<span class="number">10</span>),
-			<span class="ident">headers</span>: <span class="ident">Vec::new</span>(),
+			<span class="ident">headers</span>: <span class="ident">http::HeaderMap::new</span>(),
 			<span class="ident">max_redirections</span>: <span class="number">5</span>,
 		}
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">WsTransportClientBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">WsTransportClientBuilder</span> {
 	<span class="doccomment">/// Set whether to use system certificates (default is native).</span>
 	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">certificate_store</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">certificate_store</span>: <span class="ident">CertificateStore</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">self</span>.<span class="ident">certificate_store</span> <span class="op">=</span> <span class="ident">certificate_store</span>;
@@ -712,8 +715,8 @@
 	<span class="doccomment">/// Set a custom header passed to the server during the handshake (default is none).</span>
 	<span class="doccomment">///</span>
 	<span class="doccomment">/// The caller is responsible for checking that the headers do not conflict or are duplicated.</span>
-	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_header</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) -&gt; <span class="self">Self</span> {
-		<span class="self">self</span>.<span class="ident">headers</span>.<span class="ident">push</span>(<span class="ident">Header</span> { <span class="ident">name</span>, <span class="ident">value</span>: <span class="ident">value</span>.<span class="ident">as_bytes</span>() });
+	<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_headers</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">headers</span>: <span class="ident">http::HeaderMap</span>) -&gt; <span class="self">Self</span> {
+		<span class="self">self</span>.<span class="ident">headers</span> <span class="op">=</span> <span class="ident">headers</span>;
 		<span class="self">self</span>
 	}
 
@@ -796,7 +799,7 @@
 	<span class="doccomment">/// Sends out a request. Returns a `Future` that finishes when the request has been</span>
 	<span class="doccomment">/// successfully sent.</span>
 	<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">body</span>: <span class="ident">String</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
-		<span class="macro">tracing::debug!</span>(<span class="string">&quot;send: {}&quot;</span>, <span class="ident">body</span>);
+		<span class="macro">tracing::trace!</span>(<span class="string">&quot;send: {}&quot;</span>, <span class="ident">body</span>);
 		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">send_text</span>(<span class="ident">body</span>).<span class="kw">await</span><span class="question-mark">?</span>;
 		<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">flush</span>().<span class="kw">await</span><span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -845,7 +848,7 @@
 	}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">WsTransportClientBuilder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">WsTransportClientBuilder</span> {
 	<span class="doccomment">/// Try to establish the connection.</span>
 	<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">build</span>(<span class="self">self</span>, <span class="ident">uri</span>: <span class="ident">Uri</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Sender</span>, <span class="ident">Receiver</span>), <span class="ident">WsHandshakeError</span><span class="op">&gt;</span> {
 		<span class="kw">let</span> <span class="ident">target</span>: <span class="ident">Target</span> <span class="op">=</span> <span class="ident">uri</span>.<span class="ident">try_into</span>()<span class="question-mark">?</span>;
@@ -894,7 +897,12 @@
 					<span class="kw-2">&amp;</span><span class="ident">target</span>.<span class="ident">path_and_query</span>,
 				);
 
-				<span class="ident">client</span>.<span class="ident">set_headers</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">headers</span>);
+				<span class="kw">let</span> <span class="ident">headers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>
+					.<span class="ident">headers</span>
+					.<span class="ident">iter</span>()
+					.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">key</span>, <span class="ident">value</span>)<span class="op">|</span> <span class="ident">Header</span> { <span class="ident">name</span>: <span class="ident">key</span>.<span class="ident">as_str</span>(), <span class="ident">value</span>: <span class="ident">value</span>.<span class="ident">as_bytes</span>() })
+					.<span class="ident">collect</span>();
+				<span class="ident">client</span>.<span class="ident">set_headers</span>(<span class="kw-2">&amp;</span><span class="ident">headers</span>);
 
 				<span class="comment">// Perform the initial handshake.</span>
 				<span class="kw">match</span> <span class="ident">client</span>.<span class="ident">handshake</span>().<span class="kw">await</span> {

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["StorageApi",""],["VestingSchedules",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

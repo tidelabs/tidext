@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ChainStatus",""],["CurrentBlockCount",""],["Nonce",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

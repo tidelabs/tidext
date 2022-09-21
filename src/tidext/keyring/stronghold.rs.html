@@ -435,11 +435,11 @@
   <span class="ident">KeyProvider</span>, <span class="ident">Location</span>, <span class="ident">SnapshotPath</span>, <span class="ident">Stronghold</span>,
 };
 <span class="kw">use</span> <span class="ident">subxt</span>::{
-  <span class="ident">sp_core</span>::{
+  <span class="ident">ext::sp_core</span>::{
     <span class="ident">crypto</span>::{<span class="ident">CryptoType</span>, <span class="ident">DeriveJunction</span>, <span class="ident">Pair</span>, <span class="ident">SecretStringError</span>},
     <span class="ident">sr25519</span>::{<span class="ident">Public</span>, <span class="ident">Signature</span>},
   },
-  <span class="ident">PairSigner</span>,
+  <span class="ident">tx::PairSigner</span>,
 };
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">iota_stronghold</span> <span class="kw">as</span> <span class="ident">stronghold</span>;

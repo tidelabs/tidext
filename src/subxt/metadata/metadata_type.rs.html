@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/ff37576/subxt/src/metadata/metadata_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metadata_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/metadata/metadata_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>metadata_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -808,34 +808,59 @@
 <span id="803">803</span>
 <span id="804">804</span>
 <span id="805">805</span>
+<span id="806">806</span>
+<span id="807">807</span>
+<span id="808">808</span>
+<span id="809">809</span>
+<span id="810">810</span>
+<span id="811">811</span>
+<span id="812">812</span>
+<span id="813">813</span>
+<span id="814">814</span>
+<span id="815">815</span>
+<span id="816">816</span>
+<span id="817">817</span>
+<span id="818">818</span>
+<span id="819">819</span>
+<span id="820">820</span>
+<span id="821">821</span>
+<span id="822">822</span>
+<span id="823">823</span>
+<span id="824">824</span>
+<span id="825">825</span>
+<span id="826">826</span>
+<span id="827">827</span>
+<span id="828">828</span>
+<span id="829">829</span>
+<span id="830">830</span>
+<span id="831">831</span>
+<span id="832">832</span>
+<span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
+<span id="847">847</span>
+<span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of subxt.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
-<span class="comment">//</span>
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
-
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::hash_cache::HashCache</span>;
+<span class="comment">// This file is dual-licensed as Apache-2.0 or GPL-3.0.</span>
+<span class="comment">// see LICENSE for license details.</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::decoder::DecoderBuilder</span>;
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">u8_map::U8Map</span>,
-    <span class="ident">BasicError</span>,
-};
-
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Call</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::hash_cache::HashCache</span>;
 <span class="kw">use</span> <span class="ident">codec::Error</span> <span class="kw">as</span> <span class="ident">CodecError</span>;
 <span class="kw">use</span> <span class="ident">frame_metadata</span>::{
     <span class="ident">PalletConstantMetadata</span>,
@@ -848,8 +873,8 @@
 <span class="kw">use</span> <span class="ident">parking_lot::RwLock</span>;
 <span class="kw">use</span> <span class="ident">scale_info</span>::{
     <span class="ident">form::PortableForm</span>,
+    <span class="ident">PortableRegistry</span>,
     <span class="ident">Type</span>,
-    <span class="ident">Variant</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
@@ -857,6 +882,11 @@
     <span class="ident">sync::Arc</span>,
 };
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">u8_map::U8Map</span>,
+    <span class="ident">Error</span>,
+};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">scale_info::IntoPortable</span>;
 
@@ -889,7 +919,7 @@
 }
 
 <span class="doccomment">/// Metadata error originated from inspecting the internal representation of the runtime metadata.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>, <span class="ident">PartialEq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MetadataError</span> {
     <span class="doccomment">/// Module is not in metadata.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Pallet not found&quot;</span>)]</span>
@@ -924,9 +954,15 @@
     <span class="doccomment">/// Type is not in metadata.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Type {0} missing from type registry&quot;</span>)]</span>
     <span class="ident">TypeNotFound</span>(<span class="ident">u32</span>),
-    <span class="doccomment">/// Runtime pallet metadata is incompatible with the static one.</span>
-    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Pallet {0} has incompatible metadata&quot;</span>)]</span>
-    <span class="ident">IncompatiblePalletMetadata</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
+    <span class="doccomment">/// Runtime constant metadata is incompatible with the static one.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Pallet {0} Constant {0} has incompatible metadata&quot;</span>)]</span>
+    <span class="ident">IncompatibleConstantMetadata</span>(<span class="ident">String</span>, <span class="ident">String</span>),
+    <span class="doccomment">/// Runtime call metadata is incompatible with the static one.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Pallet {0} Call {0} has incompatible metadata&quot;</span>)]</span>
+    <span class="ident">IncompatibleCallMetadata</span>(<span class="ident">String</span>, <span class="ident">String</span>),
+    <span class="doccomment">/// Runtime storage metadata is incompatible with the static one.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Pallet {0} Storage {0} has incompatible metadata&quot;</span>)]</span>
+    <span class="ident">IncompatibleStorageMetadata</span>(<span class="ident">String</span>, <span class="ident">String</span>),
     <span class="doccomment">/// Runtime metadata is not fully compatible with the static one.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Node metadata is not fully compatible&quot;</span>)]</span>
     <span class="ident">IncompatibleMetadata</span>,
@@ -938,7 +974,11 @@
     <span class="ident">metadata</span>: <span class="ident">RuntimeMetadataV14</span>,
     <span class="ident">pallets</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">PalletMetadata</span><span class="op">&gt;</span>,
     <span class="ident">events</span>: <span class="ident">HashMap</span><span class="op">&lt;</span>(<span class="ident">u8</span>, <span class="ident">u8</span>), <span class="ident">EventMetadata</span><span class="op">&gt;</span>,
+    <span class="comment">// Errors are hashed by pallet index.</span>
     <span class="ident">errors</span>: <span class="ident">HashMap</span><span class="op">&lt;</span>(<span class="ident">u8</span>, <span class="ident">u8</span>), <span class="ident">ErrorMetadata</span><span class="op">&gt;</span>,
+    <span class="comment">// Type of the DispatchError type, which is what comes back if</span>
+    <span class="comment">// an extrinsic fails.</span>
+    <span class="ident">dispatch_error_ty</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
     <span class="comment">// The hashes uniquely identify parts of the metadata; different</span>
     <span class="comment">// hashes mean some type difference exists between static and runtime</span>
     <span class="comment">// versions. We cache them here to avoid recalculating:</span>
@@ -950,6 +990,7 @@
     <span class="ident">decoder</span>: <span class="ident"><span class="kw">super</span>::Decoder</span>,
 }
 
+<span class="doccomment">/// Metadata pallet calls</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MetadataPalletCalls</span> {
@@ -980,7 +1021,7 @@
 
 <span class="kw">impl</span> <span class="ident">Metadata</span> {
     <span class="doccomment">/// Returns a reference to [`PalletMetadata`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pallet</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PalletMetadata</span>, <span class="ident">MetadataError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pallet</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PalletMetadata</span>, <span class="ident">MetadataError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>
             .<span class="ident">pallets</span>
             .<span class="ident">get</span>(<span class="ident">name</span>)
@@ -1015,6 +1056,16 @@
         <span class="prelude-val">Ok</span>(<span class="ident">error</span>)
     }
 
+    <span class="doccomment">/// Return the DispatchError type ID if it exists.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dispatch_error_ty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">dispatch_error_ty</span>
+    }
+
+    <span class="doccomment">/// Return the type registry embedded within the metadata.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">types</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span> {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>.<span class="ident">types</span>
+    }
+
     <span class="doccomment">/// Resolve a type definition.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resolve_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">id</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Type</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>.<span class="ident">types</span>.<span class="ident">resolve</span>(<span class="ident">id</span>)
@@ -1025,7 +1076,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decode_extrinsic</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::decoder::Extrinsic</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::decoder::Extrinsic</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">decoder</span>.<span class="ident">decode_extrinsic</span>(<span class="ident">data</span>)
     }
 
@@ -1035,7 +1086,7 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">type_id</span>: <span class="ident">u32</span>,
         <span class="ident">input</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">scale_value::Value</span><span class="op">&lt;</span><span class="ident">scale_value::scale::TypeId</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">scale_value::Value</span><span class="op">&lt;</span><span class="ident">scale_value::scale::TypeId</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">decoder</span>.<span class="ident">decode</span>(<span class="ident">type_id</span>, <span class="ident">input</span>)
     }
 
@@ -1045,23 +1096,25 @@
     }
 
     <span class="doccomment">/// Obtain the unique hash for a specific storage entry.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">storage_hash</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident"><span class="kw">crate</span>::StorageEntry</span><span class="op">&gt;</span>(
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">storage_hash</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">pallet</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+        <span class="ident">storage</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>], <span class="ident">MetadataError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>
             .<span class="ident">cached_storage_hashes</span>
-            .<span class="ident">get_or_insert</span>(<span class="ident">S::PALLET</span>, <span class="ident">S::STORAGE</span>, <span class="op">|</span><span class="op">|</span> {
-                <span class="ident">subxt_metadata::get_storage_hash</span>(
-                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>,
-                    <span class="ident">S::PALLET</span>,
-                    <span class="ident">S::STORAGE</span>,
-                )
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
-                    <span class="kw">match</span> <span class="ident">e</span> {
-                        <span class="ident">subxt_metadata::NotFound::Pallet</span> =&gt; <span class="ident">MetadataError::PalletNotFound</span>,
-                        <span class="ident">subxt_metadata::NotFound::Item</span> =&gt; <span class="ident">MetadataError::StorageNotFound</span>,
-                    }
-                })
+            .<span class="ident">get_or_insert</span>(<span class="ident">pallet</span>, <span class="ident">storage</span>, <span class="op">|</span><span class="op">|</span> {
+                <span class="ident">subxt_metadata::get_storage_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>, <span class="ident">pallet</span>, <span class="ident">storage</span>)
+                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+                        <span class="kw">match</span> <span class="ident">e</span> {
+                            <span class="ident">subxt_metadata::NotFound::Pallet</span> =&gt; {
+                                <span class="ident">MetadataError::PalletNotFound</span>
+                            }
+                            <span class="ident">subxt_metadata::NotFound::Item</span> =&gt; {
+                                <span class="ident">MetadataError::StorageNotFound</span>
+                            }
+                        }
+                    })
             })
     }
 
@@ -1089,21 +1142,23 @@
     }
 
     <span class="doccomment">/// Obtain the unique hash for a call.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_hash</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="ident"><span class="kw">crate</span>::Call</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>], <span class="ident">MetadataError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_hash</span>(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        <span class="ident">pallet</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+        <span class="ident">function</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>], <span class="ident">MetadataError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">inner</span>
             .<span class="ident">cached_call_hashes</span>
-            .<span class="ident">get_or_insert</span>(<span class="ident">C::PALLET</span>, <span class="ident">C::FUNCTION</span>, <span class="op">|</span><span class="op">|</span> {
-                <span class="ident">subxt_metadata::get_call_hash</span>(
-                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>,
-                    <span class="ident">C::PALLET</span>,
-                    <span class="ident">C::FUNCTION</span>,
-                )
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
-                    <span class="kw">match</span> <span class="ident">e</span> {
-                        <span class="ident">subxt_metadata::NotFound::Pallet</span> =&gt; <span class="ident">MetadataError::PalletNotFound</span>,
-                        <span class="ident">subxt_metadata::NotFound::Item</span> =&gt; <span class="ident">MetadataError::CallNotFound</span>,
-                    }
-                })
+            .<span class="ident">get_or_insert</span>(<span class="ident">pallet</span>, <span class="ident">function</span>, <span class="op">|</span><span class="op">|</span> {
+                <span class="ident">subxt_metadata::get_call_hash</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">metadata</span>, <span class="ident">pallet</span>, <span class="ident">function</span>)
+                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+                        <span class="kw">match</span> <span class="ident">e</span> {
+                            <span class="ident">subxt_metadata::NotFound::Pallet</span> =&gt; {
+                                <span class="ident">MetadataError::PalletNotFound</span>
+                            }
+                            <span class="ident">subxt_metadata::NotFound::Item</span> =&gt; <span class="ident">MetadataError::CallNotFound</span>,
+                        }
+                    })
             })
     }
 
@@ -1128,7 +1183,8 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PalletMetadata</span> {
     <span class="ident">index</span>: <span class="ident">u8</span>,
     <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="ident">calls</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="ident">call_indexes</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="ident">call_ty_id</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
     <span class="ident">storage</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">StorageEntryMetadata</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="ident">constants</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">PalletConstantMetadata</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
@@ -1144,15 +1200,18 @@
         <span class="self">self</span>.<span class="ident">index</span>
     }
 
+    <span class="doccomment">/// If calls exist for this pallet, this returns the type ID of the variant</span>
+    <span class="doccomment">/// representing the different possible calls.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_ty_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">call_ty_id</span>
+    }
+
     <span class="doccomment">/// Attempt to resolve a call into an index in this pallet, failing</span>
     <span class="doccomment">/// if the call is not found in this pallet.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_index</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">MetadataError</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">C</span>: <span class="ident">Call</span>,
-    {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">function</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">MetadataError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">fn_index</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>
-            .<span class="ident">calls</span>
-            .<span class="ident">get</span>(<span class="ident">C::FUNCTION</span>)
+            .<span class="ident">call_indexes</span>
+            .<span class="ident">get</span>(<span class="ident">function</span>)
             .<span class="ident">ok_or</span>(<span class="ident">MetadataError::CallNotFound</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">fn_index</span>)
     }
@@ -1176,12 +1235,48 @@
     }
 }
 
+<span class="doccomment">/// Metadata for specific field.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventFieldMetadata</span> {
+    <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="ident">type_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+    <span class="ident">type_id</span>: <span class="ident">u32</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">EventFieldMetadata</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">type_name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">type_id</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
+        <span class="ident">EventFieldMetadata</span> {
+            <span class="ident">name</span>,
+            <span class="ident">type_name</span>,
+            <span class="ident">type_id</span>,
+        }
+    }
+
+    <span class="doccomment">/// Get the name of the field.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">as_deref</span>()
+    }
+
+    <span class="comment">// Get the type name of the field as it appears in the code</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">type_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">type_name</span>.<span class="ident">as_deref</span>()
+    }
+
+    <span class="doccomment">/// Get the id of a type</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">type_id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="self">self</span>.<span class="ident">type_id</span>
+    }
+}
+
 <span class="doccomment">/// Metadata for specific events.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventMetadata</span> {
-    <span class="ident">pallet</span>: <span class="ident">String</span>,
+    <span class="comment">// The pallet name is shared across every event, so put it</span>
+    <span class="comment">// behind an Arc to avoid lots of needless clones of it existing.</span>
+    <span class="ident">pallet</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>,
     <span class="ident">event</span>: <span class="ident">String</span>,
-    <span class="ident">variant</span>: <span class="ident">Variant</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
+    <span class="ident">fields</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">EventFieldMetadata</span><span class="op">&gt;</span>,
+    <span class="ident">docs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">EventMetadata</span> {
@@ -1195,21 +1290,25 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">event</span>
     }
 
-    <span class="doccomment">/// Get the type def variant for the pallet event.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">variant</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Variant</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span>
+    <span class="doccomment">/// The names, type names &amp; types of each field in the event.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fields</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">EventFieldMetadata</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">fields</span>
+    }
+
+    <span class="doccomment">/// Documentation for this event.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">docs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">String</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">docs</span>
     }
 }
 
-<span class="doccomment">/// Metadata for specific errors obtained from the pallet&#39;s `PalletErrorMetadata`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This holds in memory information regarding the Pallet&#39;s name, Error&#39;s name, and the underlying</span>
-<span class="doccomment">/// metadata representation.</span>
+<span class="doccomment">/// Details about a specific runtime error.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ErrorMetadata</span> {
-    <span class="ident">pallet</span>: <span class="ident">String</span>,
+    <span class="comment">// The pallet name is shared across every event, so put it</span>
+    <span class="comment">// behind an Arc to avoid lots of needless clones of it existing.</span>
+    <span class="ident">pallet</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>,
     <span class="ident">error</span>: <span class="ident">String</span>,
-    <span class="ident">variant</span>: <span class="ident">Variant</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
+    <span class="ident">docs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">ErrorMetadata</span> {
@@ -1218,33 +1317,37 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pallet</span>
     }
 
-    <span class="doccomment">/// Get the name of the specific pallet error.</span>
+    <span class="doccomment">/// The name of the error.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">error</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">error</span>
     }
 
-    <span class="doccomment">/// Get the description of the specific pallet error.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">String</span>] {
-        <span class="self">self</span>.<span class="ident">variant</span>.<span class="ident">docs</span>()
+    <span class="doccomment">/// Documentation for the error.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">docs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">String</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">docs</span>
     }
 }
 
 <span class="doccomment">/// Error originated from converting a runtime metadata [RuntimeMetadataPrefixed] to</span>
 <span class="doccomment">/// the internal [Metadata] representation.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The runtime metadata is converted when building the [crate::client::Client].</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">InvalidMetadataError</span> {
+    <span class="doccomment">/// Invalid prefix</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Invalid prefix&quot;</span>)]</span>
     <span class="ident">InvalidPrefix</span>,
+    <span class="doccomment">/// Invalid version</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Invalid version&quot;</span>)]</span>
     <span class="ident">InvalidVersion</span>,
+    <span class="doccomment">/// Type missing from type registry</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Type {0} missing from type registry&quot;</span>)]</span>
     <span class="ident">MissingType</span>(<span class="ident">u32</span>),
+    <span class="doccomment">/// Type was not a variant/enum type</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Type {0} was not a variant/enum type&quot;</span>)]</span>
     <span class="ident">TypeDefNotVariant</span>(<span class="ident">u32</span>),
+    <span class="doccomment">/// Something went wrong</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;{0}&quot;</span>)]</span>
     <span class="ident">Other</span>(<span class="ident">String</span>),
+    <span class="doccomment">/// Unable to create decoder</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Unable to initialize decoder&quot;</span>)]</span>
     <span class="ident">InvalidDecoderBuilder</span>,
@@ -1277,15 +1380,18 @@
             .<span class="ident">pallets</span>
             .<span class="ident">iter</span>()
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">pallet</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">calls</span> <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">calls</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="prelude-val">Ok</span>(<span class="ident">HashMap::new</span>()), <span class="op">|</span><span class="ident">call</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">type_def_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">call</span>.<span class="ident">ty</span>.<span class="ident">id</span>())<span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">calls</span> <span class="op">=</span> <span class="ident">type_def_variant</span>
-                        .<span class="ident">variants</span>()
-                        .<span class="ident">iter</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> (<span class="ident">v</span>.<span class="ident">name</span>().<span class="ident">clone</span>(), <span class="ident">v</span>.<span class="ident">index</span>()))
-                        .<span class="ident">collect</span>();
-                    <span class="prelude-val">Ok</span>(<span class="ident">calls</span>)
-                })<span class="question-mark">?</span>;
+                <span class="kw">let</span> <span class="ident">call_ty_id</span> <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">calls</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">ty</span>.<span class="ident">id</span>());
+
+                <span class="kw">let</span> <span class="ident">call_indexes</span> <span class="op">=</span>
+                    <span class="ident">pallet</span>.<span class="ident">calls</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="prelude-val">Ok</span>(<span class="ident">HashMap::new</span>()), <span class="op">|</span><span class="ident">call</span><span class="op">|</span> {
+                        <span class="kw">let</span> <span class="ident">type_def_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">call</span>.<span class="ident">ty</span>.<span class="ident">id</span>())<span class="question-mark">?</span>;
+                        <span class="kw">let</span> <span class="ident">call_indexes</span> <span class="op">=</span> <span class="ident">type_def_variant</span>
+                            .<span class="ident">variants</span>()
+                            .<span class="ident">iter</span>()
+                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> (<span class="ident">v</span>.<span class="ident">name</span>().<span class="ident">clone</span>(), <span class="ident">v</span>.<span class="ident">index</span>()))
+                            .<span class="ident">collect</span>();
+                        <span class="prelude-val">Ok</span>(<span class="ident">call_indexes</span>)
+                    })<span class="question-mark">?</span>;
 
                 <span class="kw">let</span> <span class="ident">storage</span> <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">storage</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">HashMap::new</span>(), <span class="op">|</span><span class="ident">storage</span><span class="op">|</span> {
                     <span class="ident">storage</span>
@@ -1304,7 +1410,8 @@
                 <span class="kw">let</span> <span class="ident">pallet_metadata</span> <span class="op">=</span> <span class="ident">PalletMetadata</span> {
                     <span class="ident">index</span>: <span class="ident">pallet</span>.<span class="ident">index</span>,
                     <span class="ident">name</span>: <span class="ident">pallet</span>.<span class="ident">name</span>.<span class="ident">to_string</span>(),
-                    <span class="ident">calls</span>,
+                    <span class="ident">call_indexes</span>,
+                    <span class="ident">call_ty_id</span>,
                     <span class="ident">storage</span>,
                     <span class="ident">constants</span>,
                 };
@@ -1313,55 +1420,60 @@
             })
             .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">pallet_events</span> <span class="op">=</span> <span class="ident">metadata</span>
-            .<span class="ident">pallets</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">pallet</span><span class="op">|</span> {
-                <span class="ident">pallet</span>.<span class="ident">event</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">event</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">type_def_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">event</span>.<span class="ident">ty</span>.<span class="ident">id</span>())<span class="question-mark">?</span>;
-                    <span class="prelude-val">Ok</span>((<span class="ident">pallet</span>, <span class="ident">type_def_variant</span>))
-                })
-            })
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">pallet_events</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">flat_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">type_def_variant</span>)<span class="op">|</span> {
-                <span class="ident">type_def_variant</span>.<span class="ident">variants</span>().<span class="ident">iter</span>().<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">var</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> (<span class="ident">pallet</span>.<span class="ident">index</span>, <span class="ident">var</span>.<span class="ident">index</span>());
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">EventMetadata</span> {
-                        <span class="ident">pallet</span>: <span class="ident">pallet</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-                        <span class="ident">event</span>: <span class="ident">var</span>.<span class="ident">name</span>().<span class="ident">clone</span>(),
-                        <span class="ident">variant</span>: <span class="ident">var</span>.<span class="ident">clone</span>(),
-                    };
-                    (<span class="ident">key</span>, <span class="ident">value</span>)
-                })
-            })
-            .<span class="ident">collect</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">events</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="op">&lt;</span>(<span class="ident">u8</span>, <span class="ident">u8</span>), <span class="ident">EventMetadata</span><span class="op">&gt;</span><span class="ident">::new</span>();
+        <span class="kw">for</span> <span class="ident">pallet</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">metadata</span>.<span class="ident">pallets</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">event</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">pallet</span>.<span class="ident">event</span> {
+                <span class="kw">let</span> <span class="ident">pallet_name</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">name</span>.<span class="ident">to_string</span>().<span class="ident">into</span>();
+                <span class="kw">let</span> <span class="ident">event_type_id</span> <span class="op">=</span> <span class="ident">event</span>.<span class="ident">ty</span>.<span class="ident">id</span>();
+                <span class="kw">let</span> <span class="ident">event_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">event_type_id</span>)<span class="question-mark">?</span>;
+                <span class="kw">for</span> <span class="ident">variant</span> <span class="kw">in</span> <span class="ident">event_variant</span>.<span class="ident">variants</span>() {
+                    <span class="ident">events</span>.<span class="ident">insert</span>(
+                        (<span class="ident">pallet</span>.<span class="ident">index</span>, <span class="ident">variant</span>.<span class="ident">index</span>()),
+                        <span class="ident">EventMetadata</span> {
+                            <span class="ident">pallet</span>: <span class="ident">pallet_name</span>.<span class="ident">clone</span>(),
+                            <span class="ident">event</span>: <span class="ident">variant</span>.<span class="ident">name</span>().<span class="ident">to_owned</span>(),
+                            <span class="ident">fields</span>: <span class="ident">variant</span>
+                                .<span class="ident">fields</span>()
+                                .<span class="ident">iter</span>()
+                                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> {
+                                    <span class="ident">EventFieldMetadata::new</span>(
+                                        <span class="ident">f</span>.<span class="ident">name</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">to_owned</span>()),
+                                        <span class="ident">f</span>.<span class="ident">type_name</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">to_owned</span>()),
+                                        <span class="ident">f</span>.<span class="ident">ty</span>().<span class="ident">id</span>(),
+                                    )
+                                })
+                                .<span class="ident">collect</span>(),
+                            <span class="ident">docs</span>: <span class="ident">variant</span>.<span class="ident">docs</span>().<span class="ident">to_vec</span>(),
+                        },
+                    );
+                }
+            }
+        }
 
-        <span class="kw">let</span> <span class="ident">pallet_errors</span> <span class="op">=</span> <span class="ident">metadata</span>
-            .<span class="ident">pallets</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="op">&lt;</span>(<span class="ident">u8</span>, <span class="ident">u8</span>), <span class="ident">ErrorMetadata</span><span class="op">&gt;</span><span class="ident">::new</span>();
+        <span class="kw">for</span> <span class="ident">pallet</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">metadata</span>.<span class="ident">pallets</span> {
+            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">error</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">pallet</span>.<span class="ident">error</span> {
+                <span class="kw">let</span> <span class="ident">pallet_name</span>: <span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">pallet</span>.<span class="ident">name</span>.<span class="ident">to_string</span>().<span class="ident">into</span>();
+                <span class="kw">let</span> <span class="ident">error_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">error</span>.<span class="ident">ty</span>.<span class="ident">id</span>())<span class="question-mark">?</span>;
+                <span class="kw">for</span> <span class="ident">variant</span> <span class="kw">in</span> <span class="ident">error_variant</span>.<span class="ident">variants</span>() {
+                    <span class="ident">errors</span>.<span class="ident">insert</span>(
+                        (<span class="ident">pallet</span>.<span class="ident">index</span>, <span class="ident">variant</span>.<span class="ident">index</span>()),
+                        <span class="ident">ErrorMetadata</span> {
+                            <span class="ident">pallet</span>: <span class="ident">pallet_name</span>.<span class="ident">clone</span>(),
+                            <span class="ident">error</span>: <span class="ident">variant</span>.<span class="ident">name</span>().<span class="ident">clone</span>(),
+                            <span class="ident">docs</span>: <span class="ident">variant</span>.<span class="ident">docs</span>().<span class="ident">to_vec</span>(),
+                        },
+                    );
+                }
+            }
+        }
+
+        <span class="kw">let</span> <span class="ident">dispatch_error_ty</span> <span class="op">=</span> <span class="ident">metadata</span>
+            .<span class="ident">types</span>
+            .<span class="ident">types</span>()
             .<span class="ident">iter</span>()
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">pallet</span><span class="op">|</span> {
-                <span class="ident">pallet</span>.<span class="ident">error</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">error</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">type_def_variant</span> <span class="op">=</span> <span class="ident">get_type_def_variant</span>(<span class="ident">error</span>.<span class="ident">ty</span>.<span class="ident">id</span>())<span class="question-mark">?</span>;
-                    <span class="prelude-val">Ok</span>((<span class="ident">pallet</span>, <span class="ident">type_def_variant</span>))
-                })
-            })
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">pallet_errors</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">flat_map</span>(<span class="op">|</span>(<span class="ident">pallet</span>, <span class="ident">type_def_variant</span>)<span class="op">|</span> {
-                <span class="ident">type_def_variant</span>.<span class="ident">variants</span>().<span class="ident">iter</span>().<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">var</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> (<span class="ident">pallet</span>.<span class="ident">index</span>, <span class="ident">var</span>.<span class="ident">index</span>());
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="ident">ErrorMetadata</span> {
-                        <span class="ident">pallet</span>: <span class="ident">pallet</span>.<span class="ident">name</span>.<span class="ident">clone</span>(),
-                        <span class="ident">error</span>: <span class="ident">var</span>.<span class="ident">name</span>().<span class="ident">clone</span>(),
-                        <span class="ident">variant</span>: <span class="ident">var</span>.<span class="ident">clone</span>(),
-                    };
-                    (<span class="ident">key</span>, <span class="ident">value</span>)
-                })
-            })
-            .<span class="ident">collect</span>();
+            .<span class="ident">find</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> <span class="ident">ty</span>.<span class="ident">ty</span>().<span class="ident">path</span>().<span class="ident">segments</span>() <span class="op">==</span> [<span class="string">&quot;sp_runtime&quot;</span>, <span class="string">&quot;DispatchError&quot;</span>])
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">ty</span><span class="op">|</span> <span class="ident">ty</span>.<span class="ident">id</span>());
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pallet_calls_by_index</span> <span class="op">=</span> <span class="ident">U8Map::new</span>();
@@ -1438,6 +1550,7 @@
                 <span class="ident">pallets</span>,
                 <span class="ident">events</span>,
                 <span class="ident">errors</span>,
+                <span class="ident">dispatch_error_ty</span>,
                 <span class="ident">cached_metadata_hash</span>: <span class="ident">Default::default</span>(),
                 <span class="ident">cached_call_hashes</span>: <span class="ident">Default::default</span>(),
                 <span class="ident">cached_constant_hashes</span>: <span class="ident">Default::default</span>(),
@@ -1452,7 +1565,6 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::StorageEntryKey</span>;
     <span class="kw">use</span> <span class="ident">frame_metadata</span>::{
         <span class="ident">ExtrinsicMetadata</span>,
         <span class="ident">PalletStorageMetadata</span>,
@@ -1535,14 +1647,7 @@
     <span class="kw">fn</span> <span class="ident">metadata_call_inner_cache</span>() {
         <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">load_metadata</span>();
 
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">codec::Encode</span>)]</span>
-        <span class="kw">struct</span> <span class="ident">ValidCall</span>;
-        <span class="kw">impl</span> <span class="ident"><span class="kw">crate</span>::Call</span> <span class="kw">for</span> <span class="ident">ValidCall</span> {
-            <span class="kw">const</span> <span class="ident">PALLET</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;System&quot;</span>;
-            <span class="kw">const</span> <span class="ident">FUNCTION</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;fill_block&quot;</span>;
-        }
-
-        <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">call_hash</span>::<span class="op">&lt;</span><span class="ident">ValidCall</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">call_hash</span>(<span class="string">&quot;System&quot;</span>, <span class="string">&quot;fill_block&quot;</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">call_number</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="ident">hash_cached</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">inner</span>.<span class="ident">cached_call_hashes</span>.<span class="ident">get_or_insert</span>(
@@ -1583,20 +1688,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">metadata_storage_inner_cache</span>() {
         <span class="kw">let</span> <span class="ident">metadata</span> <span class="op">=</span> <span class="ident">load_metadata</span>();
-
-        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">codec::Encode</span>)]</span>
-        <span class="kw">struct</span> <span class="ident">ValidStorage</span>;
-        <span class="kw">impl</span> <span class="ident"><span class="kw">crate</span>::StorageEntry</span> <span class="kw">for</span> <span class="ident">ValidStorage</span> {
-            <span class="kw">const</span> <span class="ident">PALLET</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;System&quot;</span>;
-            <span class="kw">const</span> <span class="ident">STORAGE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;Account&quot;</span>;
-            <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> ();
-
-            <span class="kw">fn</span> <span class="ident">key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">StorageEntryKey</span> {
-                <span class="macro">unreachable!</span>(<span class="string">&quot;Should not be called&quot;</span>);
-            }
-        }
-
-        <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">storage_hash</span>::<span class="op">&lt;</span><span class="ident">ValidStorage</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">storage_hash</span>(<span class="string">&quot;System&quot;</span>, <span class="string">&quot;Account&quot;</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">call_number</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="kw">let</span> <span class="ident">hash_cached</span> <span class="op">=</span> <span class="ident">metadata</span>.<span class="ident">inner</span>.<span class="ident">cached_storage_hashes</span>.<span class="ident">get_or_insert</span>(

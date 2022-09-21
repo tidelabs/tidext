@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["tidext"] = [{"text":"impl <a class=\"trait\" href=\"subxt/error/trait.HasModuleError.html\" title=\"trait subxt::error::HasModuleError\">HasModuleError</a> for <a class=\"enum\" href=\"tidext/tidechain/runtime_types/sp_runtime/enum.DispatchError.html\" title=\"enum tidext::tidechain::runtime_types::sp_runtime::DispatchError\">DispatchError</a>","synthetic":false,"types":["tidext::subxt_impl::tidechain::runtime_types::sp_runtime::DispatchError"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

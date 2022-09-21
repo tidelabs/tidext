@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CounterForListNodes",""],["ListBags",""],["ListNodes",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

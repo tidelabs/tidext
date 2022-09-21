@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AuthoredBlocks",""],["HeartbeatAfter",""],["Keys",""],["ReceivedHeartbeats",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

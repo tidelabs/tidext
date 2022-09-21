@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["AcceptCurator",""],["ApproveBounty",""],["AwardBounty",""],["ClaimBounty",""],["CloseBounty",""],["ExtendBountyExpiry",""],["ProposeBounty",""],["ProposeCurator",""],["TransactionApi",""],["UnassignCurator",""]]});

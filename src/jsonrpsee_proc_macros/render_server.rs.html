@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-proc-macros-0.14.0/src/render_server.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>render_server.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-proc-macros-0.15.1/src/render_server.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>render_server.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../jsonrpsee_proc_macros/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -426,6 +426,26 @@
 <span id="421">421</span>
 <span id="422">422</span>
 <span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.</span>
 <span class="comment">//</span>
 <span class="comment">// Permission is hereby granted, free of charge, to any</span>
@@ -459,6 +479,8 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::helpers</span>::{<span class="ident">generate_where_clause</span>, <span class="ident">is_option</span>};
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Span</span>, <span class="ident">TokenStream</span> <span class="kw">as</span> <span class="ident">TokenStream2</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">quote_spanned</span>};
+<span class="kw">use</span> <span class="ident">syn::punctuated::Punctuated</span>;
+<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">parse_quote</span>, <span class="ident">ReturnType</span>, <span class="ident">Token</span>};
 
 <span class="kw">impl</span> <span class="ident">RpcDescription</span> {
 	<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn</span> <span class="ident">render_server</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream2</span>, <span class="ident">syn::Error</span><span class="op">&gt;</span> {
@@ -497,10 +519,16 @@
 
 		<span class="kw">let</span> <span class="ident">subscriptions</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">subscriptions</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">sub</span><span class="op">|</span> {
 			<span class="kw">let</span> <span class="ident">docs</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">sub</span>.<span class="ident">docs</span>;
-			<span class="kw">let</span> <span class="ident">subscription_sink_ty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">PendingSubscription</span> });
+			<span class="kw">let</span> <span class="ident">subscription_sink_ty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">SubscriptionSink</span> });
 			<span class="comment">// Add `SubscriptionSink` as the second input parameter to the signature.</span>
 			<span class="kw">let</span> <span class="ident">subscription_sink</span>: <span class="ident">syn::FnArg</span> <span class="op">=</span> <span class="macro">syn::parse_quote!</span>(<span class="ident">subscription_sink</span>: #<span class="ident">subscription_sink_ty</span>);
 			<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sub_sig</span> <span class="op">=</span> <span class="ident">sub</span>.<span class="ident">signature</span>.<span class="ident">clone</span>();
+
+			<span class="comment">// For ergonomic reasons, the server&#39;s subscription method should return `SubscriptionResult`.</span>
+			<span class="kw">let</span> <span class="ident">return_ty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">types::SubscriptionResult</span> });
+			<span class="kw">let</span> <span class="ident">output</span>: <span class="ident">ReturnType</span> <span class="op">=</span> <span class="macro">parse_quote!</span> { -&gt; #<span class="ident">return_ty</span> };
+			<span class="ident">sub_sig</span>.<span class="ident">sig</span>.<span class="ident">output</span> <span class="op">=</span> <span class="ident">output</span>;
+
 			<span class="ident">sub_sig</span>.<span class="ident">sig</span>.<span class="ident">inputs</span>.<span class="ident">insert</span>(<span class="number">1</span>, <span class="ident">subscription_sink</span>);
 			<span class="macro">quote!</span> {
 				#<span class="ident">docs</span>
@@ -540,6 +568,28 @@
 			}}
 		}
 
+		<span class="doccomment">/// Helper that will parse the resources passed to the macro and call the appropriate resource</span>
+		<span class="doccomment">/// builder to register the resource limits.</span>
+		<span class="kw">fn</span> <span class="ident">handle_resource_limits</span>(<span class="ident">resources</span>: <span class="kw-2">&amp;</span><span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">Resource</span>, <span class="macro">Token!</span>[,]<span class="op">&gt;</span>) -&gt; <span class="ident">TokenStream2</span> {
+			<span class="comment">// Nothing to be done if no resources were set.</span>
+			<span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">is_empty</span>() {
+				<span class="kw">return</span> <span class="macro">quote!</span> {};
+			}
+
+			<span class="comment">// Transform each resource into a call to `.resource(name, value)`.</span>
+			<span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">resources</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">resource</span><span class="op">|</span> {
+				<span class="kw">let</span> <span class="ident">Resource</span> { <span class="ident">name</span>, <span class="ident">value</span>, .. } <span class="op">=</span> <span class="ident">resource</span>;
+				<span class="macro">quote!</span> { .<span class="ident">resource</span>(#<span class="ident">name</span>, #<span class="ident">value</span>)<span class="question-mark">?</span> }
+			});
+
+			<span class="macro">quote!</span> {
+				.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">resource_builder</span><span class="op">|</span> {
+					<span class="ident">resource_builder</span> #(#<span class="ident">resources</span>)<span class="kw-2">*</span>;
+					<span class="prelude-val">Ok</span>(())
+				})
+			}
+		}
+
 		<span class="kw">let</span> <span class="ident">methods</span> <span class="op">=</span> <span class="self">self</span>
 			.<span class="ident">methods</span>
 			.<span class="ident">iter</span>()
@@ -556,21 +606,7 @@
 
 				<span class="ident">check_name</span>(<span class="kw-2">&amp;</span><span class="ident">rpc_method_name</span>, <span class="ident">rust_method_name</span>.<span class="ident">span</span>());
 
-				<span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">method</span>.<span class="ident">resources</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">resource</span><span class="op">|</span> {
-					<span class="kw">let</span> <span class="ident">Resource</span> { <span class="ident">name</span>, <span class="ident">value</span>, .. } <span class="op">=</span> <span class="ident">resource</span>;
-
-					<span class="macro">quote!</span> { .<span class="ident">resource</span>(#<span class="ident">name</span>, #<span class="ident">value</span>)<span class="question-mark">?</span> }
-				});
-				<span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">method</span>.<span class="ident">resources</span>.<span class="ident">is_empty</span>() {
-					<span class="ident">TokenStream2::new</span>()
-				} <span class="kw">else</span> {
-					<span class="macro">quote!</span> {
-						.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">resource_builder</span><span class="op">|</span> {
-							<span class="ident">resource_builder</span> #(#<span class="ident">resources</span>)<span class="kw-2">*</span>;
-							<span class="prelude-val">Ok</span>(())
-						})
-					}
-				};
+				<span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">handle_resource_limits</span>(<span class="kw-2">&amp;</span><span class="ident">method</span>.<span class="ident">resources</span>);
 
 				<span class="kw">if</span> <span class="ident">method</span>.<span class="ident">signature</span>.<span class="ident">sig</span>.<span class="ident">asyncness</span>.<span class="ident">is_some</span>() {
 					<span class="ident">handle_register_result</span>(<span class="macro">quote!</span> {
@@ -624,11 +660,14 @@
 					<span class="prelude-val">None</span> =&gt; <span class="ident">rpc_sub_name</span>.<span class="ident">clone</span>(),
 				};
 
+				<span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">handle_resource_limits</span>(<span class="kw-2">&amp;</span><span class="ident">sub</span>.<span class="ident">resources</span>);
+
 				<span class="ident">handle_register_result</span>(<span class="macro">quote!</span> {
-					<span class="ident">rpc</span>.<span class="ident">register_subscription</span>(#<span class="ident">rpc_sub_name</span>, #<span class="ident">rpc_notif_name</span>, #<span class="ident">rpc_unsub_name</span>, <span class="op">|</span><span class="ident">params</span>, <span class="ident">subscription_sink</span>, <span class="ident">context</span><span class="op">|</span> {
+					<span class="ident">rpc</span>.<span class="ident">register_subscription</span>(#<span class="ident">rpc_sub_name</span>, #<span class="ident">rpc_notif_name</span>, #<span class="ident">rpc_unsub_name</span>, <span class="op">|</span><span class="ident">params</span>, <span class="kw-2">mut</span> <span class="ident">subscription_sink</span>, <span class="ident">context</span><span class="op">|</span> {
 						#<span class="ident">parsing</span>
 						<span class="ident">context</span>.<span class="ident">as_ref</span>().#<span class="ident">rust_method_name</span>(<span class="ident">subscription_sink</span>, #<span class="ident">params_seq</span>)
 					})
+					#<span class="ident">resources</span>
 				})
 			})
 			.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
@@ -696,7 +735,7 @@
 								and adds them into a single `RpcModule`.&quot;</span>;
 
 		<span class="kw">let</span> <span class="ident">sub_tys</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn::Type</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">subscriptions</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">item</span>).<span class="ident">collect</span>();
-		<span class="kw">let</span> <span class="ident">where_clause</span> <span class="op">=</span> <span class="ident">generate_where_clause</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trait_def</span>, <span class="kw-2">&amp;</span><span class="ident">sub_tys</span>, <span class="bool-val">false</span>);
+		<span class="kw">let</span> <span class="ident">where_clause</span> <span class="op">=</span> <span class="ident">generate_where_clause</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">trait_def</span>, <span class="kw-2">&amp;</span><span class="ident">sub_tys</span>, <span class="bool-val">false</span>, <span class="self">self</span>.<span class="ident">server_bounds</span>.<span class="ident">as_ref</span>());
 
 		<span class="comment">// NOTE(niklasad1): empty where clause is valid rust syntax.</span>
 		<span class="prelude-val">Ok</span>(<span class="macro">quote!</span> {
@@ -728,6 +767,7 @@
 		<span class="kw">let</span> <span class="ident">params_fields</span> <span class="op">=</span> <span class="macro">quote!</span> { #(#<span class="ident">params_fields_seq</span>),<span class="op">*</span> };
 		<span class="kw">let</span> <span class="ident">tracing</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">tracing</span> });
 		<span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">core::Error</span> });
+		<span class="kw">let</span> <span class="ident">sub_err</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">jrps_server_item</span>(<span class="macro">quote!</span> { <span class="ident">types::SubscriptionEmptyError</span> });
 
 		<span class="comment">// Code to decode sequence of parameters from a JSON array.</span>
 		<span class="kw">let</span> <span class="ident">decode_array</span> <span class="op">=</span> {
@@ -739,8 +779,8 @@
 							<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
 								#<span class="macro">tracing::error!</span>(<span class="macro">concat!</span>(<span class="string">&quot;Error parsing optional \&quot;&quot;</span>, <span class="macro">stringify!</span>(#<span class="ident">name</span>), <span class="string">&quot;\&quot; as \&quot;&quot;</span>, <span class="macro">stringify!</span>(#<span class="ident">ty</span>), <span class="string">&quot;\&quot;: {:?}&quot;</span>), <span class="ident">e</span>);
 								<span class="kw">let</span> <span class="ident">_e</span>: #<span class="ident">err</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">into</span>();
-								#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>);
-								<span class="kw">return</span>;
+								#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>)<span class="question-mark">?</span>;
+								<span class="kw">return</span> <span class="prelude-val">Err</span>(#<span class="ident">sub_err</span>);
 							}
 						};
 					}
@@ -763,8 +803,8 @@
 							<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
 								#<span class="macro">tracing::error!</span>(<span class="macro">concat!</span>(<span class="string">&quot;Error parsing \&quot;&quot;</span>, <span class="macro">stringify!</span>(#<span class="ident">name</span>), <span class="string">&quot;\&quot; as \&quot;&quot;</span>, <span class="macro">stringify!</span>(#<span class="ident">ty</span>), <span class="string">&quot;\&quot;: {:?}&quot;</span>), <span class="ident">e</span>);
 								<span class="kw">let</span> <span class="ident">_e</span>: #<span class="ident">err</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">into</span>();
-								#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>);
-								<span class="kw">return</span>;
+								#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>)<span class="question-mark">?</span>;
+								<span class="kw">return</span> <span class="prelude-val">Err</span>(#<span class="ident">sub_err</span>);
 							}
 						};
 					}
@@ -814,8 +854,8 @@
 						<span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
 							#<span class="macro">tracing::error!</span>(<span class="string">&quot;Failed to parse JSON-RPC params as object: {}&quot;</span>, <span class="ident">e</span>);
 							<span class="kw">let</span> <span class="ident">_e</span>: #<span class="ident">err</span> <span class="op">=</span> <span class="ident">e</span>.<span class="ident">into</span>();
-							#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>);
-							<span class="kw">return</span>;
+							#<span class="ident">pending</span>.<span class="ident">reject</span>(<span class="ident">_e</span>)<span class="question-mark">?</span>;
+							<span class="kw">return</span> <span class="prelude-val">Err</span>(#<span class="ident">sub_err</span>);
 						}
 					};
 

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccountFees",""],["ActiveEra",""],["CurrentSession",""],["EraTotalFees",""],["SessionTotalFees",""],["StorageApi",""],["StoredSessions",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

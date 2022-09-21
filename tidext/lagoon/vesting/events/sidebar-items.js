@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Claimed","Claimed vesting."],["VestingScheduleAdded","Added new vesting schedule."],["VestingSchedulesUpdated","Updated vesting schedules."]]});

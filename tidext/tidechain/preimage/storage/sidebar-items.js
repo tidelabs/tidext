@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["PreimageFor",""],["StatusFor",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

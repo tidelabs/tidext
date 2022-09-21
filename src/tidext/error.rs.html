@@ -93,7 +93,7 @@
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;json error: {0}&quot;</span>)]</span>
   <span class="ident">Json</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">serde_json::Error</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;tidechain error: {0}&quot;</span>)]</span>
-  <span class="ident">Substrate</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">subxt::BasicError</span>),
+  <span class="ident">Substrate</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">subxt::Error</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;dispatch error: {0}&quot;</span>)]</span>
   <span class="ident">DispatchError</span>(<span class="ident">String</span>),
   <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;codec error: {0}&quot;</span>)]</span>

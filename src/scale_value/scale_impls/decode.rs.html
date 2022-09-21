@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.2.1/src/scale_impls/decode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>decode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.5.0/src/scale_impls/decode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>decode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scale_value/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -484,112 +484,6 @@
 <span id="479">479</span>
 <span id="480">480</span>
 <span id="481">481</span>
-<span id="482">482</span>
-<span id="483">483</span>
-<span id="484">484</span>
-<span id="485">485</span>
-<span id="486">486</span>
-<span id="487">487</span>
-<span id="488">488</span>
-<span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
-<span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
-<span id="507">507</span>
-<span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
-<span id="514">514</span>
-<span id="515">515</span>
-<span id="516">516</span>
-<span id="517">517</span>
-<span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
-<span id="521">521</span>
-<span id="522">522</span>
-<span id="523">523</span>
-<span id="524">524</span>
-<span id="525">525</span>
-<span id="526">526</span>
-<span id="527">527</span>
-<span id="528">528</span>
-<span id="529">529</span>
-<span id="530">530</span>
-<span id="531">531</span>
-<span id="532">532</span>
-<span id="533">533</span>
-<span id="534">534</span>
-<span id="535">535</span>
-<span id="536">536</span>
-<span id="537">537</span>
-<span id="538">538</span>
-<span id="539">539</span>
-<span id="540">540</span>
-<span id="541">541</span>
-<span id="542">542</span>
-<span id="543">543</span>
-<span id="544">544</span>
-<span id="545">545</span>
-<span id="546">546</span>
-<span id="547">547</span>
-<span id="548">548</span>
-<span id="549">549</span>
-<span id="550">550</span>
-<span id="551">551</span>
-<span id="552">552</span>
-<span id="553">553</span>
-<span id="554">554</span>
-<span id="555">555</span>
-<span id="556">556</span>
-<span id="557">557</span>
-<span id="558">558</span>
-<span id="559">559</span>
-<span id="560">560</span>
-<span id="561">561</span>
-<span id="562">562</span>
-<span id="563">563</span>
-<span id="564">564</span>
-<span id="565">565</span>
-<span id="566">566</span>
-<span id="567">567</span>
-<span id="568">568</span>
-<span id="569">569</span>
-<span id="570">570</span>
-<span id="571">571</span>
-<span id="572">572</span>
-<span id="573">573</span>
-<span id="574">574</span>
-<span id="575">575</span>
-<span id="576">576</span>
-<span id="577">577</span>
-<span id="578">578</span>
-<span id="579">579</span>
-<span id="580">580</span>
-<span id="581">581</span>
-<span id="582">582</span>
-<span id="583">583</span>
-<span id="584">584</span>
-<span id="585">585</span>
-<span id="586">586</span>
-<span id="587">587</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2022 Parity Technologies (UK) Ltd. (admin@parity.io)</span>
 <span class="comment">// This file is a part of the scale-value crate.</span>
 <span class="comment">//</span>
@@ -605,48 +499,12 @@
 <span class="comment">// See the License for the specific language governing permissions and</span>
 <span class="comment">// limitations under the License.</span>
 
-<span class="kw">use</span> <span class="kw">super</span>::{
-	<span class="ident">bit_sequence</span>::{<span class="ident">get_bitsequence_details</span>, <span class="ident">BitOrderTy</span>, <span class="ident">BitSequenceError</span>, <span class="ident">BitStoreTy</span>},
-	<span class="ident">type_id::TypeId</span>,
-	<span class="ident">ScaleType</span> <span class="kw">as</span> <span class="ident">Type</span>, <span class="ident">ScaleTypeDef</span> <span class="kw">as</span> <span class="ident">TypeDef</span>,
-};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::value</span>::{<span class="ident">BitSequence</span>, <span class="ident">Composite</span>, <span class="ident">Primitive</span>, <span class="ident">Value</span>, <span class="ident">ValueDef</span>, <span class="ident">Variant</span>};
-<span class="kw">use</span> <span class="ident">bitvec</span>::{
-	<span class="ident">order</span>::{<span class="ident">BitOrder</span>, <span class="ident">Lsb0</span>, <span class="ident">Msb0</span>},
-	<span class="ident">store::BitStore</span>,
-	<span class="ident">vec::BitVec</span>,
-};
-<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Compact</span>, <span class="ident">Decode</span>};
-<span class="kw">use</span> <span class="ident">scale_info</span>::{
-	<span class="ident">form::PortableForm</span>, <span class="ident">Field</span>, <span class="ident">PortableRegistry</span>, <span class="ident">TypeDefArray</span>, <span class="ident">TypeDefBitSequence</span>, <span class="ident">TypeDefCompact</span>,
-	<span class="ident">TypeDefComposite</span>, <span class="ident">TypeDefPrimitive</span>, <span class="ident">TypeDefSequence</span>, <span class="ident">TypeDefTuple</span>, <span class="ident">TypeDefVariant</span>,
-};
+<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::type_id::TypeId</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::value</span>::{<span class="ident">Composite</span>, <span class="ident">Primitive</span>, <span class="ident">Value</span>, <span class="ident">ValueDef</span>, <span class="ident">Variant</span>};
+<span class="kw">use</span> <span class="ident">scale_info::PortableRegistry</span>;
 
-<span class="doccomment">/// An error decoding SCALE bytes into a [`Value`].</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">thiserror::Error</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">DecodeError</span> {
-	<span class="doccomment">/// Some error emitted from a [`codec::Decode`] impl.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;{0}&quot;</span>)]</span>
-	<span class="ident">CodecError</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">codec::Error</span>),
-	<span class="doccomment">/// We could not convert the [`u32`] that we found into a valid [`char`].</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;{0} is expected to be a valid char, but is not&quot;</span>)]</span>
-	<span class="ident">InvalidChar</span>(<span class="ident">u32</span>),
-	<span class="doccomment">/// We could not find the type given in the type registry provided.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Cannot find type with ID {0}&quot;</span>)]</span>
-	<span class="ident">TypeIdNotFound</span>(<span class="ident">u32</span>),
-	<span class="doccomment">/// We expected more bytes to finish decoding, but could not find them.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Ran out of data during decoding&quot;</span>)]</span>
-	<span class="ident">Eof</span>,
-	<span class="doccomment">/// We found a variant that does not match with any in the type we&#39;re trying to decode from.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Could not find variant with index {0} in {1:?}&quot;</span>)]</span>
-	<span class="ident">VariantNotFound</span>(<span class="ident">u8</span>, <span class="ident">scale_info::TypeDefVariant</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>),
-	<span class="doccomment">/// The type we&#39;re trying to decode is supposed to be compact encoded, but that is not possible.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Could not decode compact encoded type into {0:?}&quot;</span>)]</span>
-	<span class="ident">CannotDecodeCompactIntoType</span>(<span class="ident">Type</span>),
-	<span class="doccomment">/// We ran into an error trying to decode a bit sequence.</span>
-	<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Cannot decode bit sequence: {0}&quot;</span>)]</span>
-	<span class="ident">BitSequenceError</span>(<span class="ident">BitSequenceError</span>),
-}
+<span class="comment">// This is emitted if something goes wrong decoding into a Value.</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">scale_decode::visitor::DecodeError</span>;
 
 <span class="doccomment">/// Decode data according to the [`TypeId`] provided.</span>
 <span class="doccomment">/// The provided pointer to the data slice will be moved forwards as needed</span>
@@ -656,261 +514,209 @@
 	<span class="ident">ty_id</span>: <span class="ident">Id</span>,
 	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">ty_id</span> <span class="op">=</span> <span class="ident">ty_id</span>.<span class="ident">into</span>();
-	<span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">types</span>.<span class="ident">resolve</span>(<span class="ident">ty_id</span>.<span class="ident">id</span>()).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">DecodeError::TypeIdNotFound</span>(<span class="ident">ty_id</span>.<span class="ident">id</span>()))<span class="question-mark">?</span>;
-
-	<span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span>.<span class="ident">type_def</span>() {
-		<span class="ident">TypeDef::Composite</span>(<span class="ident">inner</span>) =&gt; {
-			<span class="ident">decode_composite_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Composite</span>)
-		}
-		<span class="ident">TypeDef::Sequence</span>(<span class="ident">inner</span>) =&gt; {
-			<span class="ident">decode_sequence_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Composite</span>)
-		}
-		<span class="ident">TypeDef::Array</span>(<span class="ident">inner</span>) =&gt; <span class="ident">decode_array_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Composite</span>),
-		<span class="ident">TypeDef::Tuple</span>(<span class="ident">inner</span>) =&gt; <span class="ident">decode_tuple_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Composite</span>),
-		<span class="ident">TypeDef::Variant</span>(<span class="ident">inner</span>) =&gt; <span class="ident">decode_variant_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Variant</span>),
-		<span class="ident">TypeDef::Primitive</span>(<span class="ident">inner</span>) =&gt; <span class="ident">decode_primitive_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>).<span class="ident">map</span>(<span class="ident">ValueDef::Primitive</span>),
-		<span class="ident">TypeDef::Compact</span>(<span class="ident">inner</span>) =&gt; <span class="ident">decode_compact_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>),
-		<span class="ident">TypeDef::BitSequence</span>(<span class="ident">inner</span>) =&gt; {
-			<span class="ident">decode_bit_sequence_value</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>).<span class="ident">map</span>(<span class="ident">ValueDef::BitSequence</span>)
-		}
-	}<span class="question-mark">?</span>;
-
-	<span class="prelude-val">Ok</span>(<span class="ident">Value</span> { <span class="ident">value</span>, <span class="ident">context</span>: <span class="ident">ty_id</span> })
+	<span class="ident">scale_decode::decode</span>(<span class="ident">data</span>, <span class="ident">ty_id</span>.<span class="ident">into</span>().<span class="ident">id</span>(), <span class="ident">types</span>, <span class="ident">ValueVisitor</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">decode_composite_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefComposite</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
+<span class="comment">// Sequences, Tuples and Arrays all have the same methods, so decode them in the same way:</span>
+<span class="macro">macro_rules!</span> <span class="ident">to_unnamed_composite</span> {
+	(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">type_id</span>:<span class="ident">ident</span>) =&gt; {{
+		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vals</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>.<span class="ident">len</span>());
+		<span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">val</span>) <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>.<span class="ident">decode_item</span>(<span class="ident">ValueVisitor</span>)<span class="question-mark">?</span> {
+			<span class="ident">vals</span>.<span class="ident">push</span>(<span class="ident">val</span>);
+		}
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> { <span class="ident">value</span>: <span class="ident">ValueDef::Composite</span>(<span class="ident">Composite::Unnamed</span>(<span class="ident">vals</span>)), <span class="ident">context</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">type_id</span>.<span class="ident">into</span>() })
+	}};
+}
+
+<span class="kw">struct</span> <span class="ident">ValueVisitor</span>;
+
+<span class="kw">impl</span> <span class="ident">scale_decode::visitor::Visitor</span> <span class="kw">for</span> <span class="ident">ValueVisitor</span> {
+	<span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">Value</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>;
+	<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">DecodeError</span>;
+
+	<span class="kw">fn</span> <span class="ident">visit_bool</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">bool</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value::bool</span>(<span class="ident">value</span>).<span class="ident">map_context</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">type_id</span>.<span class="ident">into</span>()))
+	}
+	<span class="kw">fn</span> <span class="ident">visit_char</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">char</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value::char</span>(<span class="ident">value</span>).<span class="ident">map_context</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">type_id</span>.<span class="ident">into</span>()))
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u8</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">u8</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_u128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u16</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">u16</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_u128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u32</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">u32</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_u128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u64</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">u64</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_u128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u128</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">u128</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value::u128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u128</span>).<span class="ident">map_context</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">type_id</span>.<span class="ident">into</span>()))
+	}
+	<span class="kw">fn</span> <span class="ident">visit_u256</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">32</span>],
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> { <span class="ident">value</span>: <span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::U256</span>(<span class="kw-2">*</span><span class="ident">value</span>)), <span class="ident">context</span>: <span class="ident">type_id</span>.<span class="ident">into</span>() })
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i8</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">i8</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_i128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">i128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i16</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">i16</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_i128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">i128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i32</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">i32</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_i128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">i128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i64</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">i64</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="self">self</span>.<span class="ident">visit_i128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">i128</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i128</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">i128</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value::i128</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">i128</span>).<span class="ident">map_context</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">type_id</span>.<span class="ident">into</span>()))
+	}
+	<span class="kw">fn</span> <span class="ident">visit_i256</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>; <span class="number">32</span>],
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> { <span class="ident">value</span>: <span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::U256</span>(<span class="kw-2">*</span><span class="ident">value</span>)), <span class="ident">context</span>: <span class="ident">type_id</span>.<span class="ident">into</span>() })
+	}
+	<span class="kw">fn</span> <span class="ident">visit_sequence</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Sequence</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="macro">to_unnamed_composite!</span>(<span class="ident">value</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_tuple</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Tuple</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="macro">to_unnamed_composite!</span>(<span class="ident">value</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_array</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Array</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="macro">to_unnamed_composite!</span>(<span class="ident">value</span>, <span class="ident">type_id</span>)
+	}
+	<span class="kw">fn</span> <span class="ident">visit_bitsequence</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::BitSequence</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> {
+			<span class="ident">value</span>: <span class="ident">ValueDef::BitSequence</span>(<span class="ident">value</span>.<span class="ident">decode_bitsequence</span>()<span class="question-mark">?</span>.<span class="ident">to_u8_lsb0</span>()),
+			<span class="ident">context</span>: <span class="ident">type_id</span>.<span class="ident">into</span>(),
+		})
+	}
+	<span class="kw">fn</span> <span class="ident">visit_str</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="ident">scale_decode::visitor::Str</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value::string</span>(<span class="ident">value</span>.<span class="ident">as_str</span>()<span class="question-mark">?</span>).<span class="ident">map_context</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">type_id</span>.<span class="ident">into</span>()))
+	}
+	<span class="kw">fn</span> <span class="ident">visit_variant</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Variant</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="kw">let</span> <span class="ident">values</span> <span class="op">=</span> <span class="ident">visit_composite</span>(<span class="ident">value</span>.<span class="ident">fields</span>())<span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> {
+			<span class="ident">value</span>: <span class="ident">ValueDef::Variant</span>(<span class="ident">Variant</span> { <span class="ident">name</span>: <span class="ident">value</span>.<span class="ident">name</span>().<span class="ident">to_owned</span>(), <span class="ident">values</span> }),
+			<span class="ident">context</span>: <span class="ident">type_id</span>.<span class="ident">into</span>(),
+		})
+	}
+	<span class="kw">fn</span> <span class="ident">visit_composite</span>(
+		<span class="self">self</span>,
+		<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Composite</span>,
+		<span class="ident">type_id</span>: <span class="ident">scale_decode::visitor::TypeId</span>,
+	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+		<span class="prelude-val">Ok</span>(<span class="ident">Value</span> { <span class="ident">value</span>: <span class="ident">ValueDef::Composite</span>(<span class="ident">visit_composite</span>(<span class="ident">value</span>)<span class="question-mark">?</span>), <span class="ident">context</span>: <span class="ident">type_id</span>.<span class="ident">into</span>() })
+	}
+}
+
+<span class="doccomment">/// Extract a named/unnamed Composite type out of scale_decode&#39;s Composite.</span>
+<span class="kw">fn</span> <span class="ident">visit_composite</span>(
+	<span class="ident">value</span>: <span class="kw-2">&amp;mut</span> <span class="ident">scale_decode::visitor::Composite</span>,
 ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Composite</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="ident">decode_fields</span>(<span class="ident">data</span>, <span class="ident">ty</span>.<span class="ident">fields</span>(), <span class="ident">types</span>)
-}
+	<span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">fields</span>().<span class="ident">len</span>();
+	<span class="kw">let</span> <span class="ident">named</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">fields</span>().<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">name</span>().<span class="ident">is_some</span>()).<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>);
 
-<span class="kw">fn</span> <span class="ident">decode_variant_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefVariant</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Variant</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">data</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">ok_or</span>(<span class="ident">DecodeError::Eof</span>)<span class="question-mark">?</span>;
-	<span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>[<span class="number">1</span>..];
-
-	<span class="comment">// Does a variant exist with the index we&#39;re looking for?</span>
-	<span class="kw">let</span> <span class="ident">variant</span> <span class="op">=</span> <span class="ident">ty</span>
-		.<span class="ident">variants</span>()
-		.<span class="ident">iter</span>()
-		.<span class="ident">find</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">index</span>() <span class="op">==</span> <span class="ident">index</span>)
-		.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">DecodeError::VariantNotFound</span>(<span class="ident">index</span>, <span class="ident">ty</span>.<span class="ident">clone</span>()))<span class="question-mark">?</span>;
-
-	<span class="kw">let</span> <span class="ident">fields</span> <span class="op">=</span> <span class="ident">decode_fields</span>(<span class="ident">data</span>, <span class="ident">variant</span>.<span class="ident">fields</span>(), <span class="ident">types</span>)<span class="question-mark">?</span>;
-	<span class="prelude-val">Ok</span>(<span class="ident">Variant</span> { <span class="ident">name</span>: <span class="ident">variant</span>.<span class="ident">name</span>().<span class="ident">clone</span>(), <span class="ident">values</span>: <span class="ident">fields</span> })
-}
-
-<span class="doccomment">/// Variant and Composite types both have fields; this will decode them into values.</span>
-<span class="kw">fn</span> <span class="ident">decode_fields</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">fields</span>: <span class="kw-2">&amp;</span>[<span class="ident">Field</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>],
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Composite</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">are_named</span> <span class="op">=</span> <span class="ident">fields</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">name</span>().<span class="ident">is_some</span>());
-	<span class="kw">let</span> <span class="ident">named_field_vals</span> <span class="op">=</span> <span class="ident">fields</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> {
-		<span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">name</span>().<span class="ident">cloned</span>().<span class="ident">unwrap_or_default</span>();
-		<span class="ident">decode_value_as_type</span>(<span class="ident">data</span>, <span class="ident">f</span>.<span class="ident">ty</span>(), <span class="ident">types</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">val</span><span class="op">|</span> (<span class="ident">name</span>, <span class="ident">val</span>))
-	});
-
-	<span class="kw">if</span> <span class="ident">are_named</span> {
-		<span class="kw">let</span> <span class="ident">vals</span> <span class="op">=</span> <span class="ident">named_field_vals</span>.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
+	<span class="kw">if</span> <span class="ident">named</span> {
+		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vals</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">len</span>);
+		<span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">name</span>, <span class="ident">v</span>)) <span class="op">=</span> <span class="ident">value</span>.<span class="ident">decode_item_with_name</span>(<span class="ident">ValueVisitor</span>)<span class="question-mark">?</span> {
+			<span class="ident">vals</span>.<span class="ident">push</span>((<span class="ident">name</span>.<span class="ident">to_owned</span>(), <span class="ident">v</span>));
+		}
 		<span class="prelude-val">Ok</span>(<span class="ident">Composite::Named</span>(<span class="ident">vals</span>))
 	} <span class="kw">else</span> {
-		<span class="kw">let</span> <span class="ident">vals</span> <span class="op">=</span> <span class="ident">named_field_vals</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="ident">r</span>.<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">v</span>)<span class="op">|</span> <span class="ident">v</span>)).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
+		<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">vals</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">len</span>);
+		<span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="ident">value</span>.<span class="ident">decode_item</span>(<span class="ident">ValueVisitor</span>)<span class="question-mark">?</span> {
+			<span class="ident">vals</span>.<span class="ident">push</span>(<span class="ident">v</span>);
+		}
 		<span class="prelude-val">Ok</span>(<span class="ident">Composite::Unnamed</span>(<span class="ident">vals</span>))
 	}
-}
-
-<span class="kw">fn</span> <span class="ident">decode_sequence_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefSequence</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Composite</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="comment">// We assume that the sequence is preceeded by a compact encoded length, so that</span>
-	<span class="comment">// we know how many values to try pulling out of the data.</span>
-	<span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>;
-	<span class="kw">let</span> <span class="ident">values</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">len</span>.<span class="number">0</span>)
-		.<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">decode_value_as_type</span>(<span class="ident">data</span>, <span class="ident">ty</span>.<span class="ident">type_param</span>(), <span class="ident">types</span>))
-		.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-
-	<span class="prelude-val">Ok</span>(<span class="ident">Composite::Unnamed</span>(<span class="ident">values</span>))
-}
-
-<span class="kw">fn</span> <span class="ident">decode_array_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefArray</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Composite</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="comment">// The length is known based on the type we want to decode into, so we pull out the number of items according</span>
-	<span class="comment">// to that, and don&#39;t need a length to exist in the SCALE encoded bytes</span>
-	<span class="kw">let</span> <span class="ident">values</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">ty</span>.<span class="ident">len</span>())
-		.<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">decode_value_as_type</span>(<span class="ident">data</span>, <span class="ident">ty</span>.<span class="ident">type_param</span>(), <span class="ident">types</span>))
-		.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-
-	<span class="prelude-val">Ok</span>(<span class="ident">Composite::Unnamed</span>(<span class="ident">values</span>))
-}
-
-<span class="kw">fn</span> <span class="ident">decode_tuple_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefTuple</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Composite</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">values</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">ty</span>
-		.<span class="ident">fields</span>()
-		.<span class="ident">iter</span>()
-		.<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">decode_value_as_type</span>(<span class="ident">data</span>, <span class="ident">f</span>, <span class="ident">types</span>))
-		.<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">_</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-
-	<span class="prelude-val">Ok</span>(<span class="ident">Composite::Unnamed</span>(<span class="ident">values</span>))
-}
-
-<span class="kw">fn</span> <span class="ident">decode_primitive_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefPrimitive</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Primitive</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span> {
-		<span class="ident">TypeDefPrimitive::Bool</span> =&gt; <span class="ident">Primitive::Bool</span>(<span class="ident">bool::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::Char</span> =&gt; {
-			<span class="comment">// Treat chars as u32&#39;s</span>
-			<span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">u32::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>;
-			<span class="ident">Primitive::Char</span>(<span class="ident">char::from_u32</span>(<span class="ident">val</span>).<span class="ident">ok_or</span>(<span class="ident">DecodeError::InvalidChar</span>(<span class="ident">val</span>))<span class="question-mark">?</span>)
-		}
-		<span class="ident">TypeDefPrimitive::Str</span> =&gt; <span class="ident">Primitive::String</span>(<span class="ident">String::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U8</span> =&gt; <span class="ident">Primitive::uint</span>(<span class="ident">u8::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U16</span> =&gt; <span class="ident">Primitive::uint</span>(<span class="ident">u16::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U32</span> =&gt; <span class="ident">Primitive::uint</span>(<span class="ident">u32::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U64</span> =&gt; <span class="ident">Primitive::uint</span>(<span class="ident">u64::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U128</span> =&gt; <span class="ident">Primitive::uint</span>(<span class="ident">u128::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::U256</span> =&gt; <span class="ident">Primitive::U256</span>(<span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>]<span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I8</span> =&gt; <span class="ident">Primitive::int</span>(<span class="ident">i8::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I16</span> =&gt; <span class="ident">Primitive::int</span>(<span class="ident">i16::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I32</span> =&gt; <span class="ident">Primitive::int</span>(<span class="ident">i32::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I64</span> =&gt; <span class="ident">Primitive::int</span>(<span class="ident">i64::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I128</span> =&gt; <span class="ident">Primitive::int</span>(<span class="ident">i128::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="ident">TypeDefPrimitive::I256</span> =&gt; <span class="ident">Primitive::I256</span>(<span class="op">&lt;</span>[<span class="ident">u8</span>; <span class="number">32</span>]<span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-	};
-	<span class="prelude-val">Ok</span>(<span class="ident">val</span>)
-}
-
-<span class="kw">fn</span> <span class="ident">decode_compact_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefCompact</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ValueDef</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">fn</span> <span class="ident">decode_compact</span>(
-		<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-		<span class="ident">inner</span>: <span class="kw-2">&amp;</span><span class="ident">Type</span>,
-		<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-	) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ValueDef</span><span class="op">&lt;</span><span class="ident">TypeId</span><span class="op">&gt;</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-		<span class="kw">use</span> <span class="ident">TypeDefPrimitive</span>::<span class="kw-2">*</span>;
-		<span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">inner</span>.<span class="ident">type_def</span>() {
-			<span class="comment">// It&#39;s obvious how to decode basic primitive unsigned types, since we have impls for them.</span>
-			<span class="ident">TypeDef::Primitive</span>(<span class="ident">U8</span>) =&gt; {
-				<span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::uint</span>(<span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>.<span class="number">0</span>))
-			}
-			<span class="ident">TypeDef::Primitive</span>(<span class="ident">U16</span>) =&gt; {
-				<span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::uint</span>(<span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>.<span class="number">0</span>))
-			}
-			<span class="ident">TypeDef::Primitive</span>(<span class="ident">U32</span>) =&gt; {
-				<span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::uint</span>(<span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>.<span class="number">0</span>))
-			}
-			<span class="ident">TypeDef::Primitive</span>(<span class="ident">U64</span>) =&gt; {
-				<span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::uint</span>(<span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>.<span class="number">0</span>))
-			}
-			<span class="ident">TypeDef::Primitive</span>(<span class="ident">U128</span>) =&gt; {
-				<span class="ident">ValueDef::Primitive</span>(<span class="ident">Primitive::uint</span>(<span class="ident">Compact</span>::<span class="op">&lt;</span><span class="ident">u128</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>.<span class="number">0</span>))
-			}
-			<span class="comment">// A struct with exactly 1 field containing one of the above types can be sensibly compact encoded/decoded.</span>
-			<span class="ident">TypeDef::Composite</span>(<span class="ident">composite</span>) =&gt; {
-				<span class="kw">if</span> <span class="ident">composite</span>.<span class="ident">fields</span>().<span class="ident">len</span>() <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
-					<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">DecodeError::CannotDecodeCompactIntoType</span>(<span class="ident">inner</span>.<span class="ident">clone</span>()));
-				}
-
-				<span class="comment">// What type is the 1 field that we are able to decode?</span>
-				<span class="kw">let</span> <span class="ident">field</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">composite</span>.<span class="ident">fields</span>()[<span class="number">0</span>];
-				<span class="kw">let</span> <span class="ident">field_type_id</span> <span class="op">=</span> <span class="ident">field</span>.<span class="ident">ty</span>().<span class="ident">id</span>();
-				<span class="kw">let</span> <span class="ident">inner_ty</span> <span class="op">=</span> <span class="ident">types</span>
-					.<span class="ident">resolve</span>(<span class="ident">field_type_id</span>)
-					.<span class="ident">ok_or</span>(<span class="ident">DecodeError::TypeIdNotFound</span>(<span class="ident">field_type_id</span>))<span class="question-mark">?</span>;
-
-				<span class="comment">// Decode this inner type via compact decoding. This can recurse, in case</span>
-				<span class="comment">// the inner type is also a 1-field composite type.</span>
-				<span class="kw">let</span> <span class="ident">inner_value</span> <span class="op">=</span> <span class="ident">Value</span> {
-					<span class="ident">value</span>: <span class="ident">decode_compact</span>(<span class="ident">data</span>, <span class="ident">inner_ty</span>, <span class="ident">types</span>)<span class="question-mark">?</span>,
-					<span class="ident">context</span>: <span class="ident">field</span>.<span class="ident">ty</span>().<span class="ident">into</span>(),
-				};
-
-				<span class="comment">// Wrap the inner type in a representation of this outer composite type.</span>
-				<span class="kw">let</span> <span class="ident">composite</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">field</span>.<span class="ident">name</span>() {
-					<span class="prelude-val">Some</span>(<span class="ident">name</span>) =&gt; <span class="ident">Composite::Named</span>(<span class="macro">vec!</span>[(<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="ident">inner_value</span>)]),
-					<span class="prelude-val">None</span> =&gt; <span class="ident">Composite::Unnamed</span>(<span class="macro">vec!</span>[<span class="ident">inner_value</span>]),
-				};
-
-				<span class="ident">ValueDef::Composite</span>(<span class="ident">composite</span>)
-			}
-			<span class="comment">// For now, we give up if we have been asked for any other type:</span>
-			<span class="ident">_cannot_decode_from</span> =&gt; {
-				<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">DecodeError::CannotDecodeCompactIntoType</span>(<span class="ident">inner</span>.<span class="ident">clone</span>()))
-			}
-		};
-
-		<span class="prelude-val">Ok</span>(<span class="ident">val</span>)
-	}
-
-	<span class="comment">// Pluck the inner type out and run it through our compact decoding logic.</span>
-	<span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">types</span>
-		.<span class="ident">resolve</span>(<span class="ident">ty</span>.<span class="ident">type_param</span>().<span class="ident">id</span>())
-		.<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">DecodeError::TypeIdNotFound</span>(<span class="ident">ty</span>.<span class="ident">type_param</span>().<span class="ident">id</span>()))<span class="question-mark">?</span>;
-	<span class="ident">decode_compact</span>(<span class="ident">data</span>, <span class="ident">inner</span>, <span class="ident">types</span>)
-}
-
-<span class="kw">fn</span> <span class="ident">decode_bit_sequence_value</span>(
-	<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-	<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TypeDefBitSequence</span><span class="op">&lt;</span><span class="ident">PortableForm</span><span class="op">&gt;</span>,
-	<span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="ident">PortableRegistry</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BitSequence</span>, <span class="ident">DecodeError</span><span class="op">&gt;</span> {
-	<span class="kw">let</span> <span class="ident">details</span> <span class="op">=</span> <span class="ident">get_bitsequence_details</span>(<span class="ident">ty</span>, <span class="ident">types</span>).<span class="ident">map_err</span>(<span class="ident">DecodeError::BitSequenceError</span>)<span class="question-mark">?</span>;
-
-	<span class="kw">fn</span> <span class="ident">to_bit_sequence</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">BitStore</span>, <span class="ident">O</span>: <span class="ident">BitOrder</span><span class="op">&gt;</span>(<span class="ident">bits</span>: <span class="ident">BitVec</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">O</span><span class="op">&gt;</span>) -&gt; <span class="ident">BitSequence</span> {
-		<span class="ident">bits</span>.<span class="ident">iter</span>().<span class="ident">by_vals</span>().<span class="ident">collect</span>()
-	}
-
-	<span class="comment">// Decode the native BitSequence type easily, or else convert to it from the type given.</span>
-	<span class="kw">let</span> <span class="ident">bits</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">details</span> {
-		(<span class="ident">BitStoreTy::U8</span>, <span class="ident">BitOrderTy::Lsb0</span>) =&gt; <span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Lsb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>,
-		(<span class="ident">BitStoreTy::U8</span>, <span class="ident">BitOrderTy::Msb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u8</span>, <span class="ident">Msb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		(<span class="ident">BitStoreTy::U16</span>, <span class="ident">BitOrderTy::Lsb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u16</span>, <span class="ident">Lsb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		(<span class="ident">BitStoreTy::U16</span>, <span class="ident">BitOrderTy::Msb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u16</span>, <span class="ident">Msb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		(<span class="ident">BitStoreTy::U32</span>, <span class="ident">BitOrderTy::Lsb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Lsb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		(<span class="ident">BitStoreTy::U32</span>, <span class="ident">BitOrderTy::Msb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Msb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="comment">// BitVec doesn&#39;t impl BitStore on u64 if pointer width isn&#39;t 64 bit, avoid using this store type here</span>
-		<span class="comment">// in that case to avoid compile errors (see https://docs.rs/bitvec/1.0.0/src/bitvec/store.rs.html#184)</span>
-		<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;32bit_target&quot;</span>))]</span>
-		(<span class="ident">BitStoreTy::U64</span>, <span class="ident">BitOrderTy::Lsb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">Lsb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;32bit_target&quot;</span>))]</span>
-		(<span class="ident">BitStoreTy::U64</span>, <span class="ident">BitOrderTy::Msb0</span>) =&gt; <span class="ident">to_bit_sequence</span>(<span class="ident">BitVec</span>::<span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">Msb0</span><span class="op">&gt;</span><span class="ident">::decode</span>(<span class="ident">data</span>)<span class="question-mark">?</span>),
-		<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;32bit_target&quot;</span>)]</span>
-		(<span class="ident">BitStoreTy::U64</span>, <span class="kw">_</span>) =&gt; {
-			<span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">DecodeError::BitSequenceError</span>(<span class="ident">BitSequenceError::StoreTypeNotSupported</span>(
-				<span class="string">&quot;u64 (pointer-width on this compile target is not 64)&quot;</span>.<span class="ident">into</span>(),
-			)))
-		}
-	};
-
-	<span class="prelude-val">Ok</span>(<span class="ident">bits</span>)
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">test</span> {
 
 	<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use</span> <span class="ident">codec::Encode</span>;
+	<span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Compact</span>, <span class="ident">Encode</span>};
 
 	<span class="doccomment">/// Given a type definition, return the PortableType and PortableRegistry</span>
 	<span class="doccomment">/// that our decode functions expect.</span>
@@ -959,21 +765,21 @@
 			<span class="string">&quot;hello&quot;</span>.<span class="ident">to_string</span>(), <span class="comment">// String or &amp;str (above) decode OK</span>
 			<span class="ident">Value::string</span>(<span class="string">&quot;hello&quot;</span>),
 		);
-		<span class="ident">encode_decode_check</span>(<span class="number">123u8</span>, <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123u16</span>, <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123u32</span>, <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123u64</span>, <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123u128</span>, <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123u8</span>, <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123u16</span>, <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123u32</span>, <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123u64</span>, <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123u128</span>, <span class="ident">Value::u128</span>(<span class="number">123</span>));
 		<span class="comment">//// Todo [jsdw]: Can we test this if we need a TypeInfo param?:</span>
 		<span class="comment">// encode_decode_check_explicit_info(</span>
 		<span class="comment">// 	[123u8; 32], // Anything 32 bytes long will do here</span>
 		<span class="comment">// 	Value::u256([123u8; 32]),</span>
 		<span class="comment">// );</span>
-		<span class="ident">encode_decode_check</span>(<span class="number">123i8</span>, <span class="ident">Value::int</span>(<span class="number">123i16</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123i16</span>, <span class="ident">Value::int</span>(<span class="number">123i16</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123i32</span>, <span class="ident">Value::int</span>(<span class="number">123i16</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123i64</span>, <span class="ident">Value::int</span>(<span class="number">123i16</span>));
-		<span class="ident">encode_decode_check</span>(<span class="number">123i128</span>, <span class="ident">Value::int</span>(<span class="number">123i16</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123i8</span>, <span class="ident">Value::i128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123i16</span>, <span class="ident">Value::i128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123i32</span>, <span class="ident">Value::i128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123i64</span>, <span class="ident">Value::i128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="number">123i128</span>, <span class="ident">Value::i128</span>(<span class="number">123</span>));
 		<span class="comment">//// Todo [jsdw]: Can we test this if we need a TypeInfo param?:</span>
 		<span class="comment">// encode_decode_check_explicit_info(</span>
 		<span class="comment">// 	[123u8; 32], // Anything 32 bytes long will do here</span>
@@ -983,11 +789,11 @@
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
 	<span class="kw">fn</span> <span class="ident">decode_compact_primitives</span>() {
-		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u8</span>), <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u16</span>), <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u32</span>), <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u64</span>), <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
-		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u128</span>), <span class="ident">Value::uint</span>(<span class="number">123u8</span>));
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u8</span>), <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u16</span>), <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u32</span>), <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u64</span>), <span class="ident">Value::u128</span>(<span class="number">123</span>));
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="number">123u128</span>), <span class="ident">Value::u128</span>(<span class="number">123</span>));
 	}
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1013,10 +819,7 @@
 			}
 		}
 
-		<span class="ident">encode_decode_check</span>(
-			<span class="ident">Compact</span>(<span class="ident">MyWrapper</span> { <span class="ident">inner</span>: <span class="number">123</span> }),
-			<span class="ident">Value::named_composite</span>(<span class="macro">vec!</span>[(<span class="string">&quot;inner&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">Value::uint</span>(<span class="number">123u8</span>))]),
-		);
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="ident">MyWrapper</span> { <span class="ident">inner</span>: <span class="number">123</span> }), <span class="ident">Value::u128</span>(<span class="number">123</span>));
 	}
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1045,29 +848,22 @@
 			}
 		}
 
-		<span class="ident">encode_decode_check</span>(
-			<span class="ident">Compact</span>(<span class="ident">MyWrapper</span>(<span class="number">123</span>)),
-			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::uint</span>(<span class="number">123u8</span>)]),
-		);
+		<span class="ident">encode_decode_check</span>(<span class="ident">Compact</span>(<span class="ident">MyWrapper</span>(<span class="number">123</span>)), <span class="ident">Value::u128</span>(<span class="number">123</span>));
 	}
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
 	<span class="kw">fn</span> <span class="ident">decode_sequence_array_tuple_types</span>() {
 		<span class="ident">encode_decode_check</span>(
 			<span class="macro">vec!</span>[<span class="number">1i32</span>, <span class="number">2</span>, <span class="number">3</span>],
-			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::int</span>(<span class="number">1</span>), <span class="ident">Value::int</span>(<span class="number">2</span>), <span class="ident">Value::int</span>(<span class="number">3</span>)]),
+			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::i128</span>(<span class="number">1</span>), <span class="ident">Value::i128</span>(<span class="number">2</span>), <span class="ident">Value::i128</span>(<span class="number">3</span>)]),
 		);
 		<span class="ident">encode_decode_check</span>(
 			[<span class="number">1i32</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="comment">// compile-time length known</span>
-			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::int</span>(<span class="number">1</span>), <span class="ident">Value::int</span>(<span class="number">2</span>), <span class="ident">Value::int</span>(<span class="number">3</span>)]),
+			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::i128</span>(<span class="number">1</span>), <span class="ident">Value::i128</span>(<span class="number">2</span>), <span class="ident">Value::i128</span>(<span class="number">3</span>)]),
 		);
 		<span class="ident">encode_decode_check</span>(
 			(<span class="number">1i32</span>, <span class="bool-val">true</span>, <span class="number">123456u128</span>),
-			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[
-				<span class="ident">Value::int</span>(<span class="number">1</span>),
-				<span class="ident">Value::bool</span>(<span class="bool-val">true</span>),
-				<span class="ident">Value::uint</span>(<span class="number">123456u32</span>),
-			]),
+			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::i128</span>(<span class="number">1</span>), <span class="ident">Value::bool</span>(<span class="bool-val">true</span>), <span class="ident">Value::u128</span>(<span class="number">123456</span>)]),
 		);
 	}
 
@@ -1089,7 +885,7 @@
 				<span class="string">&quot;Bar&quot;</span>,
 				<span class="macro">vec!</span>[
 					(<span class="string">&quot;hi&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">Value::string</span>(<span class="string">&quot;hello&quot;</span>.<span class="ident">to_string</span>())),
-					(<span class="string">&quot;other&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">Value::uint</span>(<span class="number">123u8</span>)),
+					(<span class="string">&quot;other&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">Value::u128</span>(<span class="number">123</span>)),
 				],
 			),
 		);
@@ -1112,25 +908,17 @@
 			<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[
 				<span class="ident">Value::bool</span>(<span class="bool-val">true</span>),
 				<span class="ident">Value::string</span>(<span class="string">&quot;James&quot;</span>.<span class="ident">to_string</span>()),
-				<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[
-					<span class="ident">Value::uint</span>(<span class="number">1u8</span>),
-					<span class="ident">Value::uint</span>(<span class="number">2u8</span>),
-					<span class="ident">Value::uint</span>(<span class="number">3u8</span>),
-				]),
+				<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>), <span class="ident">Value::u128</span>(<span class="number">2</span>), <span class="ident">Value::u128</span>(<span class="number">3</span>)]),
 			]),
 		);
 		<span class="ident">encode_decode_check</span>(
 			<span class="ident">Named</span> { <span class="ident">is_valid</span>: <span class="bool-val">true</span>, <span class="ident">name</span>: <span class="string">&quot;James&quot;</span>.<span class="ident">into</span>(), <span class="ident">bytes</span>: <span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] },
 			<span class="ident">Value::named_composite</span>(<span class="macro">vec!</span>[
-				(<span class="string">&quot;is_valid&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
-				(<span class="string">&quot;name&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::string</span>(<span class="string">&quot;James&quot;</span>.<span class="ident">to_string</span>())),
+				(<span class="string">&quot;is_valid&quot;</span>, <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
+				(<span class="string">&quot;name&quot;</span>, <span class="ident">Value::string</span>(<span class="string">&quot;James&quot;</span>.<span class="ident">to_string</span>())),
 				(
-					<span class="string">&quot;bytes&quot;</span>.<span class="ident">into</span>(),
-					<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[
-						<span class="ident">Value::uint</span>(<span class="number">1u8</span>),
-						<span class="ident">Value::uint</span>(<span class="number">2u8</span>),
-						<span class="ident">Value::uint</span>(<span class="number">3u8</span>),
-					]),
+					<span class="string">&quot;bytes&quot;</span>,
+					<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[<span class="ident">Value::u128</span>(<span class="number">1</span>), <span class="ident">Value::u128</span>(<span class="number">2</span>), <span class="ident">Value::u128</span>(<span class="number">3</span>)]),
 				),
 			]),
 		);

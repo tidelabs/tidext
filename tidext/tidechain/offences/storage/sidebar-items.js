@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ConcurrentReportsIndex",""],["Reports",""],["ReportsByKindIndex",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

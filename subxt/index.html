@@ -3,8 +3,8 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Crate subxt</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.22.0</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#types">Type Definitions</a></li><li><a href="#attributes">Attribute Macros</a></li></ul></div></section><div id="sidebar-vars" data-name="subxt" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../subxt/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">subxt</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/subxt/lib.rs.html#17-446">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Subxt is a library to <strong>sub</strong>mit e<strong>xt</strong>rinsics to a <a href="https://github.com/paritytech/substrate">substrate</a> node via RPC.</p>
+        </a><h2 class="location"><a href="#">Crate subxt</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.23.0</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li><li><a href="#structs">Structs</a></li><li><a href="#attributes">Attribute Macros</a></li></ul></div></section><div id="sidebar-vars" data-name="subxt" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../subxt/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">subxt</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/subxt/lib.rs.html#5-186">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Subxt is a library to <strong>sub</strong>mit e<strong>xt</strong>rinsics to a <a href="https://github.com/paritytech/substrate">substrate</a> node via RPC.</p>
 <p>The generated Subxt API exposes the ability to:</p>
 <ul>
 <li><a href="https://docs.substrate.io/v3/concepts/extrinsics/">Submit extrinsics</a> (Calls)</li>
@@ -12,179 +12,119 @@
 <li><a href="https://docs.substrate.io/how-to-guides/v3/basics/configurable-constants/">Query constants</a> (Constants)</li>
 <li><a href="https://docs.substrate.io/v3/runtime/events-and-errors/">Subscribe to events</a> (Events)</li>
 </ul>
-<h2 id="generate-the-runtime-api"><a href="#generate-the-runtime-api">Generate the runtime API</a></h2>
-<p>Subxt generates a runtime API from downloaded static metadata. The metadata can be downloaded using the
-<a href="https://crates.io/crates/subxt-cli">subxt-cli</a> tool.</p>
-<p>To generate the runtime API, use the <code>subxt</code> attribute which points at downloaded static metadata.</p>
+<h2 id="initializing-the-api-client"><a href="#initializing-the-api-client">Initializing the API client</a></h2>
+<p>To interact with a node, you’ll need to construct a client.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">OnlineClient</span>, <span class="ident">PolkadotConfig</span>};
+
+<span class="kw">let</span> <span class="ident">api</span> <span class="op">=</span> <span class="ident">OnlineClient</span>::<span class="op">&lt;</span><span class="ident">PolkadotConfig</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="kw">await</span>.<span class="ident">unwrap</span>();</code></pre></div>
+<p>This default client connects to a locally running node, but can be configured to point anywhere.
+Additionally, an <a href="client/struct.OfflineClient.html" title="crate::OfflineClient"><code>crate::OfflineClient</code></a> is available to perform operations that don’t require a
+network connection to a node.</p>
+<p>The client takes a type parameter, here <a href="config/type.PolkadotConfig.html" title="crate::PolkadotConfig"><code>crate::PolkadotConfig</code></a>, which bakes in assumptions about
+the structure of extrinsics and the underlying types used by the node for things like block numbers.
+If the node you’d like to interact with deviates from Polkadot or the default Substrate node in these
+areas, you’ll need to configure them by implementing the <a href="config/trait.Config.html" title="crate::config::Config"><code>crate::config::Config</code></a> type yourself.</p>
+<h2 id="generating-runtime-types"><a href="#generating-runtime-types">Generating runtime types</a></h2>
+<p>Subxt can optionally generate types at compile time to help you interact with a node. These types are
+generated using metadata which can be downloaded from a node using the <a href="https://crates.io/crates/subxt-cli">subxt-cli</a>
+tool. These generated types provide a degree of type safety when interacting with a node that is compatible with
+the metadata that they were generated using. We also do runtime checks in case the node you’re talking to has
+deviated from the types you’re using to communicate with it (see below).</p>
+<p>To generate the types, use the <code>subxt</code> macro and point it at the metadata you’ve downloaded, like so:</p>
 
 <div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">subxt::subxt</span>(<span class="ident">runtime_metadata_path</span> <span class="op">=</span> <span class="string">&quot;metadata.scale&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">node_runtime</span> { }</code></pre></div>
-<p>The <code>node_runtime</code> has the following hierarchy:</p>
-
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">node_runtime</span> {
-    <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">PalletName</span> {
-        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">calls</span> { }
-        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">storage</span> { }
-        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">constants</span> { }
-        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">events</span> { }
-    }
-}</code></pre></div>
-<p>For more information regarding the <code>node_runtime</code> hierarchy, please visit the
-<a href="https://docs.rs/subxt-codegen/latest/subxt_codegen/">subxt-codegen</a> documentation.</p>
-<h2 id="initializing-the-api-client"><a href="#initializing-the-api-client">Initializing the API client</a></h2>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">ClientBuilder</span>, <span class="ident">DefaultConfig</span>, <span class="ident">PolkadotExtrinsicParams</span>};
-
-<span class="attribute">#[<span class="ident">subxt::subxt</span>(<span class="ident">runtime_metadata_path</span> <span class="op">=</span> <span class="string">&quot;../artifacts/polkadot_metadata.scale&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">polkadot</span> {}
-
-<span class="kw">let</span> <span class="ident">api</span> <span class="op">=</span> <span class="ident">ClientBuilder::new</span>()
-    .<span class="ident">set_url</span>(<span class="string">&quot;wss://rpc.polkadot.io:443&quot;</span>)
-    .<span class="ident">build</span>()
-    .<span class="kw">await</span>
-    .<span class="ident">unwrap</span>()
-    .<span class="ident">to_runtime_api</span>::<span class="op">&lt;</span><span class="ident">polkadot::RuntimeApi</span><span class="op">&lt;</span><span class="ident">DefaultConfig</span>, <span class="ident">PolkadotExtrinsicParams</span><span class="op">&lt;</span><span class="ident">DefaultConfig</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>();</code></pre></div>
-<p>The <code>RuntimeApi</code> type is generated by the <code>subxt</code> macro from the supplied metadata. This can be parameterized with user
-supplied implementations for the <code>Config</code> and <code>Extra</code> types, if the default implementation differs from the target
-chain.</p>
-<p>To ensure that extrinsics are properly submitted, during the build phase of the Client the
-runtime metadata of the node is downloaded. If the URL is not specified (<code>set_url</code>), the local host is used instead.</p>
-<h2 id="submit-extrinsics"><a href="#submit-extrinsics">Submit Extrinsics</a></h2>
-<p>Extrinsics are obtained using the API’s <code>RuntimeApi::tx()</code> method, followed by <code>pallet_name()</code> and then the
-<code>call_item_name()</code>.</p>
-<p>Submit an extrinsic, returning success once the transaction is validated and accepted into the pool:</p>
-<p>Please visit the <a href="../examples/examples/balance_transfer.rs">balance_transfer</a> example for more details.</p>
-<h2 id="querying-storage"><a href="#querying-storage">Querying Storage</a></h2>
-<p>The runtime storage is queried via the generated <code>RuntimeApi::storage()</code> method, followed by the <code>pallet_name()</code> and
-then the <code>storage_item_name()</code>.</p>
-<p>Please visit the <a href="../examples/examples/fetch_staking_details.rs">fetch_staking_details</a> example for more details.</p>
-<h2 id="query-constants"><a href="#query-constants">Query Constants</a></h2>
-<p>Constants are embedded into the node’s metadata.</p>
-<p>The subxt offers the ability to query constants from the runtime metadata (metadata downloaded when constructing
-the client, <em>not</em> the one provided for API generation).</p>
-<p>To query constants use the generated <code>RuntimeApi::constants()</code> method, followed by the <code>pallet_name()</code> and then the
-<code>constant_item_name()</code>.</p>
-<p>Please visit the <a href="../examples/examples/fetch_constants.rs">fetch_constants</a> example for more details.</p>
-<h2 id="subscribe-to-events"><a href="#subscribe-to-events">Subscribe to Events</a></h2>
-<p>To subscribe to events, use the generated <code>RuntimeApi::events()</code> method which exposes:</p>
+<p>For more information, please visit the <a href="https://docs.rs/subxt-codegen/latest/subxt_codegen/">subxt-codegen</a>
+documentation.</p>
+<p>You can opt to skip this step and use dynamic queries to talk to nodes instead, which can be useful in some cases,
+but doesn’t provide any type safety.</p>
+<h2 id="interacting-with-the-api"><a href="#interacting-with-the-api">Interacting with the API</a></h2>
+<p>Once instantiated, a client exposes four core functions:</p>
 <ul>
-<li><code>subscribe()</code> - Subscribe to events emitted from blocks. These blocks haven’t necessarily been finalised.</li>
-<li><code>subscribe_finalized()</code> - Subscribe to events from finalized blocks.</li>
-<li><code>at()</code> - Obtain events at a given block hash.</li>
-</ul>
-<p><em>Examples</em></p>
+<li><code>.tx()</code> for submitting extrinsics/transactions. See <a href="tx/struct.TxClient.html" title="crate::tx::TxClient"><code>crate::tx::TxClient</code></a> for more details, or see
+the <a href="../examples/examples/balance_transfer.rs">balance_transfer</a> example.</li>
+<li><code>.storage()</code> for fetching and iterating over storage entries. See <a href="storage/struct.StorageClient.html" title="crate::storage::StorageClient"><code>crate::storage::StorageClient</code></a> for more details, or see
+the <a href="../examples/examples/fetch_staking_details.rs">fetch_staking_details</a> example.</li>
+<li><code>.constants()</code> for getting hold of constants. See <a href="constants/struct.ConstantsClient.html" title="crate::constants::ConstantsClient"><code>crate::constants::ConstantsClient</code></a> for more details, or see
+the <a href="../examples/examples/fetch_constants.rs">fetch_constants</a> example.</li>
+<li><code>.events()</code> for subscribing/obtaining events. See <a href="events/struct.EventsClient.html" title="crate::events::EventsClient"><code>crate::events::EventsClient</code></a> for more details, or see:
 <ul>
 <li><a href="../examples/examples/subscribe_all_events.rs">subscribe_all_events</a>: Subscribe to events emitted from blocks.</li>
 <li><a href="../examples/examples/subscribe_one_event.rs">subscribe_one_event</a>: Subscribe and filter by one event.</li>
 <li><a href="../examples/examples/subscribe_some_events.rs">subscribe_some_events</a>: Subscribe and filter event.</li>
 </ul>
-<h2 id="static-metadata-validation"><a href="#static-metadata-validation">Static Metadata Validation</a></h2>
-<p>There are two types of metadata that the subxt is aware of:</p>
-<ul>
-<li>static metadata: Metadata used for generating the API.</li>
-<li>runtime metadata: Metadata downloaded from the target node when a subxt client is created.</li>
+</li>
 </ul>
-<p>There are cases when the static metadata is different from the runtime metadata of a node.
-Such is the case when the node performs a runtime update.</p>
-<p>To ensure that subxt can properly communicate with the target node the static metadata is validated
-against the runtime metadata of the node.</p>
-<p>This validation is performed at the Call, Constant, and Storage levels, as well for the entire metadata.
-The level of granularity ensures that the users can still submit a given call, even if another
-call suffered changes.</p>
-<p>Full metadata validation:</p>
+<h2 id="static-metadata-validation"><a href="#static-metadata-validation">Static Metadata Validation</a></h2>
+<p>If you use types generated by the <a href="attr.subxt.html" title="crate::subxt"><code>crate::subxt</code></a> macro, there is a chance that they will fall out of sync
+with the actual state of the node you’re trying to interact with.</p>
+<p>When you attempt to use any of these static types to interact with a node, Subxt will validate that they are
+still compatible and issue an error if they have deviated.</p>
+<p>Additionally, you can validate that the entirety of the statically generated code aligns with a node like so:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// To make sure that all of our statically generated pallets are compatible with the</span>
-<span class="comment">// runtime node, we can run this check:</span>
-<span class="ident">api</span>.<span class="ident">validate_metadata</span>().<span class="ident">unwrap</span>();</code></pre></div>
-<p>Call level validation:</p>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">OnlineClient</span>, <span class="ident">PolkadotConfig</span>};
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="comment">// Submit the `transfer` extrinsic from Alice&#39;s account to Bob&#39;s.</span>
-<span class="kw">let</span> <span class="ident">dest</span> <span class="op">=</span> <span class="ident">AccountKeyring::Bob</span>.<span class="ident">to_account_id</span>().<span class="ident">into</span>();
+<span class="attribute">#[<span class="ident">subxt::subxt</span>(<span class="ident">runtime_metadata_path</span> <span class="op">=</span> <span class="string">&quot;../artifacts/polkadot_metadata.scale&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">polkadot</span> {}
 
-<span class="kw">let</span> <span class="ident">extrinsic</span> <span class="op">=</span> <span class="ident">api</span>
-    .<span class="ident">tx</span>()
-    .<span class="ident">balances</span>()
-    <span class="comment">// Constructing an extrinsic will fail if the metadata</span>
-    <span class="comment">// is not in sync with the generated API.</span>
-    .<span class="ident">transfer</span>(<span class="ident">dest</span>, <span class="number">123_456_789_012_345</span>)
-    .<span class="ident">unwrap</span>();</code></pre></div>
+<span class="kw">let</span> <span class="ident">api</span> <span class="op">=</span> <span class="ident">OnlineClient</span>::<span class="op">&lt;</span><span class="ident">PolkadotConfig</span><span class="op">&gt;</span><span class="ident">::new</span>().<span class="kw">await</span>.<span class="ident">unwrap</span>();
+
+<span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">_e</span>) <span class="op">=</span> <span class="ident">polkadot::validate_codegen</span>(<span class="kw-2">&amp;</span><span class="ident">api</span>) {
+    <span class="macro">println!</span>(<span class="string">&quot;Generated code is not up to date with node we&#39;re connected to&quot;</span>);
+}</code></pre></div>
+<h3 id="opting-out-of-static-validation"><a href="#opting-out-of-static-validation">Opting out of static validation</a></h3>
+<p>The static types that are used to query/access information are validated by default, to make sure that they are
+compatible with the node being queried. You can generally call <code>.unvalidated()</code> on these static types to
+disable this validation.</p>
 <h2 id="runtime-updates"><a href="#runtime-updates">Runtime Updates</a></h2>
-<p>There are cases when the node would perform a runtime update, and the runtime node’s metadata would be
-out of sync with the subxt’s metadata.</p>
-<p>The <code>UpdateClient</code> API keeps the <code>RuntimeVersion</code> and <code>Metadata</code> of the client synced with the target node.</p>
+<p>The node you’re connected to may occasionally perform runtime updates while you’re connected, which would ordinarily
+leave the runtime state of the node out of sync with the information Subxt requires to do things like submit
+transactions.</p>
+<p>If this is a concern, you can use the <code>UpdateClient</code> API to keep the <code>RuntimeVersion</code> and <code>Metadata</code> of the client
+synced with the target node.</p>
 <p>Please visit the <a href="../examples/examples/subscribe_runtime_updates.rs">subscribe_runtime_updates</a> example for more details.</p>
 </div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use <a class="mod" href="../bitvec/index.html" title="mod bitvec">bitvec</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use <a class="mod" href="../parity_scale_codec/index.html" title="mod parity_scale_codec">codec</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use <a class="mod" href="../sp_core/index.html" title="mod sp_core">sp_core</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use <a class="mod" href="../sp_runtime/index.html" title="mod sp_runtime">sp_runtime</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::rpc::<a class="struct" href="rpc/struct.BlockNumber.html" title="struct subxt::rpc::BlockNumber">BlockNumber</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::rpc::<a class="struct" href="rpc/struct.ReadProof.html" title="struct subxt::rpc::ReadProof">ReadProof</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::rpc::<a class="type" href="rpc/type.SystemProperties.html" title="type subxt::rpc::SystemProperties">SystemProperties</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::storage::<a class="struct" href="storage/struct.KeyIter.html" title="struct subxt::storage::KeyIter">KeyIter</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::storage::<a class="trait" href="storage/trait.StorageEntry.html" title="trait subxt::storage::StorageEntry">StorageEntry</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::storage::<a class="enum" href="storage/enum.StorageEntryKey.html" title="enum subxt::storage::StorageEntryKey">StorageEntryKey</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::storage::<a class="struct" href="storage/struct.StorageMapKey.html" title="struct subxt::storage::StorageMapKey">StorageMapKey</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="events/index.html" title="subxt::events mod">events</a></div><div class="item-right docblock-short"><p>This module exposes the ability to work with events generated by a given block.
-Subxt can either attempt to statically decode events into known types, or it
-can hand back details of the raw event without knowing what shape its contents
-are (this may be useful if we don’t know what exactly we’re looking for).</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="extrinsic/index.html" title="subxt::extrinsic mod">extrinsic</a></div><div class="item-right docblock-short"><p>Create signed or unsigned extrinsics.</p>
+<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use crate::config::<a class="trait" href="config/trait.Config.html" title="trait subxt::config::Config">Config</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::config::<a class="type" href="config/type.PolkadotConfig.html" title="type subxt::config::PolkadotConfig">PolkadotConfig</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::config::<a class="enum" href="config/enum.SubstrateConfig.html" title="enum subxt::config::SubstrateConfig">SubstrateConfig</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::error::<a class="enum" href="error/enum.Error.html" title="enum subxt::error::Error">Error</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="client/index.html" title="subxt::client mod">client</a></div><div class="item-right docblock-short"><p>This module provides two clients that can be used to work with
+transactions, storage and events. The <a href="client/struct.OfflineClient.html" title="OfflineClient"><code>OfflineClient</code></a> works
+entirely offline and can be passed to any function that doesn’t
+require network access. The <a href="client/struct.OnlineClient.html" title="OnlineClient"><code>OnlineClient</code></a> requires network
+access.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="config/index.html" title="subxt::config mod">config</a></div><div class="item-right docblock-short"><p>This module provides a <a href="config/trait.Config.html" title="Config"><code>Config</code></a> type, which is used to define various
+types that are important in order to speak to a particular chain.
+<a href="config/enum.SubstrateConfig.html" title="SubstrateConfig"><code>SubstrateConfig</code></a> provides a default set of these types suitable for the
+default Substrate node implementation, and <a href="config/type.PolkadotConfig.html" title="PolkadotConfig"><code>PolkadotConfig</code></a> for a
+Polkadot node.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="constants/index.html" title="subxt::constants mod">constants</a></div><div class="item-right docblock-short"><p>Types associated with accessing constants.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="dynamic/index.html" title="subxt::dynamic mod">dynamic</a></div><div class="item-right docblock-short"><p>This module provides the entry points to create dynamic
+transactions, storage and constant lookups.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="error/index.html" title="subxt::error mod">error</a></div><div class="item-right docblock-short"><p>Types representing the errors that can be returned.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="events/index.html" title="subxt::events mod">events</a></div><div class="item-right docblock-short"><p>This module exposes the types and such necessary for working with events.
+The two main entry points into events are <a href="client/struct.OnlineClient.html#method.events" title="crate::OnlineClient::events()"><code>crate::OnlineClient::events()</code></a>
+and calls like <a href="tx/struct.TxProgress.html#method.wait_for_finalized_success" title="crate::tx::TxProgress::wait_for_finalized_success()">crate::tx::TxProgress::wait_for_finalized_success()</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="ext/index.html" title="subxt::ext mod">ext</a></div><div class="item-right docblock-short"><p>Re-export external crates that are made use of in the subxt API.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="metadata/index.html" title="subxt::metadata mod">metadata</a></div><div class="item-right docblock-short"><p>Types representing the metadata obtained from a node.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="rpc/index.html" title="subxt::rpc mod">rpc</a></div><div class="item-right docblock-short"><p>RPC types and client for interacting with a substrate node.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="storage/index.html" title="subxt::storage mod">storage</a></div><div class="item-right docblock-short"><p>Query the runtime storage using <a href="storage/struct.StorageClient.html" title="StorageClient">StorageClient</a>.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="updates/index.html" title="subxt::updates mod">updates</a></div><div class="item-right docblock-short"><p>Perform runtime updates in the background using <a href="updates/struct.UpdateClient.html" title="UpdateClient">UpdateClient</a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="storage/index.html" title="subxt::storage mod">storage</a></div><div class="item-right docblock-short"><p>Types associated with accessing and working with storage items.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="tx/index.html" title="subxt::tx mod">tx</a></div><div class="item-right docblock-short"><p>Create signed or unsigned extrinsics.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="utils/index.html" title="subxt::utils mod">utils</a></div><div class="item-right docblock-short"><p>Miscellaneous utility helpers.</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.rpc_params.html" title="subxt::rpc_params macro">rpc_params</a></div><div class="item-right docblock-short"><p>Create some <a href="rpc/struct.RpcParams.html" title="RpcParams"><code>RpcParams</code></a> to pass to our <a href="rpc/struct.RpcClient.html" title="RpcClient"><code>RpcClient</code></a>. <a href="rpc/struct.RpcParams.html" title="RpcParams"><code>RpcParams</code></a>
+simply enforces that parameters handed to our <a href="rpc/struct.RpcClient.html" title="RpcClient"><code>RpcClient</code></a> methods
+are the correct shape.</p>
 </div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.CallData.html" title="subxt::CallData struct">CallData</a></div><div class="item-right docblock-short"><p>Decoded call data and associated type information.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Client.html" title="subxt::Client struct">Client</a></div><div class="item-right docblock-short"><p>Client to interface with a substrate node.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ClientBuilder.html" title="subxt::ClientBuilder struct">ClientBuilder</a></div><div class="item-right docblock-short"><p>ClientBuilder for constructing a Client.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Decoder.html" title="subxt::Decoder struct">Decoder</a></div><div class="item-right docblock-short"><p>Decoder</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DecoderBuilder.html" title="subxt::DecoderBuilder struct">DecoderBuilder</a></div><div class="item-right docblock-short"><p>Pallet name</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Encoded.html" title="subxt::Encoded struct">Encoded</a></div><div class="item-right docblock-short"><p>Wraps an already encoded byte vector, prevents being encoded as a raw byte vector as part of
-the transaction payload</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ErrorMetadata.html" title="subxt::ErrorMetadata struct">ErrorMetadata</a></div><div class="item-right docblock-short"><p>Metadata for specific errors obtained from the pallet’s <code>PalletErrorMetadata</code>.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.EventDetails.html" title="subxt::EventDetails struct">EventDetails</a></div><div class="item-right docblock-short"><p>A decoded event and associated details.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Events.html" title="subxt::Events struct">Events</a></div><div class="item-right docblock-short"><p>A collection of events obtained from a block, bundled with the necessary
-information needed to decode and iterate over them.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Extrinsic.html" title="subxt::Extrinsic struct">Extrinsic</a></div><div class="item-right docblock-short"><p>The result of successfully decoding an extrinsic.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Metadata.html" title="subxt::Metadata struct">Metadata</a></div><div class="item-right docblock-short"><p>A representation of the runtime metadata received from a node.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ModuleError.html" title="subxt::ModuleError struct">ModuleError</a></div><div class="item-right docblock-short"><p>Details about a module error that has occurred.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ModuleErrorData.html" title="subxt::ModuleErrorData struct">ModuleErrorData</a></div><div class="item-right docblock-short"><p>The error details about a module error that has occurred.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PairSigner.html" title="subxt::PairSigner struct">PairSigner</a></div><div class="item-right docblock-short"><p>A <a href="extrinsic/trait.Signer.html" title="Signer"><code>Signer</code></a> implementation that can be constructed from an <a href="../sp_core/crypto/trait.Pair.html" title="Pair"><code>Pair</code></a>.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OfflineClient.html" title="subxt::OfflineClient struct">OfflineClient</a></div><div class="item-right docblock-short"><p>A client that is capable of performing offline-only operations.
+Can be constructed as long as you can populate the required fields.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.OnlineClient.html" title="subxt::OnlineClient struct">OnlineClient</a></div><div class="item-right docblock-short"><p>A client that can be used to perform API calls (that is, either those
+requiriing an <a href="client/trait.OfflineClientT.html" title="OfflineClientT"><code>OfflineClientT</code></a> or those requiring an <a href="client/trait.OnlineClientT.html" title="OnlineClientT"><code>OnlineClientT</code></a>).</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PalletMetadata.html" title="subxt::PalletMetadata struct">PalletMetadata</a></div><div class="item-right docblock-short"><p>Metadata for a specific pallet.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PathKey.html" title="subxt::PathKey struct">PathKey</a></div><div class="item-right docblock-short"><p>Path key</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RawEventDetails.html" title="subxt::RawEventDetails struct">RawEventDetails</a></div><div class="item-right docblock-short"><p>The raw bytes for an event with associated details about
-where and when it was emitted.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RpcClient.html" title="subxt::RpcClient struct">RpcClient</a></div><div class="item-right docblock-short"><p>Generic asynchronous client.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.RuntimeError.html" title="subxt::RuntimeError struct">RuntimeError</a></div><div class="item-right docblock-short"><p>This is used in the place of the <code>E</code> in <a href="enum.GenericError.html" title="GenericError&lt;E&gt;"><code>GenericError&lt;E&gt;</code></a> when we may have a
-Runtime Error. We use this wrapper so that it is possible to implement
-<code>From&lt;Error&lt;Infallible&gt;</code> for <code>Error&lt;RuntimeError&lt;E&gt;&gt;</code>.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SubmittableExtrinsic.html" title="subxt::SubmittableExtrinsic struct">SubmittableExtrinsic</a></div><div class="item-right docblock-short"><p>A constructed call ready to be signed and submitted.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.TransactionEvents.html" title="subxt::TransactionEvents struct">TransactionEvents</a></div><div class="item-right docblock-short"><p>This represents the events related to our transaction.
-We can iterate over the events, or look for a specific one.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.TransactionInBlock.html" title="subxt::TransactionInBlock struct">TransactionInBlock</a></div><div class="item-right docblock-short"><p>This struct represents a transaction that has made it into a block.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.TransactionProgress.html" title="subxt::TransactionProgress struct">TransactionProgress</a></div><div class="item-right docblock-short"><p>This struct represents a subscription to the progress of some transaction, and is
-returned from <a href="struct.SubmittableExtrinsic.html#method.sign_and_submit_then_watch" title="crate::SubmittableExtrinsic::sign_and_submit_then_watch()"><code>crate::SubmittableExtrinsic::sign_and_submit_then_watch()</code></a>.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WrapperKeepOpaque.html" title="subxt::WrapperKeepOpaque struct">WrapperKeepOpaque</a></div><div class="item-right docblock-short"><p>A wrapper for any type <code>T</code> which implement encode/decode in a way compatible with <code>Vec&lt;u8&gt;</code>.</p>
-</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DefaultConfig.html" title="subxt::DefaultConfig enum">DefaultConfig</a></div><div class="item-right docblock-short"><p>Default set of commonly used types by Substrate runtimes.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.GenericError.html" title="subxt::GenericError enum">GenericError</a></div><div class="item-right docblock-short"><p>The underlying error enum, generic over the type held by the <code>Runtime</code>
-variant. Prefer to use the <a href="type.Error.html" title="Error&lt;E&gt;"><code>Error&lt;E&gt;</code></a> and <a href="type.BasicError.html" title="BasicError"><code>BasicError</code></a> aliases over
-using this type directly.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.MetadataError.html" title="subxt::MetadataError enum">MetadataError</a></div><div class="item-right docblock-short"><p>Metadata error originated from inspecting the internal representation of the runtime metadata.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Phase.html" title="subxt::Phase enum">Phase</a></div><div class="item-right docblock-short"><p>A phase of a block’s execution.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.StorageHasher.html" title="subxt::StorageHasher enum">StorageHasher</a></div><div class="item-right docblock-short"><p>Hasher used by storage maps</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.TransactionError.html" title="subxt::TransactionError enum">TransactionError</a></div><div class="item-right docblock-short"><p>Transaction error.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.TransactionStatus.html" title="subxt::TransactionStatus enum">TransactionStatus</a></div><div class="item-right docblock-short"><p>Possible transaction statuses returned from our <a href="struct.TransactionProgress.html#method.next_item" title="TransactionProgress::next_item()"><code>TransactionProgress::next_item()</code></a> call.</p>
-</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Call.html" title="subxt::Call trait">Call</a></div><div class="item-right docblock-short"><p>Trait to uniquely identify the call (extrinsic)’s identity from the runtime metadata.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Config.html" title="subxt::Config trait">Config</a></div><div class="item-right docblock-short"><p>Runtime types.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Event.html" title="subxt::Event trait">Event</a></div><div class="item-right docblock-short"><p>Trait to uniquely identify the events’s identity from the runtime metadata.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.HasModuleError.html" title="subxt::HasModuleError trait">HasModuleError</a></div><div class="item-right docblock-short"><p>This trait is automatically implemented for the generated <code>DispatchError</code>,
-so that we can pluck out information about the <code>Module</code> error variant, if`
-it exists.</p>
-</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.BasicError.html" title="subxt::BasicError type">BasicError</a></div><div class="item-right docblock-short"><p>An error that will never contain a runtime error.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Error.html" title="subxt::Error type">Error</a></div><div class="item-right docblock-short"><p>An error that may contain some runtime error <code>E</code></p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.KeyedVec.html" title="subxt::KeyedVec type">KeyedVec</a></div><div class="item-right docblock-short"><p>This represents a key-value collection and is SCALE compatible
-with collections like BTreeMap. This has the same type params
-as <code>BTreeMap</code> which allows us to easily swap the two during codegen.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.PolkadotExtrinsicParams.html" title="subxt::PolkadotExtrinsicParams type">PolkadotExtrinsicParams</a></div><div class="item-right docblock-short"><p>A struct representing the signed extra and additional parameters required
-to construct a transaction for a polkadot node.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.PolkadotExtrinsicParamsBuilder.html" title="subxt::PolkadotExtrinsicParamsBuilder type">PolkadotExtrinsicParamsBuilder</a></div><div class="item-right docblock-short"><p>A builder which leads to <a href="extrinsic/type.PolkadotExtrinsicParams.html" title="PolkadotExtrinsicParams"><code>PolkadotExtrinsicParams</code></a> being constructed.
-This is what you provide to methods like <code>sign_and_submit()</code>.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.SubstrateExtrinsicParams.html" title="subxt::SubstrateExtrinsicParams type">SubstrateExtrinsicParams</a></div><div class="item-right docblock-short"><p>A struct representing the signed extra and additional parameters required
-to construct a transaction for the default substrate node.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.SubstrateExtrinsicParamsBuilder.html" title="subxt::SubstrateExtrinsicParamsBuilder type">SubstrateExtrinsicParamsBuilder</a></div><div class="item-right docblock-short"><p>A builder which leads to <a href="extrinsic/type.SubstrateExtrinsicParams.html" title="SubstrateExtrinsicParams"><code>SubstrateExtrinsicParams</code></a> being constructed.
-This is what you provide to methods like <code>sign_and_submit()</code>.</p>
 </div></div></div><h2 id="attributes" class="small-section-header"><a href="#attributes">Attribute Macros</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="attr" href="attr.subxt.html" title="subxt::subxt attr">subxt</a></div><div class="item-right docblock-short"></div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="subxt" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
 </body></html>

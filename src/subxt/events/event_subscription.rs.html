@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/ff37576/subxt/src/events/event_subscription.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>event_subscription.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/events/event_subscription.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>event_subscription.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -212,125 +212,27 @@
 <span id="207">207</span>
 <span id="208">208</span>
 <span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of subxt.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
-<span class="comment">//</span>
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="comment">// This file is dual-licensed as Apache-2.0 or GPL-3.0.</span>
+<span class="comment">// see LICENSE for license details.</span>
 
 <span class="doccomment">//! Subscribing to events.</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">error::BasicError</span>,
-    <span class="ident">Client</span>,
+    <span class="ident">client::OnlineClientT</span>,
+    <span class="ident">error::Error</span>,
+    <span class="ident">events::EventsClient</span>,
+    <span class="ident">rpc::Subscription</span>,
     <span class="ident">Config</span>,
 };
-<span class="kw">use</span> <span class="ident">codec::Decode</span>;
 <span class="kw">use</span> <span class="ident">derivative::Derivative</span>;
 <span class="kw">use</span> <span class="ident">futures</span>::{
-    <span class="ident">future::Either</span>,
-    <span class="ident">stream</span>::{
-        <span class="self">self</span>,
-        <span class="ident">BoxStream</span>,
-    },
+    <span class="ident">stream::BoxStream</span>,
     <span class="ident">Future</span>,
     <span class="ident">FutureExt</span>,
     <span class="ident">Stream</span>,
     <span class="ident">StreamExt</span>,
 };
-<span class="kw">use</span> <span class="ident">jsonrpsee::core::client::Subscription</span>;
 <span class="kw">use</span> <span class="ident">sp_runtime::traits::Header</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">marker::Unpin</span>,
@@ -338,166 +240,98 @@
 };
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">super</span>::{
-    <span class="ident">at</span>,
     <span class="ident">EventDetails</span>,
     <span class="ident">EventFilter</span>,
     <span class="ident">Events</span>,
     <span class="ident">FilterEvents</span>,
-    <span class="ident">RawEventDetails</span>,
 };
 
-<span class="doccomment">/// Subscribe to events from blocks.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Note:** these blocks haven&#39;t necessarily been finalised yet; prefer</span>
-<span class="doccomment">/// [`Events::subscribe_finalized()`] if that is important.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Note:** This function is hidden from the documentation</span>
-<span class="doccomment">/// and is exposed only to be called via the codegen. It may</span>
-<span class="doccomment">/// break between minor releases.</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">EventSub</span><span class="op">&lt;</span><span class="ident">T::Header</span><span class="op">&gt;</span>, <span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">block_subscription</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">subscribe_blocks</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">EventSubscription::new</span>(<span class="ident">client</span>, <span class="ident">block_subscription</span>))
-}
-
-<span class="doccomment">/// Subscribe to events from finalized blocks.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Note:** This function is hidden from the documentation</span>
-<span class="doccomment">/// and is exposed only to be called via the codegen. It may</span>
-<span class="doccomment">/// break between minor releases.</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">subscribe_finalized</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">FinalizedEventSub</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T::Header</span><span class="op">&gt;</span>, <span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span> {
-    <span class="comment">// fetch the last finalised block details immediately, so that we&#39;ll get</span>
-    <span class="comment">// events for each block after this one.</span>
-    <span class="kw">let</span> <span class="ident">last_finalized_block_hash</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">finalized_head</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">last_finalized_block_number</span> <span class="op">=</span> <span class="ident">client</span>
-        .<span class="ident">rpc</span>()
-        .<span class="ident">header</span>(<span class="prelude-val">Some</span>(<span class="ident">last_finalized_block_hash</span>))
-        .<span class="kw">await</span><span class="question-mark">?</span>
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> (<span class="kw-2">*</span><span class="ident">h</span>.<span class="ident">number</span>()).<span class="ident">into</span>());
-
-    <span class="comment">// Fill in any gaps between the block above and the finalized blocks reported.</span>
-    <span class="kw">let</span> <span class="ident">block_subscription</span> <span class="op">=</span> <span class="ident">subscribe_to_block_headers_filling_in_gaps</span>(
-        <span class="ident">client</span>,
-        <span class="ident">last_finalized_block_number</span>,
-        <span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">subscribe_finalized_blocks</span>().<span class="kw">await</span><span class="question-mark">?</span>,
-    );
-
-    <span class="prelude-val">Ok</span>(<span class="ident">EventSubscription::new</span>(<span class="ident">client</span>, <span class="ident">Box::pin</span>(<span class="ident">block_subscription</span>)))
-}
-
-<span class="doccomment">/// Take a subscription that returns block headers, and if any block numbers are missed out</span>
-<span class="doccomment">/// betweem the block number provided and what&#39;s returned from the subscription, we fill in</span>
-<span class="doccomment">/// the gaps and get hold of all intermediate block headers.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Note:** This is exposed so that we can run integration tests on it, but otherwise</span>
-<span class="doccomment">/// should not be used directly and may break between minor releases.</span>
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">subscribe_to_block_headers_filling_in_gaps</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">S</span>, <span class="ident">E</span>, <span class="ident">T</span>: <span class="ident">Config</span><span class="op">&gt;</span>(
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="kw-2">mut</span> <span class="ident">last_block_num</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
-    <span class="ident">sub</span>: <span class="ident">S</span>,
-) -&gt; <span class="kw">impl</span> <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>,
-    <span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BasicError</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-{
-    <span class="ident">sub</span>.<span class="ident">flat_map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">s</span><span class="op">|</span> {
-        <span class="comment">// Get the header, or return a stream containing just the error. Our EventSubscription</span>
-        <span class="comment">// stream will return `None` as soon as it hits an error like this.</span>
-        <span class="kw">let</span> <span class="ident">header</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">header</span>) =&gt; <span class="ident">header</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="kw">return</span> <span class="ident">Either::Left</span>(<span class="ident">stream::once</span>(<span class="kw">async</span> { <span class="prelude-val">Err</span>(<span class="ident">e</span>.<span class="ident">into</span>()) })),
-        };
-
-        <span class="comment">// We want all previous details up to, but not including this current block num.</span>
-        <span class="kw">let</span> <span class="ident">end_block_num</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">header</span>.<span class="ident">number</span>()).<span class="ident">into</span>();
-
-        <span class="comment">// This is one after the last block we returned details for last time.</span>
-        <span class="kw">let</span> <span class="ident">start_block_num</span> <span class="op">=</span> <span class="ident">last_block_num</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">unwrap_or</span>(<span class="ident">end_block_num</span>);
-
-        <span class="comment">// Iterate over all of the previous blocks we need headers for, ignoring the current block</span>
-        <span class="comment">// (which we already have the header info for):</span>
-        <span class="kw">let</span> <span class="ident">previous_headers</span> <span class="op">=</span> <span class="ident">stream::iter</span>(<span class="ident">start_block_num</span>..<span class="ident">end_block_num</span>)
-            .<span class="ident">then</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">n</span><span class="op">|</span> {
-                <span class="kw">async</span> <span class="kw">move</span> {
-                    <span class="kw">let</span> <span class="ident">hash</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">block_hash</span>(<span class="prelude-val">Some</span>(<span class="ident">n</span>.<span class="ident">into</span>())).<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">header</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">rpc</span>().<span class="ident">header</span>(<span class="ident">hash</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="prelude-val">Ok</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">BasicError</span><span class="op">&gt;</span>(<span class="ident">header</span>)
-                }
-            })
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">h</span><span class="op">|</span> <span class="kw">async</span> { <span class="ident">h</span>.<span class="ident">transpose</span>() });
-
-        <span class="comment">// On the next iteration, we&#39;ll get details starting just after this end block.</span>
-        <span class="ident">last_block_num</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">end_block_num</span>);
-
-        <span class="comment">// Return a combination of any previous headers plus the new header.</span>
-        <span class="ident">Either::Right</span>(<span class="ident">previous_headers</span>.<span class="ident">chain</span>(<span class="ident">stream::once</span>(<span class="kw">async</span> { <span class="prelude-val">Ok</span>(<span class="ident">header</span>) })))
-    })
-}
-
-<span class="doccomment">/// A `jsonrpsee` Subscription. This forms a part of the `EventSubscription` type handed back</span>
+<span class="doccomment">/// A Subscription. This forms a part of the `EventSubscription` type handed back</span>
 <span class="doccomment">/// in codegen from `subscribe_finalized`, and is exposed to be used in codegen.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FinalizedEventSub</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Header</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Header</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FinalizedEventSub</span><span class="op">&lt;</span><span class="ident">Header</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">BoxStream</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Header</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
-<span class="doccomment">/// A `jsonrpsee` Subscription. This forms a part of the `EventSubscription` type handed back</span>
+<span class="doccomment">/// A Subscription. This forms a part of the `EventSubscription` type handed back</span>
 <span class="doccomment">/// in codegen from `subscribe`, and is exposed to be used in codegen.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">EventSub</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Subscription</span><span class="op">&lt;</span><span class="ident">Item</span><span class="op">&gt;</span>;
 
 <span class="doccomment">/// A subscription to events that implements [`Stream`], and returns [`Events`] objects for each block.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Derivative</span>)]</span>
-<span class="attribute">#[<span class="ident">derivative</span>(<span class="ident">Debug</span>(<span class="ident">bound</span> <span class="op">=</span> <span class="string">&quot;Sub: std::fmt::Debug&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
+<span class="attribute">#[<span class="ident">derivative</span>(<span class="ident">Debug</span>(<span class="ident">bound</span> <span class="op">=</span> <span class="string">&quot;Sub: std::fmt::Debug, Client: std::fmt::Debug&quot;</span>))]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Client</span>, <span class="ident">Sub</span><span class="op">&gt;</span> {
     <span class="ident">finished</span>: <span class="ident">bool</span>,
-    <span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">client</span>: <span class="ident">Client</span>,
     <span class="ident">block_header_subscription</span>: <span class="ident">Sub</span>,
     <span class="attribute">#[<span class="ident">derivative</span>(<span class="ident">Debug</span> <span class="op">=</span> <span class="string">&quot;ignore&quot;</span>)]</span>
-    <span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>
-        <span class="ident">std::pin::Pin</span><span class="op">&lt;</span>
-            <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-        <span class="op">&gt;</span>,
-    <span class="op">&gt;</span>,
-    <span class="ident">_event_type</span>: <span class="ident">std::marker::PhantomData</span><span class="op">&lt;</span><span class="ident">Evs</span><span class="op">&gt;</span>,
+    <span class="ident">at</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::pin::Pin</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Send</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span>, <span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BasicError</span><span class="op">&gt;</span><span class="op">&gt;</span>
-    <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Client</span>, <span class="ident">Sub</span>, <span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Client</span>, <span class="ident">Sub</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">Sub</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Unpin</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>,
+    <span class="ident">Sub</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Unpin</span>,
 {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">client</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Client</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">block_header_subscription</span>: <span class="ident">Sub</span>) -&gt; <span class="self">Self</span> {
+    <span class="doccomment">/// Create a new [`EventSubscription`] from a client and a subscription</span>
+    <span class="doccomment">/// which returns block headers.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">client</span>: <span class="ident">Client</span>, <span class="ident">block_header_subscription</span>: <span class="ident">Sub</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">EventSubscription</span> {
             <span class="ident">finished</span>: <span class="bool-val">false</span>,
             <span class="ident">client</span>,
             <span class="ident">block_header_subscription</span>,
             <span class="ident">at</span>: <span class="prelude-val">None</span>,
-            <span class="ident">_event_type</span>: <span class="ident">std::marker::PhantomData</span>,
         }
     }
 
     <span class="doccomment">/// Return only specific events matching the tuple of 1 or more event</span>
     <span class="doccomment">/// types that has been provided as the `Filter` type parameter.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filter_events</span><span class="op">&lt;</span><span class="ident">Filter</span>: <span class="ident">EventFilter</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">FilterEvents</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">Filter</span><span class="op">&gt;</span> {
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Example</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ```no_run</span>
+    <span class="doccomment">/// use futures::StreamExt;</span>
+    <span class="doccomment">/// use subxt::{OnlineClient, PolkadotConfig};</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// #[subxt::subxt(runtime_metadata_path = &quot;../artifacts/polkadot_metadata.scale&quot;)]</span>
+    <span class="doccomment">/// pub mod polkadot {}</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # #[tokio::main]</span>
+    <span class="doccomment">/// # async fn main() {</span>
+    <span class="doccomment">/// let api = OnlineClient::&lt;PolkadotConfig&gt;::new().await.unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut events = api</span>
+    <span class="doccomment">///     .events()</span>
+    <span class="doccomment">///     .subscribe()</span>
+    <span class="doccomment">///     .await</span>
+    <span class="doccomment">///     .unwrap()</span>
+    <span class="doccomment">///     .filter_events::&lt;(</span>
+    <span class="doccomment">///         polkadot::balances::events::Transfer,</span>
+    <span class="doccomment">///         polkadot::balances::events::Deposit</span>
+    <span class="doccomment">///     )&gt;();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// while let Some(ev) = events.next().await {</span>
+    <span class="doccomment">///     let event_details = ev.unwrap();</span>
+    <span class="doccomment">///     match event_details.event {</span>
+    <span class="doccomment">///         (Some(transfer), None) =&gt; println!(&quot;Balance transfer event: {transfer:?}&quot;),</span>
+    <span class="doccomment">///         (None, Some(deposit)) =&gt; println!(&quot;Balance deposit event: {deposit:?}&quot;),</span>
+    <span class="doccomment">///         _ =&gt; unreachable!()</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// # }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filter_events</span><span class="op">&lt;</span><span class="ident">Filter</span>: <span class="ident">EventFilter</span><span class="op">&gt;</span>(
+        <span class="self">self</span>,
+    ) -&gt; <span class="ident">FilterEvents</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="self">Self</span>, <span class="ident">T</span>, <span class="ident">Filter</span><span class="op">&gt;</span> {
         <span class="ident">FilterEvents::new</span>(<span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Sub</span>: <span class="ident">Unpin</span>, <span class="ident">Evs</span>: <span class="ident">Decode</span><span class="op">&gt;</span> <span class="ident">Unpin</span>
-    <span class="kw">for</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>
-{
-}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Config</span>, <span class="ident">Client</span>, <span class="ident">Sub</span>: <span class="ident">Unpin</span><span class="op">&gt;</span> <span class="ident">Unpin</span> <span class="kw">for</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Client</span>, <span class="ident">Sub</span><span class="op">&gt;</span> {}
 
 <span class="comment">// We want `EventSubscription` to implement Stream. The below implementation is the rather verbose</span>
 <span class="comment">// way to roughly implement the following function:</span>
 <span class="comment">//</span>
 <span class="comment">// ```</span>
-<span class="comment">// fn subscribe_events&lt;T: Config, Evs: Decode&gt;(client: &amp;&#39;_ Client&lt;T&gt;, block_sub: Subscription&lt;T::Header&gt;) -&gt; impl Stream&lt;Item=Result&lt;Events&lt;&#39;_, T, Evs&gt;, BasicError&gt;&gt; + &#39;_ {</span>
+<span class="comment">// fn subscribe_events&lt;T: Config, Evs: Decode&gt;(client: &amp;&#39;_ Client&lt;T&gt;, block_sub: Subscription&lt;T::Header&gt;) -&gt; impl Stream&lt;Item=Result&lt;Events&lt;&#39;_, T, Evs&gt;, Error&gt;&gt; + &#39;_ {</span>
 <span class="comment">//     use futures::StreamExt;</span>
 <span class="comment">//     block_sub.then(move |block_header_res| async move {</span>
 <span class="comment">//         use sp_runtime::traits::Header;</span>
@@ -510,14 +344,14 @@
 <span class="comment">//</span>
 <span class="comment">// The advantage of this manual implementation is that we have a named type that we (and others)</span>
 <span class="comment">// can derive things on, store away, alias etc.</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>, <span class="ident">Evs</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">Sub</span>, <span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Client</span>, <span class="ident">Sub</span>, <span class="ident">E</span><span class="op">&gt;</span> <span class="ident">Stream</span> <span class="kw">for</span> <span class="ident">EventSubscription</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Client</span>, <span class="ident">Sub</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Config</span>,
-    <span class="ident">Evs</span>: <span class="ident">Decode</span>,
-    <span class="ident">Sub</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Unpin</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>,
-    <span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BasicError</span><span class="op">&gt;</span>,
+    <span class="ident">Client</span>: <span class="ident">OnlineClientT</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="ident">Sub</span>: <span class="ident">Stream</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T::Header</span>, <span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Unpin</span>,
+    <span class="ident">E</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Evs</span><span class="op">&gt;</span>, <span class="ident">BasicError</span><span class="op">&gt;</span>;
+    <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Events</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">poll_next</span>(
         <span class="kw-2">mut</span> <span class="self">self</span>: <span class="ident">std::pin::Pin</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="self">Self</span><span class="op">&gt;</span>,
@@ -543,7 +377,9 @@
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">block_header</span>)) =&gt; {
                     <span class="comment">// Note [jsdw]: We may be able to get rid of the per-item allocation</span>
                     <span class="comment">// with https://github.com/oblique/reusable-box-future.</span>
-                    <span class="self">self</span>.<span class="ident">at</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::pin</span>(<span class="ident">at</span>(<span class="self">self</span>.<span class="ident">client</span>, <span class="ident">block_header</span>.<span class="ident">hash</span>())));
+                    <span class="kw">let</span> <span class="ident">at</span> <span class="op">=</span> <span class="ident">EventsClient::new</span>(<span class="self">self</span>.<span class="ident">client</span>.<span class="ident">clone</span>())
+                        .<span class="ident">at</span>(<span class="prelude-val">Some</span>(<span class="ident">block_header</span>.<span class="ident">hash</span>()));
+                    <span class="self">self</span>.<span class="ident">at</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Box::pin</span>(<span class="ident">at</span>));
                     <span class="comment">// Continue, so that we poll this function future we&#39;ve just created.</span>
                 }
             }
@@ -571,16 +407,16 @@
         <span class="kw">fn</span> <span class="ident">assert_send</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span><span class="op">&gt;</span>() {}
         <span class="ident">assert_send</span>::<span class="op">&lt;</span>
             <span class="ident">EventSubscription</span><span class="op">&lt;</span>
-                <span class="ident">EventSub</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::DefaultConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span>,
-                <span class="ident"><span class="kw">crate</span>::DefaultConfig</span>,
+                <span class="ident"><span class="kw">crate</span>::SubstrateConfig</span>,
                 (),
+                <span class="ident">EventSub</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::SubstrateConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span>,
             <span class="op">&gt;</span>,
         <span class="op">&gt;</span>();
         <span class="ident">assert_send</span>::<span class="op">&lt;</span>
             <span class="ident">EventSubscription</span><span class="op">&lt;</span>
-                <span class="ident">FinalizedEventSub</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::DefaultConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span>,
-                <span class="ident"><span class="kw">crate</span>::DefaultConfig</span>,
+                <span class="ident"><span class="kw">crate</span>::SubstrateConfig</span>,
                 (),
+                <span class="ident">FinalizedEventSub</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::SubstrateConfig</span> <span class="kw">as</span> <span class="ident">Config</span><span class="op">&gt;</span><span class="ident">::Header</span><span class="op">&gt;</span>,
             <span class="op">&gt;</span>,
         <span class="op">&gt;</span>();
     }

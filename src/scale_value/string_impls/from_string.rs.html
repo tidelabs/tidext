@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.2.1/src/string_impls/from_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>from_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.5.0/src/string_impls/from_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>from_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scale_value/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -973,14 +973,14 @@
 	<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">seen_n</span> <span class="op">=</span> <span class="bool-val">false</span>;
 	<span class="kw">let</span> <span class="ident">digits</span> <span class="op">=</span> <span class="ident">t</span>
 		.<span class="ident">tokens_while</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
-			<span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_digit</span>(<span class="number">10</span>) {
+			<span class="kw">if</span> <span class="ident">c</span>.<span class="ident">is_ascii_digit</span>() {
 				<span class="ident">seen_n</span> <span class="op">=</span> <span class="bool-val">true</span>;
 				<span class="bool-val">true</span>
 			} <span class="kw">else</span> {
 				<span class="ident">seen_n</span> <span class="op">&amp;&amp;</span> <span class="kw-2">*</span><span class="ident">c</span> <span class="op">==</span> <span class="string">&#39;_&#39;</span>
 			}
 		})
-		.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">is_digit</span>(<span class="number">10</span>));
+		.<span class="ident">filter</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">is_ascii_digit</span>());
 
 	<span class="comment">// Chain sign to digits and attempt to parse into a number.</span>
 	<span class="kw">let</span> <span class="ident">n_str</span>: <span class="ident">String</span> <span class="op">=</span> <span class="ident">sign</span>.<span class="ident">chain</span>(<span class="ident">digits</span>).<span class="ident">collect</span>();
@@ -1000,12 +1000,12 @@
 	<span class="kw">if</span> <span class="ident">is_positive</span> {
 		<span class="ident">n_str</span>
 			.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u128</span><span class="op">&gt;</span>()
-			.<span class="ident">map</span>(<span class="ident">Primitive::uint</span>)
+			.<span class="ident">map</span>(<span class="ident">Primitive::u128</span>)
 			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">ParseNumberError::ParsingFailed</span>(<span class="ident">e</span>).<span class="ident">between</span>(<span class="ident">start_loc</span>, <span class="ident">end_loc</span>)))
 	} <span class="kw">else</span> {
 		<span class="ident">n_str</span>
 			.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">i128</span><span class="op">&gt;</span>()
-			.<span class="ident">map</span>(<span class="ident">Primitive::int</span>)
+			.<span class="ident">map</span>(<span class="ident">Primitive::i128</span>)
 			.<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">ParseNumberError::ParsingFailed</span>(<span class="ident">e</span>).<span class="ident">between</span>(<span class="ident">start_loc</span>, <span class="ident">end_loc</span>)))
 	}
 }
@@ -1161,10 +1161,10 @@
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
 	<span class="kw">fn</span> <span class="ident">parse_numbers</span>() {
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;123&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::uint</span>(<span class="number">123u128</span>)));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;1_234_56&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::uint</span>(<span class="number">123_456_u128</span>)));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;+1_234_56&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::uint</span>(<span class="number">123_456_u128</span>)));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;-123_4&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::int</span>(<span class="op">-</span><span class="number">1234</span>)));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;123&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::u128</span>(<span class="number">123</span>)));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;1_234_56&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::u128</span>(<span class="number">123_456</span>)));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;+1_234_56&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::u128</span>(<span class="number">123_456</span>)));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;-123_4&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::i128</span>(<span class="op">-</span><span class="number">1234</span>)));
 		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;-abc&quot;</span>), <span class="prelude-val">Err</span>(<span class="ident">ParseNumberError::ExpectedDigit</span>.<span class="ident">between</span>(<span class="number">1</span>, <span class="number">2</span>)));
 	}
 
@@ -1201,12 +1201,12 @@
 			<span class="ident">from</span>(<span class="string">&quot;(  true, 1234 ,\t\n\t \&quot;Hello!\&quot; )&quot;</span>),
 			<span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[
 				<span class="ident">Value::bool</span>(<span class="bool-val">true</span>),
-				<span class="ident">Value::uint</span>(<span class="number">1234u128</span>),
+				<span class="ident">Value::u128</span>(<span class="number">1234</span>),
 				<span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>)
 			]))
 		);
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;()&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[])));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;(\n\n\t\t\n)&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_composite</span>(<span class="macro">vec!</span>[])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;()&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_composite</span>([])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;(\n\n\t\t\n)&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_composite</span>([])));
 	}
 
 	<span class="attribute">#[<span class="ident">test</span>]</span>
@@ -1219,10 +1219,10 @@
             \&quot;Hello there 😀\&quot;: \&quot;Hello!\&quot;
         }&quot;</span>
 			),
-			<span class="prelude-val">Ok</span>(<span class="ident">Value::named_composite</span>(<span class="macro">vec!</span>[
-				(<span class="string">&quot;hello&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
-				(<span class="string">&quot;foo&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::uint</span>(<span class="number">1234u128</span>)),
-				(<span class="string">&quot;Hello there 😀&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>))
+			<span class="prelude-val">Ok</span>(<span class="ident">Value::named_composite</span>([
+				(<span class="string">&quot;hello&quot;</span>, <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
+				(<span class="string">&quot;foo&quot;</span>, <span class="ident">Value::u128</span>(<span class="number">1234</span>)),
+				(<span class="string">&quot;Hello there 😀&quot;</span>, <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>))
 			]))
 		);
 	}
@@ -1239,10 +1239,10 @@
 			),
 			<span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>(
 				<span class="string">&quot;MyVariant&quot;</span>,
-				<span class="macro">vec!</span>[
-					(<span class="string">&quot;hello&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
-					(<span class="string">&quot;foo&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::uint</span>(<span class="number">1234u128</span>)),
-					(<span class="string">&quot;Hello there 😀&quot;</span>.<span class="ident">into</span>(), <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>))
+				[
+					(<span class="string">&quot;hello&quot;</span>, <span class="ident">Value::bool</span>(<span class="bool-val">true</span>)),
+					(<span class="string">&quot;foo&quot;</span>, <span class="ident">Value::u128</span>(<span class="number">1234</span>)),
+					(<span class="string">&quot;Hello there 😀&quot;</span>, <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>))
 				]
 			))
 		);
@@ -1251,19 +1251,19 @@
 			<span class="ident">from</span>(<span class="string">&quot;Foo (  true, 1234 ,\t\n\t \&quot;Hello!\&quot; )&quot;</span>),
 			<span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_variant</span>(
 				<span class="string">&quot;Foo&quot;</span>,
-				<span class="macro">vec!</span>[<span class="ident">Value::bool</span>(<span class="bool-val">true</span>), <span class="ident">Value::uint</span>(<span class="number">1234u128</span>), <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>)]
+				<span class="macro">vec!</span>[<span class="ident">Value::bool</span>(<span class="bool-val">true</span>), <span class="ident">Value::u128</span>(<span class="number">1234</span>), <span class="ident">Value::string</span>(<span class="string">&quot;Hello!&quot;</span>)]
 			))
 		);
 
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo()&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_variant</span>(<span class="string">&quot;Foo&quot;</span>, <span class="macro">vec!</span>[])));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo{}&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>(<span class="string">&quot;Foo&quot;</span>, <span class="macro">vec!</span>[])));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo( \t)&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_variant</span>(<span class="string">&quot;Foo&quot;</span>, <span class="macro">vec!</span>[])));
-		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo{  }&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>(<span class="string">&quot;Foo&quot;</span>, <span class="macro">vec!</span>[])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo()&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_variant</span>(<span class="string">&quot;Foo&quot;</span>, [])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo{}&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">String</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;Foo&quot;</span>, [])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo( \t)&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::unnamed_variant</span>(<span class="string">&quot;Foo&quot;</span>, [])));
+		<span class="macro">assert_eq!</span>(<span class="ident">from</span>(<span class="string">&quot;Foo{  }&quot;</span>), <span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">String</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;Foo&quot;</span>, [])));
 
 		<span class="comment">// Parsing special &quot;v&quot; strings:</span>
 		<span class="macro">assert_eq!</span>(
 			<span class="ident">from</span>(<span class="string">&quot;v\&quot;variant name\&quot; {  }&quot;</span>),
-			<span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>(<span class="string">&quot;variant name&quot;</span>, <span class="macro">vec!</span>[]))
+			<span class="prelude-val">Ok</span>(<span class="ident">Value::named_variant</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">String</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="string">&quot;variant name&quot;</span>, []))
 		);
 	}
 

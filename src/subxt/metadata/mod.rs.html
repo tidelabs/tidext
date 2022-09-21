@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/ff37576/subxt/src/metadata/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/metadata/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><script defer src="../../../main.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -47,29 +47,58 @@
 <span id="42">42</span>
 <span id="43">43</span>
 <span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of subxt.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
-<span class="comment">//</span>
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="comment">// This file is dual-licensed as Apache-2.0 or GPL-3.0.</span>
+<span class="comment">// see LICENSE for license details.</span>
+
+<span class="doccomment">//! Types representing the metadata obtained from a node.</span>
+
+<span class="kw">mod</span> <span class="ident">decode_with_metadata</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">decoder</span>;
+<span class="kw">mod</span> <span class="ident">encode_with_metadata</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">env_types</span>;
 <span class="kw">mod</span> <span class="ident">hash_cache</span>;
+<span class="kw">mod</span> <span class="ident">metadata_location</span>;
 <span class="kw">mod</span> <span class="ident">metadata_type</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">util</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">metadata_location::MetadataLocation</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">metadata_type</span>::{
+    <span class="ident">ErrorMetadata</span>,
+    <span class="ident">EventMetadata</span>,
+    <span class="ident">InvalidMetadataError</span>,
+    <span class="ident">Metadata</span>,
+    <span class="ident">MetadataError</span>,
+    <span class="ident">PalletMetadata</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">decode_with_metadata</span>::{
+    <span class="ident">DecodeStaticType</span>,
+    <span class="ident">DecodeWithMetadata</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">encode_with_metadata</span>::{
+    <span class="ident">EncodeStaticType</span>,
+    <span class="ident">EncodeWithMetadata</span>,
+};
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">metadata_type</span>::{
+    <span class="ident">MetadataPalletCalls</span>,
+    <span class="ident">PathKey</span>,
+};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">decoder</span>::{
@@ -77,19 +106,6 @@
     <span class="ident">Decoder</span>,
     <span class="ident">DecoderBuilder</span>,
     <span class="ident">Extrinsic</span>,
-};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">metadata_type</span>::{
-    <span class="ident">ErrorMetadata</span>,
-    <span class="ident">EventMetadata</span>,
-    <span class="ident">InvalidMetadataError</span>,
-    <span class="ident">Metadata</span>,
-    <span class="ident">MetadataError</span>,
-};
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;decoder&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">metadata_type</span>::{
-    <span class="ident">MetadataPalletCalls</span>,
-    <span class="ident">PalletMetadata</span>,
-    <span class="ident">PathKey</span>,
 };
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="subxt" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>

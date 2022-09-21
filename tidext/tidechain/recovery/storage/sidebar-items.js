@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ActiveRecoveries",""],["Proxy",""],["Recoverable",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

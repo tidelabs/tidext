@@ -4,7 +4,7 @@
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../jsonrpsee_proc_macros/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
         </a><div class="sidebar-elems"><h2 class="location"><a href="index.html">In jsonrpsee_proc_macros</a></h2><div id="sidebar-vars" data-name="rpc" data-ty="attr" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../jsonrpsee_proc_macros/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Attribute Macro <a href="index.html">jsonrpsee_proc_macros</a>::<wbr><a class="attr" href="#">rpc</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/jsonrpsee_proc_macros/lib.rs.html#344-360">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><pre class="rust attr"><code>#[rpc]</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Main RPC macro.</p>
+    <h1 class="fqn"><span class="in-band">Attribute Macro <a href="index.html">jsonrpsee_proc_macros</a>::<wbr><a class="attr" href="#">rpc</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/jsonrpsee_proc_macros/lib.rs.html#350-366">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><div class="docblock item-decl"><pre class="rust attr"><code>#[rpc]</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Main RPC macro.</p>
 <h3 id="description"><a href="#description">Description</a></h3>
 <p>This macro is capable of generating both server and client implementations on demand.
 Based on the attributes provided to the <code>rpc</code> macro, either one or both of implementations
@@ -12,12 +12,17 @@ will be generated.</p>
 <p>For clients, it will be an extension trait that adds all the required methods to a
 type that implements <code>Client</code> or <code>SubscriptionClient</code> (depending on whether trait has
 subscriptions methods or not), namely <code>HttpClient</code> and <code>WsClient</code>.</p>
-<p>For servers, it will generate a trait mostly equivalent to the input, with two main
-differences:</p>
+<p>For servers, it will generate a trait mostly equivalent to the input, with the following differences:</p>
 <ul>
 <li>The trait will have one additional (already implemented) method, <code>into_rpc</code>, which turns any object that
 implements the server trait into an <code>RpcModule</code>.</li>
-<li>For subscription methods, there will be one additional argument inserted right after <code>&amp;self</code>: <code>subscription_sink: PendingSubscription</code>. It should be used accept or reject a pending subscription.</li>
+<li>For subscription methods:
+<ul>
+<li>There will be one additional argument inserted right after <code>&amp;self</code>: <code>subscription_sink: SubscriptionSink</code>.
+It should be used to accept or reject a subscription and send data back to subscribers.</li>
+<li>The return type of the subscription method is <code>SubscriptionResult</code> for improved ergonomics.</li>
+</ul>
+</li>
 </ul>
 <p>Since this macro can generate up to two traits, both server and client traits will have
 a new name. For the <code>Foo</code> trait, server trait will be named <code>FooServer</code>, and client,
@@ -52,8 +57,8 @@ that generated for it by the macro.</p>
     <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">async_method</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">param_a</span>: <span class="ident">u8</span>, <span class="ident">param_b</span>: <span class="ident">String</span>) -&gt; <span class="ident">u16</span>;
     <span class="kw">fn</span> <span class="ident">sync_method</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span>;
 
-    <span class="comment">// Note that `subscription_sink` was added automatically.</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">subscription_sink</span>: <span class="ident">PendingSubscription</span>);
+    <span class="comment">// Note that `subscription_sink` and `SubscriptionResult` were added automatically.</span>
+    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">subscription_sink</span>: <span class="ident">SubscriptionResult</span>) -&gt; <span class="ident">SubscriptionResult</span>;
 
     <span class="kw">fn</span> <span class="ident">into_rpc</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">jsonrpsee::core::Error</span><span class="op">&gt;</span> {
         <span class="comment">// Actual implementation stripped, but inside we will create</span>
@@ -89,6 +94,10 @@ that generated for it by the macro.</p>
 implementation’s methods conveniently.</li>
 <li><code>namespace</code>: add a prefix to all the methods and subscriptions in this RPC. For example, with namespace <code>foo</code> and
 method <code>spam</code>, the resulting method name will be <code>foo_spam</code>.</li>
+<li><code>server_bounds</code>: replace <em>all</em> auto-generated trait bounds with the user-defined ones for the server
+implementation.</li>
+<li><code>client_bounds</code>: replace <em>all</em> auto-generated trait bounds with the user-defined ones for the client
+implementation.</li>
 </ul>
 <p><strong>Trait requirements:</strong></p>
 <p>A trait wrapped with the <code>rpc</code> attribute <strong>must not</strong>:</p>
@@ -149,7 +158,8 @@ so add the complete name, including the namespace.</li>
 
 <span class="comment">// RPC is put into a separate module to clearly show names of generated entities.</span>
 <span class="kw">mod</span> <span class="ident">rpc_impl</span> {
-    <span class="kw">use</span> <span class="ident">jsonrpsee</span>::{<span class="ident">proc_macros::rpc</span>, <span class="ident">core::async_trait</span>, <span class="ident">core::RpcResult</span>, <span class="ident">ws_server::PendingSubscription</span>};
+    <span class="kw">use</span> <span class="ident">jsonrpsee</span>::{<span class="ident">proc_macros::rpc</span>, <span class="ident">core::async_trait</span>, <span class="ident">core::RpcResult</span>, <span class="ident">ws_server::SubscriptionSink</span>};
+    <span class="kw">use</span> <span class="ident">jsonrpsee::types::SubscriptionResult</span>;
 
     <span class="comment">// Generate both server and client implementations, prepend all the methods with `foo_` prefix.</span>
     <span class="attribute">#[<span class="ident">rpc</span>(<span class="ident">client</span>, <span class="ident">server</span>, <span class="ident">namespace</span> <span class="op">=</span> <span class="string">&quot;foo&quot;</span>)]</span>
@@ -221,21 +231,21 @@ so add the complete name, including the namespace.</li>
 
         <span class="comment">// The stream API can be used to pipe items from the underlying stream</span>
         <span class="comment">// as subscription responses.</span>
-        <span class="kw">fn</span> <span class="ident">sub_override_notif_method</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">pending</span>: <span class="ident">PendingSubscription</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sink</span> <span class="op">=</span> <span class="ident">pending</span>.<span class="ident">accept</span>().<span class="ident">unwrap</span>();     
+        <span class="kw">fn</span> <span class="ident">sub_override_notif_method</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">sink</span>: <span class="ident">SubscriptionSink</span>) -&gt; <span class="ident">SubscriptionResult</span> {
             <span class="ident">tokio::spawn</span>(<span class="kw">async</span> <span class="kw">move</span> {
                 <span class="kw">let</span> <span class="ident">stream</span> <span class="op">=</span> <span class="ident">futures_util::stream::iter</span>([<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>]);
                 <span class="ident">sink</span>.<span class="ident">pipe_from_stream</span>(<span class="ident">stream</span>).<span class="kw">await</span>;
             });
+            <span class="prelude-val">Ok</span>(())
         }
 
         <span class="comment">// We could&#39;ve spawned a `tokio` future that yields values while our program works,</span>
         <span class="comment">// but for simplicity of the example we will only send two values and then close</span>
         <span class="comment">// the subscription.</span>
-        <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">pending</span>: <span class="ident">PendingSubscription</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sink</span> <span class="op">=</span> <span class="ident">pending</span>.<span class="ident">accept</span>().<span class="ident">unwrap</span>();
+        <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">sink</span>: <span class="ident">SubscriptionSink</span>) -&gt; <span class="ident">SubscriptionResult</span> {
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sink</span>.<span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="string">&quot;Response_A&quot;</span>);
             <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">sink</span>.<span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="string">&quot;Response_B&quot;</span>);
+            <span class="prelude-val">Ok</span>(())
         }
     }
 }

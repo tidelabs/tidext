@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ExchangeRateInTdfy",""],["Onboarding",""],["Pools",""],["PoolsLeftOverBalance",""],["Rewards",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

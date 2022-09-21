@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/ff37576/subxt/src/error.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/error.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../subxt/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -217,43 +217,130 @@
 <span id="212">212</span>
 <span id="213">213</span>
 <span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">// This file is part of subxt.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is free software: you can redistribute it and/or modify</span>
-<span class="comment">// it under the terms of the GNU General Public License as published by</span>
-<span class="comment">// the Free Software Foundation, either version 3 of the License, or</span>
-<span class="comment">// (at your option) any later version.</span>
-<span class="comment">//</span>
-<span class="comment">// subxt is distributed in the hope that it will be useful,</span>
-<span class="comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="comment">// GNU General Public License for more details.</span>
-<span class="comment">//</span>
-<span class="comment">// You should have received a copy of the GNU General Public License</span>
-<span class="comment">// along with subxt.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="comment">// This file is dual-licensed as Apache-2.0 or GPL-3.0.</span>
+<span class="comment">// see LICENSE for license details.</span>
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::metadata</span>::{
+<span class="doccomment">//! Types representing the errors that can be returned.</span>
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::metadata::Metadata</span>;
+<span class="kw">use</span> <span class="ident">codec::Decode</span>;
+<span class="kw">use</span> <span class="ident">core::fmt::Debug</span>;
+<span class="kw">use</span> <span class="ident">scale_info::TypeDef</span>;
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+
+<span class="comment">// Re-expose the errors we use from other crates here:</span>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::metadata</span>::{
     <span class="ident">InvalidMetadataError</span>,
     <span class="ident">MetadataError</span>,
 };
-<span class="kw">use</span> <span class="ident">core::fmt::Debug</span>;
-<span class="kw">use</span> <span class="ident">jsonrpsee::core::error::Error</span> <span class="kw">as</span> <span class="ident">RequestError</span>;
-<span class="kw">use</span> <span class="ident">scale_value::scale::DecodeError</span>;
-<span class="kw">use</span> <span class="ident">sp_core::crypto::SecretStringError</span>;
-<span class="kw">use</span> <span class="ident">sp_runtime::transaction_validity::TransactionValidityError</span>;
-
-<span class="doccomment">/// An error that may contain some runtime error `E`</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">RuntimeError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-
-<span class="doccomment">/// An error that will never contain a runtime error.</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">BasicError</span> <span class="op">=</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">scale_value::scale</span>::{
+    <span class="ident">DecodeError</span>,
+    <span class="ident">EncodeError</span>,
+};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_core::crypto::SecretStringError</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::transaction_validity::TransactionValidityError</span>;
 
 <span class="doccomment">/// The underlying error enum, generic over the type held by the `Runtime`</span>
-<span class="doccomment">/// variant. Prefer to use the [`Error&lt;E&gt;`] and [`BasicError`] aliases over</span>
+<span class="doccomment">/// variant. Prefer to use the [`Error&lt;E&gt;`] and [`Error`] aliases over</span>
 <span class="doccomment">/// using this type directly.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Error</span> {
     <span class="doccomment">/// Io error.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Io error: {0}&quot;</span>)]</span>
     <span class="ident">Io</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">std::io::Error</span>),
@@ -262,7 +349,7 @@
     <span class="ident">Codec</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">codec::Error</span>),
     <span class="doccomment">/// Rpc error.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Rpc error: {0}&quot;</span>)]</span>
-    <span class="ident">Rpc</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">RequestError</span>),
+    <span class="ident">Rpc</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">RpcError</span>),
     <span class="doccomment">/// Serde serialization error</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Serde json error: {0}&quot;</span>)]</span>
     <span class="ident">Serialization</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">serde_json::error::Error</span>),
@@ -280,99 +367,180 @@
     <span class="ident">Metadata</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">MetadataError</span>),
     <span class="doccomment">/// Runtime error.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Runtime error: {0:?}&quot;</span>)]</span>
-    <span class="ident">Runtime</span>(<span class="ident">E</span>),
-    <span class="doccomment">/// Events decoding error.</span>
-    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Events decoding error: {0}&quot;</span>)]</span>
-    <span class="ident">EventsDecoding</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">DecodeError</span>),
+    <span class="ident">Runtime</span>(<span class="ident">DispatchError</span>),
+    <span class="doccomment">/// Error decoding to a [`crate::dynamic::Value`].</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Error decoding into dynamic value: {0}&quot;</span>)]</span>
+    <span class="ident">DecodeValue</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">DecodeError</span>),
+    <span class="doccomment">/// Error encoding from a [`crate::dynamic::Value`].</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Error encoding from dynamic value: {0}&quot;</span>)]</span>
+    <span class="ident">EncodeValue</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">EncodeError</span><span class="op">&lt;</span>()<span class="op">&gt;</span>),
     <span class="doccomment">/// Transaction progress error.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Transaction error: {0}&quot;</span>)]</span>
     <span class="ident">Transaction</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">TransactionError</span>),
-    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Module error: {0}&quot;</span>)]</span>
-    <span class="doccomment">/// An error from the `Module` variant of the generated `DispatchError`.</span>
-    <span class="ident">Module</span>(<span class="ident">ModuleError</span>),
+    <span class="doccomment">/// An error encoding a storage address.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Error encoding storage address: {0}&quot;</span>)]</span>
+    <span class="ident">StorageAddress</span>(<span class="attribute">#[<span class="ident">from</span>]</span> <span class="ident">StorageAddressError</span>),
     <span class="doccomment">/// Other error.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Other error: {0}&quot;</span>)]</span>
     <span class="ident">Other</span>(<span class="ident">String</span>),
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// [`GenericError`] is parameterised over the type that it holds in the `Runtime`</span>
-    <span class="doccomment">/// variant. This function allows us to map the Runtime error contained within (if present)</span>
-    <span class="doccomment">/// to a different type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map_runtime_err</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">NewE</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">NewE</span><span class="op">&gt;</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">E</span>) -&gt; <span class="ident">NewE</span>,
-    {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">GenericError::Io</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Io</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Codec</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Codec</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Rpc</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Rpc</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Serialization</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Serialization</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::SecretString</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::SecretString</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Invalid</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Invalid</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::InvalidMetadata</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::InvalidMetadata</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Metadata</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Metadata</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::EventsDecoding</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::EventsDecoding</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Transaction</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Transaction</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Module</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Module</span>(<span class="ident">e</span>),
-            <span class="ident">GenericError::Other</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Other</span>(<span class="ident">e</span>),
-            <span class="comment">// This is the only branch we really care about:</span>
-            <span class="ident">GenericError::Runtime</span>(<span class="ident">e</span>) =&gt; <span class="ident">GenericError::Runtime</span>(<span class="ident">f</span>(<span class="ident">e</span>)),
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">BasicError</span> {
-    <span class="doccomment">/// Convert an [`BasicError`] into any</span>
-    <span class="doccomment">/// arbitrary [`Error&lt;E&gt;`].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_error</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">map_runtime_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">e</span> {})
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">BasicError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">BasicError</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">err</span>.<span class="ident">into_error</span>()
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SecretStringError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">SecretStringError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">SecretStringError</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">GenericError::SecretString</span>(<span class="ident">error</span>)
+        <span class="ident">Error::SecretString</span>(<span class="ident">error</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TransactionValidityError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">TransactionValidityError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">TransactionValidityError</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">GenericError::Invalid</span>(<span class="ident">error</span>)
+        <span class="ident">Error::Invalid</span>(<span class="ident">error</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">GenericError::Other</span>(<span class="ident">error</span>.<span class="ident">into</span>())
+        <span class="ident">Error::Other</span>(<span class="ident">error</span>.<span class="ident">into</span>())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GenericError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">GenericError::Other</span>(<span class="ident">error</span>)
+        <span class="ident">Error::Other</span>(<span class="ident">error</span>)
     }
 }
 
-<span class="doccomment">/// This is used in the place of the `E` in [`GenericError&lt;E&gt;`] when we may have a</span>
-<span class="doccomment">/// Runtime Error. We use this wrapper so that it is possible to implement</span>
-<span class="doccomment">/// `From&lt;Error&lt;Infallible&gt;` for `Error&lt;RuntimeError&lt;E&gt;&gt;`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This should not be used as a type; prefer to use the alias [`Error&lt;E&gt;`] when referring</span>
-<span class="doccomment">/// to errors which may contain some Runtime error `E`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuntimeError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">E</span>);
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DispatchError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Error</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">error</span>: <span class="ident">DispatchError</span>) -&gt; <span class="self">Self</span> {
+        <span class="ident">Error::Runtime</span>(<span class="ident">error</span>)
+    }
+}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="ident">RuntimeError</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Extract the actual runtime error from this struct.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inner</span>(<span class="self">self</span>) -&gt; <span class="ident">E</span> {
-        <span class="self">self</span>.<span class="number">0</span>
+<span class="doccomment">/// An RPC error. Since we are generic over the RPC client that is used,</span>
+<span class="doccomment">/// the error is any custom string.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
+<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;RPC error: {0}&quot;</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RpcError</span>(<span class="kw">pub</span> <span class="ident">String</span>);
+
+<span class="doccomment">/// This is our attempt to decode a runtime DispatchError. We either</span>
+<span class="doccomment">/// successfully decode it into a [`ModuleError`], or we fail and keep</span>
+<span class="doccomment">/// hold of the bytes, which we can attempt to decode if we have an</span>
+<span class="doccomment">/// appropriate static type to hand.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">DispatchError</span> {
+    <span class="doccomment">/// An error was emitted from a specific pallet/module.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Module error: {0}&quot;</span>)]</span>
+    <span class="ident">Module</span>(<span class="ident">ModuleError</span>),
+    <span class="doccomment">/// Some other error was emitted.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Undecoded dispatch error: {0:?}&quot;</span>)]</span>
+    <span class="ident">Other</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>),
+}
+
+<span class="kw">impl</span> <span class="ident">DispatchError</span> {
+    <span class="doccomment">/// Attempt to decode a runtime DispatchError, returning either the [`ModuleError`] it decodes</span>
+    <span class="doccomment">/// to, along with additional details on the error, or returning the raw bytes if it could not</span>
+    <span class="doccomment">/// be decoded.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decode_from</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">bytes</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">metadata</span>: <span class="kw-2">&amp;</span><span class="ident">Metadata</span>) -&gt; <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">into</span>();
+
+        <span class="kw">let</span> <span class="ident">dispatch_error_ty_id</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">metadata</span>.<span class="ident">dispatch_error_ty</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">id</span>) =&gt; <span class="ident">id</span>,
+            <span class="prelude-val">None</span> =&gt; {
+                <span class="macro">tracing::warn!</span>(
+                    <span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError was not found in Metadata&quot;</span>
+                );
+                <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">into_owned</span>())
+            }
+        };
+
+        <span class="kw">let</span> <span class="ident">dispatch_error_ty</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">metadata</span>.<span class="ident">types</span>().<span class="ident">resolve</span>(<span class="ident">dispatch_error_ty_id</span>) {
+            <span class="prelude-val">Some</span>(<span class="ident">ty</span>) =&gt; <span class="ident">ty</span>,
+            <span class="prelude-val">None</span> =&gt; {
+                <span class="macro">tracing::warn!</span>(<span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError type ID doesn&#39;t resolve to a known type&quot;</span>);
+                <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">into_owned</span>())
+            }
+        };
+
+        <span class="kw">let</span> <span class="ident">variant</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">dispatch_error_ty</span>.<span class="ident">type_def</span>() {
+            <span class="ident">TypeDef::Variant</span>(<span class="ident">var</span>) =&gt; <span class="ident">var</span>,
+            <span class="kw">_</span> =&gt; {
+                <span class="macro">tracing::warn!</span>(
+                    <span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError type is not a Variant&quot;</span>
+                );
+                <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">into_owned</span>())
+            }
+        };
+
+        <span class="kw">let</span> <span class="ident">module_variant_idx</span> <span class="op">=</span> <span class="ident">variant</span>
+            .<span class="ident">variants</span>()
+            .<span class="ident">iter</span>()
+            .<span class="ident">find</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">name</span>() <span class="op">==</span> <span class="string">&quot;Module&quot;</span>)
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">index</span>());
+        <span class="kw">let</span> <span class="ident">module_variant_idx</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">module_variant_idx</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">idx</span>) =&gt; <span class="ident">idx</span>,
+            <span class="prelude-val">None</span> =&gt; {
+                <span class="macro">tracing::warn!</span>(<span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError does not have a &#39;Module&#39; variant&quot;</span>);
+                <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">into_owned</span>())
+            }
+        };
+
+        <span class="comment">// If the error bytes don&#39;t correspond to a ModuleError, just return the bytes.</span>
+        <span class="comment">// This is perfectly reasonable and expected, so no logging.</span>
+        <span class="kw">if</span> <span class="ident">bytes</span>[<span class="number">0</span>] <span class="op">!</span><span class="op">=</span> <span class="ident">module_variant_idx</span> {
+            <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">into_owned</span>())
+        }
+
+        <span class="comment">// The remaining bytes are the module error, all being well:</span>
+        <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">bytes</span>[<span class="number">1</span>..];
+
+        <span class="comment">// The oldest and second oldest type of error decode to this shape:</span>
+        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Decode</span>)]</span>
+        <span class="kw">struct</span> <span class="ident">LegacyModuleError</span> {
+            <span class="ident">index</span>: <span class="ident">u8</span>,
+            <span class="ident">error</span>: <span class="ident">u8</span>,
+        }
+
+        <span class="comment">// The newer case expands the error for forward compat:</span>
+        <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Decode</span>)]</span>
+        <span class="kw">struct</span> <span class="ident">CurrentModuleError</span> {
+            <span class="ident">index</span>: <span class="ident">u8</span>,
+            <span class="ident">error</span>: [<span class="ident">u8</span>; <span class="number">4</span>],
+        }
+
+        <span class="comment">// try to decode into the new shape, or the old if that doesn&#39;t work</span>
+        <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">CurrentModuleError::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">bytes</span>) {
+            <span class="prelude-val">Ok</span>(<span class="ident">e</span>) =&gt; <span class="ident">e</span>,
+            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
+                <span class="kw">let</span> <span class="ident">old_e</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">LegacyModuleError::decode</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">bytes</span>) {
+                    <span class="prelude-val">Ok</span>(<span class="ident">err</span>) =&gt; <span class="ident">err</span>,
+                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
+                        <span class="macro">tracing::warn!</span>(<span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError does not match known formats&quot;</span>);
+                        <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">to_vec</span>())
+                    }
+                };
+                <span class="ident">CurrentModuleError</span> {
+                    <span class="ident">index</span>: <span class="ident">old_e</span>.<span class="ident">index</span>,
+                    <span class="ident">error</span>: [<span class="ident">old_e</span>.<span class="ident">error</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],
+                }
+            }
+        };
+
+        <span class="kw">let</span> <span class="ident">error_details</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">metadata</span>.<span class="ident">error</span>(<span class="ident">err</span>.<span class="ident">index</span>, <span class="ident">err</span>.<span class="ident">error</span>[<span class="number">0</span>]) {
+            <span class="prelude-val">Ok</span>(<span class="ident">details</span>) =&gt; <span class="ident">details</span>,
+            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
+                <span class="macro">tracing::warn!</span>(<span class="string">&quot;Can&#39;t decode error: sp_runtime::DispatchError::Module details do not match known information&quot;</span>);
+                <span class="kw">return</span> <span class="ident">DispatchError::Other</span>(<span class="ident">bytes</span>.<span class="ident">to_vec</span>())
+            }
+        };
+
+        <span class="ident">DispatchError::Module</span>(<span class="ident">ModuleError</span> {
+            <span class="ident">pallet</span>: <span class="ident">error_details</span>.<span class="ident">pallet</span>().<span class="ident">to_string</span>(),
+            <span class="ident">error</span>: <span class="ident">error_details</span>.<span class="ident">error</span>().<span class="ident">to_string</span>(),
+            <span class="ident">description</span>: <span class="ident">error_details</span>.<span class="ident">docs</span>().<span class="ident">to_vec</span>(),
+            <span class="ident">error_data</span>: <span class="ident">ModuleErrorData</span> {
+                <span class="ident">pallet_index</span>: <span class="ident">err</span>.<span class="ident">index</span>,
+                <span class="ident">error</span>: <span class="ident">err</span>.<span class="ident">error</span>,
+            },
+        })
     }
 }
 
@@ -383,7 +551,7 @@
     <span class="doccomment">/// block hasn&#39;t yet been finalized).</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;The finality subscription expired&quot;</span>)]</span>
     <span class="ident">FinalitySubscriptionTimeout</span>,
-    <span class="doccomment">/// The block hash that the tranaction was added to could not be found.</span>
+    <span class="doccomment">/// The block hash that the transaction was added to could not be found.</span>
     <span class="doccomment">/// This is probably because the block was retracted before being finalized.</span>
     <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;The block containing the transaction can no longer be found (perhaps it was on a non-finalized fork?)&quot;</span>)]</span>
     <span class="ident">BlockHashNotFound</span>,
@@ -423,13 +591,35 @@
     }
 }
 
-<span class="doccomment">/// This trait is automatically implemented for the generated `DispatchError`,</span>
-<span class="doccomment">/// so that we can pluck out information about the `Module` error variant, if`</span>
-<span class="doccomment">/// it exists.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">HasModuleError</span> {
-    <span class="doccomment">/// If the error has a `Module` variant, return a tuple of the</span>
-    <span class="doccomment">/// pallet index and error index. Else, return `None`.</span>
-    <span class="kw">fn</span> <span class="ident">module_error_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ModuleErrorData</span><span class="op">&gt;</span>;
+<span class="doccomment">/// Something went wrong trying to encode a storage address.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">thiserror::Error</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">StorageAddressError</span> {
+    <span class="doccomment">/// Storage map type must be a composite type.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Storage map type must be a composite type&quot;</span>)]</span>
+    <span class="ident">MapTypeMustBeTuple</span>,
+    <span class="doccomment">/// Storage lookup does not have the expected number of keys.</span>
+    <span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;Storage lookup requires {expected} keys but got {actual} keys&quot;</span>)]</span>
+    <span class="ident">WrongNumberOfKeys</span> {
+        <span class="doccomment">/// The actual number of keys needed, based on the metadata.</span>
+        <span class="ident">actual</span>: <span class="ident">usize</span>,
+        <span class="doccomment">/// The number of keys provided in the storage address.</span>
+        <span class="ident">expected</span>: <span class="ident">usize</span>,
+    },
+    <span class="doccomment">/// Storage lookup requires a type that wasn&#39;t found in the metadata.</span>
+    <span class="attribute">#[<span class="ident">error</span>(
+        <span class="string">&quot;Storage lookup requires type {0} to exist in the metadata, but it was not found&quot;</span>
+    )]</span>
+    <span class="ident">TypeNotFound</span>(<span class="ident">u32</span>),
+    <span class="doccomment">/// This storage entry in the metadata does not have the correct number of hashers to fields.</span>
+    <span class="attribute">#[<span class="ident">error</span>(
+        <span class="string">&quot;Storage entry in metadata does not have the correct number of hashers to fields&quot;</span>
+    )]</span>
+    <span class="ident">WrongNumberOfHashers</span> {
+        <span class="doccomment">/// The number of hashers in the metadata for this storage entry.</span>
+        <span class="ident">hashers</span>: <span class="ident">usize</span>,
+        <span class="doccomment">/// The number of fields in the metadata for this storage entry.</span>
+        <span class="ident">fields</span>: <span class="ident">usize</span>,
+    },
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="subxt" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>

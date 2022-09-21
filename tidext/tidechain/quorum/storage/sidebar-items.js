@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AccountWatchList",""],["BurnedQueue",""],["CounterForMembers",""],["Members",""],["Proposals",""],["PublicKeys",""],["QuorumStatus",""],["StorageApi",""],["Threshold",""],["Votes",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

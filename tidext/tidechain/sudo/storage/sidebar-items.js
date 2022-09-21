@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Key",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

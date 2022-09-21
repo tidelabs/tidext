@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Bounties",""],["BountyApprovals",""],["BountyCount",""],["BountyDescriptions",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});

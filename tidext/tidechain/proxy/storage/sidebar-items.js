@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Announcements",""],["Proxies",""],["StorageApi",""]]});
+initSidebarItems({"struct":[["StorageApi",""]]});
