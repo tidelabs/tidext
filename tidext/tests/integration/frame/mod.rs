@@ -14,4 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
+mod dynamic_runtimes;
+mod dynamic_ss58;
 mod tidefi;
