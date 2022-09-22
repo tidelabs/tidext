@@ -247,29 +247,32 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
           );
 
           #[cfg(feature = "tidechain-native")]
-          let default_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
+          let fallback_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
 
           #[cfg(feature = "lagoon-native")]
-          let default_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
+          let fallback_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
+
+          // select runtime automatically based on the spec name of the client
+          let runtime_version = client.offline().runtime_version();
+          let default_runtime = if let Some(spec_name) = runtime_version.other.get("specName") {
+            spec_name.as_str().map(|spec_name| match spec_name {
+              #[cfg(feature = "tidechain-native")]
+              "tidechain" => TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default())),
+              #[cfg(feature = "lagoon-native")]
+              "lagoon" => TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default())),
+              _ => panic!("No runtime available"),
+            })
+            .unwrap_or(fallback_runtime)
+          } else {
+            fallback_runtime
+          };
 
           let runtime_type = match self.runtime {
             Some(runtime) => runtime,
-            None => {
-              if self.rpc_url == "wss://rpc.tidefi.io:443" {
-                #[cfg(feature = "lagoon-native")]
-                let default_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
-
-                #[cfg(feature = "tidechain-native")]
-                let default_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
-
-                default_runtime
-              } else {
-                default_runtime
-              }
-            }
+            None => default_runtime,
           };
 
-          log::debug!("Tidext Runtime: {}", runtime_type);
+          log::debug!("selected runtime: {}", runtime_type);
 
           return Ok(Client {
             signer: self.signer,
