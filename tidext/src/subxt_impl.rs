@@ -413,12 +413,14 @@ pub enum RewardDestination {
   Controller,
 }
 
+#[cfg(feature = "lagoon-native")]
 with_config! {
   tidechain,
   tidechain_runtime,
   "../artifacts/tidechain_metadata.scale"
 }
 
+#[cfg(feature = "tidechain-native")]
 with_config! {
   lagoon,
   lagoon_runtime,

@@ -65,6 +65,7 @@ impl TestNodeProcess {
 pub struct TestNodeProcessBuilder {
   node_path: OsString,
   authority: Option<AccountKeyring>,
+  chain: Option<String>,
   scan_port_range: bool,
 }
 
@@ -76,6 +77,7 @@ impl TestNodeProcessBuilder {
     Self {
       node_path: node_path.as_ref().into(),
       authority: None,
+      chain: None,
       scan_port_range: false,
     }
   }
@@ -83,6 +85,15 @@ impl TestNodeProcessBuilder {
   /// Set the authority `dev` account for a node in `validator` mode e.g. --alice.
   pub fn with_authority(&mut self, account: AccountKeyring) -> &mut Self {
     self.authority = Some(account);
+    self
+  }
+
+  /// Set the authority `dev` account for a node in `validator` mode e.g. --alice.
+  pub fn with_chain<S>(&mut self, chain: S) -> &mut Self
+  where
+    S: Into<String>,
+  {
+    self.chain = Some(chain.into());
     self
   }
 
@@ -100,7 +111,7 @@ impl TestNodeProcessBuilder {
     cmd
       .env("RUST_LOG", "error")
       .arg("--chain")
-      .arg("lagoon-dev")
+      .arg(self.chain.clone().unwrap_or("lagoon-dev".into()))
       .arg("--tmp");
 
     if let Some(authority) = self.authority {

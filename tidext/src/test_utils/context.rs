@@ -20,7 +20,10 @@ pub use crate::test_utils::{AccountKeyring, TestNodeProcess};
 const TIDECHAIN_NODE_PATH: &str = "tidechain";
 
 /// Tidext node process with specific signer
-pub async fn test_node_process_with(key: AccountKeyring) -> TestNodeProcess {
+pub async fn test_node_process_with<S>(key: AccountKeyring, chain: S) -> TestNodeProcess
+where
+  S: Into<String>,
+{
   let path = std::env::var("TIDECHAIN_NODE_PATH").unwrap_or_else(|_| {
     if which::which(TIDECHAIN_NODE_PATH).is_err() {
       panic!("A Tidechain binary should be installed on your path for integration tests.")
@@ -30,6 +33,7 @@ pub async fn test_node_process_with(key: AccountKeyring) -> TestNodeProcess {
 
   let proc = TestNodeProcess::build(path.as_str())
     .with_authority(key)
+    .with_chain(chain)
     .scan_for_open_ports()
     .spawn()
     .await;
@@ -38,7 +42,12 @@ pub async fn test_node_process_with(key: AccountKeyring) -> TestNodeProcess {
 
 /// Launch a node process with `Alice` as signer.
 pub async fn test_node_process() -> TestNodeProcess {
-  test_node_process_with(AccountKeyring::Alice).await
+  test_node_process_with(AccountKeyring::Alice, "lagoon-dev").await
+}
+
+/// Launch a node process with `Alice` as signer.
+pub async fn test_node_process_tidechain() -> TestNodeProcess {
+  test_node_process_with(AccountKeyring::Alice, "tidechain-dev").await
 }
 
 /// Tidext test context.
@@ -46,9 +55,16 @@ pub struct TestContext {
   pub node_proc: TestNodeProcess,
 }
 
-/// Initialize a default test context.
+/// Initialize a default lagoon test context.
 pub async fn test_context() -> TestContext {
   env_logger::try_init().ok();
   let node_proc = test_node_process().await;
+  TestContext { node_proc }
+}
+
+/// Initialize a tidechain context.
+pub async fn test_context_tidechain() -> TestContext {
+  env_logger::try_init().ok();
+  let node_proc = test_node_process_tidechain().await;
   TestContext { node_proc }
 }
