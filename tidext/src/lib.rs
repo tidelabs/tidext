@@ -78,7 +78,7 @@
 //! Convert the client to a runtime api wrapper for custom runtime access
 //!
 //! The [`subxt`] proc macro will provide methods to submit extrinsics and read storage
-//! specific to the Tidechain [`runtime`]
+//! specific to the Tidechain
 //!
 //! ```no_run
 //! use tidext::ClientBuilder;
@@ -87,7 +87,6 @@
 //! let runtime = client.runtime();
 //! let tides = runtime.storage().balances().total_issuance(None).await?;
 //! ```
-//! [`runtime`]: TidechainRuntimeApi
 
 pub use crate::{
   client::{Client, ClientBuilder},
@@ -96,11 +95,11 @@ pub use crate::{
 pub use keyring::*;
 pub use parity_scale_codec::{Decode, Encode};
 
-pub use sp_runtime::Permill;
+pub use sp_runtime::{MultiAddress, Permill};
 pub use subxt::{tx::Signer, Error as SubstrateSubxtError};
 pub use subxt_impl::{
-  OracleCall, QuorumCall, RewardDestination, TidechainCall, TidechainConfig, TidefiCall,
-  TidefiRuntime,
+  OracleCall, QuorumCall, RewardDestination, StakingCall, TidechainCall, TidechainConfig,
+  TidefiCall, TidefiRuntime,
 };
 pub use tidefi_primitives as primitives;
 

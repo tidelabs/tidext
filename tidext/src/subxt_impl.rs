@@ -15,7 +15,7 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 #![allow(clippy::too_many_arguments)]
 
-use sp_runtime::Permill;
+use sp_runtime::{MultiAddress, Permill};
 use std::sync::Arc;
 use subxt::{Config, PolkadotConfig, SubstrateConfig as DefaultConfig};
 use tidefi_primitives::{AccountId, Balance, CurrencyId, Hash, SwapType};
@@ -73,6 +73,9 @@ macro_rules! with_config {
           }
           TidechainCall::Oracle(oracle_call) => {
             $mod_name::runtime_types::$runtime_name::Call::Oracle(oracle_call.into())
+          }
+          TidechainCall::Staking(staking_call) => {
+            $mod_name::runtime_types::$runtime_name::Call::Staking(staking_call.into())
           }
         }
       }
@@ -177,6 +180,27 @@ macro_rules! with_config {
           OracleCall::RemoveMarketMaker { account_id } => {
             $mod_name::runtime_types::pallet_oracle::pallet::Call::remove_market_maker { account_id }
           }
+        }
+      }
+    }
+
+    impl From<StakingCall> for $mod_name::runtime_types::pallet_staking::pallet::pallet::Call {
+      fn from(current_call: StakingCall) -> $mod_name::runtime_types::pallet_staking::pallet::pallet::Call {
+        match current_call {
+          StakingCall::Bond {
+            controller,
+            value,
+            payee,
+          } => $mod_name::runtime_types::pallet_staking::pallet::pallet::Call::bond {
+            controller,
+            value,
+            payee: payee.into()
+          },
+          StakingCall::Nominate {
+            targets,
+          } => $mod_name::runtime_types::pallet_staking::pallet::pallet::Call::nominate {
+            targets
+          },
         }
       }
     }
@@ -296,6 +320,7 @@ impl Config for TidechainConfig {
 /// Simple batch calls
 pub enum TidechainCall {
   Tidefi(TidefiCall),
+  Staking(StakingCall),
   Quorum(QuorumCall),
   Oracle(OracleCall),
 }
@@ -327,6 +352,17 @@ pub enum TidefiCall {
   },
 }
 
+pub enum StakingCall {
+  Bond {
+    controller: MultiAddress<AccountId, u32>,
+    value: Balance,
+    payee: RewardDestination,
+  },
+  Nominate {
+    targets: Vec<MultiAddress<AccountId, u32>>,
+  },
+}
+
 pub enum QuorumCall {
   SubmitProposal {
     proposal: tidefi_primitives::ProposalType<AccountId, u32, Vec<u8>, Vec<AccountId>>,
@@ -347,6 +383,7 @@ pub enum QuorumCall {
     public_keys: Vec<(u32, Vec<u8>)>,
   },
 }
+
 pub enum OracleCall {
   ConfirmSwap {
     request_id: Hash,
@@ -371,6 +408,7 @@ pub enum OracleCall {
     account_id: AccountId,
   },
 }
+
 pub enum RewardDestination {
   Controller,
 }

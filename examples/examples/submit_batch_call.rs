@@ -16,7 +16,8 @@
 
 use tidext::{
   primitives::{assets, CurrencyId, SwapType},
-  ClientBuilder, Permill, TidechainCall, TidefiCall, TidefiKeyring,
+  ClientBuilder, MultiAddress, Permill, RewardDestination, StakingCall, TidechainCall, TidefiCall,
+  TidefiKeyring,
 };
 // load sr25519 test account
 use sp_keyring::AccountKeyring;
@@ -62,6 +63,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         swap_type: SwapType::Market,
         // 0.1%
         slippage_tolerance: Some(Permill::from_rational(1_u32, 1000_u32)),
+      }),
+      TidechainCall::Staking(StakingCall::Bond {
+        controller: MultiAddress::Id(AccountKeyring::Charlie.to_account_id()),
+        value: 1_000_000_000_000,
+        payee: RewardDestination::Controller,
       }),
     ])
     .await?;
