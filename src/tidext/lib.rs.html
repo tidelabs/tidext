@@ -129,7 +129,6 @@
 <span id="124">124</span>
 <span id="125">125</span>
 <span id="126">126</span>
-<span id="127">127</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -210,7 +209,7 @@
 <span class="doccomment">//! Convert the client to a runtime api wrapper for custom runtime access</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The [`subxt`] proc macro will provide methods to submit extrinsics and read storage</span>
-<span class="doccomment">//! specific to the Tidechain [`runtime`]</span>
+<span class="doccomment">//! specific to the Tidechain</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```no_run</span>
 <span class="doccomment">//! use tidext::ClientBuilder;</span>
@@ -219,7 +218,6 @@
 <span class="doccomment">//! let runtime = client.runtime();</span>
 <span class="doccomment">//! let tides = runtime.storage().balances().total_issuance(None).await?;</span>
 <span class="doccomment">//! ```</span>
-<span class="doccomment">//! [`runtime`]: TidechainRuntimeApi</span>
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
   <span class="ident">client</span>::{<span class="ident">Client</span>, <span class="ident">ClientBuilder</span>},
@@ -228,11 +226,11 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">keyring</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">parity_scale_codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::Permill</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">MultiAddress</span>, <span class="ident">Permill</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt</span>::{<span class="ident">tx::Signer</span>, <span class="ident">Error</span> <span class="kw">as</span> <span class="ident">SubstrateSubxtError</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">subxt_impl</span>::{
-  <span class="ident">OracleCall</span>, <span class="ident">QuorumCall</span>, <span class="ident">RewardDestination</span>, <span class="ident">TidechainCall</span>, <span class="ident">TidechainConfig</span>, <span class="ident">TidefiCall</span>,
-  <span class="ident">TidefiRuntime</span>,
+  <span class="ident">OracleCall</span>, <span class="ident">QuorumCall</span>, <span class="ident">RewardDestination</span>, <span class="ident">StakingCall</span>, <span class="ident">TidechainCall</span>, <span class="ident">TidechainConfig</span>,
+  <span class="ident">TidefiCall</span>, <span class="ident">TidefiRuntime</span>,
 };
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">tidefi_primitives</span> <span class="kw">as</span> <span class="ident">primitives</span>;
 
