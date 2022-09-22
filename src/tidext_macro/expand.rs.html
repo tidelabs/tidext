@@ -295,6 +295,9 @@
 <span id="290">290</span>
 <span id="291">291</span>
 <span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -544,29 +547,32 @@
           );
 
           <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tidechain-native&quot;</span>)]</span>
-          <span class="kw">let</span> <span class="ident">default_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Tidechain</span>(<span class="ident">Arc::new</span>(<span class="ident">TidechainRuntime::default</span>()));
+          <span class="kw">let</span> <span class="ident">fallback_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Tidechain</span>(<span class="ident">Arc::new</span>(<span class="ident">TidechainRuntime::default</span>()));
 
           <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;lagoon-native&quot;</span>)]</span>
-          <span class="kw">let</span> <span class="ident">default_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Lagoon</span>(<span class="ident">Arc::new</span>(<span class="ident">LagoonRuntime::default</span>()));
+          <span class="kw">let</span> <span class="ident">fallback_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Lagoon</span>(<span class="ident">Arc::new</span>(<span class="ident">LagoonRuntime::default</span>()));
+
+          <span class="comment">// select runtime automatically based on the spec name of the client</span>
+          <span class="kw">let</span> <span class="ident">runtime_version</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">offline</span>().<span class="ident">runtime_version</span>();
+          <span class="kw">let</span> <span class="ident">default_runtime</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">spec_name</span>) <span class="op">=</span> <span class="ident">runtime_version</span>.<span class="ident">other</span>.<span class="ident">get</span>(<span class="string">&quot;specName&quot;</span>) {
+            <span class="ident">spec_name</span>.<span class="ident">as_str</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">spec_name</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">spec_name</span> {
+              <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tidechain-native&quot;</span>)]</span>
+              <span class="string">&quot;tidechain&quot;</span> =&gt; <span class="ident">TidefiRuntime::Tidechain</span>(<span class="ident">Arc::new</span>(<span class="ident">TidechainRuntime::default</span>())),
+              <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;lagoon-native&quot;</span>)]</span>
+              <span class="string">&quot;lagoon&quot;</span> =&gt; <span class="ident">TidefiRuntime::Lagoon</span>(<span class="ident">Arc::new</span>(<span class="ident">LagoonRuntime::default</span>())),
+              <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;No runtime available&quot;</span>),
+            })
+            .<span class="ident">unwrap_or</span>(<span class="ident">fallback_runtime</span>)
+          } <span class="kw">else</span> {
+            <span class="ident">fallback_runtime</span>
+          };
 
           <span class="kw">let</span> <span class="ident">runtime_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">runtime</span> {
             <span class="prelude-val">Some</span>(<span class="ident">runtime</span>) =&gt; <span class="ident">runtime</span>,
-            <span class="prelude-val">None</span> =&gt; {
-              <span class="kw">if</span> <span class="self">self</span>.<span class="ident">rpc_url</span> <span class="op">==</span> <span class="string">&quot;wss://rpc.tidefi.io:443&quot;</span> {
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;lagoon-native&quot;</span>)]</span>
-                <span class="kw">let</span> <span class="ident">default_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Lagoon</span>(<span class="ident">Arc::new</span>(<span class="ident">LagoonRuntime::default</span>()));
-
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tidechain-native&quot;</span>)]</span>
-                <span class="kw">let</span> <span class="ident">default_runtime</span> <span class="op">=</span> <span class="ident">TidefiRuntime::Tidechain</span>(<span class="ident">Arc::new</span>(<span class="ident">TidechainRuntime::default</span>()));
-
-                <span class="ident">default_runtime</span>
-              } <span class="kw">else</span> {
-                <span class="ident">default_runtime</span>
-              }
-            }
+            <span class="prelude-val">None</span> =&gt; <span class="ident">default_runtime</span>,
           };
 
-          <span class="macro">log::debug!</span>(<span class="string">&quot;Tidext Runtime: {}&quot;</span>, <span class="ident">runtime_type</span>);
+          <span class="macro">log::debug!</span>(<span class="string">&quot;selected runtime: {}&quot;</span>, <span class="ident">runtime_type</span>);
 
           <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">Client</span> {
             <span class="ident">signer</span>: <span class="self">self</span>.<span class="ident">signer</span>,
