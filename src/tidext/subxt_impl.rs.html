@@ -429,6 +429,8 @@
 <span id="424">424</span>
 <span id="425">425</span>
 <span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2022 Semantic Network Ltd.</span>
 <span class="comment">// This file is part of tidext.</span>
 
@@ -844,12 +846,14 @@
   <span class="ident">Controller</span>,
 }
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;lagoon-native&quot;</span>)]</span>
 <span class="macro">with_config!</span> {
   <span class="ident">tidechain</span>,
   <span class="ident">tidechain_runtime</span>,
   <span class="string">&quot;../artifacts/tidechain_metadata.scale&quot;</span>
 }
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tidechain-native&quot;</span>)]</span>
 <span class="macro">with_config!</span> {
   <span class="ident">lagoon</span>,
   <span class="ident">lagoon_runtime</span>,
