@@ -111,7 +111,7 @@ impl TestNodeProcessBuilder {
     cmd
       .env("RUST_LOG", "error")
       .arg("--chain")
-      .arg(self.chain.clone().unwrap_or("lagoon-dev".into()))
+      .arg(self.chain.clone().unwrap_or_else(|| "lagoon-dev".into()))
       .arg("--tmp");
 
     if let Some(authority) = self.authority {

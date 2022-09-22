@@ -25,7 +25,7 @@ async fn ss58_tidechain() -> Result<(), Error> {
   let alice =
     TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)?;
   let mut client = cxt.node_proc.client().clone();
-  client.set_signer(Some(alice.clone()));
+  client.set_signer(Some(alice));
 
   assert_eq!(client.ss58_prefix(), 7007);
   assert_eq!(
@@ -44,7 +44,7 @@ async fn ss58_lagoon() -> Result<(), Error> {
   let alice =
     TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)?;
   let mut client = cxt.node_proc.client().clone();
-  client.set_signer(Some(alice.clone()));
+  client.set_signer(Some(alice));
 
   assert_eq!(client.ss58_prefix(), 42);
   assert_eq!(
