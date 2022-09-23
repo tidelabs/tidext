@@ -78,7 +78,7 @@
 //! Convert the client to a runtime api wrapper for custom runtime access
 //!
 //! The [`subxt`] proc macro will provide methods to submit extrinsics and read storage
-//! specific to the Tidechain [`runtime`]
+//! specific to the Tidechain
 //!
 //! ```no_run
 //! use tidext::ClientBuilder;
@@ -87,37 +87,34 @@
 //! let runtime = client.runtime();
 //! let tides = runtime.storage().balances().total_issuance(None).await?;
 //! ```
-//! [`runtime`]: TidechainRuntimeApi
 
 pub use crate::{
   client::{Client, ClientBuilder},
   error::Error,
 };
 pub use keyring::*;
-use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
 pub use parity_scale_codec::{Decode, Encode};
-use primitives::{
-  AccountId, Balance, BalanceInfo, BlockNumber, CurrencyBalance, CurrencyId, CurrencyMetadata,
-  EraIndex, Hash, Stake, SwapType,
+
+pub use sp_runtime::{MultiAddress, Permill};
+pub use subxt::{tx::Signer, Error as SubstrateSubxtError};
+pub use subxt_impl::{
+  OracleCall, QuorumCall, RewardDestination, StakingCall, TidechainCall, TidechainConfig,
+  TidefiCall, TidefiRuntime,
 };
-use sp_runtime::MultiAddress;
-pub use sp_runtime::Permill;
-use std::sync::Arc;
-pub use subxt::{extrinsic::Signer, Error as SubstrateSubxtError};
-use subxt::{
-  rpc::{rpc_params, ClientT},
-  PolkadotExtrinsicParams,
-};
-pub use subxt_impl::{tidechain, TidechainConfig};
-use tidechain::runtime_types::pallet_staking::RewardDestination;
 pub use tidefi_primitives as primitives;
-use tidext_macro::tidext;
+
+#[cfg(feature = "lagoon-native")]
+pub use subxt_impl::{lagoon, LagoonRuntime};
+#[cfg(feature = "tidechain-native")]
+pub use subxt_impl::{tidechain, TidechainRuntime};
+
 pub use traits::*;
 pub use utils::*;
 
 #[macro_use]
 extern crate log;
 
+mod client;
 mod error;
 mod keyring;
 mod subxt_impl;
@@ -127,264 +124,3 @@ mod utils;
 /// Test utils
 #[cfg(feature = "test")]
 pub mod test_utils;
-
-/// Tidechain runtime API generated from scale encoding file
-pub type TidechainRuntimeApi =
-  tidechain::RuntimeApi<TidechainConfig, PolkadotExtrinsicParams<TidechainConfig>>;
-
-pub use crate::tidechain::runtime_types::{
-  lagoon_runtime::Call as TidechainCall, pallet_oracle::pallet::Call as OracleCall,
-  pallet_quorum::pallet::Call as QuorumCall, pallet_tidefi::pallet::Call as TidefiCall,
-  pallet_tidefi_stake::pallet::Call as TidefiStakingCall,
-};
-
-#[tidext]
-mod client {
-  /// Tidechain client
-  #[tidext::client]
-  pub struct Client {
-    pub runtime_api: Arc<TidechainRuntimeApi>,
-    pub signer: Option<TidefiKeyring>,
-  }
-
-  // Automatic implementation of subxt functions, because we are lazy.
-  #[tidext::subxt]
-  trait ClientSubxt {
-    /// Transfer tokens
-    #[tidext::pallet = "tidefi"]
-    fn transfer(&self, destination_id: AccountId, currency_id: CurrencyId, amount: Balance);
-
-    /// Submit a new swap request on-chain
-    #[tidext::pallet = "tidefi"]
-    fn swap(
-      &self,
-      currency_id_from: CurrencyId,
-      amount_from: Balance,
-      currency_id_to: CurrencyId,
-      amount_to: Balance,
-      swap_type: SwapType,
-      slippage_tolerance: Option<Permill>,
-    );
-
-    /// Cancel swap for the current signer
-    #[tidext::pallet = "tidefi"]
-    fn cancel_swap(&self, request_id: Hash);
-
-    /// Request withdrawal for the current signer
-    #[tidext::pallet = "tidefi"]
-    fn withdrawal(&self, currency_id: CurrencyId, amount: Balance, external_address: Vec<u8>);
-
-    /// Declare no desire to either validate or nominate
-    #[tidext::pallet = "staking"]
-    fn chill(&self);
-
-    /// Nominate validators
-    #[tidext::pallet = "staking"]
-    #[tidext::substitute_params = (
-      value.iter().map(|v| MultiAddress::Id(v.clone())).collect(),
-    )]
-    fn nominate(&self, value: Vec<AccountId>);
-
-    /// Bond TDFY tokens
-    /// Take the signer account as a stash and lock up `value` of its balance. `controller` will
-    /// be the account that controls it
-    #[tidext::pallet = "staking"]
-    #[tidext::substitute_params = (
-      MultiAddress::Id(controller),
-      value,
-      RewardDestination::Controller
-    )]
-    fn bond(&self, controller: AccountId, value: Balance);
-
-    /// Bond some extra amount
-    #[tidext::pallet = "staking"]
-    fn bond_extra(&self, value: Balance);
-
-    /// Schedule a portion of the stash to be unlocked ready for transfer out after the bond
-    #[tidext::pallet = "staking"]
-    fn unbond(&self, amount: Balance);
-
-    /// Remove any unlocked chunks from the unlocking queue from our management
-    #[tidext::pallet = "staking"]
-    fn withdraw_unbonded(&self, num_slashing_spans: u32);
-
-    /// Stake token for the current signer
-    #[tidext::pallet = "tidefi_staking"]
-    fn stake(&self, currency_id: CurrencyId, amount: Balance, duration: u32);
-
-    /// Unstake token for the current signer
-    #[tidext::pallet = "tidefi_staking"]
-    fn unstake(&self, stake_id: Hash, force_unstake: bool);
-
-    /// Return a list of all assets registered on-chain
-    #[tidext::pallet = "tidefi"]
-    #[tidext::rpc = "getAssets"]
-    fn all_assets(&self) -> Result<Vec<(CurrencyId, CurrencyMetadata<Vec<u8>>)>, Error>;
-
-    /// Submit signed extrinsic via RPC
-    #[tidext::pallet = "author"]
-    #[tidext::rpc = "submitExtrinsic"]
-    fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<Hash, Error>;
-
-    /// Validate node connection.
-    /// You should call this function every 20 seconds to keep the connection alive.
-    #[tidext::pallet = "system"]
-    #[tidext::rpc = "health"]
-    fn system_health(&self) -> Result<NodeHealth, Error>;
-
-    /// Get the swap fee
-    /// If you are a market maker, you should use [`swap_fee_market_maker`] as a reference.
-    #[tidext::pallet = "fees"]
-    #[tidext::consts = "fee_amount"]
-    fn swap_fee(&self) -> Result<Permill, Error>;
-
-    /// Get the market maker swap fee
-    #[tidext::pallet = "fees"]
-    #[tidext::consts = "market_maker_fee_amount"]
-    fn swap_fee_market_maker(&self) -> Result<Permill, Error>;
-
-    /// Send a batch of dispatch calls for the current signer
-    #[tidext::pallet = "utility"]
-    #[tidext::substitute_fn = "batch"]
-    fn submit_batch(&self, calls: Vec<TidechainCall>);
-
-    /// Send a batch of dispatch calls for the current signer. Unlike `submit_batch` it allows error and won't interrupt.
-    #[tidext::pallet = "utility"]
-    fn force_batch(&self, calls: Vec<TidechainCall>);
-
-    /// Claim available sunrise rewards for the `era_index`.
-    #[tidext::pallet = "tidefi"]
-    fn claim_sunrise_rewards(&self, era_index: EraIndex);
-  }
-
-  // Custom implementation of our client
-  #[tidext::custom]
-  impl Client {
-    /// Set new signer for the client
-    pub fn set_signer(&mut self, signer: Option<TidefiKeyring>) {
-      self.signer = signer;
-    }
-
-    /// Return tidechain runtime
-    pub fn runtime(&self) -> &Arc<TidechainRuntimeApi> {
-      &self.runtime_api
-    }
-
-    /// Return account id for current signer
-    pub fn account_id(&self) -> Option<&AccountId> {
-      self.signer().map(|signer| signer.account_id()).ok()
-    }
-
-    /// Return signer if set
-    pub fn signer(&self) -> Result<&TidefiKeyring, Error> {
-      self.signer.as_ref().ok_or(Error::NoSignerAvailable)
-    }
-
-    /// Return a list of all stakes for the `AccountId` with optional `CurrencyId`
-    pub async fn stakes(
-      &self,
-      account_id: &AccountId,
-      currency_id: Option<CurrencyId>,
-    ) -> Result<Vec<(CurrencyId, Stake<Balance, BlockNumber>)>, Error> {
-      Ok(match currency_id {
-        None => query_storage!(self, tidefi_staking, account_stakes, account_id)?
-          .into_iter()
-          .map(|stake| (stake.currency_id, stake))
-          .collect(),
-        Some(currency_id) => query_storage!(self, tidefi_staking, account_stakes, account_id)?
-          .into_iter()
-          .filter(|stake| stake.currency_id == currency_id)
-          .map(|stake| (currency_id, stake))
-          .collect(),
-      })
-    }
-
-    /// Return available balance for the current signer
-    pub async fn balance(
-      &self,
-      account_id: &AccountId,
-      currency_id: CurrencyId,
-    ) -> Result<CurrencyBalance<Balance>, Error> {
-      make_rpc_call!(
-        self,
-        "tidefi_getAccountBalance",
-        CurrencyBalance<BalanceInfo>,
-        account_id,
-        currency_id
-      )
-      .map(|wrapped_balance| CurrencyBalance {
-        available: wrapped_balance.available.amount,
-        reserved: wrapped_balance.reserved.amount,
-      })
-      .map_err(Into::into)
-    }
-
-    /// Return available balances with all owned assets for the current signer
-    pub async fn balances(
-      &self,
-      account_id: &AccountId,
-    ) -> Result<Vec<(CurrencyId, CurrencyBalance<Balance>)>, Error> {
-      make_rpc_call!(
-        self,
-        "tidefi_getAccountBalances",
-        Vec<(CurrencyId, CurrencyBalance<BalanceInfo>)>,
-        account_id
-      )
-      .map(|wrapped_balances| {
-        wrapped_balances
-          .iter()
-          .map(|(currency_id, balance_info)| {
-            (
-              *currency_id,
-              CurrencyBalance {
-                available: balance_info.available.amount,
-                reserved: balance_info.reserved.amount,
-              },
-            )
-          })
-          .collect()
-      })
-      .map_err(Into::into)
-    }
-
-    /// Return the cost (gas fee) of an extrinsic on-chain (always in TDFY)
-    pub async fn extrinsic_cost(&self, extrinsic: String) -> Result<Balance, Error> {
-      let best_block = latest_block!(self);
-      Ok(
-        make_rpc_call!(
-          self,
-          "payment_queryInfo",
-          Option<RuntimeDispatchInfo<Balance>>,
-          extrinsic,
-          best_block
-        )?
-        .unwrap_or_default()
-        .partial_fee,
-      )
-    }
-
-    /// Return the total staked for the currency
-    pub async fn total_stake_for(&self, currency_id: CurrencyId) -> Result<Balance, Error> {
-      Ok(query_storage!(self, tidefi_staking, staking_pool, &currency_id)?.unwrap_or(0))
-    }
-
-    /// Return the total supply for the currency across all accounts
-    pub async fn total_supply_for(&self, currency_id: CurrencyId) -> Result<Balance, Error> {
-      match currency_id {
-        CurrencyId::Tdfy => query_storage!(self, balances, total_issuance).map_err(Into::into),
-        CurrencyId::Wrapped(wrapped_token) => {
-          Ok(query_storage!(self, assets, asset, &wrapped_token)?.map_or(0, |asset| asset.supply))
-        }
-      }
-    }
-
-    #[cfg(feature = "decoder")]
-    /// Extrinsic decoder
-    /// This function is unstable and may be updated anytime with breaking changes.
-    pub async fn decode_extrinsic(&self, data: &mut &[u8]) -> Result<subxt::Extrinsic, Error> {
-      let metadata = self.runtime().client.metadata();
-      let locked_metadata = metadata.read();
-      locked_metadata.decode_extrinsic(data).map_err(Into::into)
-    }
-  }
-}

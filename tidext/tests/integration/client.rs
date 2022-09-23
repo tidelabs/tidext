@@ -22,7 +22,6 @@ async fn rpc_subscribe_finalized_blocks() {
   let client = node_process.client();
   let mut blocks = client
     .runtime()
-    .client
     .rpc()
     .subscribe_finalized_blocks()
     .await

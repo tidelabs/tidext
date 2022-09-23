@@ -16,7 +16,8 @@
 
 use tidext::{
   primitives::{assets, CurrencyId, SwapType},
-  ClientBuilder, Permill, TidechainCall, TidefiCall, TidefiKeyring, TidefiStakingCall,
+  ClientBuilder, MultiAddress, Permill, RewardDestination, StakingCall, TidechainCall, TidefiCall,
+  TidefiKeyring,
 };
 // load sr25519 test account
 use sp_keyring::AccountKeyring;
@@ -46,7 +47,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   debug!("submitting batch calls...");
   client
     .submit_batch(vec![
-      TidechainCall::Tidefi(TidefiCall::swap {
+      TidechainCall::Tidefi(TidefiCall::Swap {
         currency_id_from: CurrencyId::Tdfy,
         amount_from: 1_000_000_000_000,
         currency_id_to: CurrencyId::Wrapped(assets::USDT),
@@ -54,7 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         swap_type: SwapType::Limit,
         slippage_tolerance: None,
       }),
-      TidechainCall::Tidefi(TidefiCall::swap {
+      TidechainCall::Tidefi(TidefiCall::Swap {
         currency_id_from: CurrencyId::Tdfy,
         amount_from: 2_000_000_000_000,
         currency_id_to: CurrencyId::Wrapped(assets::USDT),
@@ -63,10 +64,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // 0.1%
         slippage_tolerance: Some(Permill::from_rational(1_u32, 1000_u32)),
       }),
-      TidechainCall::TidefiStaking(TidefiStakingCall::stake {
-        currency_id: CurrencyId::Tdfy,
-        amount: 100_000_000_000_000,
-        duration: 150,
+      TidechainCall::Staking(StakingCall::Bond {
+        controller: MultiAddress::Id(AccountKeyring::Charlie.to_account_id()),
+        value: 1_000_000_000_000,
+        payee: RewardDestination::Controller,
       }),
     ])
     .await?;

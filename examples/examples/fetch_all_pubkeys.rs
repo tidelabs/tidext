@@ -15,7 +15,7 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use sp_keyring::AccountKeyring;
-use tidext::{primitives::assets, ClientBuilder, TidefiKeyring};
+use tidext::{primitives::assets, ClientBuilder, TidefiKeyring, TidefiRuntime};
 
 #[path = "../src/lib.rs"]
 mod helpers;
@@ -23,6 +23,22 @@ mod helpers;
 // logging
 #[macro_use]
 extern crate log;
+
+#[macro_export]
+macro_rules! with_tidext_runtime {
+	{
+		$self:ident,
+		$client:ident,
+		{
+			$( $code:tt )*
+		}
+	} => {
+		match $self.runtime_type() {
+			TidefiRuntime::Tidechain($client) => { $( $code )* },
+			TidefiRuntime::Lagoon($client) => { $( $code )* },
+		}
+	}
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -36,19 +52,36 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init client
   let client = ClientBuilder::new()
     .set_signer(signer)
-    .set_url("ws://127.0.0.1:9944")
+    .set_url("wss://rpc.staging.tidefi.io:443")
     .build()
     .await?;
 
-  let runtime = client.runtime();
+  let pubkeys = with_tidext_runtime! {
+    client,
+    current_runtime,
+    {
+      client
+      .runtime()
+      .storage()
+      .fetch(&current_runtime.storage().quorum().public_keys(assets::BTC), None)
+      .await?
+    }
+  }
+  .unwrap_or_default();
 
-  let pubkeys = runtime
-    .storage()
-    .quorum()
-    .public_keys(&assets::USDT, None)
-    .await?;
+  let members_count = with_tidext_runtime! {
+    client,
+    current_runtime,
+    {
+      client
+      .runtime()
+      .storage()
+      .fetch(&current_runtime.storage().quorum().counter_for_members(), None)
+      .await?
+    }
+  }
+  .unwrap_or_default();
 
-  let members_count = runtime.storage().quorum().counter_for_members(None).await?;
   if pubkeys.len() < members_count as usize {
     error!(
       "Not enough pubkeys available, {} member(s), and {} pubkeys available.",
@@ -59,9 +92,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
   for (account_id, pubkey) in pubkeys {
     debug!(
-      "USDT pubkey for {}: {}",
+      "USDT pubkey for {}: 0x{}",
       account_id,
-      String::from_utf8_lossy(&pubkey)
+      hex::encode(&pubkey[..])
     );
   }
 

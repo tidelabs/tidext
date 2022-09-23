@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::{Client, Error};
+use crate::{with_runtime, Client, Error};
 use async_trait::async_trait;
 use tidefi_primitives::{AccountId, AssetId, Balance, Hash, SwapConfirmation};
 
@@ -74,13 +74,17 @@ pub trait OracleExt {
 #[async_trait]
 impl OracleExt for Client {
   async fn update_assets_value(&self, values: Vec<(AssetId, Balance)>) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .update_assets_value(values)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().update_assets_value(values), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
@@ -89,68 +93,92 @@ impl OracleExt for Client {
     request_id: Hash,
     market_makers: Vec<SwapConfirmation>,
   ) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .confirm_swap(request_id, market_makers)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().confirm_swap(request_id, market_makers), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn update_status(&self, enabled: bool) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .set_status(enabled)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().set_status(enabled), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn update_account_id(&self, account_id: &AccountId) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .set_account_id(account_id.clone())?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().set_account_id(account_id.clone()), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn cancel_swap(&self, request_id: Hash) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .cancel_swap(request_id)?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().cancel_swap(request_id), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn add_market_maker(&self, account_id: &AccountId) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .add_market_maker(account_id.clone())?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().add_market_maker(account_id.clone()), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 
   async fn remove_market_maker(&self, account_id: &AccountId) -> Result<(), Error> {
-    self
-      .runtime()
-      .tx()
-      .oracle()
-      .remove_market_maker(account_id.clone())?
-      .sign_and_submit_default(self.signer()?)
-      .await?;
+    with_runtime! {
+      self,
+      current_runtime,
+      {
+        self
+        .runtime()
+        .tx()
+        .sign_and_submit_default(&current_runtime.tx().oracle().remove_market_maker(account_id.clone()), self.signer()?)
+        .await?
+      }
+    };
     Ok(())
   }
 }

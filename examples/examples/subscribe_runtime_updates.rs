@@ -42,7 +42,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
   // Start a new tokio task to watch the runtime updates while
   // utilizing the API for other use cases.
-  let update_client = client.runtime().client.updates();
+  let update_client = client.runtime().subscribe_to_updates();
   tokio::spawn(async move {
     let result = update_client.perform_runtime_updates().await;
     if let Err(err) = result {
@@ -54,7 +54,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   for _ in 0..10 {
     client
       .transfer(
-        AccountKeyring::Bob.to_account_id().into(),
+        AccountKeyring::Bob.to_account_id(),
         CurrencyId::Tdfy,
         1_000_000_000_000,
       )

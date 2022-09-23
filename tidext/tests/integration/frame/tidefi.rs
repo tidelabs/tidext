@@ -68,5 +68,6 @@ async fn tx_basic_transfer() -> Result<(), Error> {
   assert!(charlie_pre - transfer_amount >= charlie_post);
   // initial deposit is 1 TDFY
   assert_eq!(alice_pre + transfer_amount - 1_000_000_000_000, alice_post);
+
   Ok(())
 }
