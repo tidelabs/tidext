@@ -13,6 +13,7 @@ zeroize = "1.5"
 hex = "0.4"
 sp-core = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
 iota-crypto = { git = "https://github.com/tidelabs/crypto.rs", branch = "dev", features = [ "hmac", "sha", "pbkdf" ] }
+rust-argon2 = { version = "=1.0.0" }
 # Primitives
 tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "dev" }
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix

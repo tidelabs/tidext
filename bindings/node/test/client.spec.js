@@ -2,7 +2,7 @@ const { Builder } = require('..')
 
 async function getClient() {
   if (process.env.SUBSTRATE_URL && process.env.STRONGHOLD_PATH && process.env.STRONGHOLD_PASSWORD) {
-    const builder = new Builder(process.env.SUBSTRATE_URL, [], process.env.STRONGHOLD_PATH, process.env.STRONGHOLD_PASSWORD)
+    const builder = new Builder(process.env.SUBSTRATE_URL, Array.from(new TextEncoder().encode('TIDEFI')), process.env.STRONGHOLD_PATH, process.env.STRONGHOLD_PASSWORD)
     const client = await builder.build()
     return client
   }
