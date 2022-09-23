@@ -35,6 +35,8 @@ mod wrapper;
 
 const SECRET_VAULT_PATH: &str = "TIDEFI";
 const SR25519_KEYPAIR_RECORD_PATH: &str = "SR25519_KEYPAIR";
+const SECRET_KEY_FILE_EXTENSION: &str = "secret-key";
+const SECRET_KEY_LENGTH: usize = 128;
 
 macro_rules! python_future {
   ($py: ident, $fut: expr) => {{
@@ -66,22 +68,24 @@ fn to_python_error(error: Error) -> PyErr {
   }
 }
 
-// TODO: Use Argon2 with a stronger salt and more rounds or use the Stronghold KeyProvider directly.
-fn password_to_encryption_key(mut password: Vec<u8>) -> [u8; 32] {
-  let mut dk = [0; 64];
-  // safe to unwrap (rounds > 0)
-  crypto::keys::pbkdf::PBKDF2_HMAC_SHA512(&password, b"TIDEFI", 256, &mut dk).unwrap();
+fn hash_password(mut password: Vec<u8>, mut secret_key: Vec<u8>) -> Vec<u8> {
+  let config = argon2::Config {
+    lanes: 2,
+    mem_cost: 50_000,
+    time_cost: 30,
+    thread_mode: argon2::ThreadMode::from_threads(2),
+    variant: argon2::Variant::Argon2id,
+    ..Default::default()
+  };
+
+  let key = argon2::hash_raw(password.as_ref(), secret_key.as_ref(), &config)
+    .expect("failed to hash password");
+
   password.zeroize();
-  let key: [u8; 32] = dk[0..32][..].try_into().unwrap();
+  secret_key.zeroize();
+
   key
 }
-
-// fn stronghold_response_to_result<T>(status: ResultMessage<T>) -> std::result::Result<T, String> {
-//   match status {
-//     ResultMessage::Ok(v) => Ok(v),
-//     ResultMessage::Error(e) => Err(e),
-//   }
-// }
 
 #[pyclass]
 pub struct Currency {
@@ -117,18 +121,11 @@ impl Builder {
     let stronghold_path = self.snapshot_path.clone().into();
     let client_path = self.client_path.clone();
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
-    let mut password = password_to_encryption_key(self.password.as_bytes().to_vec()).to_vec();
+    let password = self.password.clone();
     pyo3_asyncio::tokio::future_into_py(py, async move {
       let client = try_build(&url, stronghold_path, client_path, location, &password)
         .await
-        .map(|client| {
-          password.zeroize();
-          client
-        })
-        .map_err(|e| {
-          password.zeroize();
-          to_python_error(e)
-        })?;
+        .map_err(to_python_error)?;
       Python::with_gil(move |py| Py::new(py, client))
     })
   }
@@ -139,26 +136,38 @@ async fn try_build(
   stronghold_path: PathBuf,
   client_path: Vec<u8>,
   location: Location,
-  password: &Vec<u8>,
+  password: &str,
 ) -> Result<Client, Error> {
+  let secret_key_path = stronghold_path
+    .as_path()
+    .with_extension(SECRET_KEY_FILE_EXTENSION);
+
   let builder = SubstrateClientBuilder::new()
     .set_signer(if stronghold_path.exists() {
+      let secret_key = std::fs::read(secret_key_path)?;
       TidefiKeyring::try_from_stronghold_path(
         client_path.clone(),
         &stronghold_path,
         Some(location),
-        Some(&password),
+        Some(hash_password(password.as_bytes().to_vec(), secret_key)),
       )?
     } else {
+      let mut secret_key = [0u8; SECRET_KEY_LENGTH];
+      crypto::utils::rand::fill(&mut secret_key).map_err(|e| Error::Other(e.to_string()))?;
+
       let stronghold = init_stronghold_from_seed(client_path.clone(), &location, None, None)?;
 
       let snapshot_path = SnapshotPath::named(stronghold_path);
-      let key_provider = KeyProvider::try_from(password.clone()).map_err(|e| {
+      let key_provider = KeyProvider::try_from(hash_password(
+        password.as_bytes().to_vec(),
+        secret_key.to_vec(),
+      ))
+      .map_err(|e| {
         ClientError::Provider(format!("Couldn't build a key from the password: {:?}", e))
       })?;
 
-      // TODO: use `commit` and store keyprovider in snapshot state.
       stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
+      std::fs::write(secret_key_path, &secret_key)?;
 
       TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))?
     })
