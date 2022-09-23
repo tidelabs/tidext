@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use pyo3::prelude::*;
+use pyo3::{exceptions::PyRuntimeError, prelude::*};
 use tidefi_primitives::{
-  CurrencyId as PrimitiveCurrencyId, CurrencyMetadata as PrimitiveCurrencyMetadata,
+  CurrencyId as PrimitiveCurrencyId, CurrencyMetadata as PrimitiveCurrencyMetadata, Hash,
   SwapType as PrimitiveSwapType,
 };
 use tidext::NodeHealth as PrimitiveNodeHealth;
@@ -126,4 +126,24 @@ impl From<SwapType> for PrimitiveSwapType {
   fn from(swap_type: SwapType) -> Self {
     swap_type.value
   }
+}
+
+pub fn to_hash(hex: String) -> PyResult<Hash> {
+  let hex = if let Some(hex) = hex.strip_prefix("0x") {
+    hex
+  } else {
+    hex.as_str()
+  };
+  let b = hex::decode(&hex)
+    .map_err(|e| PyRuntimeError::new_err(format!("invalid hash, must be a hex string: {e}")))?;
+
+  let hash: [u8; 32] = b
+    .try_into()
+    .map_err(|_| PyRuntimeError::new_err("hash must represent 32 bytes"))?;
+
+  Ok(sp_core::H256(hash))
+}
+
+pub fn hash_to_string(hash: Hash) -> String {
+  hex::encode(hash.0)
 }

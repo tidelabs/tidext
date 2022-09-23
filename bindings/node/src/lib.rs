@@ -203,12 +203,12 @@ impl Client {
   }
 
   #[napi]
-  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<()> {
+  pub async fn submit_signed_extrinsic(&self, extrinsic: String) -> Result<String> {
     self
       .inner
       .submit_signed_extrinsic(extrinsic)
       .await
-      .map(|_| ())
+      .map(wrapper::hash_to_string)
       .map_err(err_mapper)
   }
 
@@ -263,6 +263,15 @@ impl Client {
         swap_type.into(),
         Some(Permill::from_rational(slippage_tolerance, 1_000_000)),
       )
+      .await
+      .map_err(err_mapper)
+  }
+
+  #[napi]
+  pub async fn cancel_swap_extrinsic(&self, request_id: String) -> Result<String> {
+    self
+      .inner
+      .cancel_swap_extrinsic(wrapper::to_hash(request_id)?)
       .await
       .map_err(err_mapper)
   }
