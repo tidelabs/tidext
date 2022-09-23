@@ -90,16 +90,14 @@ impl Builder {
     let stronghold_path: PathBuf = self.snapshot_path.clone().into();
     let location = Location::generic(SECRET_VAULT_PATH, SR25519_KEYPAIR_RECORD_PATH);
 
-    let r = try_build(
+    try_build(
       &self.url,
       self.client_path.clone(),
       stronghold_path,
       location,
       &self.password,
     )
-    .await;
-
-    r
+    .await
   }
 }
 
