@@ -176,11 +176,7 @@ impl Client {
 
   #[napi]
   pub async fn get_account_id_ss58(&self) -> String {
-    self
-      .inner
-      .account_id()
-      .expect("No signer found")
-      .to_string()
+    self.inner.account_id_ss58().expect("No signer found")
   }
 
   #[napi]
