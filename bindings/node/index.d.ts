@@ -58,6 +58,7 @@ export class Client {
   stakeExtrinsic(tokenId: CurrencyId, amount: BalanceInfo, duration: number): Promise<string>
   swapExtrinsic(fromTokenId: CurrencyId, toTokenId: CurrencyId, fromAmount: BalanceInfo, toAmount: BalanceInfo, swapType: SwapType, slippageTolerance: number): Promise<string>
   cancelSwapExtrinsic(requestId: string): Promise<string>
+  batchCancelSwapsExtrinsic(requestIds: Array<string>): Promise<string>
   transferExtrinsic(tokenId: CurrencyId, amount: BalanceInfo, destination: Buffer): Promise<string>
   balance(tokenId: CurrencyId, accountId?: Buffer | undefined | null): Promise<CurrencyBalance>
   totalStakeFor(currencyId: CurrencyId): Promise<BalanceInfo>

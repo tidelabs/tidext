@@ -292,7 +292,7 @@ impl Client {
     )
   }
 
-  fn batch_cancel_swaps<'p>(
+  fn batch_cancel_swaps_extrinsic<'p>(
     &self,
     py: Python<'p>,
     request_ids: Vec<String>,

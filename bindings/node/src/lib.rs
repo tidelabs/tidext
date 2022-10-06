@@ -285,7 +285,7 @@ impl Client {
   }
 
   #[napi]
-  pub async fn batch_cancel_swaps(&self, request_ids: Vec<String>) -> Result<String> {
+  pub async fn batch_cancel_swaps_extrinsic(&self, request_ids: Vec<String>) -> Result<String> {
     let mut calls: Vec<TidechainCall> = vec![];
 
     for rid in request_ids.into_iter() {
