@@ -27,7 +27,7 @@ use tidext::{
   primitives::AccountId,
   stronghold::{ClientError, KeyProvider, Location, SnapshotPath},
   Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Error, Permill,
-  TidefiKeyring,
+  TidechainCall, TidefiCall, TidefiKeyring,
 };
 use zeroize::Zeroize;
 
@@ -290,6 +290,23 @@ impl Client {
       py,
       client.cancel_swap_extrinsic(wrapper::to_hash(request_id)?)
     )
+  }
+
+  fn batch_cancel_swaps<'p>(
+    &self,
+    py: Python<'p>,
+    request_ids: Vec<String>,
+  ) -> PyResult<&'p PyAny> {
+    let mut calls: Vec<TidechainCall> = vec![];
+    let client = self.inner.clone();
+
+    for rid in request_ids.into_iter() {
+      calls.push(TidechainCall::Tidefi(TidefiCall::CancelSwap {
+        request_id: wrapper::to_hash(rid)?,
+      }));
+    }
+
+    python_future!(py, client.force_batch_extrinsic(calls))
   }
 
   fn transfer_extrinsic<'p>(

@@ -24,7 +24,8 @@ use tidext::{
   init_stronghold_from_seed,
   primitives::AccountId,
   stronghold::{KeyProvider, Location, SnapshotPath},
-  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill, TidefiKeyring,
+  Client as SubstrateClient, ClientBuilder as SubstrateClientBuilder, Permill, TidechainCall,
+  TidefiCall, TidefiKeyring,
 };
 use zeroize::Zeroize;
 
@@ -279,6 +280,23 @@ impl Client {
     self
       .inner
       .cancel_swap_extrinsic(wrapper::to_hash(request_id)?)
+      .await
+      .map_err(err_mapper)
+  }
+
+  #[napi]
+  pub async fn batch_cancel_swaps(&self, request_ids: Vec<String>) -> Result<String> {
+    let mut calls: Vec<TidechainCall> = vec![];
+
+    for rid in request_ids.into_iter() {
+      calls.push(TidechainCall::Tidefi(TidefiCall::CancelSwap {
+        request_id: wrapper::to_hash(rid)?,
+      }));
+    }
+
+    self
+      .inner
+      .force_batch_extrinsic(calls)
       .await
       .map_err(err_mapper)
   }
