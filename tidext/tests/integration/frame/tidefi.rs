@@ -47,7 +47,7 @@ async fn tx_basic_transfer() -> Result<(), Error> {
 
   assert_ok!(
     client
-      .transfer_and_wait_for_finalized_success(
+      .transfer_and_wait_for_in_block_success(
         alice.account_id().clone(),
         Asset::Tdfy.currency_id(),
         transfer_amount,
