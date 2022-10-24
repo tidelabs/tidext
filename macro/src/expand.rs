@@ -47,6 +47,8 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
     let args = &attr.input_typed();
     let function_and_wait_for_finalized_success =
       format_ident!("{}_and_wait_for_finalized_success", trait_function_name);
+    let function_and_wait_for_in_block =
+      format_ident!("{}_and_wait_for_in_block", trait_function_name);
     let function_extrinsic = format_ident!("{}_extrinsic", trait_function_name);
     let function_doc = &attr.docs;
 
@@ -153,6 +155,32 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
             }
           }
           .wait_for_finalized_success()
+          .await?;
+
+          Ok(())
+        }
+
+
+        #( #[doc = #function_doc] )*
+        ///
+        #[doc = "This function wait for the extrinsic to be included in a block and may take up to 6 seconds to complete"]
+        pub async fn #function_and_wait_for_in_block(
+          &self,
+          #(#args,)*
+        ) -> Result<(), Error> {
+
+          with_runtime! {
+            self,
+            current_runtime,
+            {
+              self
+              .runtime()
+              .tx()
+              .sign_and_submit_then_watch_default(&current_runtime.tx().#pallet_name().#function_name(#all_params_token), self.signer()?)
+              .await?
+            }
+          }
+          .wait_for_in_block()
           .await?;
 
           Ok(())
