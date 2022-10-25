@@ -252,7 +252,7 @@ mod client {
               .rpc()
               .block(Some(block_hash))
               .await?
-              .ok_or(Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
+              .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
 
             let extrinsic_idx = block
               .block
@@ -262,7 +262,7 @@ mod client {
                 let hash = blake2_256(&ext.encode());
                 hash == ext_hash
               })
-              .ok_or(Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
+              .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
 
             let events = self.runtime().events().at(Some(block_hash)).await?;
             for ev in events.iter().filter(|ev| {
