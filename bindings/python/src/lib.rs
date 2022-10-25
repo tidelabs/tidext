@@ -167,7 +167,7 @@ async fn try_build(
       })?;
 
       stronghold.commit_with_keyprovider(&snapshot_path, &key_provider)?;
-      std::fs::write(secret_key_path, &secret_key)?;
+      std::fs::write(secret_key_path, secret_key)?;
 
       TidefiKeyring::try_from_stronghold_instance(client_path, stronghold, Some(location))?
     })

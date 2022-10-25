@@ -132,7 +132,7 @@ pub fn to_hash(hex: String) -> Result<Hash> {
     hex.as_str()
   };
 
-  let b = hex::decode(&hex).map_err(|e| {
+  let b = hex::decode(hex).map_err(|e| {
     Error::new(
       Status::InvalidArg,
       format!("invalid hash, must be a hex string: {e}"),

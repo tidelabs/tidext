@@ -134,7 +134,7 @@ pub fn to_hash(hex: String) -> PyResult<Hash> {
   } else {
     hex.as_str()
   };
-  let b = hex::decode(&hex)
+  let b = hex::decode(hex)
     .map_err(|e| PyRuntimeError::new_err(format!("invalid hash, must be a hex string: {e}")))?;
 
   let hash: [u8; 32] = b
