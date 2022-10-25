@@ -51,6 +51,8 @@ pub enum Error {
   ChannelClosed,
   #[error("No signer available, use `set_signer()` first")]
   NoSignerAvailable,
+  #[error("Unable to decode extrinsic, make sure this is hex encoded")]
+  InvalidExtrinsic,
 }
 
 impl From<&str> for Error {

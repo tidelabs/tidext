@@ -20,11 +20,18 @@ use crate::{
   TidefiRuntime,
 };
 use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
+use parity_scale_codec::Encode;
 use sp_runtime::MultiAddress;
 use std::sync::Arc;
 use subxt::{
-  ext::sp_core::crypto::{Ss58AddressFormat, Ss58Codec},
-  rpc::rpc_params,
+  error::{DispatchError, TransactionError},
+  events::Phase,
+  ext::sp_core::{
+    blake2_256,
+    crypto::{Ss58AddressFormat, Ss58Codec},
+  },
+  rpc::{rpc_params, SubstrateTxStatus},
+  utils::Encoded,
 };
 use tidefi_primitives::{
   AccountId, Balance, BalanceInfo, BlockNumber, CurrencyBalance, CurrencyId, CurrencyMetadata,
@@ -212,6 +219,79 @@ mod client {
     /// Return signer if set
     pub fn signer(&self) -> Result<&TidefiKeyring, Error> {
       self.signer.as_ref().ok_or(Error::NoSignerAvailable)
+    }
+
+    /// Submit signed extrinsic via RPC and wait for inclusing in a block and may take up to 6 seconds to complete
+    pub async fn submit_signed_extrinsic_and_wait_for_in_block_success(
+      &self,
+      extrinsic: String,
+    ) -> Result<Hash, Error> {
+      // rebuild the extrinsic bytes from the hex string
+      let ext_bytes = hex::decode(
+        extrinsic
+          .strip_prefix("0x")
+          .ok_or(Error::InvalidExtrinsic)?,
+      )
+      .map_err(|_| Error::InvalidExtrinsic)?;
+
+      // extrinsic hash
+      let ext_hash = blake2_256(&ext_bytes[..]);
+
+      // submit and watch for transaction progress.
+      let mut sub = self
+        .runtime()
+        .rpc()
+        .watch_extrinsic(Encoded(ext_bytes))
+        .await?;
+
+      while let Some(status) = sub.next().await {
+        match status? {
+          SubstrateTxStatus::InBlock(block_hash) | SubstrateTxStatus::Finalized(block_hash) => {
+            let block = self
+              .runtime()
+              .rpc()
+              .block(Some(block_hash))
+              .await?
+              .ok_or(Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
+
+            let extrinsic_idx = block
+              .block
+              .extrinsics
+              .iter()
+              .position(|ext| {
+                let hash = blake2_256(&ext.encode());
+                hash == ext_hash
+              })
+              .ok_or(Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
+
+            let events = self.runtime().events().at(Some(block_hash)).await?;
+            for ev in events.iter().filter(|ev| {
+              ev.as_ref()
+                .map(|ev| ev.phase() == Phase::ApplyExtrinsic(extrinsic_idx as u32))
+                .unwrap_or(true)
+            }) {
+              let ev = ev?;
+              // if we find an `ExtrinsicFailed` connected with the same extrinsic idx, we should throw the error
+              if ev.pallet_name() == "System" && ev.variant_name() == "ExtrinsicFailed" {
+                let dispatch_error =
+                  DispatchError::decode_from(ev.field_bytes(), &self.runtime().metadata());
+                return Err(Error::Substrate(dispatch_error.into()));
+              }
+            }
+
+            // close the loop
+            break;
+          }
+          SubstrateTxStatus::FinalityTimeout(_) => {
+            return Err(Error::Substrate(
+              TransactionError::FinalitySubscriptionTimeout.into(),
+            ))
+          }
+          _ => continue,
+        }
+      }
+
+      Ok(Hash::from(ext_hash))
     }
 
     /// Return a list of all stakes for the `AccountId` with optional `CurrencyId`
