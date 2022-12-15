@@ -138,6 +138,11 @@ mod client {
     #[tidext::rpc = "health"]
     fn system_health(&self) -> Result<NodeHealth, Error>;
 
+    /// Returns the base58-encoded PeerId of the node
+    #[tidext::pallet = "system"]
+    #[tidext::rpc = "localPeerId"]
+    fn system_peer_id(&self) -> Result<String, Error>;
+
     /// Get the swap fee
     /// If you are a market maker, you should use [`swap_fee_market_maker`] as a reference.
     #[tidext::pallet = "fees"]
