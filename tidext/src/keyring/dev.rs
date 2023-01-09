@@ -18,8 +18,10 @@
 
 use crate::{Error, TidechainConfig};
 pub use sp_keyring::AccountKeyring;
+use subxt::ext::sp_core::sr25519::Pair;
+
 use std::{fmt, sync::Arc};
-use subxt::{sp_core::sr25519::Pair, PairSigner};
+use subxt::tx::PairSigner;
 
 /// Pair of SR25519 keys for development.
 pub type TidefiPairSigner = PairSigner<TidechainConfig, Pair>;

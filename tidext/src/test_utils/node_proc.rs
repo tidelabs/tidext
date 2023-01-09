@@ -155,12 +155,18 @@ impl TestNodeProcessBuilder {
         MAX_ATTEMPTS
       );
 
+      #[cfg(feature = "keyring-stronghold")]
+      let keyring =
+        TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
+          .map_err(|err| err.to_string())?;
+
+      #[cfg(not(feature = "keyring-stronghold"))]
+      let keyring = TidefiKeyring::try_from_seed(AccountKeyring::Alice.to_seed())
+        .map_err(|err| err.to_string())?;
+
       // test keyring as well
       let result = ClientBuilder::new()
-        .set_signer(
-          TidefiKeyring::try_from_seed(client_path.clone(), AccountKeyring::Alice.to_seed(), None)
-            .map_err(|err| err.to_string())?,
-        )
+        .set_signer(keyring)
         .set_url(ws_url.clone())
         .build()
         .await;
