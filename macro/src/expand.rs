@@ -217,6 +217,7 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
     #client_mod_vis mod #client_mod {
       use super::*;
       use jsonrpsee::ws_client::WsClientBuilder;
+      use jsonrpsee::core::client::CertificateStore;
       use subxt::OnlineClient;
       use std::time::Duration;
 
@@ -265,8 +266,15 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
 
         /// Initialize a new [`Client`]
         pub async fn build(self) -> Result<Client, Error> {
+          #[cfg(feature = "android")]
+          let cert_store = CertificateStore::WebPki;
+          #[cfg(not(feature = "android"))]
+          let cert_store = CertificateStore::Native;
+
           let ws_client = WsClientBuilder::default()
             .max_notifs_per_subscription(4096)
+            .certificate_store(cert_store)
+
             .connection_timeout(Duration::from_secs(5))
             .build(&self.rpc_url)
             .await
