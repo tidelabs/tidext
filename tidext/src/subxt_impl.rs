@@ -44,6 +44,8 @@ macro_rules! with_config {
       use ::tidefi_primitives::CurrencyId;
       #[subxt(substitute_type = "tidefi_primitives::Mint")]
       use ::tidefi_primitives::Mint;
+      #[subxt(substitute_type = "tidefi_primitives::Swap")]
+      use ::tidefi_primitives::Swap;
       #[subxt(substitute_type = "tidefi_primitives::OracleImAlive")]
       use ::tidefi_primitives::OracleImAlive;
       #[subxt(substitute_type = "tidefi_primitives::ProposalType")]
@@ -65,6 +67,12 @@ macro_rules! with_config {
     impl From<TidechainCall> for $mod_name::runtime_types::$runtime_name::Call {
       fn from(current_call: TidechainCall) -> $mod_name::runtime_types::$runtime_name::Call {
         match current_call {
+          TidechainCall::Assets(tidefi_call) => {
+            $mod_name::runtime_types::$runtime_name::Call::Assets(tidefi_call.into())
+          }
+          TidechainCall::Balances(tidefi_call) => {
+            $mod_name::runtime_types::$runtime_name::Call::Balances(tidefi_call.into())
+          }
           TidechainCall::Tidefi(tidefi_call) => {
             $mod_name::runtime_types::$runtime_name::Call::Tidefi(tidefi_call.into())
           }
@@ -205,6 +213,26 @@ macro_rules! with_config {
       }
     }
 
+    impl From<AssetsCall> for $mod_name::runtime_types::pallet_assets::pallet::Call {
+      fn from(current_call: AssetsCall) -> $mod_name::runtime_types::pallet_assets::pallet::Call {
+        match current_call {
+          AssetsCall::Mint { id, beneficiary, amount } => {
+            $mod_name::runtime_types::pallet_assets::pallet::Call::mint { id, beneficiary: MultiAddress::Id(beneficiary), amount }
+          }
+        }
+      }
+    }
+
+    impl From<BalancesCall> for $mod_name::runtime_types::pallet_balances::pallet::Call {
+      fn from(current_call: BalancesCall) -> $mod_name::runtime_types::pallet_balances::pallet::Call {
+        match current_call {
+          BalancesCall::SetBalance { who, new_free, new_reserved } => {
+            $mod_name::runtime_types::pallet_balances::pallet::Call::set_balance { who: MultiAddress::Id(who), new_free, new_reserved }
+          }
+        }
+      }
+    }
+
     impl<AccountId> From<RewardDestination> for $mod_name::runtime_types::pallet_staking::RewardDestination<AccountId> {
       fn from(
         dest: RewardDestination,
@@ -216,7 +244,6 @@ macro_rules! with_config {
         }
       }
     }
-
   }
 }
 
@@ -319,6 +346,8 @@ impl Config for TidechainConfig {
 
 /// Simple batch calls
 pub enum TidechainCall {
+  Assets(AssetsCall),
+  Balances(BalancesCall),
   Tidefi(TidefiCall),
   Staking(StakingCall),
   Quorum(QuorumCall),
@@ -411,6 +440,22 @@ pub enum OracleCall {
 
 pub enum RewardDestination {
   Controller,
+}
+
+pub enum AssetsCall {
+  Mint {
+    id: u32,
+    beneficiary: AccountId,
+    amount: Balance,
+  },
+}
+
+pub enum BalancesCall {
+  SetBalance {
+    who: AccountId,
+    new_free: Balance,
+    new_reserved: Balance,
+  },
 }
 
 #[cfg(feature = "lagoon-native")]

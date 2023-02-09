@@ -25,3 +25,19 @@ pub fn init_logger() -> Result<(), Box<dyn std::error::Error>> {
     .init()?;
   Ok(())
 }
+
+#[macro_export]
+macro_rules! with_tidext_runtime {
+	{
+		$self:ident,
+		$client:ident,
+		{
+			$( $code:tt )*
+		}
+	} => {
+		match $self.runtime_type() {
+			tidext::TidefiRuntime::Tidechain($client) => { $( $code )* },
+			tidext::TidefiRuntime::Lagoon($client) => { $( $code )* },
+		}
+	}
+}

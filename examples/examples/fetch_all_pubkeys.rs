@@ -24,22 +24,6 @@ mod helpers;
 #[macro_use]
 extern crate log;
 
-#[macro_export]
-macro_rules! with_tidext_runtime {
-	{
-		$self:ident,
-		$client:ident,
-		{
-			$( $code:tt )*
-		}
-	} => {
-		match $self.runtime_type() {
-			TidefiRuntime::Tidechain($client) => { $( $code )* },
-			TidefiRuntime::Lagoon($client) => { $( $code )* },
-		}
-	}
-}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init logger
@@ -50,11 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init signer
   let signer = TidefiKeyring::try_from_seed(client_path, AccountKeyring::Alice.to_seed(), None)?;
   // init client
-  let client = ClientBuilder::new()
-    .set_signer(signer)
-    .set_url("wss://rpc.staging.tidefi.io:443")
-    .build()
-    .await?;
+  let client = ClientBuilder::new().set_signer(signer).build().await?;
 
   let pubkeys = with_tidext_runtime! {
     client,

@@ -98,8 +98,8 @@ pub use parity_scale_codec::{Decode, Encode};
 pub use sp_runtime::{MultiAddress, Permill};
 pub use subxt::{tx::Signer, Error as SubstrateSubxtError};
 pub use subxt_impl::{
-  OracleCall, QuorumCall, RewardDestination, StakingCall, TidechainCall, TidechainConfig,
-  TidefiCall, TidefiRuntime,
+  AssetsCall, BalancesCall, OracleCall, QuorumCall, RewardDestination, StakingCall, TidechainCall,
+  TidechainConfig, TidefiCall, TidefiRuntime,
 };
 pub use tidefi_primitives as primitives;
 

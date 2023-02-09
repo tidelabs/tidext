@@ -37,11 +37,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let signer = TidefiKeyring::try_from_seed(client_path, AccountKeyring::Charlie.to_seed(), None)?;
 
   // init client
-  let client = ClientBuilder::new()
-    .set_signer(signer)
-    .set_url("wss://rpc.tidefi.io:443")
-    .build()
-    .await?;
+  let client = ClientBuilder::new().set_signer(signer).build().await?;
 
   let swap_fee = client.account_id_ss58();
 
