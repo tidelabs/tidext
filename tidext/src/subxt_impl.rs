@@ -52,11 +52,11 @@ macro_rules! with_config {
       use ::tidefi_primitives::ProposalVotes;
       #[subxt(substitute_type = "tidefi_primitives::Stake")]
       use ::tidefi_primitives::Stake;
-      #[subxt(substitute_type = "tidefi_primitives::SwapConfirmation")]
+      #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapConfirmation")]
       use ::tidefi_primitives::SwapConfirmation;
-      #[subxt(substitute_type = "tidefi_primitives::SwapStatus")]
+      #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapStatus")]
       use ::tidefi_primitives::SwapStatus;
-      #[subxt(substitute_type = "tidefi_primitives::SwapType")]
+      #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapType")]
       use ::tidefi_primitives::SwapType;
       #[subxt(substitute_type = "tidefi_primitives::Withdrawal")]
       use ::tidefi_primitives::Withdrawal;
