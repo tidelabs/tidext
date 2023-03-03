@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NewSession","New session has happened. Note that the argument is the session index, not the block number as the type might suggest."]]});
+window.SIDEBAR_ITEMS = {"struct":[["NewSession","New session has happened. Note that the argument is the session index, not the block number as the type might suggest."]]};

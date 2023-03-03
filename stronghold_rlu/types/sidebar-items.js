@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Read","[`Read<T>`] provides immutable read access to the synchronized data via the current managing context."],["Write","[`Write<T>`] gives mutable access to synchronized value via the current managing context."]]});
+window.SIDEBAR_ITEMS = {"trait":[["Read","[`Read<T>`] provides immutable read access to the synchronized data via the current managing context."],["Write","[`Write<T>`] gives mutable access to synchronized value via the current managing context."]]};

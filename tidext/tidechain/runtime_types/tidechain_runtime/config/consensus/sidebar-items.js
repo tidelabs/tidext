@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NposCompactSolution16",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["NposCompactSolution16",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["StatusChanged",""],["UpdateCurrentBlock",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["StatusChanged",""],["UpdateCurrentBlock",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CheckWeight",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["CheckWeight",""]]};

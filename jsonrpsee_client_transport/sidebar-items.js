@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["ws","Websocket transport"]]});
+window.SIDEBAR_ITEMS = {"mod":[["ws","Websocket transport"]]};

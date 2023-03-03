@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["RuntimeVersion",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["RuntimeVersion",""]]};

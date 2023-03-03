@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["module",""]],"struct":[["VestingSchedule",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["module",""]],"struct":[["VestingSchedule",""]]};

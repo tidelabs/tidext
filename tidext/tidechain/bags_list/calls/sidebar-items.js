@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["PutInFrontOf",""],["Rebag",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["PutInFrontOf",""],["Rebag",""],["TransactionApi",""]]};

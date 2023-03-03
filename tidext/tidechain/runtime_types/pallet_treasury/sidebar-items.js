@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""]],"struct":[["Proposal",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["Proposal",""]]};

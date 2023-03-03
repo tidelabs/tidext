@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Claim",""],["ForceTransfer",""],["Free",""],["Freeze",""],["TransactionApi",""],["Transfer",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["Claim",""],["ForceTransfer",""],["Free",""],["Freeze",""],["TransactionApi",""],["Transfer",""]]};

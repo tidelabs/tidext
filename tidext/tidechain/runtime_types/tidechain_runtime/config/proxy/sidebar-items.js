@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["ProxyType",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["ProxyType",""]]};

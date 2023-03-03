@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""],["types",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""],["types",""]]};

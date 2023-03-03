@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["ciphers",""],["error",""],["hashes",""],["keys",""],["macs",""],["signatures",""],["utils",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["ciphers",""],["error",""],["hashes",""],["keys",""],["macs",""],["signatures",""],["utils",""]]};

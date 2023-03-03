@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""]],"struct":[["ActiveRecovery",""],["RecoveryConfig",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["ActiveRecovery",""],["RecoveryConfig",""]]};

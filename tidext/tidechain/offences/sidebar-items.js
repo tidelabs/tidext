@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["events",""],["storage",""]],"type":[["Event","Events type."]]});
+window.SIDEBAR_ITEMS = {"mod":[["events",""],["storage",""]],"type":[["Event","Events type."]]};

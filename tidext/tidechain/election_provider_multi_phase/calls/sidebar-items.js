@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["GovernanceFallback",""],["SetEmergencyElectionResult",""],["SetMinimumUntrustedScore",""],["Submit",""],["SubmitUnsigned",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["GovernanceFallback",""],["SetEmergencyElectionResult",""],["SetMinimumUntrustedScore",""],["Submit",""],["SubmitUnsigned",""],["TransactionApi",""]]};

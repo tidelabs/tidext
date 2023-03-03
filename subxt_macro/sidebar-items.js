@@ -1,1 +1,1 @@
-initSidebarItems({"attr":[["subxt",""]]});
+window.SIDEBAR_ITEMS = {"attr":[["subxt",""]]};

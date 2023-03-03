@@ -1,3 +1,3 @@
-(function() {var implementors = {};
-implementors["iota_stronghold"] = [{"text":"impl <a class=\"trait\" href=\"engine/vault/crypto_box/trait.BoxProvider.html\" title=\"trait engine::vault::crypto_box::BoxProvider\">BoxProvider</a> for <a class=\"struct\" href=\"iota_stronghold/internal/struct.Provider.html\" title=\"struct iota_stronghold::internal::Provider\">Provider</a>","synthetic":false,"types":["iota_stronghold::internal::provider::Provider"]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
+(function() {var implementors = {
+"iota_stronghold":[["impl <a class=\"trait\" href=\"engine/vault/crypto_box/trait.BoxProvider.html\" title=\"trait engine::vault::crypto_box::BoxProvider\">BoxProvider</a> for <a class=\"struct\" href=\"iota_stronghold/internal/struct.Provider.html\" title=\"struct iota_stronghold::internal::Provider\">Provider</a>"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

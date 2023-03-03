@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["PrivateKey",""]]});
+window.SIDEBAR_ITEMS = {"trait":[["PrivateKey",""]]};

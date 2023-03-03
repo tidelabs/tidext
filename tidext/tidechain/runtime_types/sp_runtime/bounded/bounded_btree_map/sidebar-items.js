@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["BoundedBTreeMap",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["BoundedBTreeMap",""]]};

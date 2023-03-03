@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["Aes256Gcm",""]]});
+window.SIDEBAR_ITEMS = {"type":[["Aes256Gcm",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""]],"struct":[["Announcement",""],["ProxyDefinition",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["Announcement",""],["ProxyDefinition",""]]};

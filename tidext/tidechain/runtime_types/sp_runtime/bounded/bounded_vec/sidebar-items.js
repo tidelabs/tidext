@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["BoundedVec",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["BoundedVec",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RawOrigin",""]],"mod":[["pallet",""]],"struct":[["Votes",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["RawOrigin",""]],"mod":[["pallet",""]],"struct":[["Votes",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["LookupError",""],["MaybeHashed",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["LookupError",""],["MaybeHashed",""]]};

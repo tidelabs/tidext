@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["aes_gcm",""],["aes_kw",""],["chacha",""],["traits",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["aes_gcm",""],["aes_kw",""],["chacha",""],["traits",""]]};

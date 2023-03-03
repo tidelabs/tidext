@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["digest",""],["era",""],["header",""],["unchecked_extrinsic",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["digest",""],["era",""],["header",""],["unchecked_extrinsic",""]]};

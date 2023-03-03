@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Call","Contains one variant per dispatchable that can be called by an extrinsic."]]});
+window.SIDEBAR_ITEMS = {"enum":[["Call","Contains one variant per dispatchable that can be called by an extrinsic."]]};

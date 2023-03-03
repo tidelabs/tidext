@@ -1,1 +1,1 @@
-initSidebarItems({"attr":[["tidext",""]]});
+window.SIDEBAR_ITEMS = {"attr":[["runtimes",""],["tidext",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["consensus",""],["proxy",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["consensus",""],["proxy",""]]};

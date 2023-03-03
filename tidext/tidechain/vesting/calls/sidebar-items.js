@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Claim",""],["ClaimFor",""],["TransactionApi",""],["UpdateVestingSchedules",""],["VestedTransfer",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["Claim",""],["ClaimFor",""],["TransactionApi",""],["UpdateVestingSchedules",""],["VestedTransfer",""]]};

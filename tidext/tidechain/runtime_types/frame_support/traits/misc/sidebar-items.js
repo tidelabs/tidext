@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["WrapperKeepOpaque",""],["WrapperOpaque",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["WrapperKeepOpaque",""],["WrapperOpaque",""]]};

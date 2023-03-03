@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AddMember",""],["ChangeKey",""],["ClearPrime",""],["RemoveMember",""],["ResetMembers",""],["SetPrime",""],["SwapMember",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["AddMember",""],["ChangeKey",""],["ClearPrime",""],["RemoveMember",""],["ResetMembers",""],["SetPrime",""],["SwapMember",""],["TransactionApi",""]]};

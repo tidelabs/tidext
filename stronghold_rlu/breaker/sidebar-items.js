@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["BusyBreakerError",""]],"struct":[["BusyBreaker","BusyBreaker"]]});
+window.SIDEBAR_ITEMS = {"enum":[["BusyBreakerError",""]],"struct":[["BusyBreaker","BusyBreaker"]]};

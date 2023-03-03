@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["app_sr25519",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["app_sr25519",""]]};

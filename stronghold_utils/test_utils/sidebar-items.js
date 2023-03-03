@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["corrupt",""],["corrupt_file",""],["corrupt_file_at",""]]});
+window.SIDEBAR_ITEMS = {"fn":[["corrupt",""],["corrupt_file",""],["corrupt_file_at",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CheckGenesis",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["CheckGenesis",""]]};

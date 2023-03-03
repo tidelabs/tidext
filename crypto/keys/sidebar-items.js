@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["bip39",""],["pbkdf",""],["slip10",""],["x25519",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["bip39",""],["pbkdf",""],["slip10",""],["x25519",""]]};

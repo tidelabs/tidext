@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Rebagged","Moved an account from one bag to another."],["ScoreUpdated","Updated the score of some account to the given amount."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Rebagged","Moved an account from one bag to another."],["ScoreUpdated","Updated the score of some account to the given amount."]]};

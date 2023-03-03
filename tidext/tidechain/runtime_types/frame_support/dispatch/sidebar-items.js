@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RawOrigin",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["RawOrigin",""]]};

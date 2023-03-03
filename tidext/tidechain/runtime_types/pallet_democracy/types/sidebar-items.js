@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["ReferendumInfo",""]],"struct":[["Delegations",""],["ReferendumStatus",""],["Tally",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["ReferendumInfo",""]],"struct":[["Delegations",""],["ReferendumStatus",""],["Tally",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SetStatus",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["SetStatus",""],["TransactionApi",""]]};

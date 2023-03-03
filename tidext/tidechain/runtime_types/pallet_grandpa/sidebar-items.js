@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["StoredState",""]],"mod":[["pallet",""]],"struct":[["StoredPendingChange",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["StoredState",""]],"mod":[["pallet",""]],"struct":[["StoredPendingChange",""]]};

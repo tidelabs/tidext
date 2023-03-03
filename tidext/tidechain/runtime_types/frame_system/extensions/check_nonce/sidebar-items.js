@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CheckNonce",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["CheckNonce",""]]};

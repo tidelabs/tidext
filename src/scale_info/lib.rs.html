@@ -1,794 +1,788 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-info-2.2.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scale_info/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../scale_info/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scale_info/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
-<span id="2">2</span>
-<span id="3">3</span>
-<span id="4">4</span>
-<span id="5">5</span>
-<span id="6">6</span>
-<span id="7">7</span>
-<span id="8">8</span>
-<span id="9">9</span>
-<span id="10">10</span>
-<span id="11">11</span>
-<span id="12">12</span>
-<span id="13">13</span>
-<span id="14">14</span>
-<span id="15">15</span>
-<span id="16">16</span>
-<span id="17">17</span>
-<span id="18">18</span>
-<span id="19">19</span>
-<span id="20">20</span>
-<span id="21">21</span>
-<span id="22">22</span>
-<span id="23">23</span>
-<span id="24">24</span>
-<span id="25">25</span>
-<span id="26">26</span>
-<span id="27">27</span>
-<span id="28">28</span>
-<span id="29">29</span>
-<span id="30">30</span>
-<span id="31">31</span>
-<span id="32">32</span>
-<span id="33">33</span>
-<span id="34">34</span>
-<span id="35">35</span>
-<span id="36">36</span>
-<span id="37">37</span>
-<span id="38">38</span>
-<span id="39">39</span>
-<span id="40">40</span>
-<span id="41">41</span>
-<span id="42">42</span>
-<span id="43">43</span>
-<span id="44">44</span>
-<span id="45">45</span>
-<span id="46">46</span>
-<span id="47">47</span>
-<span id="48">48</span>
-<span id="49">49</span>
-<span id="50">50</span>
-<span id="51">51</span>
-<span id="52">52</span>
-<span id="53">53</span>
-<span id="54">54</span>
-<span id="55">55</span>
-<span id="56">56</span>
-<span id="57">57</span>
-<span id="58">58</span>
-<span id="59">59</span>
-<span id="60">60</span>
-<span id="61">61</span>
-<span id="62">62</span>
-<span id="63">63</span>
-<span id="64">64</span>
-<span id="65">65</span>
-<span id="66">66</span>
-<span id="67">67</span>
-<span id="68">68</span>
-<span id="69">69</span>
-<span id="70">70</span>
-<span id="71">71</span>
-<span id="72">72</span>
-<span id="73">73</span>
-<span id="74">74</span>
-<span id="75">75</span>
-<span id="76">76</span>
-<span id="77">77</span>
-<span id="78">78</span>
-<span id="79">79</span>
-<span id="80">80</span>
-<span id="81">81</span>
-<span id="82">82</span>
-<span id="83">83</span>
-<span id="84">84</span>
-<span id="85">85</span>
-<span id="86">86</span>
-<span id="87">87</span>
-<span id="88">88</span>
-<span id="89">89</span>
-<span id="90">90</span>
-<span id="91">91</span>
-<span id="92">92</span>
-<span id="93">93</span>
-<span id="94">94</span>
-<span id="95">95</span>
-<span id="96">96</span>
-<span id="97">97</span>
-<span id="98">98</span>
-<span id="99">99</span>
-<span id="100">100</span>
-<span id="101">101</span>
-<span id="102">102</span>
-<span id="103">103</span>
-<span id="104">104</span>
-<span id="105">105</span>
-<span id="106">106</span>
-<span id="107">107</span>
-<span id="108">108</span>
-<span id="109">109</span>
-<span id="110">110</span>
-<span id="111">111</span>
-<span id="112">112</span>
-<span id="113">113</span>
-<span id="114">114</span>
-<span id="115">115</span>
-<span id="116">116</span>
-<span id="117">117</span>
-<span id="118">118</span>
-<span id="119">119</span>
-<span id="120">120</span>
-<span id="121">121</span>
-<span id="122">122</span>
-<span id="123">123</span>
-<span id="124">124</span>
-<span id="125">125</span>
-<span id="126">126</span>
-<span id="127">127</span>
-<span id="128">128</span>
-<span id="129">129</span>
-<span id="130">130</span>
-<span id="131">131</span>
-<span id="132">132</span>
-<span id="133">133</span>
-<span id="134">134</span>
-<span id="135">135</span>
-<span id="136">136</span>
-<span id="137">137</span>
-<span id="138">138</span>
-<span id="139">139</span>
-<span id="140">140</span>
-<span id="141">141</span>
-<span id="142">142</span>
-<span id="143">143</span>
-<span id="144">144</span>
-<span id="145">145</span>
-<span id="146">146</span>
-<span id="147">147</span>
-<span id="148">148</span>
-<span id="149">149</span>
-<span id="150">150</span>
-<span id="151">151</span>
-<span id="152">152</span>
-<span id="153">153</span>
-<span id="154">154</span>
-<span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
-<span id="158">158</span>
-<span id="159">159</span>
-<span id="160">160</span>
-<span id="161">161</span>
-<span id="162">162</span>
-<span id="163">163</span>
-<span id="164">164</span>
-<span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
-<span id="177">177</span>
-<span id="178">178</span>
-<span id="179">179</span>
-<span id="180">180</span>
-<span id="181">181</span>
-<span id="182">182</span>
-<span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
-<span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
-<span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.</span>
-<span class="comment">//</span>
-<span class="comment">// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
-<span class="comment">// you may not use this file except in compliance with the License.</span>
-<span class="comment">// You may obtain a copy of the License at</span>
-<span class="comment">//</span>
-<span class="comment">//     http://www.apache.org/licenses/LICENSE-2.0</span>
-<span class="comment">//</span>
-<span class="comment">// Unless required by applicable law or agreed to in writing, software</span>
-<span class="comment">// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
-<span class="comment">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
-<span class="comment">// See the License for the specific language governing permissions and</span>
-<span class="comment">// limitations under the License.</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-info-2.2.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../scale_info/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<a href="#2" id="2">2</a>
+<a href="#3" id="3">3</a>
+<a href="#4" id="4">4</a>
+<a href="#5" id="5">5</a>
+<a href="#6" id="6">6</a>
+<a href="#7" id="7">7</a>
+<a href="#8" id="8">8</a>
+<a href="#9" id="9">9</a>
+<a href="#10" id="10">10</a>
+<a href="#11" id="11">11</a>
+<a href="#12" id="12">12</a>
+<a href="#13" id="13">13</a>
+<a href="#14" id="14">14</a>
+<a href="#15" id="15">15</a>
+<a href="#16" id="16">16</a>
+<a href="#17" id="17">17</a>
+<a href="#18" id="18">18</a>
+<a href="#19" id="19">19</a>
+<a href="#20" id="20">20</a>
+<a href="#21" id="21">21</a>
+<a href="#22" id="22">22</a>
+<a href="#23" id="23">23</a>
+<a href="#24" id="24">24</a>
+<a href="#25" id="25">25</a>
+<a href="#26" id="26">26</a>
+<a href="#27" id="27">27</a>
+<a href="#28" id="28">28</a>
+<a href="#29" id="29">29</a>
+<a href="#30" id="30">30</a>
+<a href="#31" id="31">31</a>
+<a href="#32" id="32">32</a>
+<a href="#33" id="33">33</a>
+<a href="#34" id="34">34</a>
+<a href="#35" id="35">35</a>
+<a href="#36" id="36">36</a>
+<a href="#37" id="37">37</a>
+<a href="#38" id="38">38</a>
+<a href="#39" id="39">39</a>
+<a href="#40" id="40">40</a>
+<a href="#41" id="41">41</a>
+<a href="#42" id="42">42</a>
+<a href="#43" id="43">43</a>
+<a href="#44" id="44">44</a>
+<a href="#45" id="45">45</a>
+<a href="#46" id="46">46</a>
+<a href="#47" id="47">47</a>
+<a href="#48" id="48">48</a>
+<a href="#49" id="49">49</a>
+<a href="#50" id="50">50</a>
+<a href="#51" id="51">51</a>
+<a href="#52" id="52">52</a>
+<a href="#53" id="53">53</a>
+<a href="#54" id="54">54</a>
+<a href="#55" id="55">55</a>
+<a href="#56" id="56">56</a>
+<a href="#57" id="57">57</a>
+<a href="#58" id="58">58</a>
+<a href="#59" id="59">59</a>
+<a href="#60" id="60">60</a>
+<a href="#61" id="61">61</a>
+<a href="#62" id="62">62</a>
+<a href="#63" id="63">63</a>
+<a href="#64" id="64">64</a>
+<a href="#65" id="65">65</a>
+<a href="#66" id="66">66</a>
+<a href="#67" id="67">67</a>
+<a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+<a href="#74" id="74">74</a>
+<a href="#75" id="75">75</a>
+<a href="#76" id="76">76</a>
+<a href="#77" id="77">77</a>
+<a href="#78" id="78">78</a>
+<a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
+<a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
+<a href="#86" id="86">86</a>
+<a href="#87" id="87">87</a>
+<a href="#88" id="88">88</a>
+<a href="#89" id="89">89</a>
+<a href="#90" id="90">90</a>
+<a href="#91" id="91">91</a>
+<a href="#92" id="92">92</a>
+<a href="#93" id="93">93</a>
+<a href="#94" id="94">94</a>
+<a href="#95" id="95">95</a>
+<a href="#96" id="96">96</a>
+<a href="#97" id="97">97</a>
+<a href="#98" id="98">98</a>
+<a href="#99" id="99">99</a>
+<a href="#100" id="100">100</a>
+<a href="#101" id="101">101</a>
+<a href="#102" id="102">102</a>
+<a href="#103" id="103">103</a>
+<a href="#104" id="104">104</a>
+<a href="#105" id="105">105</a>
+<a href="#106" id="106">106</a>
+<a href="#107" id="107">107</a>
+<a href="#108" id="108">108</a>
+<a href="#109" id="109">109</a>
+<a href="#110" id="110">110</a>
+<a href="#111" id="111">111</a>
+<a href="#112" id="112">112</a>
+<a href="#113" id="113">113</a>
+<a href="#114" id="114">114</a>
+<a href="#115" id="115">115</a>
+<a href="#116" id="116">116</a>
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
+<a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
+<a href="#235" id="235">235</a>
+<a href="#236" id="236">236</a>
+<a href="#237" id="237">237</a>
+<a href="#238" id="238">238</a>
+<a href="#239" id="239">239</a>
+<a href="#240" id="240">240</a>
+<a href="#241" id="241">241</a>
+<a href="#242" id="242">242</a>
+<a href="#243" id="243">243</a>
+<a href="#244" id="244">244</a>
+<a href="#245" id="245">245</a>
+<a href="#246" id="246">246</a>
+<a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
+<a href="#252" id="252">252</a>
+<a href="#253" id="253">253</a>
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
+<a href="#341" id="341">341</a>
+<a href="#342" id="342">342</a>
+<a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
+<a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
+<a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
+//
+// Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-<span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
-<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>)]</span>
+</span><span class="attr">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
+#![deny(missing_docs)]
 
-<span class="doccomment">//! Efficient and space-efficient serialization of Rust types.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This library provides structures to easily retrieve compile-time type</span>
-<span class="doccomment">//! information at runtime and also to serialize this information in a</span>
-<span class="doccomment">//! space-efficient form, aka `PortableForm`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Registry</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! At the heart of its functionality is the [`Registry`](`crate::Registry`)</span>
-<span class="doccomment">//! that acts as a cache for known types in order to efficiently deduplicate</span>
-<span class="doccomment">//! types and ensure a space-efficient serialization.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Type Information</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Information about types is provided via the [`TypeInfo`](`crate::TypeInfo`)</span>
-<span class="doccomment">//! trait.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This trait should be implemented for all types that are serializable.</span>
-<span class="doccomment">//! `scale-info` provides implementations for all commonly used Rust standard</span>
-<span class="doccomment">//! types and a derive macro for implementing of custom types.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Deriving `TypeInfo`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Enable the `derive` feature of this crate:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```toml</span>
-<span class="doccomment">//! scale-info = { version = &quot;2.0.0&quot;, features = [&quot;derive&quot;] }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! use scale_info::TypeInfo;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! struct MyStruct {</span>
-<span class="doccomment">//!     a: u32,</span>
-<span class="doccomment">//!     b: MyEnum,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! enum MyEnum {</span>
-<span class="doccomment">//!     A(bool),</span>
-<span class="doccomment">//!     B { f: Vec&lt;u8&gt; },</span>
-<span class="doccomment">//!     C,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Attributes</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #### `#[scale_info(bounds(..))]`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Replace the auto-generated `where` clause bounds for the derived `TypeInfo` implementation.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! #[scale_info(bounds(T: TypeInfo + &#39;static))]</span>
-<span class="doccomment">//! struct MyStruct&lt;T&gt; {</span>
-<span class="doccomment">//!     a: Vec&lt;T&gt;,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The derive macro automatically adds `TypeInfo` bounds for all type parameters, and all field</span>
-<span class="doccomment">//! types containing type parameters or associated types.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This is naive and sometimes adds unnecessary bounds, since on a syntactical level there is no</span>
-<span class="doccomment">//! way to differentiate between a generic type constructor and a type alias with a generic argument</span>
-<span class="doccomment">//! e.g.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! trait MyTrait {</span>
-<span class="doccomment">//!     type A;</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! type MyAlias&lt;T&gt; = &lt;T as MyTrait&gt;::A;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! struct MyStruct&lt;T&gt; {</span>
-<span class="doccomment">//!     a: MyAlias&lt;T&gt;,</span>
-<span class="doccomment">//!     b: Vec&lt;T&gt;,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! So for the above, since a `MyAlias&lt;T&gt;: TypeInfo` bound is required, and we can&#39;t distinguish</span>
-<span class="doccomment">//! between `MyAlias&lt;T&gt;` and `Vec&lt;T&gt;`, then the `TypeInfo` bound is simply added for all</span>
-<span class="doccomment">//! fields which contain any type param. In this case the redundant `Vec&lt;T&gt;: TypeInfo`</span>
-<span class="doccomment">//! would be added.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This is usually okay, but in some circumstances can cause problems, for example with the</span>
-<span class="doccomment">//! [`overflow evaluating the requirement`] error [here](https://github.com/paritytech/scale-info/blob/master/test_suite/tests/ui/pass_custom_bounds_fix_overflow.rs).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `bounds` attribute provides an [&quot;escape hatch&quot;](https://serde.rs/attr-bound.html) to allow</span>
-<span class="doccomment">//! the programmer control of the `where` clause on the generated `impl`, to solve this and other</span>
-<span class="doccomment">//! issues that can&#39;t be foreseen by the auto-generated bounds heuristic.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #### `#[scale_info(skip_type_params(..))]`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Remove the requirement for the specified type params to implement `TypeInfo`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Consider a simple example of a type parameter which is used for associated types, but the type</span>
-<span class="doccomment">//! itself does not carry any type information. Consider this common pattern:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! trait Config {</span>
-<span class="doccomment">//!     type Balance;</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! struct Runtime; // doesn&#39;t implement `TypeInfo`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! impl Config for Runtime {</span>
-<span class="doccomment">//!     type Balance = u64;</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[allow(unused)]</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! #[scale_info(skip_type_params(T))]</span>
-<span class="doccomment">//! struct A&lt;T: Config&gt; {</span>
-<span class="doccomment">//!     balance: T::Balance,</span>
-<span class="doccomment">//!     marker: core::marker::PhantomData&lt;T&gt;,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn assert_type_info&lt;T: scale_info::TypeInfo + &#39;static&gt;() {}</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     // without the `skip_type_params` attribute this will fail.</span>
-<span class="doccomment">//!     assert_type_info::&lt;A&lt;Runtime&gt;&gt;();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! By default, the derived `TypeInfo` implementation will add the type of all type parameters to</span>
-<span class="doccomment">//! the `TypeParameter` specification e.g.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `type_params(vec![TypeParameter::new(&quot;T&quot;, Some(MetaType::new::&lt;T&gt;()))])`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! In the example above, this will cause a compiler error because `Runtime` is the concrete tyoe</span>
-<span class="doccomment">//! for `T`, which does not satisfy the `TypeInfo` requirement of `MetaType::new::&lt;T&gt;()`.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Simply adding a `TypeInfo` derive to `Runtime` is one way of solving this, but that could be</span>
-<span class="doccomment">//! misleading (why does it need `TypeInfo` if a value of that type is never encoded?), and can</span>
-<span class="doccomment">//! sometimes require adding `TypeInfo` bounds in other impl blocks.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `skip_type_params` attribute solves this, providing an additional &quot;escape hatch&quot; which</span>
-<span class="doccomment">//! prevents the given type parameter&#39;s type information being required:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `type_params(vec![TypeParameter::new(&quot;T&quot;, None)])`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The generated type params do not now require `T` to implement `TypeInfo`, so the auto-generated</span>
-<span class="doccomment">//! bound is not added to the generated `TypeInfo` `where` clause.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #### Combining `bounds` and `skip_type_params`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! These two attributes can complement one another, particularly in the case where using `bounds`</span>
-<span class="doccomment">//! would still require manually adding a `TypeInfo` bound for the type parameter:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! #[scale_info(bounds(), skip_type_params(T))]</span>
-<span class="doccomment">//! struct A&lt;T&gt; {</span>
-<span class="doccomment">//!     marker: core::marker::PhantomData&lt;T&gt;,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Without `skip_type_params` in the example above, it would require the `TypeInfo` bounds for `T`</span>
-<span class="doccomment">//! to be added manually e.g. `#[scale_info(bounds(T: TypeInfo + &#39;static))]`. Since the intention of</span>
-<span class="doccomment">//! the empty bounds is to **remove** all type bounds, then the addition of `skip_type_params`</span>
-<span class="doccomment">//! allows this to compile successfully.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ##### Precedence</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! When used independently, both attributes modify the `where` clause of the derived `TypeInfo`</span>
-<span class="doccomment">//! impl. When used together, the predicates supplied in the `bounds` attribute replaces *all*</span>
-<span class="doccomment">//! auto-generated bounds, and `skip_type_params` will have no effect on the resulting `where`</span>
-<span class="doccomment">//! clause.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! **Note:** When using `bounds` without `skip_type_params`, it is therefore required to manually</span>
-<span class="doccomment">//! add a `TypeInfo` bound for any non skipped type parameters. The compiler will let you know.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #### `#[scale_info(capture_docs = &quot;default|always|never&quot;)]`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Docs for types, fields and variants can all be captured by the `docs` feature being enabled.</span>
-<span class="doccomment">//! This can be overridden using the `capture_docs` attribute:</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `#[scale_info(capture_docs = &quot;default&quot;)]` will capture docs iff the `docs` feature is enabled.</span>
-<span class="doccomment">//! This is the default if `capture_docs` is not specified.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `#[scale_info(capture_docs = &quot;always&quot;)]` will capture docs for the annotated type even if the</span>
-<span class="doccomment">//! `docs` feature is *not* enabled.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `#[scale_info(capture_docs = &quot;never&quot;)]` will *not* capture docs for the annotated type even if</span>
-<span class="doccomment">//! the `docs` is enabled.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! This is useful e.g. when compiling metadata into a Wasm blob, and it is desirable to keep the</span>
-<span class="doccomment">//! binary size as small as possible, so the `docs` feature would be disabled. In case the docs for</span>
-<span class="doccomment">//! some types is necessary they could be enabled on a per-type basis with the above attribute.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #### `#[scale_info(crate = path::to::crate)]`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Specify a path to the scale-info crate instance to use when referring to the APIs from generated</span>
-<span class="doccomment">//! code. This is normally only applicable when invoking re-exported scale-info derives from a public</span>
-<span class="doccomment">//! macro in a different crate. For example:</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! use scale_info_reexport::info::TypeInfo;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(TypeInfo)]</span>
-<span class="doccomment">//! #[scale_info(crate = scale_info_reexport::info)]</span>
-<span class="doccomment">//! enum TestEnum {</span>
-<span class="doccomment">//!     FirstVariant,</span>
-<span class="doccomment">//!     SecondVariant,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Forms</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! To bridge between compile-time type information and runtime the</span>
-<span class="doccomment">//! [`MetaForm`](`crate::form::MetaForm`) is used to easily retrieve all</span>
-<span class="doccomment">//! information needed to uniquely identify types.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! The `MetaForm` and its associated `Registry` can be transformed into the</span>
-<span class="doccomment">//! space-efficient form by the [`IntoPortable`](`crate::IntoPortable`) trait; it is</span>
-<span class="doccomment">//! used internally by the [`Registry`](`crate::Registry`) in order to convert</span>
-<span class="doccomment">//! the expanded types into their space-efficient form.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Symbols and Namespaces</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! To differentiate two types sharing the same name, namespaces are used.</span>
-<span class="doccomment">//! Commonly the namespace is equal to the one where the type has been defined</span>
-<span class="doccomment">//! in. For Rust prelude types such as [`Option`](`std::option::Option`) and</span>
-<span class="doccomment">//! [`Result`](`std::result::Result`) the root namespace (empty namespace) is</span>
-<span class="doccomment">//! used.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! To use this library simply use the [`MetaForm`](`crate::form::MetaForm`)</span>
-<span class="doccomment">//! initially with your own data structures; make them generic over the</span>
-<span class="doccomment">//! [`Form`](`crate::form::Form`) trait just as has been done in this crate with</span>
-<span class="doccomment">//! [`TypeInfo`](`crate::TypeInfo`) in order to get a simple implementation of</span>
-<span class="doccomment">//! [`IntoPortable`](`crate::IntoPortable`). Use a single instance of the</span>
-<span class="doccomment">//! [`Registry`](`crate::Registry`) for compaction and provide this registry</span>
-<span class="doccomment">//! instance upon serialization.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! A usage example can be found in ink! here:</span>
-<span class="doccomment">//! https://github.com/paritytech/ink/blob/master/abi/src/specs.rs</span>
+</span><span class="doccomment">//! Efficient and space-efficient serialization of Rust types.
+//!
+//! This library provides structures to easily retrieve compile-time type
+//! information at runtime and also to serialize this information in a
+//! space-efficient form, aka `PortableForm`.
+//!
+//! # Registry
+//!
+//! At the heart of its functionality is the [`Registry`](`crate::Registry`)
+//! that acts as a cache for known types in order to efficiently deduplicate
+//! types and ensure a space-efficient serialization.
+//!
+//! # Type Information
+//!
+//! Information about types is provided via the [`TypeInfo`](`crate::TypeInfo`)
+//! trait.
+//!
+//! This trait should be implemented for all types that are serializable.
+//! `scale-info` provides implementations for all commonly used Rust standard
+//! types and a derive macro for implementing of custom types.
+//!
+//! ## Deriving `TypeInfo`
+//!
+//! Enable the `derive` feature of this crate:
+//!
+//! ```toml
+//! scale-info = { version = &quot;2.0.0&quot;, features = [&quot;derive&quot;] }
+//! ```
+//!
+//! ```ignore
+//! use scale_info::TypeInfo;
+//!
+//! #[derive(TypeInfo)]
+//! struct MyStruct {
+//!     a: u32,
+//!     b: MyEnum,
+//! }
+//!
+//! #[derive(TypeInfo)]
+//! enum MyEnum {
+//!     A(bool),
+//!     B { f: Vec&lt;u8&gt; },
+//!     C,
+//! }
+//! ```
+//!
+//! ### Attributes
+//!
+//! #### `#[scale_info(bounds(..))]`
+//!
+//! Replace the auto-generated `where` clause bounds for the derived `TypeInfo` implementation.
+//!
+//! ```ignore
+//! #[derive(TypeInfo)]
+//! #[scale_info(bounds(T: TypeInfo + &#39;static))]
+//! struct MyStruct&lt;T&gt; {
+//!     a: Vec&lt;T&gt;,
+//! }
+//! ```
+//!
+//! The derive macro automatically adds `TypeInfo` bounds for all type parameters, and all field
+//! types containing type parameters or associated types.
+//!
+//! This is naive and sometimes adds unnecessary bounds, since on a syntactical level there is no
+//! way to differentiate between a generic type constructor and a type alias with a generic argument
+//! e.g.
+//!
+//! ```ignore
+//! trait MyTrait {
+//!     type A;
+//! }
+//!
+//! type MyAlias&lt;T&gt; = &lt;T as MyTrait&gt;::A;
+//!
+//! #[derive(TypeInfo)]
+//! struct MyStruct&lt;T&gt; {
+//!     a: MyAlias&lt;T&gt;,
+//!     b: Vec&lt;T&gt;,
+//! }
+//! ```
+//!
+//! So for the above, since a `MyAlias&lt;T&gt;: TypeInfo` bound is required, and we can&#39;t distinguish
+//! between `MyAlias&lt;T&gt;` and `Vec&lt;T&gt;`, then the `TypeInfo` bound is simply added for all
+//! fields which contain any type param. In this case the redundant `Vec&lt;T&gt;: TypeInfo`
+//! would be added.
+//!
+//! This is usually okay, but in some circumstances can cause problems, for example with the
+//! [`overflow evaluating the requirement`] error [here](https://github.com/paritytech/scale-info/blob/master/test_suite/tests/ui/pass_custom_bounds_fix_overflow.rs).
+//!
+//! The `bounds` attribute provides an [&quot;escape hatch&quot;](https://serde.rs/attr-bound.html) to allow
+//! the programmer control of the `where` clause on the generated `impl`, to solve this and other
+//! issues that can&#39;t be foreseen by the auto-generated bounds heuristic.
+//!
+//! #### `#[scale_info(skip_type_params(..))]`
+//!
+//! Remove the requirement for the specified type params to implement `TypeInfo`.
+//!
+//! Consider a simple example of a type parameter which is used for associated types, but the type
+//! itself does not carry any type information. Consider this common pattern:
+//!
+//! ```ignore
+//! trait Config {
+//!     type Balance;
+//! }
+//!
+//! struct Runtime; // doesn&#39;t implement `TypeInfo`
+//!
+//! impl Config for Runtime {
+//!     type Balance = u64;
+//! }
+//!
+//! #[allow(unused)]
+//! #[derive(TypeInfo)]
+//! #[scale_info(skip_type_params(T))]
+//! struct A&lt;T: Config&gt; {
+//!     balance: T::Balance,
+//!     marker: core::marker::PhantomData&lt;T&gt;,
+//! }
+//!
+//! fn assert_type_info&lt;T: scale_info::TypeInfo + &#39;static&gt;() {}
+//!
+//! fn main() {
+//!     // without the `skip_type_params` attribute this will fail.
+//!     assert_type_info::&lt;A&lt;Runtime&gt;&gt;();
+//! }
+//! ```
+//!
+//! By default, the derived `TypeInfo` implementation will add the type of all type parameters to
+//! the `TypeParameter` specification e.g.
+//!
+//! `type_params(vec![TypeParameter::new(&quot;T&quot;, Some(MetaType::new::&lt;T&gt;()))])`
+//!
+//! In the example above, this will cause a compiler error because `Runtime` is the concrete tyoe
+//! for `T`, which does not satisfy the `TypeInfo` requirement of `MetaType::new::&lt;T&gt;()`.
+//!
+//! Simply adding a `TypeInfo` derive to `Runtime` is one way of solving this, but that could be
+//! misleading (why does it need `TypeInfo` if a value of that type is never encoded?), and can
+//! sometimes require adding `TypeInfo` bounds in other impl blocks.
+//!
+//! The `skip_type_params` attribute solves this, providing an additional &quot;escape hatch&quot; which
+//! prevents the given type parameter&#39;s type information being required:
+//!
+//! `type_params(vec![TypeParameter::new(&quot;T&quot;, None)])`
+//!
+//! The generated type params do not now require `T` to implement `TypeInfo`, so the auto-generated
+//! bound is not added to the generated `TypeInfo` `where` clause.
+//!
+//! #### Combining `bounds` and `skip_type_params`
+//!
+//! These two attributes can complement one another, particularly in the case where using `bounds`
+//! would still require manually adding a `TypeInfo` bound for the type parameter:
+//!
+//! ```ignore
+//! #[derive(TypeInfo)]
+//! #[scale_info(bounds(), skip_type_params(T))]
+//! struct A&lt;T&gt; {
+//!     marker: core::marker::PhantomData&lt;T&gt;,
+//! }
+//! ```
+//!
+//! Without `skip_type_params` in the example above, it would require the `TypeInfo` bounds for `T`
+//! to be added manually e.g. `#[scale_info(bounds(T: TypeInfo + &#39;static))]`. Since the intention of
+//! the empty bounds is to **remove** all type bounds, then the addition of `skip_type_params`
+//! allows this to compile successfully.
+//!
+//! ##### Precedence
+//!
+//! When used independently, both attributes modify the `where` clause of the derived `TypeInfo`
+//! impl. When used together, the predicates supplied in the `bounds` attribute replaces *all*
+//! auto-generated bounds, and `skip_type_params` will have no effect on the resulting `where`
+//! clause.
+//!
+//! **Note:** When using `bounds` without `skip_type_params`, it is therefore required to manually
+//! add a `TypeInfo` bound for any non skipped type parameters. The compiler will let you know.
+//!
+//! #### `#[scale_info(capture_docs = &quot;default|always|never&quot;)]`
+//!
+//! Docs for types, fields and variants can all be captured by the `docs` feature being enabled.
+//! This can be overridden using the `capture_docs` attribute:
+//!
+//! `#[scale_info(capture_docs = &quot;default&quot;)]` will capture docs iff the `docs` feature is enabled.
+//! This is the default if `capture_docs` is not specified.
+//!
+//! `#[scale_info(capture_docs = &quot;always&quot;)]` will capture docs for the annotated type even if the
+//! `docs` feature is *not* enabled.
+//!
+//! `#[scale_info(capture_docs = &quot;never&quot;)]` will *not* capture docs for the annotated type even if
+//! the `docs` is enabled.
+//!
+//! This is useful e.g. when compiling metadata into a Wasm blob, and it is desirable to keep the
+//! binary size as small as possible, so the `docs` feature would be disabled. In case the docs for
+//! some types is necessary they could be enabled on a per-type basis with the above attribute.
+//!
+//! #### `#[scale_info(crate = path::to::crate)]`
+//!
+//! Specify a path to the scale-info crate instance to use when referring to the APIs from generated
+//! code. This is normally only applicable when invoking re-exported scale-info derives from a public
+//! macro in a different crate. For example:
+//! ```ignore
+//! use scale_info_reexport::info::TypeInfo;
+//!
+//! #[derive(TypeInfo)]
+//! #[scale_info(crate = scale_info_reexport::info)]
+//! enum TestEnum {
+//!     FirstVariant,
+//!     SecondVariant,
+//! }
+//! ```
+//!
+//! # Forms
+//!
+//! To bridge between compile-time type information and runtime the
+//! [`MetaForm`](`crate::form::MetaForm`) is used to easily retrieve all
+//! information needed to uniquely identify types.
+//!
+//! The `MetaForm` and its associated `Registry` can be transformed into the
+//! space-efficient form by the [`IntoPortable`](`crate::IntoPortable`) trait; it is
+//! used internally by the [`Registry`](`crate::Registry`) in order to convert
+//! the expanded types into their space-efficient form.
+//!
+//! # Symbols and Namespaces
+//!
+//! To differentiate two types sharing the same name, namespaces are used.
+//! Commonly the namespace is equal to the one where the type has been defined
+//! in. For Rust prelude types such as [`Option`](`std::option::Option`) and
+//! [`Result`](`std::result::Result`) the root namespace (empty namespace) is
+//! used.
+//!
+//! To use this library simply use the [`MetaForm`](`crate::form::MetaForm`)
+//! initially with your own data structures; make them generic over the
+//! [`Form`](`crate::form::Form`) trait just as has been done in this crate with
+//! [`TypeInfo`](`crate::TypeInfo`) in order to get a simple implementation of
+//! [`IntoPortable`](`crate::IntoPortable`). Use a single instance of the
+//! [`Registry`](`crate::Registry`) for compaction and provide this registry
+//! instance upon serialization.
+//!
+//! A usage example can be found in ink! here:
+//! https://github.com/paritytech/ink/blob/master/abi/src/specs.rs
 
-<span class="doccomment">/// Takes a number of types and returns a vector that contains their respective</span>
-<span class="doccomment">/// [`MetaType`](`crate::MetaType`) instances.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This is useful for places that require inputs of iterators over [`MetaType`](`crate::MetaType`)</span>
-<span class="doccomment">/// instances and provide a way out of code bloat in these scenarios.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// # use scale_info::tuple_meta_type;</span>
-<span class="doccomment">/// assert_eq!(</span>
-<span class="doccomment">///     tuple_meta_type!(i32, [u8; 32], String),</span>
-<span class="doccomment">///     {</span>
-<span class="doccomment">///         use scale_info::MetaType;</span>
-<span class="doccomment">///         let mut vec = Vec::new();</span>
-<span class="doccomment">///         vec.push(MetaType::new::&lt;i32&gt;());</span>
-<span class="doccomment">///         vec.push(MetaType::new::&lt;[u8; 32]&gt;());</span>
-<span class="doccomment">///         vec.push(MetaType::new::&lt;String&gt;());</span>
-<span class="doccomment">///         vec</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// );</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">tuple_meta_type</span> {
-    ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">ty</span>),<span class="op">*</span> ) =&gt; {
+/// Takes a number of types and returns a vector that contains their respective
+/// [`MetaType`](`crate::MetaType`) instances.
+///
+/// This is useful for places that require inputs of iterators over [`MetaType`](`crate::MetaType`)
+/// instances and provide a way out of code bloat in these scenarios.
+///
+/// # Example
+///
+/// ```
+/// # use scale_info::tuple_meta_type;
+/// assert_eq!(
+///     tuple_meta_type!(i32, [u8; 32], String),
+///     {
+///         use scale_info::MetaType;
+///         let mut vec = Vec::new();
+///         vec.push(MetaType::new::&lt;i32&gt;());
+///         vec.push(MetaType::new::&lt;[u8; 32]&gt;());
+///         vec.push(MetaType::new::&lt;String&gt;());
+///         vec
+///     }
+/// );
+/// ```
+</span><span class="attr">#[macro_export]
+</span><span class="macro">macro_rules! </span>tuple_meta_type {
+    ( $(<span class="macro-nonterminal">$ty</span>:ty),* ) =&gt; {
         {
             <span class="macro-nonterminal">$</span><span class="macro">crate::prelude::vec!</span>[
                 $(
-                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::MetaType::new</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span><span class="op">&gt;</span>(),
-                )<span class="op">*</span>
+                    <span class="macro-nonterminal">$crate::MetaType::new</span>::&lt;<span class="macro-nonterminal">$ty</span>&gt;(),
+                )*
             ]
         }
     }
 }
 
-<span class="doccomment">/// Construct a vector of `TypeParameter`s from pairs of the name and the concrete type.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// # use scale_info::{named_type_params, MetaType, TypeParameter};</span>
-<span class="doccomment">/// assert_eq!(</span>
-<span class="doccomment">///     named_type_params![(T, u8), (U, u32)],</span>
-<span class="doccomment">///     vec! [</span>
-<span class="doccomment">///         TypeParameter::new(&quot;T&quot;, Some(MetaType::new::&lt;u8&gt;())),</span>
-<span class="doccomment">///         TypeParameter::new(&quot;U&quot;, Some(MetaType::new::&lt;u32&gt;())),</span>
-<span class="doccomment">///     ]</span>
-<span class="doccomment">/// );</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">named_type_params</span> {
-    ( $((<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tp</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">ty</span>)),<span class="op">*</span> ) =&gt; {
+<span class="doccomment">/// Construct a vector of `TypeParameter`s from pairs of the name and the concrete type.
+///
+/// # Example
+///
+/// ```
+/// # use scale_info::{named_type_params, MetaType, TypeParameter};
+/// assert_eq!(
+///     named_type_params![(T, u8), (U, u32)],
+///     vec! [
+///         TypeParameter::new(&quot;T&quot;, Some(MetaType::new::&lt;u8&gt;())),
+///         TypeParameter::new(&quot;U&quot;, Some(MetaType::new::&lt;u32&gt;())),
+///     ]
+/// );
+/// ```
+</span><span class="attr">#[macro_export]
+</span><span class="macro">macro_rules! </span>named_type_params {
+    ( $((<span class="macro-nonterminal">$tp</span>:ty, <span class="macro-nonterminal">$ty</span>:ty)),* ) =&gt; {
         {
             <span class="macro-nonterminal">$</span><span class="macro">crate::prelude::vec!</span>[
                 $(
-                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::TypeParameter</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::form::MetaForm</span><span class="op">&gt;</span><span class="ident">::new</span>(
-                        <span class="macro">::core::stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tp</span>),
-                        <span class="prelude-val">Some</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::MetaType::new</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span><span class="op">&gt;</span>())
+                    <span class="macro-nonterminal">$crate::TypeParameter</span>::&lt;<span class="macro-nonterminal">$crate::form::MetaForm</span>&gt;::new(
+                        <span class="macro">::core::stringify!</span>(<span class="macro-nonterminal">$tp</span>),
+                        <span class="prelude-val">Some</span>(<span class="macro-nonterminal">$crate::MetaType::new</span>::&lt;<span class="macro-nonterminal">$ty</span>&gt;())
                     ),
-                )<span class="op">*</span>
+                )*
             ]
         }
     }
 }
 
-<span class="doccomment">/// Construct a vector of [`TypeParameter`] instances with the name of the type parameter,</span>
-<span class="doccomment">/// together with its concrete [`MetaType`].</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">type_params</span> {
-    ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">ty</span>),<span class="op">*</span> ) =&gt; {
-        <span class="macro-nonterminal">$</span><span class="macro">crate::named_type_params!</span>{ $( (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>) ),<span class="op">*</span> }
+<span class="doccomment">/// Construct a vector of [`TypeParameter`] instances with the name of the type parameter,
+/// together with its concrete [`MetaType`].
+</span><span class="attr">#[macro_export]
+</span><span class="macro">macro_rules! </span>type_params {
+    ( $(<span class="macro-nonterminal">$ty</span>:ty),* ) =&gt; {
+        <span class="macro-nonterminal">$</span><span class="macro">crate::named_type_params!</span>{ $( (<span class="macro-nonterminal">$ty</span>, <span class="macro-nonterminal">$ty</span>) ),* }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span>;
+<span class="kw">pub mod </span>prelude;
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">build</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">form</span>;
-<span class="kw">mod</span> <span class="ident">impls</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">interner</span>;
-<span class="kw">mod</span> <span class="ident">meta_type</span>;
-<span class="kw">mod</span> <span class="ident">registry</span>;
-<span class="kw">mod</span> <span class="ident">ty</span>;
-<span class="kw">mod</span> <span class="ident">utils</span>;
+<span class="kw">pub mod </span>build;
+<span class="kw">pub mod </span>form;
+<span class="kw">mod </span>impls;
+<span class="kw">pub mod </span>interner;
+<span class="kw">mod </span>meta_type;
+<span class="kw">mod </span>registry;
+<span class="kw">mod </span>ty;
+<span class="kw">mod </span>utils;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tests</span>;
+<span class="attr">#[cfg(test)]
+</span><span class="kw">mod </span>tests;
 
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">scale</span>;
+<span class="attr">#[doc(hidden)]
+</span><span class="kw">pub use </span>scale;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{
-    <span class="ident">meta_type::MetaType</span>,
-    <span class="ident">registry</span>::{
-        <span class="ident">IntoPortable</span>,
-        <span class="ident">PortableRegistry</span>,
-        <span class="ident">Registry</span>,
+<span class="kw">pub use </span><span class="self">self</span>::{
+    meta_type::MetaType,
+    registry::{
+        IntoPortable,
+        PortableRegistry,
+        Registry,
     },
-    <span class="ident">ty</span>::<span class="kw-2">*</span>,
+    ty::<span class="kw-2">*</span>,
 };
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;derive&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">scale_info_derive::TypeInfo</span>;
+<span class="attr">#[cfg(feature = <span class="string">&quot;derive&quot;</span>)]
+</span><span class="kw">pub use </span>scale_info_derive::TypeInfo;
 
-<span class="doccomment">/// Implementors return their meta type information.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TypeInfo</span> {
-    <span class="doccomment">/// The type identifying for which type info is provided.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Note</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This is used to uniquely identify a type via [`core::any::TypeId::of`]. In most cases it</span>
-    <span class="doccomment">/// will just be `Self`, but can be used to unify different types which have the same encoded</span>
-    <span class="doccomment">/// representation e.g. reference types `Box&lt;T&gt;`, `&amp;T` and `&amp;mut T`.</span>
-    <span class="kw">type</span> <span class="ident">Identity</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>;
+<span class="doccomment">/// Implementors return their meta type information.
+</span><span class="kw">pub trait </span>TypeInfo {
+    <span class="doccomment">/// The type identifying for which type info is provided.
+    ///
+    /// # Note
+    ///
+    /// This is used to uniquely identify a type via [`core::any::TypeId::of`]. In most cases it
+    /// will just be `Self`, but can be used to unify different types which have the same encoded
+    /// representation e.g. reference types `Box&lt;T&gt;`, `&amp;T` and `&amp;mut T`.
+    </span><span class="kw">type </span>Identity: <span class="question-mark">?</span>Sized + <span class="lifetime">&#39;static</span>;
 
-    <span class="doccomment">/// Returns the static type identifier for `Self`.</span>
-    <span class="kw">fn</span> <span class="ident">type_info</span>() -&gt; <span class="ident">Type</span>;
+    <span class="doccomment">/// Returns the static type identifier for `Self`.
+    </span><span class="kw">fn </span>type_info() -&gt; Type;
 }
 
-<span class="doccomment">/// Convenience trait for implementors, combining `TypeInfo` and `&#39;static` bounds.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Note</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Currently because of the `&#39;static` constraint on [`std::any::TypeId::of`] (see [`MetaType`]),</span>
-<span class="doccomment">/// `TypeInfo` constraints must also be accompanied by a `&#39;static` bound. This trait is useful to</span>
-<span class="doccomment">/// implementors so only a single constraint is required.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">StaticTypeInfo</span>: <span class="ident">TypeInfo</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {}
+<span class="doccomment">/// Convenience trait for implementors, combining `TypeInfo` and `&#39;static` bounds.
+///
+/// # Note
+///
+/// Currently because of the `&#39;static` constraint on [`std::any::TypeId::of`] (see [`MetaType`]),
+/// `TypeInfo` constraints must also be accompanied by a `&#39;static` bound. This trait is useful to
+/// implementors so only a single constraint is required.
+</span><span class="kw">pub trait </span>StaticTypeInfo: TypeInfo + <span class="lifetime">&#39;static </span>{}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">StaticTypeInfo</span> <span class="kw">for</span> <span class="ident">T</span> <span class="kw">where</span> <span class="ident">T</span>: <span class="ident">TypeInfo</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {}
+<span class="kw">impl</span>&lt;T&gt; StaticTypeInfo <span class="kw">for </span>T <span class="kw">where </span>T: TypeInfo + <span class="lifetime">&#39;static </span>{}
 
-<span class="doccomment">/// Returns the runtime bridge to the types compile-time type information.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">meta_type</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() -&gt; <span class="ident">MetaType</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="question-mark">?</span><span class="ident">Sized</span> <span class="op">+</span> <span class="ident">TypeInfo</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+<span class="doccomment">/// Returns the runtime bridge to the types compile-time type information.
+</span><span class="kw">pub fn </span>meta_type&lt;T&gt;() -&gt; MetaType
+<span class="kw">where
+    </span>T: <span class="question-mark">?</span>Sized + TypeInfo + <span class="lifetime">&#39;static</span>,
 {
-    <span class="ident">MetaType::new</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>()
+    MetaType::new::&lt;T&gt;()
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scale_info" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="scale_info" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

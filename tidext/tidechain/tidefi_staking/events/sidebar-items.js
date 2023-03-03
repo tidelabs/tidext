@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Staked","The assets get staked successfully"],["UnstakeQueued","The assets unstaking has been queued"],["Unstaked","The assets get `unstaked` successfully"]]});
+window.SIDEBAR_ITEMS = {"struct":[["BatchCompound","Batch compound, number of accounts"],["BatchFinished","Batch finished, number of session or unstaking processed."],["SessionFinished","Session finished"],["Staked","The assets get staked successfully"],["UnstakeQueued","The assets unstaking has been queued"],["Unstaked","The assets get `unstaked` successfully"]]};

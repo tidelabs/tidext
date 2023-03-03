@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["BlakeTwo256",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["BlakeTwo256",""]]};

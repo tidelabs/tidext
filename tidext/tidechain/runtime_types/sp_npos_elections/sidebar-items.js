@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ElectionScore",""],["Support",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["ElectionScore",""],["Support",""]]};

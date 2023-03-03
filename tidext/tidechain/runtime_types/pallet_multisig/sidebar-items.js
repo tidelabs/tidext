@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""]],"struct":[["Multisig",""],["Timepoint",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["Multisig",""],["Timepoint",""]]};

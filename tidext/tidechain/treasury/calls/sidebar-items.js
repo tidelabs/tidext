@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["ApproveProposal",""],["ProposeSpend",""],["RejectProposal",""],["RemoveApproval",""],["Spend",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["ApproveProposal",""],["ProposeSpend",""],["RejectProposal",""],["RemoveApproval",""],["Spend",""],["TransactionApi",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AcceptCurator",""],["ApproveBounty",""],["AwardBounty",""],["ClaimBounty",""],["CloseBounty",""],["ExtendBountyExpiry",""],["ProposeBounty",""],["ProposeCurator",""],["TransactionApi",""],["UnassignCurator",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["AcceptCurator",""],["ApproveBounty",""],["AwardBounty",""],["ClaimBounty",""],["CloseBounty",""],["ExtendBountyExpiry",""],["ProposeBounty",""],["ProposeCurator",""],["TransactionApi",""],["UnassignCurator",""]]};

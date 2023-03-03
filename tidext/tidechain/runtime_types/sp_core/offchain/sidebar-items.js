@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["OpaqueMultiaddr",""],["OpaqueNetworkState",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["OpaqueMultiaddr",""],["OpaqueNetworkState",""]]};

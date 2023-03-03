@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Reasons",""],["Releases",""]],"mod":[["pallet",""]],"struct":[["AccountData",""],["BalanceLock",""],["ReserveData",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["Reasons",""],["Releases",""]],"mod":[["pallet",""]],"struct":[["AccountData",""],["BalanceLock",""],["ReserveData",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"macro":[["rpc_params","Convert the given values to a [`jsonrpsee_types::ParamsSer`] as expected by a jsonrpsee Client (http or websocket)."]],"mod":[["async_client","Abstract async client."]]});
+window.SIDEBAR_ITEMS = {"macro":[["rpc_params","Convert the given values to a [`jsonrpsee_types::ParamsSer`] as expected by a jsonrpsee Client (http or websocket)."]],"mod":[["async_client","Abstract async client."]]};

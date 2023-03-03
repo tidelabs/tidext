@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Cleared","A preimage has ben cleared."],["Noted","A preimage has been noted."],["Requested","A preimage has been requested."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Cleared","A preimage has ben cleared."],["Noted","A preimage has been noted."],["Requested","A preimage has been requested."]]};

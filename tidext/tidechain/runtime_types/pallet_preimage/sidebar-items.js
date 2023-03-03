@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["RequestStatus",""]],"mod":[["pallet",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["RequestStatus",""]],"mod":[["pallet",""]]};

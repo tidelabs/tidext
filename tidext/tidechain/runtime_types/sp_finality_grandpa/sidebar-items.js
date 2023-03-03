@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Equivocation",""]],"mod":[["app",""]],"struct":[["EquivocationProof",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["Equivocation",""]],"mod":[["app",""]],"struct":[["EquivocationProof",""]]};

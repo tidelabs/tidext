@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["hmac",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["hmac",""]]};

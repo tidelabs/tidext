@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["OnboardingRebatesApplied",""],["SunriseClaimed",""],["SunriseRewarded",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["OnboardingRebatesApplied",""],["SunriseClaimed",""],["SunriseRewarded",""]]};

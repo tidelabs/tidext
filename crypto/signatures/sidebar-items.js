@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["ed25519",""],["secp256k1",""],["sr25519",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["ed25519",""],["secp256k1",""],["sr25519",""]]};

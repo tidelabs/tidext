@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Staked","The assets get staked successfully"],["UnstakeQueued","The assets unstaking has been queued"],["Unstaked","The assets get `unstaked` successfully"]]};

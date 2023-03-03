@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SetUncles",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["SetUncles",""],["TransactionApi",""]]};

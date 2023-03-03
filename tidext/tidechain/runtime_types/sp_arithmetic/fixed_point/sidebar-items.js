@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["FixedU128",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["FixedU128",""]]};

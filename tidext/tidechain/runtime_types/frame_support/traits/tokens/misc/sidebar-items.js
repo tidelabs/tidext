@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["BalanceStatus",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["BalanceStatus",""]]};

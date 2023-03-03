@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["XChaCha20Poly1305",""]]});
+window.SIDEBAR_ITEMS = {"type":[["XChaCha20Poly1305",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["PUBLIC_KEY_LENGTH",""],["SECRET_KEY_LENGTH",""]],"struct":[["PublicKey","An X25519 Public Key"],["SecretKey","An X25519 Secret Key"]],"type":[["SharedSecret","An X25519 Shared Secret - the result of a Diffie-Hellman key exchange."]]});
+window.SIDEBAR_ITEMS = {"constant":[["PUBLIC_KEY_LENGTH",""],["SECRET_KEY_LENGTH",""]],"struct":[["PublicKey","An X25519 Public Key"],["SecretKey","An X25519 Secret Key"]],"type":[["SharedSecret","An X25519 Shared Secret - the result of a Diffie-Hellman key exchange."]]};

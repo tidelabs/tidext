@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CleanDefunctVoters",""],["RemoveMember",""],["RemoveVoter",""],["RenounceCandidacy",""],["SubmitCandidacy",""],["TransactionApi",""],["Vote",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["CleanDefunctVoters",""],["RemoveMember",""],["RemoveVoter",""],["RenounceCandidacy",""],["SubmitCandidacy",""],["TransactionApi",""],["Vote",""]]};

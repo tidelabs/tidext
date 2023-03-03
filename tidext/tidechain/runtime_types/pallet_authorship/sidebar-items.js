@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["UncleEntryItem",""]],"mod":[["pallet",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["UncleEntryItem",""]],"mod":[["pallet",""]]};

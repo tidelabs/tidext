@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["misc",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["misc",""]]};

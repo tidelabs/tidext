@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["MultiAddress",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["MultiAddress",""]]};

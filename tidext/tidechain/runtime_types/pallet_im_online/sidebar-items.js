@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["pallet",""],["sr25519",""]],"struct":[["BoundedOpaqueNetworkState",""],["Heartbeat",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""],["sr25519",""]],"struct":[["BoundedOpaqueNetworkState",""],["Heartbeat",""]]};

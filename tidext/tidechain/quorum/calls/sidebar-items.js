@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AcknowledgeBurned",""],["AcknowledgeProposal",""],["EvalProposalState",""],["RejectProposal",""],["SubmitProposal",""],["SubmitPublicKeys",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["AcknowledgeBurned",""],["AcknowledgeProposal",""],["EvalProposalState",""],["RejectProposal",""],["SubmitProposal",""],["SubmitPublicKeys",""],["TransactionApi",""]]};

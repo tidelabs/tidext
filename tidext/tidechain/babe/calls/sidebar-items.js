@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["PlanConfigChange",""],["ReportEquivocation",""],["ReportEquivocationUnsigned",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["PlanConfigChange",""],["ReportEquivocation",""],["ReportEquivocationUnsigned",""],["TransactionApi",""]]};

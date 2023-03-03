@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Registered","Asset was registered. [currency_id]"],["StatusChanged","Asset was updated. [currency_id, is_enabled]"]]});
+window.SIDEBAR_ITEMS = {"struct":[["Registered","Asset was registered. [currency_id]"],["StatusChanged","Asset was updated. [currency_id, is_enabled]"]]};

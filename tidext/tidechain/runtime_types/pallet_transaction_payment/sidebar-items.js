@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Releases",""]],"mod":[["pallet",""]],"struct":[["ChargeTransactionPayment",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["Releases",""]],"mod":[["pallet",""]],"struct":[["ChargeTransactionPayment",""]]};

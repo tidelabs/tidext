@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["WriteGuardType",""]],"struct":[["WriteGuard",""]]});
+window.SIDEBAR_ITEMS = {"enum":[["WriteGuardType",""]],"struct":[["WriteGuard",""]]};

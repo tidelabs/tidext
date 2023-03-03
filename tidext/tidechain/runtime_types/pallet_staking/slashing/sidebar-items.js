@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SlashingSpans",""],["SpanRecord",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["SlashingSpans",""],["SpanRecord",""]]};

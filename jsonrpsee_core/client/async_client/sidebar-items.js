@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Client","Generic asynchronous client."],["ClientBuilder","Builder for [`Client`]."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Client","Generic asynchronous client."],["ClientBuilder","Builder for [`Client`]."]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NoteStalled",""],["ReportEquivocation",""],["ReportEquivocationUnsigned",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["NoteStalled",""],["ReportEquivocation",""],["ReportEquivocationUnsigned",""],["TransactionApi",""]]};

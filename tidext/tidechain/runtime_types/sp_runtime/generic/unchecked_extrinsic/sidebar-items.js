@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["UncheckedExtrinsic",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["UncheckedExtrinsic",""]]};

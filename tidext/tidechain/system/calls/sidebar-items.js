@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["FillBlock",""],["KillPrefix",""],["KillStorage",""],["Remark",""],["RemarkWithEvent",""],["SetCode",""],["SetCodeWithoutChecks",""],["SetHeapPages",""],["SetStorage",""],["TransactionApi",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["FillBlock",""],["KillPrefix",""],["KillStorage",""],["Remark",""],["RemarkWithEvent",""],["SetCode",""],["SetCodeWithoutChecks",""],["SetHeapPages",""],["SetStorage",""],["TransactionApi",""]]};

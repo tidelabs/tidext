@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["SwapStatus",""],["SwapType",""]],"struct":[["Swap",""],["SwapConfirmation",""]]};

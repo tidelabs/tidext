@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["CheckTxVersion",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["CheckTxVersion",""]]};

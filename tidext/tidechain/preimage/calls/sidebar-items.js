@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["NotePreimage",""],["RequestPreimage",""],["TransactionApi",""],["UnnotePreimage",""],["UnrequestPreimage",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["NotePreimage",""],["RequestPreimage",""],["TransactionApi",""],["UnnotePreimage",""],["UnrequestPreimage",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Param","Extension parameter (used for negotiation)."]],"trait":[["Extension","A websocket extension as per RFC 6455, section 9."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Param","Extension parameter (used for negotiation)."]],"trait":[["Extension","A websocket extension as per RFC 6455, section 9."]]};

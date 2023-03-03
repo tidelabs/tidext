@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["MergePolicy","Policy for conflicts when merging two vaults."]],"struct":[["SyncClientsConfig","Config for synching two clients."],["SyncSnapshotsConfig","Config for synching two snapshots."]]});
+window.SIDEBAR_ITEMS = {"enum":[["MergePolicy","Policy for conflicts when merging two vaults."]],"struct":[["SyncClientsConfig","Config for synching two clients."],["SyncSnapshotsConfig","Config for synching two snapshots."]]};

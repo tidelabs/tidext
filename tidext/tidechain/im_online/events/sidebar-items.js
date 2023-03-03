@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AllGood","At the end of the session, no offence was committed."],["HeartbeatReceived","A new heartbeat was received from `AuthorityId`."],["SomeOffline","At the end of the session, at least one validator was found to be offline."]]});
+window.SIDEBAR_ITEMS = {"struct":[["AllGood","At the end of the session, no offence was committed."],["HeartbeatReceived","A new heartbeat was received from `AuthorityId`."],["SomeOffline","At the end of the session, at least one validator was found to be offline."]]};

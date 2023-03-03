@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["EquivocationProof",""],["Slot",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["EquivocationProof",""],["Slot",""]]};

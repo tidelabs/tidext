@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Swap","Event emitted when swap is initialized."],["SwapCancelled","User cancelled the initial swap and the funds has been released"],["Transfer","Event emitted when transfer is processed."],["Withdrawal","Event emitted when widthdraw is initialized."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Swap","Event emitted when swap is initialized."],["SwapCancelled","User cancelled the initial swap and the funds has been released"],["Transfer","Event emitted when transfer is processed."],["Withdrawal","Event emitted when widthdraw is initialized."]]};

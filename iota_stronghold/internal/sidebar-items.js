@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Provider","An implementation of the Vault’s [`BoxProvider`] type.  Used to encrypt and decrypt the data in this Stronghold."]]});
+window.SIDEBAR_ITEMS = {"struct":[["Provider","An implementation of the Vault’s [`BoxProvider`] type.  Used to encrypt and decrypt the data in this Stronghold."]]};
