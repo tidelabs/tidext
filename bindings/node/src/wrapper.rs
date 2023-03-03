@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -45,7 +45,7 @@ impl From<PrimitiveNodeHealth> for NodeHealth {
   }
 }
 
-pub type CurrencyId = Option<u32>; // None means Tdfy
+pub type CurrencyId = Option<u32>; // None means TDFY
 
 pub fn currency_id_from(id: PrimitiveCurrencyId) -> CurrencyId {
   match id {

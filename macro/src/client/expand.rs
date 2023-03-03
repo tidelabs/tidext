@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use crate::parse::Def;
+use super::parse::Def;
 use quote::{format_ident, ToTokens};
 
 pub fn expand(mut def: Def) -> proc_macro2::TokenStream {
@@ -265,6 +265,8 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
 
         /// Initialize a new [`Client`]
         pub async fn build(self) -> Result<Client, Error> {
+          const FALLBACK_SPEC_NAME: &str = "tidechain";
+
           let ws_client = WsClientBuilder::default()
             .max_notifs_per_subscription(4096)
             .connection_timeout(Duration::from_secs(5))
@@ -277,33 +279,11 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
               .await?
           );
 
-          #[cfg(feature = "tidechain-native")]
-          let fallback_runtime = TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default()));
-
-          #[cfg(feature = "lagoon-native")]
-          let fallback_runtime = TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default()));
-
-          // select runtime automatically based on the spec name of the client
+          // select runtime automatically based on the spec name and version of the chain
           let runtime_version = client.offline().runtime_version();
-          let default_runtime = if let Some(spec_name) = runtime_version.other.get("specName") {
-            spec_name.as_str().map(|spec_name| match spec_name {
-              #[cfg(feature = "tidechain-native")]
-              "tidechain" => TidefiRuntime::Tidechain(Arc::new(TidechainRuntime::default())),
-              #[cfg(feature = "lagoon-native")]
-              "lagoon" => TidefiRuntime::Lagoon(Arc::new(LagoonRuntime::default())),
-              _ => panic!("No runtime available"),
-            })
-            .unwrap_or(fallback_runtime)
-          } else {
-            fallback_runtime
-          };
-
-          let runtime_type = match self.runtime {
-            Some(runtime) => runtime,
-            None => default_runtime,
-          };
-
-          log::debug!("selected runtime: {}", runtime_type);
+          let spec_name = runtime_version.other.get("specName").map(|x| x.as_str().unwrap_or(FALLBACK_SPEC_NAME)).unwrap_or(FALLBACK_SPEC_NAME);
+          let runtime_type = TidefiRuntime::select_runtime(spec_name, runtime_version.spec_version);
+          log::debug!("selected runtime: {} for {}/{}", runtime_type, spec_name, runtime_version.spec_version);
 
           return Ok(Client {
             signer: self.signer,

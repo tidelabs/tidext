@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -15,23 +15,7 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::{test_context, test_context_tidechain};
-use tidext::{Error, TidefiRuntime};
-
-#[macro_export]
-macro_rules! with_tidext_runtime {
-	{
-		$self:ident,
-		$client:ident,
-		{
-			$( $code:tt )*
-		}
-	} => {
-		match $self.runtime_type() {
-			TidefiRuntime::Tidechain($client) => { $( $code )* },
-			TidefiRuntime::Lagoon($client) => { $( $code )* },
-		}
-	}
-}
+use tidext::{with_runtime, Error};
 
 fn type_of<T>(_: &T) -> String {
   std::any::type_name::<T>().into()
@@ -43,11 +27,7 @@ async fn dynamic_tidechain_runtime() -> Result<(), Error> {
   let cxt = test_context_tidechain().await;
   let client = cxt.node_proc.client().clone();
 
-  assert!(matches!(
-    client.runtime_type(),
-    TidefiRuntime::Tidechain { .. }
-  ));
-
+  assert!(client.runtime_type().id().contains("Tidechain"));
   Ok(())
 }
 
@@ -57,11 +37,7 @@ async fn dynamic_lagoon_runtime() -> Result<(), Error> {
   let cxt = test_context().await;
   let client = cxt.node_proc.client().clone();
 
-  assert!(matches!(
-    client.runtime_type(),
-    TidefiRuntime::Lagoon { .. }
-  ));
-
+  assert!(client.runtime_type().id().contains("Lagoon"));
   Ok(())
 }
 
@@ -70,21 +46,22 @@ async fn dynamic_lagoon_runtime() -> Result<(), Error> {
 async fn dynamic_lagoon_macro_runtime() -> Result<(), Error> {
   let cxt = test_context().await;
   let client = cxt.node_proc.client().clone();
-  with_tidext_runtime! {
+  with_runtime! {
     client,
     current_runtime,
     {
+      let spec_version = current_runtime.spec_version();
       assert_eq!(
         type_of(&current_runtime.storage()),
-        "&tidext::subxt_impl::lagoon::StorageApi",
+        format!("&tidext::subxt_impl::runtimes::lagoon{}::StorageApi", spec_version),
       );
       assert_eq!(
         type_of(&current_runtime.constants()),
-        "&tidext::subxt_impl::lagoon::ConstantsApi",
+        format!("&tidext::subxt_impl::runtimes::lagoon{}::ConstantsApi", spec_version),
       );
       assert_eq!(
         type_of(&current_runtime.tx()),
-        "&tidext::subxt_impl::lagoon::TransactionApi",
+        format!("&tidext::subxt_impl::runtimes::lagoon{}::TransactionApi", spec_version),
       );
       Ok(())
     }
@@ -96,21 +73,22 @@ async fn dynamic_lagoon_macro_runtime() -> Result<(), Error> {
 async fn dynamic_tidechain_macro_runtime() -> Result<(), Error> {
   let cxt = test_context_tidechain().await;
   let client = cxt.node_proc.client().clone();
-  with_tidext_runtime! {
+  with_runtime! {
     client,
     current_runtime,
     {
+      let spec_version = current_runtime.spec_version();
       assert_eq!(
         type_of(&current_runtime.storage()),
-        "&tidext::subxt_impl::tidechain::StorageApi",
+        format!("&tidext::subxt_impl::runtimes::tidechain{}::StorageApi", spec_version),
       );
       assert_eq!(
         type_of(&current_runtime.constants()),
-        "&tidext::subxt_impl::tidechain::ConstantsApi",
+        format!("&tidext::subxt_impl::runtimes::tidechain{}::ConstantsApi", spec_version),
       );
       assert_eq!(
         type_of(&current_runtime.tx()),
-        "&tidext::subxt_impl::tidechain::TransactionApi",
+        format!("&tidext::subxt_impl::runtimes::tidechain{}::TransactionApi", spec_version),
       );
       Ok(())
     }

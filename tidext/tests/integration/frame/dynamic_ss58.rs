@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify

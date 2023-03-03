@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use tidext::{primitives::CurrencyId, ClientBuilder, TidefiKeyring, TidefiRuntime};
+use tidext::{primitives::CurrencyId, ClientBuilder, TidefiKeyring};
 
 // load sr25519 test account
 use sp_keyring::AccountKeyring;
@@ -39,7 +39,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   // init client
   let client = ClientBuilder::new()
     .set_url("wss://rpc.lagoon.tidefi.io:443")
-    .set_runtime(TidefiRuntime::Lagoon(Default::default()))
     .set_signer(signer)
     .build()
     .await?;

@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -17,5 +17,4 @@
 mod offline_client;
 mod online_client;
 
-//pub use offline_client::{OfflineClient, OfflineClientT};
 pub use online_client::{Client, ClientBuilder};

@@ -5,13 +5,13 @@ authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 edition = "2021"
 
 [features]
-default = [ "production", "tidechain-native", "lagoon-native" ]
-production = ["keyring-stronghold"]
-dev = [ "sp-keyring", "another" ]
+default = [ "production", "lagoon-native" ]
+production = ["keyring-stronghold", "tidechain-native"]
+dev = [ "keyring-dev", "lagoon-native" ]
 keyring-stronghold = [ "iota_stronghold" ]
+keyring-dev = [ "sp-keyring" ]
 test = ["which", "env_logger", "sp-keyring"]
 decoder = [ "subxt/decoder" ]
-another = []
 tidechain-native = [ "tidext-macro/tidechain-native" ]
 lagoon-native = [ "tidext-macro/lagoon-native" ]
 

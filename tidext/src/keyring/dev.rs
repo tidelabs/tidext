@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -14,12 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-#![cfg(not(feature = "keyring-stronghold"))]
-
 use crate::{Error, TidechainConfig};
+#[cfg(feature = "keyring-dev")]
 pub use sp_keyring::AccountKeyring;
 use std::{fmt, sync::Arc};
-use subxt::{sp_core::sr25519::Pair, PairSigner};
+#[cfg(feature = "keyring-dev")]
+use subxt::ext::sp_core::crypto::Pair as TraitPair;
+use subxt::{ext::sp_core::sr25519::Pair, tx::PairSigner};
 
 /// Pair of SR25519 keys for development.
 pub type TidefiPairSigner = PairSigner<TidechainConfig, Pair>;
@@ -28,7 +29,9 @@ pub type TidefiKeyring = TidextKeyring<TidechainConfig>;
 
 #[derive(Clone)]
 pub enum TidextAccountKeyring {
+  #[cfg(feature = "keyring-dev")]
   AccountKeyring(AccountKeyring),
+  #[cfg(feature = "keyring-dev")]
   Custom(usize),
 }
 
@@ -51,6 +54,7 @@ where
   }
 }
 
+#[cfg(feature = "keyring-dev")]
 impl<T> From<usize> for TidextKeyring<T>
 where
   T: subxt::Config,
@@ -61,6 +65,7 @@ where
   }
 }
 
+#[cfg(feature = "keyring-dev")]
 impl<T> From<AccountKeyring> for TidextKeyring<T>
 where
   T: subxt::Config,
@@ -76,10 +81,11 @@ where
   T: subxt::Config,
   T::AccountId: From<tidefi_primitives::AccountId>,
 {
+  #[cfg(feature = "keyring-dev")]
   pub fn new(signer: TidextAccountKeyring) -> Self {
-    let account_id = match signer {
-      TidextAccountKeyring::AccountKeyring(keyrig) => keyrig.to_account_id(),
-      TidextAccountKeyring::Custom(idx) => AccountKeyring::numeric_id(idx),
+    let account_id: T::AccountId = match signer {
+      TidextAccountKeyring::AccountKeyring(keyrig) => keyrig.to_account_id().into(),
+      TidextAccountKeyring::Custom(idx) => AccountKeyring::numeric_id(idx).into(),
     };
 
     Self {
@@ -91,7 +97,24 @@ where
     }
   }
 
+  #[cfg(not(feature = "keyring-dev"))]
+  pub fn new(_signer: TidextAccountKeyring) -> Self {
+    unimplemented!("Add `keyring-dev` feature to use development keyring");
+  }
+
+  #[cfg(feature = "keyring-dev")]
+  pub async fn try_from_seed(seed: String) -> Result<Self, Error> {
+    let (pair_signer, _) = Pair::from_string_with_seed(seed.as_str(), None)
+      .map_err(|_| Error::Other("Invalid seed".into()))?;
+
+    Ok(Self {
+      account_id: T::AccountId::from(pair_signer.public().into()),
+      pair_signer: Arc::new(TidefiPairSigner::new(pair_signer)),
+    })
+  }
+
+  #[cfg(not(feature = "keyring-dev"))]
   pub async fn try_from_seed(_seed: String) -> Result<Self, Error> {
-    unimplemented!()
+    unimplemented!("Add `keyring-dev` feature to use development keyring");
   }
 }

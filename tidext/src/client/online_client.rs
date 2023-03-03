@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -15,9 +15,8 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::{
-  latest_block, make_rpc_call, with_runtime, Error, LagoonRuntime, NodeHealth, Permill,
-  RewardDestination, Signer, TidechainCall, TidechainConfig, TidechainRuntime, TidefiKeyring,
-  TidefiRuntime,
+  latest_block, make_rpc_call, with_runtime, Error, NodeHealth, Permill, RewardDestination, Signer,
+  TidechainCall, TidechainConfig, TidefiKeyring, TidefiRuntime,
 };
 use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
 use parity_scale_codec::Encode;
@@ -43,8 +42,6 @@ pub use client::*;
 
 #[tidext]
 mod client {
-  use crate::{lagoon::tidefi_staking, tidechain::tidefi_staking};
-
   /// Tidechain client
   #[tidext::client]
   pub struct Client {
@@ -93,18 +90,32 @@ mod client {
 
     /// Bond TDFY tokens
     /// Take the signer account as a stash and lock up `value` of its balance. `controller` will
-    /// be the account that controls it
+    /// be the account that controls it.
+    /// If `reward_destination` is not set, it default to `RewardDestination::Staked`
     #[tidext::pallet = "staking"]
     #[tidext::substitute_params = (
       MultiAddress::Id(controller),
       value,
-      RewardDestination::Controller.into()
+      reward_destination.unwrap_or(RewardDestination::Staked).into(),
     )]
-    fn bond(&self, controller: AccountId, value: Balance);
+    fn bond(
+      &self,
+      controller: AccountId,
+      value: Balance,
+      reward_destination: Option<RewardDestination>,
+    );
 
     /// Bond some extra amount
     #[tidext::pallet = "staking"]
     fn bond_extra(&self, value: Balance);
+
+    /// Update bonding payee
+    #[tidext::pallet = "staking"]
+    #[tidext::substitute_fn = "set_payee"]
+    #[tidext::substitute_params = (
+      reward_destination.into(),
+    )]
+    fn bond_set_payee(&self, reward_destination: RewardDestination);
 
     /// Schedule a portion of the stash to be unlocked ready for transfer out after the bond
     #[tidext::pallet = "staking"]
@@ -226,7 +237,7 @@ mod client {
       self.signer.as_ref().ok_or(Error::NoSignerAvailable)
     }
 
-    /// Submit signed extrinsic via RPC and wait for inclusing in a block and may take up to 6 seconds to complete
+    /// Submit signed extrinsic via RPC and wait for inclusion in a block and may take up to 6 seconds to complete
     pub async fn submit_signed_extrinsic_and_wait_for_in_block_success(
       &self,
       extrinsic: String,

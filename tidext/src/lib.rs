@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -75,9 +75,9 @@
 //!
 //! ## Access the runtime API
 //!
-//! Convert the client to a runtime api wrapper for custom runtime access
+//! Convert the client to a runtime API wrapper for custom runtime access
 //!
-//! The [`subxt`] proc macro will provide methods to submit extrinsics and read storage
+//! The [`subxt`] proc macro will provide methods to submit extrinsic(s) and read storage
 //! specific to the Tidechain
 //!
 //! ```no_run
@@ -97,16 +97,8 @@ pub use parity_scale_codec::{Decode, Encode};
 
 pub use sp_runtime::{MultiAddress, Permill};
 pub use subxt::{tx::Signer, Error as SubstrateSubxtError};
-pub use subxt_impl::{
-  OracleCall, QuorumCall, RewardDestination, StakingCall, TidechainCall, TidechainConfig,
-  TidefiCall, TidefiRuntime,
-};
+pub use subxt_impl::{runtimes::*, TidechainConfig};
 pub use tidefi_primitives as primitives;
-
-#[cfg(feature = "lagoon-native")]
-pub use subxt_impl::{lagoon, LagoonRuntime};
-#[cfg(feature = "tidechain-native")]
-pub use subxt_impl::{tidechain, TidechainRuntime};
 
 pub use traits::*;
 pub use utils::*;
