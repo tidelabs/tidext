@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -44,7 +44,7 @@ impl TestNodeProcess {
     TestNodeProcessBuilder::new(program)
   }
 
-  /// Attempt to kill the running substrate process.
+  /// Attempt to kill the running tidechain process.
   pub fn kill(&mut self) -> Result<(), String> {
     log::info!("Killing node process {}", self.proc.id());
     if let Err(err) = self.proc.kill() {
@@ -105,7 +105,7 @@ impl TestNodeProcessBuilder {
     self
   }
 
-  /// Spawn the substrate node at the given path, and wait for RPC to be initialized.
+  /// Spawn the tidechain node at the given path, and wait for RPC to be initialized.
   pub async fn spawn(&self) -> Result<TestNodeProcess, String> {
     let mut cmd = process::Command::new(&self.node_path);
     cmd
@@ -137,12 +137,12 @@ impl TestNodeProcessBuilder {
 
     let mut proc = cmd.spawn().map_err(|e| {
       format!(
-        "Error spawning substrate node '{}': {}",
+        "Error spawning tidechain node '{}': {}",
         self.node_path.to_string_lossy(),
         e
       )
     })?;
-    // wait for rpc to be initialized
+    // wait for RPC to be initialized
     let client_path = b"client_path".to_vec();
     const MAX_ATTEMPTS: u32 = 6;
     let mut attempts = 1;
@@ -150,7 +150,7 @@ impl TestNodeProcessBuilder {
     let client = loop {
       thread::sleep(time::Duration::from_secs(wait_secs));
       log::info!(
-        "Connecting to contracts enabled node, attempt {}/{}",
+        "Connecting to tidechain node, attempt {}/{}",
         attempts,
         MAX_ATTEMPTS
       );
@@ -186,7 +186,7 @@ impl TestNodeProcessBuilder {
         log::error!("{}", err);
         proc
           .kill()
-          .map_err(|e| format!("Error killing substrate process '{}': {}", proc.id(), e))?;
+          .map_err(|e| format!("Error killing tidechain process '{}': {}", proc.id(), e))?;
         Err(err)
       }
     }

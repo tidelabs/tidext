@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -19,10 +19,7 @@ use crate::Signer;
 use subxt::ext::sp_core::sr25519;
 
 #[cfg_attr(feature = "keyring-stronghold", path = "stronghold.rs")]
-#[cfg_attr(
-  not(any(feature = "keyring-stronghold", feature = "keyring-stronghold_ex")),
-  path = "dev.rs"
-)]
+#[cfg_attr(not(feature = "keyring-stronghold"), path = "dev.rs")]
 mod keyring_impl;
 pub use keyring_impl::*;
 

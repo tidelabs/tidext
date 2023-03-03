@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use sp_keyring::AccountKeyring;
-use tidext::{primitives::assets, ClientBuilder, TidefiKeyring, TidefiRuntime};
+use tidext::{primitives::assets, with_runtime, ClientBuilder, TidefiKeyring};
 
 #[path = "../src/lib.rs"]
 mod helpers;
@@ -23,22 +23,6 @@ mod helpers;
 // logging
 #[macro_use]
 extern crate log;
-
-#[macro_export]
-macro_rules! with_tidext_runtime {
-	{
-		$self:ident,
-		$client:ident,
-		{
-			$( $code:tt )*
-		}
-	} => {
-		match $self.runtime_type() {
-			TidefiRuntime::Tidechain($client) => { $( $code )* },
-			TidefiRuntime::Lagoon($client) => { $( $code )* },
-		}
-	}
-}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -56,7 +40,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .build()
     .await?;
 
-  let pubkeys = with_tidext_runtime! {
+  let pubkeys = with_runtime! {
     client,
     current_runtime,
     {
@@ -69,7 +53,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   }
   .unwrap_or_default();
 
-  let members_count = with_tidext_runtime! {
+  let members_count = with_runtime! {
     client,
     current_runtime,
     {

@@ -49,12 +49,8 @@ default:
     - cargo --version
     - sccache -s
 
-.auth-gitlab: &auth-gitlab
+.auth-github: &auth-github
   before_script:
-    - git config --global credential.helper store
-    - echo "https://gitlab-ci-token:${CI_JOB_TOKEN}@${GITLAB_DOMAIN}" > ~/.git-credentials
-    - git config --global url.ssh://git@github.com/.insteadOf https://github.com/
-    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent)
     - ssh-add - <<< ${GITHUB_SSH_PRIV_KEY}
     - mkdir ~/.ssh && touch ~/.ssh/known_hosts
@@ -84,7 +80,6 @@ test-build-linux-stable:
   <<: *rules-test
   <<: *docker-env
   <<: *compiler-info
-  <<: *auth-gitlab
   variables:
     CARGO_NET_GIT_FETCH_WITH_CLI: "true"
     RUST_TOOLCHAIN: stable
@@ -118,7 +113,6 @@ build-rustdoc:
   stage: build
   <<: *docker-env
   <<: *rules-test
-  <<: *auth-gitlab
   variables:
     SKIP_WASM_BUILD: 1
   artifacts:
@@ -142,7 +136,7 @@ publish-rustdoc:
   stage: publish
   #<<: *kubernetes-env
   <<: *docker-env
-  <<: *auth-gitlab
+  <<: *auth-github
   image: tidelabs/tools:latest
   variables:
     GIT_DEPTH: 100

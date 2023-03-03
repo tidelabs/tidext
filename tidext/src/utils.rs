@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -15,24 +15,6 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use serde::{Deserialize, Serialize};
-
-#[macro_export]
-macro_rules! with_runtime {
-	{
-		$self:ident,
-		$client:ident,
-		{
-			$( $code:tt )*
-		}
-	} => {
-		match $self.runtime_type() {
-			#[cfg(feature = "tidechain-native")]
-			$crate::TidefiRuntime::Tidechain($client) => { $( $code )* },
-			#[cfg(feature = "lagoon-native")]
-			$crate::TidefiRuntime::Lagoon($client) => { $( $code )* },
-		}
-	}
-}
 
 /// Make RPC call to Tidechain
 ///

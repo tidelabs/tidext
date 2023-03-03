@@ -1,4 +1,4 @@
-// Copyright 2021-2022 Semantic Network Ltd.
+// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -44,7 +44,7 @@ pub trait OracleExt {
   async fn cancel_swap(&self, request_id: Hash) -> Result<(), Error>;
 
   /// Update assets value for the sunrise pool
-  /// It should represent how many TDFY's for 1 `AssetId`.
+  /// It should represent how many TDFY for 1 `AssetId`.
   ///
   /// The value should always be formatted with TDFY decimals (12)
   ///
