@@ -23,7 +23,7 @@ async fn rpc_subscribe_finalized_blocks() {
   let mut blocks = client
     .runtime()
     .rpc()
-    .subscribe_finalized_blocks()
+    .subscribe_finalized_block_headers()
     .await
     .unwrap();
   blocks.next().await.unwrap().unwrap();

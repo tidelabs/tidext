@@ -85,55 +85,61 @@ impl QuorumExt for Client {
     )>,
     Error,
   > {
-    let proposals = with_runtime! {
+    with_runtime! {
       self,
       current_runtime,
       {
         self
-        .runtime()
-        .storage()
-        .fetch(&current_runtime.storage().quorum().proposals(), None)
-        .await?
-        .unwrap_or_default()
+          .runtime()
+          .storage()
+          .at(None)
+          .await?
+          .fetch(&current_runtime.storage().quorum().proposals())
+          .await
+          .map(|p| p.unwrap_or_default())
+          .map_err(Into::into)
       }
-    };
-    Ok(proposals)
+    }
   }
 
   async fn get_burned_queue(
     &self,
   ) -> Result<Vec<(Hash, Withdrawal<AccountId, BlockNumber, Vec<u8>>)>, Error> {
-    let queue = with_runtime! {
+    with_runtime! {
       self,
       current_runtime,
       {
         self
-        .runtime()
-        .storage()
-        .fetch(&current_runtime.storage().quorum().burned_queue(), None)
-        .await?
-        .unwrap_or_default()
+          .runtime()
+          .storage()
+          .at(None)
+          .await?
+          .fetch(&current_runtime.storage().quorum().burned_queue())
+          .await
+          .map(|p| p.unwrap_or_default())
+          .map_err(Into::into)
       }
-    };
-    Ok(queue)
+    }
   }
 
   async fn get_proposal(
     &self,
     proposal: Hash,
   ) -> Result<Option<ProposalVotes<BlockNumber, Vec<AccountId>>>, Error> {
-    let proposal = with_runtime! {
-      self,
-      current_runtime,
-      {
-        self
-        .runtime()
-        .storage()
-        .fetch(&current_runtime.storage().quorum().votes(proposal), None)
-        .await?
+    with_runtime! {
+        self,
+        current_runtime,
+        {
+          self
+            .runtime()
+            .storage()
+            .at(None)
+            .await?
+            .fetch(&current_runtime.storage().quorum().votes(proposal))
+            .await
+            .map_err(Into::into)
       }
-    };
-    Ok(proposal)
+    }
   }
 
   async fn submit_proposal(
@@ -227,7 +233,9 @@ impl QuorumExt for Client {
         self
         .runtime()
         .storage()
-        .fetch(&current_runtime.storage().quorum().members(account_id), None)
+        .at(None)
+        .await?
+        .fetch(&current_runtime.storage().quorum().members(account_id))
         .await?
         .unwrap_or(false)
       }

@@ -25,14 +25,12 @@ pub mod runtimes {}
 pub struct TidechainConfig;
 impl Config for TidechainConfig {
   type Index = <DefaultConfig as Config>::Index;
-  type BlockNumber = <DefaultConfig as Config>::BlockNumber;
   type Hash = <DefaultConfig as Config>::Hash;
-  type Hashing = <DefaultConfig as Config>::Hashing;
-  type AccountId = <DefaultConfig as Config>::AccountId;
+  type Hasher = <DefaultConfig as Config>::Hasher;
+  type AccountId = tidefi_primitives::AccountId;
   type Address = <DefaultConfig as Config>::Address;
   type Header = <DefaultConfig as Config>::Header;
   type Signature = <DefaultConfig as Config>::Signature;
-  type Extrinsic = <DefaultConfig as Config>::Extrinsic;
   type ExtrinsicParams = <PolkadotConfig as Config>::ExtrinsicParams;
 }
 
@@ -77,8 +75,10 @@ mod test {
       &[
         "Lagoon6030Runtime".to_string(),
         "Lagoon6040Runtime".to_string(),
+        "Lagoon7000Runtime".to_string(),
         "Tidechain6030Runtime".to_string(),
         "Tidechain6040Runtime".to_string(),
+        "Tidechain7000Runtime".to_string(),
       ]
     );
   }
@@ -132,11 +132,20 @@ mod test {
 
     assert_eq!(
       TidefiRuntime::select_runtime("tidechain", 7000).id(),
-      "Tidechain6040Runtime".to_string()
+      "Tidechain7000Runtime".to_string()
     );
     assert_eq!(
       TidefiRuntime::select_runtime("lagoon", 7000).id(),
-      "Lagoon6040Runtime".to_string()
+      "Lagoon7000Runtime".to_string()
+    );
+
+    assert_eq!(
+      TidefiRuntime::select_runtime("tidechain", 8000).id(),
+      "Tidechain7000Runtime".to_string()
+    );
+    assert_eq!(
+      TidefiRuntime::select_runtime("lagoon", 8000).id(),
+      "Lagoon7000Runtime".to_string()
     );
   }
 }

@@ -47,7 +47,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
       client
       .runtime()
       .storage()
-      .fetch(&current_runtime.storage().quorum().public_keys(assets::BTC), None)
+      .at(None)
+      .await?
+      .fetch(&current_runtime.storage().quorum().public_keys(assets::BTC))
       .await?
     }
   }
@@ -60,7 +62,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
       client
       .runtime()
       .storage()
-      .fetch(&current_runtime.storage().quorum().counter_for_members(), None)
+      .at(None)
+      .await?
+      .fetch(&current_runtime.storage().quorum().counter_for_members())
       .await?
     }
   }

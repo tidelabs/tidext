@@ -69,7 +69,7 @@
 //! use tidext::ClientBuilder;
 //!
 //! // This needs to run on a different thread
-//! let client = ClientBuilder::new().set_signer(signer).build().await?;
+//! let client = ClientBuilder::new().build().await?;
 //! let swap_fee = client.swap_fee().await?;
 //! ```
 //!
@@ -83,9 +83,20 @@
 //! ```no_run
 //! use tidext::ClientBuilder;
 //!
-//! let client = ClientBuilder::new().set_signer(signer).build().await?;
-//! let runtime = client.runtime();
-//! let tides = runtime.storage().balances().total_issuance(None).await?;
+//! let client = ClientBuilder::new().build().await?;
+//! let tides = tidext::with_runtime! {
+//!   client,
+//!   current_runtime,
+//!   {
+//!    client
+//!     .runtime()
+//!     .storage()
+//!     .at(None)
+//!     .await?
+//!     .fetch(&current_runtime.storage().balances().total_issuance())
+//!     .await?
+//!    }
+//!   }
 //! ```
 
 pub use crate::{

@@ -216,7 +216,6 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
   quote::quote!(
     #client_mod_vis mod #client_mod {
       use super::*;
-      use jsonrpsee::ws_client::WsClientBuilder;
       use subxt::OnlineClient;
       use std::time::Duration;
 
@@ -266,16 +265,8 @@ pub fn expand_calls(def: &mut Def) -> proc_macro2::TokenStream {
         /// Initialize a new [`Client`]
         pub async fn build(self) -> Result<Client, Error> {
           const FALLBACK_SPEC_NAME: &str = "tidechain";
-
-          let ws_client = WsClientBuilder::default()
-            .max_notifs_per_subscription(4096)
-            .connection_timeout(Duration::from_secs(5))
-            .build(&self.rpc_url)
-            .await
-            .map_err(|err| Error::Other(err.to_string()))?;
-
           let client = Arc::new(
-            subxt::OnlineClient::<TidechainConfig>::from_rpc_client(ws_client)
+            subxt::OnlineClient::<TidechainConfig>::from_url(&self.rpc_url)
               .await?
           );
 

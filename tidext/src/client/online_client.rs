@@ -19,17 +19,15 @@ use crate::{
   TidechainCall, TidechainConfig, TidefiKeyring, TidefiRuntime,
 };
 use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
-use parity_scale_codec::Encode;
-use sp_runtime::MultiAddress;
+use sp_core::{
+  blake2_256,
+  crypto::{Ss58AddressFormat, Ss58Codec},
+};
 use std::sync::Arc;
 use subxt::{
   error::{DispatchError, TransactionError},
   events::Phase,
-  ext::sp_core::{
-    blake2_256,
-    crypto::{Ss58AddressFormat, Ss58Codec},
-  },
-  rpc::{rpc_params, SubstrateTxStatus},
+  rpc::{rpc_params, types::SubstrateTxStatus},
   utils::Encoded,
 };
 use tidefi_primitives::{
@@ -84,7 +82,7 @@ mod client {
     /// Nominate validators
     #[tidext::pallet = "staking"]
     #[tidext::substitute_params = (
-      value.iter().map(|v| MultiAddress::Id(v.clone())).collect(),
+      value.iter().map(|v| sp_runtime::MultiAddress::Id(v.clone())).collect(),
     )]
     fn nominate(&self, value: Vec<AccountId>);
 
@@ -94,7 +92,7 @@ mod client {
     /// If `reward_destination` is not set, it default to `RewardDestination::Staked`
     #[tidext::pallet = "staking"]
     #[tidext::substitute_params = (
-      MultiAddress::Id(controller),
+      sp_runtime::MultiAddress::Id(controller),
       value,
       reward_destination.unwrap_or(RewardDestination::Staked).into(),
     )]
@@ -275,7 +273,7 @@ mod client {
               .extrinsics
               .iter()
               .position(|ext| {
-                let hash = blake2_256(&ext.encode());
+                let hash = blake2_256(&ext.0);
                 hash == ext_hash
               })
               .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
@@ -325,7 +323,9 @@ mod client {
               self
               .runtime()
               .storage()
-              .fetch(&current_runtime.storage().tidefi_staking().account_stakes(account_id), None)
+              .at(None)
+              .await?
+              .fetch(&current_runtime.storage().tidefi_staking().account_stakes(account_id))
               .await?
               .unwrap_or_default()
               .into_iter()
@@ -342,7 +342,9 @@ mod client {
               self
               .runtime()
               .storage()
-              .fetch(&current_runtime.storage().tidefi_staking().account_stakes(account_id), None)
+              .at(None)
+              .await?
+              .fetch(&current_runtime.storage().tidefi_staking().account_stakes(account_id))
               .await?
               .unwrap_or_default()
               .into_iter()
@@ -430,7 +432,9 @@ mod client {
             self
             .runtime()
             .storage()
-            .fetch(&current_runtime.storage().tidefi_staking().staking_pool(currency_id), None)
+            .at(None)
+            .await?
+            .fetch(&current_runtime.storage().tidefi_staking().staking_pool(currency_id))
             .await?
             .unwrap_or_default()
         }
@@ -447,7 +451,9 @@ mod client {
             self
             .runtime()
             .storage()
-            .fetch(&current_runtime.storage().balances().total_issuance(), None)
+            .at(None)
+            .await?
+            .fetch(&current_runtime.storage().balances().total_issuance())
             .await?
             .unwrap_or_default()
           }
@@ -459,7 +465,9 @@ mod client {
             self
             .runtime()
             .storage()
-            .fetch(&current_runtime.storage().assets().asset(wrapped_token), None)
+            .at(None)
+            .await?
+            .fetch(&current_runtime.storage().assets().asset(wrapped_token))
             .await?
             .map(|asset| asset.supply)
             .unwrap_or_default()

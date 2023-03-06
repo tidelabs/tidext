@@ -1,6 +1,6 @@
 [package]
 name = "tidext-macro"
-version = "0.1.0"
+version = "0.7.0"
 authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 edition = "2021"
 autotests = false
