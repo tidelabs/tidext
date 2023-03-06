@@ -16,7 +16,7 @@
 
 //! Tidext official keyring.
 use crate::Signer;
-use subxt::ext::sp_core::sr25519;
+use sp_core::sr25519;
 
 #[cfg_attr(feature = "keyring-stronghold", path = "stronghold.rs")]
 #[cfg_attr(not(feature = "keyring-stronghold"), path = "dev.rs")]
@@ -36,14 +36,9 @@ where
   T::AccountId: From<[u8; 32]>,
   T::Index: From<tidefi_primitives::Index>,
   T::AccountId: From<tidefi_primitives::AccountId>,
-  T::Address: From<sp_runtime::MultiAddress<sp_runtime::AccountId32, u32>>,
-  T::Signature: From<sp_runtime::MultiSignature>,
+  T::Address: From<subxt::utils::MultiAddress<subxt::utils::AccountId32, u32>>,
+  T::Signature: From<subxt::utils::MultiSignature>,
 {
-  /// Optionally returns a nonce.
-  fn nonce(&self) -> Option<T::Index> {
-    self.pair_signer.nonce().map(|nonce| nonce.into())
-  }
-
   /// Return the account ID.
   fn account_id(&self) -> &T::AccountId {
     &self.account_id

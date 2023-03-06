@@ -16,18 +16,16 @@
 
 #![cfg(feature = "keyring-stronghold")]
 use crate::{Error, TidechainConfig};
+use sp_core::{
+  crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
+  sr25519::{Public, Signature},
+};
 use std::{fmt, path::Path, sync::Arc};
 use stronghold::{
   procedures::{BIP39Recover, GenerateKey, KeyType, PublicKey, Sr25519Sign},
   KeyProvider, Location, SnapshotPath, Stronghold,
 };
-use subxt::{
-  ext::sp_core::{
-    crypto::{CryptoType, DeriveJunction, Pair, SecretStringError},
-    sr25519::{Public, Signature},
-  },
-  tx::PairSigner,
-};
+use subxt::tx::PairSigner;
 
 pub use iota_stronghold as stronghold;
 

@@ -42,7 +42,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
   // Start a new tokio task to watch the runtime updates while
   // utilizing the API for other use cases.
-  let update_client = client.runtime().subscribe_to_updates();
+  let update_client = client.runtime().updater();
   tokio::spawn(async move {
     let result = update_client.perform_runtime_updates().await;
     if let Err(err) = result {

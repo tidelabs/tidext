@@ -1,4 +1,4 @@
-// Copyright 2021-2023 Semantic Network Ltd.
+// Copyright 2021-2022 Semantic Network Ltd.
 // This file is part of tidext.
 
 // tidext is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
-use futures::{future, stream, StreamExt};
+use futures::StreamExt;
 use tidext::{tidechain, ClientBuilder, TidefiKeyring};
 
 // load sr25519 test account
@@ -42,23 +42,26 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     .build()
     .await?;
 
-  let runtime = client.runtime();
-  let mut event_sub = runtime
-    .events()
-    .subscribe()
-    .await?
-    // Filter extrinsic success
-    .filter_map(|events| future::ready(events.ok()))
-    // Map events to just the one we care about:
-    .flat_map(|events| {
-      let update_block = events
-        .find::<tidechain::security::events::UpdateCurrentBlock>()
-        .collect::<Vec<_>>();
-      stream::iter(update_block)
-    });
+  let mut blocks_sub = client.runtime().blocks().subscribe_all().await?;
+  while let Some(block) = blocks_sub.next().await {
+    let block = block?;
 
-  while let Some(update_block_event) = event_sub.next().await {
-    debug!("Update block event: {:?}", update_block_event);
+    let block_number = block.header().number;
+    let block_hash = block.hash();
+    // Ask for the events for this block.
+    let events = block.events().await?;
+
+    debug!("Block #{block_number}:");
+    debug!("Hash: {block_hash}");
+
+    // Iterate through the events using metadata to dynamically decode and skip them,
+    // and return the first event found which decodes to the provided Ev type.
+    let update_block_event =
+      events.find_first::<tidechain::security::events::UpdateCurrentBlock>()?;
+
+    if let Some(event) = update_block_event {
+      debug!("Update block event found {:?}", event.0)
+    }
   }
 
   Ok(())

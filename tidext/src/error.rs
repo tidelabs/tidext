@@ -28,8 +28,6 @@ pub enum Error {
   DispatchError(String),
   #[error("codec error: {0}")]
   Codec(#[from] parity_scale_codec::Error),
-  #[error("jsonrpsee error: {0}")]
-  JsonRpsee(#[from] jsonrpsee::core::Error),
   #[error("other error: {0}")]
   Other(String),
   #[error("stronghold error: {0}")]
@@ -40,9 +38,6 @@ pub enum Error {
   #[cfg(feature = "keyring-stronghold")]
   #[error("stronghold procedure error: {0}")]
   StrongholdProcedure(#[from] iota_stronghold::procedures::ProcedureError),
-  #[cfg(feature = "keyring-stronghold_ex")]
-  #[error("stronghold engine error: {0}")]
-  ClientExError(#[from] ex_client::Error),
   #[error("quorum: {0}")]
   QuorumInit(String),
   #[error("network error: {0}")]

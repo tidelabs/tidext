@@ -1,6 +1,6 @@
 [package]
 name = "tidext"
-version = "0.1.0"
+version = "0.7.0"
 authors = ["Semantic Network Team <publishers@tidelabs.org>"]
 edition = "2021"
 
@@ -30,6 +30,7 @@ parity-scale-codec = { version = "3" }
 subxt = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
 subxt-macro = { git = "https://github.com/tidelabs/subxt", branch = "tidechain"}
 
+sp-core = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
 sp-keyring = { git = "https://github.com/tidelabs/substrate", branch = "tidechain", optional = true }
 sp-runtime = { git = "https://github.com/tidelabs/substrate", branch = "tidechain"}
 frame-support = { git = "https://github.com/tidelabs/substrate", branch = "tidechain" }
@@ -40,9 +41,6 @@ tidefi-primitives = { git = "https://github.com/tidelabs/primitives", branch = "
 
 # Stronghold
 iota_stronghold = { git = "https://github.com/tidelabs/stronghold.rs", branch = "dev", optional = true }
-
-# jsonrpsee
-jsonrpsee = { version = "0.15.1", features = ["macros", "ws-client", "client-ws-transport"] }
 
 # test module dependencies
 which = { version = "4.2.2", optional = true }

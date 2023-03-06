@@ -139,9 +139,12 @@ pub fn to_hash(hex: String) -> Result<Hash> {
     )
   })?;
 
-  let hash: [u8; 32] = b
-    .try_into()
-    .map_err(|_| Error::new(Status::InvalidArg, "hash must represent 32 bytes".into()))?;
+  let hash: [u8; 32] = b.try_into().map_err(|_| {
+    Error::new(
+      Status::InvalidArg,
+      "hash must represent 32 bytes".to_string(),
+    )
+  })?;
 
   Ok(sp_core::H256(hash))
 }

@@ -16,6 +16,7 @@ pub struct Runtime {
   pub enum_name: syn::Ident,
   pub mod_name: syn::Ident,
   pub runtime_name: syn::Ident,
+  pub runtime_call: syn::Ident,
   pub runtime_metadata_path: String,
 }
 
@@ -70,6 +71,15 @@ impl TryInto<Vec<Runtime>> for RuntimeMetadataPath {
           )
         })?;
 
+      let runtime_call = format_ident!(
+        "{}",
+        if spec_version >= 7000 {
+          "RuntimeCall"
+        } else {
+          "Call"
+        }
+      );
+
       // lagoon
       let expected_lagoon_path = dir_path.join("lagoon_metadata.scale");
       if expected_lagoon_path.exists() {
@@ -84,6 +94,7 @@ impl TryInto<Vec<Runtime>> for RuntimeMetadataPath {
               "Invalid artifacts directory",
             ))?
             .to_string(),
+          runtime_call: runtime_call.clone(),
           mod_name: format_ident!("lagoon{}", spec_version),
           runtime_name: format_ident!("{}", "lagoon_runtime"),
         })
@@ -103,6 +114,7 @@ impl TryInto<Vec<Runtime>> for RuntimeMetadataPath {
               "Unable to convert path to string",
             ))?
             .to_string(),
+          runtime_call,
           mod_name: format_ident!("tidechain{}", spec_version),
           runtime_name: format_ident!("{}", "tidechain_runtime"),
         })

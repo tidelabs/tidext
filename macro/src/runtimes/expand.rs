@@ -29,9 +29,7 @@ pub fn expand(item_mod: syn::ItemMod, runtimes: Vec<Runtime>) -> proc_macro2::To
   // to be used mainly to match events
   let get_first_runtime = |runtime_name: &str| {
     let all_runtimes = runtimes.sort_desc();
-    let found_runtime = all_runtimes
-      .iter()
-      .find(|r| r.spec_name == runtime_name.to_string());
+    let found_runtime = all_runtimes.iter().find(|r| r.spec_name == *runtime_name);
     if let Some(found_runtime) = found_runtime {
       let runtime_name_ident = format_ident!("{}", runtime_name);
       let mod_name = &found_runtime.mod_name;
@@ -99,7 +97,7 @@ pub fn expand(item_mod: syn::ItemMod, runtimes: Vec<Runtime>) -> proc_macro2::To
   // all runtimes without tidechain
   let macro_def_no_tidechain = runtimes
     .iter()
-    .filter(|runtime| runtime.spec_name != "tidechain".to_string())
+    .filter(|runtime| runtime.spec_name != *"tidechain")
     .map(|runtime| {
       let enum_item = &runtime.enum_name;
       quote::quote!(
@@ -110,7 +108,7 @@ pub fn expand(item_mod: syn::ItemMod, runtimes: Vec<Runtime>) -> proc_macro2::To
   // all runtimes without lagoon
   let macro_def_no_lagoon = runtimes
     .iter()
-    .filter(|runtime| runtime.spec_name != "lagoon".to_string())
+    .filter(|runtime| runtime.spec_name != *"lagoon")
     .map(|runtime| {
       let enum_item = &runtime.enum_name;
       quote::quote!(
@@ -122,75 +120,121 @@ pub fn expand(item_mod: syn::ItemMod, runtimes: Vec<Runtime>) -> proc_macro2::To
     let metadata_path = &runtime.runtime_metadata_path;
     let mod_name = &runtime.mod_name;
     let runtime_name = &runtime.runtime_name;
+    let runtime_call = &runtime.runtime_call;
     let feature = format!("{}-native", &runtime.spec_name);
 
     quote::quote!(
       #[cfg(feature = #feature)]
-      #[subxt::subxt(runtime_metadata_path = #metadata_path)]
-      pub mod #mod_name {
-        #[subxt(substitute_type = "sp_runtime::bounded::bounded_vec::BoundedVec")]
-        use ::Vec;
-        #[subxt(substitute_type = "frame_support::storage::bounded_vec::BoundedVec")]
-        use ::Vec;
-        #[subxt(substitute_type = "frame_support::PalletId")]
-        use ::frame_support::PalletId;
-        #[subxt(substitute_type = "sp_arithmetic::per_things::Percent")]
-        use ::sp_runtime::Percent;
-        #[subxt(substitute_type = "sp_arithmetic::per_things::Permill")]
-        use ::sp_runtime::Permill;
-        #[subxt(substitute_type = "tidefi_primitives::ComplianceLevel")]
-        use ::tidefi_primitives::ComplianceLevel;
-        #[subxt(substitute_type = "tidefi_primitives::CurrencyId")]
-        use ::tidefi_primitives::CurrencyId;
-        #[subxt(substitute_type = "tidefi_primitives::Mint")]
-        use ::tidefi_primitives::Mint;
-        #[subxt(substitute_type = "tidefi_primitives::OracleImAlive")]
-        use ::tidefi_primitives::OracleImAlive;
-        #[subxt(substitute_type = "tidefi_primitives::ProposalType")]
-        use ::tidefi_primitives::ProposalType;
-        #[subxt(substitute_type = "tidefi_primitives::ProposalVotes")]
-        use ::tidefi_primitives::ProposalVotes;
-        #[subxt(substitute_type = "tidefi_primitives::Stake")]
-        use ::tidefi_primitives::Stake;
-        #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapConfirmation")]
-        use ::tidefi_primitives::SwapConfirmation;
-        #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapStatus")]
-        use ::tidefi_primitives::SwapStatus;
-        #[subxt(substitute_type = "tidefi_primitives::swap::swap::SwapType")]
-        // required for 6030
-        use ::tidefi_primitives::SwapType;
-        #[subxt(substitute_type = "tidefi_primitives::SwapConfirmation")]
-        use ::tidefi_primitives::SwapConfirmation;
-        #[subxt(substitute_type = "tidefi_primitives::SwapStatus")]
-        use ::tidefi_primitives::SwapStatus;
-        #[subxt(substitute_type = "tidefi_primitives::SwapType")]
-        use ::tidefi_primitives::SwapType;
-        // -----
-        #[subxt(substitute_type = "tidefi_primitives::Withdrawal")]
-        use ::tidefi_primitives::Withdrawal;
-      }
+      #[subxt::subxt(
+        runtime_metadata_path = #metadata_path,
+        substitute_type(
+          type = "sp_runtime::bounded::bounded_vec::BoundedVec<A>",
+          with = "::frame_support::inherent::Vec<A>"
+        ),
+        substitute_type(
+          type = "sp_core::bounded::bounded_vec::BoundedVec<A>",
+          with = "::frame_support::inherent::Vec<A>"
+        ),
+        substitute_type(
+          type = "bounded_collections::bounded_vec::BoundedVec<A>",
+          with = "::frame_support::inherent::Vec<A>"
+        ),
+        substitute_type(
+          type = "sp_arithmetic::per_things::Percent",
+          with = "::sp_runtime::Percent"
+        ),
+        substitute_type(
+          type = "sp_arithmetic::per_things::Permill",
+          with = "::sp_runtime::Permill"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::ComplianceLevel",
+          with = "::tidefi_primitives::ComplianceLevel"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::CurrencyId",
+          with = "::tidefi_primitives::CurrencyId"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::OracleImAlive",
+          with = "::tidefi_primitives::OracleImAlive"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::Stake",
+          with = "::tidefi_primitives::Stake"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::swap::swap::SwapConfirmation",
+          with = "::tidefi_primitives::SwapConfirmation"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::SwapConfirmation",
+          with = "::tidefi_primitives::SwapConfirmation"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::swap::swap::SwapStatus",
+          with = "::tidefi_primitives::SwapStatus"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::SwapStatus",
+          with = "::tidefi_primitives::SwapStatus"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::swap::swap::SwapType",
+          with = "::tidefi_primitives::SwapType"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::SwapType",
+          with = "::tidefi_primitives::SwapType"
+        ),
+        substitute_type(
+          type = "::sp_core::crypto::AccountId32",
+          with = "::tidefi_primitives::AccountId"
+        ),
+        substitute_type(
+          type = "::sp_runtime::multiaddress::MultiAddress",
+          with = "::sp_runtime::MultiAddress"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::ProposalType<A, B, V, VA>",
+          with = "::tidefi_primitives::ProposalType<A, B, V, VA>"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::Withdrawal<A, B, V>",
+          with = "::tidefi_primitives::Withdrawal<A, B, V>"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::ProposalVotes<A, B>",
+          with = "::tidefi_primitives::ProposalVotes<A, B>"
+        ),
+        substitute_type(
+          type = "tidefi_primitives::ProposalStatus",
+          with = "::tidefi_primitives::ProposalStatus"
+        ),
+      )]
+      pub mod #mod_name {}
 
       #[cfg(feature = #feature)]
-      impl From<TidechainCall> for #mod_name::runtime_types::#runtime_name::Call {
-        fn from(current_call: TidechainCall) -> #mod_name::runtime_types::#runtime_name::Call {
+      impl From<TidechainCall> for #mod_name::runtime_types::#runtime_name::#runtime_call {
+        fn from(current_call: TidechainCall) -> #mod_name::runtime_types::#runtime_name::#runtime_call {
           match current_call {
             TidechainCall::Assets(assets_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Assets(assets_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Assets(assets_call.into())
             }
             TidechainCall::Balances(balances_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Balances(balances_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Balances(balances_call.into())
             }
             TidechainCall::Tidefi(tidefi_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Tidefi(tidefi_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Tidefi(tidefi_call.into())
             }
             TidechainCall::Quorum(quorum_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Quorum(quorum_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Quorum(quorum_call.into())
             }
             TidechainCall::Oracle(oracle_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Oracle(oracle_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Oracle(oracle_call.into())
             }
             TidechainCall::Staking(staking_call) => {
-              #mod_name::runtime_types::#runtime_name::Call::Staking(staking_call.into())
+              #mod_name::runtime_types::#runtime_name::#runtime_call::Staking(staking_call.into())
             }
           }
         }
