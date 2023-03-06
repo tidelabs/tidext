@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.23.1/src/proof/generate.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>generate.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../trie_db/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.25.1/src/proof/generate.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>generate.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../trie_db/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -545,6 +545,9 @@
 <a href="#545" id="545">545</a>
 <a href="#546" id="546">546</a>
 <a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019, 2021 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -563,14 +566,15 @@
 
 </span><span class="kw">use </span><span class="kw">crate</span>::rstd::{boxed::Box, convert::TryInto, marker::PhantomData, vec, vec::Vec};
 
-<span class="kw">use </span>hash_db::Hasher;
+<span class="kw">use </span>hash_db::{HashDBRef, Hasher};
 
 <span class="kw">use crate</span>::{
 	nibble::LeftNibbleSlice,
 	nibble_ops::NIBBLE_LENGTH,
 	node::{NodeHandle, NodeHandlePlan, NodePlan, OwnedNode, Value, ValuePlan},
-	CError, ChildReference, NibbleSlice, NodeCodec, Record, Recorder, <span class="prelude-ty">Result </span><span class="kw">as </span>TrieResult, Trie,
-	TrieError, TrieHash, TrieLayout,
+	recorder::Record,
+	CError, ChildReference, DBValue, NibbleSlice, NodeCodec, Recorder, <span class="prelude-ty">Result </span><span class="kw">as </span>TrieResult, Trie,
+	TrieDBBuilder, TrieError, TrieHash, TrieLayout,
 };
 
 <span class="kw">struct </span>StackEntry&lt;<span class="lifetime">&#39;a</span>, C: NodeCodec&gt; {
@@ -634,7 +638,7 @@
 			NodePlan::Leaf { .. } <span class="kw">if </span>!omit_value =&gt; node_data.to_vec(),
 			NodePlan::Leaf { partial, value: <span class="kw">_ </span>} =&gt; {
 				<span class="kw">let </span>partial = partial.build(node_data);
-				C::leaf_node(partial.right(), Value::Inline(<span class="kw-2">&amp;</span>[]))
+				C::leaf_node(partial.right_iter(), partial.len(), Value::Inline(<span class="kw-2">&amp;</span>[]))
 			},
 			NodePlan::Extension { .. } <span class="kw">if </span><span class="self">self</span>.child_index == <span class="number">0 </span>=&gt; node_data.to_vec(),
 			NodePlan::Extension { partial: partial_plan, child: <span class="kw">_ </span>} =&gt; {
@@ -764,17 +768,18 @@
 <span class="doccomment">/// Generate a compact proof for key-value pairs in a trie given a set of keys.
 ///
 /// Assumes inline nodes have only inline children.
-</span><span class="kw">pub fn </span>generate_proof&lt;<span class="lifetime">&#39;a</span>, T, L, I, K&gt;(
-	trie: <span class="kw-2">&amp;</span>T,
+</span><span class="kw">pub fn </span>generate_proof&lt;<span class="lifetime">&#39;a</span>, D, L, I, K&gt;(
+	db: <span class="kw-2">&amp;</span>D,
+	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
 	keys: I,
 ) -&gt; TrieResult&lt;Vec&lt;Vec&lt;u8&gt;&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;
 <span class="kw">where
-	</span>T: Trie&lt;L&gt;,
+	</span>D: HashDBRef&lt;L::Hash, DBValue&gt;,
 	L: TrieLayout,
 	I: IntoIterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>K&gt;,
 	K: <span class="lifetime">&#39;a </span>+ AsRef&lt;[u8]&gt;,
 {
-	<span class="comment">// Sort and deduplicate keys.
+	<span class="comment">// Sort and de-duplicate keys.
 	</span><span class="kw">let </span><span class="kw-2">mut </span>keys = keys.into_iter().map(|key| key.as_ref()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 	keys.sort();
 	keys.dedup();
@@ -793,10 +798,13 @@
 		</span>unwind_stack(<span class="kw-2">&amp;mut </span>stack, <span class="kw-2">&amp;mut </span>proof_nodes, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>key))<span class="question-mark">?</span>;
 
 		<span class="comment">// Perform the trie lookup for the next key, recording the sequence of nodes traversed.
-		</span><span class="kw">let </span><span class="kw-2">mut </span>recorder = Recorder::new();
-		<span class="kw">let </span>expected_value = trie.get_with(key_bytes, <span class="kw-2">&amp;mut </span>recorder)<span class="question-mark">?</span>;
-		<span class="comment">// Remember recorded entry is node query order and hashed value after its node.
-		</span><span class="kw">let </span><span class="kw-2">mut </span>recorded_nodes = recorder.drain().into_iter().peekable();
+		</span><span class="kw">let </span><span class="kw-2">mut </span>recorder = Recorder::&lt;L&gt;::new();
+		<span class="kw">let </span>expected_value = {
+			<span class="kw">let </span>trie = TrieDBBuilder::&lt;L&gt;::new(db, root).with_recorder(<span class="kw-2">&amp;mut </span>recorder).build();
+			trie.get(key_bytes)<span class="question-mark">?
+		</span>};
+
+		<span class="kw">let </span><span class="kw-2">mut </span>recorded_nodes = recorder.drain().into_iter().peekable();
 
 		<span class="comment">// Skip over recorded nodes already on the stack. Their indexes into the respective vector
 		// (either `stack` or `recorded_nodes`) match under the assumption that inline nodes have
@@ -827,10 +835,8 @@
 					<span class="kw-2">&amp;mut </span>recorded_nodes,
 				)<span class="question-mark">?</span>,
 				<span class="comment">// If stack is empty, descend into the root node.
-				</span><span class="prelude-val">None </span>=&gt; Step::Descend {
-					child_prefix_len: <span class="number">0</span>,
-					child: NodeHandle::Hash(trie.root().as_ref()),
-				},
+				</span><span class="prelude-val">None </span>=&gt;
+					Step::Descend { child_prefix_len: <span class="number">0</span>, child: NodeHandle::Hash(root.as_ref()) },
 			};
 
 			<span class="kw">match </span>step {

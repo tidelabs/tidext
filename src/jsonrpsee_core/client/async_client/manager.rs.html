@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.15.1/src/client/async_client/manager.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>manager.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.16.2/src/client/async_client/manager.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>manager.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -475,9 +475,6 @@
 <a href="#475" id="475">475</a>
 <a href="#476" id="476">476</a>
 <a href="#477" id="477">477</a>
-<a href="#478" id="478">478</a>
-<a href="#479" id="479">479</a>
-<a href="#480" id="480">480</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 //
 // Permission is hereby granted, free of charge, to any
@@ -512,9 +509,12 @@
 //!    &gt; **Note**: The spec allow number, string or null but this crate only supports numbers.
 //!    - SubscriptionId: unique ID generated by server
 
-</span><span class="kw">use </span>std::collections::{hash_map::Entry, HashMap};
+</span><span class="kw">use </span>std::{
+	collections::{hash_map::Entry, HashMap},
+	ops::Range,
+};
 
-<span class="kw">use </span><span class="kw">crate</span>::Error;
+<span class="kw">use crate</span>::{client::BatchEntry, Error};
 <span class="kw">use </span>futures_channel::{mpsc, oneshot};
 <span class="kw">use </span>jsonrpsee_types::{Id, SubscriptionId};
 <span class="kw">use </span>rustc_hash::FxHashMap;
@@ -527,7 +527,7 @@
 	Subscription((RequestId, SubscriptionSink, UnsubscribeMethod)),
 }
 
-<span class="attr">#[derive(Debug)]
+<span class="attr">#[derive(Debug, Clone)]
 </span><span class="doccomment">/// Indicates the status of a given request/response.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum </span>RequestStatus {
 	<span class="doccomment">/// The method call is waiting for a response,
@@ -541,7 +541,7 @@
 }
 
 <span class="kw">type </span>PendingCallOneshot = <span class="prelude-ty">Option</span>&lt;oneshot::Sender&lt;<span class="prelude-ty">Result</span>&lt;JsonValue, Error&gt;&gt;&gt;;
-<span class="kw">type </span>PendingBatchOneshot = oneshot::Sender&lt;<span class="prelude-ty">Result</span>&lt;Vec&lt;JsonValue&gt;, Error&gt;&gt;;
+<span class="kw">type </span>PendingBatchOneshot = oneshot::Sender&lt;<span class="prelude-ty">Result</span>&lt;Vec&lt;BatchEntry&lt;<span class="lifetime">&#39;static</span>, JsonValue&gt;&gt;, Error&gt;&gt;;
 <span class="kw">type </span>PendingSubscriptionOneshot = oneshot::Sender&lt;<span class="prelude-ty">Result</span>&lt;(mpsc::Receiver&lt;JsonValue&gt;, SubscriptionId&lt;<span class="lifetime">&#39;static</span>&gt;), Error&gt;&gt;;
 <span class="kw">type </span>SubscriptionSink = mpsc::Sender&lt;JsonValue&gt;;
 <span class="kw">type </span>UnsubscribeMethod = String;
@@ -550,8 +550,6 @@
 <span class="attr">#[derive(Debug)]
 </span><span class="doccomment">/// Batch state.
 </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>BatchState {
-	<span class="doccomment">/// Order that the request was performed in.
-	</span><span class="kw">pub</span>(<span class="kw">crate</span>) order: FxHashMap&lt;RequestId, usize&gt;,
 	<span class="doccomment">/// Oneshot send back.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) send_back: PendingBatchOneshot,
 }
@@ -566,9 +564,9 @@
 	<span class="doccomment">/// Reverse lookup, to find a request ID in constant time by `subscription ID` instead of looking through all
 	/// requests.
 	</span>subscriptions: HashMap&lt;SubscriptionId&lt;<span class="lifetime">&#39;static</span>&gt;, RequestId&gt;,
-	<span class="doccomment">/// Pending batch requests
-	</span>batches: FxHashMap&lt;Vec&lt;RequestId&gt;, BatchState&gt;,
-	<span class="doccomment">/// Registered Methods for incoming notifications
+	<span class="doccomment">/// Pending batch requests.
+	</span>batches: FxHashMap&lt;Range&lt;u64&gt;, BatchState&gt;,
+	<span class="doccomment">/// Registered Methods for incoming notifications.
 	</span>notification_handlers: HashMap&lt;String, SubscriptionSink&gt;,
 }
 
@@ -578,7 +576,7 @@
 		<span class="self">Self</span>::default()
 	}
 
-	<span class="doccomment">/// Tries to insert a new pending call.
+	<span class="doccomment">/// Tries to insert a new pending request.
 	///
 	/// Returns `Ok` if the pending request was successfully inserted otherwise `Err`.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>insert_pending_call(
@@ -594,26 +592,22 @@
 		}
 	}
 
-	<span class="doccomment">/// Tries to insert a new batch request
+	<span class="doccomment">/// Tries to insert a new batch request.
 	///
 	/// Returns `Ok` if the pending request was successfully inserted otherwise `Err`.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>insert_pending_batch(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		<span class="kw-2">mut </span>batch: Vec&lt;RequestId&gt;,
+		batch: Range&lt;u64&gt;,
 		send_back: PendingBatchOneshot,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(), PendingBatchOneshot&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>order = FxHashMap::with_capacity_and_hasher(batch.len(), Default::default());
-		<span class="kw">for </span>(idx, batch_id) <span class="kw">in </span>batch.iter().enumerate() {
-			order.insert(batch_id.clone(), idx);
-		}
-		batch.sort_unstable();
 		<span class="kw">if let </span>Entry::Vacant(v) = <span class="self">self</span>.batches.entry(batch) {
-			v.insert(BatchState { order, send_back });
+			v.insert(BatchState { send_back });
 			<span class="prelude-val">Ok</span>(())
 		} <span class="kw">else </span>{
 			<span class="prelude-val">Err</span>(send_back)
 		}
 	}
+
 	<span class="doccomment">/// Tries to insert a new pending subscription and reserves a slot for a &quot;potential&quot; unsubscription request.
 	///
 	/// Returns `Ok` if the pending request was successfully inserted otherwise `Err`.
@@ -660,7 +654,7 @@
 		}
 	}
 
-	<span class="doccomment">/// Inserts a handler for incoming notifications
+	<span class="doccomment">/// Inserts a handler for incoming notifications.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>insert_notification_handler(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 		method: <span class="kw-2">&amp;</span>str,
@@ -674,7 +668,7 @@
 		}
 	}
 
-	<span class="doccomment">/// Removes a notification handler
+	<span class="doccomment">/// Removes a notification handler.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>remove_notification_handler(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: String) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
 		<span class="kw">if </span><span class="self">self</span>.notification_handlers.remove(<span class="kw-2">&amp;</span>method).is_some() {
 			<span class="prelude-val">Ok</span>(())
@@ -703,10 +697,10 @@
 		}
 	}
 
-	<span class="doccomment">/// Tries to complete a pending batch request
+	<span class="doccomment">/// Tries to complete a pending batch request.
 	///
 	/// Returns `Some` if the subscription was completed otherwise `None`.
-	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>complete_pending_batch(<span class="kw-2">&amp;mut </span><span class="self">self</span>, batch: Vec&lt;RequestId&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;BatchState&gt; {
+	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>complete_pending_batch(<span class="kw-2">&amp;mut </span><span class="self">self</span>, batch: Range&lt;u64&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;BatchState&gt; {
 		<span class="kw">match </span><span class="self">self</span>.batches.entry(batch) {
 			Entry::Occupied(request) =&gt; {
 				<span class="kw">let </span>(_digest, state) = request.remove_entry();
@@ -716,7 +710,7 @@
 		}
 	}
 
-	<span class="doccomment">/// Tries to complete a pending call..
+	<span class="doccomment">/// Tries to complete a pending call.
 	///
 	/// Returns `Some` if the call was completed otherwise `None`.
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>complete_pending_call(<span class="kw-2">&amp;mut </span><span class="self">self</span>, request_id: RequestId) -&gt; <span class="prelude-ty">Option</span>&lt;PendingCallOneshot&gt; {

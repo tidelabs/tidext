@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/sec1-0.2.1/src/private_key.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>private_key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sec1/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/sec1-0.3.0/src/private_key.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>private_key.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sec1/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -133,6 +133,36 @@
 <a href="#132" id="132">132</a>
 <a href="#133" id="133">133</a>
 <a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
 </pre><pre class="rust"><code><span class="doccomment">//! SEC1 elliptic curve private key support.
 //!
 //! Support for ASN.1 DER-encoded elliptic curve private keys as described in
@@ -140,15 +170,18 @@
 //!
 //! &lt;https://www.secg.org/sec1-v2.pdf&gt;
 
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>document;
-
-<span class="kw">use crate</span>::{EcParameters, Error};
+</span><span class="kw">use crate</span>::{EcParameters, Error, <span class="prelude-ty">Result</span>};
 <span class="kw">use </span>core::fmt;
 <span class="kw">use </span>der::{
-    asn1::{BitString, ContextSpecific, OctetString},
-    Decodable, Decoder, Encodable, Sequence, Tag, TagMode, TagNumber,
+    asn1::{BitStringRef, ContextSpecific, OctetStringRef},
+    Decode, DecodeValue, Encode, Header, Reader, Sequence, Tag, TagMode, TagNumber,
 };
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+</span><span class="kw">use </span>der::SecretDocument;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
+</span><span class="kw">use </span>der::pem::PemLabel;
 
 <span class="doccomment">/// `ECPrivateKey` version.
 ///
@@ -190,6 +223,7 @@
 /// [SEC1: Elliptic Curve Cryptography (Version 2.0)]: https://www.secg.org/sec1-v2.pdf
 /// [RFC5915 Section 3]: https://datatracker.ietf.org/doc/html/rfc5915#section-3
 </span><span class="attr">#[derive(Clone)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;der&quot;</span>)))]
 </span><span class="kw">pub struct </span>EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Private key data.
     </span><span class="kw">pub </span>private_key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8],
@@ -201,17 +235,17 @@
     </span><span class="kw">pub </span>public_key: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Decodable&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>decode(decoder: <span class="kw-2">&amp;mut </span>Decoder&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; der::Result&lt;<span class="self">Self</span>&gt; {
-        decoder.sequence(|decoder| {
-            <span class="kw">if </span>decoder.uint8()<span class="question-mark">? </span>!= VERSION {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; DecodeValue&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>decode_value&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R, header: Header) -&gt; der::Result&lt;<span class="self">Self</span>&gt; {
+        reader.read_nested(header.length, |reader| {
+            <span class="kw">if </span>u8::decode(reader)<span class="question-mark">? </span>!= VERSION {
                 <span class="kw">return </span><span class="prelude-val">Err</span>(der::Tag::Integer.value_error());
             }
 
-            <span class="kw">let </span>private_key = decoder.octet_string()<span class="question-mark">?</span>.as_bytes();
-            <span class="kw">let </span>parameters = decoder.context_specific(EC_PARAMETERS_TAG, TagMode::Explicit)<span class="question-mark">?</span>;
-            <span class="kw">let </span>public_key = decoder
-                .context_specific::&lt;BitString&lt;<span class="lifetime">&#39;_</span>&gt;&gt;(PUBLIC_KEY_TAG, TagMode::Explicit)<span class="question-mark">?
+            <span class="kw">let </span>private_key = OctetStringRef::decode(reader)<span class="question-mark">?</span>.as_bytes();
+            <span class="kw">let </span>parameters = reader.context_specific(EC_PARAMETERS_TAG, TagMode::Explicit)<span class="question-mark">?</span>;
+            <span class="kw">let </span>public_key = reader
+                .context_specific::&lt;BitStringRef&lt;<span class="lifetime">&#39;_</span>&gt;&gt;(PUBLIC_KEY_TAG, TagMode::Explicit)<span class="question-mark">?
                 </span>.map(|bs| bs.as_bytes().ok_or_else(|| Tag::BitString.value_error()))
                 .transpose()<span class="question-mark">?</span>;
 
@@ -227,11 +261,11 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Sequence&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">fn </span>fields&lt;F, T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; der::Result&lt;T&gt;
     <span class="kw">where
-        </span>F: FnOnce(<span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="kw">dyn </span>Encodable]) -&gt; der::Result&lt;T&gt;,
+        </span>F: FnOnce(<span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="kw">dyn </span>Encode]) -&gt; der::Result&lt;T&gt;,
     {
         f(<span class="kw-2">&amp;</span>[
             <span class="kw-2">&amp;</span>VERSION,
-            <span class="kw-2">&amp;</span>OctetString::new(<span class="self">self</span>.private_key)<span class="question-mark">?</span>,
+            <span class="kw-2">&amp;</span>OctetStringRef::new(<span class="self">self</span>.private_key)<span class="question-mark">?</span>,
             <span class="kw-2">&amp;</span><span class="self">self</span>.parameters.as_ref().map(|params| ContextSpecific {
                 tag_number: EC_PARAMETERS_TAG,
                 tag_mode: TagMode::Explicit,
@@ -240,7 +274,7 @@
             <span class="kw-2">&amp;</span><span class="self">self
                 </span>.public_key
                 .map(|pk| {
-                    BitString::from_bytes(pk).map(|value| ContextSpecific {
+                    BitStringRef::from_bytes(pk).map(|value| ContextSpecific {
                         tag_number: PUBLIC_KEY_TAG,
                         tag_mode: TagMode::Explicit,
                         value,
@@ -254,7 +288,7 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; TryFrom&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; <span class="kw">for </span>EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">type </span>Error = Error;
 
-    <span class="kw">fn </span>try_from(bytes: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt;, Error&gt; {
+    <span class="kw">fn </span>try_from(bytes: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;EcPrivateKey&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
         <span class="prelude-val">Ok</span>(<span class="self">Self</span>::from_der(bytes)<span class="question-mark">?</span>)
     }
 }
@@ -266,6 +300,32 @@
             .field(<span class="string">&quot;public_key&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.public_key)
             .finish_non_exhaustive()
     }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;alloc&quot;</span>)))]
+</span><span class="kw">impl </span>TryFrom&lt;EcPrivateKey&lt;<span class="lifetime">&#39;_</span>&gt;&gt; <span class="kw">for </span>SecretDocument {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(private_key: EcPrivateKey&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        SecretDocument::try_from(<span class="kw-2">&amp;</span>private_key)
+    }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;alloc&quot;</span>)))]
+</span><span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>EcPrivateKey&lt;<span class="lifetime">&#39;_</span>&gt;&gt; <span class="kw">for </span>SecretDocument {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(private_key: <span class="kw-2">&amp;</span>EcPrivateKey&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span>::encode_msg(private_key)<span class="question-mark">?</span>)
+    }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pem&quot;</span>)))]
+</span><span class="kw">impl </span>PemLabel <span class="kw">for </span>EcPrivateKey&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">const </span>PEM_LABEL: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str = <span class="string">&quot;EC PRIVATE KEY&quot;</span>;
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sec1" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["ReferendumInfo",""]],"struct":[["Delegations",""],["ReferendumStatus",""],["Tally",""]]};
+window.SIDEBAR_ITEMS = {"enum":[["MetadataOwner",""],["ReferendumInfo",""]],"struct":[["Delegations",""],["ReferendumStatus",""],["Tally",""]]};

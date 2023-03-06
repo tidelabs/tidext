@@ -54,11 +54,6 @@
 <a href="#54" id="54">54</a>
 <a href="#55" id="55">55</a>
 <a href="#56" id="56">56</a>
-<a href="#57" id="57">57</a>
-<a href="#58" id="58">58</a>
-<a href="#59" id="59">59</a>
-<a href="#60" id="60">60</a>
-<a href="#61" id="61">61</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
@@ -77,7 +72,7 @@
 
 </span><span class="doccomment">//! Tidext official keyring.
 </span><span class="kw">use </span><span class="kw">crate</span>::Signer;
-<span class="kw">use </span>subxt::ext::sp_core::sr25519;
+<span class="kw">use </span>sp_core::sr25519;
 
 <span class="attr">#[cfg_attr(feature = <span class="string">&quot;keyring-stronghold&quot;</span>, path = <span class="string">&quot;stronghold.rs&quot;</span>)]
 #[cfg_attr(not(feature = <span class="string">&quot;keyring-stronghold&quot;</span>), path = <span class="string">&quot;dev.rs&quot;</span>)]
@@ -97,14 +92,9 @@
   T::AccountId: From&lt;[u8; <span class="number">32</span>]&gt;,
   T::Index: From&lt;tidefi_primitives::Index&gt;,
   T::AccountId: From&lt;tidefi_primitives::AccountId&gt;,
-  T::Address: From&lt;sp_runtime::MultiAddress&lt;sp_runtime::AccountId32, u32&gt;&gt;,
-  T::Signature: From&lt;sp_runtime::MultiSignature&gt;,
+  T::Address: From&lt;subxt::utils::MultiAddress&lt;subxt::utils::AccountId32, u32&gt;&gt;,
+  T::Signature: From&lt;subxt::utils::MultiSignature&gt;,
 {
-  <span class="doccomment">/// Optionally returns a nonce.
-  </span><span class="kw">fn </span>nonce(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;T::Index&gt; {
-    <span class="self">self</span>.pair_signer.nonce().map(|nonce| nonce.into())
-  }
-
   <span class="doccomment">/// Return the account ID.
   </span><span class="kw">fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId {
     <span class="kw-2">&amp;</span><span class="self">self</span>.account_id

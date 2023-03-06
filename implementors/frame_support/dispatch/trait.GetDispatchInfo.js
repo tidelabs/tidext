@@ -1,0 +1,5 @@
+(function() {var implementors = {
+"frame_support":[],
+"frame_system":[["impl&lt;T:&nbsp;<a class=\"trait\" href=\"frame_system/pallet/trait.Config.html\" title=\"trait frame_system::pallet::Config\">Config</a>&gt; <a class=\"trait\" href=\"frame_support/dispatch/trait.GetDispatchInfo.html\" title=\"trait frame_support::dispatch::GetDispatchInfo\">GetDispatchInfo</a> for <a class=\"enum\" href=\"frame_system/pallet/enum.Call.html\" title=\"enum frame_system::pallet::Call\">Call</a>&lt;T&gt;"]],
+"pallet_transaction_payment":[["impl&lt;T:&nbsp;<a class=\"trait\" href=\"pallet_transaction_payment/pallet/trait.Config.html\" title=\"trait pallet_transaction_payment::pallet::Config\">Config</a>&gt; <a class=\"trait\" href=\"frame_support/dispatch/trait.GetDispatchInfo.html\" title=\"trait frame_support::dispatch::GetDispatchInfo\">GetDispatchInfo</a> for <a class=\"enum\" href=\"pallet_transaction_payment/pallet/enum.Call.html\" title=\"enum pallet_transaction_payment::pallet::Call\">Call</a>&lt;T&gt;"]]
+};if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

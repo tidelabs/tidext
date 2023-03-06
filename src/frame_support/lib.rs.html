@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../frame_support/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../frame_support/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2509,9 +2509,311 @@
 <a href="#2509" id="2509">2509</a>
 <a href="#2510" id="2510">2510</a>
 <a href="#2511" id="2511">2511</a>
+<a href="#2512" id="2512">2512</a>
+<a href="#2513" id="2513">2513</a>
+<a href="#2514" id="2514">2514</a>
+<a href="#2515" id="2515">2515</a>
+<a href="#2516" id="2516">2516</a>
+<a href="#2517" id="2517">2517</a>
+<a href="#2518" id="2518">2518</a>
+<a href="#2519" id="2519">2519</a>
+<a href="#2520" id="2520">2520</a>
+<a href="#2521" id="2521">2521</a>
+<a href="#2522" id="2522">2522</a>
+<a href="#2523" id="2523">2523</a>
+<a href="#2524" id="2524">2524</a>
+<a href="#2525" id="2525">2525</a>
+<a href="#2526" id="2526">2526</a>
+<a href="#2527" id="2527">2527</a>
+<a href="#2528" id="2528">2528</a>
+<a href="#2529" id="2529">2529</a>
+<a href="#2530" id="2530">2530</a>
+<a href="#2531" id="2531">2531</a>
+<a href="#2532" id="2532">2532</a>
+<a href="#2533" id="2533">2533</a>
+<a href="#2534" id="2534">2534</a>
+<a href="#2535" id="2535">2535</a>
+<a href="#2536" id="2536">2536</a>
+<a href="#2537" id="2537">2537</a>
+<a href="#2538" id="2538">2538</a>
+<a href="#2539" id="2539">2539</a>
+<a href="#2540" id="2540">2540</a>
+<a href="#2541" id="2541">2541</a>
+<a href="#2542" id="2542">2542</a>
+<a href="#2543" id="2543">2543</a>
+<a href="#2544" id="2544">2544</a>
+<a href="#2545" id="2545">2545</a>
+<a href="#2546" id="2546">2546</a>
+<a href="#2547" id="2547">2547</a>
+<a href="#2548" id="2548">2548</a>
+<a href="#2549" id="2549">2549</a>
+<a href="#2550" id="2550">2550</a>
+<a href="#2551" id="2551">2551</a>
+<a href="#2552" id="2552">2552</a>
+<a href="#2553" id="2553">2553</a>
+<a href="#2554" id="2554">2554</a>
+<a href="#2555" id="2555">2555</a>
+<a href="#2556" id="2556">2556</a>
+<a href="#2557" id="2557">2557</a>
+<a href="#2558" id="2558">2558</a>
+<a href="#2559" id="2559">2559</a>
+<a href="#2560" id="2560">2560</a>
+<a href="#2561" id="2561">2561</a>
+<a href="#2562" id="2562">2562</a>
+<a href="#2563" id="2563">2563</a>
+<a href="#2564" id="2564">2564</a>
+<a href="#2565" id="2565">2565</a>
+<a href="#2566" id="2566">2566</a>
+<a href="#2567" id="2567">2567</a>
+<a href="#2568" id="2568">2568</a>
+<a href="#2569" id="2569">2569</a>
+<a href="#2570" id="2570">2570</a>
+<a href="#2571" id="2571">2571</a>
+<a href="#2572" id="2572">2572</a>
+<a href="#2573" id="2573">2573</a>
+<a href="#2574" id="2574">2574</a>
+<a href="#2575" id="2575">2575</a>
+<a href="#2576" id="2576">2576</a>
+<a href="#2577" id="2577">2577</a>
+<a href="#2578" id="2578">2578</a>
+<a href="#2579" id="2579">2579</a>
+<a href="#2580" id="2580">2580</a>
+<a href="#2581" id="2581">2581</a>
+<a href="#2582" id="2582">2582</a>
+<a href="#2583" id="2583">2583</a>
+<a href="#2584" id="2584">2584</a>
+<a href="#2585" id="2585">2585</a>
+<a href="#2586" id="2586">2586</a>
+<a href="#2587" id="2587">2587</a>
+<a href="#2588" id="2588">2588</a>
+<a href="#2589" id="2589">2589</a>
+<a href="#2590" id="2590">2590</a>
+<a href="#2591" id="2591">2591</a>
+<a href="#2592" id="2592">2592</a>
+<a href="#2593" id="2593">2593</a>
+<a href="#2594" id="2594">2594</a>
+<a href="#2595" id="2595">2595</a>
+<a href="#2596" id="2596">2596</a>
+<a href="#2597" id="2597">2597</a>
+<a href="#2598" id="2598">2598</a>
+<a href="#2599" id="2599">2599</a>
+<a href="#2600" id="2600">2600</a>
+<a href="#2601" id="2601">2601</a>
+<a href="#2602" id="2602">2602</a>
+<a href="#2603" id="2603">2603</a>
+<a href="#2604" id="2604">2604</a>
+<a href="#2605" id="2605">2605</a>
+<a href="#2606" id="2606">2606</a>
+<a href="#2607" id="2607">2607</a>
+<a href="#2608" id="2608">2608</a>
+<a href="#2609" id="2609">2609</a>
+<a href="#2610" id="2610">2610</a>
+<a href="#2611" id="2611">2611</a>
+<a href="#2612" id="2612">2612</a>
+<a href="#2613" id="2613">2613</a>
+<a href="#2614" id="2614">2614</a>
+<a href="#2615" id="2615">2615</a>
+<a href="#2616" id="2616">2616</a>
+<a href="#2617" id="2617">2617</a>
+<a href="#2618" id="2618">2618</a>
+<a href="#2619" id="2619">2619</a>
+<a href="#2620" id="2620">2620</a>
+<a href="#2621" id="2621">2621</a>
+<a href="#2622" id="2622">2622</a>
+<a href="#2623" id="2623">2623</a>
+<a href="#2624" id="2624">2624</a>
+<a href="#2625" id="2625">2625</a>
+<a href="#2626" id="2626">2626</a>
+<a href="#2627" id="2627">2627</a>
+<a href="#2628" id="2628">2628</a>
+<a href="#2629" id="2629">2629</a>
+<a href="#2630" id="2630">2630</a>
+<a href="#2631" id="2631">2631</a>
+<a href="#2632" id="2632">2632</a>
+<a href="#2633" id="2633">2633</a>
+<a href="#2634" id="2634">2634</a>
+<a href="#2635" id="2635">2635</a>
+<a href="#2636" id="2636">2636</a>
+<a href="#2637" id="2637">2637</a>
+<a href="#2638" id="2638">2638</a>
+<a href="#2639" id="2639">2639</a>
+<a href="#2640" id="2640">2640</a>
+<a href="#2641" id="2641">2641</a>
+<a href="#2642" id="2642">2642</a>
+<a href="#2643" id="2643">2643</a>
+<a href="#2644" id="2644">2644</a>
+<a href="#2645" id="2645">2645</a>
+<a href="#2646" id="2646">2646</a>
+<a href="#2647" id="2647">2647</a>
+<a href="#2648" id="2648">2648</a>
+<a href="#2649" id="2649">2649</a>
+<a href="#2650" id="2650">2650</a>
+<a href="#2651" id="2651">2651</a>
+<a href="#2652" id="2652">2652</a>
+<a href="#2653" id="2653">2653</a>
+<a href="#2654" id="2654">2654</a>
+<a href="#2655" id="2655">2655</a>
+<a href="#2656" id="2656">2656</a>
+<a href="#2657" id="2657">2657</a>
+<a href="#2658" id="2658">2658</a>
+<a href="#2659" id="2659">2659</a>
+<a href="#2660" id="2660">2660</a>
+<a href="#2661" id="2661">2661</a>
+<a href="#2662" id="2662">2662</a>
+<a href="#2663" id="2663">2663</a>
+<a href="#2664" id="2664">2664</a>
+<a href="#2665" id="2665">2665</a>
+<a href="#2666" id="2666">2666</a>
+<a href="#2667" id="2667">2667</a>
+<a href="#2668" id="2668">2668</a>
+<a href="#2669" id="2669">2669</a>
+<a href="#2670" id="2670">2670</a>
+<a href="#2671" id="2671">2671</a>
+<a href="#2672" id="2672">2672</a>
+<a href="#2673" id="2673">2673</a>
+<a href="#2674" id="2674">2674</a>
+<a href="#2675" id="2675">2675</a>
+<a href="#2676" id="2676">2676</a>
+<a href="#2677" id="2677">2677</a>
+<a href="#2678" id="2678">2678</a>
+<a href="#2679" id="2679">2679</a>
+<a href="#2680" id="2680">2680</a>
+<a href="#2681" id="2681">2681</a>
+<a href="#2682" id="2682">2682</a>
+<a href="#2683" id="2683">2683</a>
+<a href="#2684" id="2684">2684</a>
+<a href="#2685" id="2685">2685</a>
+<a href="#2686" id="2686">2686</a>
+<a href="#2687" id="2687">2687</a>
+<a href="#2688" id="2688">2688</a>
+<a href="#2689" id="2689">2689</a>
+<a href="#2690" id="2690">2690</a>
+<a href="#2691" id="2691">2691</a>
+<a href="#2692" id="2692">2692</a>
+<a href="#2693" id="2693">2693</a>
+<a href="#2694" id="2694">2694</a>
+<a href="#2695" id="2695">2695</a>
+<a href="#2696" id="2696">2696</a>
+<a href="#2697" id="2697">2697</a>
+<a href="#2698" id="2698">2698</a>
+<a href="#2699" id="2699">2699</a>
+<a href="#2700" id="2700">2700</a>
+<a href="#2701" id="2701">2701</a>
+<a href="#2702" id="2702">2702</a>
+<a href="#2703" id="2703">2703</a>
+<a href="#2704" id="2704">2704</a>
+<a href="#2705" id="2705">2705</a>
+<a href="#2706" id="2706">2706</a>
+<a href="#2707" id="2707">2707</a>
+<a href="#2708" id="2708">2708</a>
+<a href="#2709" id="2709">2709</a>
+<a href="#2710" id="2710">2710</a>
+<a href="#2711" id="2711">2711</a>
+<a href="#2712" id="2712">2712</a>
+<a href="#2713" id="2713">2713</a>
+<a href="#2714" id="2714">2714</a>
+<a href="#2715" id="2715">2715</a>
+<a href="#2716" id="2716">2716</a>
+<a href="#2717" id="2717">2717</a>
+<a href="#2718" id="2718">2718</a>
+<a href="#2719" id="2719">2719</a>
+<a href="#2720" id="2720">2720</a>
+<a href="#2721" id="2721">2721</a>
+<a href="#2722" id="2722">2722</a>
+<a href="#2723" id="2723">2723</a>
+<a href="#2724" id="2724">2724</a>
+<a href="#2725" id="2725">2725</a>
+<a href="#2726" id="2726">2726</a>
+<a href="#2727" id="2727">2727</a>
+<a href="#2728" id="2728">2728</a>
+<a href="#2729" id="2729">2729</a>
+<a href="#2730" id="2730">2730</a>
+<a href="#2731" id="2731">2731</a>
+<a href="#2732" id="2732">2732</a>
+<a href="#2733" id="2733">2733</a>
+<a href="#2734" id="2734">2734</a>
+<a href="#2735" id="2735">2735</a>
+<a href="#2736" id="2736">2736</a>
+<a href="#2737" id="2737">2737</a>
+<a href="#2738" id="2738">2738</a>
+<a href="#2739" id="2739">2739</a>
+<a href="#2740" id="2740">2740</a>
+<a href="#2741" id="2741">2741</a>
+<a href="#2742" id="2742">2742</a>
+<a href="#2743" id="2743">2743</a>
+<a href="#2744" id="2744">2744</a>
+<a href="#2745" id="2745">2745</a>
+<a href="#2746" id="2746">2746</a>
+<a href="#2747" id="2747">2747</a>
+<a href="#2748" id="2748">2748</a>
+<a href="#2749" id="2749">2749</a>
+<a href="#2750" id="2750">2750</a>
+<a href="#2751" id="2751">2751</a>
+<a href="#2752" id="2752">2752</a>
+<a href="#2753" id="2753">2753</a>
+<a href="#2754" id="2754">2754</a>
+<a href="#2755" id="2755">2755</a>
+<a href="#2756" id="2756">2756</a>
+<a href="#2757" id="2757">2757</a>
+<a href="#2758" id="2758">2758</a>
+<a href="#2759" id="2759">2759</a>
+<a href="#2760" id="2760">2760</a>
+<a href="#2761" id="2761">2761</a>
+<a href="#2762" id="2762">2762</a>
+<a href="#2763" id="2763">2763</a>
+<a href="#2764" id="2764">2764</a>
+<a href="#2765" id="2765">2765</a>
+<a href="#2766" id="2766">2766</a>
+<a href="#2767" id="2767">2767</a>
+<a href="#2768" id="2768">2768</a>
+<a href="#2769" id="2769">2769</a>
+<a href="#2770" id="2770">2770</a>
+<a href="#2771" id="2771">2771</a>
+<a href="#2772" id="2772">2772</a>
+<a href="#2773" id="2773">2773</a>
+<a href="#2774" id="2774">2774</a>
+<a href="#2775" id="2775">2775</a>
+<a href="#2776" id="2776">2776</a>
+<a href="#2777" id="2777">2777</a>
+<a href="#2778" id="2778">2778</a>
+<a href="#2779" id="2779">2779</a>
+<a href="#2780" id="2780">2780</a>
+<a href="#2781" id="2781">2781</a>
+<a href="#2782" id="2782">2782</a>
+<a href="#2783" id="2783">2783</a>
+<a href="#2784" id="2784">2784</a>
+<a href="#2785" id="2785">2785</a>
+<a href="#2786" id="2786">2786</a>
+<a href="#2787" id="2787">2787</a>
+<a href="#2788" id="2788">2788</a>
+<a href="#2789" id="2789">2789</a>
+<a href="#2790" id="2790">2790</a>
+<a href="#2791" id="2791">2791</a>
+<a href="#2792" id="2792">2792</a>
+<a href="#2793" id="2793">2793</a>
+<a href="#2794" id="2794">2794</a>
+<a href="#2795" id="2795">2795</a>
+<a href="#2796" id="2796">2796</a>
+<a href="#2797" id="2797">2797</a>
+<a href="#2798" id="2798">2798</a>
+<a href="#2799" id="2799">2799</a>
+<a href="#2800" id="2800">2800</a>
+<a href="#2801" id="2801">2801</a>
+<a href="#2802" id="2802">2802</a>
+<a href="#2803" id="2803">2803</a>
+<a href="#2804" id="2804">2804</a>
+<a href="#2805" id="2805">2805</a>
+<a href="#2806" id="2806">2806</a>
+<a href="#2807" id="2807">2807</a>
+<a href="#2808" id="2808">2808</a>
+<a href="#2809" id="2809">2809</a>
+<a href="#2810" id="2810">2810</a>
+<a href="#2811" id="2811">2811</a>
+<a href="#2812" id="2812">2812</a>
+<a href="#2813" id="2813">2813</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -2527,6 +2829,16 @@
 // limitations under the License.
 
 </span><span class="doccomment">//! Support code for the runtime.
+//!
+//! ## Note on Tuple Traits
+//!
+//! Many of the traits defined in [`traits`] have auto-implementations on tuples as well. Usually,
+//! the tuple is a function of number of pallets in the runtime. By default, the traits are
+//! implemented for tuples of up to 64 items.
+</span><span class="comment">//
+// If you have more pallets in your runtime, or for any other reason need more, enabled `tuples-96`
+// or the `tuples-128` complication flag. Note that these features *will increase* the compilation
+// of this crate.
 
 </span><span class="attr">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
@@ -2579,6 +2891,7 @@
 <span class="attr">#[macro_use]
 </span><span class="kw">pub mod </span>error;
 <span class="kw">pub mod </span>crypto;
+<span class="kw">pub mod </span>dispatch_context;
 <span class="kw">pub mod </span>instances;
 <span class="kw">pub mod </span>migrations;
 <span class="kw">pub mod </span>traits;
@@ -2594,6 +2907,8 @@
 	};
 }
 
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;runtime-benchmarks&quot;</span>, feature = <span class="string">&quot;try-runtime&quot;</span>, test))]
+</span><span class="kw">pub use </span><span class="self">self</span>::storage::storage_noop_guard::StorageNoopGuard;
 <span class="kw">pub use </span><span class="self">self</span>::{
 	dispatch::{Callable, Parameter},
 	hash::{
@@ -2782,81 +3097,87 @@
 </span><span class="macro">macro_rules! </span>parameter_types {
 	(
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr</span>:meta ] </span>)*
-		<span class="macro-nonterminal">$vis</span>:vis <span class="kw">const </span><span class="macro-nonterminal">$name</span>:ident: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
+		<span class="macro-nonterminal">$vis</span>:vis <span class="kw">const </span><span class="macro-nonterminal">$name</span>:ident $(&lt; $(<span class="macro-nonterminal">$ty_params</span>:ident),* &gt;)<span class="question-mark">?</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
 		$( <span class="macro-nonterminal">$rest</span>:tt )*
 	) =&gt; (
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr </span>] </span>)*
-		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name</span>;
-		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL_CONST $name </span>, <span class="macro-nonterminal">$</span><span class="kw">type </span>, <span class="macro-nonterminal">$value</span>);
+		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name </span>$(
+			&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt;( $(<span class="macro-nonterminal">$crate::sp_std::marker::PhantomData</span>&lt;<span class="macro-nonterminal">$ty_params</span>&gt;),* )
+		)<span class="question-mark">?</span>;
+		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL_CONST $name </span>, <span class="macro-nonterminal">$</span><span class="kw">type </span>, <span class="macro-nonterminal">$value </span>$( $(, <span class="macro-nonterminal">$ty_params</span>)* )<span class="question-mark">?</span>);
 		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>( $( <span class="macro-nonterminal">$rest </span>)* );
 	);
 	(
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr</span>:meta ] </span>)*
-		<span class="macro-nonterminal">$vis</span>:vis <span class="macro-nonterminal">$name</span>:ident: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
+		<span class="macro-nonterminal">$vis</span>:vis <span class="macro-nonterminal">$name</span>:ident $(&lt; $(<span class="macro-nonterminal">$ty_params</span>:ident),* &gt;)<span class="question-mark">?</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
 		$( <span class="macro-nonterminal">$rest</span>:tt )*
 	) =&gt; (
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr </span>] </span>)*
-		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name</span>;
-		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL $name</span>, <span class="macro-nonterminal">$</span><span class="kw">type</span>, <span class="macro-nonterminal">$value</span>);
+		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name </span>$(
+			&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt;( $(<span class="macro-nonterminal">$crate::sp_std::marker::PhantomData</span>&lt;<span class="macro-nonterminal">$ty_params</span>&gt;),* )
+		)<span class="question-mark">?</span>;
+		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL $name</span>, <span class="macro-nonterminal">$</span><span class="kw">type</span>, <span class="macro-nonterminal">$value </span>$( $(, <span class="macro-nonterminal">$ty_params</span>)* )<span class="question-mark">?</span>);
 		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>( $( <span class="macro-nonterminal">$rest </span>)* );
 	);
 	(
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr</span>:meta ] </span>)*
-		<span class="macro-nonterminal">$vis</span>:vis storage <span class="macro-nonterminal">$name</span>:ident: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
+		<span class="macro-nonterminal">$vis</span>:vis storage <span class="macro-nonterminal">$name</span>:ident $(&lt; $(<span class="macro-nonterminal">$ty_params</span>:ident),* &gt;)<span class="question-mark">?</span>: <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$value</span>:expr;
 		$( <span class="macro-nonterminal">$rest</span>:tt )*
 	) =&gt; (
 		$( <span class="attr">#[ <span class="macro-nonterminal">$attr </span>] </span>)*
-		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name</span>;
-		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL_STORAGE $name</span>, <span class="macro-nonterminal">$</span><span class="kw">type</span>, <span class="macro-nonterminal">$value</span>);
+		<span class="macro-nonterminal">$vis </span><span class="kw">struct </span><span class="macro-nonterminal">$name </span>$(
+			&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt;( $(<span class="macro-nonterminal">$crate::sp_std::marker::PhantomData</span>&lt;<span class="macro-nonterminal">$ty_params</span>&gt;),* )
+		)<span class="question-mark">?</span>;
+		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>(<span class="macro-nonterminal">IMPL_STORAGE $name</span>, <span class="macro-nonterminal">$</span><span class="kw">type</span>, <span class="macro-nonterminal">$value </span>$( $(, <span class="macro-nonterminal">$ty_params</span>)* )<span class="question-mark">?</span>);
 		<span class="macro-nonterminal">$</span><span class="macro">crate::parameter_types!</span>( $( <span class="macro-nonterminal">$rest </span>)* );
 	);
 	() =&gt; ();
-	(IMPL_CONST <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr) =&gt; {
-		<span class="kw">impl </span><span class="macro-nonterminal">$name </span>{
+	(IMPL_CONST <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr $(, <span class="macro-nonterminal">$ty_params</span>:ident)<span class="kw-2">*</span>) =&gt; {
+		<span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="doccomment">/// Returns the value of this parameter type.
 			</span><span class="kw">pub const fn </span>get() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
 				<span class="macro-nonterminal">$value
 			</span>}
 		}
 
-		<span class="kw">impl</span>&lt;I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
-			<span class="kw">fn </span>get() -&gt; I {
-				I::from(<span class="self">Self</span>::get())
+		<span class="kw">impl</span>&lt;_I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; $(, <span class="macro-nonterminal">$ty_params</span>)<span class="kw-2">*</span>&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;_I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
+			<span class="kw">fn </span>get() -&gt; _I {
+				_I::from(<span class="self">Self</span>::get())
 			}
 		}
 
-		<span class="kw">impl </span><span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+		<span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="kw">type </span>Type = <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 			<span class="kw">fn </span><span class="macro-nonterminal">get</span>() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
 				<span class="macro-nonterminal">Self::get</span>()
 			}
 		}
 	};
-	(IMPL <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr) =&gt; {
-		<span class="kw">impl </span><span class="macro-nonterminal">$name </span>{
+	(IMPL <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr $(, <span class="macro-nonterminal">$ty_params</span>:ident)<span class="kw-2">*</span>) =&gt; {
+		<span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="doccomment">/// Returns the value of this parameter type.
 			</span><span class="kw">pub fn </span>get() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
 				<span class="macro-nonterminal">$value
 			</span>}
 		}
 
-		<span class="kw">impl</span>&lt;I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
-			<span class="kw">fn </span>get() -&gt; I {
-				I::from(<span class="self">Self</span>::get())
+		<span class="kw">impl</span>&lt;_I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;, $(, <span class="macro-nonterminal">$ty_params</span>)<span class="kw-2">*</span>&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;_I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
+			<span class="kw">fn </span>get() -&gt; _I {
+				_I::from(<span class="self">Self</span>::get())
 			}
 		}
 
-		<span class="kw">impl </span><span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+		<span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="kw">type </span>Type = <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 			<span class="kw">fn </span><span class="macro-nonterminal">get</span>() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
 				<span class="macro-nonterminal">Self::get</span>()
 			}
 		}
 	};
-	(IMPL_STORAGE <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr) =&gt; {
-		<span class="kw">impl </span><span class="macro-nonterminal">$name </span>{
+	(IMPL_STORAGE <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$value</span>:expr $(, <span class="macro-nonterminal">$ty_params</span>:ident)<span class="kw-2">*</span>) =&gt; {
+		<span class="attr">#[allow(unused)]
+		</span><span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="doccomment">/// Returns the key for this parameter type.
-			</span><span class="attr">#[allow(unused)]
 			</span><span class="kw">pub fn </span>key() -&gt; [u8; <span class="number">16</span>] {
 				<span class="macro-nonterminal">$</span><span class="macro">crate::sp_core_hashing_proc_macro::twox_128!</span>(<span class="string">b&quot;:&quot;</span>, <span class="macro-nonterminal">$name</span>, <span class="string">b&quot;:&quot;</span>)
 			}
@@ -2865,7 +3186,6 @@
 			///
 			/// This needs to be executed in an externalities provided
 			/// environment.
-			</span><span class="attr">#[allow(unused)]
 			</span><span class="kw">pub fn </span>set(value: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="kw">type</span>) {
 				<span class="macro-nonterminal">$crate::storage::unhashed::put</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>::key(), value);
 			}
@@ -2880,13 +3200,13 @@
 			}
 		}
 
-		<span class="kw">impl</span>&lt;I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
-			<span class="kw">fn </span>get() -&gt; I {
-				I::from(<span class="self">Self</span>::get())
+		<span class="kw">impl</span>&lt;_I: From&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; $(, <span class="macro-nonterminal">$ty_params</span>)<span class="kw-2">*</span>&gt; <span class="macro-nonterminal">$crate::traits::Get</span>&lt;_I&gt; <span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
+			<span class="kw">fn </span>get() -&gt; _I {
+				_I::from(<span class="self">Self</span>::get())
 			}
 		}
 
-		<span class="kw">impl </span><span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+		<span class="kw">impl</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; <span class="macro-nonterminal">$crate::traits::TypedGet </span><span class="kw">for </span><span class="macro-nonterminal">$name</span>&lt; $(<span class="macro-nonterminal">$ty_params</span>),* &gt; {
 			<span class="kw">type </span>Type = <span class="macro-nonterminal">$</span><span class="kw">type</span>;
 			<span class="kw">fn </span><span class="macro-nonterminal">get</span>() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
 				<span class="macro-nonterminal">Self::get</span>()
@@ -2938,6 +3258,23 @@
 					<span class="doccomment">/// Set the internal value.
 					</span><span class="kw">pub fn </span>set(t: <span class="macro-nonterminal">$</span><span class="kw">type</span>) {
 						[&lt;<span class="macro-nonterminal">$name</span>:snake:upper&gt;].with(|v| <span class="kw-2">*</span>v.borrow_mut() = t);
+					}
+
+					<span class="doccomment">/// Mutate the internal value in place.
+					</span><span class="attr">#[allow(unused)]
+					</span><span class="kw">pub fn </span>mutate&lt;R, F: FnOnce(<span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$</span><span class="kw">type</span>) -&gt; <span class="macro-nonterminal">R</span>&gt;(mutate: F) -&gt; R{
+						<span class="kw">let </span><span class="kw-2">mut </span>current = <span class="self">Self</span>::get();
+						<span class="kw">let </span>result = mutate(<span class="kw-2">&amp;mut </span>current);
+						<span class="self">Self</span>::set(current);
+						result
+					}
+
+					<span class="doccomment">/// Get current value and replace with initial value of the parameter type.
+					</span><span class="attr">#[allow(unused)]
+					</span><span class="kw">pub fn </span>take() -&gt; <span class="macro-nonterminal">$</span><span class="kw">type </span>{
+						<span class="kw">let </span><span class="macro-nonterminal">current </span>= <span class="self">Self</span>::get();
+						<span class="self">Self</span>::set(<span class="macro-nonterminal">$value</span>);
+						current
 					}
 				}
 			)*
@@ -3098,14 +3435,23 @@
 /// # use frame_support::DefaultNoBound;
 /// # use core::default::Default;
 /// trait Config {
-/// 		type C: Default;
+/// 	type C: Default;
 /// }
 ///
 /// // Foo implements [`Default`] because `C` bounds [`Default`].
 /// // Otherwise compilation will fail with an output telling `c` doesn&#39;t implement [`Default`].
 /// #[derive(DefaultNoBound)]
 /// struct Foo&lt;T: Config&gt; {
-/// 		c: T::C,
+/// 	c: T::C,
+/// }
+///
+/// // Also works with enums, by specifying the default with #[default]:
+/// #[derive(DefaultNoBound)]
+/// enum Bar&lt;T: Config&gt; {
+/// 	// Bar will implement Default as long as all of the types within Baz also implement default.
+/// 	#[default]
+/// 	Baz(T::C),
+/// 	Quxx,
 /// }
 /// ```
 </span><span class="kw">pub use </span>frame_support_procedural::DefaultNoBound;
@@ -3190,7 +3536,7 @@
 	</span>) =&gt; {
 		<span class="kw">let </span>h = <span class="macro-nonterminal">$crate::storage_root</span>(<span class="macro-nonterminal">$crate::StateVersion::V1</span>);
 		<span class="macro-nonterminal">$</span><span class="macro">crate::assert_err!</span>(<span class="macro-nonterminal">$x</span>, <span class="macro-nonterminal">$y</span>);
-		<span class="macro">assert_eq!</span>(h, <span class="macro-nonterminal">$crate::storage_root</span>(<span class="macro-nonterminal">$crate::StateVersion::V1</span>));
+		<span class="macro">assert_eq!</span>(h, <span class="macro-nonterminal">$crate::storage_root</span>(<span class="macro-nonterminal">$crate::StateVersion::V1</span>), <span class="string">&quot;storage has been mutated&quot;</span>);
 	};
 }
 
@@ -3221,7 +3567,7 @@
 
 <span class="doccomment">/// Assert an expression returns an error specified.
 ///
-/// This can be used on`DispatchResultWithPostInfo` when the post info should
+/// This can be used on `DispatchResultWithPostInfo` when the post info should
 /// be ignored.
 </span><span class="attr">#[macro_export]
 </span><span class="macro">macro_rules! </span>assert_err_ignore_postinfo {
@@ -3323,7 +3669,7 @@
 
 	<span class="kw">pub trait </span>Config: <span class="lifetime">&#39;static </span>{
 		<span class="kw">type </span>BlockNumber: Codec + EncodeLike + Default + TypeInfo;
-		<span class="kw">type </span>Origin;
+		<span class="kw">type </span>RuntimeOrigin;
 		<span class="kw">type </span>PalletInfo: <span class="kw">crate</span>::traits::PalletInfo;
 		<span class="kw">type </span>DbWeight: <span class="kw">crate</span>::traits::Get&lt;<span class="kw">crate</span>::weights::RuntimeDbWeight&gt;;
 	}
@@ -3334,13 +3680,15 @@
 		</span><span class="kw">use </span><span class="kw">super</span>::Config;
 
 		<span class="macro">decl_module! </span>{
-			<span class="kw">pub struct </span>Module&lt;T: Config&gt; <span class="kw">for enum </span>Call <span class="kw">where </span>origin: T::Origin, system=<span class="self">self  </span>{}
+			<span class="kw">pub struct </span>Module&lt;T: Config&gt; <span class="kw">for enum </span>Call <span class="kw">where </span>origin: T::RuntimeOrigin, system=<span class="self">self  </span>{}
 		}
 	}
+
 	<span class="kw">use </span><span class="self">self</span>::module::Module;
 
 	<span class="macro">decl_storage! </span>{
 		<span class="kw">trait </span>Store <span class="kw">for </span>Module&lt;T: Config&gt; <span class="kw">as </span>Test {
+			<span class="kw">pub </span>Value get(<span class="kw">fn </span>value): u64;
 			<span class="kw">pub </span>Data get(<span class="kw">fn </span>data) build(|<span class="kw">_</span>| <span class="macro">vec!</span>[(<span class="number">15u32</span>, <span class="number">42u64</span>)]):
 				map hasher(twox_64_concat) u32 =&gt; u64;
 			<span class="kw">pub </span>OptionLinkedMap: map hasher(blake2_128_concat) u32 =&gt; <span class="prelude-ty">Option</span>&lt;u32&gt;;
@@ -3362,9 +3710,10 @@
 	}
 
 	<span class="kw">struct </span>Test;
+
 	<span class="kw">impl </span>Config <span class="kw">for </span>Test {
 		<span class="kw">type </span>BlockNumber = u32;
-		<span class="kw">type </span>Origin = u32;
+		<span class="kw">type </span>RuntimeOrigin = u32;
 		<span class="kw">type </span>PalletInfo = PanicPalletInfo;
 		<span class="kw">type </span>DbWeight = ();
 	}
@@ -3378,6 +3727,7 @@
 	<span class="kw">trait </span>Sorted {
 		<span class="kw">fn </span>sorted(<span class="self">self</span>) -&gt; <span class="self">Self</span>;
 	}
+
 	<span class="kw">impl</span>&lt;T: Ord&gt; Sorted <span class="kw">for </span>Vec&lt;T&gt; {
 		<span class="kw">fn </span>sorted(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
 			<span class="self">self</span>.sort();
@@ -3408,6 +3758,61 @@
 				&lt;T <span class="kw">as </span>Config&gt;::BlockNumber,
 				&lt;T <span class="kw">as </span>Config&gt;::BlockNumber,
 			&gt;;
+		});
+	}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>storage_value_mutate_exists_should_work() {
+		new_test_ext().execute_with(|| {
+			<span class="attr">#[<span class="kw">crate</span>::storage_alias]
+			</span><span class="kw">pub type </span>Value = StorageValue&lt;Test, u32&gt;;
+
+			<span class="macro">assert!</span>(!Value::exists());
+
+			Value::mutate_exists(|v| <span class="kw-2">*</span>v = <span class="prelude-val">Some</span>(<span class="number">1</span>));
+			<span class="macro">assert!</span>(Value::exists());
+			<span class="macro">assert_eq!</span>(Value::get(), <span class="prelude-val">Some</span>(<span class="number">1</span>));
+
+			<span class="comment">// removed if mutated to `None`
+			</span>Value::mutate_exists(|v| <span class="kw-2">*</span>v = <span class="prelude-val">None</span>);
+			<span class="macro">assert!</span>(!Value::exists());
+		});
+	}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>storage_value_try_mutate_exists_should_work() {
+		new_test_ext().execute_with(|| {
+			<span class="attr">#[<span class="kw">crate</span>::storage_alias]
+			</span><span class="kw">pub type </span>Value = StorageValue&lt;Test, u32&gt;;
+
+			<span class="kw">type </span>TestResult = result::Result&lt;(), <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;;
+
+			<span class="macro">assert!</span>(!Value::exists());
+
+			<span class="comment">// mutated if `Ok`
+			</span><span class="macro">assert_ok!</span>(Value::try_mutate_exists(|v| -&gt; TestResult {
+				<span class="kw-2">*</span>v = <span class="prelude-val">Some</span>(<span class="number">1</span>);
+				<span class="prelude-val">Ok</span>(())
+			}));
+			<span class="macro">assert!</span>(Value::exists());
+			<span class="macro">assert_eq!</span>(Value::get(), <span class="prelude-val">Some</span>(<span class="number">1</span>));
+
+			<span class="comment">// no-op if `Err`
+			</span><span class="macro">assert_noop!</span>(
+				Value::try_mutate_exists(|v| -&gt; TestResult {
+					<span class="kw-2">*</span>v = <span class="prelude-val">Some</span>(<span class="number">2</span>);
+					<span class="prelude-val">Err</span>(<span class="string">&quot;nah&quot;</span>)
+				}),
+				<span class="string">&quot;nah&quot;
+			</span>);
+			<span class="macro">assert_eq!</span>(Value::get(), <span class="prelude-val">Some</span>(<span class="number">1</span>));
+
+			<span class="comment">// removed if mutated to`None`
+			</span><span class="macro">assert_ok!</span>(Value::try_mutate_exists(|v| -&gt; TestResult {
+				<span class="kw-2">*</span>v = <span class="prelude-val">None</span>;
+				<span class="prelude-val">Ok</span>(())
+			}));
+			<span class="macro">assert!</span>(!Value::exists());
 		});
 	}
 
@@ -3723,6 +4128,13 @@
 			prefix: <span class="string">&quot;Test&quot;</span>,
 			entries: <span class="macro">vec!</span>[
 				StorageEntryMetadata {
+					name: <span class="string">&quot;Value&quot;</span>,
+					modifier: StorageEntryModifier::Default,
+					ty: StorageEntryType::Plain(scale_info::meta_type::&lt;u64&gt;()),
+					default: <span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],
+					docs: <span class="macro">vec!</span>[],
+				},
+				StorageEntryMetadata {
 					name: <span class="string">&quot;Data&quot;</span>,
 					modifier: StorageEntryModifier::Default,
 					ty: StorageEntryType::Map {
@@ -3851,26 +4263,29 @@
 	<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 	</span><span class="kw">pub use </span><span class="kw">crate</span>::traits::GenesisBuild;
 	<span class="kw">pub use crate</span>::{
-		dispatch::{DispatchError, DispatchResult, DispatchResultWithPostInfo, Parameter},
+		dispatch::{
+			DispatchClass, DispatchError, DispatchResult, DispatchResultWithPostInfo, Parameter,
+			Pays,
+		},
 		ensure,
 		inherent::{InherentData, InherentIdentifier, ProvideInherent},
 		storage,
 		storage::{
 			bounded_vec::BoundedVec,
 			types::{
-				CountedStorageMap, Key <span class="kw">as </span>NMapKey, OptionQuery, StorageDoubleMap, StorageMap,
-				StorageNMap, StorageValue, ValueQuery,
+				CountedStorageMap, Key <span class="kw">as </span>NMapKey, OptionQuery, ResultQuery, StorageDoubleMap,
+				StorageMap, StorageNMap, StorageValue, ValueQuery,
 			},
 		},
 		traits::{
 			ConstU32, EnsureOrigin, Get, GetDefault, GetStorageVersion, Hooks, IsType,
 			PalletInfoAccess, StorageInfoTrait, StorageVersion, TypedGet,
 		},
-		weights::{DispatchClass, Pays, Weight},
 		Blake2_128, Blake2_128Concat, Blake2_256, CloneNoBound, DebugNoBound, EqNoBound, Identity,
 		PartialEqNoBound, RuntimeDebug, RuntimeDebugNoBound, Twox128, Twox256, Twox64Concat,
 	};
 	<span class="kw">pub use </span>codec::{Decode, Encode, MaxEncodedLen};
+	<span class="kw">pub use </span>frame_support::pallet_macros::<span class="kw-2">*</span>;
 	<span class="kw">pub use </span>scale_info::TypeInfo;
 	<span class="kw">pub use </span>sp_runtime::{
 		traits::{MaybeSerializeDeserialize, Member, ValidateUnsigned},
@@ -3882,40 +4297,166 @@
 		MAX_MODULE_ERROR_ENCODED_SIZE,
 	};
 	<span class="kw">pub use </span>sp_std::marker::PhantomData;
+	<span class="kw">pub use </span>sp_weights::Weight;
 }
 
-<span class="doccomment">/// `pallet` attribute macro allows to define a pallet to be used in `construct_runtime!`.
+<span class="doccomment">/// The `pallet` attribute macro defines a pallet that can be used with
+/// [`construct_runtime!`]. It must be attached to a module named `pallet` as follows:
 ///
-/// It is define by a module item:
 /// ```ignore
 /// #[pallet]
 /// pub mod pallet {
-/// ...
+/// 	...
 /// }
 /// ```
 ///
-/// Inside the module the macro will parse item with the attribute: `#[pallet::*]`, some
-/// attributes are mandatory, some other optional.
+/// Note that various types can be automatically imported using
+/// [`frame_support::pallet_prelude`] and `frame_system::pallet_prelude`:
 ///
-/// The attribute are explained with the syntax of non instantiable pallets, to see how pallet
-/// with instance work see below example.
-///
-/// Note various type can be automatically imported using pallet_prelude in frame_support and
-/// frame_system:
 /// ```ignore
 /// #[pallet]
 /// pub mod pallet {
-/// 		use frame_support::pallet_prelude::*;
-/// 		use frame_system::pallet_prelude::*;
-/// 		...
+/// 	use frame_support::pallet_prelude::*;
+/// 	use frame_system::pallet_prelude::*;
+/// 	...
 /// }
 /// ```
 ///
-/// # Config trait: `#[pallet::config]` mandatory
+/// # pallet::* Attributes
 ///
-/// The trait defining generics of the pallet.
+/// The `pallet` macro will parse any items within your `pallet` module that are annotated with
+/// `#[pallet::*]` attributes. Some of these attributes are mandatory and some are optional,
+/// and they can attach to different types of items within your pallet depending on the
+/// attribute in question. The full list of `#[pallet::*]` attributes is shown below in the
+/// order in which they are mentioned in this document:
 ///
-/// Item must be defined as
+/// * [`pallet::pallet`](#pallet-struct-placeholder-palletpallet-mandatory)
+/// * [`pallet::config`](#config-trait-palletconfig-mandatory)
+/// * [`pallet::constant`](#palletconstant)
+/// * [`pallet::disable_frame_system_supertrait_check`](#disable_supertrait_check)
+/// * [`pallet::generate_store($vis trait Store)`](#palletgenerate_storevis-trait-store)
+/// * [`pallet::generate_storage_info`](#palletgenerate_storage_info)
+/// * [`pallet::storage_version`](#palletstorage_version)
+/// * [`pallet::hooks`](#hooks-pallethooks-optional)
+/// * [`pallet::call`](#call-palletcall-optional)
+/// * [`pallet::weight($expr)`](#palletweightexpr)
+/// * [`pallet::compact`](#palletcompact-some_arg-some_type)
+/// * [`pallet::call_index($idx)`](#palletcall_indexidx)
+/// * [`pallet::extra_constants`](#extra-constants-palletextra_constants-optional)
+/// * [`pallet::error`](#error-palleterror-optional)
+/// * [`pallet::event`](#event-palletevent-optional)
+/// * [`pallet::generate_deposit($visibility fn
+///   deposit_event)`](#palletgenerate_depositvisibility-fn-deposit_event)
+/// * [`pallet::storage`](#storage-palletstorage-optional)
+/// * [`pallet::getter(fn $my_getter_fn_name)`](#palletgetterfn-my_getter_fn_name-optional)
+/// * [`pallet::storage_prefix = &quot;SomeName&quot;`](#palletstorage_prefix--somename-optional)
+/// * [`pallet::unbounded`](#palletunbounded-optional)
+/// * [`pallet::whitelist_storage`](#palletwhitelist_storage-optional)
+/// * [`cfg(..)`](#cfg-for-storage) (on storage items)
+/// * [`pallet::type_value`](#type-value-pallettype_value-optional)
+/// * [`pallet::genesis_config`](#genesis-config-palletgenesis_config-optional)
+/// * [`pallet::genesis_build`](#genesis-build-palletgenesis_build-optional)
+/// * [`pallet::inherent`](#inherent-palletinherent-optional)
+/// * [`pallet::validate_unsigned`](#validate-unsigned-palletvalidate_unsigned-optional)
+/// * [`pallet::origin`](#origin-palletorigin-optional)
+///
+/// Note that at compile-time, the `#[pallet]` macro will analyze and expand all of these
+/// attributes, ultimately removing their AST nodes before they can be parsed as real
+/// attribute macro calls. This means that technically we do not need attribute macro
+/// definitions for any of these attributes, however, for consistency and discoverability
+/// reasons, we still maintain stub attribute macro definitions for all of these attributes in
+/// the [`pallet_macros`] module which is automatically included in all pallets as part of the
+/// pallet prelude. The actual &quot;work&quot; for all of these attribute macros can be found in the
+/// macro expansion for `#[pallet]`.
+///
+/// Also note that in this document, pallet attributes are explained using the syntax of
+/// non-instantiable pallets. For an example of an instantiable pallet, see [this
+/// example](#example-of-an-instantiable-pallet).
+///
+/// # Dev Mode (`#[pallet(dev_mode)]`)
+///
+/// Specifying the argument `dev_mode` on the `#[pallet]` or `#[frame_support::pallet]`
+/// attribute attached to your pallet module will allow you to enable dev mode for a pallet.
+/// The aim of dev mode is to loosen some of the restrictions and requirements placed on
+/// production pallets for easy tinkering and development. Dev mode pallets should not be used
+/// in production. Enabling dev mode has the following effects:
+///
+/// * Weights no longer need to be specified on every `#[pallet::call]` declaration. By
+///   default, dev mode pallets will assume a weight of zero (`0`) if a weight is not
+///   specified. This is equivalent to specifying `#[weight(0)]` on all calls that do not
+///   specify a weight.
+/// * All storages are marked as unbounded, meaning you do not need to implement
+///   `MaxEncodedLen` on storage types. This is equivalent to specifying `#[pallet::unbounded]`
+///   on all storage type definitions.
+///
+/// Note that the `dev_mode` argument can only be supplied to the `#[pallet]` or
+/// `#[frame_support::pallet]` attribute macro that encloses your pallet module. This argument
+/// cannot be specified anywhere else, including but not limited to the `#[pallet::pallet]`
+/// attribute macro.
+///
+/// &lt;div class=&quot;example-wrap&quot; style=&quot;display:inline-block&quot;&gt;&lt;pre class=&quot;compile_fail&quot;
+/// style=&quot;white-space:normal;font:inherit;&quot;&gt;
+/// &lt;strong&gt;WARNING&lt;/strong&gt;:
+/// You should not deploy or use dev mode pallets in production. Doing so can break your chain
+/// and therefore should never be done. Once you are done tinkering, you should remove the
+/// &#39;dev_mode&#39; argument from your #[pallet] declaration and fix any compile errors before
+/// attempting to use your pallet in a production scenario.
+/// &lt;/pre&gt;&lt;/div&gt;
+///
+/// # Pallet struct placeholder: `#[pallet::pallet]` (mandatory)
+///
+/// The pallet struct placeholder `#[pallet::pallet]` is mandatory and allows you to specify
+/// pallet information.
+///
+/// The struct must be defined as follows:
+/// ```ignore
+/// #[pallet::pallet]
+/// pub struct Pallet&lt;T&gt;(_);
+/// ```
+/// I.e. a regular struct definition named `Pallet`, with generic T and no where clause.
+///
+/// ## Macro expansion:
+///
+/// The macro adds this attribute to the struct definition:
+/// ```ignore
+/// #[derive(
+/// 	frame_support::CloneNoBound,
+/// 	frame_support::EqNoBound,
+/// 	frame_support::PartialEqNoBound,
+/// 	frame_support::RuntimeDebugNoBound,
+/// )]
+/// ```
+/// and replaces the type `_` with `PhantomData&lt;T&gt;`. It also implements on the pallet:
+/// * [`GetStorageVersion`](`traits::GetStorageVersion`)
+/// * [`OnGenesis`](`traits::OnGenesis`): contains some logic to write the pallet version into
+///   storage.
+/// * `PalletErrorTypeInfo`: provides the type information for the pallet error, if defined.
+///
+/// It declares `type Module` type alias for `Pallet`, used by `construct_runtime`.
+///
+/// It implements [`PalletInfoAccess`](`traits::PalletInfoAccess&#39;) on `Pallet` to ease access
+/// to pallet information given by [`frame_support::traits::PalletInfo`]. (The implementation
+/// uses the associated type `frame_system::Config::PalletInfo`).
+///
+/// It implements [`StorageInfoTrait`](`traits::StorageInfoTrait`) on `Pallet` which give
+/// information about all storages.
+///
+/// If the attribute `generate_store` is set then the macro creates the trait `Store` and
+/// implements it on `Pallet`.
+///
+/// If the attribute `set_storage_max_encoded_len` is set then the macro calls
+/// [`StorageInfoTrait`](`traits::StorageInfoTrait`) for each storage in the implementation of
+/// [`StorageInfoTrait`](`traits::StorageInfoTrait`) for the pallet. Otherwise it implements
+/// [`StorageInfoTrait`](`traits::StorageInfoTrait`) for the pallet using the
+/// [`PartialStorageInfoTrait`](`traits::PartialStorageInfoTrait`) implementation of storages.
+///
+/// # Config trait: `#[pallet::config]` (mandatory)
+///
+/// The mandatory attribute `#[pallet::config]` defines the configurable options for the
+/// pallet.
+///
+/// Item must be defined as:
+///
 /// ```ignore
 /// #[pallet::config]
 /// pub trait Config: frame_system::Config + $optionally_some_other_supertraits
@@ -3924,74 +4465,103 @@
 /// ...
 /// }
 /// ```
-/// I.e. a regular trait definition named `Config`, with supertrait `frame_system::Config`,
-/// optionally other supertrait and where clause.
 ///
-/// The associated type `Event` is reserved, if defined it must bounds `From&lt;Event&gt;` and
-/// `IsType&lt;&lt;Self as frame_system::Config&gt;::Event&gt;`, see `#[pallet::event]` for more
-/// information.
+/// I.e. a regular trait definition named `Config`, with the supertrait
+/// `frame_system::pallet::Config`, and optionally other supertraits and a where clause.
+/// (Specifying other supertraits here is known as [tight
+/// coupling](https://docs.substrate.io/reference/how-to-guides/pallet-design/use-tight-coupling/))
 ///
-/// To put `Get` associated type into metadatas, use the attribute `#[pallet::constant]`, e.g.:
+/// The associated type `RuntimeEvent` is reserved. If defined, it must have the bounds
+/// `From&lt;Event&gt;` and `IsType&lt;&lt;Self as frame_system::Config&gt;::RuntimeEvent&gt;`.
+///
+/// [`pallet::event`](`frame_support::pallet_macros::event`) must be present if `RuntimeEvent`
+/// exists as a config item in your `#[pallet::config]`.
+///
+/// Also see [`pallet::config`](`frame_support::pallet_macros::config`)
+///
+/// ## `pallet::constant`
+///
+/// The `#[pallet::constant]` attribute can be used to add an associated type trait bounded by
+/// [`Get`](crate::traits::Get) from [`pallet::config`](#palletconfig) into metadata, e.g.:
+///
 /// ```ignore
 /// #[pallet::config]
 /// pub trait Config: frame_system::Config {
-/// 		#[pallet::constant]
-/// 		type Foo: Get&lt;u32&gt;;
+/// 	#[pallet::constant]
+/// 	type Foo: Get&lt;u32&gt;;
 /// }
 /// ```
 ///
+/// Also see [`pallet::constant`](`frame_support::pallet_macros::constant`)
+///
+/// ## `pallet::disable_frame_system_supertrait_check`
+/// &lt;a name=&quot;disable_supertrait_check&quot;&gt;&lt;/a&gt;
+///
 /// To bypass the `frame_system::Config` supertrait check, use the attribute
-/// `#[pallet::disable_frame_system_supertrait_check]`, e.g.:
+/// `pallet::disable_frame_system_supertrait_check`, e.g.:
+///
 /// ```ignore
 /// #[pallet::config]
 /// #[pallet::disable_frame_system_supertrait_check]
 /// pub trait Config: pallet_timestamp::Config {}
 /// ```
 ///
-/// ### Macro expansion:
+/// NOTE: Bypassing the `frame_system::Config` supertrait check is typically desirable when you
+/// want to write an alternative to the `frame_system` pallet.
 ///
-/// The macro expand pallet constant metadata with the information given by
+/// Also see
+/// [`pallet::disable_frame_system_supertrait_check`](`frame_support::pallet_macros::disable_frame_system_supertrait_check`)
+///
+/// ## Macro expansion:
+///
+/// The macro expands pallet constant metadata with the information given by
 /// `#[pallet::constant]`.
 ///
-/// # Pallet struct placeholder: `#[pallet::pallet]` mandatory
+/// # `pallet::generate_store($vis trait Store)`
 ///
-/// The placeholder struct, on which is implemented pallet informations.
+/// To generate a `Store` trait associating all storages, annotate your `Pallet` struct with
+/// the attribute `#[pallet::generate_store($vis trait Store)]`, e.g.:
 ///
-/// Item must be defined as followed:
-/// ```ignore
-/// #[pallet::pallet]
-/// pub struct Pallet&lt;T&gt;(_);
-/// ```
-/// I.e. a regular struct definition named `Pallet`, with generic T and no where clause.
-///
-/// To generate a `Store` trait associating all storages, use the attribute
-/// `#[pallet::generate_store($vis trait Store)]`, e.g.:
 /// ```ignore
 /// #[pallet::pallet]
 /// #[pallet::generate_store(pub(super) trait Store)]
 /// pub struct Pallet&lt;T&gt;(_);
 /// ```
-/// More precisely the store trait contains an associated type for each storage. It is
-/// implemented for `Pallet` allowing to access the storage from pallet struct.
+/// More precisely, the `Store` trait contains an associated type for each storage. It is
+/// implemented for `Pallet` allowing access to the storage from pallet struct.
 ///
 /// Thus when defining a storage named `Foo`, it can later be accessed from `Pallet` using
 /// `&lt;Pallet as Store&gt;::Foo`.
 ///
+/// NOTE: this attribute is only valid when applied _directly_ to your `Pallet` struct
+/// definition.
+///
+/// Also see [`pallet::generate_store`](`frame_support::pallet_macros::generate_store`).
+///
+/// # `pallet::generate_storage_info`
+///
 /// To generate the full storage info (used for PoV calculation) use the attribute
 /// `#[pallet::generate_storage_info]`, e.g.:
+///
 /// ```ignore
 /// #[pallet::pallet]
 /// #[pallet::generate_storage_info]
 /// pub struct Pallet&lt;T&gt;(_);
 /// ```
 ///
-/// This require all storage to implement the trait [`traits::StorageInfoTrait`], thus all keys
-/// and value types must bound [`pallet_prelude::MaxEncodedLen`].
-/// Some individual storage can opt-out from this constraint by using `#[pallet::unbounded]`,
-/// see `#[pallet::storage]` documentation.
+/// This requires all storage items to implement the trait [`traits::StorageInfoTrait`], thus
+/// all keys and value types must be bound by [`pallet_prelude::MaxEncodedLen`]. Individual
+/// storages can opt-out from this constraint by using `#[pallet::unbounded]` (see
+/// `#[pallet::storage]` for more info).
 ///
-/// As the macro implements [`traits::GetStorageVersion`], the current storage version needs to
-/// be communicated to the macro. This can be done by using the `storage_version` attribute:
+/// Also see [`pallet::generate_storage_info`](`frame_support::pallet_macros::generate_storage_info`)
+///
+/// # `pallet::storage_version`
+///
+/// Because the [`pallet::pallet`](#pallet-struct-placeholder-palletpallet-mandatory) macro
+/// implements [`traits::GetStorageVersion`], the current storage version needs to be
+/// communicated to the macro. This can be done by using the `pallet::storage_version`
+/// attribute:
 ///
 /// ```ignore
 /// const STORAGE_VERSION: StorageVersion = StorageVersion::new(5);
@@ -4003,75 +4573,34 @@
 ///
 /// If not present, the current storage version is set to the default value.
 ///
-/// ### Macro expansion:
+/// Also see [`pallet::storage_version`](`frame_support::pallet_macros::storage_version`)
 ///
-/// The macro add this attribute to the struct definition:
-/// ```ignore
-/// #[derive(
-/// 	frame_support::CloneNoBound,
-/// 	frame_support::EqNoBound,
-/// 	frame_support::PartialEqNoBound,
-/// 	frame_support::RuntimeDebugNoBound,
-/// )]
-/// ```
-/// and replace the type `_` by `PhantomData&lt;T&gt;`.
+/// # Hooks: `#[pallet::hooks]` (optional)
 ///
-/// It implements on pallet:
-/// * [`traits::GetStorageVersion`]
-/// * [`traits::OnGenesis`]: contains some logic to write pallet version into storage.
-/// * `PalletErrorTypeInfo`: provides the type information for the pallet error, if defined.
+/// The `pallet::hooks` attribute allows you to specify a `Hooks` implementation for `Pallet`
+/// that specifies pallet-specific logic.
 ///
-/// It declares `type Module` type alias for `Pallet`, used by [`construct_runtime`].
-///
-/// It implements [`traits::PalletInfoAccess`] on `Pallet` to ease access to pallet
-/// informations given by [`frame_support::traits::PalletInfo`].
-/// (The implementation uses the associated type `frame_system::Config::PalletInfo`).
-///
-/// It implements [`traits::StorageInfoTrait`] on `Pallet` which give information about all
-/// storages.
-///
-/// If the attribute generate_store is set then the macro creates the trait `Store` and
-/// implements it on `Pallet`.
-///
-/// If the attribute set_storage_max_encoded_len is set then the macro call
-/// [`traits::StorageInfoTrait`] for each storage in the implementation of
-/// [`traits::StorageInfoTrait`] for the pallet.
-/// Otherwise it implements [`traits::StorageInfoTrait`] for the pallet using the
-/// [`traits::PartialStorageInfoTrait`] implementation of storages.
-///
-/// # Hooks: `#[pallet::hooks]` optional
-///
-/// Implementation of `Hooks` on `Pallet` allowing to define some specific pallet logic.
-///
-/// Item must be defined as
+/// The item the attribute attaches to must be defined as follows:
 /// ```ignore
 /// #[pallet::hooks]
 /// impl&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; for Pallet&lt;T&gt; $optional_where_clause {
+///     ...
 /// }
 /// ```
 /// I.e. a regular trait implementation with generic bound: `T: Config`, for the trait
-/// `Hooks&lt;BlockNumberFor&lt;T&gt;&gt;` (they are defined in preludes), for the type `Pallet&lt;T&gt;`
-/// and with an optional where clause.
+/// `Hooks&lt;BlockNumberFor&lt;T&gt;&gt;` (they are defined in preludes), for the type `Pallet&lt;T&gt;` and
+/// with an optional where clause.
 ///
-/// If no `#[pallet::hooks]` exists, then a default implementation corresponding to the
-/// following code is automatically generated:
+/// If no `#[pallet::hooks]` exists, then the following default implementation is
+/// automatically generated:
 /// ```ignore
 /// #[pallet::hooks]
 /// impl&lt;T: Config&gt; Hooks&lt;BlockNumberFor&lt;T&gt;&gt; for Pallet&lt;T&gt; {}
 /// ```
 ///
-/// ### Macro expansion:
+/// Also see [`pallet::hooks`](`frame_support::pallet_macros::hooks`)
 ///
-/// The macro implements the traits `OnInitialize`, `OnIdle`, `OnFinalize`, `OnRuntimeUpgrade`,
-/// `OffchainWorker`, `IntegrityTest` using `Hooks` implementation.
-///
-/// NOTE: OnRuntimeUpgrade is implemented with `Hooks::on_runtime_upgrade` and some additional
-/// logic. E.g. logic to write pallet version into storage.
-///
-/// NOTE: The macro also adds some tracing logic when implementing the above traits. The
-/// following  hooks emit traces: `on_initialize`, `on_finalize` and `on_runtime_upgrade`.
-///
-/// # Call: `#[pallet::call]` optional
+/// # Call: `#[pallet::call]` (optional)
 ///
 /// Implementation of pallet dispatchables.
 ///
@@ -4093,53 +4622,50 @@
 /// }
 /// ```
 /// I.e. a regular type implementation, with generic `T: Config`, on type `Pallet&lt;T&gt;`, with
-/// optional where clause.
+/// an optional where clause.
 ///
-/// Each dispatchable needs to define a weight with `#[pallet::weight($expr)]` attribute,
-/// the first argument must be `origin: OriginFor&lt;T&gt;`, compact encoding for argument can be
-/// used using `#[pallet::compact]`, function must return `DispatchResultWithPostInfo` or
-/// `DispatchResult`.
+/// ## `#[pallet::weight($expr)]`
+///
+/// Each dispatchable needs to define a weight with `#[pallet::weight($expr)]` attribute, the
+/// first argument must be `origin: OriginFor&lt;T&gt;`.
+///
+/// Also see [`pallet::weight`](`frame_support::pallet_macros::weight`)
+///
+/// ### `#[pallet::compact] $some_arg: $some_type`
+///
+/// Compact encoding for arguments can be achieved via `#[pallet::compact]`. The function must
+/// return a `DispatchResultWithPostInfo` or `DispatchResult`.
+///
+/// Also see [`pallet::compact`](`frame_support::pallet_macros::compact`)
+///
+/// ## `#[pallet::call_index($idx)]`
 ///
 /// Each dispatchable may also be annotated with the `#[pallet::call_index($idx)]` attribute,
-/// which defines and sets the codec index for the dispatchable function in the `Call` enum.
+/// which explicitly defines the codec index for the dispatchable function in the `Call` enum.
 ///
 /// All call indexes start from 0, until it encounters a dispatchable function with a defined
 /// call index. The dispatchable function that lexically follows the function with a defined
 /// call index will have that call index, but incremented by 1, e.g. if there are 3
-/// dispatchable functions `fn foo`, `fn bar` and `fn qux` in that order, and only `fn bar` has
-/// a call index of 10, then `fn qux` will have an index of 11, instead of 1.
+/// dispatchable functions `fn foo`, `fn bar` and `fn qux` in that order, and only `fn bar`
+/// has a call index of 10, then `fn qux` will have an index of 11, instead of 1.
 ///
-/// All arguments must implement `Debug`, `PartialEq`, `Eq`, `Decode`, `Encode`, `Clone`. For
-/// ease of use, bound the trait `Member` available in frame_support::pallet_prelude.
-///
-/// If no `#[pallet::call]` exists, then a default implementation corresponding to the
-/// following code is automatically generated:
-/// ```ignore
-/// #[pallet::call]
-/// impl&lt;T: Config&gt; Pallet&lt;T&gt; {}
-/// ```
-///
-/// **WARNING**: modifying dispatchables, changing their order, removing some must be done with
-/// care. Indeed this will change the outer runtime call type (which is an enum with one
-/// variant per pallet), this outer runtime call can be stored on-chain (e.g. in
-/// pallet-scheduler). Thus migration might be needed. To mitigate against some of this, the
+/// **WARNING**: modifying dispatchables, changing their order, removing some, etc., must be
+/// done with care. Indeed this will change the outer runtime call type (which is an enum with
+/// one variant per pallet), this outer runtime call can be stored on-chain (e.g. in
+/// `pallet-scheduler`). Thus migration might be needed. To mitigate against some of this, the
 /// `#[pallet::call_index($idx)]` attribute can be used to fix the order of the dispatchable so
-/// that the `Call` enum encoding does not change after modification.
+/// that the `Call` enum encoding does not change after modification. As a general rule of
+/// thumb, it is therefore adventageous to always add new calls to the end so you can maintain
+/// the existing order of calls.
 ///
-/// ### Macro expansion
+/// Also see [`pallet::call_index`](`frame_support::pallet_macros::call_index`)
 ///
-/// The macro creates an enum `Call` with one variant per dispatchable. This enum implements:
-/// `Clone`, `Eq`, `PartialEq`, `Debug` (with stripped implementation in `not(&quot;std&quot;)`),
-/// `Encode`, `Decode`, `GetDispatchInfo`, `GetCallName`, `UnfilteredDispatchable`.
+/// # Extra constants: `#[pallet::extra_constants]` (optional)
 ///
-/// The macro implement the `Callable` trait on `Pallet` and a function `call_functions` which
-/// returns the dispatchable metadata.
-///
-/// # Extra constants: `#[pallet::extra_constants]` optional
-///
-/// Allow to define some extra constants to put into constant metadata.
+/// Allows you to define some extra constants to be added into constant metadata.
 ///
 /// Item must be defined as:
+///
 /// ```ignore
 /// #[pallet::extra_constants]
 /// impl&lt;T: Config&gt; Pallet&lt;T&gt; where $optional_where_clause {
@@ -4150,19 +4676,23 @@
 /// 	...
 /// }
 /// ```
-/// I.e. a regular rust implement block with some optional where clause and functions with 0
-/// args, 0 generics, and some return type.
+/// I.e. a regular rust `impl` block with some optional where clause and functions with 0 args,
+/// 0 generics, and some return type.
 ///
-/// ### Macro expansion
+/// ## Macro expansion
 ///
-/// The macro add some extra constant to pallet constant metadata.
+/// The macro add some extra constants to pallet constant metadata.
 ///
-/// # Error: `#[pallet::error]` optional
+/// Also see: [`pallet::extra_constants`](`frame_support::pallet_macros::extra_constants`)
 ///
-/// Allow to define an error type to be return from dispatchable on error.
-/// This error type informations are put into metadata.
+/// # Error: `#[pallet::error]` (optional)
+///
+/// The `#[pallet::error]` attribute allows you to define an error enum that will be returned
+/// from the dispatchable when an error occurs. The information for this error type is then
+/// stored in metadata.
 ///
 /// Item must be defined as:
+///
 /// ```ignore
 /// #[pallet::error]
 /// pub enum Error&lt;T&gt; {
@@ -4173,7 +4703,7 @@
 /// 	...
 /// }
 /// ```
-/// I.e. a regular rust enum named `Error`, with generic `T` and fieldless or multiple-field
+/// I.e. a regular enum named `Error`, with generic `T` and fieldless or multiple-field
 /// variants.
 ///
 /// Any field type in the enum variants must implement [`scale_info::TypeInfo`] in order to be
@@ -4181,29 +4711,28 @@
 /// preferably 1 byte in size in order to reduce storage size. The error enum itself has an
 /// absolute maximum encoded size specified by [`MAX_MODULE_ERROR_ENCODED_SIZE`].
 ///
+/// (1 byte can still be 256 different errors. The more specific the error, the easier it is to
+/// diagnose problems and give a better experience to the user. Don&#39;t skimp on having lots of
+/// individual error conditions.)
+///
 /// Field types in enum variants must also implement [`PalletError`](traits::PalletError),
 /// otherwise the pallet will fail to compile. Rust primitive types have already implemented
 /// the [`PalletError`](traits::PalletError) trait along with some commonly used stdlib types
-/// such as `Option` and `PhantomData`, and hence in most use cases, a manual implementation is
-/// not necessary and is discouraged.
+/// such as [`Option`] and [`PhantomData`](`frame_support::dispatch::marker::PhantomData`), and
+/// hence in most use cases, a manual implementation is not necessary and is discouraged.
 ///
-/// The generic `T` mustn&#39;t bound anything and where clause is not allowed. But bounds and
-/// where clause shouldn&#39;t be needed for any usecase.
+/// The generic `T` must not bound anything and a `where` clause is not allowed. That said,
+/// bounds and/or a where clause should not needed for any use-case.
 ///
-/// ### Macro expansion
+/// Also see: [`pallet::error`](`frame_support::pallet_macros::error`)
 ///
-/// The macro implements `Debug` trait and functions `as_u8` using variant position, and
-/// `as_str` using variant doc.
+/// # Event: `#[pallet::event]` (optional)
 ///
-/// The macro implements `From&lt;Error&lt;T&gt;&gt;` for `&amp;&#39;static str`.
-/// The macro implements `From&lt;Error&lt;T&gt;&gt;` for `DispatchError`.
+/// Allows you to define pallet events. Pallet events are stored under the `system` / `events`
+/// key when the block is applied (and then replaced when the next block writes it&#39;s events).
 ///
-/// # Event: `#[pallet::event]` optional
+/// The Event enum must be defined as follows:
 ///
-/// Allow to define pallet events, pallet events are stored in the block when they deposited
-/// (and removed in next block).
-///
-/// Item is defined as:
 /// ```ignore
 /// #[pallet::event]
 /// #[pallet::generate_deposit($visibility fn deposit_event)] // Optional
@@ -4213,117 +4742,148 @@
 /// 	...
 /// }
 /// ```
-/// I.e. an enum (with named or unnamed fields variant), named Event, with generic: none or `T`
-/// or `T: Config`, and optional where clause.
 ///
-/// Each field must implement `Clone`, `Eq`, `PartialEq`, `Encode`, `Decode`, and `Debug` (on
-/// std only).
-/// For ease of use, bound the trait `Member` available in frame_support::pallet_prelude.
+/// I.e. an enum (with named or unnamed fields variant), named `Event`, with generic: none or
+/// `T` or `T: Config`, and optional w here clause.
 ///
-/// The attribute `#[pallet::generate_deposit($visibility fn deposit_event)]` generate a helper
-/// function on `Pallet` to deposit event.
+/// Each field must implement [`Clone`], [`Eq`], [`PartialEq`], [`Encode`], [`Decode`], and
+/// [`Debug`] (on std only). For ease of use, bound by the trait
+/// [`Member`](`frame_support::pallet_prelude::Member`), available in
+/// frame_support::pallet_prelude.
 ///
-/// NOTE: For instantiable pallet, event must be generic over T and I.
+/// Also see [`pallet::event`](`frame_support::pallet_macros::event`)
 ///
-/// ### Macro expansion:
+/// ## `#[pallet::generate_deposit($visibility fn deposit_event)]`
 ///
-/// Macro will add on enum `Event` the attributes:
-/// * `#[derive(frame_support::CloneNoBound)]`,
-/// * `#[derive(frame_support::EqNoBound)]`,
-/// * `#[derive(frame_support::PartialEqNoBound)]`,
-/// * `#[derive(codec::Encode)]`,
-/// * `#[derive(codec::Decode)]`,
-/// * `#[derive(frame_support::RuntimeDebugNoBound)]`
+/// The attribute `#[pallet::generate_deposit($visibility fn deposit_event)]` generates a
+/// helper function on `Pallet` that handles deposit events.
 ///
-/// Macro implements `From&lt;Event&lt;..&gt;&gt;` for ().
+/// NOTE: For instantiable pallets, the event must be generic over `T` and `I`.
 ///
-/// Macro implements metadata function on `Event` returning the `EventMetadata`.
+/// Also see [`pallet::generate_deposit`](`frame_support::pallet_macros::generate_deposit`)
 ///
-/// If `#[pallet::generate_deposit]` then macro implement `fn deposit_event` on `Pallet`.
+/// # Storage: `#[pallet::storage]` (optional)
 ///
-/// # Storage: `#[pallet::storage]` optional
+/// The `#[pallet::storage]` attribute lets you define some abstract storage inside of runtime
+/// storage and also set its metadata. This attribute can be used multiple times.
 ///
-/// Allow to define some abstract storage inside runtime storage and also set its metadata.
-/// This attribute can be used multiple times.
+/// Item should be defined as:
 ///
-/// Item is defined as:
 /// ```ignore
 /// #[pallet::storage]
 /// #[pallet::getter(fn $getter_name)] // optional
 /// $vis type $StorageName&lt;$some_generic&gt; $optional_where_clause
 /// 	= $StorageType&lt;$generic_name = $some_generics, $other_name = $some_other, ...&gt;;
 /// ```
-/// or with unnamed generic
+///
+/// or with unnamed generic:
+///
 /// ```ignore
 /// #[pallet::storage]
 /// #[pallet::getter(fn $getter_name)] // optional
 /// $vis type $StorageName&lt;$some_generic&gt; $optional_where_clause
 /// 	= $StorageType&lt;_, $some_generics, ...&gt;;
 /// ```
-/// I.e. it must be a type alias, with generics: `T` or `T: Config`, aliased type must be one
-/// of `StorageValue`, `StorageMap` or `StorageDoubleMap` (defined in frame_support).
-/// The generic arguments of the storage type can be given in two manner: named and unnamed.
-/// For named generic argument: the name for each argument is the one as define on the storage
-/// struct:
-/// * [`pallet_prelude::StorageValue`] expect `Value` and optionally `QueryKind` and `OnEmpty`,
-/// * [`pallet_prelude::StorageMap`] expect `Hasher`, `Key`, `Value` and optionally `QueryKind`
-///   and `OnEmpty`,
-/// * [`pallet_prelude::CountedStorageMap`] expect `Hasher`, `Key`, `Value` and optionally
+///
+/// I.e. it must be a type alias, with generics: `T` or `T: Config`. The aliased type must be
+/// one of [`StorageValue`](`pallet_prelude::StorageValue`),
+/// [`StorageMap`](`pallet_prelude::StorageMap`) or
+/// [`StorageDoubleMap`](`pallet_prelude::StorageDoubleMap`). The generic arguments of the
+/// storage type can be given in two manners: named and unnamed. For named generic arguments,
+/// the name for each argument should match the name defined for it on the storage struct:
+/// * [`StorageValue`](`pallet_prelude::StorageValue`) expects `Value` and optionally
 ///   `QueryKind` and `OnEmpty`,
-/// * [`pallet_prelude::StorageDoubleMap`] expect `Hasher1`, `Key1`, `Hasher2`, `Key2`, `Value`
-///   and optionally `QueryKind` and `OnEmpty`.
+/// * [`StorageMap`](`pallet_prelude::StorageMap`) expects `Hasher`, `Key`, `Value` and
+///   optionally `QueryKind` and `OnEmpty`,
+/// * [`CountedStorageMap`](`pallet_prelude::CountedStorageMap`) expects `Hasher`, `Key`,
+///   `Value` and optionally `QueryKind` and `OnEmpty`,
+/// * [`StorageDoubleMap`](`pallet_prelude::StorageDoubleMap`) expects `Hasher1`, `Key1`,
+///   `Hasher2`, `Key2`, `Value` and optionally `QueryKind` and `OnEmpty`.
 ///
-/// For unnamed generic argument: Their first generic must be `_` as it is replaced by the
-/// macro and other generic must declared as a normal declaration of type generic in rust.
+/// For unnamed generic arguments: Their first generic must be `_` as it is replaced by the
+/// macro and other generic must declared as a normal generic type declaration.
 ///
-/// The Prefix generic written by the macro is generated using
-/// `PalletInfo::name::&lt;Pallet&lt;..&gt;&gt;()` and the name of the storage type.
-/// E.g. if runtime names the pallet &quot;MyExample&quot; then the storage `type Foo&lt;T&gt; = ...` use the
-/// prefix: `Twox128(b&quot;MyExample&quot;) ++ Twox128(b&quot;Foo&quot;)`.
+/// The `Prefix` generic written by the macro is generated using
+/// `PalletInfo::name::&lt;Pallet&lt;..&gt;&gt;()` and the name of the storage type. E.g. if runtime names
+/// the pallet &quot;MyExample&quot; then the storage `type Foo&lt;T&gt; = ...` should use the prefix:
+/// `Twox128(b&quot;MyExample&quot;) ++ Twox128(b&quot;Foo&quot;)`.
 ///
-/// For the `CountedStorageMap` variant, the Prefix also implements
-/// `CountedStorageMapInstance`. It associate a `CounterPrefix`, which is implemented same as
-/// above, but the storage prefix is prepend with `&quot;CounterFor&quot;`.
-/// E.g. if runtime names the pallet &quot;MyExample&quot; then the storage
-/// `type Foo&lt;T&gt; = CountedStorageaMap&lt;...&gt;` will store its counter at the prefix:
-/// `Twox128(b&quot;MyExample&quot;) ++ Twox128(b&quot;CounterForFoo&quot;)`.
+/// For the [`CountedStorageMap`](`pallet_prelude::CountedStorageMap`) variant, the `Prefix`
+/// also implements
+/// [`CountedStorageMapInstance`](`frame_support::storage::types::CountedStorageMapInstance`).
+/// It also associates a [`CounterPrefix`](`pallet_prelude::CounterPrefix&#39;), which is
+/// implemented the same as above, but the storage prefix is prepend with `&quot;CounterFor&quot;`. E.g.
+/// if runtime names the pallet &quot;MyExample&quot; then the storage `type Foo&lt;T&gt; =
+/// CountedStorageaMap&lt;...&gt;` will store its counter at the prefix: `Twox128(b&quot;MyExample&quot;) ++
+/// Twox128(b&quot;CounterForFoo&quot;)`.
 ///
 /// E.g:
+///
 /// ```ignore
 /// #[pallet::storage]
 /// pub(super) type MyStorage&lt;T&gt; = StorageMap&lt;Hasher = Blake2_128Concat, Key = u32, Value = u32&gt;;
 /// ```
-/// In this case the final prefix used by the map is
-/// `Twox128(b&quot;MyExample&quot;) ++ Twox128(b&quot;OtherName&quot;)`.
 ///
-/// The optional attribute `#[pallet::getter(fn $my_getter_fn_name)]` allows to define a
+/// In this case the final prefix used by the map is `Twox128(b&quot;MyExample&quot;) ++
+/// Twox128(b&quot;OtherName&quot;)`.
+///
+/// Also see [`pallet::storage`](`frame_support::pallet_macros::storage`)
+///
+/// ## `#[pallet::getter(fn $my_getter_fn_name)]` (optional)
+///
+/// The optional attribute `#[pallet::getter(fn $my_getter_fn_name)]` allows you to define a
 /// getter function on `Pallet`.
 ///
-/// The optional attribute `#[pallet::storage_prefix = &quot;SomeName&quot;]` allow to define the storage
-/// prefix to use, see how `Prefix` generic is implemented above.
+/// Also see [`pallet::getter`](`frame_support::pallet_macros::getter`)
+///
+/// ## `#[pallet::storage_prefix = &quot;SomeName&quot;]` (optional)
+///
+/// The optional attribute `#[pallet::storage_prefix = &quot;SomeName&quot;]` allows you to define the
+/// storage prefix to use, see how `Prefix` generic is implemented above. This is helpful if
+/// you wish to rename the storage field but don&#39;t want to perform a migration.
 ///
 /// E.g:
+///
 /// ```ignore
 /// #[pallet::storage]
 /// #[pallet::storage_prefix = &quot;foo&quot;]
 /// #[pallet::getter(fn my_storage)]
 /// pub(super) type MyStorage&lt;T&gt; = StorageMap&lt;Hasher = Blake2_128Concat, Key = u32, Value = u32&gt;;
 /// ```
+///
 /// or
+///
 /// ```ignore
 /// #[pallet::storage]
 /// #[pallet::getter(fn my_storage)]
 /// pub(super) type MyStorage&lt;T&gt; = StorageMap&lt;_, Blake2_128Concat, u32, u32&gt;;
 /// ```
 ///
-/// The optional attribute `#[pallet::unbounded]` allows to declare the storage as unbounded.
-/// When implementating the storage info (when `#[pallet::generate_storage_info]` is specified
-/// on the pallet struct placeholder), the size of the storage will be declared as unbounded.
-/// This can be useful for storage which can never go into PoV (Proof of Validity).
+/// Also see [`pallet::storage_prefix`](`frame_support::pallet_macros::storage_prefix`)
 ///
+/// ## `#[pallet::unbounded]` (optional)
+///
+/// The optional attribute `#[pallet::unbounded]` declares the storage as unbounded. When
+/// implementating the storage info (when `#[pallet::generate_storage_info]` is specified on
+/// the pallet struct placeholder), the size of the storage will be declared as unbounded. This
+/// can be useful for storage which can never go into PoV (Proof of Validity).
+///
+/// Also see [`pallet::unbounded`](`frame_support::pallet_macros::unbounded`)
+///
+/// ## `#[pallet::whitelist_storage]` (optional)
+///
+/// The optional attribute `#[pallet::whitelist_storage]` will declare the storage as
+/// whitelisted from benchmarking.
+///
+/// See
+/// [`pallet::whitelist_storage`](frame_support::pallet_macros::whitelist_storage)
+/// for more info.
+///
+///	## `#[cfg(..)]` (for storage)
 /// The optional attributes `#[cfg(..)]` allow conditional compilation for the storage.
 ///
 /// E.g:
+///
 /// ```ignore
 /// #[cfg(feature = &quot;my-feature&quot;)]
 /// #[pallet::storage]
@@ -4333,6 +4893,24 @@
 /// All the `cfg` attributes are automatically copied to the items generated for the storage,
 /// i.e. the getter, storage prefix, and the metadata element etc.
 ///
+/// Any type placed as the `QueryKind` parameter must implement
+/// [`frame_support::storage::types::QueryKindTrait`]. There are 3 implementations of this
+/// trait by default:
+///
+/// 1. [`OptionQuery`](`frame_support::storage::types::OptionQuery`), the default `QueryKind`
+///    used when this type parameter is omitted. Specifying this as the `QueryKind` would cause
+///    storage map APIs that return a `QueryKind` to instead return an [`Option`], returning
+///    `Some` when a value does exist under a specified storage key, and `None` otherwise.
+/// 2. [`ValueQuery`](`frame_support::storage::types::ValueQuery`) causes storage map APIs that
+///    return a `QueryKind` to instead return the value type. In cases where a value does not
+///    exist under a specified storage key, the `OnEmpty` type parameter on `QueryKindTrait` is
+///    used to return an appropriate value.
+/// 3. [`ResultQuery`](`frame_support::storage::types::ResultQuery`) causes storage map APIs
+///    that return a `QueryKind` to instead return a `Result&lt;T, E&gt;`, with `T` being the value
+///    type and `E` being the pallet error type specified by the `#[pallet::error]` attribute.
+///    In cases where a value does not exist under a specified storage key, an `Err` with the
+///    specified pallet error variant is returned.
+///
 /// NOTE: If the `QueryKind` generic parameter is still generic at this stage or is using some
 /// type alias then the generation of the getter might fail. In this case the getter can be
 /// implemented manually.
@@ -4341,60 +4919,62 @@
 /// usable at all). We use [`StorageHasher::METADATA`] for the metadata of the hasher of the
 /// storage item. Thus generic hasher is supported.
 ///
-/// ### Macro expansion
+/// ## Macro expansion
 ///
 /// For each storage item the macro generates a struct named
 /// `_GeneratedPrefixForStorage$NameOfStorage`, and implements
 /// [`StorageInstance`](traits::StorageInstance) on it using the pallet and storage name. It
-/// then uses it as the first generic of the aliased type.
-/// For `CountedStorageMap`, `CountedStorageMapInstance` is implemented, and another similar
-/// struct is generated.
+/// then uses it as the first generic of the aliased type. For
+/// [`CountedStorageMap`](`pallet_prelude::CountedStorageMap`),
+/// [`CountedStorageMapInstance`](`frame_support::storage::types::CountedStorageMapInstance`)
+/// is implemented, and another similar struct is generated.
 ///
-/// For named generic, the macro will reorder the generics, and remove the names.
+/// For a named generic, the macro will reorder the generics, and remove the names.
 ///
-/// The macro implements the function `storage_metadata` on `Pallet` implementing the metadata
-/// for all storage items based on their kind:
+/// The macro implements the function `storage_metadata` on the `Pallet` implementing the
+/// metadata for all storage items based on their kind:
 /// * for a storage value, the type of the value is copied into the metadata
 /// * for a storage map, the type of the values and the key&#39;s type is copied into the metadata
-/// * for a storage double map, the type of the values, and the types of key1 and key2 are
+/// * for a storage double map, the type of the values, and the types of `key1` and `key2` are
 ///   copied into the metadata.
 ///
-/// # Type value: `#[pallet::type_value]` optional
+/// # Type value: `#[pallet::type_value]` (optional)
 ///
-/// Helper to define a struct implementing `Get` trait. To ease use of storage types.
-/// This attribute can be used multiple time.
+/// The `#[pallet::type_value]` attribute lets you define a struct implementing the
+/// [`Get`](crate::traits::Get) trait to ease use of storage types. This attribute is meant to
+/// be used alongside [`#[pallet::storage]`](#storage-palletstorage-optional) to define a
+/// storage&#39;s default value. This attribute can be used multiple times.
 ///
-/// Item is defined as
+/// Item must be defined as:
+///
 /// ```ignore
 /// #[pallet::type_value]
 /// fn $MyDefaultName&lt;$some_generic&gt;() -&gt; $default_type $optional_where_clause { $expr }
 /// ```
+///
 /// I.e.: a function definition with generics none or `T: Config` and a returned type.
 ///
 /// E.g.:
+///
 /// ```ignore
 /// #[pallet::type_value]
 /// fn MyDefault&lt;T: Config&gt;() -&gt; T::Balance { 3.into() }
 /// ```
 ///
-/// NOTE: This attribute is meant to be used alongside `#[pallet::storage]` to defined some
-/// specific default value in storage.
+/// Also see [`pallet::type_value`](`frame_support::pallet_macros::type_value`)
 ///
-/// ### Macro expansion
+/// # Genesis config: `#[pallet::genesis_config]` (optional)
 ///
-/// Macro renames the function to some internal name, generate a struct with the original name
-/// of the function and its generic, and implement `Get&lt;$ReturnType&gt;` by calling the user
-/// defined function.
+/// The `#[pallet::genesis_config]` attribute allows you to define the genesis configuration
+/// for the pallet.
 ///
-/// # Genesis config: `#[pallet::genesis_config]` optional
-///
-/// Allow to define the genesis configuration of the pallet.
-///
-/// Item is defined as either an enum or a struct.
-/// It needs to be public and implement trait GenesisBuild with `#[pallet::genesis_build]`.
-/// The type generics is constrained to be either none, or `T` or `T: Config`.
+/// Item is defined as either an enum or a struct. It needs to be public and implement the
+/// trait [`GenesisBuild`](`traits::GenesisBuild`) with
+/// [`#[pallet::genesis_build]`](#genesis-build-palletgenesis_build-optional). The type
+/// generics are constrained to be either none, or `T` or `T: Config`.
 ///
 /// E.g:
+///
 /// ```ignore
 /// #[pallet::genesis_config]
 /// pub struct GenesisConfig&lt;T: Config&gt; {
@@ -4402,31 +4982,28 @@
 /// }
 /// ```
 ///
-/// ### Macro expansion
+/// Also see [`pallet::genesis_config`](`frame_support::pallet_macros::genesis_config`)
 ///
-/// Macro will add the following attribute on it:
-/// * `#[cfg(feature = &quot;std&quot;)]`
-/// * `#[derive(Serialize, Deserialize)]`
-/// * `#[serde(rename_all = &quot;camelCase&quot;)]`
-/// * `#[serde(deny_unknown_fields)]`
-/// * `#[serde(bound(serialize = &quot;&quot;))]`
-/// * `#[serde(bound(deserialize = &quot;&quot;))]`
+/// # Genesis build: `#[pallet::genesis_build]` (optional)
 ///
-/// # Genesis build: `#[pallet::genesis_build]` optional
+/// The `#[pallet::genesis_build]` attribute allows you to define how `genesis_configuration`
+/// is built. This takes as input the `GenesisConfig` type (as `self`) and constructs the
+/// pallet&#39;s initial state.
 ///
-/// Allow to define how genesis_configuration is built.
+/// The impl must be defined as:
 ///
-/// Item is defined as
 /// ```ignore
 /// #[pallet::genesis_build]
 /// impl&lt;T: Config&gt; GenesisBuild&lt;T&gt; for GenesisConfig&lt;$maybe_generics&gt; {
 /// 	fn build(&amp;self) { $expr }
 /// }
 /// ```
-/// I.e. a rust trait implementation with generic `T: Config`, of trait `GenesisBuild&lt;T&gt;` on
+///
+/// I.e. a trait implementation with generic `T: Config`, of trait `GenesisBuild&lt;T&gt;` on
 /// type `GenesisConfig` with generics none or `T`.
 ///
 /// E.g.:
+///
 /// ```ignore
 /// #[pallet::genesis_build]
 /// impl&lt;T: Config&gt; GenesisBuild&lt;T&gt; for GenesisConfig {
@@ -4434,87 +5011,93 @@
 /// }
 /// ```
 ///
-/// ### Macro expansion
+/// Also see [`pallet::genesis_build`](`frame_support::pallet_macros::genesis_build`)
 ///
-/// Macro will add the following attribute on it:
-/// * `#[cfg(feature = &quot;std&quot;)]`
+/// # Inherent: `#[pallet::inherent]` (optional)
 ///
-/// Macro will implement `sp_runtime::BuildModuleGenesisStorage` using `()` as second generic
-/// for non-instantiable pallets.
+/// The `#[pallet::inherent]` attribute allows the pallet to provide some
+/// [inherent](https://docs.substrate.io/fundamentals/transaction-types/#inherent-transactions).
+/// An inherent is some piece of data that is inserted by a block authoring node at block
+/// creation time and can either be accepted or rejected by validators based on whether the
+/// data falls within an acceptable range.
 ///
-/// # Inherent: `#[pallet::inherent]` optional
+/// The most common inherent is the `timestamp` that is inserted into every block. Since there
+/// is no way to validate timestamps, validators simply check that the timestamp reported by
+/// the block authoring node falls within an acceptable range.
 ///
-/// Allow the pallet to provide some inherent:
+/// Item must be defined as:
 ///
-/// Item is defined as:
 /// ```ignore
 /// #[pallet::inherent]
 /// impl&lt;T: Config&gt; ProvideInherent for Pallet&lt;T&gt; {
 /// 	// ... regular trait implementation
 /// }
 /// ```
-/// I.e. a trait implementation with bound `T: Config`, of trait `ProvideInherent` for type
-/// `Pallet&lt;T&gt;`, and some optional where clause.
 ///
-/// ### Macro expansion
+/// I.e. a trait implementation with bound `T: Config`, of trait
+/// [`ProvideInherent`](`pallet_prelude::ProvideInherent`) for type `Pallet&lt;T&gt;`, and some
+/// optional where clause.
 ///
-/// Macro make currently no use of this information, but it might use this information in the
-/// future to give information directly to construct_runtime.
+/// Also see [`pallet::inherent`](`frame_support::pallet_macros::inherent`)
 ///
-/// # Validate unsigned: `#[pallet::validate_unsigned]` optional
+/// # Validate unsigned: `#[pallet::validate_unsigned]` (optional)
 ///
-/// Allow the pallet to validate some unsigned transaction:
+/// The `#[pallet::validate_unsigned]` attribute allows the pallet to validate some unsigned
+/// transaction:
 ///
-/// Item is defined as:
+/// Item must be defined as:
+///
 /// ```ignore
 /// #[pallet::validate_unsigned]
 /// impl&lt;T: Config&gt; ValidateUnsigned for Pallet&lt;T&gt; {
 /// 	// ... regular trait implementation
 /// }
 /// ```
-/// I.e. a trait implementation with bound `T: Config`, of trait `ValidateUnsigned` for type
-/// `Pallet&lt;T&gt;`, and some optional where clause.
 ///
-/// NOTE: There is also `sp_runtime::traits::SignedExtension` that can be used to add some
-/// specific logic for transaction validation.
+/// I.e. a trait implementation with bound `T: Config`, of trait
+/// [`ValidateUnsigned`](`pallet_prelude::ValidateUnsigned`) for type `Pallet&lt;T&gt;`, and some
+/// optional where clause.
 ///
-/// ### Macro expansion
+/// NOTE: There is also the [`sp_runtime::traits::SignedExtension`] trait that can be used to
+/// add some specific logic for transaction validation.
 ///
-/// Macro make currently no use of this information, but it might use this information in the
-/// future to give information directly to construct_runtime.
+/// Also see [`pallet::validate_unsigned`](`frame_support::pallet_macros::validate_unsigned`)
 ///
-/// # Origin: `#[pallet::origin]` optional
+/// # Origin: `#[pallet::origin]` (optional)
 ///
-/// Allow to define some origin for the pallet.
+/// The `#[pallet::origin]` attribute allows you to define some origin for the pallet.
 ///
-/// Item must be either a type alias or an enum or a struct. It needs to be public.
+/// Item must be either a type alias, an enum, or a struct. It needs to be public.
 ///
 /// E.g.:
+///
 /// ```ignore
 /// #[pallet::origin]
 /// pub struct Origin&lt;T&gt;(PhantomData&lt;(T)&gt;);
 /// ```
 ///
 /// **WARNING**: modifying origin changes the outer runtime origin. This outer runtime origin
-/// can be stored on-chain (e.g. in pallet-scheduler), thus any change must be done with care
+/// can be stored on-chain (e.g. in `pallet-scheduler`), thus any change must be done with care
 /// as it might require some migration.
 ///
-/// NOTE: for instantiable pallet, origin must be generic over T and I.
+/// NOTE: for instantiable pallets, the origin must be generic over `T` and `I`.
 ///
-/// # General notes on instantiable pallet
+/// Also see [`pallet::origin`](`frame_support::pallet_macros::origin`)
 ///
-/// An instantiable pallet is one where Config is generic, i.e. `Config&lt;I&gt;`. This allow runtime
-/// to implement multiple instance of the pallet, by using different type for the generic.
-/// This is the sole purpose of the generic `I`.
-/// But because `PalletInfo` requires `Pallet` placeholder to be static it is important to
-/// bound `&#39;static` whenever `PalletInfo` can be used.
-/// And in order to have instantiable pallet usable as a regular pallet without instance, it is
-/// important to bound `= ()` on every types.
+/// # General notes on instantiable pallets
 ///
-/// Thus impl bound look like `impl&lt;T: Config&lt;I&gt;, I: &#39;static&gt;`, and types look like
+/// An instantiable pallet is one where Config is generic, i.e. `Config&lt;I&gt;`. This allows
+/// runtime to implement multiple instances of the pallet, by using different types for the
+/// generic. This is the sole purpose of the generic `I`, but because
+/// [`PalletInfo`](`traits::PalletInfo`) requires the `Pallet` placeholder to be static, it is
+/// important to bound by `&#39;static` whenever [`PalletInfo`](`traits::PalletInfo`) can be used.
+/// Additionally, in order to make an instantiable pallet usable as a regular pallet without an
+/// instance, it is important to bound by `= ()` on every type.
+///
+/// Thus impl bound looks like `impl&lt;T: Config&lt;I&gt;, I: &#39;static&gt;`, and types look like
 /// `SomeType&lt;T, I=()&gt;` or `SomeType&lt;T: Config&lt;I&gt;, I: &#39;static = ()&gt;`.
 ///
-/// # Example for pallet without instance.
+/// # Example of a non-instantiable pallet
 ///
 /// ```
 /// pub use pallet::*; // reexport in crate namespace for `construct_runtime!`
@@ -4536,7 +5119,7 @@
 /// 		#[pallet::constant] // put the constant in metadata
 /// 		type MyGetParam: Get&lt;u32&gt;;
 /// 		type Balance: Parameter + MaxEncodedLen + From&lt;u8&gt;;
-/// 		type Event: From&lt;Event&lt;Self&gt;&gt; + IsType&lt;&lt;Self as frame_system::Config&gt;::Event&gt;;
+/// 		type RuntimeEvent: From&lt;Event&lt;Self&gt;&gt; + IsType&lt;&lt;Self as frame_system::Config&gt;::RuntimeEvent&gt;;
 /// 	}
 ///
 /// 	// Define some additional constant to put into the constant metadata.
@@ -4708,7 +5291,7 @@
 /// }
 /// ```
 ///
-/// # Example for pallet with instance.
+/// # Example of an instantiable pallet
 ///
 /// ```
 /// pub use pallet::*;
@@ -4725,7 +5308,7 @@
 /// 		#[pallet::constant]
 /// 		type MyGetParam: Get&lt;u32&gt;;
 /// 		type Balance: Parameter + MaxEncodedLen + From&lt;u8&gt;;
-/// 		type Event: From&lt;Event&lt;Self, I&gt;&gt; + IsType&lt;&lt;Self as frame_system::Config&gt;::Event&gt;;
+/// 		type RuntimeEvent: From&lt;Event&lt;Self, I&gt;&gt; + IsType&lt;&lt;Self as frame_system::Config&gt;::RuntimeEvent&gt;;
 /// 	}
 ///
 /// 	#[pallet::extra_constants]
@@ -4839,28 +5422,28 @@
 /// }
 /// ```
 ///
-/// ## Upgrade guidelines:
+/// # Upgrade guidelines
 ///
 /// 1. Export the metadata of the pallet for later checks
 ///     - run your node with the pallet active
 ///     - query the metadata using the `state_getMetadata` RPC and curl, or use `subsee -p
 ///       &lt;PALLET_NAME&gt; &gt; meta.json`
-/// 2. generate the template upgrade for the pallet provided by decl_storage
-///     with environment variable `PRINT_PALLET_UPGRADE`:
-///     `PRINT_PALLET_UPGRADE=1 cargo check -p my_pallet` This template can be
-///     used as information it contains all information for storages, genesis
-///     config and genesis build.
-/// 3. reorganize pallet to have trait `Config`, `decl_*` macros, `ValidateUnsigned`,
-/// 	`ProvideInherent`, `Origin` all together in one file. Suggested order:
-/// 	* Config,
-/// 	* decl_module,
-/// 	* decl_event,
-/// 	* decl_error,
-/// 	* decl_storage,
-/// 	* origin,
-/// 	* validate_unsigned,
-/// 	* provide_inherent,
-/// 	so far it should compile and all be correct.
+/// 2. Generate the template upgrade for the pallet provided by `decl_storage` with the
+///     environment variable `PRINT_PALLET_UPGRADE`: `PRINT_PALLET_UPGRADE=1 cargo check -p
+///     my_pallet`. This template can be used as it contains all information for storages,
+///     genesis config and genesis build.
+/// 3. Reorganize the pallet to have the trait `Config`, `decl_*` macros,
+///     [`ValidateUnsigned`](`pallet_prelude::ValidateUnsigned`),
+///     [`ProvideInherent`](`pallet_prelude::ProvideInherent`), and Origin` all together in one
+///     file. Suggested order:
+///     * `Config`,
+///     * `decl_module`,
+///     * `decl_event`,
+///     * `decl_error`,
+///     * `decl_storage`,
+///     * `origin`,
+///     * `validate_unsigned`,
+///     * `provide_inherent`, so far it should compile and all be correct.
 /// 4. start writing the new pallet module
 /// 	```ignore
 /// 	pub use pallet::*;
@@ -4880,16 +5463,17 @@
 /// 	}
 /// 	```
 /// 5. **migrate Config**: move trait into the module with
-/// 	* all const in decl_module to `#[pallet::constant]`
-/// 	* add bound `IsType&lt;&lt;Self as frame_system::Config&gt;::Event&gt;` to `type Event`
+///     * all const in `decl_module` to [`#[pallet::constant]`](#palletconstant)
+///     * add the bound `IsType&lt;&lt;Self as frame_system::Config&gt;::RuntimeEvent&gt;` to `type
+///       RuntimeEvent`
 /// 7. **migrate decl_module**: write:
 /// 	```ignore
 /// 	#[pallet::hooks]
 /// 	impl&lt;T: Config&gt; Hooks for Pallet&lt;T&gt; {
 /// 	}
 /// 	```
-/// 	and write inside
-/// 	`on_initialize`, `on_finalize`, `on_runtime_upgrade`, `offchain_worker`, `integrity_test`.
+///     and write inside `on_initialize`, `on_finalize`, `on_runtime_upgrade`,
+///     `offchain_worker`, and `integrity_test`.
 ///
 /// 	then write:
 /// 	```ignore
@@ -4897,25 +5481,26 @@
 /// 	impl&lt;T: Config&gt; Pallet&lt;T&gt; {
 /// 	}
 /// 	```
-/// 	and write inside all the calls in decl_module with a few changes in the signature:
-/// 	- origin must now be written completely, e.g. `origin: OriginFor&lt;T&gt;`
-/// 	- result type must be `DispatchResultWithPostInfo`, you need to write it and also you
-///    might
-/// 	need to put `Ok(().into())` at the end or the function.
-/// 	- `#[compact]` must now be written `#[pallet::compact]`
-/// 	- `#[weight = ..]` must now be written `#[pallet::weight(..)]`
+///     and write inside all the calls in `decl_module` with a few changes in the signature:
+///     - origin must now be written completely, e.g. `origin: OriginFor&lt;T&gt;`
+///     - result type must be `DispatchResultWithPostInfo`, you need to write it and also you
+///    might need to put `Ok(().into())` at the end or the function.
+///     - `#[compact]` must now be written
+///       [`#[pallet::compact]`](#palletcompact-some_arg-some_type)
+///     - `#[weight = ..]` must now be written [`#[pallet::weight(..)]`](#palletweightexpr)
 ///
-/// 7. **migrate event**:
-/// 	rewrite as a simple enum under with the attribute `#[pallet::event]`,
-/// 	use `#[pallet::generate_deposit($vis fn deposit_event)]` to generate deposit_event,
-/// 8. **migrate error**: rewrite it with attribute `#[pallet::error]`.
-/// 9. **migrate storage**:
-/// 	decl_storage provide an upgrade template (see 3.). All storages, genesis config, genesis
-/// 	build and default implementation of genesis config can be taken from it directly.
+/// 7. **migrate event**: rewrite as a simple enum with the attribute
+///    [`#[pallet::event]`](#event-palletevent-optional), use [`#[pallet::generate_deposit($vis
+///    fn deposit_event)]`](#event-palletevent-optional) to generate `deposit_event`,
+/// 8. **migrate error**: rewrite it with attribute
+///    [`#[pallet::error]`](#error-palleterror-optional).
+/// 9. **migrate storage**: `decl_storage` provide an upgrade template (see 3.). All storages,
+///     genesis config, genesis build and default implementation of genesis config can be
+///     taken from it directly.
 ///
-/// 	Otherwise here is the manual process:
+///     Otherwise here is the manual process:
 ///
-/// 	first migrate the genesis logic. write:
+///     first migrate the genesis logic. write:
 /// 	```ignore
 /// 	#[pallet::genesis_config]
 /// 	struct GenesisConfig {
@@ -4933,79 +5518,85 @@
 /// 		}
 /// 	}
 /// 	```
-/// 	for each storages, if it contains config(..) then add a fields, and make its default to the
-/// 	value in `= ..;` or the type default if none, if it contains no build then also add the
-/// 	logic to build the value.
-/// 	for each storages if it contains build(..) then add the logic to genesis_build.
+///     for each storage, if it contains `config(..)` then add fields, and make it default to
+///     the value in `= ..;` or the type default if none, if it contains no build then also add
+///     the logic to build the value. for each storage if it contains `build(..)` then add the
+///     logic to `genesis_build`.
 ///
-/// 	NOTE: in decl_storage: is executed first the individual config and build and at the end the
-/// 	add_extra_genesis build
+///     NOTE: within `decl_storage`: the individual config is executed first, followed by the
+///     build and finally the `add_extra_genesis` build.
 ///
-/// 	Once this is done you can migrate storage individually, a few notes:
-/// 	- for private storage use `pub(crate) type ` or `pub(super) type` or nothing,
-/// 	- for storage with `get(fn ..)` use `#[pallet::getter(fn ...)]`
-/// 	- for storage with value being `Option&lt;$something&gt;` make generic `Value` being
-///    `$something`
-/// 		and generic `QueryKind` being `OptionQuery` (note: this is default). Otherwise make
-/// 		`Value` the complete value type and `QueryKind` being `ValueQuery`.
-/// 	- for storage with default value: `= $expr;` provide some specific OnEmpty generic. To do
-///    so
-/// 		use of `#[pallet::type_value]` to generate the wanted struct to put.
-/// 		example: `MyStorage: u32 = 3u32` would be written:
-/// 		```ignore
+///     Once this is done you can migrate storages individually, a few notes:
+///     - for private storage use `pub(crate) type ` or `pub(super) type` or nothing,
+///     - for storages with `get(fn ..)` use [`#[pallet::getter(fn
+///       ...)]`](#palletgetterfn-my_getter_fn_name-optional)
+///     - for storages with value being `Option&lt;$something&gt;` make generic `Value` being
+///       `$something` and generic `QueryKind` being `OptionQuery` (note: this is default).
+///       Otherwise make `Value` the complete value type and `QueryKind` being `ValueQuery`.
+///     - for storages with default value: `= $expr;` provide some specific `OnEmpty` generic.
+///       To do so use of `#[pallet::type_value]` to generate the wanted struct to put.
+///       example: `MyStorage: u32 = 3u32` would be written:
+///
+/// 	  	```ignore
 /// 		#[pallet::type_value] fn MyStorageOnEmpty() -&gt; u32 { 3u32 }
 /// 		#[pallet::storage]
 /// 		pub(super) type MyStorage&lt;T&gt; = StorageValue&lt;_, u32, ValueQuery, MyStorageOnEmpty&gt;;
 /// 		```
 ///
-/// 	NOTE: `decl_storage` also generates functions `assimilate_storage` and `build_storage`
-/// 	directly on GenesisConfig, those are sometimes used in tests. In order not to break they
-/// 	can be implemented manually, one can implement those functions by calling `GenesisBuild`
-/// 	implementation.
-///
-/// 10. **migrate origin**: move the origin to the pallet module under `#[pallet::origin]`
-/// 11. **migrate validate_unsigned**: move the `ValidateUnsigned` implementation to the pallet
-/// 	module under `#[pallet::validate_unsigned]`
-/// 12. **migrate provide_inherent**: move the `ProvideInherent` implementation to the pallet
-/// 	module under `#[pallet::inherent]`
+///       NOTE: `decl_storage` also generates the functions `assimilate_storage` and
+///       `build_storage` directly on `GenesisConfig`, and these are sometimes used in tests.
+///       In order not to break they can be implemented manually, one can implement those
+///       functions by calling the `GenesisBuild` implementation.
+/// 10. **migrate origin**: move the origin to the pallet module to be under a
+///     [`#[pallet::origin]`](#origin-palletorigin-optional) attribute
+/// 11. **migrate validate_unsigned**: move the
+///     [`ValidateUnsigned`](`pallet_prelude::ValidateUnsigned`) implementation to the pallet
+///     module under a
+///     [`#[pallet::validate_unsigned]`](#validate-unsigned-palletvalidate_unsigned-optional)
+///     attribute
+/// 12. **migrate provide_inherent**: move the
+///     [`ProvideInherent`](`pallet_prelude::ProvideInherent`) implementation to the pallet
+///     module under a [`#[pallet::inherent]`](#inherent-palletinherent-optional) attribute
 /// 13. rename the usage of `Module` to `Pallet` inside the crate.
-/// 14. migration is done, now double check migration with the checking migration guidelines.
+/// 14. migration is done, now double check the migration with the checking migration
+///     guidelines shown below.
 ///
-/// ## Checking upgrade guidelines:
+/// # Checking upgrade guidelines:
 ///
 /// * compare metadata. Use [subsee](https://github.com/ascjones/subsee) to fetch the metadata
-/// and do a diff of the resulting json before and after migration. This checks for:
-/// 	* call, names, signature, docs
-/// 	* event names, docs
-/// 	* error names, docs
-/// 	* storage names, hasher, prefixes, default value
-/// 	* error , error, constant,
+///   and do a diff of the resulting json before and after migration. This checks for:
+/// 		* call, names, signature, docs
+///     * event names, docs
+///     * error names, docs
+///     * storage names, hasher, prefixes, default value
+///     * error, error, constant
 /// * manually check that:
-/// 	* `Origin` is moved inside the macro under `#[pallet::origin]` if it exists
-/// 	* `ValidateUnsigned` is moved inside the macro under `#[pallet::validate_unsigned)]` if it
-///    exists
-/// 	* `ProvideInherent` is moved inside macro under `#[pallet::inherent)]` if it exists
-/// 	* `on_initialize`/`on_finalize`/`on_runtime_upgrade`/`offchain_worker` are moved to
-///    `Hooks`
-/// 		implementation
-/// 	* storages with `config(..)` are converted to `GenesisConfig` field, and their default is
-/// 		`= $expr;` if the storage have default value
-/// 	* storages with `build($expr)` or `config(..)` are built in `GenesisBuild::build`
-/// 	* `add_extra_genesis` fields are converted to `GenesisConfig` field with their correct
-/// 		default if specified
-/// 	* `add_extra_genesis` build is written into `GenesisBuild::build`
+///     * `Origin` was moved inside the macro under
+///       [`#[pallet::origin]`](#origin-palletorigin-optional) if it exists
+///     * [`ValidateUnsigned`](`pallet_prelude::ValidateUnsigned`) was moved inside the macro
+///       under
+/// 	  [`#[pallet::validate_unsigned)]`](#validate-unsigned-palletvalidate_unsigned-optional)
+/// 	  if it exists
+///     * [`ProvideInherent`](`pallet_prelude::ProvideInherent`) was moved inside the macro
+///       under [`#[pallet::inherent)]`](#inherent-palletinherent-optional) if it exists
+///     * `on_initialize` / `on_finalize` / `on_runtime_upgrade` / `offchain_worker` were moved
+///       to the `Hooks` implementation
+///     * storages with `config(..)` were converted to `GenesisConfig` field, and their default
+///       is `= $expr;` if the storage has a default value
+///     * storages with `build($expr)` or `config(..)` were built in `GenesisBuild::build`
+///     * `add_extra_genesis` fields were converted to `GenesisConfig` field with their correct
+///       default if specified
+///     * `add_extra_genesis` build was written into `GenesisBuild::build`
 /// * storage items defined with [`pallet`] use the name of the pallet provided by
-/// 	[`traits::PalletInfo::name`] as `pallet_prefix` (in `decl_storage`, storage items used the
-/// 	`pallet_prefix` given as input of `decl_storage` with the syntax `as Example`).
-/// 	Thus a runtime using the pallet must be careful with this change.
-/// 	To handle this change:
-/// 	* either ensure that the name of the pallet given to `construct_runtime!` is the same
-/// 		as the name the pallet was giving to `decl_storage`,
-/// 	* or do a storage migration from the old prefix used to the new prefix used.
+///   [`traits::PalletInfo::name`] as `pallet_prefix` (in `decl_storage`, storage items used
+///   the `pallet_prefix` given as input of `decl_storage` with the syntax `as Example`). Thus
+///   a runtime using the pallet must be careful with this change. To handle this change:
+///     * either ensure that the name of the pallet given to `construct_runtime!` is the same
+///       as the name the pallet was giving to `decl_storage`,
+///     * or do a storage migration from the old prefix used to the new prefix used.
 ///
-/// 	NOTE: The prefixes used by storage items are in the metadata. Thus, ensuring the metadata
-/// hasn&#39;t 	changed does ensure that the `pallet_prefix`s used by the storage items haven&#39;t
-/// changed.
+/// NOTE: The prefixes used by storage items are in metadata. Thus, ensuring the metadata
+/// hasn&#39;t changed ensures that the `pallet_prefix`s used by the storage items haven&#39;t changed.
 ///
 /// # Notes when macro fails to show proper error message spans:
 ///
@@ -5020,5 +5611,18 @@
 /// 	```
 /// * use the newest nightly possible.
 </span><span class="kw">pub use </span>frame_support_procedural::pallet;
+
+<span class="doccomment">/// Contains macro stubs for all of the pallet:: macros
+</span><span class="kw">pub mod </span>pallet_macros {
+	<span class="kw">pub use </span>frame_support_procedural::{
+		call_index, compact, config, constant, disable_frame_system_supertrait_check, error, event,
+		extra_constants, generate_deposit, generate_storage_info, generate_store, genesis_build,
+		genesis_config, getter, hooks, inherent, origin, storage, storage_prefix, storage_version,
+		type_value, unbounded, validate_unsigned, weight, whitelist_storage,
+	};
+}
+
+<span class="comment">// Generate a macro that will enable/disable code based on `std` feature being active.
+</span><span class="macro">sp_core::generate_feature_enabled_macro!</span>(std_enabled, feature = <span class="string">&quot;std&quot;</span>, $);
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="frame_support" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

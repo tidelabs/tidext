@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/core/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/core/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -438,36 +438,9 @@
 <a href="#438" id="438">438</a>
 <a href="#439" id="439">439</a>
 <a href="#440" id="440">440</a>
-<a href="#441" id="441">441</a>
-<a href="#442" id="442">442</a>
-<a href="#443" id="443">443</a>
-<a href="#444" id="444">444</a>
-<a href="#445" id="445">445</a>
-<a href="#446" id="446">446</a>
-<a href="#447" id="447">447</a>
-<a href="#448" id="448">448</a>
-<a href="#449" id="449">449</a>
-<a href="#450" id="450">450</a>
-<a href="#451" id="451">451</a>
-<a href="#452" id="452">452</a>
-<a href="#453" id="453">453</a>
-<a href="#454" id="454">454</a>
-<a href="#455" id="455">455</a>
-<a href="#456" id="456">456</a>
-<a href="#457" id="457">457</a>
-<a href="#458" id="458">458</a>
-<a href="#459" id="459">459</a>
-<a href="#460" id="460">460</a>
-<a href="#461" id="461">461</a>
-<a href="#462" id="462">462</a>
-<a href="#463" id="463">463</a>
-<a href="#464" id="464">464</a>
-<a href="#465" id="465">465</a>
-<a href="#466" id="466">466</a>
-<a href="#467" id="467">467</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -507,8 +480,6 @@
 </span><span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>sp_runtime_interface::pass_by::{PassByEnum, PassByInner};
 <span class="kw">use </span>sp_std::{ops::Deref, prelude::<span class="kw-2">*</span>};
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">use </span>std::borrow::Cow;
 
 <span class="kw">pub use </span>sp_debug_derive::RuntimeDebug;
 
@@ -523,6 +494,7 @@
 <span class="kw">pub mod </span>crypto;
 <span class="kw">pub mod </span>hexdisplay;
 
+<span class="kw">pub mod </span>defer;
 <span class="kw">pub mod </span>ecdsa;
 <span class="kw">pub mod </span>ed25519;
 <span class="kw">pub mod </span>hash;
@@ -548,6 +520,13 @@
 </span><span class="kw">pub use </span><span class="self">self</span>::hasher::keccak::KeccakHasher;
 <span class="kw">pub use </span>hash_db::Hasher;
 
+<span class="kw">pub use </span>bounded_collections <span class="kw">as </span>bounded;
+<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub use </span>bounded_collections::{bounded_btree_map, bounded_vec};
+<span class="kw">pub use </span>bounded_collections::{
+	parameter_types, ConstBool, ConstI128, ConstI16, ConstI32, ConstI64, ConstI8, ConstU128,
+	ConstU16, ConstU32, ConstU64, ConstU8, Get, GetDefault, TryCollect, TypedGet,
+};
 <span class="kw">pub use </span>sp_storage <span class="kw">as </span>storage;
 
 <span class="attr">#[doc(hidden)]
@@ -632,7 +611,7 @@
 }
 
 <span class="doccomment">/// Stores the encoded `RuntimeMetadata` for the native side as opaque type.
-</span><span class="attr">#[derive(Encode, Decode, PartialEq)]
+</span><span class="attr">#[derive(Encode, Decode, PartialEq, TypeInfo)]
 </span><span class="kw">pub struct </span>OpaqueMetadata(Vec&lt;u8&gt;);
 
 <span class="kw">impl </span>OpaqueMetadata {
@@ -671,85 +650,6 @@
 	<span class="doccomment">/// Create new `OpaquePeerId`
 	</span><span class="kw">pub fn </span>new(vec: Vec&lt;u8&gt;) -&gt; <span class="self">Self </span>{
 		OpaquePeerId(vec)
-	}
-}
-
-<span class="doccomment">/// Something that is either a native or an encoded value.
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">pub enum </span>NativeOrEncoded&lt;R&gt; {
-	<span class="doccomment">/// The native representation.
-	</span>Native(R),
-	<span class="doccomment">/// The encoded representation.
-	</span>Encoded(Vec&lt;u8&gt;),
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;R&gt; From&lt;R&gt; <span class="kw">for </span>NativeOrEncoded&lt;R&gt; {
-	<span class="kw">fn </span>from(val: R) -&gt; <span class="self">Self </span>{
-		<span class="self">Self</span>::Native(val)
-	}
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;R: codec::Encode&gt; sp_std::fmt::Debug <span class="kw">for </span>NativeOrEncoded&lt;R&gt; {
-	<span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>sp_std::fmt::Formatter) -&gt; sp_std::fmt::Result {
-		hexdisplay::HexDisplay::from(<span class="kw-2">&amp;</span><span class="self">self</span>.as_encoded().as_ref()).fmt(f)
-	}
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;R: codec::Encode&gt; NativeOrEncoded&lt;R&gt; {
-	<span class="doccomment">/// Return the value as the encoded format.
-	</span><span class="kw">pub fn </span>as_encoded(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cow&lt;<span class="lifetime">&#39;_</span>, [u8]&gt; {
-		<span class="kw">match </span><span class="self">self </span>{
-			NativeOrEncoded::Encoded(e) =&gt; Cow::Borrowed(e.as_slice()),
-			NativeOrEncoded::Native(n) =&gt; Cow::Owned(n.encode()),
-		}
-	}
-
-	<span class="doccomment">/// Return the value as the encoded format.
-	</span><span class="kw">pub fn </span>into_encoded(<span class="self">self</span>) -&gt; Vec&lt;u8&gt; {
-		<span class="kw">match </span><span class="self">self </span>{
-			NativeOrEncoded::Encoded(e) =&gt; e,
-			NativeOrEncoded::Native(n) =&gt; n.encode(),
-		}
-	}
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;R: PartialEq + codec::Decode&gt; PartialEq <span class="kw">for </span>NativeOrEncoded&lt;R&gt; {
-	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
-		<span class="kw">match </span>(<span class="self">self</span>, other) {
-			(NativeOrEncoded::Native(l), NativeOrEncoded::Native(r)) =&gt; l == r,
-			(NativeOrEncoded::Native(n), NativeOrEncoded::Encoded(e)) |
-			(NativeOrEncoded::Encoded(e), NativeOrEncoded::Native(n)) =&gt;
-				<span class="prelude-val">Some</span>(n) == codec::Decode::decode(<span class="kw-2">&amp;mut &amp;</span>e[..]).ok().as_ref(),
-			(NativeOrEncoded::Encoded(l), NativeOrEncoded::Encoded(r)) =&gt; l == r,
-		}
-	}
-}
-
-<span class="doccomment">/// A value that is never in a native representation.
-/// This is type is useful in conjunction with `NativeOrEncoded`.
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-#[derive(PartialEq)]
-</span><span class="kw">pub enum </span>NeverNativeValue {}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl </span>codec::Encode <span class="kw">for </span>NeverNativeValue {
-	<span class="kw">fn </span>encode(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;u8&gt; {
-		<span class="comment">// The enum is not constructable, so this function should never be callable!
-		</span><span class="macro">unreachable!</span>()
-	}
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl </span>codec::EncodeLike <span class="kw">for </span>NeverNativeValue {}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl </span>codec::Decode <span class="kw">for </span>NeverNativeValue {
-	<span class="kw">fn </span>decode&lt;I: codec::Input&gt;(<span class="kw">_</span>: <span class="kw-2">&amp;mut </span>I) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, codec::Error&gt; {
-		<span class="prelude-val">Err</span>(<span class="string">&quot;`NeverNativeValue` should never be decoded&quot;</span>.into())
 	}
 }
 
@@ -932,5 +832,51 @@
 </span><span class="comment">// The maximum possible allocation size was chosen rather arbitrary, 32 MiB should be enough for
 // everybody.
 </span><span class="kw">pub const </span>MAX_POSSIBLE_ALLOCATION: u32 = <span class="number">33554432</span>; <span class="comment">// 2^25 bytes, 32 MiB
-</span></code></pre></div>
+
+</span><span class="doccomment">/// Generates a macro for checking if a certain feature is enabled.
+///
+/// These feature checking macros can be used to conditionally enable/disable code in a dependent
+/// crate based on a feature in the crate where the macro is called.
+</span><span class="attr">#[macro_export]
+</span><span class="comment">// We need to skip formatting this macro because of this bug:
+// https://github.com/rust-lang/rustfmt/issues/5283
+</span><span class="attr">#[rustfmt::skip]
+</span><span class="macro">macro_rules! </span>generate_feature_enabled_macro {
+	( <span class="macro-nonterminal">$macro_name</span>:ident, <span class="macro-nonterminal">$feature_name</span>:meta, <span class="macro-nonterminal">$d</span>:tt ) =&gt; {
+		<span class="doccomment">/// Enable/disable the given code depending on
+		</span><span class="attr">#[doc = <span class="macro">concat!</span>(<span class="string">&quot;`&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$feature_name</span>), <span class="string">&quot;`&quot;</span>)]
+		</span><span class="doccomment">/// being enabled for the crate or not.
+		///
+		/// # Example
+		///
+		/// ```nocompile
+		/// // Will add the code depending on the feature being enabled or not.
+		</span><span class="attr">#[doc = <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$macro_name</span>), <span class="string">&quot;!( println!(\&quot;Hello\&quot;) )&quot;</span>)]
+		</span><span class="doccomment">/// ```
+		</span><span class="attr">#[cfg(<span class="macro-nonterminal">$feature_name</span>)]
+		#[macro_export]
+		</span><span class="macro">macro_rules! </span><span class="macro-nonterminal">$macro_name </span>{
+			( <span class="macro-nonterminal">$d </span>( <span class="macro-nonterminal">$d </span>input:tt )* ) =&gt; {
+				<span class="macro-nonterminal">$d </span>( <span class="macro-nonterminal">$d </span>input )*
+			}
+		}
+
+		<span class="doccomment">/// Enable/disable the given code depending on
+		</span><span class="attr">#[doc = <span class="macro">concat!</span>(<span class="string">&quot;`&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$feature_name</span>), <span class="string">&quot;`&quot;</span>)]
+		</span><span class="doccomment">/// being enabled for the crate or not.
+		///
+		/// # Example
+		///
+		/// ```nocompile
+		/// // Will add the code depending on the feature being enabled or not.
+		</span><span class="attr">#[doc = <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$macro_name</span>), <span class="string">&quot;!( println!(\&quot;Hello\&quot;) )&quot;</span>)]
+		</span><span class="doccomment">/// ```
+		</span><span class="attr">#[cfg(not(<span class="macro-nonterminal">$feature_name</span>))]
+		#[macro_export]
+		</span><span class="macro">macro_rules! </span><span class="macro-nonterminal">$macro_name </span>{
+			( <span class="macro-nonterminal">$d </span>( <span class="macro-nonterminal">$d </span>input:tt )* ) =&gt; {};
+		}
+	};
+}
+</code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sp_core" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

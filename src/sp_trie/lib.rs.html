@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/trie/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_trie/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/trie/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_trie/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -966,9 +966,49 @@
 <a href="#966" id="966">966</a>
 <a href="#967" id="967">967</a>
 <a href="#968" id="968">968</a>
+<a href="#969" id="969">969</a>
+<a href="#970" id="970">970</a>
+<a href="#971" id="971">971</a>
+<a href="#972" id="972">972</a>
+<a href="#973" id="973">973</a>
+<a href="#974" id="974">974</a>
+<a href="#975" id="975">975</a>
+<a href="#976" id="976">976</a>
+<a href="#977" id="977">977</a>
+<a href="#978" id="978">978</a>
+<a href="#979" id="979">979</a>
+<a href="#980" id="980">980</a>
+<a href="#981" id="981">981</a>
+<a href="#982" id="982">982</a>
+<a href="#983" id="983">983</a>
+<a href="#984" id="984">984</a>
+<a href="#985" id="985">985</a>
+<a href="#986" id="986">986</a>
+<a href="#987" id="987">987</a>
+<a href="#988" id="988">988</a>
+<a href="#989" id="989">989</a>
+<a href="#990" id="990">990</a>
+<a href="#991" id="991">991</a>
+<a href="#992" id="992">992</a>
+<a href="#993" id="993">993</a>
+<a href="#994" id="994">994</a>
+<a href="#995" id="995">995</a>
+<a href="#996" id="996">996</a>
+<a href="#997" id="997">997</a>
+<a href="#998" id="998">998</a>
+<a href="#999" id="999">999</a>
+<a href="#1000" id="1000">1000</a>
+<a href="#1001" id="1001">1001</a>
+<a href="#1002" id="1002">1002</a>
+<a href="#1003" id="1003">1003</a>
+<a href="#1004" id="1004">1004</a>
+<a href="#1005" id="1005">1005</a>
+<a href="#1006" id="1006">1006</a>
+<a href="#1007" id="1007">1007</a>
+<a href="#1008" id="1008">1008</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2015-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -987,9 +1027,13 @@
 
 </span><span class="attr">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
 
-</span><span class="kw">mod </span>error;
+#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub mod </span>cache;
+<span class="kw">mod </span>error;
 <span class="kw">mod </span>node_codec;
 <span class="kw">mod </span>node_header;
+<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub mod </span>recorder;
 <span class="kw">mod </span>storage_proof;
 <span class="kw">mod </span>trie_codec;
 <span class="kw">mod </span>trie_stream;
@@ -1014,17 +1058,17 @@
 </span><span class="kw">pub use </span>trie_db::{
 	nibble_ops,
 	node::{NodePlan, ValuePlan},
-	CError, DBValue, Query, Recorder, Trie, TrieConfiguration, TrieDBIterator, TrieDBKeyIterator,
-	TrieLayout, TrieMut,
+	CError, DBValue, Query, Recorder, Trie, TrieCache, TrieConfiguration, TrieDBIterator,
+	TrieDBKeyIterator, TrieDBRawIterator, TrieLayout, TrieMut, TrieRecorder,
 };
 <span class="doccomment">/// The Substrate format implementation of `TrieStream`.
 </span><span class="kw">pub use </span>trie_stream::TrieStream;
 
 <span class="doccomment">/// substrate trie layout
-</span><span class="kw">pub struct </span>LayoutV0&lt;H&gt;(sp_std::marker::PhantomData&lt;H&gt;);
+</span><span class="kw">pub struct </span>LayoutV0&lt;H&gt;(PhantomData&lt;H&gt;);
 
 <span class="doccomment">/// substrate trie layout, with external value nodes.
-</span><span class="kw">pub struct </span>LayoutV1&lt;H&gt;(sp_std::marker::PhantomData&lt;H&gt;);
+</span><span class="kw">pub struct </span>LayoutV1&lt;H&gt;(PhantomData&lt;H&gt;);
 
 <span class="kw">impl</span>&lt;H&gt; TrieLayout <span class="kw">for </span>LayoutV0&lt;H&gt;
 <span class="kw">where
@@ -1110,11 +1154,6 @@
 	}
 }
 
-<span class="attr">#[cfg(not(feature = <span class="string">&quot;memory-tracker&quot;</span>))]
-</span><span class="kw">type </span>MemTracker = memory_db::NoopTracker&lt;trie_db::DBValue&gt;;
-<span class="attr">#[cfg(feature = <span class="string">&quot;memory-tracker&quot;</span>)]
-</span><span class="kw">type </span>MemTracker = memory_db::MemCounter&lt;trie_db::DBValue&gt;;
-
 <span class="doccomment">/// TrieDB error over `TrieConfiguration` trait.
 </span><span class="kw">pub type </span>TrieError&lt;L&gt; = trie_db::TrieError&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
 <span class="doccomment">/// Reexport from `hash_db`, with genericity set for `Hasher` trait.
@@ -1125,21 +1164,24 @@
 <span class="doccomment">/// Reexport from `hash_db`, with genericity set for `Hasher` trait.
 /// This uses a `KeyFunction` for prefixing keys internally (avoiding
 /// key conflict for non random keys).
-</span><span class="kw">pub type </span>PrefixedMemoryDB&lt;H&gt; =
-	memory_db::MemoryDB&lt;H, memory_db::PrefixedKey&lt;H&gt;, trie_db::DBValue, MemTracker&gt;;
+</span><span class="kw">pub type </span>PrefixedMemoryDB&lt;H&gt; = memory_db::MemoryDB&lt;H, memory_db::PrefixedKey&lt;H&gt;, trie_db::DBValue&gt;;
 <span class="doccomment">/// Reexport from `hash_db`, with genericity set for `Hasher` trait.
 /// This uses a noops `KeyFunction` (key addressing must be hashed or using
 /// an encoding scheme that avoid key conflict).
-</span><span class="kw">pub type </span>MemoryDB&lt;H&gt; = memory_db::MemoryDB&lt;H, memory_db::HashKey&lt;H&gt;, trie_db::DBValue, MemTracker&gt;;
+</span><span class="kw">pub type </span>MemoryDB&lt;H&gt; = memory_db::MemoryDB&lt;H, memory_db::HashKey&lt;H&gt;, trie_db::DBValue&gt;;
 <span class="doccomment">/// Reexport from `hash_db`, with genericity set for `Hasher` trait.
-</span><span class="kw">pub type </span>GenericMemoryDB&lt;H, KF&gt; = memory_db::MemoryDB&lt;H, KF, trie_db::DBValue, MemTracker&gt;;
+</span><span class="kw">pub type </span>GenericMemoryDB&lt;H, KF&gt; = memory_db::MemoryDB&lt;H, KF, trie_db::DBValue&gt;;
 
 <span class="doccomment">/// Persistent trie database read-access interface for the a given hasher.
-</span><span class="kw">pub type </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, L&gt; = trie_db::TrieDB&lt;<span class="lifetime">&#39;a</span>, L&gt;;
+</span><span class="kw">pub type </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt; = trie_db::TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt;;
+<span class="doccomment">/// Builder for creating a [`TrieDB`].
+</span><span class="kw">pub type </span>TrieDBBuilder&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt; = trie_db::TrieDBBuilder&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt;;
 <span class="doccomment">/// Persistent trie database write-access interface for the a given hasher.
 </span><span class="kw">pub type </span>TrieDBMut&lt;<span class="lifetime">&#39;a</span>, L&gt; = trie_db::TrieDBMut&lt;<span class="lifetime">&#39;a</span>, L&gt;;
+<span class="doccomment">/// Builder for creating a [`TrieDBMut`].
+</span><span class="kw">pub type </span>TrieDBMutBuilder&lt;<span class="lifetime">&#39;a</span>, L&gt; = trie_db::TrieDBMutBuilder&lt;<span class="lifetime">&#39;a</span>, L&gt;;
 <span class="doccomment">/// Querying interface, as in `trie_db` but less generic.
-</span><span class="kw">pub type </span>Lookup&lt;<span class="lifetime">&#39;a</span>, L, Q&gt; = trie_db::Lookup&lt;<span class="lifetime">&#39;a</span>, L, Q&gt;;
+</span><span class="kw">pub type </span>Lookup&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L, Q&gt; = trie_db::Lookup&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L, Q&gt;;
 <span class="doccomment">/// Hash type for a trie layout.
 </span><span class="kw">pub type </span>TrieHash&lt;L&gt; = &lt;&lt;L <span class="kw">as </span>TrieLayout&gt;::Hash <span class="kw">as </span>Hasher&gt;::Out;
 <span class="doccomment">/// This module is for non generic definition of trie type.
@@ -1148,18 +1190,23 @@
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 
 	<span class="doccomment">/// Persistent trie database read-access interface for the a given hasher.
+	///
 	/// Read only V1 and V0 are compatible, thus we always use V1.
-	</span><span class="kw">pub type </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, H&gt; = <span class="kw">super</span>::TrieDB&lt;<span class="lifetime">&#39;a</span>, LayoutV1&lt;H&gt;&gt;;
+	</span><span class="kw">pub type </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, H&gt; = <span class="kw">super</span>::TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, LayoutV1&lt;H&gt;&gt;;
+	<span class="doccomment">/// Builder for creating a [`TrieDB`].
+	</span><span class="kw">pub type </span>TrieDBBuilder&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, H&gt; = <span class="kw">super</span>::TrieDBBuilder&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, LayoutV1&lt;H&gt;&gt;;
 	<span class="doccomment">/// Persistent trie database write-access interface for the a given hasher.
 	</span><span class="kw">pub type </span>TrieDBMutV0&lt;<span class="lifetime">&#39;a</span>, H&gt; = <span class="kw">super</span>::TrieDBMut&lt;<span class="lifetime">&#39;a</span>, LayoutV0&lt;H&gt;&gt;;
+	<span class="doccomment">/// Builder for creating a [`TrieDBMutV0`].
+	</span><span class="kw">pub type </span>TrieDBMutBuilderV0&lt;<span class="lifetime">&#39;a</span>, H&gt; = <span class="kw">super</span>::TrieDBMutBuilder&lt;<span class="lifetime">&#39;a</span>, LayoutV0&lt;H&gt;&gt;;
 	<span class="doccomment">/// Persistent trie database write-access interface for the a given hasher.
 	</span><span class="kw">pub type </span>TrieDBMutV1&lt;<span class="lifetime">&#39;a</span>, H&gt; = <span class="kw">super</span>::TrieDBMut&lt;<span class="lifetime">&#39;a</span>, LayoutV1&lt;H&gt;&gt;;
+	<span class="doccomment">/// Builder for creating a [`TrieDBMutV1`].
+	</span><span class="kw">pub type </span>TrieDBMutBuilderV1&lt;<span class="lifetime">&#39;a</span>, H&gt; = <span class="kw">super</span>::TrieDBMutBuilder&lt;<span class="lifetime">&#39;a</span>, LayoutV1&lt;H&gt;&gt;;
 	<span class="doccomment">/// Querying interface, as in `trie_db` but less generic.
-	</span><span class="kw">pub type </span>LookupV0&lt;<span class="lifetime">&#39;a</span>, H, Q&gt; = trie_db::Lookup&lt;<span class="lifetime">&#39;a</span>, LayoutV0&lt;H&gt;, Q&gt;;
-	<span class="doccomment">/// Querying interface, as in `trie_db` but less generic.
-	</span><span class="kw">pub type </span>LookupV1&lt;<span class="lifetime">&#39;a</span>, H, Q&gt; = trie_db::Lookup&lt;<span class="lifetime">&#39;a</span>, LayoutV1&lt;H&gt;, Q&gt;;
+	</span><span class="kw">pub type </span>Lookup&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, H, Q&gt; = trie_db::Lookup&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, LayoutV1&lt;H&gt;, Q&gt;;
 	<span class="doccomment">/// As in `trie_db`, but less generic, error type for the crate.
-	</span><span class="kw">pub type </span>TrieError&lt;H&gt; = trie_db::TrieError&lt;H, <span class="kw">super</span>::Error&gt;;
+	</span><span class="kw">pub type </span>TrieError&lt;H&gt; = trie_db::TrieError&lt;H, <span class="kw">super</span>::Error&lt;H&gt;&gt;;
 }
 
 <span class="doccomment">/// Create a proof for a subset of keys in a trie.
@@ -1181,9 +1228,7 @@
 	K: <span class="lifetime">&#39;a </span>+ AsRef&lt;[u8]&gt;,
 	DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
 {
-	<span class="comment">// Can use default layout (read only).
-	</span><span class="kw">let </span>trie = TrieDB::&lt;L&gt;::new(db, <span class="kw-2">&amp;</span>root)<span class="question-mark">?</span>;
-	generate_proof(<span class="kw-2">&amp;</span>trie, keys)
+	generate_proof::&lt;<span class="kw">_</span>, L, <span class="kw">_</span>, <span class="kw">_</span>&gt;(db, <span class="kw-2">&amp;</span>root, keys)
 }
 
 <span class="doccomment">/// Verify a set of key-value pairs against a trie root and a proof.
@@ -1213,6 +1258,8 @@
 	db: <span class="kw-2">&amp;mut </span>DB,
 	<span class="kw-2">mut </span>root: TrieHash&lt;L&gt;,
 	delta: I,
+	recorder: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>trie_db::TrieRecorder&lt;TrieHash&lt;L&gt;&gt;&gt;,
+	cache: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;L::Codec&gt;&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;TrieHash&lt;L&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt;
 <span class="kw">where
 	</span>I: IntoIterator&lt;Item = (A, B)&gt;,
@@ -1222,7 +1269,10 @@
 	DB: hash_db::HashDB&lt;L::Hash, trie_db::DBValue&gt;,
 {
 	{
-		<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMut::&lt;L&gt;::from_existing(db, <span class="kw-2">&amp;mut </span>root)<span class="question-mark">?</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilder::&lt;L&gt;::from_existing(db, <span class="kw-2">&amp;mut </span>root)
+			.with_optional_cache(cache)
+			.with_optional_recorder(recorder)
+			.build();
 
 		<span class="kw">let </span><span class="kw-2">mut </span>delta = delta.into_iter().collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
 		delta.sort_by(|l, r| l.<span class="number">0</span>.borrow().cmp(r.<span class="number">0</span>.borrow()));
@@ -1239,33 +1289,32 @@
 }
 
 <span class="doccomment">/// Read a value from the trie.
-</span><span class="kw">pub fn </span>read_trie_value&lt;L, DB&gt;(
+</span><span class="kw">pub fn </span>read_trie_value&lt;L: TrieLayout, DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;&gt;(
 	db: <span class="kw-2">&amp;</span>DB,
 	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
 	key: <span class="kw-2">&amp;</span>[u8],
-) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt;
-<span class="kw">where
-	</span>L: TrieConfiguration,
-	DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
-{
-	TrieDB::&lt;L&gt;::new(<span class="kw-2">&amp;*</span>db, root)<span class="question-mark">?</span>.get(key).map(|x| x.map(|val| val.to_vec()))
+	recorder: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;TrieHash&lt;L&gt;&gt;&gt;,
+	cache: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;L::Codec&gt;&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt; {
+	TrieDBBuilder::&lt;L&gt;::new(db, root)
+		.with_optional_cache(cache)
+		.with_optional_recorder(recorder)
+		.build()
+		.get(key)
 }
 
 <span class="doccomment">/// Read a value from the trie with given Query.
-</span><span class="kw">pub fn </span>read_trie_value_with&lt;L, Q, DB&gt;(
+</span><span class="kw">pub fn </span>read_trie_value_with&lt;
+	L: TrieLayout,
+	Q: Query&lt;L::Hash, Item = Vec&lt;u8&gt;&gt;,
+	DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
+&gt;(
 	db: <span class="kw-2">&amp;</span>DB,
 	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
 	key: <span class="kw-2">&amp;</span>[u8],
 	query: Q,
-) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt;
-<span class="kw">where
-	</span>L: TrieConfiguration,
-	Q: Query&lt;L::Hash, Item = DBValue&gt;,
-	DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
-{
-	TrieDB::&lt;L&gt;::new(<span class="kw-2">&amp;*</span>db, root)<span class="question-mark">?
-		</span>.get_with(key, query)
-		.map(|x| x.map(|val| val.to_vec()))
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt; {
+	TrieDBBuilder::&lt;L&gt;::new(db, root).build().get_with(key, query)
 }
 
 <span class="doccomment">/// Determine the empty trie root.
@@ -1296,6 +1345,8 @@
 	db: <span class="kw-2">&amp;mut </span>DB,
 	root_data: RD,
 	delta: I,
+	recorder: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;TrieHash&lt;L&gt;&gt;&gt;,
+	cache: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;L::Codec&gt;&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;&lt;L::Hash <span class="kw">as </span>Hasher&gt;::Out, Box&lt;TrieError&lt;L&gt;&gt;&gt;
 <span class="kw">where
 	</span>I: IntoIterator&lt;Item = (A, B)&gt;,
@@ -1309,32 +1360,8 @@
 	<span class="comment">// root is fetched from DB, not writable by runtime, so it&#39;s always valid.
 	</span>root.as_mut().copy_from_slice(root_data.as_ref());
 
-	<span class="kw">let </span><span class="kw-2">mut </span>db = KeySpacedDBMut::new(<span class="kw-2">&amp;mut *</span>db, keyspace);
-	delta_trie_root::&lt;L, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(<span class="kw-2">&amp;mut </span>db, root, delta)
-}
-
-<span class="doccomment">/// Record all keys for a given root.
-</span><span class="kw">pub fn </span>record_all_keys&lt;L: TrieConfiguration, DB&gt;(
-	db: <span class="kw-2">&amp;</span>DB,
-	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
-	recorder: <span class="kw-2">&amp;mut </span>Recorder&lt;TrieHash&lt;L&gt;&gt;,
-) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;TrieError&lt;L&gt;&gt;&gt;
-<span class="kw">where
-	</span>DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
-{
-	<span class="kw">let </span>trie = TrieDB::&lt;L&gt;::new(<span class="kw-2">&amp;*</span>db, root)<span class="question-mark">?</span>;
-	<span class="kw">let </span>iter = trie.iter()<span class="question-mark">?</span>;
-
-	<span class="kw">for </span>x <span class="kw">in </span>iter {
-		<span class="kw">let </span>(key, <span class="kw">_</span>) = x<span class="question-mark">?</span>;
-
-		<span class="comment">// there&#39;s currently no API like iter_with()
-		// =&gt; use iter to enumerate all keys AND lookup each
-		// key using get_with
-		</span>trie.get_with(<span class="kw-2">&amp;</span>key, <span class="kw-2">&amp;mut *</span>recorder)<span class="question-mark">?</span>;
-	}
-
-	<span class="prelude-val">Ok</span>(())
+	<span class="kw">let </span><span class="kw-2">mut </span>db = KeySpacedDBMut::new(db, keyspace);
+	delta_trie_root::&lt;L, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(<span class="kw-2">&amp;mut </span>db, root, delta, recorder, cache)
 }
 
 <span class="doccomment">/// Read a value from the child trie.
@@ -1343,12 +1370,39 @@
 	db: <span class="kw-2">&amp;</span>DB,
 	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
 	key: <span class="kw-2">&amp;</span>[u8],
+	recorder: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;TrieHash&lt;L&gt;&gt;&gt;,
+	cache: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;L::Codec&gt;&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt;
 <span class="kw">where
 	</span>DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
 {
-	<span class="kw">let </span>db = KeySpacedDB::new(<span class="kw-2">&amp;*</span>db, keyspace);
-	TrieDB::&lt;L&gt;::new(<span class="kw-2">&amp;</span>db, root)<span class="question-mark">?</span>.get(key).map(|x| x.map(|val| val.to_vec()))
+	<span class="kw">let </span>db = KeySpacedDB::new(db, keyspace);
+	TrieDBBuilder::&lt;L&gt;::new(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)
+		.with_optional_recorder(recorder)
+		.with_optional_cache(cache)
+		.build()
+		.get(key)
+		.map(|x| x.map(|val| val.to_vec()))
+}
+
+<span class="doccomment">/// Read a hash from the child trie.
+</span><span class="kw">pub fn </span>read_child_trie_hash&lt;L: TrieConfiguration, DB&gt;(
+	keyspace: <span class="kw-2">&amp;</span>[u8],
+	db: <span class="kw-2">&amp;</span>DB,
+	root: <span class="kw-2">&amp;</span>TrieHash&lt;L&gt;,
+	key: <span class="kw-2">&amp;</span>[u8],
+	recorder: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;TrieHash&lt;L&gt;&gt;&gt;,
+	cache: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;L::Codec&gt;&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;TrieHash&lt;L&gt;&gt;, Box&lt;TrieError&lt;L&gt;&gt;&gt;
+<span class="kw">where
+	</span>DB: hash_db::HashDBRef&lt;L::Hash, trie_db::DBValue&gt;,
+{
+	<span class="kw">let </span>db = KeySpacedDB::new(db, keyspace);
+	TrieDBBuilder::&lt;L&gt;::new(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)
+		.with_optional_recorder(recorder)
+		.with_optional_cache(cache)
+		.build()
+		.get_hash(key)
 }
 
 <span class="doccomment">/// Read a value from the child trie with given query.
@@ -1368,21 +1422,22 @@
 	<span class="comment">// root is fetched from DB, not writable by runtime, so it&#39;s always valid.
 	</span>root.as_mut().copy_from_slice(root_slice);
 
-	<span class="kw">let </span>db = KeySpacedDB::new(<span class="kw-2">&amp;*</span>db, keyspace);
-	TrieDB::&lt;L&gt;::new(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)<span class="question-mark">?
-		</span>.get_with(key, query)
+	<span class="kw">let </span>db = KeySpacedDB::new(db, keyspace);
+	TrieDBBuilder::&lt;L&gt;::new(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)
+		.build()
+		.get_with(key, query)
 		.map(|x| x.map(|val| val.to_vec()))
 }
 
 <span class="doccomment">/// `HashDB` implementation that append a encoded prefix (unique id bytes) in addition to the
 /// prefix of every key value.
-</span><span class="kw">pub struct </span>KeySpacedDB&lt;<span class="lifetime">&#39;a</span>, DB, H&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DB, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], PhantomData&lt;H&gt;);
+</span><span class="kw">pub struct </span>KeySpacedDB&lt;<span class="lifetime">&#39;a</span>, DB: <span class="question-mark">?</span>Sized, H&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DB, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], PhantomData&lt;H&gt;);
 
 <span class="doccomment">/// `HashDBMut` implementation that append a encoded prefix (unique id bytes) in addition to the
 /// prefix of every key value.
 ///
 /// Mutable variant of `KeySpacedDB`, see [`KeySpacedDB`].
-</span><span class="kw">pub struct </span>KeySpacedDBMut&lt;<span class="lifetime">&#39;a</span>, DB, H&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>DB, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], PhantomData&lt;H&gt;);
+</span><span class="kw">pub struct </span>KeySpacedDBMut&lt;<span class="lifetime">&#39;a</span>, DB: <span class="question-mark">?</span>Sized, H&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>DB, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], PhantomData&lt;H&gt;);
 
 <span class="doccomment">/// Utility function used to merge some byte data (keyspace) and `prefix` data
 /// before calling key value database primitives.
@@ -1393,20 +1448,15 @@
 	(result, prefix.<span class="number">1</span>)
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, DB, H&gt; KeySpacedDB&lt;<span class="lifetime">&#39;a</span>, DB, H&gt;
-<span class="kw">where
-	</span>H: Hasher,
-{
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, DB: <span class="question-mark">?</span>Sized, H&gt; KeySpacedDB&lt;<span class="lifetime">&#39;a</span>, DB, H&gt; {
 	<span class="doccomment">/// instantiate new keyspaced db
+	</span><span class="attr">#[inline]
 	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>DB, ks: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
 		KeySpacedDB(db, ks, PhantomData)
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, DB, H&gt; KeySpacedDBMut&lt;<span class="lifetime">&#39;a</span>, DB, H&gt;
-<span class="kw">where
-	</span>H: Hasher,
-{
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, DB: <span class="question-mark">?</span>Sized, H&gt; KeySpacedDBMut&lt;<span class="lifetime">&#39;a</span>, DB, H&gt; {
 	<span class="doccomment">/// instantiate new keyspaced db
 	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>DB, ks: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]) -&gt; <span class="self">Self </span>{
 		KeySpacedDBMut(db, ks, PhantomData)
@@ -1415,7 +1465,7 @@
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, DB, H, T&gt; hash_db::HashDBRef&lt;H, T&gt; <span class="kw">for </span>KeySpacedDB&lt;<span class="lifetime">&#39;a</span>, DB, H&gt;
 <span class="kw">where
-	</span>DB: hash_db::HashDBRef&lt;H, T&gt;,
+	</span>DB: hash_db::HashDBRef&lt;H, T&gt; + <span class="question-mark">?</span>Sized,
 	H: Hasher,
 	T: From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8]&gt;,
 {
@@ -1469,7 +1519,7 @@
 	T: Default + PartialEq&lt;T&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;b</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>[u8]&gt; + Clone + Send + Sync,
 {
 	<span class="kw">fn </span>as_hash_db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw">dyn </span>hash_db::HashDB&lt;H, T&gt; {
-		<span class="kw-2">&amp;*</span><span class="self">self
+		<span class="self">self
 	</span>}
 
 	<span class="kw">fn </span>as_hash_db_mut&lt;<span class="lifetime">&#39;b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="kw-2">mut </span>(<span class="kw">dyn </span>hash_db::HashDB&lt;H, T&gt; + <span class="lifetime">&#39;b</span>) {
@@ -1480,7 +1530,6 @@
 <span class="doccomment">/// Constants used into trie simplification codec.
 </span><span class="kw">mod </span>trie_constants {
 	<span class="kw">const </span>FIRST_PREFIX: u8 = <span class="number">0b_00 </span>&lt;&lt; <span class="number">6</span>;
-	<span class="kw">pub const </span>NIBBLE_SIZE_BOUND: usize = u16::max_value() <span class="kw">as </span>usize;
 	<span class="kw">pub const </span>LEAF_PREFIX_MASK: u8 = <span class="number">0b_01 </span>&lt;&lt; <span class="number">6</span>;
 	<span class="kw">pub const </span>BRANCH_WITHOUT_MASK: u8 = <span class="number">0b_10 </span>&lt;&lt; <span class="number">6</span>;
 	<span class="kw">pub const </span>BRANCH_WITH_MASK: u8 = <span class="number">0b_11 </span>&lt;&lt; <span class="number">6</span>;
@@ -1495,7 +1544,6 @@
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 	<span class="kw">use </span>codec::{Compact, Decode, Encode};
 	<span class="kw">use </span>hash_db::{HashDB, Hasher};
-	<span class="kw">use </span>hex_literal::hex;
 	<span class="kw">use </span>sp_core::Blake2Hasher;
 	<span class="kw">use </span>trie_db::{DBValue, NodeCodec <span class="kw">as </span>NodeCodecT, Trie, TrieMut};
 	<span class="kw">use </span>trie_standardmap::{Alphabet, StandardMap, ValueMode};
@@ -1503,8 +1551,7 @@
 	<span class="kw">type </span>LayoutV0 = <span class="kw">super</span>::LayoutV0&lt;Blake2Hasher&gt;;
 	<span class="kw">type </span>LayoutV1 = <span class="kw">super</span>::LayoutV1&lt;Blake2Hasher&gt;;
 
-	<span class="kw">type </span>MemoryDBMeta&lt;H&gt; =
-		memory_db::MemoryDB&lt;H, memory_db::HashKey&lt;H&gt;, trie_db::DBValue, MemTracker&gt;;
+	<span class="kw">type </span>MemoryDBMeta&lt;H&gt; = memory_db::MemoryDB&lt;H, memory_db::HashKey&lt;H&gt;, trie_db::DBValue&gt;;
 
 	<span class="kw">fn </span>hashed_null_node&lt;T: TrieConfiguration&gt;() -&gt; TrieHash&lt;T&gt; {
 		&lt;T::Codec <span class="kw">as </span>NodeCodecT&gt;::hashed_null_node()
@@ -1518,7 +1565,7 @@
 			<span class="kw">let </span>persistent = {
 				<span class="kw">let </span><span class="kw-2">mut </span>memdb = MemoryDBMeta::default();
 				<span class="kw">let </span><span class="kw-2">mut </span>root = Default::default();
-				<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMut::&lt;T&gt;::new(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root);
+				<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMutBuilder::&lt;T&gt;::new(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root).build();
 				<span class="kw">for </span>(x, y) <span class="kw">in </span>input.iter().rev() {
 					t.insert(x, y).unwrap();
 				}
@@ -1532,13 +1579,13 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>memdb = MemoryDBMeta::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>root = Default::default();
 		{
-			<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMut::&lt;T&gt;::new(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root);
+			<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMutBuilder::&lt;T&gt;::new(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root).build();
 			<span class="kw">for </span>(x, y) <span class="kw">in </span>input.clone() {
 				t.insert(x, y).unwrap();
 			}
 		}
 		{
-			<span class="kw">let </span>t = TrieDB::&lt;T&gt;::new(<span class="kw-2">&amp;</span>memdb, <span class="kw-2">&amp;</span>root).unwrap();
+			<span class="kw">let </span>t = TrieDBBuilder::&lt;T&gt;::new(<span class="kw-2">&amp;</span>memdb, <span class="kw-2">&amp;</span>root).build();
 			<span class="macro">assert_eq!</span>(
 				input.iter().map(|(i, j)| (i.to_vec(), j.to_vec())).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
 				t.iter()
@@ -1560,7 +1607,7 @@
 	</span><span class="kw">fn </span>default_trie_root() {
 		<span class="kw">let </span><span class="kw-2">mut </span>db = MemoryDB::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>root = TrieHash::&lt;LayoutV1&gt;::default();
-		<span class="kw">let </span><span class="kw-2">mut </span>empty = TrieDBMut::&lt;LayoutV1&gt;::new(<span class="kw-2">&amp;mut </span>db, <span class="kw-2">&amp;mut </span>root);
+		<span class="kw">let </span><span class="kw-2">mut </span>empty = TrieDBMutBuilder::&lt;LayoutV1&gt;::new(<span class="kw-2">&amp;mut </span>db, <span class="kw-2">&amp;mut </span>root).build();
 		empty.commit();
 		<span class="kw">let </span>root1 = empty.root().as_ref().to_vec();
 		<span class="kw">let </span>root2: Vec&lt;u8&gt; = LayoutV1::trie_root::&lt;<span class="kw">_</span>, Vec&lt;u8&gt;, Vec&lt;u8&gt;&gt;(std::iter::empty())
@@ -1663,15 +1710,12 @@
 		check_input(<span class="kw-2">&amp;</span>input);
 	}
 
-	<span class="kw">fn </span>populate_trie&lt;<span class="lifetime">&#39;db</span>, T&gt;(
+	<span class="kw">fn </span>populate_trie&lt;<span class="lifetime">&#39;db</span>, T: TrieConfiguration&gt;(
 		db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span><span class="kw">dyn </span>HashDB&lt;T::Hash, DBValue&gt;,
 		root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span>TrieHash&lt;T&gt;,
 		v: <span class="kw-2">&amp;</span>[(Vec&lt;u8&gt;, Vec&lt;u8&gt;)],
-	) -&gt; TrieDBMut&lt;<span class="lifetime">&#39;db</span>, T&gt;
-	<span class="kw">where
-		</span>T: TrieConfiguration,
-	{
-		<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMut::&lt;T&gt;::new(db, root);
+	) -&gt; TrieDBMut&lt;<span class="lifetime">&#39;db</span>, T&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMutBuilder::&lt;T&gt;::new(db, root).build();
 		<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..v.len() {
 			<span class="kw">let </span>key: <span class="kw-2">&amp;</span>[u8] = <span class="kw-2">&amp;</span>v[i].<span class="number">0</span>;
 			<span class="kw">let </span>val: <span class="kw-2">&amp;</span>[u8] = <span class="kw-2">&amp;</span>v[i].<span class="number">1</span>;
@@ -1801,21 +1845,27 @@
 	}
 	<span class="kw">fn </span>iterator_works_inner&lt;Layout: TrieConfiguration&gt;() {
 		<span class="kw">let </span>pairs = <span class="macro">vec!</span>[
-			(<span class="macro">hex!</span>(<span class="string">&quot;0103000000000000000464&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;0400000000&quot;</span>).to_vec()),
-			(<span class="macro">hex!</span>(<span class="string">&quot;0103000000000000000469&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;0401000000&quot;</span>).to_vec()),
+			(
+				array_bytes::hex2bytes_unchecked(<span class="string">&quot;0103000000000000000464&quot;</span>),
+				array_bytes::hex2bytes_unchecked(<span class="string">&quot;0400000000&quot;</span>),
+			),
+			(
+				array_bytes::hex2bytes_unchecked(<span class="string">&quot;0103000000000000000469&quot;</span>),
+				array_bytes::hex2bytes_unchecked(<span class="string">&quot;0401000000&quot;</span>),
+			),
 		];
 
 		<span class="kw">let </span><span class="kw-2">mut </span>mdb = MemoryDB::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>root = Default::default();
 		<span class="kw">let _ </span>= populate_trie::&lt;Layout&gt;(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root, <span class="kw-2">&amp;</span>pairs);
 
-		<span class="kw">let </span>trie = TrieDB::&lt;Layout&gt;::new(<span class="kw-2">&amp;</span>mdb, <span class="kw-2">&amp;</span>root).unwrap();
+		<span class="kw">let </span>trie = TrieDBBuilder::&lt;Layout&gt;::new(<span class="kw-2">&amp;</span>mdb, <span class="kw-2">&amp;</span>root).build();
 
 		<span class="kw">let </span>iter = trie.iter().unwrap();
 		<span class="kw">let </span><span class="kw-2">mut </span>iter_pairs = Vec::new();
 		<span class="kw">for </span>pair <span class="kw">in </span>iter {
 			<span class="kw">let </span>(key, value) = pair.unwrap();
-			iter_pairs.push((key, value.to_vec()));
+			iter_pairs.push((key, value));
 		}
 
 		<span class="macro">assert_eq!</span>(pairs, iter_pairs);
@@ -1824,15 +1874,15 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>proof_non_inclusion_works() {
 		<span class="kw">let </span>pairs = <span class="macro">vec!</span>[
-			(<span class="macro">hex!</span>(<span class="string">&quot;0102&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;01&quot;</span>).to_vec()),
-			(<span class="macro">hex!</span>(<span class="string">&quot;0203&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;0405&quot;</span>).to_vec()),
+			(array_bytes::hex2bytes_unchecked(<span class="string">&quot;0102&quot;</span>), array_bytes::hex2bytes_unchecked(<span class="string">&quot;01&quot;</span>)),
+			(array_bytes::hex2bytes_unchecked(<span class="string">&quot;0203&quot;</span>), array_bytes::hex2bytes_unchecked(<span class="string">&quot;0405&quot;</span>)),
 		];
 
 		<span class="kw">let </span><span class="kw-2">mut </span>memdb = MemoryDB::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>root = Default::default();
 		populate_trie::&lt;LayoutV1&gt;(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root, <span class="kw-2">&amp;</span>pairs);
 
-		<span class="kw">let </span>non_included_key: Vec&lt;u8&gt; = <span class="macro">hex!</span>(<span class="string">&quot;0909&quot;</span>).to_vec();
+		<span class="kw">let </span>non_included_key: Vec&lt;u8&gt; = array_bytes::hex2bytes_unchecked(<span class="string">&quot;0909&quot;</span>);
 		<span class="kw">let </span>proof =
 			generate_trie_proof::&lt;LayoutV1, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(<span class="kw-2">&amp;</span>memdb, root, <span class="kw-2">&amp;</span>[non_included_key.clone()])
 				.unwrap();
@@ -1849,7 +1899,7 @@
 		</span><span class="macro">assert!</span>(verify_trie_proof::&lt;LayoutV1, <span class="kw">_</span>, <span class="kw">_</span>, Vec&lt;u8&gt;&gt;(
 			<span class="kw-2">&amp;</span>root,
 			<span class="kw-2">&amp;</span>proof,
-			<span class="kw-2">&amp;</span>[(non_included_key, <span class="prelude-val">Some</span>(<span class="macro">hex!</span>(<span class="string">&quot;1010&quot;</span>).to_vec()))],
+			<span class="kw-2">&amp;</span>[(non_included_key, <span class="prelude-val">Some</span>(array_bytes::hex2bytes_unchecked(<span class="string">&quot;1010&quot;</span>)))],
 		)
 		.is_err());
 	}
@@ -1857,8 +1907,8 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>proof_inclusion_works() {
 		<span class="kw">let </span>pairs = <span class="macro">vec!</span>[
-			(<span class="macro">hex!</span>(<span class="string">&quot;0102&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;01&quot;</span>).to_vec()),
-			(<span class="macro">hex!</span>(<span class="string">&quot;0203&quot;</span>).to_vec(), <span class="macro">hex!</span>(<span class="string">&quot;0405&quot;</span>).to_vec()),
+			(array_bytes::hex2bytes_unchecked(<span class="string">&quot;0102&quot;</span>), array_bytes::hex2bytes_unchecked(<span class="string">&quot;01&quot;</span>)),
+			(array_bytes::hex2bytes_unchecked(<span class="string">&quot;0203&quot;</span>), array_bytes::hex2bytes_unchecked(<span class="string">&quot;0405&quot;</span>)),
 		];
 
 		<span class="kw">let </span><span class="kw-2">mut </span>memdb = MemoryDB::default();
@@ -1888,7 +1938,7 @@
 		</span><span class="macro">assert!</span>(verify_trie_proof::&lt;LayoutV1, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
 			<span class="kw-2">&amp;</span>root,
 			<span class="kw-2">&amp;</span>proof,
-			<span class="kw-2">&amp;</span>[(<span class="macro">hex!</span>(<span class="string">&quot;4242&quot;</span>).to_vec(), <span class="prelude-val">Some</span>(pairs[<span class="number">0</span>].<span class="number">1</span>.clone()))]
+			<span class="kw-2">&amp;</span>[(array_bytes::hex2bytes_unchecked(<span class="string">&quot;4242&quot;</span>), <span class="prelude-val">Some</span>(pairs[<span class="number">0</span>].<span class="number">1</span>.clone()))]
 		)
 		.is_err());
 
@@ -1922,16 +1972,46 @@
 			<span class="kw-2">&amp;mut </span>proof_db.clone(),
 			storage_root,
 			valid_delta,
+			<span class="prelude-val">None</span>,
+			<span class="prelude-val">None</span>,
 		)
 		.unwrap();
 		<span class="kw">let </span>second_storage_root = delta_trie_root::&lt;LayoutV0, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
 			<span class="kw-2">&amp;mut </span>proof_db.clone(),
 			storage_root,
 			invalid_delta,
+			<span class="prelude-val">None</span>,
+			<span class="prelude-val">None</span>,
 		)
 		.unwrap();
 
 		<span class="macro">assert_eq!</span>(first_storage_root, second_storage_root);
+	}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>big_key() {
+		<span class="kw">let </span>check = |keysize: usize| {
+			<span class="kw">let </span><span class="kw-2">mut </span>memdb = PrefixedMemoryDB::&lt;Blake2Hasher&gt;::default();
+			<span class="kw">let </span><span class="kw-2">mut </span>root = Default::default();
+			<span class="kw">let </span><span class="kw-2">mut </span>t = TrieDBMutBuilder::&lt;LayoutV1&gt;::new(<span class="kw-2">&amp;mut </span>memdb, <span class="kw-2">&amp;mut </span>root).build();
+			t.insert(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">0x01u8</span>; keysize][..], <span class="kw-2">&amp;</span>[<span class="number">0x01u8</span>, <span class="number">0x23</span>]).unwrap();
+			std::mem::drop(t);
+			<span class="kw">let </span>t = TrieDBBuilder::&lt;LayoutV1&gt;::new(<span class="kw-2">&amp;</span>memdb, <span class="kw-2">&amp;</span>root).build();
+			<span class="macro">assert_eq!</span>(t.get(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">0x01u8</span>; keysize][..]).unwrap(), <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="number">0x01u8</span>, <span class="number">0x23</span>]));
+		};
+		check(u16::MAX <span class="kw">as </span>usize / <span class="number">2</span>); <span class="comment">// old limit
+		</span>check(u16::MAX <span class="kw">as </span>usize / <span class="number">2 </span>+ <span class="number">1</span>); <span class="comment">// value over old limit still works
+	</span>}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>node_with_no_children_fail_decoding() {
+		<span class="kw">let </span>branch = NodeCodec::&lt;Blake2Hasher&gt;::branch_node_nibbled(
+			<span class="string">b&quot;some_partial&quot;</span>.iter().copied(),
+			<span class="number">24</span>,
+			<span class="macro">vec!</span>[<span class="prelude-val">None</span>; <span class="number">16</span>].into_iter(),
+			<span class="prelude-val">Some</span>(trie_db::node::Value::Inline(<span class="string">b&quot;value&quot;</span>[..].into())),
+		);
+		<span class="macro">assert!</span>(NodeCodec::&lt;Blake2Hasher&gt;::decode(branch.as_slice()).is_err());
 	}
 }
 </code></pre></div>

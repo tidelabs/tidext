@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/api/proc-macro/src/decl_runtime_apis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>decl_runtime_apis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api_proc_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/api/proc-macro/src/decl_runtime_apis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>decl_runtime_apis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api_proc_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -789,206 +789,9 @@
 <a href="#789" id="789">789</a>
 <a href="#790" id="790">790</a>
 <a href="#791" id="791">791</a>
-<a href="#792" id="792">792</a>
-<a href="#793" id="793">793</a>
-<a href="#794" id="794">794</a>
-<a href="#795" id="795">795</a>
-<a href="#796" id="796">796</a>
-<a href="#797" id="797">797</a>
-<a href="#798" id="798">798</a>
-<a href="#799" id="799">799</a>
-<a href="#800" id="800">800</a>
-<a href="#801" id="801">801</a>
-<a href="#802" id="802">802</a>
-<a href="#803" id="803">803</a>
-<a href="#804" id="804">804</a>
-<a href="#805" id="805">805</a>
-<a href="#806" id="806">806</a>
-<a href="#807" id="807">807</a>
-<a href="#808" id="808">808</a>
-<a href="#809" id="809">809</a>
-<a href="#810" id="810">810</a>
-<a href="#811" id="811">811</a>
-<a href="#812" id="812">812</a>
-<a href="#813" id="813">813</a>
-<a href="#814" id="814">814</a>
-<a href="#815" id="815">815</a>
-<a href="#816" id="816">816</a>
-<a href="#817" id="817">817</a>
-<a href="#818" id="818">818</a>
-<a href="#819" id="819">819</a>
-<a href="#820" id="820">820</a>
-<a href="#821" id="821">821</a>
-<a href="#822" id="822">822</a>
-<a href="#823" id="823">823</a>
-<a href="#824" id="824">824</a>
-<a href="#825" id="825">825</a>
-<a href="#826" id="826">826</a>
-<a href="#827" id="827">827</a>
-<a href="#828" id="828">828</a>
-<a href="#829" id="829">829</a>
-<a href="#830" id="830">830</a>
-<a href="#831" id="831">831</a>
-<a href="#832" id="832">832</a>
-<a href="#833" id="833">833</a>
-<a href="#834" id="834">834</a>
-<a href="#835" id="835">835</a>
-<a href="#836" id="836">836</a>
-<a href="#837" id="837">837</a>
-<a href="#838" id="838">838</a>
-<a href="#839" id="839">839</a>
-<a href="#840" id="840">840</a>
-<a href="#841" id="841">841</a>
-<a href="#842" id="842">842</a>
-<a href="#843" id="843">843</a>
-<a href="#844" id="844">844</a>
-<a href="#845" id="845">845</a>
-<a href="#846" id="846">846</a>
-<a href="#847" id="847">847</a>
-<a href="#848" id="848">848</a>
-<a href="#849" id="849">849</a>
-<a href="#850" id="850">850</a>
-<a href="#851" id="851">851</a>
-<a href="#852" id="852">852</a>
-<a href="#853" id="853">853</a>
-<a href="#854" id="854">854</a>
-<a href="#855" id="855">855</a>
-<a href="#856" id="856">856</a>
-<a href="#857" id="857">857</a>
-<a href="#858" id="858">858</a>
-<a href="#859" id="859">859</a>
-<a href="#860" id="860">860</a>
-<a href="#861" id="861">861</a>
-<a href="#862" id="862">862</a>
-<a href="#863" id="863">863</a>
-<a href="#864" id="864">864</a>
-<a href="#865" id="865">865</a>
-<a href="#866" id="866">866</a>
-<a href="#867" id="867">867</a>
-<a href="#868" id="868">868</a>
-<a href="#869" id="869">869</a>
-<a href="#870" id="870">870</a>
-<a href="#871" id="871">871</a>
-<a href="#872" id="872">872</a>
-<a href="#873" id="873">873</a>
-<a href="#874" id="874">874</a>
-<a href="#875" id="875">875</a>
-<a href="#876" id="876">876</a>
-<a href="#877" id="877">877</a>
-<a href="#878" id="878">878</a>
-<a href="#879" id="879">879</a>
-<a href="#880" id="880">880</a>
-<a href="#881" id="881">881</a>
-<a href="#882" id="882">882</a>
-<a href="#883" id="883">883</a>
-<a href="#884" id="884">884</a>
-<a href="#885" id="885">885</a>
-<a href="#886" id="886">886</a>
-<a href="#887" id="887">887</a>
-<a href="#888" id="888">888</a>
-<a href="#889" id="889">889</a>
-<a href="#890" id="890">890</a>
-<a href="#891" id="891">891</a>
-<a href="#892" id="892">892</a>
-<a href="#893" id="893">893</a>
-<a href="#894" id="894">894</a>
-<a href="#895" id="895">895</a>
-<a href="#896" id="896">896</a>
-<a href="#897" id="897">897</a>
-<a href="#898" id="898">898</a>
-<a href="#899" id="899">899</a>
-<a href="#900" id="900">900</a>
-<a href="#901" id="901">901</a>
-<a href="#902" id="902">902</a>
-<a href="#903" id="903">903</a>
-<a href="#904" id="904">904</a>
-<a href="#905" id="905">905</a>
-<a href="#906" id="906">906</a>
-<a href="#907" id="907">907</a>
-<a href="#908" id="908">908</a>
-<a href="#909" id="909">909</a>
-<a href="#910" id="910">910</a>
-<a href="#911" id="911">911</a>
-<a href="#912" id="912">912</a>
-<a href="#913" id="913">913</a>
-<a href="#914" id="914">914</a>
-<a href="#915" id="915">915</a>
-<a href="#916" id="916">916</a>
-<a href="#917" id="917">917</a>
-<a href="#918" id="918">918</a>
-<a href="#919" id="919">919</a>
-<a href="#920" id="920">920</a>
-<a href="#921" id="921">921</a>
-<a href="#922" id="922">922</a>
-<a href="#923" id="923">923</a>
-<a href="#924" id="924">924</a>
-<a href="#925" id="925">925</a>
-<a href="#926" id="926">926</a>
-<a href="#927" id="927">927</a>
-<a href="#928" id="928">928</a>
-<a href="#929" id="929">929</a>
-<a href="#930" id="930">930</a>
-<a href="#931" id="931">931</a>
-<a href="#932" id="932">932</a>
-<a href="#933" id="933">933</a>
-<a href="#934" id="934">934</a>
-<a href="#935" id="935">935</a>
-<a href="#936" id="936">936</a>
-<a href="#937" id="937">937</a>
-<a href="#938" id="938">938</a>
-<a href="#939" id="939">939</a>
-<a href="#940" id="940">940</a>
-<a href="#941" id="941">941</a>
-<a href="#942" id="942">942</a>
-<a href="#943" id="943">943</a>
-<a href="#944" id="944">944</a>
-<a href="#945" id="945">945</a>
-<a href="#946" id="946">946</a>
-<a href="#947" id="947">947</a>
-<a href="#948" id="948">948</a>
-<a href="#949" id="949">949</a>
-<a href="#950" id="950">950</a>
-<a href="#951" id="951">951</a>
-<a href="#952" id="952">952</a>
-<a href="#953" id="953">953</a>
-<a href="#954" id="954">954</a>
-<a href="#955" id="955">955</a>
-<a href="#956" id="956">956</a>
-<a href="#957" id="957">957</a>
-<a href="#958" id="958">958</a>
-<a href="#959" id="959">959</a>
-<a href="#960" id="960">960</a>
-<a href="#961" id="961">961</a>
-<a href="#962" id="962">962</a>
-<a href="#963" id="963">963</a>
-<a href="#964" id="964">964</a>
-<a href="#965" id="965">965</a>
-<a href="#966" id="966">966</a>
-<a href="#967" id="967">967</a>
-<a href="#968" id="968">968</a>
-<a href="#969" id="969">969</a>
-<a href="#970" id="970">970</a>
-<a href="#971" id="971">971</a>
-<a href="#972" id="972">972</a>
-<a href="#973" id="973">973</a>
-<a href="#974" id="974">974</a>
-<a href="#975" id="975">975</a>
-<a href="#976" id="976">976</a>
-<a href="#977" id="977">977</a>
-<a href="#978" id="978">978</a>
-<a href="#979" id="979">979</a>
-<a href="#980" id="980">980</a>
-<a href="#981" id="981">981</a>
-<a href="#982" id="982">982</a>
-<a href="#983" id="983">983</a>
-<a href="#984" id="984">984</a>
-<a href="#985" id="985">985</a>
-<a href="#986" id="986">986</a>
-<a href="#987" id="987">987</a>
-<a href="#988" id="988">988</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2018-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -1004,11 +807,15 @@
 // limitations under the License.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::utils::{
-	extract_parameter_names_types_and_borrows, fold_fn_decl_for_client_side,
-	generate_call_api_at_fn_name, generate_crate_access, generate_hidden_includes,
-	generate_method_runtime_api_impl_name, generate_native_call_generator_fn_name,
-	generate_runtime_mod_name_for_trait, prefix_function_with_trait,
-	replace_wild_card_parameter_names, return_type_extract_type, AllowSelfRefInParameters,
+	extract_parameter_names_types_and_borrows, fold_fn_decl_for_client_side, generate_crate_access,
+	generate_hidden_includes, generate_runtime_mod_name_for_trait, parse_runtime_api_version,
+	prefix_function_with_trait, replace_wild_card_parameter_names, return_type_extract_type,
+	versioned_trait_name, AllowSelfRefInParameters,
+};
+
+<span class="kw">use </span><span class="kw">crate</span>::common::{
+	API_VERSION_ATTRIBUTE, BLOCK_GENERIC_IDENT, CHANGED_IN_ATTRIBUTE, CORE_TRAIT_ATTRIBUTE,
+	HIDDEN_INCLUDES_ID, RENAMED_ATTRIBUTE, SUPPORTED_ATTRIBUTE_NAMES,
 };
 
 <span class="kw">use </span>proc_macro2::{Span, TokenStream};
@@ -1021,36 +828,11 @@
 	parse_macro_input, parse_quote,
 	spanned::Spanned,
 	visit::{<span class="self">self</span>, Visit},
-	Attribute, FnArg, GenericParam, Generics, Ident, ItemTrait, Lit, Meta, NestedMeta, ReturnType,
-	TraitBound, TraitItem, TraitItemMethod, Type,
+	Attribute, FnArg, GenericParam, Generics, Ident, ItemTrait, Lit, Meta, NestedMeta, TraitBound,
+	TraitItem, TraitItemMethod,
 };
 
-<span class="kw">use </span>std::collections::HashMap;
-
-<span class="doccomment">/// The ident used for the block generic parameter.
-</span><span class="kw">const </span>BLOCK_GENERIC_IDENT: <span class="kw-2">&amp;</span>str = <span class="string">&quot;Block&quot;</span>;
-
-<span class="doccomment">/// Unique identifier used to make the hidden includes unique for this macro.
-</span><span class="kw">const </span>HIDDEN_INCLUDES_ID: <span class="kw-2">&amp;</span>str = <span class="string">&quot;DECL_RUNTIME_APIS&quot;</span>;
-
-<span class="doccomment">/// The `core_trait` attribute.
-</span><span class="kw">const </span>CORE_TRAIT_ATTRIBUTE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;core_trait&quot;</span>;
-<span class="doccomment">/// The `api_version` attribute.
-///
-/// Is used to set the current version of the trait.
-</span><span class="kw">const </span>API_VERSION_ATTRIBUTE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;api_version&quot;</span>;
-<span class="doccomment">/// The `changed_in` attribute.
-///
-/// Is used when the function signature changed between different versions of a trait.
-/// This attribute should be placed on the old signature of the function.
-</span><span class="kw">const </span>CHANGED_IN_ATTRIBUTE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;changed_in&quot;</span>;
-<span class="doccomment">/// The `renamed` attribute.
-///
-/// Is used when a trait method was renamed.
-</span><span class="kw">const </span>RENAMED_ATTRIBUTE: <span class="kw-2">&amp;</span>str = <span class="string">&quot;renamed&quot;</span>;
-<span class="doccomment">/// All attributes that we support in the declaration of a runtime api trait.
-</span><span class="kw">const </span>SUPPORTED_ATTRIBUTE_NAMES: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str] =
-	<span class="kw-2">&amp;</span>[CORE_TRAIT_ATTRIBUTE, API_VERSION_ATTRIBUTE, CHANGED_IN_ATTRIBUTE, RENAMED_ATTRIBUTE];
+<span class="kw">use </span>std::collections::{BTreeMap, HashMap};
 
 <span class="doccomment">/// The structure used for parsing the runtime api declarations.
 </span><span class="kw">struct </span>RuntimeApiDecls {
@@ -1107,20 +889,6 @@
 	}
 }
 
-<span class="doccomment">/// Visits the ast and checks if `Block` ident is used somewhere.
-</span><span class="kw">fn </span>type_is_using_block(ty: <span class="kw-2">&amp;</span>Type) -&gt; bool {
-	<span class="kw">let </span><span class="kw-2">mut </span>visitor = IsUsingBlock { result: <span class="bool-val">false </span>};
-	visitor.visit_type(ty);
-	visitor.result
-}
-
-<span class="doccomment">/// Visits the ast and checks if `Block` ident is used somewhere.
-</span><span class="kw">fn </span>return_type_is_using_block(ty: <span class="kw-2">&amp;</span>ReturnType) -&gt; bool {
-	<span class="kw">let </span><span class="kw-2">mut </span>visitor = IsUsingBlock { result: <span class="bool-val">false </span>};
-	visitor.visit_return_type(ty);
-	visitor.result
-}
-
 <span class="doccomment">/// Replace all occurrences of `Block` with `NodeBlock`
 </span><span class="kw">struct </span>ReplaceBlockWithNodeBlock {}
 
@@ -1134,146 +902,69 @@
 	}
 }
 
-<span class="doccomment">/// Replace all occurrences of `Block` with `NodeBlock`
-</span><span class="kw">fn </span>fn_arg_replace_block_with_node_block(fn_arg: FnArg) -&gt; FnArg {
-	<span class="kw">let </span><span class="kw-2">mut </span>replace = ReplaceBlockWithNodeBlock {};
-	fold::fold_fn_arg(<span class="kw-2">&amp;mut </span>replace, fn_arg)
-}
-
-<span class="doccomment">/// Replace all occurrences of `Block` with `NodeBlock`
-</span><span class="kw">fn </span>return_type_replace_block_with_node_block(return_type: ReturnType) -&gt; ReturnType {
-	<span class="kw">let </span><span class="kw-2">mut </span>replace = ReplaceBlockWithNodeBlock {};
-	fold::fold_return_type(<span class="kw-2">&amp;mut </span>replace, return_type)
-}
-
-<span class="doccomment">/// Generate the functions that generate the native call closure for each trait method.
-</span><span class="kw">fn </span>generate_native_call_generators(decl: <span class="kw-2">&amp;</span>ItemTrait) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
-	<span class="kw">let </span>fns = decl.items.iter().filter_map(|i| <span class="kw">match </span>i {
-		TraitItem::Method(<span class="kw-2">ref </span>m) =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>m.sig),
-		<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-	});
-
-	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
-	<span class="kw">let </span>trait_ = <span class="kw-2">&amp;</span>decl.ident;
-	<span class="kw">let </span>crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
-
-	<span class="comment">// Auxiliary function that is used to convert between types that use different block types.
-	// The function expects that both are convertible by encoding the one and decoding the other.
-	</span>result.push(<span class="macro">quote!</span>(
-		<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
-		</span><span class="kw">fn </span>convert_between_block_types
-			&lt;I: #crate_::Encode, R: #crate_::Decode, F: FnOnce(#crate_::codec::Error) -&gt; #crate_::ApiError&gt;(
-				input: <span class="kw-2">&amp;</span>I,
-				map_error: F,
-			) -&gt; std::result::Result&lt;R, #crate_::ApiError&gt;
-		{
-			&lt;R <span class="kw">as </span>#crate_::DecodeLimit&gt;::decode_with_depth_limit(
-				#crate_::MAX_EXTRINSIC_DEPTH,
-				<span class="kw-2">&amp;mut &amp;</span>#crate_::Encode::encode(input)[..],
-			).map_err(map_error)
+<span class="doccomment">/// Versioned API traits are used to catch missing methods when implementing a specific version of a
+/// versioned API. They contain all non-versioned methods (aka stable methods) from the main trait
+/// and all versioned methods for the specific version. This means that there is one trait for each
+/// version mentioned in the trait definition. For example:
+/// ```ignore
+/// // The trait version implicitly is 1
+/// decl_runtime_apis!(
+/// 	trait SomeApi {
+/// 		fn method1(); 	// this is a &#39;stable method&#39;
+///
+/// 		#[api_version(2)]
+/// 		fn method2();
+///
+/// 		#[api_version(2)]
+/// 		fn method3();
+///
+/// 		#[api_version(3)]
+/// 		fn method4();
+/// 	}
+/// );
+/// ```
+/// This trait has got three different versions. The function below will generate the following
+/// code:
+/// ```
+/// trait SomeApiV1 {
+/// 	// in V1 only the stable methods are required. The rest has got default implementations.
+/// 	fn method1();
+/// }
+///
+/// trait SomeApiV2 {
+/// 	// V2 contains all methods from V1 and V2. V3 not required so they are skipped.
+/// 	fn method1();
+/// 	fn method2();
+/// 	fn method3();
+/// }
+///
+/// trait SomeApiV3 {
+/// 	// And V3 contains all methods from the trait.
+/// 	fn method1();
+/// 	fn method2();
+/// 	fn method3();
+/// 	fn method4();
+/// }
+/// ```
+</span><span class="kw">fn </span>generate_versioned_api_traits(
+	api: ItemTrait,
+	methods: BTreeMap&lt;u64, Vec&lt;TraitItemMethod&gt;&gt;,
+) -&gt; Vec&lt;ItemTrait&gt; {
+	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::&lt;ItemTrait&gt;::new();
+	<span class="kw">for </span>(version, <span class="kw">_</span>) <span class="kw">in </span><span class="kw-2">&amp;</span>methods {
+		<span class="kw">let </span><span class="kw-2">mut </span>versioned_trait = api.clone();
+		versioned_trait.ident = versioned_trait_name(<span class="kw-2">&amp;</span>versioned_trait.ident, <span class="kw-2">*</span>version);
+		versioned_trait.items = Vec::new();
+		<span class="comment">// Add the methods from the current version and all previous one. Versions are sorted so
+		// it&#39;s safe to stop early.
+		</span><span class="kw">for </span>(<span class="kw">_</span>, m) <span class="kw">in </span>methods.iter().take_while(|(v, <span class="kw">_</span>)| v &lt;= <span class="kw-2">&amp;</span>version) {
+			versioned_trait.items.extend(m.iter().cloned().map(|m| TraitItem::Method(m)));
 		}
-	));
 
-	<span class="comment">// Generate a native call generator for each function of the given trait.
-	</span><span class="kw">for </span>fn_ <span class="kw">in </span>fns {
-		<span class="kw">let </span>params = extract_parameter_names_types_and_borrows(fn_, AllowSelfRefInParameters::No)<span class="question-mark">?</span>;
-		<span class="kw">let </span>trait_fn_name = <span class="kw-2">&amp;</span>fn_.ident;
-		<span class="kw">let </span>function_name_str = fn_.ident.to_string();
-		<span class="kw">let </span>fn_name = generate_native_call_generator_fn_name(<span class="kw-2">&amp;</span>fn_.ident);
-		<span class="kw">let </span>output = return_type_replace_block_with_node_block(fn_.output.clone());
-		<span class="kw">let </span>output_ty = return_type_extract_type(<span class="kw-2">&amp;</span>output);
-		<span class="kw">let </span>output = <span class="macro">quote!</span>( std::result::Result&lt;#output_ty, #crate_::ApiError&gt; );
-
-		<span class="comment">// Every type that is using the `Block` generic parameter, we need to encode/decode,
-		// to make it compatible between the runtime/node.
-		</span><span class="kw">let </span>conversions = params.iter().filter(|v| type_is_using_block(<span class="kw-2">&amp;</span>v.<span class="number">1</span>)).map(|(n, t, <span class="kw">_</span>)| {
-			<span class="kw">let </span>param_name = <span class="macro">quote!</span>(#n).to_string();
-
-			<span class="macro">quote!</span>(
-				<span class="kw">let </span>#n: #t = convert_between_block_types(
-					<span class="kw-2">&amp;</span>#n,
-					|e| #crate_::ApiError::FailedToConvertParameter {
-						function: #function_name_str,
-						parameter: #param_name,
-						error: e,
-					},
-				)<span class="question-mark">?</span>;
-			)
-		});
-		<span class="comment">// Same as for the input types, we need to check if we also need to convert the output,
-		// before returning it.
-		</span><span class="kw">let </span>output_conversion = <span class="kw">if </span>return_type_is_using_block(<span class="kw-2">&amp;</span>fn_.output) {
-			<span class="macro">quote!</span>(
-				convert_between_block_types(
-					<span class="kw-2">&amp;</span>res,
-					|e| #crate_::ApiError::FailedToConvertReturnValue {
-						function: #function_name_str,
-						error: e,
-					},
-				)
-			)
-		} <span class="kw">else </span>{
-			<span class="macro">quote!</span>(<span class="prelude-val">Ok</span>(res))
-		};
-
-		<span class="kw">let </span>input_names = params.iter().map(|v| <span class="kw-2">&amp;</span>v.<span class="number">0</span>);
-		<span class="comment">// If the type is using the block generic type, we will encode/decode it to make it
-		// compatible. To ensure that we forward it by ref/value, we use the value given by the
-		// the user. Otherwise if it is not using the block, we don&#39;t need to add anything.
-		</span><span class="kw">let </span>input_borrows =
-			params.iter().map(|v| <span class="kw">if </span>type_is_using_block(<span class="kw-2">&amp;</span>v.<span class="number">1</span>) { v.<span class="number">2 </span>} <span class="kw">else </span>{ <span class="prelude-val">None </span>});
-
-		<span class="comment">// Replace all `Block` with `NodeBlock`, add `&#39;a` lifetime to references and collect
-		// all the function inputs.
-		</span><span class="kw">let </span>fn_inputs = fn_
-			.inputs
-			.iter()
-			.map(|v| fn_arg_replace_block_with_node_block(v.clone()))
-			.map(|v| <span class="kw">match </span>v {
-				FnArg::Typed(<span class="kw-2">ref </span>arg) =&gt; {
-					<span class="kw">let </span><span class="kw-2">mut </span>arg = arg.clone();
-					<span class="kw">if let </span>Type::Reference(<span class="kw-2">ref mut </span>r) = <span class="kw-2">*</span>arg.ty {
-						r.lifetime = <span class="prelude-val">Some</span>(<span class="macro">parse_quote!</span>( <span class="lifetime">&#39;a </span>));
-					}
-					FnArg::Typed(arg)
-				},
-				r =&gt; r,
-			});
-
-		<span class="kw">let </span>(impl_generics, ty_generics, where_clause) = decl.generics.split_for_impl();
-		<span class="comment">// We need to parse them again, to get an easy access to the actual parameters.
-		</span><span class="kw">let </span>impl_generics: Generics = <span class="macro">parse_quote!</span>( #impl_generics );
-		<span class="kw">let </span>impl_generics_params = impl_generics.params.iter().map(|p| {
-			<span class="kw">match </span>p {
-				GenericParam::Type(<span class="kw-2">ref </span>ty) =&gt; {
-					<span class="kw">let </span><span class="kw-2">mut </span>ty = ty.clone();
-					ty.bounds.push(<span class="macro">parse_quote!</span>( <span class="lifetime">&#39;a </span>));
-					GenericParam::Type(ty)
-				},
-				<span class="comment">// We should not see anything different than type params here.
-				</span>r =&gt; r.clone(),
-			}
-		});
-
-		<span class="comment">// Generate the generator function
-		</span>result.push(<span class="macro">quote!</span>(
-			<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
-			</span><span class="kw">pub fn </span>#fn_name&lt;
-				<span class="lifetime">&#39;a</span>, ApiImpl: #trait_ #ty_generics, NodeBlock: #crate_::BlockT
-				#(, #impl_generics_params)*
-			&gt;(
-				#( #fn_inputs ),*
-			) -&gt; <span class="kw">impl </span>FnOnce() -&gt; #output + <span class="lifetime">&#39;a </span>#where_clause {
-				<span class="kw">move </span>|| {
-					#( #conversions )*
-					<span class="kw">let </span>res = ApiImpl::#trait_fn_name(#( #input_borrows #input_names ),<span class="kw-2">*</span>);
-					#output_conversion
-				}
-			}
-		));
+		result.push(versioned_trait);
 	}
 
-	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>( #( #result )* ))
+	result
 }
 
 <span class="doccomment">/// Try to parse the given `Attribute` as `renamed` attribute.
@@ -1311,44 +1002,230 @@
 	}
 }
 
-<span class="doccomment">/// Generate the functions that call the api at a given block for a given trait method.
-</span><span class="kw">fn </span>generate_call_api_at_calls(decl: <span class="kw-2">&amp;</span>ItemTrait) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
-	<span class="kw">let </span>fns = decl.items.iter().filter_map(|i| <span class="kw">match </span>i {
-		TraitItem::Method(<span class="kw-2">ref </span>m) =&gt; <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span>m.attrs, <span class="kw-2">&amp;</span>m.sig)),
-		<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-	});
-
+<span class="doccomment">/// Generate the declaration of the trait for the runtime.
+</span><span class="kw">fn </span>generate_runtime_decls(decls: <span class="kw-2">&amp;</span>[ItemTrait]) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
 	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
-	<span class="kw">let </span>crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
 
-	<span class="comment">// Generate a native call generator for each function of the given trait.
-	</span><span class="kw">for </span>(attrs, fn_) <span class="kw">in </span>fns {
-		<span class="kw">let </span>trait_name = <span class="kw-2">&amp;</span>decl.ident;
-		<span class="kw">let </span>trait_fn_name = prefix_function_with_trait(trait_name, <span class="kw-2">&amp;</span>fn_.ident);
-		<span class="kw">let </span>fn_name = generate_call_api_at_fn_name(<span class="kw-2">&amp;</span>fn_.ident);
+	<span class="kw">for </span>decl <span class="kw">in </span>decls {
+		<span class="kw">let </span><span class="kw-2">mut </span>decl = decl.clone();
+		<span class="kw">let </span>decl_span = decl.span();
+		extend_generics_with_block(<span class="kw-2">&amp;mut </span>decl.generics);
+		<span class="kw">let </span>mod_name = generate_runtime_mod_name_for_trait(<span class="kw-2">&amp;</span>decl.ident);
+		<span class="kw">let </span>found_attributes = remove_supported_attributes(<span class="kw-2">&amp;mut </span>decl.attrs);
+		<span class="kw">let </span>api_version =
+			get_api_version(<span class="kw-2">&amp;</span>found_attributes).map(|v| generate_runtime_api_version(v <span class="kw">as </span>u32))<span class="question-mark">?</span>;
+		<span class="kw">let </span>id = generate_runtime_api_id(<span class="kw-2">&amp;</span>decl.ident.to_string());
 
-		<span class="kw">let </span>attrs = remove_supported_attributes(<span class="kw-2">&amp;mut </span>attrs.clone());
+		<span class="kw">let </span>trait_api_version = get_api_version(<span class="kw-2">&amp;</span>found_attributes)<span class="question-mark">?</span>;
 
-		<span class="kw">if </span>attrs.contains_key(RENAMED_ATTRIBUTE) &amp;&amp; attrs.contains_key(CHANGED_IN_ATTRIBUTE) {
-			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
-				fn_.span(),
-				<span class="macro">format!</span>(
-					<span class="string">&quot;`{}` and `{}` are not supported at once.&quot;</span>,
-					RENAMED_ATTRIBUTE, CHANGED_IN_ATTRIBUTE
-				),
-			))
-		}
+		<span class="kw">let </span><span class="kw-2">mut </span>methods_by_version: BTreeMap&lt;u64, Vec&lt;TraitItemMethod&gt;&gt; = BTreeMap::new();
 
-		<span class="comment">// We do not need to generate this function for a method that signature was changed.
-		</span><span class="kw">if </span>attrs.contains_key(CHANGED_IN_ATTRIBUTE) {
-			<span class="kw">continue
-		</span>}
+		<span class="comment">// Process the items in the declaration. The filter_map function below does a lot of stuff
+		// because the method attributes are stripped at this point
+		</span>decl.items.iter_mut().for_each(|i| <span class="kw">match </span>i {
+			TraitItem::Method(<span class="kw-2">ref mut </span>method) =&gt; {
+				<span class="kw">let </span>method_attrs = remove_supported_attributes(<span class="kw-2">&amp;mut </span>method.attrs);
+				<span class="kw">let </span><span class="kw-2">mut </span>method_version = trait_api_version;
+				<span class="comment">// validate the api version for the method (if any) and generate default
+				// implementation for versioned methods
+				</span><span class="kw">if let </span><span class="prelude-val">Some</span>(version_attribute) = method_attrs.get(API_VERSION_ATTRIBUTE) {
+					method_version = <span class="kw">match </span>parse_runtime_api_version(version_attribute) {
+						<span class="prelude-val">Ok</span>(method_api_ver) <span class="kw">if </span>method_api_ver &lt; trait_api_version =&gt; {
+							<span class="kw">let </span>method_ver = method_api_ver.to_string();
+							<span class="kw">let </span>trait_ver = trait_api_version.to_string();
+							<span class="kw">let </span><span class="kw-2">mut </span>err1 = Error::new(
+								version_attribute.span(),
+								<span class="macro">format!</span>(
+										<span class="string">&quot;Method version `{}` is older than (or equal to) trait version `{}`.\
+										 Methods can&#39;t define versions older than the trait version.&quot;</span>,
+										method_ver,
+										trait_ver,
+									),
+							);
+
+							<span class="kw">let </span>err2 = <span class="kw">match </span>found_attributes.get(<span class="kw-2">&amp;</span>API_VERSION_ATTRIBUTE) {
+								<span class="prelude-val">Some</span>(attr) =&gt; Error::new(attr.span(), <span class="string">&quot;Trait version is set here.&quot;</span>),
+								<span class="prelude-val">None </span>=&gt; Error::new(
+									decl_span,
+									<span class="string">&quot;Trait version is not set so it is implicitly equal to 1.&quot;</span>,
+								),
+							};
+							err1.combine(err2);
+							result.push(err1.to_compile_error());
+
+							trait_api_version
+						},
+						<span class="prelude-val">Ok</span>(method_api_ver) =&gt; method_api_ver,
+						<span class="prelude-val">Err</span>(e) =&gt; {
+							result.push(e.to_compile_error());
+							trait_api_version
+						},
+					};
+				}
+
+				<span class="comment">// Any method with the `changed_in` attribute isn&#39;t required for the runtime
+				// anymore.
+				</span><span class="kw">if </span>!method_attrs.contains_key(CHANGED_IN_ATTRIBUTE) {
+					<span class="comment">// Make sure we replace all the wild card parameter names.
+					</span>replace_wild_card_parameter_names(<span class="kw-2">&amp;mut </span>method.sig);
+
+					<span class="comment">// partition methods by api version
+					</span>methods_by_version.entry(method_version).or_default().push(method.clone());
+				}
+			},
+			<span class="kw">_ </span>=&gt; (),
+		});
+
+		<span class="kw">let </span>versioned_api_traits = generate_versioned_api_traits(decl.clone(), methods_by_version);
+
+		<span class="kw">let </span>main_api_ident = decl.ident.clone();
+		<span class="kw">let </span>versioned_ident = <span class="kw-2">&amp;</span>versioned_api_traits
+			.first()
+			.expect(<span class="string">&quot;There should always be at least one version.&quot;</span>)
+			.ident;
+
+		result.push(<span class="macro">quote!</span>(
+			<span class="attr">#[doc(hidden)]
+			#[allow(dead_code)]
+			#[allow(deprecated)]
+			</span><span class="kw">pub mod </span>#mod_name {
+				<span class="kw">use super</span>::<span class="kw-2">*</span>;
+
+				#( #versioned_api_traits )*
+
+				<span class="kw">pub use </span>#versioned_ident <span class="kw">as </span>#main_api_ident;
+
+				<span class="kw">pub </span>#api_version
+
+				<span class="kw">pub </span>#id
+			}
+		));
+	}
+
+	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>( #( #result )* ))
+}
+
+<span class="doccomment">/// Modify the given runtime api declaration to be usable on the client side.
+</span><span class="kw">struct </span>ToClientSideDecl&lt;<span class="lifetime">&#39;a</span>&gt; {
+	block_hash: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TokenStream,
+	crate_: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TokenStream,
+	found_attributes: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, Attribute&gt;,
+	<span class="doccomment">/// Any error that we found while converting this declaration.
+	</span>errors: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Vec&lt;TokenStream&gt;,
+	trait_: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Ident,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ToClientSideDecl&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="doccomment">/// Process the given [`ItemTrait`].
+	</span><span class="kw">fn </span>process(<span class="kw-2">mut </span><span class="self">self</span>, decl: ItemTrait) -&gt; ItemTrait {
+		<span class="kw">let </span><span class="kw-2">mut </span>decl = <span class="self">self</span>.fold_item_trait(decl);
+
+		<span class="kw">let </span>block_hash = <span class="self">self</span>.block_hash;
+		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
+
+		<span class="comment">// Add the special method that will be implemented by the `impl_runtime_apis!` macro
+		// to enable functions to call into the runtime.
+		</span>decl.items.push(<span class="macro">parse_quote! </span>{
+			<span class="doccomment">/// !!INTERNAL USE ONLY!!
+			</span><span class="attr">#[doc(hidden)]
+			</span><span class="kw">fn </span>__runtime_api_internal_call_api_at(
+				<span class="kw-2">&amp;</span><span class="self">self</span>,
+				at: #block_hash,
+				context: #crate_::ExecutionContext,
+				params: std::vec::Vec&lt;u8&gt;,
+				fn_name: <span class="kw-2">&amp;</span><span class="kw">dyn </span>Fn(#crate_::RuntimeVersion) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+			) -&gt; std::result::Result&lt;std::vec::Vec&lt;u8&gt;, #crate_::ApiError&gt;;
+		});
+
+		decl
+	}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ToClientSideDecl&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="kw">fn </span>fold_item_trait_items(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		items: Vec&lt;TraitItem&gt;,
+		trait_generics_num: usize,
+	) -&gt; Vec&lt;TraitItem&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+
+		items.into_iter().for_each(|i| <span class="kw">match </span>i {
+			TraitItem::Method(method) =&gt; {
+				<span class="kw">let </span>(fn_decl, fn_decl_ctx) =
+					<span class="self">self</span>.fold_trait_item_method(method, trait_generics_num);
+				result.push(fn_decl.into());
+				result.push(fn_decl_ctx.into());
+			},
+			r =&gt; result.push(r),
+		});
+
+		result
+	}
+
+	<span class="kw">fn </span>fold_trait_item_method(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		method: TraitItemMethod,
+		trait_generics_num: usize,
+	) -&gt; (TraitItemMethod, TraitItemMethod) {
+		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
+		<span class="kw">let </span>context = <span class="macro">quote!</span>( #crate_::ExecutionContext::OffchainCall(<span class="prelude-val">None</span>) );
+		<span class="kw">let </span>fn_decl = <span class="self">self</span>.create_method_decl(method.clone(), context, trait_generics_num);
+		<span class="kw">let </span>fn_decl_ctx = <span class="self">self</span>.create_method_decl_with_context(method, trait_generics_num);
+
+		(fn_decl, fn_decl_ctx)
+	}
+
+	<span class="kw">fn </span>create_method_decl_with_context(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		method: TraitItemMethod,
+		trait_generics_num: usize,
+	) -&gt; TraitItemMethod {
+		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
+		<span class="kw">let </span>context_arg: syn::FnArg = <span class="macro">parse_quote!</span>( context: #crate_::ExecutionContext );
+		<span class="kw">let </span><span class="kw-2">mut </span>fn_decl_ctx = <span class="self">self</span>.create_method_decl(method, <span class="macro">quote!</span>(context), trait_generics_num);
+		fn_decl_ctx.sig.ident =
+			Ident::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}_with_context&quot;</span>, <span class="kw-2">&amp;</span>fn_decl_ctx.sig.ident), Span::call_site());
+		fn_decl_ctx.sig.inputs.insert(<span class="number">2</span>, context_arg);
+
+		fn_decl_ctx
+	}
+
+	<span class="doccomment">/// Takes the method declared by the user and creates the declaration we require for the runtime
+	/// api client side. This method will call by default the `method_runtime_api_impl` for doing
+	/// the actual call into the runtime.
+	</span><span class="kw">fn </span>create_method_decl(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		<span class="kw-2">mut </span>method: TraitItemMethod,
+		context: TokenStream,
+		trait_generics_num: usize,
+	) -&gt; TraitItemMethod {
+		<span class="kw">let </span>params = <span class="kw">match </span>extract_parameter_names_types_and_borrows(
+			<span class="kw-2">&amp;</span>method.sig,
+			AllowSelfRefInParameters::No,
+		) {
+			<span class="prelude-val">Ok</span>(res) =&gt; res.into_iter().map(|v| v.<span class="number">0</span>).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
+			<span class="prelude-val">Err</span>(e) =&gt; {
+				<span class="self">self</span>.errors.push(e.to_compile_error());
+				Vec::new()
+			},
+		};
+		<span class="kw">let </span>ret_type = return_type_extract_type(<span class="kw-2">&amp;</span>method.sig.output);
+
+		fold_fn_decl_for_client_side(<span class="kw-2">&amp;mut </span>method.sig, <span class="self">self</span>.block_hash, <span class="self">self</span>.crate_);
+
+		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
+
+		<span class="kw">let </span>found_attributes = remove_supported_attributes(<span class="kw-2">&amp;mut </span>method.attrs);
 
 		<span class="comment">// Parse the renamed attributes.
 		</span><span class="kw">let </span><span class="kw-2">mut </span>renames = Vec::new();
-		<span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, a)) = attrs.iter().find(|a| a.<span class="number">0 </span>== <span class="kw-2">&amp;</span>RENAMED_ATTRIBUTE) {
-			<span class="kw">let </span>(old_name, version) = parse_renamed_attribute(a)<span class="question-mark">?</span>;
-			renames.push((version, prefix_function_with_trait(trait_name, <span class="kw-2">&amp;</span>old_name)));
+		<span class="kw">for </span>(<span class="kw">_</span>, a) <span class="kw">in </span>found_attributes.iter().filter(|a| a.<span class="number">0 </span>== <span class="kw-2">&amp;</span>RENAMED_ATTRIBUTE) {
+			<span class="kw">match </span>parse_renamed_attribute(a) {
+				<span class="prelude-val">Ok</span>((old_name, version)) =&gt; {
+					renames.push((version, prefix_function_with_trait(<span class="kw-2">&amp;</span><span class="self">self</span>.trait_, <span class="kw-2">&amp;</span>old_name)));
+				},
+				<span class="prelude-val">Err</span>(e) =&gt; <span class="self">self</span>.errors.push(e.to_compile_error()),
+			}
 		}
 
 		renames.sort_by(|l, r| r.cmp(l));
@@ -1361,261 +1238,13 @@
 			},
 		);
 
-		<span class="comment">// Generate the generator function
-		</span>result.push(<span class="macro">quote!</span>(
-			<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
-			#[allow(clippy::too_many_arguments)]
-			</span><span class="kw">pub fn </span>#fn_name&lt;
-				R: #crate_::Encode + #crate_::Decode + std::cmp::PartialEq,
-				NC: FnOnce() -&gt; std::result::Result&lt;R, #crate_::ApiError&gt; + std::panic::UnwindSafe,
-				Block: #crate_::BlockT,
-				T: #crate_::CallApiAt&lt;Block&gt;,
-			&gt;(
-				call_runtime_at: <span class="kw-2">&amp;</span>T,
-				at: <span class="kw-2">&amp;</span>#crate_::BlockId&lt;Block&gt;,
-				args: std::vec::Vec&lt;u8&gt;,
-				changes: <span class="kw-2">&amp;</span>std::cell::RefCell&lt;#crate_::OverlayedChanges&gt;,
-				storage_transaction_cache: <span class="kw-2">&amp;</span>std::cell::RefCell&lt;
-					#crate_::StorageTransactionCache&lt;Block, T::StateBackend&gt;
-				&gt;,
-				native_call: std::option::Option&lt;NC&gt;,
-				context: #crate_::ExecutionContext,
-				recorder: <span class="kw-2">&amp;</span>std::option::Option&lt;#crate_::ProofRecorder&lt;Block&gt;&gt;,
-			) -&gt; std::result::Result&lt;#crate_::NativeOrEncoded&lt;R&gt;, #crate_::ApiError&gt; {
-				<span class="kw">let </span>version = call_runtime_at.runtime_version_at(at)<span class="question-mark">?</span>;
+		<span class="comment">// Generate the function name before we may rename it below to
+		// `function_name_before_version_{}`.
+		</span><span class="kw">let </span>function_name = prefix_function_with_trait(<span class="kw-2">&amp;</span><span class="self">self</span>.trait_, <span class="kw-2">&amp;</span>method.sig.ident);
 
-				#(
-					<span class="comment">// Check if we need to call the function by an old name.
-					</span><span class="kw">if </span>version.apis.iter().any(|(s, v)| {
-						s == <span class="kw-2">&amp;</span>ID &amp;&amp; <span class="kw-2">*</span>v &lt; #versions
-					}) {
-						<span class="kw">let </span>params = #crate_::CallApiAtParams::&lt;<span class="kw">_</span>, <span class="kw">fn</span>() -&gt; <span class="kw">_</span>, <span class="kw">_</span>&gt; {
-							at,
-							function: #old_names,
-							native_call: <span class="prelude-val">None</span>,
-							arguments: args,
-							overlayed_changes: changes,
-							storage_transaction_cache,
-							context,
-							recorder,
-						};
-
-						<span class="kw">let </span>ret = #crate_::CallApiAt::&lt;Block&gt;::call_api_at(call_runtime_at, params)<span class="question-mark">?</span>;
-
-						<span class="kw">return </span><span class="prelude-val">Ok</span>(ret)
-					}
-				)*
-
-				<span class="kw">let </span>params = #crate_::CallApiAtParams {
-					at,
-					function: #trait_fn_name,
-					native_call,
-					arguments: args,
-					overlayed_changes: changes,
-					storage_transaction_cache,
-					context,
-					recorder,
-				};
-
-				#crate_::CallApiAt::&lt;Block&gt;::call_api_at(call_runtime_at, params)
-			}
-		));
-	}
-
-	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>( #( #result )* ))
-}
-
-<span class="doccomment">/// Generate the declaration of the trait for the runtime.
-</span><span class="kw">fn </span>generate_runtime_decls(decls: <span class="kw-2">&amp;</span>[ItemTrait]) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
-	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
-
-	<span class="kw">for </span>decl <span class="kw">in </span>decls {
-		<span class="kw">let </span><span class="kw-2">mut </span>decl = decl.clone();
-		extend_generics_with_block(<span class="kw-2">&amp;mut </span>decl.generics);
-		<span class="kw">let </span>mod_name = generate_runtime_mod_name_for_trait(<span class="kw-2">&amp;</span>decl.ident);
-		<span class="kw">let </span>found_attributes = remove_supported_attributes(<span class="kw-2">&amp;mut </span>decl.attrs);
-		<span class="kw">let </span>api_version =
-			get_api_version(<span class="kw-2">&amp;</span>found_attributes).map(|v| generate_runtime_api_version(v <span class="kw">as </span>u32))<span class="question-mark">?</span>;
-		<span class="kw">let </span>id = generate_runtime_api_id(<span class="kw-2">&amp;</span>decl.ident.to_string());
-
-		<span class="kw">let </span>call_api_at_calls = generate_call_api_at_calls(<span class="kw-2">&amp;</span>decl)<span class="question-mark">?</span>;
-
-		<span class="comment">// Remove methods that have the `changed_in` attribute as they are not required for the
-		// runtime anymore.
-		</span>decl.items = decl
-			.items
-			.iter_mut()
-			.filter_map(|i| <span class="kw">match </span>i {
-				TraitItem::Method(<span class="kw-2">ref mut </span>method) =&gt; {
-					<span class="kw">if </span>remove_supported_attributes(<span class="kw-2">&amp;mut </span>method.attrs)
-						.contains_key(CHANGED_IN_ATTRIBUTE)
-					{
-						<span class="prelude-val">None
-					</span>} <span class="kw">else </span>{
-						<span class="comment">// Make sure we replace all the wild card parameter names.
-						</span>replace_wild_card_parameter_names(<span class="kw-2">&amp;mut </span>method.sig);
-						<span class="prelude-val">Some</span>(TraitItem::Method(method.clone()))
-					}
-				},
-				r =&gt; <span class="prelude-val">Some</span>(r.clone()),
-			})
-			.collect();
-
-		<span class="kw">let </span>native_call_generators = generate_native_call_generators(<span class="kw-2">&amp;</span>decl)<span class="question-mark">?</span>;
-
-		result.push(<span class="macro">quote!</span>(
-			<span class="attr">#[doc(hidden)]
-			#[allow(dead_code)]
-			#[allow(deprecated)]
-			</span><span class="kw">pub mod </span>#mod_name {
-				<span class="kw">use super</span>::<span class="kw-2">*</span>;
-
-				#decl
-
-				<span class="kw">pub </span>#api_version
-
-				<span class="kw">pub </span>#id
-
-				#native_call_generators
-
-				#call_api_at_calls
-			}
-		));
-	}
-
-	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>( #( #result )* ))
-}
-
-<span class="doccomment">/// Modify the given runtime api declaration to be usable on the client side.
-</span><span class="kw">struct </span>ToClientSideDecl&lt;<span class="lifetime">&#39;a</span>&gt; {
-	block_id: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TokenStream,
-	crate_: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TokenStream,
-	found_attributes: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, Attribute&gt;,
-	<span class="doccomment">/// Any error that we found while converting this declaration.
-	</span>errors: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Vec&lt;TokenStream&gt;,
-	trait_: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Ident,
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ToClientSideDecl&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="kw">fn </span>fold_item_trait_items(<span class="kw-2">&amp;mut </span><span class="self">self</span>, items: Vec&lt;TraitItem&gt;) -&gt; Vec&lt;TraitItem&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
-
-		items.into_iter().for_each(|i| <span class="kw">match </span>i {
-			TraitItem::Method(method) =&gt; {
-				<span class="kw">let </span>(fn_decl, fn_impl, fn_decl_ctx) = <span class="self">self</span>.fold_trait_item_method(method);
-				result.push(fn_decl.into());
-				result.push(fn_decl_ctx.into());
-
-				<span class="kw">if let </span><span class="prelude-val">Some</span>(fn_impl) = fn_impl {
-					result.push(fn_impl.into());
-				}
-			},
-			r =&gt; result.push(r),
-		});
-
-		result
-	}
-
-	<span class="kw">fn </span>fold_trait_item_method(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		method: TraitItemMethod,
-	) -&gt; (TraitItemMethod, <span class="prelude-ty">Option</span>&lt;TraitItemMethod&gt;, TraitItemMethod) {
-		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
-		<span class="kw">let </span>context = <span class="macro">quote!</span>( #crate_::ExecutionContext::OffchainCall(<span class="prelude-val">None</span>) );
-		<span class="kw">let </span>fn_impl = <span class="self">self</span>.create_method_runtime_api_impl(method.clone());
-		<span class="kw">let </span>fn_decl = <span class="self">self</span>.create_method_decl(method.clone(), context);
-		<span class="kw">let </span>fn_decl_ctx = <span class="self">self</span>.create_method_decl_with_context(method);
-
-		(fn_decl, fn_impl, fn_decl_ctx)
-	}
-
-	<span class="kw">fn </span>create_method_decl_with_context(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: TraitItemMethod) -&gt; TraitItemMethod {
-		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
-		<span class="kw">let </span>context_arg: syn::FnArg = <span class="macro">parse_quote!</span>( context: #crate_::ExecutionContext );
-		<span class="kw">let </span><span class="kw-2">mut </span>fn_decl_ctx = <span class="self">self</span>.create_method_decl(method, <span class="macro">quote!</span>(context));
-		fn_decl_ctx.sig.ident =
-			Ident::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}_with_context&quot;</span>, <span class="kw-2">&amp;</span>fn_decl_ctx.sig.ident), Span::call_site());
-		fn_decl_ctx.sig.inputs.insert(<span class="number">2</span>, context_arg);
-
-		fn_decl_ctx
-	}
-
-	<span class="doccomment">/// Takes the given method and creates a `method_runtime_api_impl` method that will be
-	/// implemented in the runtime for the client side.
-	</span><span class="kw">fn </span>create_method_runtime_api_impl(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		<span class="kw-2">mut </span>method: TraitItemMethod,
-	) -&gt; <span class="prelude-ty">Option</span>&lt;TraitItemMethod&gt; {
-		<span class="kw">if </span>remove_supported_attributes(<span class="kw-2">&amp;mut </span>method.attrs).contains_key(CHANGED_IN_ATTRIBUTE) {
-			<span class="kw">return </span><span class="prelude-val">None
-		</span>}
-
-		<span class="kw">let </span>fn_sig = <span class="kw-2">&amp;</span>method.sig;
-		<span class="kw">let </span>ret_type = return_type_extract_type(<span class="kw-2">&amp;</span>fn_sig.output);
-
-		<span class="comment">// Get types and if the value is borrowed from all parameters.
-		// If there is an error, we push it as the block to the user.
-		</span><span class="kw">let </span>param_types =
-			<span class="kw">match </span>extract_parameter_names_types_and_borrows(fn_sig, AllowSelfRefInParameters::No) {
-				<span class="prelude-val">Ok</span>(res) =&gt; res
-					.into_iter()
-					.map(|v| {
-						<span class="kw">let </span>ty = v.<span class="number">1</span>;
-						<span class="kw">let </span>borrow = v.<span class="number">2</span>;
-						<span class="macro">quote!</span>( #borrow #ty )
-					})
-					.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
-				<span class="prelude-val">Err</span>(e) =&gt; {
-					<span class="self">self</span>.errors.push(e.to_compile_error());
-					Vec::new()
-				},
-			};
-		<span class="kw">let </span>name = generate_method_runtime_api_impl_name(<span class="self">self</span>.trait_, <span class="kw-2">&amp;</span>method.sig.ident);
-		<span class="kw">let </span>block_id = <span class="self">self</span>.block_id;
-		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
-
-		<span class="prelude-val">Some</span>(<span class="macro">parse_quote! </span>{
-			<span class="attr">#[doc(hidden)]
-			</span><span class="kw">fn </span>#name(
-				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				at: <span class="kw-2">&amp;</span>#block_id,
-				context: #crate_::ExecutionContext,
-				params: <span class="prelude-ty">Option</span>&lt;( #( #param_types ),* )&gt;,
-				params_encoded: Vec&lt;u8&gt;,
-			) -&gt; std::result::Result&lt;#crate_::NativeOrEncoded&lt;#ret_type&gt;, #crate_::ApiError&gt;;
-		})
-	}
-
-	<span class="doccomment">/// Takes the method declared by the user and creates the declaration we require for the runtime
-	/// api client side. This method will call by default the `method_runtime_api_impl` for doing
-	/// the actual call into the runtime.
-	</span><span class="kw">fn </span>create_method_decl(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		<span class="kw-2">mut </span>method: TraitItemMethod,
-		context: TokenStream,
-	) -&gt; TraitItemMethod {
-		<span class="kw">let </span>params = <span class="kw">match </span>extract_parameter_names_types_and_borrows(
-			<span class="kw-2">&amp;</span>method.sig,
-			AllowSelfRefInParameters::No,
-		) {
-			<span class="prelude-val">Ok</span>(res) =&gt; res.into_iter().map(|v| v.<span class="number">0</span>).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
-			<span class="prelude-val">Err</span>(e) =&gt; {
-				<span class="self">self</span>.errors.push(e.to_compile_error());
-				Vec::new()
-			},
-		};
-		<span class="kw">let </span>params2 = params.clone();
-		<span class="kw">let </span>ret_type = return_type_extract_type(<span class="kw-2">&amp;</span>method.sig.output);
-
-		fold_fn_decl_for_client_side(<span class="kw-2">&amp;mut </span>method.sig, <span class="self">self</span>.block_id, <span class="self">self</span>.crate_);
-
-		<span class="kw">let </span>name_impl = generate_method_runtime_api_impl_name(<span class="self">self</span>.trait_, <span class="kw-2">&amp;</span>method.sig.ident);
-		<span class="kw">let </span>crate_ = <span class="self">self</span>.crate_;
-
-		<span class="kw">let </span>found_attributes = remove_supported_attributes(<span class="kw-2">&amp;mut </span>method.attrs);
 		<span class="comment">// If the method has a `changed_in` attribute, we need to alter the method name to
 		// `method_before_version_VERSION`.
-		</span><span class="kw">let </span>(native_handling, param_tuple) = <span class="kw">match </span>get_changed_in(<span class="kw-2">&amp;</span>found_attributes) {
+		</span><span class="kw">match </span>get_changed_in(<span class="kw-2">&amp;</span>found_attributes) {
 			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(version)) =&gt; {
 				<span class="comment">// Make sure that the `changed_in` version is at least the current `api_version`.
 				</span><span class="kw">if </span>get_api_version(<span class="self">self</span>.found_attributes).ok() &lt; <span class="prelude-val">Some</span>(version) {
@@ -1634,46 +1263,50 @@
 				);
 				method.sig.ident = ident;
 				method.attrs.push(<span class="macro">parse_quote!</span>( <span class="attr">#[deprecated] </span>));
-
-				<span class="kw">let </span>panic =
-					<span class="macro">format!</span>(<span class="string">&quot;Calling `{}` should not return a native value!&quot;</span>, method.sig.ident);
-				(<span class="macro">quote!</span>(<span class="macro">panic!</span>(#panic)), <span class="macro">quote!</span>(<span class="prelude-val">None</span>))
 			},
-			<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; (<span class="macro">quote!</span>(<span class="prelude-val">Ok</span>(n)), <span class="macro">quote!</span>( <span class="prelude-val">Some</span>(( #( #params2 ),* )) )),
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; {},
 			<span class="prelude-val">Err</span>(e) =&gt; {
 				<span class="self">self</span>.errors.push(e.to_compile_error());
-				(<span class="macro">quote!</span>(<span class="macro">unimplemented!</span>()), <span class="macro">quote!</span>(<span class="prelude-val">None</span>))
 			},
 		};
 
-		<span class="kw">let </span>function_name = method.sig.ident.to_string();
+		<span class="comment">// The module where the runtime relevant stuff is declared.
+		</span><span class="kw">let </span>trait_name = <span class="kw-2">&amp;</span><span class="self">self</span>.trait_;
+		<span class="kw">let </span>runtime_mod = generate_runtime_mod_name_for_trait(trait_name);
+		<span class="kw">let </span>underscores = (<span class="number">0</span>..trait_generics_num).map(|<span class="kw">_</span>| <span class="macro">quote!</span>(<span class="kw">_</span>));
 
 		<span class="comment">// Generate the default implementation that calls the `method_runtime_api_impl` method.
 		</span>method.default = <span class="prelude-val">Some</span>(<span class="macro">parse_quote! </span>{
 			{
-				<span class="kw">let </span>runtime_api_impl_params_encoded =
+				<span class="kw">let </span>__runtime_api_impl_params_encoded__ =
 					#crate_::Encode::encode(<span class="kw-2">&amp;</span>( #( <span class="kw-2">&amp;</span>#params ),* ));
 
-				<span class="self">self</span>.#name_impl(
+				&lt;<span class="self">Self </span><span class="kw">as </span>#trait_name&lt;#( #underscores ),<span class="kw-2">*</span>&gt;&gt;::__runtime_api_internal_call_api_at(
+					<span class="self">self</span>,
 					__runtime_api_at_param__,
 					#context,
-					#param_tuple,
-					runtime_api_impl_params_encoded,
-				).and_then(|r|
-					<span class="kw">match </span>r {
-						#crate_::NativeOrEncoded::Native(n) =&gt; {
-							#native_handling
-						},
-						#crate_::NativeOrEncoded::Encoded(r) =&gt; {
-							std::result::Result::map_err(
-								&lt;#ret_type <span class="kw">as </span>#crate_::Decode&gt;::decode(<span class="kw-2">&amp;mut &amp;</span>r[..]),
-								|err| #crate_::ApiError::FailedToDecodeReturnValue {
-									function: #function_name,
-									error: err,
-								}
-							)
-						}
+					__runtime_api_impl_params_encoded__,
+					<span class="kw-2">&amp;</span>|version| {
+						#(
+							<span class="comment">// Check if we need to call the function by an old name.
+							</span><span class="kw">if </span>version.apis.iter().any(|(s, v)| {
+								s == <span class="kw-2">&amp;</span>#runtime_mod::ID &amp;&amp; <span class="kw-2">*</span>v &lt; #versions
+							}) {
+								<span class="kw">return </span>#old_names
+							}
+						)*
+
+						#function_name
 					}
+				)
+				.and_then(|r|
+					std::result::Result::map_err(
+						&lt;#ret_type <span class="kw">as </span>#crate_::Decode&gt;::decode(<span class="kw-2">&amp;mut &amp;</span>r[..]),
+						|err| #crate_::ApiError::FailedToDecodeReturnValue {
+							function: #function_name,
+							error: err,
+						}
+					)
 				)
 			}
 		});
@@ -1693,7 +1326,7 @@
 
 		<span class="kw">if </span>is_core_trait {
 			<span class="comment">// Add all the supertraits we want to have for `Core`.
-			</span>input.supertraits = <span class="macro">parse_quote!</span>(<span class="lifetime">&#39;static </span>+ Send + Sync);
+			</span>input.supertraits = <span class="macro">parse_quote!</span>(<span class="lifetime">&#39;static </span>+ Send);
 		} <span class="kw">else </span>{
 			<span class="comment">// Add the `Core` runtime api as super trait.
 			</span><span class="kw">let </span>crate_ = <span class="kw-2">&amp;</span><span class="self">self</span>.crate_;
@@ -1702,34 +1335,9 @@
 
 		<span class="comment">// The client side trait is only required when compiling with the feature `std` or `test`.
 		</span>input.attrs.push(<span class="macro">parse_quote!</span>( <span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))] </span>));
-		input.items = <span class="self">self</span>.fold_item_trait_items(input.items);
+		input.items = <span class="self">self</span>.fold_item_trait_items(input.items, input.generics.params.len());
 
 		fold::fold_item_trait(<span class="self">self</span>, input)
-	}
-}
-
-<span class="doccomment">/// Parse the given attribute as `API_VERSION_ATTRIBUTE`.
-</span><span class="kw">fn </span>parse_runtime_api_version(version: <span class="kw-2">&amp;</span>Attribute) -&gt; <span class="prelude-ty">Result</span>&lt;u64&gt; {
-	<span class="kw">let </span>meta = version.parse_meta()<span class="question-mark">?</span>;
-
-	<span class="kw">let </span>err = <span class="prelude-val">Err</span>(Error::new(
-		meta.span(),
-		<span class="kw-2">&amp;</span><span class="macro">format!</span>(
-			<span class="string">&quot;Unexpected `{api_version}` attribute. The supported format is `{api_version}(1)`&quot;</span>,
-			api_version = API_VERSION_ATTRIBUTE
-		),
-	));
-
-	<span class="kw">match </span>meta {
-		Meta::List(list) =&gt;
-			<span class="kw">if </span>list.nested.len() != <span class="number">1 </span>{
-				err
-			} <span class="kw">else if let </span><span class="prelude-val">Some</span>(NestedMeta::Lit(Lit::Int(i))) = list.nested.first() {
-				i.base10_parse()
-			} <span class="kw">else </span>{
-				err
-			},
-		<span class="kw">_ </span>=&gt; err,
 	}
 }
 
@@ -1804,21 +1412,19 @@
 		<span class="kw">let </span>decl = decl.clone();
 
 		<span class="kw">let </span>crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
-		<span class="kw">let </span>block_id = <span class="macro">quote!</span>( #crate_::BlockId&lt;Block&gt; );
+		<span class="kw">let </span>block_hash = <span class="macro">quote!</span>( &lt;Block <span class="kw">as </span>#crate_::BlockT&gt;::Hash );
 		<span class="kw">let </span><span class="kw-2">mut </span>found_attributes = HashMap::new();
 		<span class="kw">let </span><span class="kw-2">mut </span>errors = Vec::new();
 		<span class="kw">let </span>trait_ = decl.ident.clone();
 
-		<span class="kw">let </span>decl = {
-			<span class="kw">let </span><span class="kw-2">mut </span>to_client_side = ToClientSideDecl {
-				crate_: <span class="kw-2">&amp;</span>crate_,
-				block_id: <span class="kw-2">&amp;</span>block_id,
-				found_attributes: <span class="kw-2">&amp;mut </span>found_attributes,
-				errors: <span class="kw-2">&amp;mut </span>errors,
-				trait_: <span class="kw-2">&amp;</span>trait_,
-			};
-			to_client_side.fold_item_trait(decl)
-		};
+		<span class="kw">let </span>decl = ToClientSideDecl {
+			crate_: <span class="kw-2">&amp;</span>crate_,
+			block_hash: <span class="kw-2">&amp;</span>block_hash,
+			found_attributes: <span class="kw-2">&amp;mut </span>found_attributes,
+			errors: <span class="kw-2">&amp;mut </span>errors,
+			trait_: <span class="kw-2">&amp;</span>trait_,
+		}
+		.process(decl);
 
 		<span class="kw">let </span>api_version = get_api_version(<span class="kw-2">&amp;</span>found_attributes);
 

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["transport","HTTP transport."]],"struct":[["HeaderMap","A set of HTTP headers"],["HeaderValue","Represents an HTTP header field value."],["HttpClient","JSON-RPC HTTP Client that provides functionality to perform method calls and notifications."],["HttpClientBuilder","Http Client Builder."]]};

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/arithmetic/mul.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mul.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/arithmetic/mul.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mul.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -367,6 +367,80 @@
 <a href="#366" id="366">366</a>
 <a href="#367" id="367">367</a>
 <a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
+<a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
+<a href="#432" id="432">432</a>
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
 </pre><pre class="rust"><code><span class="doccomment">//! From libsecp256k1:
 //!
 //! The Secp256k1 curve has an endomorphism, where lambda * (x, y) = (beta * x, y), where
@@ -397,42 +471,11 @@
 //! Cryptography on Sensor Networks Using the MSP430X Microcontroller&quot; (Gouvea, Oliveira, Lopez),
 //! Section 4.3 (here we use a somewhat higher-precision estimate):
 //! d = a1*b2 - b1*a2
-//! g1 = round((2^272)*b2/d)
-//! g2 = round((2^272)*b1/d)
+//! g1 = round((2^384)*b2/d)
+//! g2 = round((2^384)*(-b1)/d)
 //!
 //! (Note that &#39;d&#39; is also equal to the curve order here because `[a1,b1]` and `[a2,b2]` are found
 //! as outputs of the Extended Euclidean Algorithm on inputs &#39;order&#39; and &#39;lambda&#39;).
-//!
-//! @fjarri:
-//!
-//! To be precise, the method used here is based on &quot;An Alternate Decomposition of an Integer for
-//! Faster Point Multiplication on Certain Elliptic Curves&quot; by Young-Ho Park, Sangtae Jeong,
-//! Chang Han Kim, and Jongin Lim:
-//! &lt;https://link.springer.com/chapter/10.1007%2F3-540-45664-3_23&gt;
-//!
-//! The precision used for `g1` and `g2` is not enough to ensure correct approximation at all times.
-//! For example, `2^272 * b1 / n` used to calculate `g2` is rounded down.
-//! This means that the approximation `z&#39; = k * g2 / 2^272` always slightly underestimates
-//! the real value `z = b1 * k / n`. Therefore, when the fractional part of `z` is just slightly
-//! above 0.5, it will be rounded up, but `z&#39;` will have the fractional part slightly below 0.5 and
-//! will be rounded down.
-//!
-//! The difference `z - z&#39; = k * delta / 2^272`, where `delta = b1 * 2^272 mod n`.
-//! The closest `z` can get to the fractional part equal to .5 is `1 / (2n)` (since `n` is odd).
-//! Therefore, to guarantee that `z&#39;` will always be rounded to the same value, one must have
-//! `delta / 2^m &lt; 1 / (2n * (n - 1))`, where `m` is the power of 2 used for the approximation.
-//! This means that one should use at least `m = 512` (since `0 &lt; delta &lt; 1`).
-//! Indeed, tests show that with only `m = 272` the approximation produces off-by-1 errors
-//! occasionally.
-//!
-//! Now since `r1` is calculated as `k - r2 * lambda mod n`, the contract
-//! `r1 + r2 * lambda = k mod n` is always satisfied. The method guarantees both `r1` and `r2` to be
-//! less than `sqrt(n)` (so, fit in 128 bits) if the rounding is applied correctly - but in our case
-//! the off-by-1 errors will produce different `r1` and `r2` which are not necessarily bounded by
-//! `sqrt(n)`.
-//!
-//! In experiments, I was not able to detect any case where they would go outside the 128 bit bound,
-//! but I cannot be sure that it cannot happen.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::arithmetic::{
     scalar::{Scalar, WideScalar},
@@ -501,20 +544,125 @@
 ]);
 
 <span class="kw">const </span>G1: Scalar = Scalar::from_bytes_unchecked(<span class="kw-2">&amp;</span>[
-    <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x30</span>, <span class="number">0x86</span>,
-    <span class="number">0xd2</span>, <span class="number">0x21</span>, <span class="number">0xa7</span>, <span class="number">0xd4</span>, <span class="number">0x6b</span>, <span class="number">0xcd</span>, <span class="number">0xe8</span>, <span class="number">0x6c</span>, <span class="number">0x90</span>, <span class="number">0xe4</span>, <span class="number">0x92</span>, <span class="number">0x84</span>, <span class="number">0xeb</span>, <span class="number">0x15</span>, <span class="number">0x3d</span>, <span class="number">0xab</span>,
+    <span class="number">0x30</span>, <span class="number">0x86</span>, <span class="number">0xd2</span>, <span class="number">0x21</span>, <span class="number">0xa7</span>, <span class="number">0xd4</span>, <span class="number">0x6b</span>, <span class="number">0xcd</span>, <span class="number">0xe8</span>, <span class="number">0x6c</span>, <span class="number">0x90</span>, <span class="number">0xe4</span>, <span class="number">0x92</span>, <span class="number">0x84</span>, <span class="number">0xeb</span>, <span class="number">0x15</span>,
+    <span class="number">0x3d</span>, <span class="number">0xaa</span>, <span class="number">0x8a</span>, <span class="number">0x14</span>, <span class="number">0x71</span>, <span class="number">0xe8</span>, <span class="number">0xca</span>, <span class="number">0x7f</span>, <span class="number">0xe8</span>, <span class="number">0x93</span>, <span class="number">0x20</span>, <span class="number">0x9a</span>, <span class="number">0x45</span>, <span class="number">0xdb</span>, <span class="number">0xb0</span>, <span class="number">0x31</span>,
 ]);
 
 <span class="kw">const </span>G2: Scalar = Scalar::from_bytes_unchecked(<span class="kw-2">&amp;</span>[
-    <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0xe4</span>, <span class="number">0x43</span>,
-    <span class="number">0x7e</span>, <span class="number">0xd6</span>, <span class="number">0x01</span>, <span class="number">0x0e</span>, <span class="number">0x88</span>, <span class="number">0x28</span>, <span class="number">0x6f</span>, <span class="number">0x54</span>, <span class="number">0x7f</span>, <span class="number">0xa9</span>, <span class="number">0x0a</span>, <span class="number">0xbf</span>, <span class="number">0xe4</span>, <span class="number">0xc4</span>, <span class="number">0x22</span>, <span class="number">0x12</span>,
+    <span class="number">0xe4</span>, <span class="number">0x43</span>, <span class="number">0x7e</span>, <span class="number">0xd6</span>, <span class="number">0x01</span>, <span class="number">0x0e</span>, <span class="number">0x88</span>, <span class="number">0x28</span>, <span class="number">0x6f</span>, <span class="number">0x54</span>, <span class="number">0x7f</span>, <span class="number">0xa9</span>, <span class="number">0x0a</span>, <span class="number">0xbf</span>, <span class="number">0xe4</span>, <span class="number">0xc4</span>,
+    <span class="number">0x22</span>, <span class="number">0x12</span>, <span class="number">0x08</span>, <span class="number">0xac</span>, <span class="number">0x9d</span>, <span class="number">0xf5</span>, <span class="number">0x06</span>, <span class="number">0xc6</span>, <span class="number">0x15</span>, <span class="number">0x71</span>, <span class="number">0xb4</span>, <span class="number">0xae</span>, <span class="number">0x8a</span>, <span class="number">0xc4</span>, <span class="number">0x7f</span>, <span class="number">0x71</span>,
 ]);
 
-<span class="doccomment">/// Find r1 and r2 given k, such that r1 + r2 * lambda == k mod n.
+<span class="comment">/*
+ * Proof for decompose_scalar&#39;s bounds.
+ *
+ * Let
+ *  - epsilon1 = 2^256 * |g1/2^384 - b2/d|
+ *  - epsilon2 = 2^256 * |g2/2^384 - (-b1)/d|
+ *  - c1 = round(k*g1/2^384)
+ *  - c2 = round(k*g2/2^384)
+ *
+ * Lemma 1: |c1 - k*b2/d| &lt; 2^-1 + epsilon1
+ *
+ *    |c1 - k*b2/d|
+ *  =
+ *    |c1 - k*g1/2^384 + k*g1/2^384 - k*b2/d|
+ * &lt;=   {triangle inequality}
+ *    |c1 - k*g1/2^384| + |k*g1/2^384 - k*b2/d|
+ *  =
+ *    |c1 - k*g1/2^384| + k*|g1/2^384 - b2/d|
+ * &lt;    {rounding in c1 and 0 &lt;= k &lt; 2^256}
+ *    2^-1 + 2^256 * |g1/2^384 - b2/d|
+ *  =   {definition of epsilon1}
+ *    2^-1 + epsilon1
+ *
+ * Lemma 2: |c2 - k*(-b1)/d| &lt; 2^-1 + epsilon2
+ *
+ *    |c2 - k*(-b1)/d|
+ *  =
+ *    |c2 - k*g2/2^384 + k*g2/2^384 - k*(-b1)/d|
+ * &lt;=   {triangle inequality}
+ *    |c2 - k*g2/2^384| + |k*g2/2^384 - k*(-b1)/d|
+ *  =
+ *    |c2 - k*g2/2^384| + k*|g2/2^384 - (-b1)/d|
+ * &lt;    {rounding in c2 and 0 &lt;= k &lt; 2^256}
+ *    2^-1 + 2^256 * |g2/2^384 - (-b1)/d|
+ *  =   {definition of epsilon2}
+ *    2^-1 + epsilon2
+ *
+ * Let
+ *  - k1 = k - c1*a1 - c2*a2
+ *  - k2 = - c1*b1 - c2*b2
+ *
+ * Lemma 3: |k1| &lt; (a1 + a2 + 1)/2 &lt; 2^128
+ *
+ *    |k1|
+ *  =   {definition of k1}
+ *    |k - c1*a1 - c2*a2|
+ *  =   {(a1*b2 - b1*a2)/n = 1}
+ *    |k*(a1*b2 - b1*a2)/n - c1*a1 - c2*a2|
+ *  =
+ *    |a1*(k*b2/n - c1) + a2*(k*(-b1)/n - c2)|
+ * &lt;=   {triangle inequality}
+ *    a1*|k*b2/n - c1| + a2*|k*(-b1)/n - c2|
+ * &lt;    {Lemma 1 and Lemma 2}
+ *    a1*(2^-1 + epslion1) + a2*(2^-1 + epsilon2)
+ * &lt;    {rounding up to an integer}
+ *    (a1 + a2 + 1)/2
+ * &lt;    {rounding up to a power of 2}
+ *    2^128
+ *
+ * Lemma 4: |k2| &lt; (-b1 + b2)/2 + 1 &lt; 2^128
+ *
+ *    |k2|
+ *  =   {definition of k2}
+ *    |- c1*a1 - c2*a2|
+ *  =   {(b1*b2 - b1*b2)/n = 0}
+ *    |k*(b1*b2 - b1*b2)/n - c1*b1 - c2*b2|
+ *  =
+ *    |b1*(k*b2/n - c1) + b2*(k*(-b1)/n - c2)|
+ * &lt;=   {triangle inequality}
+ *    (-b1)*|k*b2/n - c1| + b2*|k*(-b1)/n - c2|
+ * &lt;    {Lemma 1 and Lemma 2}
+ *    (-b1)*(2^-1 + epslion1) + b2*(2^-1 + epsilon2)
+ * &lt;    {rounding up to an integer}
+ *    (-b1 + b2)/2 + 1
+ * &lt;    {rounding up to a power of 2}
+ *    2^128
+ *
+ * Let
+ *  - r2 = k2 mod n
+ *  - r1 = k - r2*lambda mod n.
+ *
+ * Notice that r1 is defined such that r1 + r2 * lambda == k (mod n).
+ *
+ * Lemma 5: r1 == k1 mod n.
+ *
+ *    r1
+ * ==   {definition of r1 and r2}
+ *    k - k2*lambda
+ * ==   {definition of k2}
+ *    k - (- c1*b1 - c2*b2)*lambda
+ * ==
+ *    k + c1*b1*lambda + c2*b2*lambda
+ * ==  {a1 + b1*lambda == 0 mod n and a2 + b2*lambda == 0 mod n}
+ *    k - c1*a1 - c2*a2
+ * ==  {definition of k1}
+ *    k1
+ *
+ * From Lemma 3, Lemma 4, Lemma 5 and the definition of r2, we can conclude that
+ *
+ *  - either r1 &lt; 2^128 or -r1 mod n &lt; 2^128
+ *  - either r2 &lt; 2^128 or -r2 mod n &lt; 2^128.
+ *
+ * Q.E.D.
+ */
+
+</span><span class="doccomment">/// Find r1 and r2 given k, such that r1 + r2 * lambda == k mod n.
 </span><span class="kw">fn </span>decompose_scalar(k: <span class="kw-2">&amp;</span>Scalar) -&gt; (Scalar, Scalar) {
     <span class="comment">// these _vartime calls are constant time since the shift amount is constant
-    </span><span class="kw">let </span>c1 = WideScalar::mul_shift_vartime(k, <span class="kw-2">&amp;</span>G1, <span class="number">272</span>) * MINUS_B1;
-    <span class="kw">let </span>c2 = WideScalar::mul_shift_vartime(k, <span class="kw-2">&amp;</span>G2, <span class="number">272</span>) * MINUS_B2;
+    </span><span class="kw">let </span>c1 = WideScalar::mul_shift_vartime(k, <span class="kw-2">&amp;</span>G1, <span class="number">384</span>) * MINUS_B1;
+    <span class="kw">let </span>c2 = WideScalar::mul_shift_vartime(k, <span class="kw-2">&amp;</span>G2, <span class="number">384</span>) * MINUS_B2;
     <span class="kw">let </span>r2 = c1 + c2;
     <span class="kw">let </span>r1 = k + r2 * MINUS_LAMBDA;
 

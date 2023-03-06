@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["FromSs58Error","An error obtained from trying to interpret an SS58 encoded string into an AccountId32"]],"struct":[["AccountId32","A 32-byte cryptographic identifier. This is a simplified version of Substrate’s `sp_core::crypto::AccountId32`. To obtain more functionality, convert this into that type."]]};

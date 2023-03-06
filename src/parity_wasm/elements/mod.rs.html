@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -330,88 +330,97 @@
 <a href="#330" id="330">330</a>
 <a href="#331" id="331">331</a>
 <a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Elements of the WebAssembly binary format.
 
-</span><span class="kw">use </span>alloc::{string::String, vec::Vec};
-<span class="kw">use </span><span class="kw">crate</span>::io;
+</span><span class="kw">use </span><span class="kw">crate</span>::io;
+<span class="kw">use </span>alloc::{string::String, vec::Vec};
 
 <span class="kw">use </span>core::fmt;
 
 <span class="macro">macro_rules! </span>buffered_read {
-	(<span class="macro-nonterminal">$buffer_size</span>: expr, <span class="macro-nonterminal">$length</span>: expr, <span class="macro-nonterminal">$reader</span>: expr) =&gt; {
-		{
-			<span class="kw">let </span><span class="kw-2">mut </span>vec_buf = Vec::new();
-			<span class="kw">let </span><span class="kw-2">mut </span>total_read = <span class="number">0</span>;
-			<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="macro-nonterminal">$buffer_size</span>];
-			<span class="kw">while </span>total_read &lt; <span class="macro-nonterminal">$length </span>{
-				<span class="kw">let </span>next_to_read = <span class="kw">if </span><span class="macro-nonterminal">$length </span>- total_read &gt; <span class="macro-nonterminal">$buffer_size </span>{ <span class="macro-nonterminal">$buffer_size </span>} <span class="kw">else </span>{ <span class="macro-nonterminal">$length </span>- total_read };
-				<span class="macro-nonterminal">$reader</span>.read(<span class="kw-2">&amp;mut </span>buf[<span class="number">0</span>..next_to_read])<span class="question-mark">?</span>;
-				vec_buf.extend_from_slice(<span class="kw-2">&amp;</span>buf[<span class="number">0</span>..next_to_read]);
-				total_read += next_to_read;
-			}
-			vec_buf
+	(<span class="macro-nonterminal">$buffer_size</span>: expr, <span class="macro-nonterminal">$length</span>: expr, <span class="macro-nonterminal">$reader</span>: expr) =&gt; {{
+		<span class="kw">let </span><span class="kw-2">mut </span>vec_buf = Vec::new();
+		<span class="kw">let </span><span class="kw-2">mut </span>total_read = <span class="number">0</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="macro-nonterminal">$buffer_size</span>];
+		<span class="kw">while </span>total_read &lt; <span class="macro-nonterminal">$length </span>{
+			<span class="kw">let </span>next_to_read = <span class="kw">if </span><span class="macro-nonterminal">$length </span>- total_read &gt; <span class="macro-nonterminal">$buffer_size </span>{
+				<span class="macro-nonterminal">$buffer_size
+			</span>} <span class="kw">else </span>{
+				<span class="macro-nonterminal">$length </span>- total_read
+			};
+			<span class="macro-nonterminal">$reader</span>.read(<span class="kw-2">&amp;mut </span>buf[<span class="number">0</span>..next_to_read])<span class="question-mark">?</span>;
+			vec_buf.extend_from_slice(<span class="kw-2">&amp;</span>buf[<span class="number">0</span>..next_to_read]);
+			total_read += next_to_read;
 		}
-	}
+		vec_buf
+	}};
 }
 
-<span class="kw">mod </span>primitives;
-<span class="kw">mod </span>module;
-<span class="kw">mod </span>section;
-<span class="kw">mod </span>types;
-<span class="kw">mod </span>import_entry;
 <span class="kw">mod </span>export_entry;
-<span class="kw">mod </span>global_entry;
-<span class="kw">mod </span>ops;
 <span class="kw">mod </span>func;
-<span class="kw">mod </span>segment;
+<span class="kw">mod </span>global_entry;
+<span class="kw">mod </span>import_entry;
 <span class="kw">mod </span>index_map;
+<span class="kw">mod </span>module;
 <span class="kw">mod </span>name_section;
+<span class="kw">mod </span>ops;
+<span class="kw">mod </span>primitives;
 <span class="kw">mod </span>reloc_section;
+<span class="kw">mod </span>section;
+<span class="kw">mod </span>segment;
+<span class="kw">mod </span>types;
 
-<span class="kw">pub use </span><span class="self">self</span>::module::{Module, peek_size, ImportCountType};
-<span class="kw">pub use </span><span class="self">self</span>::section::{
-	Section, FunctionSection, CodeSection, MemorySection, DataSection,
-	ImportSection, ExportSection, GlobalSection, TypeSection, ElementSection,
-	TableSection, CustomSection,
+<span class="kw">pub use </span><span class="self">self</span>::{
+	export_entry::{ExportEntry, Internal},
+	global_entry::GlobalEntry,
+	import_entry::{External, GlobalType, ImportEntry, MemoryType, ResizableLimits, TableType},
+	module::{peek_size, ImportCountType, Module},
+	ops::{opcodes, BrTableData, InitExpr, Instruction, Instructions},
+	primitives::{
+		CountedList, CountedListWriter, CountedWriter, Uint32, Uint64, Uint8, VarInt32, VarInt64,
+		VarInt7, VarUint1, VarUint32, VarUint64, VarUint7,
+	},
+	section::{
+		CodeSection, CustomSection, DataSection, ElementSection, ExportSection, FunctionSection,
+		GlobalSection, ImportSection, MemorySection, Section, TableSection, TypeSection,
+	},
+	types::{BlockType, FunctionType, TableElementType, Type, ValueType},
 };
-<span class="kw">pub use </span><span class="self">self</span>::import_entry::{ImportEntry, ResizableLimits, MemoryType, TableType, GlobalType, External};
-<span class="kw">pub use </span><span class="self">self</span>::export_entry::{ExportEntry, Internal};
-<span class="kw">pub use </span><span class="self">self</span>::global_entry::GlobalEntry;
-<span class="kw">pub use </span><span class="self">self</span>::primitives::{
-	VarUint32, VarUint7, Uint8, VarUint1, VarInt7, Uint32, VarInt32, VarInt64,
-	Uint64, VarUint64, CountedList, CountedWriter, CountedListWriter,
-};
-<span class="kw">pub use </span><span class="self">self</span>::types::{Type, ValueType, BlockType, FunctionType, TableElementType};
-<span class="kw">pub use </span><span class="self">self</span>::ops::{Instruction, Instructions, InitExpr, opcodes, BrTableData};
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="kw">pub use </span><span class="self">self</span>::ops::AtomicsInstruction;
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 </span><span class="kw">pub use </span><span class="self">self</span>::ops::SimdInstruction;
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 </span><span class="kw">pub use </span><span class="self">self</span>::ops::SignExtInstruction;
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 </span><span class="kw">pub use </span><span class="self">self</span>::ops::BulkInstruction;
 
-<span class="attr">#[cfg(any(feature=<span class="string">&quot;simd&quot;</span>, feature=<span class="string">&quot;atomics&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;simd&quot;</span>, feature = <span class="string">&quot;atomics&quot;</span>))]
 </span><span class="kw">pub use </span><span class="self">self</span>::ops::MemArg;
 
-<span class="kw">pub use </span><span class="self">self</span>::func::{Func, FuncBody, Local};
-<span class="kw">pub use </span><span class="self">self</span>::segment::{ElementSegment, DataSegment};
-<span class="kw">pub use </span><span class="self">self</span>::index_map::IndexMap;
-<span class="kw">pub use </span><span class="self">self</span>::name_section::{
-	NameMap, NameSection, ModuleNameSubsection, FunctionNameSubsection,
-	LocalNameSubsection,
-};
-<span class="kw">pub use </span><span class="self">self</span>::reloc_section::{
-	RelocSection, RelocationEntry,
+<span class="kw">pub use </span><span class="self">self</span>::{
+	func::{Func, FuncBody, Local},
+	index_map::IndexMap,
+	name_section::{
+		FunctionNameSubsection, LocalNameSubsection, ModuleNameSubsection, NameMap, NameSection,
+	},
+	reloc_section::{RelocSection, RelocationEntry},
+	segment::{DataSegment, ElementSegment},
 };
 
 <span class="doccomment">/// Deserialization from serial i/o.
-</span><span class="kw">pub trait </span>Deserialize : Sized {
+</span><span class="kw">pub trait </span>Deserialize: Sized {
 	<span class="doccomment">/// Serialization error produced by deserialization routine.
 	</span><span class="kw">type </span>Error: From&lt;io::Error&gt;;
 	<span class="doccomment">/// Deserialize type from serial i/o
@@ -441,7 +450,7 @@
 		<span class="doccomment">/// Expected length of the definition.
 		</span>expected: usize,
 		<span class="doccomment">/// Actual length of the definition.
-		</span>actual: usize
+		</span>actual: usize,
 	},
 	<span class="doccomment">/// Other static error.
 	</span>Other(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
@@ -449,6 +458,8 @@
 	</span>HeapOther(String),
 	<span class="doccomment">/// Invalid/unknown value type declaration.
 	</span>UnknownValueType(i8),
+	<span class="doccomment">/// Invalid block type declaration.
+	</span>UnknownBlockType(i32),
 	<span class="doccomment">/// Invalid/unknown table element type declaration.
 	</span>UnknownTableElementType(i8),
 	<span class="doccomment">/// Non-utf8 string.
@@ -459,7 +470,7 @@
 	</span>UnknownInternalKind(u8),
 	<span class="doccomment">/// Unknown opcode encountered.
 	</span>UnknownOpcode(u8),
-	<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 	</span><span class="doccomment">/// Unknown SIMD opcode encountered.
 	</span>UnknownSimdOpcode(u32),
 	<span class="doccomment">/// Invalid VarUint1 value.
@@ -510,16 +521,17 @@
 			Error::UnsupportedVersion(v) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unsupported wasm version {}&quot;</span>, v),
 			Error::InconsistentLength { expected, actual } =&gt; {
 				<span class="macro">write!</span>(f, <span class="string">&quot;Expected length {}, found {}&quot;</span>, expected, actual)
-			}
+			},
 			Error::Other(msg) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, msg),
 			Error::HeapOther(<span class="kw-2">ref </span>msg) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, msg),
 			Error::UnknownValueType(ty) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Invalid or unknown value type {}&quot;</span>, ty),
+			Error::UnknownBlockType(ty) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Invalid or unknown block type {}&quot;</span>, ty),
 			Error::UnknownTableElementType(ty) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown table element type {}&quot;</span>, ty),
 			Error::NonUtf8String =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Non-UTF-8 string&quot;</span>),
 			Error::UnknownExternalKind(kind) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown external kind {}&quot;</span>, kind),
 			Error::UnknownInternalKind(kind) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown internal kind {}&quot;</span>, kind),
 			Error::UnknownOpcode(opcode) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown opcode {}&quot;</span>, opcode),
-			<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 			</span>Error::UnknownSimdOpcode(opcode) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown SIMD opcode {}&quot;</span>, opcode),
 			Error::InvalidVarUint1(val) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Not an unsigned 1-bit integer: {}&quot;</span>, val),
 			Error::InvalidVarInt7(val) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Not a signed 7-bit integer: {}&quot;</span>, val),
@@ -527,18 +539,21 @@
 			Error::InvalidVarUint32 =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Not an unsigned 32-bit integer&quot;</span>),
 			Error::InvalidVarInt64 =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Not a signed 64-bit integer&quot;</span>),
 			Error::InvalidVarUint64 =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Not an unsigned 64-bit integer&quot;</span>),
-			Error::InconsistentMetadata =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Inconsistent metadata&quot;</span>),
-			Error::InvalidSectionId(<span class="kw-2">ref </span>id) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Invalid section id: {}&quot;</span>, id),
-			Error::SectionsOutOfOrder =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Sections out of order&quot;</span>),
-			Error::DuplicatedSections(<span class="kw-2">ref </span>id) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Duplicated sections ({})&quot;</span>, id),
-			Error::InvalidMemoryReference(<span class="kw-2">ref </span>mem_ref) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Invalid memory reference ({})&quot;</span>, mem_ref),
-			Error::InvalidTableReference(<span class="kw-2">ref </span>table_ref) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Invalid table reference ({})&quot;</span>, table_ref),
-			Error::InvalidLimitsFlags(<span class="kw-2">ref </span>flags) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Invalid limits flags ({})&quot;</span>, flags),
-			Error::UnknownFunctionForm(<span class="kw-2">ref </span>form) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Unknown function form ({})&quot;</span>, form),
-			Error::InconsistentCode =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Number of function body entries and signatures does not match&quot;</span>),
-			Error::InvalidSegmentFlags(n) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Invalid segment flags: {}&quot;</span>, n),
+			Error::InconsistentMetadata =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Inconsistent metadata&quot;</span>),
+			Error::InvalidSectionId(<span class="kw-2">ref </span>id) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Invalid section id: {}&quot;</span>, id),
+			Error::SectionsOutOfOrder =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Sections out of order&quot;</span>),
+			Error::DuplicatedSections(<span class="kw-2">ref </span>id) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Duplicated sections ({})&quot;</span>, id),
+			Error::InvalidMemoryReference(<span class="kw-2">ref </span>mem_ref) =&gt;
+				<span class="macro">write!</span>(f, <span class="string">&quot;Invalid memory reference ({})&quot;</span>, mem_ref),
+			Error::InvalidTableReference(<span class="kw-2">ref </span>table_ref) =&gt;
+				<span class="macro">write!</span>(f, <span class="string">&quot;Invalid table reference ({})&quot;</span>, table_ref),
+			Error::InvalidLimitsFlags(<span class="kw-2">ref </span>flags) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Invalid limits flags ({})&quot;</span>, flags),
+			Error::UnknownFunctionForm(<span class="kw-2">ref </span>form) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown function form ({})&quot;</span>, form),
+			Error::InconsistentCode =&gt;
+				<span class="macro">write!</span>(f, <span class="string">&quot;Number of function body entries and signatures does not match&quot;</span>),
+			Error::InvalidSegmentFlags(n) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Invalid segment flags: {}&quot;</span>, n),
 			Error::TooManyLocals =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Too many locals&quot;</span>),
-			Error::DuplicatedNameSubsections(n) =&gt;  <span class="macro">write!</span>(f, <span class="string">&quot;Duplicated name subsections: {}&quot;</span>, n),
+			Error::DuplicatedNameSubsections(n) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Duplicated name subsections: {}&quot;</span>, n),
 			Error::UnknownNameSubsectionType(n) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Unknown subsection type: {}&quot;</span>, n),
 		}
 	}
@@ -555,12 +570,13 @@
 			Error::Other(msg) =&gt; msg,
 			Error::HeapOther(<span class="kw-2">ref </span>msg) =&gt; <span class="kw-2">&amp;</span>msg[..],
 			Error::UnknownValueType(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid or unknown value type&quot;</span>,
+			Error::UnknownBlockType(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid or unknown block type&quot;</span>,
 			Error::UnknownTableElementType(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown table element type&quot;</span>,
 			Error::NonUtf8String =&gt; <span class="string">&quot;Non-UTF-8 string&quot;</span>,
 			Error::UnknownExternalKind(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown external kind&quot;</span>,
 			Error::UnknownInternalKind(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown internal kind&quot;</span>,
 			Error::UnknownOpcode(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown opcode&quot;</span>,
-			<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 			</span>Error::UnknownSimdOpcode(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown SIMD opcode&quot;</span>,
 			Error::InvalidVarUint1(<span class="kw">_</span>) =&gt; <span class="string">&quot;Not an unsigned 1-bit integer&quot;</span>,
 			Error::InvalidVarInt32 =&gt; <span class="string">&quot;Not a signed 32-bit integer&quot;</span>,
@@ -569,17 +585,18 @@
 			Error::InvalidVarInt64 =&gt; <span class="string">&quot;Not a signed 64-bit integer&quot;</span>,
 			Error::InvalidVarUint64 =&gt; <span class="string">&quot;Not an unsigned 64-bit integer&quot;</span>,
 			Error::InconsistentMetadata =&gt; <span class="string">&quot;Inconsistent metadata&quot;</span>,
-			Error::InvalidSectionId(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Invalid section id&quot;</span>,
-			Error::SectionsOutOfOrder =&gt;  <span class="string">&quot;Sections out of order&quot;</span>,
-			Error::DuplicatedSections(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Duplicated section&quot;</span>,
-			Error::InvalidMemoryReference(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Invalid memory reference&quot;</span>,
-			Error::InvalidTableReference(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Invalid table reference&quot;</span>,
+			Error::InvalidSectionId(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid section id&quot;</span>,
+			Error::SectionsOutOfOrder =&gt; <span class="string">&quot;Sections out of order&quot;</span>,
+			Error::DuplicatedSections(<span class="kw">_</span>) =&gt; <span class="string">&quot;Duplicated section&quot;</span>,
+			Error::InvalidMemoryReference(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid memory reference&quot;</span>,
+			Error::InvalidTableReference(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid table reference&quot;</span>,
 			Error::InvalidLimitsFlags(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid limits flags&quot;</span>,
-			Error::UnknownFunctionForm(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Unknown function form&quot;</span>,
-			Error::InconsistentCode =&gt;  <span class="string">&quot;Number of function body entries and signatures does not match&quot;</span>,
-			Error::InvalidSegmentFlags(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Invalid segment flags&quot;</span>,
+			Error::UnknownFunctionForm(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown function form&quot;</span>,
+			Error::InconsistentCode =&gt;
+				<span class="string">&quot;Number of function body entries and signatures does not match&quot;</span>,
+			Error::InvalidSegmentFlags(<span class="kw">_</span>) =&gt; <span class="string">&quot;Invalid segment flags&quot;</span>,
 			Error::TooManyLocals =&gt; <span class="string">&quot;Too many locals&quot;</span>,
-			Error::DuplicatedNameSubsections(<span class="kw">_</span>) =&gt;  <span class="string">&quot;Duplicated name subsections&quot;</span>,
+			Error::DuplicatedNameSubsections(<span class="kw">_</span>) =&gt; <span class="string">&quot;Duplicated name subsections&quot;</span>,
 			Error::UnknownNameSubsectionType(<span class="kw">_</span>) =&gt; <span class="string">&quot;Unknown name subsections type&quot;</span>,
 		}
 	}
@@ -594,11 +611,10 @@
 <span class="comment">// These are emitted by section parsers, such as `parse_names` and `parse_reloc`.
 </span><span class="kw">impl </span>From&lt;(Vec&lt;(usize, Error)&gt;, Module)&gt; <span class="kw">for </span>Error {
 	<span class="kw">fn </span>from(err: (Vec&lt;(usize, Error)&gt;, Module)) -&gt; <span class="self">Self </span>{
-		<span class="kw">let </span>ret = err.<span class="number">0</span>.iter()
-			.fold(
-				String::new(),
-				|<span class="kw-2">mut </span>acc, item| { acc.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;In section {}: {}\n&quot;</span>, item.<span class="number">0</span>, item.<span class="number">1</span>)); acc }
-			);
+		<span class="kw">let </span>ret = err.<span class="number">0</span>.iter().fold(String::new(), |<span class="kw-2">mut </span>acc, item| {
+			acc.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;In section {}: {}\n&quot;</span>, item.<span class="number">0</span>, item.<span class="number">1</span>));
+			acc
+		});
 		Error::HeapOther(ret)
 	}
 }
@@ -655,9 +671,7 @@
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">pub fn </span>serialize_to_file&lt;P: AsRef&lt;::std::path::Path&gt;&gt;(p: P, module: Module) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
 	<span class="kw">let </span><span class="kw-2">mut </span>io = ::std::fs::File::create(p)
-		.map_err(|e|
-			Error::HeapOther(<span class="macro">format!</span>(<span class="string">&quot;Can&#39;t create the file: {:?}&quot;</span>, e))
-		)<span class="question-mark">?</span>;
+		.map_err(|e| Error::HeapOther(<span class="macro">format!</span>(<span class="string">&quot;Can&#39;t create the file: {:?}&quot;</span>, e)))<span class="question-mark">?</span>;
 
 	module.serialize(<span class="kw-2">&amp;mut </span>io)<span class="question-mark">?</span>;
 	<span class="prelude-val">Ok</span>(())

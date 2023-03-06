@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/elliptic-curve-0.11.12/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../elliptic_curve/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/elliptic-curve-0.12.3/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../elliptic_curve/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -219,37 +219,15 @@
 <a href="#218" id="218">218</a>
 <a href="#219" id="219">219</a>
 <a href="#220" id="220">220</a>
-<a href="#221" id="221">221</a>
-<a href="#222" id="222">222</a>
-<a href="#223" id="223">223</a>
-<a href="#224" id="224">224</a>
-<a href="#225" id="225">225</a>
-<a href="#226" id="226">226</a>
-<a href="#227" id="227">227</a>
-<a href="#228" id="228">228</a>
-<a href="#229" id="229">229</a>
-<a href="#230" id="230">230</a>
-<a href="#231" id="231">231</a>
-<a href="#232" id="232">232</a>
-<a href="#233" id="233">233</a>
-<a href="#234" id="234">234</a>
-<a href="#235" id="235">235</a>
-<a href="#236" id="236">236</a>
-<a href="#237" id="237">237</a>
-<a href="#238" id="238">238</a>
-<a href="#239" id="239">239</a>
-<a href="#240" id="240">240</a>
-<a href="#241" id="241">241</a>
 </pre><pre class="rust"><code><span class="attr">#![no_std]
 #![cfg_attr(docsrs, feature(doc_cfg))]
-#![forbid(unsafe_code, clippy::unwrap_used)]
-#![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
+#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
 #![doc(
     html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;</span>,
-    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;</span>,
-    html_root_url = <span class="string">&quot;https://docs.rs/elliptic-curve/0.11.12&quot;
+    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;
 </span>)]
-#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+#![forbid(unsafe_code, clippy::unwrap_used)]
+#![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
 
 </span><span class="doccomment">//! ## Usage
 //!
@@ -309,10 +287,30 @@
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;rand_core&quot;</span>)))]
 </span><span class="kw">pub use </span>rand_core;
 
+<span class="attr">#[macro_use]
+</span><span class="kw">mod </span>macros;
+
 <span class="kw">pub mod </span>ops;
 
+<span class="attr">#[cfg(feature = <span class="string">&quot;dev&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;dev&quot;</span>)))]
+</span><span class="kw">pub mod </span>dev;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;ecdh&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdh&quot;</span>)))]
+</span><span class="kw">pub mod </span>ecdh;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;hash2curve&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;hash2curve&quot;</span>)))]
+</span><span class="kw">pub mod </span>hash2curve;
+
 <span class="attr">#[cfg(feature = <span class="string">&quot;sec1&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;sec1&quot;</span>)))]
 </span><span class="kw">pub mod </span>sec1;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)))]
+</span><span class="kw">pub mod </span>weierstrass;
 
 <span class="kw">mod </span>error;
 <span class="kw">mod </span>point;
@@ -324,24 +322,8 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)]
 </span><span class="kw">mod </span>public_key;
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;dev&quot;</span>)]
-#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;dev&quot;</span>)))]
-</span><span class="kw">pub mod </span>dev;
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;ecdh&quot;</span>)]
-#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdh&quot;</span>)))]
-</span><span class="kw">pub mod </span>ecdh;
-
 <span class="attr">#[cfg(feature = <span class="string">&quot;jwk&quot;</span>)]
 </span><span class="kw">mod </span>jwk;
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;hash2curve&quot;</span>)]
-#[doc(hidden)]
-</span><span class="kw">pub mod </span>hash2field;
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;hash2curve&quot;</span>)]
-#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;hash2curve&quot;</span>)))]
-</span><span class="kw">pub mod </span>hash2curve;
 
 <span class="kw">pub use crate</span>::{
     error::{Error, <span class="prelude-ty">Result</span>},
@@ -377,10 +359,7 @@
 </span><span class="kw">pub use </span><span class="kw">crate</span>::jwk::{JwkEcKey, JwkParameters};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
-</span><span class="kw">pub use </span>::sec1::pkcs8;
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
-</span><span class="kw">pub use </span>serde;
+</span><span class="kw">pub use </span>pkcs8;
 
 <span class="kw">use </span>core::fmt::Debug;
 <span class="kw">use </span>generic_array::GenericArray;
@@ -392,7 +371,7 @@
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)))]
 </span><span class="kw">pub const </span>ALGORITHM_OID: pkcs8::ObjectIdentifier =
-    pkcs8::ObjectIdentifier::new(<span class="string">&quot;1.2.840.10045.2.1&quot;</span>);
+    pkcs8::ObjectIdentifier::new_unwrap(<span class="string">&quot;1.2.840.10045.2.1&quot;</span>);
 
 <span class="doccomment">/// Elliptic curve.
 ///
@@ -443,27 +422,6 @@
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)]
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)))]
 </span><span class="kw">pub type </span>ProjectivePoint&lt;C&gt; = &lt;C <span class="kw">as </span>ProjectiveArithmetic&gt;::ProjectivePoint;
-
-<span class="doccomment">/// Associate an [`ObjectIdentifier`][`pkcs8::ObjectIdentifier`] (OID) with an
-/// elliptic curve algorithm implementation.
-///
-/// This is used as as the `parameters` of an `AlgorithmIdentifier` as
-/// described in RFC 5280 Section 4.1.1.2:
-/// &lt;https://tools.ietf.org/html/rfc5280#section-4.1.1.2&gt;
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
-#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)))]
-</span><span class="kw">pub trait </span>AlgorithmParameters: Curve {
-    <span class="doccomment">/// Object Identifier (OID) for this curve
-    </span><span class="kw">const </span>OID: pkcs8::ObjectIdentifier;
-
-    <span class="doccomment">/// Get the [`pkcs8::AlgorithmIdentifier`] for this curve
-    </span><span class="kw">fn </span>algorithm_identifier() -&gt; pkcs8::AlgorithmIdentifier&lt;<span class="lifetime">&#39;static</span>&gt; {
-        pkcs8::AlgorithmIdentifier {
-            oid: ALGORITHM_OID,
-            parameters: <span class="prelude-val">Some</span>((<span class="kw-2">&amp;</span><span class="self">Self</span>::OID).into()),
-        }
-    }
-}
 
 <span class="doccomment">/// Elliptic curve parameters used by VOPRF.
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;voprf&quot;</span>)]

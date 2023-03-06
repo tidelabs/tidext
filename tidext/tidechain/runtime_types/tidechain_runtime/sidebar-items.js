@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Call",""],["Event",""],["OriginCaller",""]],"mod":[["config",""]],"struct":[["Runtime",""],["SessionKeys",""]]};
+window.SIDEBAR_ITEMS = {"enum":[["OriginCaller",""],["RuntimeCall",""],["RuntimeEvent",""]],"mod":[["config",""]],"struct":[["Runtime",""],["SessionKeys",""]]};

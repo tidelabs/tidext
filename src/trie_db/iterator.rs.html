@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.23.1/src/iterator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>iterator.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.25.1/src/iterator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>iterator.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -434,6 +434,148 @@
 <a href="#434" id="434">434</a>
 <a href="#435" id="435">435</a>
 <a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
+<a href="#450" id="450">450</a>
+<a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
+<a href="#457" id="457">457</a>
+<a href="#458" id="458">458</a>
+<a href="#459" id="459">459</a>
+<a href="#460" id="460">460</a>
+<a href="#461" id="461">461</a>
+<a href="#462" id="462">462</a>
+<a href="#463" id="463">463</a>
+<a href="#464" id="464">464</a>
+<a href="#465" id="465">465</a>
+<a href="#466" id="466">466</a>
+<a href="#467" id="467">467</a>
+<a href="#468" id="468">468</a>
+<a href="#469" id="469">469</a>
+<a href="#470" id="470">470</a>
+<a href="#471" id="471">471</a>
+<a href="#472" id="472">472</a>
+<a href="#473" id="473">473</a>
+<a href="#474" id="474">474</a>
+<a href="#475" id="475">475</a>
+<a href="#476" id="476">476</a>
+<a href="#477" id="477">477</a>
+<a href="#478" id="478">478</a>
+<a href="#479" id="479">479</a>
+<a href="#480" id="480">480</a>
+<a href="#481" id="481">481</a>
+<a href="#482" id="482">482</a>
+<a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
+<a href="#487" id="487">487</a>
+<a href="#488" id="488">488</a>
+<a href="#489" id="489">489</a>
+<a href="#490" id="490">490</a>
+<a href="#491" id="491">491</a>
+<a href="#492" id="492">492</a>
+<a href="#493" id="493">493</a>
+<a href="#494" id="494">494</a>
+<a href="#495" id="495">495</a>
+<a href="#496" id="496">496</a>
+<a href="#497" id="497">497</a>
+<a href="#498" id="498">498</a>
+<a href="#499" id="499">499</a>
+<a href="#500" id="500">500</a>
+<a href="#501" id="501">501</a>
+<a href="#502" id="502">502</a>
+<a href="#503" id="503">503</a>
+<a href="#504" id="504">504</a>
+<a href="#505" id="505">505</a>
+<a href="#506" id="506">506</a>
+<a href="#507" id="507">507</a>
+<a href="#508" id="508">508</a>
+<a href="#509" id="509">509</a>
+<a href="#510" id="510">510</a>
+<a href="#511" id="511">511</a>
+<a href="#512" id="512">512</a>
+<a href="#513" id="513">513</a>
+<a href="#514" id="514">514</a>
+<a href="#515" id="515">515</a>
+<a href="#516" id="516">516</a>
+<a href="#517" id="517">517</a>
+<a href="#518" id="518">518</a>
+<a href="#519" id="519">519</a>
+<a href="#520" id="520">520</a>
+<a href="#521" id="521">521</a>
+<a href="#522" id="522">522</a>
+<a href="#523" id="523">523</a>
+<a href="#524" id="524">524</a>
+<a href="#525" id="525">525</a>
+<a href="#526" id="526">526</a>
+<a href="#527" id="527">527</a>
+<a href="#528" id="528">528</a>
+<a href="#529" id="529">529</a>
+<a href="#530" id="530">530</a>
+<a href="#531" id="531">531</a>
+<a href="#532" id="532">532</a>
+<a href="#533" id="533">533</a>
+<a href="#534" id="534">534</a>
+<a href="#535" id="535">535</a>
+<a href="#536" id="536">536</a>
+<a href="#537" id="537">537</a>
+<a href="#538" id="538">538</a>
+<a href="#539" id="539">539</a>
+<a href="#540" id="540">540</a>
+<a href="#541" id="541">541</a>
+<a href="#542" id="542">542</a>
+<a href="#543" id="543">543</a>
+<a href="#544" id="544">544</a>
+<a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
+<a href="#551" id="551">551</a>
+<a href="#552" id="552">552</a>
+<a href="#553" id="553">553</a>
+<a href="#554" id="554">554</a>
+<a href="#555" id="555">555</a>
+<a href="#556" id="556">556</a>
+<a href="#557" id="557">557</a>
+<a href="#558" id="558">558</a>
+<a href="#559" id="559">559</a>
+<a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2017, 2021 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -451,12 +593,13 @@
 </span><span class="kw">use super</span>::{CError, DBValue, <span class="prelude-ty">Result</span>, Trie, TrieHash, TrieIterator, TrieLayout};
 <span class="kw">use crate</span>::{
 	nibble::{nibble_ops, NibbleSlice, NibbleVec},
-	node::{NodeHandle, NodePlan, OwnedNode},
+	node::{Node, NodeHandle, NodePlan, OwnedNode, Value},
 	triedb::TrieDB,
+	TrieError, TrieItem, TrieKeyItem,
 };
 <span class="kw">use </span>hash_db::{Hasher, Prefix, EMPTY_PREFIX};
 
-<span class="kw">use </span><span class="kw">crate</span>::rstd::{rc::Rc, vec::Vec};
+<span class="kw">use </span><span class="kw">crate</span>::rstd::{boxed::Box, rc::Rc, vec::Vec};
 
 <span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Debug))]
 #[derive(Clone, Copy, Eq, PartialEq)]
@@ -494,35 +637,50 @@
 }
 
 <span class="doccomment">/// Iterator for going through all nodes in the trie in pre-order traversal order.
-</span><span class="kw">pub struct </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L: TrieLayout&gt; {
-	db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, L&gt;,
+</span><span class="kw">pub struct </span>TrieDBRawIterator&lt;L: TrieLayout&gt; {
 	trail: Vec&lt;Crumb&lt;L::Hash&gt;&gt;,
 	key_nibbles: NibbleVec,
 }
 
-<span class="doccomment">/// When there is guaranties the storage backend do not change,
-/// this can be use to suspend and restore the iterator.
-</span><span class="kw">pub struct </span>SuspendedTrieDBNodeIterator&lt;L: TrieLayout&gt; {
-	trail: Vec&lt;Crumb&lt;L::Hash&gt;&gt;,
-	key_nibbles: NibbleVec,
-}
-
-<span class="kw">impl</span>&lt;L: TrieLayout&gt; SuspendedTrieDBNodeIterator&lt;L&gt; {
-	<span class="doccomment">/// Restore iterator.
-	</span><span class="kw">pub fn </span>unsafe_restore&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="self">self</span>, db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, L&gt;) -&gt; TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt; {
-		TrieDBNodeIterator { db, trail: <span class="self">self</span>.trail, key_nibbles: <span class="self">self</span>.key_nibbles }
+<span class="kw">impl</span>&lt;L: TrieLayout&gt; TrieDBRawIterator&lt;L&gt; {
+	<span class="doccomment">/// Create a new empty iterator.
+	</span><span class="kw">pub fn </span>empty() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ trail: Vec::new(), key_nibbles: NibbleVec::new() }
 	}
-}
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, L: TrieLayout&gt; TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt; {
 	<span class="doccomment">/// Create a new iterator.
-	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>r =
-			TrieDBNodeIterator { db, trail: Vec::with_capacity(<span class="number">8</span>), key_nibbles: NibbleVec::new() };
-		<span class="kw">let </span>(root_node, root_hash) =
-			db.get_raw_or_lookup(<span class="kw-2">*</span>db.root(), NodeHandle::Hash(db.root().as_ref()), EMPTY_PREFIX)<span class="question-mark">?</span>;
+			TrieDBRawIterator { trail: Vec::with_capacity(<span class="number">8</span>), key_nibbles: NibbleVec::new() };
+		<span class="kw">let </span>(root_node, root_hash) = db.get_raw_or_lookup(
+			<span class="kw-2">*</span>db.root(),
+			NodeHandle::Hash(db.root().as_ref()),
+			EMPTY_PREFIX,
+			<span class="bool-val">true</span>,
+		)<span class="question-mark">?</span>;
 		r.descend(root_node, root_hash);
 		<span class="prelude-val">Ok</span>(r)
+	}
+
+	<span class="doccomment">/// Create a new iterator, but limited to a given prefix.
+	</span><span class="kw">pub fn </span>new_prefixed(db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>iter = TrieDBRawIterator::new(db)<span class="question-mark">?</span>;
+		iter.prefix(db, prefix)<span class="question-mark">?</span>;
+
+		<span class="prelude-val">Ok</span>(iter)
+	}
+
+	<span class="doccomment">/// Create a new iterator, but limited to a given prefix.
+	/// It then do a seek operation from prefixed context (using `seek` lose
+	/// prefix context by default).
+	</span><span class="kw">pub fn </span>new_prefixed_then_seek(
+		db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;,
+		prefix: <span class="kw-2">&amp;</span>[u8],
+		start_at: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="kw">let </span><span class="kw-2">mut </span>iter = TrieDBRawIterator::new(db)<span class="question-mark">?</span>;
+		iter.prefix_then_seek(db, prefix, start_at)<span class="question-mark">?</span>;
+		<span class="prelude-val">Ok</span>(iter)
 	}
 
 	<span class="doccomment">/// Descend into a payload.
@@ -531,36 +689,37 @@
 			.push(Crumb { hash: node_hash, status: Status::Entering, node: Rc::new(node) });
 	}
 
-	<span class="doccomment">/// Suspend iterator. Warning this does not hold guaranties it can be restored later.
-	/// Restoring requires that trie backend does not change.
-	</span><span class="kw">pub fn </span>suspend(<span class="self">self</span>) -&gt; SuspendedTrieDBNodeIterator&lt;L&gt; {
-		SuspendedTrieDBNodeIterator { trail: <span class="self">self</span>.trail, key_nibbles: <span class="self">self</span>.key_nibbles }
-	}
-
 	<span class="doccomment">/// Fetch value by hash at a current node height
-	</span><span class="kw">pub fn </span>fetch_value(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8], prefix: Prefix) -&gt; <span class="prelude-ty">Option</span>&lt;DBValue&gt; {
+	</span><span class="kw">fn </span>fetch_value(
+		db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;,
+		key: <span class="kw-2">&amp;</span>[u8],
+		prefix: Prefix,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;DBValue, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>res = TrieHash::&lt;L&gt;::default();
 		res.as_mut().copy_from_slice(key);
-		<span class="self">self</span>.db.db().get(<span class="kw-2">&amp;</span>res, prefix)
+		db.fetch_value(res, prefix)
 	}
-}
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, L: TrieLayout&gt; TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt; {
 	<span class="doccomment">/// Seek a node position at &#39;key&#39; for iterator.
 	/// Returns true if the cursor is at or after the key, but still shares
 	/// a common prefix with the key, return false if the key do not
 	/// share its prefix with the node.
 	/// This indicates if there is still nodes to iterate over in the case
 	/// where we limit iteration to &#39;key&#39; as a prefix.
-	</span><span class="kw">fn </span>seek_prefix(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;bool, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>seek(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;,
+		key: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="self">self</span>.trail.clear();
 		<span class="self">self</span>.key_nibbles.clear();
 		<span class="kw">let </span>key = NibbleSlice::new(key);
 
-		<span class="kw">let </span>(<span class="kw-2">mut </span>node, <span class="kw-2">mut </span>node_hash) = <span class="self">self</span>.db.get_raw_or_lookup(
+		<span class="kw">let </span>(<span class="kw-2">mut </span>node, <span class="kw-2">mut </span>node_hash) = db.get_raw_or_lookup(
 			&lt;TrieHash&lt;L&gt;&gt;::default(),
-			NodeHandle::Hash(<span class="self">self</span>.db.root().as_ref()),
+			NodeHandle::Hash(db.root().as_ref()),
 			EMPTY_PREFIX,
+			<span class="bool-val">true</span>,
 		)<span class="question-mark">?</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>partial = key;
 		<span class="kw">let </span><span class="kw-2">mut </span>full_key_nibbles = <span class="number">0</span>;
@@ -599,10 +758,11 @@
 						<span class="self">self</span>.key_nibbles.append_partial(slice.right());
 
 						<span class="kw">let </span>prefix = key.back(full_key_nibbles);
-						<span class="self">self</span>.db.get_raw_or_lookup(
+						db.get_raw_or_lookup(
 							node_hash.unwrap_or_default(),
 							child.build(node_data),
 							prefix.left(),
+							<span class="bool-val">true</span>,
 						)<span class="question-mark">?
 					</span>},
 					NodePlan::Branch { value: <span class="kw">_</span>, children } =&gt; {
@@ -619,10 +779,11 @@
 							partial = partial.mid(<span class="number">1</span>);
 
 							<span class="kw">let </span>prefix = key.back(full_key_nibbles);
-							<span class="self">self</span>.db.get_raw_or_lookup(
+							db.get_raw_or_lookup(
 								node_hash.unwrap_or_default(),
 								child.build(node_data),
 								prefix.left(),
+								<span class="bool-val">true</span>,
 							)<span class="question-mark">?
 						</span>} <span class="kw">else </span>{
 							<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
@@ -657,10 +818,11 @@
 							partial = partial.mid(<span class="number">1</span>);
 
 							<span class="kw">let </span>prefix = key.back(full_key_nibbles);
-							<span class="self">self</span>.db.get_raw_or_lookup(
+							db.get_raw_or_lookup(
 								node_hash.unwrap_or_default(),
 								child.build(node_data),
 								prefix.left(),
+								<span class="bool-val">true</span>,
 							)<span class="question-mark">?
 						</span>} <span class="kw">else </span>{
 							<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
@@ -683,8 +845,8 @@
 
 	<span class="doccomment">/// Advance the iterator into a prefix, no value out of the prefix will be accessed
 	/// or returned after this operation.
-	</span><span class="kw">pub fn </span>prefix(<span class="kw-2">&amp;mut </span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
-		<span class="kw">if </span><span class="self">self</span>.seek_prefix(prefix)<span class="question-mark">? </span>{
+	</span><span class="kw">fn </span>prefix(<span class="kw-2">&amp;mut </span><span class="self">self</span>, db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="kw">if </span><span class="self">self</span>.seek(db, prefix)<span class="question-mark">? </span>{
 			<span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.trail.pop() {
 				<span class="self">self</span>.trail.clear();
 				<span class="self">self</span>.trail.push(v);
@@ -698,13 +860,14 @@
 
 	<span class="doccomment">/// Advance the iterator into a prefix, no value out of the prefix will be accessed
 	/// or returned after this operation.
-	</span><span class="kw">pub fn </span>prefix_then_seek(
+	</span><span class="kw">fn </span>prefix_then_seek(
 		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;,
 		prefix: <span class="kw-2">&amp;</span>[u8],
 		seek: <span class="kw-2">&amp;</span>[u8],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="kw">if </span>seek.starts_with(prefix) {
-			<span class="self">self</span>.seek_prefix(seek)<span class="question-mark">?</span>;
+			<span class="self">self</span>.seek(db, seek)<span class="question-mark">?</span>;
 			<span class="kw">let </span>prefix_len = prefix.len() * <span class="kw">crate</span>::nibble::nibble_ops::NIBBLE_PER_BYTE;
 			<span class="kw">let </span><span class="kw-2">mut </span>len = <span class="number">0</span>;
 			<span class="comment">// look first prefix in trail
@@ -736,138 +899,259 @@
 		<span class="prelude-val">Ok</span>(())
 	}
 
+	<span class="doccomment">/// Fetches the next raw item.
+	</span><span class="comment">//
+	</span><span class="doccomment">/// Must be called with the same `db` as when the iterator was created.
+	</span><span class="kw">fn </span>next_raw_item(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;
+		<span class="prelude-ty">Result</span>&lt;(<span class="kw-2">&amp;</span>NibbleVec, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>TrieHash&lt;L&gt;&gt;, <span class="kw-2">&amp;</span>Rc&lt;OwnedNode&lt;DBValue&gt;&gt;), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;,
+	&gt; {
+		<span class="kw">loop </span>{
+			<span class="kw">let </span>crumb = <span class="self">self</span>.trail.last_mut()<span class="question-mark">?</span>;
+			<span class="kw">let </span>node_data = crumb.node.data();
+
+			<span class="kw">match </span>(crumb.status, crumb.node.node_plan()) {
+				(Status::Entering, <span class="kw">_</span>) =&gt; {
+					<span class="comment">// This is only necessary due to current borrow checker&#39;s limitation.
+					</span><span class="kw">let </span>crumb = <span class="self">self</span>.trail.last_mut().expect(<span class="string">&quot;we&#39;ve just fetched the last element using `last_mut` so this cannot fail; qed&quot;</span>);
+					crumb.increment();
+					<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>((<span class="kw-2">&amp;</span><span class="self">self</span>.key_nibbles, crumb.hash.as_ref(), <span class="kw-2">&amp;</span>crumb.node)))
+				},
+				(Status::Exiting, node) =&gt; {
+					<span class="kw">match </span>node {
+						NodePlan::Empty | NodePlan::Leaf { .. } =&gt; {},
+						NodePlan::Extension { partial, .. } =&gt; {
+							<span class="self">self</span>.key_nibbles.drop_lasts(partial.len());
+						},
+						NodePlan::Branch { .. } =&gt; {
+							<span class="self">self</span>.key_nibbles.pop();
+						},
+						NodePlan::NibbledBranch { partial, .. } =&gt; {
+							<span class="self">self</span>.key_nibbles.drop_lasts(partial.len() + <span class="number">1</span>);
+						},
+					}
+					<span class="self">self</span>.trail.pop().expect(<span class="string">&quot;we&#39;ve just fetched the last element using `last_mut` so this cannot fail; qed&quot;</span>);
+					<span class="self">self</span>.trail.last_mut()<span class="question-mark">?</span>.increment();
+				},
+				(Status::At, NodePlan::Extension { partial: partial_plan, child }) =&gt; {
+					<span class="kw">let </span>partial = partial_plan.build(node_data);
+					<span class="self">self</span>.key_nibbles.append_partial(partial.right());
+
+					<span class="kw">match </span>db.get_raw_or_lookup(
+						crumb.hash.unwrap_or_default(),
+						child.build(node_data),
+						<span class="self">self</span>.key_nibbles.as_prefix(),
+						<span class="bool-val">true</span>,
+					) {
+						<span class="prelude-val">Ok</span>((node, node_hash)) =&gt; {
+							<span class="self">self</span>.descend(node, node_hash);
+						},
+						<span class="prelude-val">Err</span>(err) =&gt; {
+							crumb.increment();
+							<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err))
+						},
+					}
+				},
+				(Status::At, NodePlan::Branch { .. }) =&gt; {
+					<span class="self">self</span>.key_nibbles.push(<span class="number">0</span>);
+					crumb.increment();
+				},
+				(Status::At, NodePlan::NibbledBranch { partial: partial_plan, .. }) =&gt; {
+					<span class="kw">let </span>partial = partial_plan.build(node_data);
+					<span class="self">self</span>.key_nibbles.append_partial(partial.right());
+					<span class="self">self</span>.key_nibbles.push(<span class="number">0</span>);
+					crumb.increment();
+				},
+				(Status::AtChild(i), NodePlan::Branch { children, .. }) |
+				(Status::AtChild(i), NodePlan::NibbledBranch { children, .. }) =&gt; {
+					<span class="kw">if let </span><span class="prelude-val">Some</span>(child) = <span class="kw-2">&amp;</span>children[i] {
+						<span class="self">self</span>.key_nibbles.pop();
+						<span class="self">self</span>.key_nibbles.push(i <span class="kw">as </span>u8);
+
+						<span class="kw">match </span>db.get_raw_or_lookup(
+							crumb.hash.unwrap_or_default(),
+							child.build(node_data),
+							<span class="self">self</span>.key_nibbles.as_prefix(),
+							<span class="bool-val">true</span>,
+						) {
+							<span class="prelude-val">Ok</span>((node, node_hash)) =&gt; {
+								<span class="self">self</span>.descend(node, node_hash);
+							},
+							<span class="prelude-val">Err</span>(err) =&gt; {
+								crumb.increment();
+								<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err))
+							},
+						}
+					} <span class="kw">else </span>{
+						crumb.increment();
+					}
+				},
+				<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(
+					<span class="string">&quot;Crumb::increment and TrieDBNodeIterator are implemented so that \
+						the above arms are the only possible states&quot;
+				</span>),
+			}
+		}
+	}
+
+	<span class="doccomment">/// Fetches the next trie item.
+	///
+	/// Must be called with the same `db` as when the iterator was created.
+	</span><span class="kw">pub fn </span>next_item(<span class="kw-2">&amp;mut </span><span class="self">self</span>, db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;TrieItem&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;&gt; {
+		<span class="kw">while let </span><span class="prelude-val">Some</span>(raw_item) = <span class="self">self</span>.next_raw_item(db) {
+			<span class="kw">let </span>(prefix, <span class="kw">_</span>, node) = <span class="kw">match </span>raw_item {
+				<span class="prelude-val">Ok</span>(raw_item) =&gt; raw_item,
+				<span class="prelude-val">Err</span>(err) =&gt; <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err)),
+			};
+
+			<span class="kw">let </span><span class="kw-2">mut </span>prefix = prefix.clone();
+			<span class="kw">let </span>value = <span class="kw">match </span>node.node() {
+				Node::Leaf(partial, value) =&gt; {
+					prefix.append_partial(partial.right());
+					value
+				},
+				Node::Branch(<span class="kw">_</span>, value) =&gt; <span class="kw">match </span>value {
+					<span class="prelude-val">Some</span>(value) =&gt; value,
+					<span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
+				},
+				Node::NibbledBranch(partial, <span class="kw">_</span>, value) =&gt; {
+					prefix.append_partial(partial.right());
+					<span class="kw">match </span>value {
+						<span class="prelude-val">Some</span>(value) =&gt; value,
+						<span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
+					}
+				},
+				<span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
+			};
+
+			<span class="kw">let </span>(key_slice, maybe_extra_nibble) = prefix.as_prefix();
+			<span class="kw">let </span>key = key_slice.to_vec();
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(extra_nibble) = maybe_extra_nibble {
+				<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(Box::new(TrieError::ValueAtIncompleteKey(key, extra_nibble))))
+			}
+
+			<span class="kw">let </span>value = <span class="kw">match </span>value {
+				Value::Node(hash) =&gt; <span class="kw">match </span><span class="self">Self</span>::fetch_value(db, <span class="kw-2">&amp;</span>hash, (key_slice, <span class="prelude-val">None</span>)) {
+					<span class="prelude-val">Ok</span>(value) =&gt; value,
+					<span class="prelude-val">Err</span>(err) =&gt; <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err)),
+				},
+				Value::Inline(value) =&gt; value.to_vec(),
+			};
+
+			<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>((key, value)))
+		}
+		<span class="prelude-val">None
+	</span>}
+
+	<span class="doccomment">/// Fetches the next key.
+	///
+	/// Must be called with the same `db` as when the iterator was created.
+	</span><span class="kw">pub fn </span>next_key(<span class="kw-2">&amp;mut </span><span class="self">self</span>, db: <span class="kw-2">&amp;</span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;TrieKeyItem&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;&gt; {
+		<span class="kw">while let </span><span class="prelude-val">Some</span>(raw_item) = <span class="self">self</span>.next_raw_item(db) {
+			<span class="kw">let </span>(prefix, <span class="kw">_</span>, node) = <span class="kw">match </span>raw_item {
+				<span class="prelude-val">Ok</span>(raw_item) =&gt; raw_item,
+				<span class="prelude-val">Err</span>(err) =&gt; <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err)),
+			};
+
+			<span class="kw">let </span><span class="kw-2">mut </span>prefix = prefix.clone();
+			<span class="kw">match </span>node.node() {
+				Node::Leaf(partial, <span class="kw">_</span>) =&gt; {
+					prefix.append_partial(partial.right());
+				},
+				Node::Branch(<span class="kw">_</span>, value) =&gt;
+					<span class="kw">if </span>value.is_none() {
+						<span class="kw">continue
+					</span>},
+				Node::NibbledBranch(partial, <span class="kw">_</span>, value) =&gt; {
+					prefix.append_partial(partial.right());
+					<span class="kw">if </span>value.is_none() {
+						<span class="kw">continue
+					</span>}
+				},
+				<span class="kw">_ </span>=&gt; <span class="kw">continue</span>,
+			};
+
+			<span class="kw">let </span>(key_slice, maybe_extra_nibble) = prefix.as_prefix();
+			<span class="kw">let </span>key = key_slice.to_vec();
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(extra_nibble) = maybe_extra_nibble {
+				<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(Box::new(TrieError::ValueAtIncompleteKey(key, extra_nibble))))
+			}
+
+			<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(key))
+		}
+		<span class="prelude-val">None
+	</span>}
+}
+
+<span class="doccomment">/// Iterator for going through all nodes in the trie in pre-order traversal order.
+</span><span class="kw">pub struct </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; {
+	db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
+	raw_iter: TrieDBRawIterator&lt;L&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt; {
+	<span class="doccomment">/// Create a new iterator.
+	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ raw_iter: TrieDBRawIterator::new(db)<span class="question-mark">?</span>, db })
+	}
+
+	<span class="doccomment">/// Restore an iterator from a raw iterator.
+	</span><span class="kw">pub fn </span>from_raw(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TrieDB&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt;, raw_iter: TrieDBRawIterator&lt;L&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ db, raw_iter }
+	}
+
+	<span class="doccomment">/// Convert the iterator to a raw iterator.
+	</span><span class="kw">pub fn </span>into_raw(<span class="self">self</span>) -&gt; TrieDBRawIterator&lt;L&gt; {
+		<span class="self">self</span>.raw_iter
+	}
+
+	<span class="doccomment">/// Fetch value by hash at a current node height
+	</span><span class="kw">pub fn </span>fetch_value(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		key: <span class="kw-2">&amp;</span>[u8],
+		prefix: Prefix,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;DBValue, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		TrieDBRawIterator::fetch_value(<span class="self">self</span>.db, key, prefix)
+	}
+
+	<span class="doccomment">/// Advance the iterator into a prefix, no value out of the prefix will be accessed
+	/// or returned after this operation.
+	</span><span class="kw">pub fn </span>prefix(<span class="kw-2">&amp;mut </span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="self">self</span>.raw_iter.prefix(<span class="self">self</span>.db, prefix)
+	}
+
+	<span class="doccomment">/// Advance the iterator into a prefix, no value out of the prefix will be accessed
+	/// or returned after this operation.
+	</span><span class="kw">pub fn </span>prefix_then_seek(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		prefix: <span class="kw-2">&amp;</span>[u8],
+		seek: <span class="kw-2">&amp;</span>[u8],
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="self">self</span>.raw_iter.prefix_then_seek(<span class="self">self</span>.db, prefix, seek)
+	}
+
 	<span class="doccomment">/// Access inner hash db.
 	</span><span class="kw">pub fn </span>db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw">dyn </span>hash_db::HashDBRef&lt;L::Hash, DBValue&gt; {
 		<span class="self">self</span>.db.db()
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, L: TrieLayout&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt; {
 	<span class="kw">fn </span>seek(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
-		<span class="self">self</span>.seek_prefix(key).map(|<span class="kw">_</span>| ())
+		<span class="self">self</span>.raw_iter.seek(<span class="self">self</span>.db, key).map(|<span class="kw">_</span>| ())
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, L: TrieLayout&gt; Iterator <span class="kw">for </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, L&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; Iterator <span class="kw">for </span>TrieDBNodeIterator&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;cache</span>, L&gt; {
 	<span class="kw">type </span>Item =
 		<span class="prelude-ty">Result</span>&lt;(NibbleVec, <span class="prelude-ty">Option</span>&lt;TrieHash&lt;L&gt;&gt;, Rc&lt;OwnedNode&lt;DBValue&gt;&gt;), TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
 
 	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
-		<span class="kw">enum </span>IterStep&lt;O, E&gt; {
-			YieldNode,
-			PopTrail,
-			Continue,
-			Descend(<span class="prelude-ty">Result</span>&lt;(OwnedNode&lt;DBValue&gt;, <span class="prelude-ty">Option</span>&lt;O&gt;), O, E&gt;),
-		}
-		<span class="kw">loop </span>{
-			<span class="kw">let </span>iter_step = {
-				<span class="kw">let </span>b = <span class="self">self</span>.trail.last_mut()<span class="question-mark">?</span>;
-				<span class="kw">let </span>node_data = b.node.data();
-
-				<span class="kw">match </span>(b.status, b.node.node_plan()) {
-					(Status::Entering, <span class="kw">_</span>) =&gt; IterStep::YieldNode,
-					(Status::Exiting, node) =&gt; {
-						<span class="kw">match </span>node {
-							NodePlan::Empty | NodePlan::Leaf { .. } =&gt; {},
-							NodePlan::Extension { partial, .. } =&gt; {
-								<span class="self">self</span>.key_nibbles.drop_lasts(partial.len());
-							},
-							NodePlan::Branch { .. } =&gt; {
-								<span class="self">self</span>.key_nibbles.pop();
-							},
-							NodePlan::NibbledBranch { partial, .. } =&gt; {
-								<span class="self">self</span>.key_nibbles.drop_lasts(partial.len() + <span class="number">1</span>);
-							},
-						}
-						IterStep::PopTrail
-					},
-					(Status::At, NodePlan::Extension { partial: partial_plan, child }) =&gt; {
-						<span class="kw">let </span>partial = partial_plan.build(node_data);
-						<span class="self">self</span>.key_nibbles.append_partial(partial.right());
-						IterStep::Descend::&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;(<span class="self">self</span>.db.get_raw_or_lookup(
-							b.hash.unwrap_or_default(),
-							child.build(node_data),
-							<span class="self">self</span>.key_nibbles.as_prefix(),
-						))
-					},
-					(Status::At, NodePlan::Branch { .. }) =&gt; {
-						<span class="self">self</span>.key_nibbles.push(<span class="number">0</span>);
-						IterStep::Continue
-					},
-					(Status::At, NodePlan::NibbledBranch { partial: partial_plan, .. }) =&gt; {
-						<span class="kw">let </span>partial = partial_plan.build(node_data);
-						<span class="self">self</span>.key_nibbles.append_partial(partial.right());
-						<span class="self">self</span>.key_nibbles.push(<span class="number">0</span>);
-						IterStep::Continue
-					},
-					(Status::AtChild(i), NodePlan::Branch { children, .. }) |
-					(Status::AtChild(i), NodePlan::NibbledBranch { children, .. }) =&gt; {
-						<span class="kw">if let </span><span class="prelude-val">Some</span>(child) = <span class="kw-2">&amp;</span>children[i] {
-							<span class="self">self</span>.key_nibbles.pop();
-							<span class="self">self</span>.key_nibbles.push(i <span class="kw">as </span>u8);
-							IterStep::Descend::&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;(<span class="self">self</span>.db.get_raw_or_lookup(
-								b.hash.unwrap_or_default(),
-								child.build(node_data),
-								<span class="self">self</span>.key_nibbles.as_prefix(),
-							))
-						} <span class="kw">else </span>{
-							IterStep::Continue
-						}
-					},
-					<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(
-						<span class="string">&quot;Crumb::increment and TrieDBNodeIterator are implemented so that \
-						the above arms are the only possible states&quot;
-					</span>),
-				}
-			};
-
-			<span class="kw">match </span>iter_step {
-				IterStep::YieldNode =&gt; {
-					<span class="kw">let </span>crumb = <span class="self">self</span>.trail.last_mut().expect(
-						<span class="string">&quot;method would have exited at top of previous block if trial were empty;\
-							trial could not have been modified within the block since it was immutably borrowed;\
-							qed&quot;</span>,
-					);
-					crumb.increment();
-					<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>((
-						<span class="self">self</span>.key_nibbles.clone(),
-						crumb.hash.clone(),
-						crumb.node.clone(),
-					)))
-				},
-				IterStep::PopTrail =&gt; {
-					<span class="self">self</span>.trail.pop().expect(
-						<span class="string">&quot;method would have exited at top of previous block if trial were empty;\
-							trial could not have been modified within the block since it was immutably borrowed;\
-							qed&quot;</span>,
-					);
-					<span class="self">self</span>.trail.last_mut()<span class="question-mark">?</span>.increment();
-				},
-				IterStep::Descend::&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;(<span class="prelude-val">Ok</span>((node, node_hash))) =&gt; {
-					<span class="self">self</span>.descend(node, node_hash);
-				},
-				IterStep::Descend::&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;(<span class="prelude-val">Err</span>(err)) =&gt; {
-					<span class="comment">// Increment here as there is an implicit PopTrail.
-					</span><span class="self">self</span>.trail.last_mut()
-						.expect(
-							<span class="string">&quot;method would have exited at top of previous block if trial were empty;\
-								trial could not have been modified within the block since it was immutably borrowed;\
-								qed&quot;
-						</span>)
-						.increment();
-					<span class="kw">return </span><span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(err))
-				},
-				IterStep::Continue =&gt; {
-					<span class="self">self</span>.trail.last_mut()
-						.expect(
-							<span class="string">&quot;method would have exited at top of previous block if trial were empty;\
-							trial could not have been modified within the block since it was immutably borrowed;\
-							qed&quot;
-						</span>)
-						.increment();
-				},
-			}
-		}
+		<span class="self">self</span>.raw_iter.next_raw_item(<span class="self">self</span>.db).map(|result| {
+			result.map(|(nibble, hash, node)| (nibble.clone(), hash.cloned(), node.clone()))
+		})
 	}
 }
 </code></pre></div>

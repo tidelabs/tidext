@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/builder/code.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>code.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/builder/code.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>code.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -430,12 +430,66 @@
 <a href="#430" id="430">430</a>
 <a href="#431" id="431">431</a>
 <a href="#432" id="432">432</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::vec::Vec;
-<span class="kw">use </span><span class="kw">crate</span>::elements;
-<span class="kw">use super</span>::{
-	invoke::{Invoke, Identity},
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
+<a href="#450" id="450">450</a>
+<a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
+<a href="#457" id="457">457</a>
+<a href="#458" id="458">458</a>
+<a href="#459" id="459">459</a>
+<a href="#460" id="460">460</a>
+<a href="#461" id="461">461</a>
+<a href="#462" id="462">462</a>
+<a href="#463" id="463">463</a>
+<a href="#464" id="464">464</a>
+<a href="#465" id="465">465</a>
+<a href="#466" id="466">466</a>
+<a href="#467" id="467">467</a>
+<a href="#468" id="468">468</a>
+<a href="#469" id="469">469</a>
+<a href="#470" id="470">470</a>
+<a href="#471" id="471">471</a>
+<a href="#472" id="472">472</a>
+<a href="#473" id="473">473</a>
+<a href="#474" id="474">474</a>
+<a href="#475" id="475">475</a>
+<a href="#476" id="476">476</a>
+<a href="#477" id="477">477</a>
+<a href="#478" id="478">478</a>
+<a href="#479" id="479">479</a>
+<a href="#480" id="480">480</a>
+<a href="#481" id="481">481</a>
+<a href="#482" id="482">482</a>
+<a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+	invoke::{Identity, Invoke},
 	misc::{ValueTypeBuilder, ValueTypesBuilder},
 };
+<span class="kw">use </span><span class="kw">crate</span>::elements;
+<span class="kw">use </span>alloc::vec::Vec;
 
 <span class="doccomment">/// Signature template description
 </span><span class="kw">pub enum </span>Signature {
@@ -444,7 +498,7 @@
 }
 
 <span class="doccomment">/// Signature builder
-</span><span class="kw">pub struct </span>SignatureBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>SignatureBuilder&lt;F = Identity&gt; {
 	callback: F,
 	signature: elements::FunctionType,
 }
@@ -456,13 +510,18 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; SignatureBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;elements::FunctionType&gt; {
+<span class="kw">impl </span>Default <span class="kw">for </span>SignatureBuilder {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::new()
+	}
+}
+<span class="kw">impl</span>&lt;F&gt; SignatureBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::FunctionType&gt;,
+{
 	<span class="doccomment">/// New builder with callback function specified
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		SignatureBuilder {
-			callback: callback,
-			signature: elements::FunctionType::default(),
-		}
+		SignatureBuilder { callback, signature: elements::FunctionType::default() }
 	}
 
 	<span class="doccomment">/// Add argument to signature builder
@@ -472,7 +531,10 @@
 	</span>}
 
 	<span class="doccomment">/// Add multiple arguments to signature builder
-	</span><span class="kw">pub fn </span>with_params(<span class="kw-2">mut </span><span class="self">self</span>, value_types: Vec&lt;elements::ValueType&gt;) -&gt; <span class="self">Self </span>{
+	</span><span class="kw">pub fn </span>with_params&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, value_types: I) -&gt; <span class="self">Self
+	</span><span class="kw">where
+		</span>I: IntoIterator&lt;Item = elements::ValueType&gt;,
+	{
 		<span class="self">self</span>.signature.params_mut().extend(value_types);
 		<span class="self">self
 	</span>}
@@ -494,7 +556,10 @@
 	</span>}
 
 	<span class="doccomment">/// Add multiple results to signature builder
-	</span><span class="kw">pub fn </span>with_results(<span class="kw-2">mut </span><span class="self">self</span>, value_types: Vec&lt;elements::ValueType&gt;) -&gt; <span class="self">Self </span>{
+	</span><span class="kw">pub fn </span>with_results&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, value_types: I) -&gt; <span class="self">Self
+	</span><span class="kw">where
+		</span>I: IntoIterator&lt;Item = elements::ValueType&gt;,
+	{
 		<span class="self">self</span>.signature.results_mut().extend(value_types);
 		<span class="self">self
 	</span>}
@@ -520,18 +585,21 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; Invoke&lt;Vec&lt;elements::ValueType&gt;&gt; <span class="kw">for </span>SignatureBuilder&lt;F&gt;
-	<span class="kw">where </span>F: Invoke&lt;elements::FunctionType&gt;
+<span class="kw">impl</span>&lt;F, I&gt; Invoke&lt;I&gt; <span class="kw">for </span>SignatureBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::FunctionType&gt;,
+	I: IntoIterator&lt;Item = elements::ValueType&gt;,
 {
 	<span class="kw">type </span><span class="prelude-ty">Result </span>= <span class="self">Self</span>;
 
-	<span class="kw">fn </span>invoke(<span class="self">self</span>, args: Vec&lt;elements::ValueType&gt;) -&gt; <span class="self">Self </span>{
+	<span class="kw">fn </span>invoke(<span class="self">self</span>, args: I) -&gt; <span class="self">Self </span>{
 		<span class="self">self</span>.with_params(args)
 	}
 }
 
 <span class="kw">impl</span>&lt;F&gt; Invoke&lt;elements::ValueType&gt; <span class="kw">for </span>SignatureBuilder&lt;F&gt;
-	<span class="kw">where </span>F: Invoke&lt;elements::FunctionType&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::FunctionType&gt;,
 {
 	<span class="kw">type </span><span class="prelude-ty">Result </span>= <span class="self">Self</span>;
 
@@ -541,18 +609,18 @@
 }
 
 <span class="doccomment">/// Type (signature) reference builder (for function/import/indirect call)
-</span><span class="kw">pub struct </span>TypeRefBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>TypeRefBuilder&lt;F = Identity&gt; {
 	callback: F,
 	type_ref: u32,
 }
 
-<span class="kw">impl</span>&lt;F&gt; TypeRefBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;u32&gt; {
+<span class="kw">impl</span>&lt;F&gt; TypeRefBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;u32&gt;,
+{
 	<span class="doccomment">/// New builder chained with specified callback
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		TypeRefBuilder {
-			callback: callback,
-			type_ref: <span class="number">0
-		</span>}
+		TypeRefBuilder { callback, type_ref: <span class="number">0 </span>}
 	}
 
 	<span class="doccomment">/// Set/override of type reference
@@ -562,11 +630,13 @@
 	</span>}
 
 	<span class="doccomment">/// Finish current builder
-	</span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; F::Result { <span class="self">self</span>.callback.invoke(<span class="self">self</span>.type_ref) }
+	</span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; F::Result {
+		<span class="self">self</span>.callback.invoke(<span class="self">self</span>.type_ref)
+	}
 }
 
 <span class="doccomment">/// Multiple signatures builder
-</span><span class="kw">pub struct </span>SignaturesBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>SignaturesBuilder&lt;F = Identity&gt; {
 	callback: F,
 	section: Vec&lt;Signature&gt;,
 }
@@ -578,13 +648,16 @@
 	}
 }
 
+<span class="kw">impl </span>Default <span class="kw">for </span>SignaturesBuilder {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::new()
+	}
+}
+
 <span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt; {
 	<span class="doccomment">/// New builder chained with specified callback
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		SignaturesBuilder {
-			callback: callback,
-			section: Vec::new(),
-		}
+		SignaturesBuilder { callback, section: Vec::new() }
 	}
 
 	<span class="doccomment">/// Push new signature into the builder output
@@ -599,7 +672,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;SignatureBindings&gt; {
+<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;SignatureBindings&gt;,
+{
 	<span class="doccomment">/// Start building new signature with dedicated builder
 	</span><span class="kw">pub fn </span>signature(<span class="self">self</span>) -&gt; SignatureBuilder&lt;<span class="self">Self</span>&gt; {
 		SignatureBuilder::with_callback(<span class="self">self</span>)
@@ -622,8 +698,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;elements::FunctionSection&gt; {
-
+<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::FunctionSection&gt;,
+{
 	<span class="doccomment">/// Finalize builder spawning element
 	</span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; F::Result {
 		<span class="kw">let </span><span class="kw-2">mut </span>result = elements::FunctionSection::default();
@@ -641,7 +719,10 @@
 <span class="doccomment">/// Signature bindings
 </span><span class="kw">pub type </span>SignatureBindings = Vec&lt;Signature&gt;;
 
-<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;SignatureBindings&gt; {
+<span class="kw">impl</span>&lt;F&gt; SignaturesBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;SignatureBindings&gt;,
+{
 	<span class="doccomment">/// Bind signature list
 	</span><span class="kw">pub fn </span>bind(<span class="self">self</span>) -&gt; F::Result {
 		<span class="self">self</span>.callback.invoke(<span class="self">self</span>.section)
@@ -649,7 +730,7 @@
 }
 
 <span class="doccomment">/// Function body (code) builder
-</span><span class="kw">pub struct </span>FuncBodyBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>FuncBodyBuilder&lt;F = Identity&gt; {
 	callback: F,
 	body: elements::FuncBody,
 }
@@ -658,13 +739,16 @@
 	<span class="doccomment">/// New body (code) builder given the chain callback
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
 		FuncBodyBuilder {
-			callback: callback,
+			callback,
 			body: elements::FuncBody::new(Vec::new(), elements::Instructions::empty()),
 		}
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; FuncBodyBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;elements::FuncBody&gt; {
+<span class="kw">impl</span>&lt;F&gt; FuncBodyBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::FuncBody&gt;,
+{
 	<span class="doccomment">/// Set/override entirely with FuncBody struct
 	</span><span class="kw">pub fn </span>with_func(<span class="kw-2">mut </span><span class="self">self</span>, func: elements::FuncBody) -&gt; <span class="self">Self </span>{
 		<span class="self">self</span>.body = func;
@@ -672,7 +756,10 @@
 	</span>}
 
 	<span class="doccomment">/// Extend function local list with new entries
-	</span><span class="kw">pub fn </span>with_locals(<span class="kw-2">mut </span><span class="self">self</span>, locals: Vec&lt;elements::Local&gt;) -&gt; <span class="self">Self </span>{
+	</span><span class="kw">pub fn </span>with_locals&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, locals: I) -&gt; <span class="self">Self
+	</span><span class="kw">where
+		</span>I: IntoIterator&lt;Item = elements::Local&gt;,
+	{
 		<span class="self">self</span>.body.locals_mut().extend(locals);
 		<span class="self">self
 	</span>}
@@ -710,7 +797,7 @@
 }
 
 <span class="doccomment">/// Function definition builder
-</span><span class="kw">pub struct </span>FunctionBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>FunctionBuilder&lt;F = Identity&gt; {
 	callback: F,
 	func: FunctionDefinition,
 }
@@ -722,13 +809,19 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; FunctionBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;FunctionDefinition&gt; {
+<span class="kw">impl </span>Default <span class="kw">for </span>FunctionBuilder {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::new()
+	}
+}
+
+<span class="kw">impl</span>&lt;F&gt; FunctionBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;FunctionDefinition&gt;,
+{
 	<span class="doccomment">/// New function builder with chained callback
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		FunctionBuilder {
-			callback: callback,
-			func: Default::default(),
-		}
+		FunctionBuilder { callback, func: Default::default() }
 	}
 
 	<span class="doccomment">/// Set that this function is main entry point
@@ -765,7 +858,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; Invoke&lt;elements::FunctionType&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;FunctionDefinition&gt; {
+<span class="kw">impl</span>&lt;F&gt; Invoke&lt;elements::FunctionType&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;FunctionDefinition&gt;,
+{
 	<span class="kw">type </span><span class="prelude-ty">Result </span>= <span class="self">Self</span>;
 
 	<span class="kw">fn </span>invoke(<span class="self">self</span>, signature: elements::FunctionType) -&gt; <span class="self">Self </span>{
@@ -773,7 +869,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; Invoke&lt;u32&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;FunctionDefinition&gt; {
+<span class="kw">impl</span>&lt;F&gt; Invoke&lt;u32&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;FunctionDefinition&gt;,
+{
 	<span class="kw">type </span><span class="prelude-ty">Result </span>= <span class="self">Self</span>;
 
 	<span class="kw">fn </span>invoke(<span class="self">self</span>, type_ref: u32) -&gt; <span class="self">Self </span>{
@@ -781,7 +880,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; Invoke&lt;elements::FuncBody&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;FunctionDefinition&gt; {
+<span class="kw">impl</span>&lt;F&gt; Invoke&lt;elements::FuncBody&gt; <span class="kw">for </span>FunctionBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;FunctionDefinition&gt;,
+{
 	<span class="kw">type </span><span class="prelude-ty">Result </span>= <span class="self">Self</span>;
 
 	<span class="kw">fn </span>invoke(<span class="self">self</span>, body: elements::FuncBody) -&gt; <span class="self">Self</span>::Result {
@@ -807,23 +909,24 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
 
-	<span class="kw">use super</span>::{signatures, function};
+	<span class="kw">use super</span>::{function, signatures};
 	<span class="kw">use </span><span class="kw">crate</span>::elements;
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>example() {
-		<span class="kw">let </span>result = signatures()
-			.type_ref().val(<span class="number">1</span>).build()
-			.build();
+		<span class="kw">let </span>result = signatures().type_ref().val(<span class="number">1</span>).build().build();
 
 		<span class="macro">assert_eq!</span>(result.entries().len(), <span class="number">1</span>);
 
 		<span class="kw">let </span>result = signatures()
 			.signature()
-				.param().i32()
-				.param().i32()
-				.result().i64()
-				.build()
+			.param()
+			.i32()
+			.param()
+			.i32()
+			.result()
+			.i64()
+			.build()
 			.bind();
 
 		<span class="macro">assert_eq!</span>(result.len(), <span class="number">1</span>);
@@ -833,12 +936,14 @@
 	</span><span class="kw">fn </span>func_example() {
 		<span class="kw">let </span>func = function()
 			.signature()
-				.param().i32()
-				.result().i32()
-				.build()
+			.param()
+			.i32()
+			.result()
+			.i32()
+			.build()
 			.body()
-				.with_instructions(elements::Instructions::empty())
-				.build()
+			.with_instructions(elements::Instructions::empty())
+			.build()
 			.build();
 
 		<span class="macro">assert_eq!</span>(func.code.locals().len(), <span class="number">0</span>);
@@ -849,9 +954,12 @@
 	</span><span class="kw">fn </span>func_example_multi_result() {
 		<span class="kw">let </span>func = function()
 			.signature()
-			.param().i32()
-			.result().i32()
-			.result().i32()
+			.param()
+			.i32()
+			.result()
+			.i32()
+			.result()
+			.i32()
 			.build()
 			.body()
 			.with_instructions(elements::Instructions::empty())

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.15.1/src/client/async_client/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.16.2/src/client/async_client/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -695,26 +695,130 @@
 <a href="#695" id="695">695</a>
 <a href="#696" id="696">696</a>
 <a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
+<a href="#704" id="704">704</a>
+<a href="#705" id="705">705</a>
+<a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
+<a href="#713" id="713">713</a>
+<a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
+<a href="#741" id="741">741</a>
+<a href="#742" id="742">742</a>
+<a href="#743" id="743">743</a>
+<a href="#744" id="744">744</a>
+<a href="#745" id="745">745</a>
+<a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
+<a href="#794" id="794">794</a>
+<a href="#795" id="795">795</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Abstract async client.
 
 </span><span class="kw">mod </span>helpers;
 <span class="kw">mod </span>manager;
 
+<span class="kw">use </span><span class="kw">crate</span>::client::async_client::helpers::InnerBatchResponse;
 <span class="kw">use </span><span class="kw">crate</span>::client::{
-	async_client::helpers::process_subscription_close_response, BatchMessage, ClientT, ReceivedMessage,
+	async_client::helpers::process_subscription_close_response, BatchMessage, BatchResponse, ClientT, ReceivedMessage,
 	RegisterNotificationMessage, RequestMessage, Subscription, SubscriptionClientT, SubscriptionKind,
 	SubscriptionMessage, TransportReceiverT, TransportSenderT,
 };
-<span class="kw">use </span><span class="kw">crate</span>::tracing::{rx_log_from_json, tx_log_from_str, RpcTracing};
+<span class="kw">use </span><span class="kw">crate</span>::error::Error;
+<span class="kw">use </span><span class="kw">crate</span>::params::BatchRequestBuilder;
+<span class="kw">use </span><span class="kw">crate</span>::tracing::{rx_log_from_json, tx_log_from_str};
+<span class="kw">use </span><span class="kw">crate</span>::traits::ToRpcParams;
+<span class="kw">use </span><span class="kw">crate</span>::JsonRawValue;
+<span class="kw">use </span>std::borrow::Cow <span class="kw">as </span>StdCow;
 
 <span class="kw">use </span>core::time::Duration;
 <span class="kw">use </span>helpers::{
 	build_unsubscribe_message, call_with_timeout, process_batch_response, process_error_response, process_notification,
 	process_single_response, process_subscription_response, stop_subscription,
 };
+<span class="kw">use </span>jsonrpsee_types::TwoPointZero;
 <span class="kw">use </span>manager::RequestManager;
 
-<span class="kw">use </span><span class="kw">crate</span>::error::Error;
 <span class="kw">use </span>async_lock::Mutex;
 <span class="kw">use </span>async_trait::async_trait;
 <span class="kw">use </span>futures_channel::{mpsc, oneshot};
@@ -724,13 +828,13 @@
 <span class="kw">use </span>futures_util::stream::StreamExt;
 <span class="kw">use </span>futures_util::FutureExt;
 <span class="kw">use </span>jsonrpsee_types::{
-	response::SubscriptionError, ErrorResponse, Id, Notification, NotificationSer, ParamsSer, RequestSer, Response,
+	response::SubscriptionError, ErrorResponse, Notification, NotificationSer, RequestSer, Response,
 	SubscriptionResponse,
 };
 <span class="kw">use </span>serde::de::DeserializeOwned;
-<span class="kw">use </span>tracing_futures::Instrument;
+<span class="kw">use </span>tracing::instrument;
 
-<span class="kw">use super</span>::{FrontToBack, IdKind, RequestIdManager};
+<span class="kw">use super</span>::{generate_batch_id_range, FrontToBack, IdKind, RequestIdManager};
 
 <span class="doccomment">/// Wrapper over a [`oneshot::Receiver`](futures_channel::oneshot::Receiver) that reads
 /// the underlying channel once and then stores the result in String.
@@ -763,7 +867,7 @@
 }
 
 <span class="doccomment">/// Builder for [`Client`].
-</span><span class="attr">#[derive(Clone, Debug)]
+</span><span class="attr">#[derive(Debug, Copy, Clone)]
 </span><span class="kw">pub struct </span>ClientBuilder {
 	request_timeout: Duration,
 	max_concurrent_requests: usize,
@@ -859,9 +963,19 @@
 		<span class="kw">let </span>(err_tx, err_rx) = oneshot::channel();
 		<span class="kw">let </span>max_notifs_per_subscription = <span class="self">self</span>.max_notifs_per_subscription;
 		<span class="kw">let </span>ping_interval = <span class="self">self</span>.ping_interval;
+		<span class="kw">let </span>(on_close_tx, on_close_rx) = oneshot::channel();
 
 		tokio::spawn(<span class="kw">async move </span>{
-			background_task(sender, receiver, from_front, err_tx, max_notifs_per_subscription, ping_interval).<span class="kw">await</span>;
+			background_task(
+				sender,
+				receiver,
+				from_front,
+				err_tx,
+				max_notifs_per_subscription,
+				ping_interval,
+				on_close_tx,
+			)
+			.<span class="kw">await</span>;
 		});
 		Client {
 			to_back,
@@ -869,6 +983,7 @@
 			error: Mutex::new(ErrorFromBack::Unread(err_rx)),
 			id_manager: RequestIdManager::new(<span class="self">self</span>.max_concurrent_requests, <span class="self">self</span>.id_kind),
 			max_log_length: <span class="self">self</span>.max_log_length,
+			notify: Mutex::new(<span class="prelude-val">Some</span>(on_close_rx)),
 		}
 	}
 
@@ -883,9 +998,10 @@
 		<span class="kw">let </span>(to_back, from_front) = mpsc::channel(<span class="self">self</span>.max_concurrent_requests);
 		<span class="kw">let </span>(err_tx, err_rx) = oneshot::channel();
 		<span class="kw">let </span>max_notifs_per_subscription = <span class="self">self</span>.max_notifs_per_subscription;
+		<span class="kw">let </span>(on_close_tx, on_close_rx) = oneshot::channel();
 
 		wasm_bindgen_futures::spawn_local(<span class="kw">async move </span>{
-			background_task(sender, receiver, from_front, err_tx, max_notifs_per_subscription, <span class="prelude-val">None</span>).<span class="kw">await</span>;
+			background_task(sender, receiver, from_front, err_tx, max_notifs_per_subscription, <span class="prelude-val">None</span>, on_close_tx).<span class="kw">await</span>;
 		});
 		Client {
 			to_back,
@@ -893,6 +1009,7 @@
 			error: Mutex::new(ErrorFromBack::Unread(err_rx)),
 			id_manager: RequestIdManager::new(<span class="self">self</span>.max_concurrent_requests, <span class="self">self</span>.id_kind),
 			max_log_length: <span class="self">self</span>.max_log_length,
+			notify: Mutex::new(<span class="prelude-val">Some</span>(on_close_rx)),
 		}
 	}
 }
@@ -913,6 +1030,10 @@
 	///
 	/// Entries bigger than this limit will be truncated.
 	</span>max_log_length: u32,
+	<span class="doccomment">/// Notify when the client is disconnected or encountered an error.
+	</span><span class="comment">// NOTE: Similar to error, the async fns use immutable references. The `Receiver` is wrapped
+	// into `Option` to ensure the `on_disconnect` awaits only once.
+	</span>notify: Mutex&lt;<span class="prelude-ty">Option</span>&lt;oneshot::Receiver&lt;()&gt;&gt;&gt;,
 }
 
 <span class="kw">impl </span>Client {
@@ -929,6 +1050,20 @@
 		<span class="kw-2">*</span>err_lock = next_state;
 		err
 	}
+
+	<span class="doccomment">/// Completes when the client is disconnected or the client&#39;s background task encountered an error.
+	/// If the client is already disconnected, the future produced by this method will complete immediately.
+	///
+	/// # Cancel safety
+	///
+	/// This method is cancel safe.
+	</span><span class="kw">pub async fn </span>on_disconnect(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+		<span class="comment">// Wait until the `background_task` exits.
+		</span><span class="kw">let </span><span class="kw-2">mut </span>notify_lock = <span class="self">self</span>.notify.lock().<span class="kw">await</span>;
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(notify) = notify_lock.take() {
+			<span class="kw">let _ </span>= notify.<span class="kw">await</span>;
+		}
+	}
 }
 
 <span class="kw">impl </span>Drop <span class="kw">for </span>Client {
@@ -939,106 +1074,128 @@
 
 <span class="attr">#[async_trait]
 </span><span class="kw">impl </span>ClientT <span class="kw">for </span>Client {
-	<span class="kw">async fn </span>notification&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="comment">// NOTE: we use this to guard against max number of concurrent requests.
-        </span><span class="kw">let </span>_req_id = <span class="self">self</span>.id_manager.next_request_id()<span class="question-mark">?</span>;
-        <span class="kw">let </span>notif = NotificationSer::new(method, params);
-        <span class="kw">let </span>trace = RpcTracing::batch();
+	<span class="attr">#[instrument(name = <span class="string">&quot;notification&quot;</span>, skip(<span class="self">self</span>, params), level = <span class="string">&quot;trace&quot;</span>)]
+	</span><span class="kw">async fn </span>notification&lt;Params&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, method: <span class="kw-2">&amp;</span>str, params: Params) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt;
+	<span class="kw">where
+		</span>Params: ToRpcParams + Send,
+	{
+		<span class="comment">// NOTE: we use this to guard against max number of concurrent requests.
+		</span><span class="kw">let </span>_req_id = <span class="self">self</span>.id_manager.next_request_id()<span class="question-mark">?</span>;
+		<span class="kw">let </span>params = params.to_rpc_params()<span class="question-mark">?</span>;
+		<span class="kw">let </span>notif = NotificationSer::borrowed(<span class="kw-2">&amp;</span>method, params.as_deref());
 
-        <span class="kw">async </span>{
-            <span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>notif).map_err(Error::ParseError)<span class="question-mark">?</span>;
-            tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
+		<span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>notif).map_err(Error::ParseError)<span class="question-mark">?</span>;
+		tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
 
-            <span class="kw">let </span><span class="kw-2">mut </span>sender = <span class="self">self</span>.to_back.clone();
-            <span class="kw">let </span>fut = sender.send(FrontToBack::Notification(raw));
+		<span class="kw">let </span><span class="kw-2">mut </span>sender = <span class="self">self</span>.to_back.clone();
+		<span class="kw">let </span>fut = sender.send(FrontToBack::Notification(raw));
 
-            <span class="kw">match </span>future::select(fut, Delay::new(<span class="self">self</span>.request_timeout)).<span class="kw">await </span>{
-                Either::Left((<span class="prelude-val">Ok</span>(()), <span class="kw">_</span>)) =&gt; <span class="prelude-val">Ok</span>(()),
-                Either::Left((<span class="prelude-val">Err</span>(<span class="kw">_</span>), <span class="kw">_</span>)) =&gt; <span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
-                Either::Right((<span class="kw">_</span>, <span class="kw">_</span>)) =&gt; <span class="prelude-val">Err</span>(Error::RequestTimeout),
-            }
-        }.instrument(trace.into_span()).<span class="kw">await
-    </span>}
+		<span class="kw">match </span>future::select(fut, Delay::new(<span class="self">self</span>.request_timeout)).<span class="kw">await </span>{
+			Either::Left((<span class="prelude-val">Ok</span>(()), <span class="kw">_</span>)) =&gt; <span class="prelude-val">Ok</span>(()),
+			Either::Left((<span class="prelude-val">Err</span>(<span class="kw">_</span>), <span class="kw">_</span>)) =&gt; <span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
+			Either::Right((<span class="kw">_</span>, <span class="kw">_</span>)) =&gt; <span class="prelude-val">Err</span>(Error::RequestTimeout),
+		}
+	}
 
-	<span class="kw">async fn </span>request&lt;<span class="lifetime">&#39;a</span>, R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;R, Error&gt;
+	<span class="attr">#[instrument(name = <span class="string">&quot;method_call&quot;</span>, skip(<span class="self">self</span>, params), level = <span class="string">&quot;trace&quot;</span>)]
+	</span><span class="kw">async fn </span>request&lt;R, Params&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, method: <span class="kw-2">&amp;</span>str, params: Params) -&gt; <span class="prelude-ty">Result</span>&lt;R, Error&gt;
 	<span class="kw">where
 		</span>R: DeserializeOwned,
-    {
-        <span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
-        <span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_id()<span class="question-mark">?</span>;
-        <span class="kw">let </span>id = guard.inner();
-        <span class="kw">let </span>trace = RpcTracing::method_call(method);
+		Params: ToRpcParams + Send,
+	{
+		<span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
+		<span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_id()<span class="question-mark">?</span>;
+		<span class="kw">let </span>id = guard.inner();
 
-        <span class="kw">async </span>{
-            <span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::new(<span class="kw-2">&amp;</span>id, method, params)).map_err(Error::ParseError)<span class="question-mark">?</span>;
-            tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
+		<span class="kw">let </span>params = params.to_rpc_params()<span class="question-mark">?</span>;
+		<span class="kw">let </span>raw =
+			serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::borrowed(<span class="kw-2">&amp;</span>id, <span class="kw-2">&amp;</span>method, params.as_deref())).map_err(Error::ParseError)<span class="question-mark">?</span>;
+		tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
 
-            <span class="kw">if </span><span class="self">self
-                </span>.to_back
-                .clone()
-                .send(FrontToBack::Request(RequestMessage { raw, id: id.clone(), send_back: <span class="prelude-val">Some</span>(send_back_tx) }))
-                .<span class="kw">await
-                </span>.is_err()
-            {
-                <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
-            }
+		<span class="kw">if </span><span class="self">self
+			</span>.to_back
+			.clone()
+			.send(FrontToBack::Request(RequestMessage { raw, id: id.clone(), send_back: <span class="prelude-val">Some</span>(send_back_tx) }))
+			.<span class="kw">await
+			</span>.is_err()
+		{
+			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
+		}
 
-            <span class="kw">let </span>res = call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await</span>;
-            <span class="kw">let </span>json_value = <span class="kw">match </span>res {
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(v)) =&gt; v,
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
-                <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
-            };
+		<span class="kw">let </span>json_value = <span class="kw">match </span>call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await </span>{
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(v)) =&gt; v,
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+			<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
+		};
 
-            rx_log_from_json(<span class="kw-2">&amp;</span>Response::new(<span class="kw-2">&amp;</span>json_value, id), <span class="self">self</span>.max_log_length);
+		rx_log_from_json(<span class="kw-2">&amp;</span>Response::new(<span class="kw-2">&amp;</span>json_value, id), <span class="self">self</span>.max_log_length);
 
-            serde_json::from_value(json_value).map_err(Error::ParseError)
-        }.instrument(trace.into_span()).<span class="kw">await
-    </span>}
+		serde_json::from_value(json_value).map_err(Error::ParseError)
+	}
 
-	<span class="kw">async fn </span>batch_request&lt;<span class="lifetime">&#39;a</span>, R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, batch: Vec&lt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;)&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;R&gt;, Error&gt;
+	<span class="kw">async fn </span>batch_request&lt;<span class="lifetime">&#39;a</span>, R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, batch: BatchRequestBuilder&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;BatchResponse&lt;<span class="lifetime">&#39;a</span>, R&gt;, Error&gt;
 	<span class="kw">where
-		</span>R: DeserializeOwned + Default + Clone,
-    {
-        <span class="kw">let </span>trace = RpcTracing::batch();
-        <span class="kw">async </span>{
-			<span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_ids(batch.len())<span class="question-mark">?</span>;
-			<span class="kw">let </span>batch_ids: Vec&lt;Id&gt; = guard.inner();
-			<span class="kw">let </span><span class="kw-2">mut </span>batches = Vec::with_capacity(batch.len());
-			<span class="kw">for </span>(idx, (method, params)) <span class="kw">in </span>batch.into_iter().enumerate() {
-                batches.push(RequestSer::new(<span class="kw-2">&amp;</span>batch_ids[idx], method, params));
-            }
+		</span>R: DeserializeOwned,
+	{
+		<span class="kw">let </span>batch = batch.build()<span class="question-mark">?</span>;
+		<span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_id()<span class="question-mark">?</span>;
+		<span class="kw">let </span>id_range = generate_batch_id_range(<span class="kw-2">&amp;</span>guard, batch.len() <span class="kw">as </span>u64)<span class="question-mark">?</span>;
 
-            <span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
+		<span class="kw">let </span><span class="kw-2">mut </span>batches = Vec::with_capacity(batch.len());
+		<span class="kw">for </span>((method, params), id) <span class="kw">in </span>batch.into_iter().zip(id_range.clone()) {
+			<span class="kw">let </span>id = <span class="self">self</span>.id_manager.as_id_kind().into_id(id);
+			batches.push(RequestSer {
+				jsonrpc: TwoPointZero,
+				id,
+				method: method.into(),
+				params: params.map(StdCow::Owned),
+			});
+		}
 
-            <span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>batches).map_err(Error::ParseError)<span class="question-mark">?</span>;
+		<span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
 
-            tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
+		<span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>batches).map_err(Error::ParseError)<span class="question-mark">?</span>;
 
-            <span class="kw">if </span><span class="self">self
-                </span>.to_back
-                .clone()
-                .send(FrontToBack::Batch(BatchMessage { raw, ids: batch_ids, send_back: send_back_tx }))
-                .<span class="kw">await
-                </span>.is_err()
-            {
-                <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
-            }
+		tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
 
-            <span class="kw">let </span>res = call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await</span>;
-            <span class="kw">let </span>json_values = <span class="kw">match </span>res {
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(v)) =&gt; v,
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
-                <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
-            };
+		<span class="kw">if </span><span class="self">self
+			</span>.to_back
+			.clone()
+			.send(FrontToBack::Batch(BatchMessage { raw, ids: id_range, send_back: send_back_tx }))
+			.<span class="kw">await
+			</span>.is_err()
+		{
+			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
+		}
 
-            rx_log_from_json(<span class="kw-2">&amp;</span>json_values, <span class="self">self</span>.max_log_length);
+		<span class="kw">let </span>res = call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await</span>;
+		<span class="kw">let </span>json_values = <span class="kw">match </span>res {
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(v)) =&gt; v,
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+			<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
+		};
 
-            <span class="kw">let </span>values: <span class="prelude-ty">Result</span>&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt; =
-                json_values.into_iter().map(|val| serde_json::from_value(val).map_err(Error::ParseError)).collect();
-            <span class="prelude-val">Ok</span>(values<span class="question-mark">?</span>)
-        }.instrument(trace.into_span()).<span class="kw">await
-	</span>}
+		rx_log_from_json(<span class="kw-2">&amp;</span>json_values, <span class="self">self</span>.max_log_length);
+
+		<span class="kw">let </span><span class="kw-2">mut </span>responses = Vec::with_capacity(json_values.len());
+		<span class="kw">let </span><span class="kw-2">mut </span>successful_calls = <span class="number">0</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>failed_calls = <span class="number">0</span>;
+
+		<span class="kw">for </span>json_val <span class="kw">in </span>json_values {
+			<span class="kw">match </span>json_val {
+				<span class="prelude-val">Ok</span>(val) =&gt; {
+					<span class="kw">let </span>result: R = serde_json::from_value(val).map_err(Error::ParseError)<span class="question-mark">?</span>;
+					responses.push(<span class="prelude-val">Ok</span>(result));
+					successful_calls += <span class="number">1</span>;
+				}
+				<span class="prelude-val">Err</span>(err) =&gt; {
+					responses.push(<span class="prelude-val">Err</span>(err));
+					failed_calls += <span class="number">1</span>;
+				}
+			}
+		}
+		<span class="prelude-val">Ok</span>(BatchResponse { successful_calls, failed_calls, responses })
+	}
 }
 
 <span class="attr">#[async_trait]
@@ -1047,62 +1204,60 @@
 	///
 	/// The `subscribe_method` and `params` are used to ask for the subscription towards the
 	/// server. The `unsubscribe_method` is used to close the subscription.
-	</span><span class="kw">async fn </span>subscribe&lt;<span class="lifetime">&#39;a</span>, N&gt;(
+	</span><span class="attr">#[instrument(name = <span class="string">&quot;subscription&quot;</span>, fields(method = subscribe_method), skip(<span class="self">self</span>, params, subscribe_method, unsubscribe_method), level = <span class="string">&quot;trace&quot;</span>)]
+	</span><span class="kw">async fn </span>subscribe&lt;<span class="lifetime">&#39;a</span>, Notif, Params&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		subscribe_method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
-		params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+		params: Params,
 		unsubscribe_method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;N&gt;, Error&gt;
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;Notif&gt;, Error&gt;
 	<span class="kw">where
-		</span>N: DeserializeOwned,
-    {
-        <span class="kw">if </span>subscribe_method == unsubscribe_method {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::SubscriptionNameConflict(unsubscribe_method.to_owned()));
-        }
+		</span>Params: ToRpcParams + Send,
+		Notif: DeserializeOwned,
+	{
+		<span class="kw">if </span>subscribe_method == unsubscribe_method {
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::SubscriptionNameConflict(unsubscribe_method.to_owned()));
+		}
 
-        <span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_ids(<span class="number">2</span>)<span class="question-mark">?</span>;
-        <span class="kw">let </span><span class="kw-2">mut </span>ids: Vec&lt;Id&gt; = guard.inner();
-        <span class="kw">let </span>trace = RpcTracing::method_call(subscribe_method);
+		<span class="kw">let </span>guard = <span class="self">self</span>.id_manager.next_request_two_ids()<span class="question-mark">?</span>;
+		<span class="kw">let </span>(id_sub, id_unsub) = guard.inner();
+		<span class="kw">let </span>params = params.to_rpc_params()<span class="question-mark">?</span>;
 
-        <span class="kw">async </span>{
-            <span class="kw">let </span>id = ids[<span class="number">0</span>].clone();
+		<span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::borrowed(<span class="kw-2">&amp;</span>id_sub, <span class="kw-2">&amp;</span>subscribe_method, params.as_deref()))
+			.map_err(Error::ParseError)<span class="question-mark">?</span>;
 
-            <span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::new(<span class="kw-2">&amp;</span>id, subscribe_method, params)).map_err(Error::ParseError)<span class="question-mark">?</span>;
+		tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
 
-            tx_log_from_str(<span class="kw-2">&amp;</span>raw, <span class="self">self</span>.max_log_length);
+		<span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
+		<span class="kw">if </span><span class="self">self
+			</span>.to_back
+			.clone()
+			.send(FrontToBack::Subscribe(SubscriptionMessage {
+				raw,
+				subscribe_id: id_sub,
+				unsubscribe_id: id_unsub.clone(),
+				unsubscribe_method: unsubscribe_method.to_owned(),
+				send_back: send_back_tx,
+			}))
+			.<span class="kw">await
+			</span>.is_err()
+		{
+			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
+		}
 
-            <span class="kw">let </span>(send_back_tx, send_back_rx) = oneshot::channel();
-            <span class="kw">if </span><span class="self">self
-                </span>.to_back
-                .clone()
-                .send(FrontToBack::Subscribe(SubscriptionMessage {
-                    raw,
-                    subscribe_id: ids.swap_remove(<span class="number">0</span>),
-                    unsubscribe_id: ids.swap_remove(<span class="number">0</span>),
-                    unsubscribe_method: unsubscribe_method.to_owned(),
-                    send_back: send_back_tx,
-                }))
-                .<span class="kw">await
-                </span>.is_err()
-            {
-                <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>);
-            }
+		<span class="kw">let </span>(notifs_rx, sub_id) = <span class="kw">match </span>call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await </span>{
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(val)) =&gt; val,
+			<span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+			<span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
+		};
 
-            <span class="kw">let </span>res = call_with_timeout(<span class="self">self</span>.request_timeout, send_back_rx).<span class="kw">await</span>;
+		rx_log_from_json(<span class="kw-2">&amp;</span>Response::new(<span class="kw-2">&amp;</span>sub_id, id_unsub), <span class="self">self</span>.max_log_length);
 
-            <span class="kw">let </span>(notifs_rx, sub_id) = <span class="kw">match </span>res {
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(val)) =&gt; val,
-                <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
-                <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">self</span>.read_error_from_backend().<span class="kw">await</span>),
-            };
-
-            rx_log_from_json(<span class="kw-2">&amp;</span>Response::new(<span class="kw-2">&amp;</span>sub_id, id), <span class="self">self</span>.max_log_length);
-
-            <span class="prelude-val">Ok</span>(Subscription::new(<span class="self">self</span>.to_back.clone(), notifs_rx, SubscriptionKind::Subscription(sub_id)))
-        }.instrument(trace.into_span()).<span class="kw">await
-    </span>}
+		<span class="prelude-val">Ok</span>(Subscription::new(<span class="self">self</span>.to_back.clone(), notifs_rx, SubscriptionKind::Subscription(sub_id)))
+	}
 
 	<span class="doccomment">/// Subscribe to a specific method.
+	</span><span class="attr">#[instrument(name = <span class="string">&quot;subscribe_method&quot;</span>, skip(<span class="self">self</span>), level = <span class="string">&quot;trace&quot;</span>)]
 	</span><span class="kw">async fn </span>subscribe_to_method&lt;<span class="lifetime">&#39;a</span>, N&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str) -&gt; <span class="prelude-ty">Result</span>&lt;Subscription&lt;N&gt;, Error&gt;
 	<span class="kw">where
 		</span>N: DeserializeOwned,
@@ -1149,59 +1304,94 @@
 		sender: <span class="kw-2">&amp;mut </span>S,
 		max_notifs_per_subscription: usize,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-		<span class="comment">// Single response to a request.
-		</span><span class="kw">if let </span><span class="prelude-val">Ok</span>(single) = serde_json::from_slice::&lt;Response&lt;<span class="kw">_</span>&gt;&gt;(raw) {
-			<span class="kw">match </span>process_single_response(manager, single, max_notifs_per_subscription) {
-				<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(unsub)) =&gt; {
-					stop_subscription(sender, manager, unsub).<span class="kw">await</span>;
+		<span class="kw">let </span>first_non_whitespace = raw.iter().find(|byte| !byte.is_ascii_whitespace());
+
+		<span class="kw">match </span>first_non_whitespace {
+			<span class="prelude-val">Some</span>(<span class="string">b&#39;{&#39;</span>) =&gt; {
+				<span class="comment">// Single response to a request.
+				</span><span class="kw">if let </span><span class="prelude-val">Ok</span>(single) = serde_json::from_slice::&lt;Response&lt;<span class="kw">_</span>&gt;&gt;(raw) {
+					<span class="kw">match </span>process_single_response(manager, single, max_notifs_per_subscription) {
+						<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(unsub)) =&gt; {
+							stop_subscription(sender, manager, unsub).<span class="kw">await</span>;
+						}
+						<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; (),
+						<span class="prelude-val">Err</span>(err) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+					}
 				}
-				<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; (),
-				<span class="prelude-val">Err</span>(err) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(err),
+				<span class="comment">// Subscription response.
+				</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(response) = serde_json::from_slice::&lt;SubscriptionResponse&lt;<span class="kw">_</span>&gt;&gt;(raw) {
+					<span class="kw">if let </span><span class="prelude-val">Err</span>(<span class="prelude-val">Some</span>(unsub)) = process_subscription_response(manager, response) {
+						stop_subscription(sender, manager, unsub).<span class="kw">await</span>;
+					}
+				}
+				<span class="comment">// Subscription error response.
+				</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(response) = serde_json::from_slice::&lt;SubscriptionError&lt;<span class="kw">_</span>&gt;&gt;(raw) {
+					<span class="kw">let _ </span>= process_subscription_close_response(manager, response);
+				}
+				<span class="comment">// Incoming Notification
+				</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(notif) = serde_json::from_slice::&lt;Notification&lt;<span class="kw">_</span>&gt;&gt;(raw) {
+					<span class="kw">let _ </span>= process_notification(manager, notif);
+				}
+				<span class="comment">// Error response
+				</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(err) = serde_json::from_slice::&lt;ErrorResponse&gt;(raw) {
+					process_error_response(manager, err)<span class="question-mark">?</span>;
+				} <span class="kw">else </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(unparse_error(raw));
+				}
 			}
-		}
-		<span class="comment">// Subscription response.
-		</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(response) = serde_json::from_slice::&lt;SubscriptionResponse&lt;<span class="kw">_</span>&gt;&gt;(raw) {
-			<span class="kw">if let </span><span class="prelude-val">Err</span>(<span class="prelude-val">Some</span>(unsub)) = process_subscription_response(manager, response) {
-				stop_subscription(sender, manager, unsub).<span class="kw">await</span>;
-			}
-		}
-		<span class="comment">// Subscription error response.
-		</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(response) = serde_json::from_slice::&lt;SubscriptionError&lt;<span class="kw">_</span>&gt;&gt;(raw) {
-			<span class="kw">let _ </span>= process_subscription_close_response(manager, response);
-		}
-		<span class="comment">// Incoming Notification
-		</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(notif) = serde_json::from_slice::&lt;Notification&lt;<span class="kw">_</span>&gt;&gt;(raw) {
-			<span class="kw">let _ </span>= process_notification(manager, notif);
-		}
-		<span class="comment">// Batch response.
-		</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(batch) = serde_json::from_slice::&lt;Vec&lt;Response&lt;<span class="kw">_</span>&gt;&gt;&gt;(raw) {
-			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = process_batch_response(manager, batch) {
-				<span class="kw">return </span><span class="prelude-val">Err</span>(e);
-			}
-		}
-		<span class="comment">// Error response
-		</span><span class="kw">else if let </span><span class="prelude-val">Ok</span>(err) = serde_json::from_slice::&lt;ErrorResponse&gt;(raw) {
-			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = process_error_response(manager, err) {
-				<span class="kw">return </span><span class="prelude-val">Err</span>(e);
-			}
-		}
-		<span class="comment">// Unparsable response
-		</span><span class="kw">else </span>{
-			<span class="kw">let </span>json = serde_json::from_slice::&lt;serde_json::Value&gt;(raw);
+			<span class="prelude-val">Some</span>(<span class="string">b&#39;[&#39;</span>) =&gt; {
+				<span class="comment">// Batch response.
+				</span><span class="kw">if let </span><span class="prelude-val">Ok</span>(raw_responses) = serde_json::from_slice::&lt;Vec&lt;<span class="kw-2">&amp;</span>JsonRawValue&gt;&gt;(raw) {
+					<span class="kw">let </span><span class="kw-2">mut </span>batch = Vec::with_capacity(raw_responses.len());
 
-			<span class="kw">let </span>json_str = <span class="kw">match </span>json {
-				<span class="prelude-val">Ok</span>(json) =&gt; serde_json::to_string(<span class="kw-2">&amp;</span>json).expect(<span class="string">&quot;valid JSON; qed&quot;</span>),
-				<span class="prelude-val">Err</span>(e) =&gt; e.to_string(),
-			};
+					<span class="kw">let </span><span class="kw-2">mut </span>range = <span class="prelude-val">None</span>;
 
-			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::Custom(<span class="macro">format!</span>(<span class="string">&quot;Unparseable message: {}&quot;</span>, json_str)));
-		}
+					<span class="kw">for </span>r <span class="kw">in </span>raw_responses {
+						<span class="kw">let </span>id = <span class="kw">if let </span><span class="prelude-val">Ok</span>(response) = serde_json::from_str::&lt;Response&lt;<span class="kw">_</span>&gt;&gt;(r.get()) {
+							<span class="kw">let </span>id = response.id.try_parse_inner_as_number().ok_or(Error::InvalidRequestId)<span class="question-mark">?</span>;
+							batch.push(InnerBatchResponse { id, result: <span class="prelude-val">Ok</span>(response.result) });
+							id
+						} <span class="kw">else if let </span><span class="prelude-val">Ok</span>(err) = serde_json::from_str::&lt;ErrorResponse&gt;(r.get()) {
+							<span class="kw">let </span>id = err.id().try_parse_inner_as_number().ok_or(Error::InvalidRequestId)<span class="question-mark">?</span>;
+							batch.push(InnerBatchResponse { id, result: <span class="prelude-val">Err</span>(err.error_object().clone().into_owned()) });
+							id
+						} <span class="kw">else </span>{
+							<span class="kw">return </span><span class="prelude-val">Err</span>(unparse_error(raw));
+						};
+
+						<span class="kw">let </span>r = range.get_or_insert(id..id);
+
+						<span class="kw">if </span>id &lt; r.start {
+							r.start = id;
+						}
+
+						<span class="kw">if </span>id &gt; r.end {
+							r.end = id;
+						}
+					}
+
+					<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>range) = range {
+						<span class="comment">// the range is exclusive so need to add one.
+						</span>range.end += <span class="number">1</span>;
+						process_batch_response(manager, batch, range)<span class="question-mark">?</span>;
+					} <span class="kw">else </span>{
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::EmptyBatchRequest);
+					}
+				} <span class="kw">else </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(unparse_error(raw));
+				}
+			}
+			<span class="kw">_ </span>=&gt; {
+				<span class="kw">return </span><span class="prelude-val">Err</span>(unparse_error(raw));
+			}
+		};
+
 		<span class="prelude-val">Ok</span>(())
 	}
 
 	<span class="kw">match </span>message {
 		<span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(ReceivedMessage::Pong)) =&gt; {
-			<span class="macro">tracing::debug!</span>(<span class="string">&quot;recv pong&quot;</span>);
+			<span class="macro">tracing::debug!</span>(<span class="string">&quot;Received pong&quot;</span>);
 		}
 		<span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(ReceivedMessage::Bytes(raw))) =&gt; {
 			handle_recv_message(raw.as_ref(), manager, sender, max_notifs_per_subscription).<span class="kw">await</span><span class="question-mark">?</span>;
@@ -1210,12 +1400,10 @@
 			handle_recv_message(raw.as_ref(), manager, sender, max_notifs_per_subscription).<span class="kw">await</span><span class="question-mark">?</span>;
 		}
 		<span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
-			<span class="macro">tracing::error!</span>(<span class="string">&quot;Error: {:?} terminating client&quot;</span>, e);
 			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::Transport(e.into()));
 		}
 		<span class="prelude-val">None </span>=&gt; {
-			<span class="macro">tracing::error!</span>(<span class="string">&quot;[backend]: WebSocket receiver dropped; terminate client&quot;</span>);
-			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::Custom(<span class="string">&quot;WebSocket receiver dropped&quot;</span>.into()));
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::Custom(<span class="string">&quot;TransportReceiver dropped&quot;</span>.into()));
 		}
 	}
 
@@ -1223,49 +1411,41 @@
 }
 
 <span class="doccomment">/// Handle frontend messages.
-///
-/// Returns an error if the main background loop should be terminated.
 </span><span class="kw">async fn </span>handle_frontend_messages&lt;S: TransportSenderT&gt;(
-	message: <span class="prelude-ty">Option</span>&lt;FrontToBack&gt;,
+	message: FrontToBack,
 	manager: <span class="kw-2">&amp;mut </span>RequestManager,
 	sender: <span class="kw-2">&amp;mut </span>S,
 	max_notifs_per_subscription: usize,
-) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+) {
 	<span class="kw">match </span>message {
-		<span class="comment">// User dropped the sender side of the channel.
-		// There is nothing to do just terminate.
-		</span><span class="prelude-val">None </span>=&gt; {
-			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::Custom(<span class="string">&quot;[backend]: frontend dropped; terminate client&quot;</span>.into()));
-		}
-
-		<span class="prelude-val">Some</span>(FrontToBack::Batch(batch)) =&gt; {
+		FrontToBack::Batch(batch) =&gt; {
 			<span class="kw">if let </span><span class="prelude-val">Err</span>(send_back) = manager.insert_pending_batch(batch.ids.clone(), batch.send_back) {
-				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: batch request: {:?} already pending&quot;</span>, batch.ids);
+				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: Batch request already pending: {:?}&quot;</span>, batch.ids);
 				<span class="kw">let _ </span>= send_back.send(<span class="prelude-val">Err</span>(Error::InvalidRequestId));
-				<span class="kw">return </span><span class="prelude-val">Ok</span>(());
+				<span class="kw">return</span>;
 			}
 
 			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = sender.send(batch.raw).<span class="kw">await </span>{
-				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: client batch request failed: {:?}&quot;</span>, e);
+				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: Batch request failed: {:?}&quot;</span>, e);
 				manager.complete_pending_batch(batch.ids);
 			}
 		}
 		<span class="comment">// User called `notification` on the front-end
-		</span><span class="prelude-val">Some</span>(FrontToBack::Notification(notif)) =&gt; {
+		</span>FrontToBack::Notification(notif) =&gt; {
 			<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = sender.send(notif).<span class="kw">await </span>{
-				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: client notif failed: {:?}&quot;</span>, e);
+				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: Notification failed: {:?}&quot;</span>, e);
 			}
 		}
 		<span class="comment">// User called `request` on the front-end
-		</span><span class="prelude-val">Some</span>(FrontToBack::Request(request)) =&gt; <span class="kw">match </span>sender.send(request.raw).<span class="kw">await </span>{
+		</span>FrontToBack::Request(request) =&gt; <span class="kw">match </span>sender.send(request.raw).<span class="kw">await </span>{
 			<span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; manager.insert_pending_call(request.id, request.send_back).expect(<span class="string">&quot;ID unused checked above; qed&quot;</span>),
 			<span class="prelude-val">Err</span>(e) =&gt; {
-				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: client request failed: {:?}&quot;</span>, e);
+				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: Request failed: {:?}&quot;</span>, e);
 				<span class="kw">let _ </span>= request.send_back.map(|s| s.send(<span class="prelude-val">Err</span>(Error::Transport(e.into()))));
 			}
 		},
 		<span class="comment">// User called `subscribe` on the front-end.
-		</span><span class="prelude-val">Some</span>(FrontToBack::Subscribe(sub)) =&gt; <span class="kw">match </span>sender.send(sub.raw).<span class="kw">await </span>{
+		</span>FrontToBack::Subscribe(sub) =&gt; <span class="kw">match </span>sender.send(sub.raw).<span class="kw">await </span>{
 			<span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; manager
 				.insert_pending_subscription(
 					sub.subscribe_id,
@@ -1275,13 +1455,13 @@
 				)
 				.expect(<span class="string">&quot;Request ID unused checked above; qed&quot;</span>),
 			<span class="prelude-val">Err</span>(e) =&gt; {
-				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: client subscription failed: {:?}&quot;</span>, e);
+				<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: Subscription failed: {:?}&quot;</span>, e);
 				<span class="kw">let _ </span>= sub.send_back.send(<span class="prelude-val">Err</span>(Error::Transport(e.into())));
 			}
 		},
 		<span class="comment">// User dropped a subscription.
-		</span><span class="prelude-val">Some</span>(FrontToBack::SubscriptionClosed(sub_id)) =&gt; {
-			<span class="macro">tracing::trace!</span>(<span class="string">&quot;Closing subscription: {:?}&quot;</span>, sub_id);
+		</span>FrontToBack::SubscriptionClosed(sub_id) =&gt; {
+			<span class="macro">tracing::trace!</span>(<span class="string">&quot;[backend]: Closing subscription: {:?}&quot;</span>, sub_id);
 			<span class="comment">// NOTE: The subscription may have been closed earlier if
 			// the channel was full or disconnected.
 			</span><span class="kw">if let </span><span class="prelude-val">Some</span>(unsub) = manager
@@ -1292,7 +1472,7 @@
 			}
 		}
 		<span class="comment">// User called `register_notification` on the front-end.
-		</span><span class="prelude-val">Some</span>(FrontToBack::RegisterNotification(reg)) =&gt; {
+		</span>FrontToBack::RegisterNotification(reg) =&gt; {
 			<span class="kw">let </span>(subscribe_tx, subscribe_rx) = mpsc::channel(max_notifs_per_subscription);
 
 			<span class="kw">if </span>manager.insert_notification_handler(<span class="kw-2">&amp;</span>reg.method, subscribe_tx).is_ok() {
@@ -1301,13 +1481,11 @@
 				<span class="kw">let _ </span>= reg.send_back.send(<span class="prelude-val">Err</span>(Error::MethodAlreadyRegistered(reg.method)));
 			}
 		}
-		<span class="comment">// User dropped the notificationHandler for this method
-		</span><span class="prelude-val">Some</span>(FrontToBack::UnregisterNotification(method)) =&gt; {
+		<span class="comment">// User dropped the NotificationHandler for this method
+		</span>FrontToBack::UnregisterNotification(method) =&gt; {
 			<span class="kw">let _ </span>= manager.remove_notification_handler(method);
 		}
 	}
-
-	<span class="prelude-val">Ok</span>(())
 }
 
 <span class="doccomment">/// Function being run in the background that processes messages from the frontend.
@@ -1318,6 +1496,7 @@
 	front_error: oneshot::Sender&lt;Error&gt;,
 	max_notifs_per_subscription: usize,
 	ping_interval: <span class="prelude-ty">Option</span>&lt;Duration&gt;,
+	on_close: oneshot::Sender&lt;()&gt;,
 ) <span class="kw">where
 	</span>S: TransportSenderT,
 	R: TransportReceiverT,
@@ -1350,14 +1529,17 @@
 		<span class="kw">match </span>future::select(message_fut, submit_ping).<span class="kw">await </span>{
 			<span class="comment">// Message received from the frontend.
 			</span>Either::Left((Either::Left((frontend_value, backend)), <span class="kw">_</span>)) =&gt; {
-				<span class="kw">if let </span><span class="prelude-val">Err</span>(err) =
-					handle_frontend_messages(frontend_value, <span class="kw-2">&amp;mut </span>manager, <span class="kw-2">&amp;mut </span>sender, max_notifs_per_subscription)
-						.<span class="kw">await
-				</span>{
-					<span class="macro">tracing::warn!</span>(<span class="string">&quot;{:?}&quot;</span>, err);
-					<span class="kw">let _ </span>= front_error.send(err);
+				<span class="kw">let </span>frontend_value = <span class="kw">if let </span><span class="prelude-val">Some</span>(value) = frontend_value {
+					value
+				} <span class="kw">else </span>{
+					<span class="comment">// User dropped the sender side of the channel.
+					// There is nothing to do just terminate.
+					</span><span class="macro">tracing::debug!</span>(<span class="string">&quot;[backend]: Client dropped&quot;</span>);
 					<span class="kw">break</span>;
-				}
+				};
+
+				handle_frontend_messages(frontend_value, <span class="kw-2">&amp;mut </span>manager, <span class="kw-2">&amp;mut </span>sender, max_notifs_per_subscription).<span class="kw">await</span>;
+
 				<span class="comment">// Advance frontend, save backend.
 				</span>message_fut = future::select(frontend.next(), backend);
 			}
@@ -1371,7 +1553,7 @@
 				)
 				.<span class="kw">await
 				</span>{
-					<span class="macro">tracing::warn!</span>(<span class="string">&quot;{:?}&quot;</span>, err);
+					<span class="macro">tracing::error!</span>(<span class="string">&quot;[backend]: {}&quot;</span>, err);
 					<span class="kw">let _ </span>= front_error.send(err);
 					<span class="kw">break</span>;
 				}
@@ -1380,8 +1562,8 @@
 			}
 			<span class="comment">// Submit ping interval was triggered if enabled.
 			</span>Either::Right((<span class="kw">_</span>, next_message_fut)) =&gt; {
-				<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = sender.send_ping().<span class="kw">await </span>{
-					<span class="macro">tracing::warn!</span>(<span class="string">&quot;[backend]: client send ping failed: {:?}&quot;</span>, e);
+				<span class="kw">if let </span><span class="prelude-val">Err</span>(err) = sender.send_ping().<span class="kw">await </span>{
+					<span class="macro">tracing::error!</span>(<span class="string">&quot;[backend]: Could not send ping frame: {}&quot;</span>, err);
 					<span class="kw">let _ </span>= front_error.send(Error::Custom(<span class="string">&quot;Could not send ping frame&quot;</span>.into()));
 					<span class="kw">break</span>;
 				}
@@ -1389,8 +1571,22 @@
 			}
 		};
 	}
+
+	<span class="comment">// Wake the `on_disconnect` method.
+	</span><span class="kw">let _ </span>= on_close.send(());
 	<span class="comment">// Send close message to the server.
 	</span><span class="kw">let _ </span>= sender.close().<span class="kw">await</span>;
+}
+
+<span class="kw">fn </span>unparse_error(raw: <span class="kw-2">&amp;</span>[u8]) -&gt; Error {
+	<span class="kw">let </span>json = serde_json::from_slice::&lt;serde_json::Value&gt;(raw);
+
+	<span class="kw">let </span>json_str = <span class="kw">match </span>json {
+		<span class="prelude-val">Ok</span>(json) =&gt; serde_json::to_string(<span class="kw-2">&amp;</span>json).expect(<span class="string">&quot;valid JSON; qed&quot;</span>),
+		<span class="prelude-val">Err</span>(e) =&gt; e.to_string(),
+	};
+
+	Error::Custom(<span class="macro">format!</span>(<span class="string">&quot;Unparseable message: {}&quot;</span>, json_str))
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="jsonrpsee_core" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

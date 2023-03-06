@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/tx/signer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>signer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/subxt/src/tx/signer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>signer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -100,11 +100,6 @@
 <a href="#100" id="100">100</a>
 <a href="#101" id="101">101</a>
 <a href="#102" id="102">102</a>
-<a href="#103" id="103">103</a>
-<a href="#104" id="104">104</a>
-<a href="#105" id="105">105</a>
-<a href="#106" id="106">106</a>
-<a href="#107" id="107">107</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
@@ -113,20 +108,11 @@
 //! [substrate](https://github.com/paritytech/substrate) node via RPC.
 
 </span><span class="kw">use </span><span class="kw">crate</span>::Config;
-<span class="kw">use </span>sp_core::Pair;
-<span class="kw">use </span>sp_runtime::traits::{
-    IdentifyAccount,
-    Verify,
-};
 
 <span class="doccomment">/// Signing transactions requires a [`Signer`]. This is responsible for
 /// providing the &quot;from&quot; account that the transaction is being signed by,
-/// as well as actually signing a SCALE encoded payload. Optionally, a
-/// signer can also provide the nonce for the transaction to use.
+/// as well as actually signing a SCALE encoded payload.
 </span><span class="kw">pub trait </span>Signer&lt;T: Config&gt; {
-    <span class="doccomment">/// Optionally returns a nonce.
-    </span><span class="kw">fn </span>nonce(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;T::Index&gt;;
-
     <span class="doccomment">/// Return the &quot;from&quot; account ID.
     </span><span class="kw">fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId;
 
@@ -140,76 +126,80 @@
     </span><span class="kw">fn </span>sign(<span class="kw-2">&amp;</span><span class="self">self</span>, signer_payload: <span class="kw-2">&amp;</span>[u8]) -&gt; T::Signature;
 }
 
-<span class="doccomment">/// A [`Signer`] implementation that can be constructed from an [`Pair`].
-</span><span class="attr">#[derive(Clone, Debug)]
-</span><span class="kw">pub struct </span>PairSigner&lt;T: Config, P: Pair&gt; {
-    account_id: T::AccountId,
-    nonce: <span class="prelude-ty">Option</span>&lt;T::Index&gt;,
-    signer: P,
-}
+<span class="attr">#[cfg(feature = <span class="string">&quot;substrate-compat&quot;</span>)]
+</span><span class="kw">pub use </span>pair_signer::PairSigner;
 
-<span class="kw">impl</span>&lt;T, P&gt; PairSigner&lt;T, P&gt;
-<span class="kw">where
-    </span>T: Config,
-    T::Signature: From&lt;P::Signature&gt;,
-    &lt;T::Signature <span class="kw">as </span>Verify&gt;::Signer:
-        From&lt;P::Public&gt; + IdentifyAccount&lt;AccountId = T::AccountId&gt;,
-    P: Pair,
-{
-    <span class="doccomment">/// Creates a new [`Signer`] from a [`Pair`].
-    </span><span class="kw">pub fn </span>new(signer: P) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>account_id =
-            &lt;T::Signature <span class="kw">as </span>Verify&gt;::Signer::from(signer.public()).into_account();
-        <span class="self">Self </span>{
-            account_id,
-            nonce: <span class="prelude-val">None</span>,
-            signer,
+<span class="comment">// A signer suitable for substrate based chains. This provides compatibility with Substrate
+// packages like sp_keyring and such, and so relies on sp_core and sp_runtime to be included.
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;substrate-compat&quot;</span>)]
+</span><span class="kw">mod </span>pair_signer {
+    <span class="kw">use </span><span class="kw">super</span>::Signer;
+    <span class="kw">use </span><span class="kw">crate</span>::Config;
+    <span class="kw">use </span>sp_core::Pair <span class="kw">as </span>PairT;
+    <span class="kw">use </span>sp_runtime::{
+        traits::{
+            IdentifyAccount,
+            Verify,
+        },
+        AccountId32 <span class="kw">as </span>SpAccountId32,
+        MultiSignature <span class="kw">as </span>SpMultiSignature,
+    };
+
+    <span class="doccomment">/// A [`Signer`] implementation that can be constructed from an [`sp_core::Pair`].
+    </span><span class="attr">#[derive(Clone, Debug)]
+    </span><span class="kw">pub struct </span>PairSigner&lt;T: Config, Pair&gt; {
+        account_id: T::AccountId,
+        signer: Pair,
+    }
+
+    <span class="kw">impl</span>&lt;T, Pair&gt; PairSigner&lt;T, Pair&gt;
+    <span class="kw">where
+        </span>T: Config,
+        Pair: PairT,
+        <span class="comment">// We go via an sp_runtime::MultiSignature. We can probably generalise this
+        // by implementing some of these traits on our built-in MultiSignature and then
+        // requiring them on all T::Signatures, to avoid any go-between.
+        </span>&lt;SpMultiSignature <span class="kw">as </span>Verify&gt;::Signer: From&lt;Pair::Public&gt;,
+        T::AccountId: From&lt;SpAccountId32&gt;,
+    {
+        <span class="doccomment">/// Creates a new [`Signer`] from an [`sp_core::Pair`].
+        </span><span class="kw">pub fn </span>new(signer: Pair) -&gt; <span class="self">Self </span>{
+            <span class="kw">let </span>account_id = &lt;SpMultiSignature <span class="kw">as </span>Verify&gt;::Signer::from(signer.public())
+                .into_account();
+            <span class="self">Self </span>{
+                account_id: account_id.into(),
+                signer,
+            }
+        }
+
+        <span class="doccomment">/// Returns the [`sp_core::Pair`] implementation used to construct this.
+        </span><span class="kw">pub fn </span>signer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Pair {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.signer
+        }
+
+        <span class="doccomment">/// Return the account ID.
+        </span><span class="kw">pub fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.account_id
         }
     }
 
-    <span class="doccomment">/// Sets the nonce to a new value. By default, the nonce will
-    /// be retrieved from the node. Setting one here will override that.
-    </span><span class="kw">pub fn </span>set_nonce(<span class="kw-2">&amp;mut </span><span class="self">self</span>, nonce: T::Index) {
-        <span class="self">self</span>.nonce = <span class="prelude-val">Some</span>(nonce);
-    }
+    <span class="kw">impl</span>&lt;T, Pair&gt; Signer&lt;T&gt; <span class="kw">for </span>PairSigner&lt;T, Pair&gt;
+    <span class="kw">where
+        </span>T: Config,
+        Pair: PairT,
+        Pair::Signature: Into&lt;T::Signature&gt;,
+    {
+        <span class="kw">fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.account_id
+        }
 
-    <span class="doccomment">/// Increment the nonce.
-    </span><span class="kw">pub fn </span>increment_nonce(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="self">self</span>.nonce = <span class="self">self</span>.nonce.map(|nonce| nonce + <span class="number">1u32</span>.into());
-    }
+        <span class="kw">fn </span>address(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T::Address {
+            <span class="self">self</span>.account_id.clone().into()
+        }
 
-    <span class="doccomment">/// Returns the [`Pair`] implementation used to construct this.
-    </span><span class="kw">pub fn </span>signer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>P {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.signer
-    }
-
-    <span class="doccomment">/// Return the account ID.
-    </span><span class="kw">pub fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.account_id
-    }
-}
-
-<span class="kw">impl</span>&lt;T, P&gt; Signer&lt;T&gt; <span class="kw">for </span>PairSigner&lt;T, P&gt;
-<span class="kw">where
-    </span>T: Config,
-    T::AccountId: Into&lt;T::Address&gt; + Clone + <span class="lifetime">&#39;static</span>,
-    P: Pair + <span class="lifetime">&#39;static</span>,
-    P::Signature: Into&lt;T::Signature&gt; + <span class="lifetime">&#39;static</span>,
-{
-    <span class="kw">fn </span>nonce(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;T::Index&gt; {
-        <span class="self">self</span>.nonce
-    }
-
-    <span class="kw">fn </span>account_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T::AccountId {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.account_id
-    }
-
-    <span class="kw">fn </span>address(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T::Address {
-        <span class="self">self</span>.account_id.clone().into()
-    }
-
-    <span class="kw">fn </span>sign(<span class="kw-2">&amp;</span><span class="self">self</span>, signer_payload: <span class="kw-2">&amp;</span>[u8]) -&gt; T::Signature {
-        <span class="self">self</span>.signer.sign(signer_payload).into()
+        <span class="kw">fn </span>sign(<span class="kw-2">&amp;</span><span class="self">self</span>, signer_payload: <span class="kw-2">&amp;</span>[u8]) -&gt; T::Signature {
+            <span class="self">self</span>.signer.sign(signer_payload).into()
+        }
     }
 }
 </code></pre></div>

@@ -119,6 +119,18 @@
 <a href="#119" id="119">119</a>
 <a href="#120" id="120">120</a>
 <a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
 </pre><pre class="rust"><code><span class="kw">use </span>darling::FromMeta;
 <span class="kw">use </span>quote::format_ident;
 
@@ -137,6 +149,7 @@
   <span class="kw">pub </span>enum_name: syn::Ident,
   <span class="kw">pub </span>mod_name: syn::Ident,
   <span class="kw">pub </span>runtime_name: syn::Ident,
+  <span class="kw">pub </span>runtime_call: syn::Ident,
   <span class="kw">pub </span>runtime_metadata_path: String,
 }
 
@@ -191,6 +204,15 @@
           )
         })<span class="question-mark">?</span>;
 
+      <span class="kw">let </span>runtime_call = <span class="macro">format_ident!</span>(
+        <span class="string">&quot;{}&quot;</span>,
+        <span class="kw">if </span>spec_version &gt;= <span class="number">7000 </span>{
+          <span class="string">&quot;RuntimeCall&quot;
+        </span>} <span class="kw">else </span>{
+          <span class="string">&quot;Call&quot;
+        </span>}
+      );
+
       <span class="comment">// lagoon
       </span><span class="kw">let </span>expected_lagoon_path = dir_path.join(<span class="string">&quot;lagoon_metadata.scale&quot;</span>);
       <span class="kw">if </span>expected_lagoon_path.exists() {
@@ -205,6 +227,7 @@
               <span class="string">&quot;Invalid artifacts directory&quot;</span>,
             ))<span class="question-mark">?
             </span>.to_string(),
+          runtime_call: runtime_call.clone(),
           mod_name: <span class="macro">format_ident!</span>(<span class="string">&quot;lagoon{}&quot;</span>, spec_version),
           runtime_name: <span class="macro">format_ident!</span>(<span class="string">&quot;{}&quot;</span>, <span class="string">&quot;lagoon_runtime&quot;</span>),
         })
@@ -224,6 +247,7 @@
               <span class="string">&quot;Unable to convert path to string&quot;</span>,
             ))<span class="question-mark">?
             </span>.to_string(),
+          runtime_call,
           mod_name: <span class="macro">format_ident!</span>(<span class="string">&quot;tidechain{}&quot;</span>, spec_version),
           runtime_name: <span class="macro">format_ident!</span>(<span class="string">&quot;{}&quot;</span>, <span class="string">&quot;tidechain_runtime&quot;</span>),
         })

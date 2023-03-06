@@ -39,7 +39,7 @@ exported in the metadata.</p>
 // exported in the metadata.
 
 </span><span class="macro">decl_module! </span>{
-    <span class="kw">pub struct </span>Module&lt;T: Config&gt; <span class="kw">for enum </span>Call <span class="kw">where </span>origin: T::Origin {
+    <span class="kw">pub struct </span>Module&lt;T: Config&gt; <span class="kw">for enum </span>Call <span class="kw">where </span>origin: T::RuntimeOrigin {
         <span class="kw">type </span>Error = MyError&lt;T&gt;;
 
         <span class="attr">#[weight = <span class="number">0</span>]

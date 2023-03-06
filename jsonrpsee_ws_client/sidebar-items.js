@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"struct":[["HeaderMap","A set of HTTP headers"],["HeaderValue","Represents an HTTP header field value."],["WsClient","Generic asynchronous client."],["WsClientBuilder","Builder for [`WsClient`]."]]};

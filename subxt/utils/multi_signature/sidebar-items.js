@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["MultiSignature","Signature container that can store known signature types. This is a simplified version of `sp_runtime::MultiSignature`. To obtain more functionality, convert this into that type."]]};

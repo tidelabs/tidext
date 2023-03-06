@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/arithmetic/projective.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>projective.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/arithmetic/projective.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>projective.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -691,12 +691,109 @@
 <a href="#690" id="690">690</a>
 <a href="#691" id="691">691</a>
 <a href="#692" id="692">692</a>
+<a href="#693" id="693">693</a>
+<a href="#694" id="694">694</a>
+<a href="#695" id="695">695</a>
+<a href="#696" id="696">696</a>
+<a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
+<a href="#704" id="704">704</a>
+<a href="#705" id="705">705</a>
+<a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
+<a href="#713" id="713">713</a>
+<a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
+<a href="#741" id="741">741</a>
+<a href="#742" id="742">742</a>
+<a href="#743" id="743">743</a>
+<a href="#744" id="744">744</a>
+<a href="#745" id="745">745</a>
+<a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Projective points
 
 </span><span class="attr">#![allow(clippy::op_ref)]
 
 </span><span class="kw">use super</span>::{AffinePoint, FieldElement, Scalar, CURVE_EQUATION_B_SINGLE};
-<span class="kw">use crate</span>::{CompressedPoint, EncodedPoint, Secp256k1};
+<span class="kw">use crate</span>::{CompressedPoint, EncodedPoint, PublicKey, Secp256k1};
 <span class="kw">use </span>core::{
     iter::Sum,
     ops::{Add, AddAssign, Neg, Sub, SubAssign},
@@ -711,7 +808,7 @@
     sec1::{FromEncodedPoint, ToEncodedPoint},
     subtle::{Choice, ConditionallySelectable, ConstantTimeEq, CtOption},
     zeroize::DefaultIsZeroes,
-    PrimeCurveArithmetic, ProjectiveArithmetic,
+    Error, PrimeCurveArithmetic, ProjectiveArithmetic, <span class="prelude-ty">Result</span>,
 };
 
 <span class="attr">#[rustfmt::skip]
@@ -771,12 +868,8 @@
     </span><span class="kw">pub fn </span>to_affine(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; AffinePoint {
         <span class="self">self</span>.z
             .invert()
-            .map(|zinv| AffinePoint {
-                x: <span class="self">self</span>.x * <span class="kw-2">&amp;</span>zinv,
-                y: <span class="self">self</span>.y * <span class="kw-2">&amp;</span>zinv,
-                infinity: <span class="number">0</span>,
-            })
-            .unwrap_or(AffinePoint::IDENTITY)
+            .map(|zinv| AffinePoint::new(<span class="self">self</span>.x * <span class="kw-2">&amp;</span>zinv, <span class="self">self</span>.y * <span class="kw-2">&amp;</span>zinv))
+            .unwrap_or_else(|| AffinePoint::IDENTITY)
     }
 
     <span class="doccomment">/// Returns `-self`.
@@ -921,6 +1014,24 @@
             z: <span class="self">self</span>.z,
         }
     }
+
+    <span class="doccomment">/// Check whether `self` is equal to an affine point.
+    ///
+    /// This is a lot faster than first converting `self` to an `AffinePoint` and then doing the
+    /// comparision. It is a little bit faster than converting `other` to a `ProjectivePoint` first.
+    </span><span class="kw">pub fn </span>eq_affine(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>AffinePoint) -&gt; Choice {
+        <span class="comment">// For understanding of this algorithm see Projective equality comment. It&#39;s the same except
+        // that we know z = 1 for rhs and we have to check identity as a separate case.
+        </span><span class="kw">let </span>both_identity = <span class="self">self</span>.is_identity() &amp; other.is_identity();
+        <span class="kw">let </span>rhs_identity = other.is_identity();
+        <span class="kw">let </span>rhs_x = <span class="kw-2">&amp;</span>other.x * <span class="kw-2">&amp;</span><span class="self">self</span>.z;
+        <span class="kw">let </span>x_eq = rhs_x.negate(<span class="number">1</span>).add(<span class="kw-2">&amp;</span><span class="self">self</span>.x).normalizes_to_zero();
+
+        <span class="kw">let </span>rhs_y = <span class="kw-2">&amp;</span>other.y * <span class="kw-2">&amp;</span><span class="self">self</span>.z;
+        <span class="kw">let </span>y_eq = rhs_y.negate(<span class="number">1</span>).add(<span class="kw-2">&amp;</span><span class="self">self</span>.y).normalizes_to_zero();
+
+        both_identity | (!rhs_identity &amp; x_eq &amp; y_eq)
+    }
 }
 
 <span class="kw">impl </span>From&lt;AffinePoint&gt; <span class="kw">for </span>ProjectivePoint {
@@ -976,13 +1087,46 @@
 
 <span class="kw">impl </span>ConstantTimeEq <span class="kw">for </span>ProjectivePoint {
     <span class="kw">fn </span>ct_eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; Choice {
-        <span class="self">self</span>.to_affine().ct_eq(<span class="kw-2">&amp;</span>other.to_affine())
+        <span class="comment">// If both points are not equal to inifinity then they are in the form:
+        //
+        // lhs: (x₁z₁, y₁z₁, z₁), rhs: (x₂z₂, y₂z₂, z₂) where z₁ ≠ 0 and z₂ ≠ 0.
+        // we want to know if x₁ == x₂ and y₁ == y₂
+        // So we multiply the x and y by the opposing z to get:
+        // lhs: (x₁z₁z₂, y₁z₁z₂) rhs: (x₂z₁z₂, y₂z₁z₂)
+        // and check lhs == rhs which implies x₁ == x₂ and y₁ == y₂.
+        //
+        // If one point is infinity it is always in the form (0, y, 0). Note that the above
+        // algorithm still works here. If They are both infinity then they&#39;ll both evalute to (0,0).
+        // If for example the first point is infinity then the above will evaluate to (z₂ * 0, z₂ *
+        // y₂) = (0, z₂y₂) for the first point and (0 * x₂z₂, 0 * y₂z₂) = (0, 0) for the second.
+        //
+        // Since z₂y₂ will never be 0 they will not be equal in this case either.
+        </span><span class="kw">let </span>lhs_x = <span class="self">self</span>.x * <span class="kw-2">&amp;</span>other.z;
+        <span class="kw">let </span>rhs_x = other.x * <span class="kw-2">&amp;</span><span class="self">self</span>.z;
+        <span class="kw">let </span>x_eq = rhs_x.negate(<span class="number">1</span>).add(<span class="kw-2">&amp;</span>lhs_x).normalizes_to_zero();
+
+        <span class="kw">let </span>lhs_y = <span class="self">self</span>.y * <span class="kw-2">&amp;</span>other.z;
+        <span class="kw">let </span>rhs_y = other.y * <span class="kw-2">&amp;</span><span class="self">self</span>.z;
+        <span class="kw">let </span>y_eq = rhs_y.negate(<span class="number">1</span>).add(<span class="kw-2">&amp;</span>lhs_y).normalizes_to_zero();
+        x_eq &amp; y_eq
     }
 }
 
 <span class="kw">impl </span>PartialEq <span class="kw">for </span>ProjectivePoint {
     <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
         <span class="self">self</span>.ct_eq(other).into()
+    }
+}
+
+<span class="kw">impl </span>PartialEq&lt;AffinePoint&gt; <span class="kw">for </span>ProjectivePoint {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>AffinePoint) -&gt; bool {
+        <span class="self">self</span>.eq_affine(other).into()
+    }
+}
+
+<span class="kw">impl </span>PartialEq&lt;ProjectivePoint&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ProjectivePoint) -&gt; bool {
+        other.eq_affine(<span class="self">self</span>).into()
     }
 }
 
@@ -1004,7 +1148,7 @@
     }
 
     <span class="kw">fn </span>is_identity(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Choice {
-        <span class="self">self</span>.ct_eq(<span class="kw-2">&amp;</span><span class="self">Self</span>::IDENTITY)
+        <span class="self">self</span>.z.normalizes_to_zero()
     }
 
     <span class="attr">#[must_use]
@@ -1224,6 +1368,34 @@
     }
 }
 
+<span class="kw">impl </span>From&lt;PublicKey&gt; <span class="kw">for </span>ProjectivePoint {
+    <span class="kw">fn </span>from(public_key: PublicKey) -&gt; ProjectivePoint {
+        AffinePoint::from(public_key).into()
+    }
+}
+
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>PublicKey&gt; <span class="kw">for </span>ProjectivePoint {
+    <span class="kw">fn </span>from(public_key: <span class="kw-2">&amp;</span>PublicKey) -&gt; ProjectivePoint {
+        AffinePoint::from(public_key).into()
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;ProjectivePoint&gt; <span class="kw">for </span>PublicKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(point: ProjectivePoint) -&gt; <span class="prelude-ty">Result</span>&lt;PublicKey&gt; {
+        AffinePoint::from(point).try_into()
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>ProjectivePoint&gt; <span class="kw">for </span>PublicKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(point: <span class="kw-2">&amp;</span>ProjectivePoint) -&gt; <span class="prelude-ty">Result</span>&lt;PublicKey&gt; {
+        AffinePoint::from(point).try_into()
+    }
+}
+
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{AffinePoint, ProjectivePoint};
@@ -1381,6 +1553,28 @@
             <span class="macro">assert_eq!</span>(res.x.to_bytes(), coords.<span class="number">0</span>.into());
             <span class="macro">assert_eq!</span>(res.y.to_bytes(), coords.<span class="number">1</span>.into());
         }
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>projective_equality() {
+        <span class="kw">use </span>core::ops::Neg;
+        <span class="macro">assert_ne!</span>(ProjectivePoint::GENERATOR, ProjectivePoint::IDENTITY);
+        <span class="macro">assert_ne!</span>(ProjectivePoint::IDENTITY, ProjectivePoint::GENERATOR);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::IDENTITY, ProjectivePoint::IDENTITY);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::IDENTITY.neg(), ProjectivePoint::IDENTITY);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::GENERATOR, ProjectivePoint::GENERATOR);
+        <span class="macro">assert_ne!</span>(ProjectivePoint::GENERATOR, ProjectivePoint::GENERATOR.neg());
+
+        <span class="macro">assert_ne!</span>(ProjectivePoint::GENERATOR, AffinePoint::IDENTITY);
+        <span class="macro">assert_ne!</span>(ProjectivePoint::IDENTITY, AffinePoint::GENERATOR);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::IDENTITY, AffinePoint::IDENTITY);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::IDENTITY.neg(), AffinePoint::IDENTITY);
+        <span class="macro">assert_eq!</span>(ProjectivePoint::GENERATOR, AffinePoint::GENERATOR);
+        <span class="macro">assert_ne!</span>(ProjectivePoint::GENERATOR.neg(), AffinePoint::GENERATOR);
+        <span class="macro">assert_eq!</span>(
+            ProjectivePoint::GENERATOR.neg(),
+            AffinePoint::GENERATOR.neg()
+        );
     }
 }
 </code></pre></div>

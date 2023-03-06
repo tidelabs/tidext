@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.13.4/src/hazmat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hazmat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.14.8/src/hazmat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>hazmat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -195,6 +195,71 @@
 <a href="#194" id="194">194</a>
 <a href="#195" id="195">195</a>
 <a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
+<a href="#216" id="216">216</a>
+<a href="#217" id="217">217</a>
+<a href="#218" id="218">218</a>
+<a href="#219" id="219">219</a>
+<a href="#220" id="220">220</a>
+<a href="#221" id="221">221</a>
+<a href="#222" id="222">222</a>
+<a href="#223" id="223">223</a>
+<a href="#224" id="224">224</a>
+<a href="#225" id="225">225</a>
+<a href="#226" id="226">226</a>
+<a href="#227" id="227">227</a>
+<a href="#228" id="228">228</a>
+<a href="#229" id="229">229</a>
+<a href="#230" id="230">230</a>
+<a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
+<a href="#235" id="235">235</a>
+<a href="#236" id="236">236</a>
+<a href="#237" id="237">237</a>
+<a href="#238" id="238">238</a>
+<a href="#239" id="239">239</a>
+<a href="#240" id="240">240</a>
+<a href="#241" id="241">241</a>
+<a href="#242" id="242">242</a>
+<a href="#243" id="243">243</a>
+<a href="#244" id="244">244</a>
+<a href="#245" id="245">245</a>
+<a href="#246" id="246">246</a>
+<a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
+<a href="#252" id="252">252</a>
+<a href="#253" id="253">253</a>
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Low-level ECDSA primitives.
 //!
 //! # ⚠️ Warning: Hazmat!
@@ -209,32 +274,37 @@
 
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;arithmetic&quot;</span>)]
 </span><span class="kw">use </span>{
-    <span class="kw">crate</span>::{Error, RecoveryId, <span class="prelude-ty">Result</span>, SignatureSize},
+    <span class="kw">crate</span>::{RecoveryId, SignatureSize},
     core::borrow::Borrow,
     elliptic_curve::{
         group::Curve <span class="kw">as _</span>,
         ops::{Invert, LinearCombination, Reduce},
-        AffineArithmetic, AffineXCoordinate, Field, FieldBytes, Group, ProjectiveArithmetic,
-        ProjectivePoint, Scalar, ScalarArithmetic,
+        subtle::CtOption,
+        AffineArithmetic, AffineXCoordinate, Field, Group, ProjectiveArithmetic, ProjectivePoint,
+        Scalar, ScalarArithmetic,
     },
 };
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;digest&quot;</span>)]
 </span><span class="kw">use </span>{
-    elliptic_curve::FieldSize,
+    core::cmp,
+    elliptic_curve::{bigint::Encoding, FieldSize},
     signature::{digest::Digest, PrehashSignature},
 };
 
 <span class="attr">#[cfg(any(feature = <span class="string">&quot;arithmetic&quot;</span>, feature = <span class="string">&quot;digest&quot;</span>))]
 </span><span class="kw">use crate</span>::{
-    elliptic_curve::{generic_array::ArrayLength, PrimeCurve},
-    Signature,
+    elliptic_curve::{generic_array::ArrayLength, FieldBytes, PrimeCurve},
+    Error, <span class="prelude-ty">Result</span>, Signature,
 };
 
-<span class="attr">#[cfg(all(feature = <span class="string">&quot;sign&quot;</span>))]
+<span class="attr">#[cfg(all(feature = <span class="string">&quot;arithmetic&quot;</span>, feature = <span class="string">&quot;digest&quot;</span>))]
+</span><span class="kw">use </span>signature::digest::FixedOutput;
+
+<span class="attr">#[cfg(all(feature = <span class="string">&quot;rfc6979&quot;</span>))]
 </span><span class="kw">use </span>{
-    elliptic_curve::{ff::PrimeField, zeroize::Zeroizing, NonZeroScalar, ScalarCore},
-    signature::digest::{BlockInput, FixedOutput, Reset, Update},
+    elliptic_curve::ScalarCore,
+    signature::digest::{core_api::BlockSizeUser, FixedOutputReset},
 };
 
 <span class="doccomment">/// Try to sign the given prehashed message using ECDSA.
@@ -253,13 +323,8 @@
     /// Accepts the following arguments:
     ///
     /// - `k`: ephemeral scalar value. MUST BE UNIFORMLY RANDOM!!!
-    /// - `z`: scalar computed from a hashed message digest to be signed.
-    ///   MUST BE OUTPUT OF A CRYPTOGRAPHICALLY SECURE DIGEST ALGORITHM!!!
-    ///
-    /// # Computing the `hashed_msg` scalar
-    ///
-    /// To compute a [`Scalar`] from a message digest, use the [`Reduce`] trait
-    /// on the computed digest, e.g. `Scalar::from_be_bytes_reduced`.
+    /// - `z`: message digest to be signed. MUST BE OUTPUT OF A CRYPTOGRAPHICALLY
+    ///        SECURE DIGEST ALGORITHM!!!
     ///
     /// # Returns
     ///
@@ -269,26 +334,28 @@
     </span><span class="kw">fn </span>try_sign_prehashed&lt;K&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         k: K,
-        z: Scalar&lt;C&gt;,
+        z: FieldBytes&lt;C&gt;,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;(Signature&lt;C&gt;, <span class="prelude-ty">Option</span>&lt;RecoveryId&gt;)&gt;
     <span class="kw">where
-        </span>K: Borrow&lt;<span class="self">Self</span>&gt; + Invert&lt;Output = <span class="self">Self</span>&gt;,
+        </span>K: Borrow&lt;<span class="self">Self</span>&gt; + Invert&lt;Output = CtOption&lt;<span class="self">Self</span>&gt;&gt;,
     {
         <span class="kw">if </span>k.borrow().is_zero().into() {
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new());
         }
 
+        <span class="kw">let </span>z = <span class="self">Self</span>::from_be_bytes_reduced(z);
+
         <span class="comment">// Compute scalar inversion of 𝑘
         </span><span class="kw">let </span>k_inv = <span class="prelude-ty">Option</span>::&lt;Scalar&lt;C&gt;&gt;::from(k.invert()).ok_or_else(Error::new)<span class="question-mark">?</span>;
 
-        <span class="comment">// Compute 𝐑 = 𝑘×𝑮
+        <span class="comment">// Compute 𝑹 = 𝑘×𝑮
         </span><span class="kw">let </span>R = (C::ProjectivePoint::generator() * k.borrow()).to_affine();
 
-        <span class="comment">// Lift x-coordinate of 𝐑 (element of base field) into a serialized big
+        <span class="comment">// Lift x-coordinate of 𝑹 (element of base field) into a serialized big
         // integer, then reduce it into an element of the scalar field
         </span><span class="kw">let </span>r = <span class="self">Self</span>::from_be_bytes_reduced(R.x());
 
-        <span class="comment">// Compute `s` as a signature over `r` and `z`.
+        <span class="comment">// Compute 𝒔 as a signature over 𝒓 and 𝒛.
         </span><span class="kw">let </span>s = k_inv * (z + (r * <span class="self">self</span>));
 
         <span class="kw">if </span>s.is_zero().into() {
@@ -297,6 +364,51 @@
 
         <span class="comment">// TODO(tarcieri): support for computing recovery ID
         </span><span class="prelude-val">Ok</span>((Signature::from_scalars(r, s)<span class="question-mark">?</span>, <span class="prelude-val">None</span>))
+    }
+
+    <span class="doccomment">/// Try to sign the given message digest deterministically using the method
+    /// described in [RFC6979] for computing ECDSA ephemeral scalar `k`.
+    ///
+    /// Accepts the following parameters:
+    /// - `z`: message digest to be signed.
+    /// - `ad`: optional additional data, e.g. added entropy from an RNG
+    ///
+    /// [RFC6979]: https://datatracker.ietf.org/doc/html/rfc6979
+    </span><span class="attr">#[cfg(all(feature = <span class="string">&quot;rfc6979&quot;</span>))]
+    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;rfc6979&quot;</span>)))]
+    </span><span class="kw">fn </span>try_sign_prehashed_rfc6979&lt;D&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        z: FieldBytes&lt;C&gt;,
+        ad: <span class="kw-2">&amp;</span>[u8],
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(Signature&lt;C&gt;, <span class="prelude-ty">Option</span>&lt;RecoveryId&gt;)&gt;
+    <span class="kw">where
+        </span><span class="self">Self</span>: From&lt;ScalarCore&lt;C&gt;&gt;,
+        C::UInt: <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt;,
+        D: Digest + BlockSizeUser + FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt; + FixedOutputReset,
+    {
+        <span class="kw">let </span>x = C::UInt::from(<span class="self">self</span>);
+        <span class="kw">let </span>k = rfc6979::generate_k::&lt;D, C::UInt&gt;(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>C::ORDER, <span class="kw-2">&amp;</span>z, ad);
+        <span class="kw">let </span>k = <span class="self">Self</span>::from(ScalarCore::&lt;C&gt;::new(<span class="kw-2">*</span>k).unwrap());
+        <span class="self">self</span>.try_sign_prehashed(k, z)
+    }
+
+    <span class="doccomment">/// Try to sign the given digest instance using the method described in
+    /// [RFC6979].
+    ///
+    /// [RFC6979]: https://datatracker.ietf.org/doc/html/rfc6979
+    </span><span class="attr">#[cfg(all(feature = <span class="string">&quot;rfc6979&quot;</span>))]
+    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;rfc6979&quot;</span>)))]
+    </span><span class="kw">fn </span>try_sign_digest_rfc6979&lt;D&gt;(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        msg_digest: D,
+        ad: <span class="kw-2">&amp;</span>[u8],
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(Signature&lt;C&gt;, <span class="prelude-ty">Option</span>&lt;RecoveryId&gt;)&gt;
+    <span class="kw">where
+        </span><span class="self">Self</span>: From&lt;ScalarCore&lt;C&gt;&gt;,
+        C::UInt: <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt;,
+        D: Digest + BlockSizeUser + FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt; + FixedOutputReset,
+    {
+        <span class="self">self</span>.try_sign_prehashed_rfc6979::&lt;D&gt;(msg_digest.finalize_fixed(), ad)
     }
 }
 
@@ -317,11 +429,13 @@
     ///
     /// Accepts the following arguments:
     ///
-    /// - `z`: prehashed message to be verified
+    /// - `z`: message digest to be verified. MUST BE OUTPUT OF A
+    ///        CRYPTOGRAPHICALLY SECURE DIGEST ALGORITHM!!!
     /// - `sig`: signature to be verified against the key and message
-    </span><span class="kw">fn </span>verify_prehashed(<span class="kw-2">&amp;</span><span class="self">self</span>, z: Scalar&lt;C&gt;, sig: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    </span><span class="kw">fn </span>verify_prehashed(<span class="kw-2">&amp;</span><span class="self">self</span>, z: FieldBytes&lt;C&gt;, sig: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+        <span class="kw">let </span>z = Scalar::&lt;C&gt;::from_be_bytes_reduced(z);
         <span class="kw">let </span>(r, s) = sig.split_scalars();
-        <span class="kw">let </span>s_inv = <span class="prelude-ty">Option</span>::&lt;Scalar&lt;C&gt;&gt;::from(s.invert()).ok_or_else(Error::new)<span class="question-mark">?</span>;
+        <span class="kw">let </span>s_inv = <span class="kw-2">*</span>s.invert();
         <span class="kw">let </span>u1 = z * s_inv;
         <span class="kw">let </span>u2 = <span class="kw-2">*</span>r * s_inv;
         <span class="kw">let </span>x = ProjectivePoint::&lt;C&gt;::lincomb(
@@ -339,6 +453,16 @@
             <span class="prelude-val">Err</span>(Error::new())
         }
     }
+
+    <span class="doccomment">/// Verify message digest against the provided signature.
+    </span><span class="attr">#[cfg(feature = <span class="string">&quot;digest&quot;</span>)]
+    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;digest&quot;</span>)))]
+    </span><span class="kw">fn </span>verify_digest&lt;D&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, msg_digest: D, sig: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt;
+    <span class="kw">where
+        </span>D: FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt;,
+    {
+        <span class="self">self</span>.verify_prehashed(msg_digest.finalize_fixed(), sig)
+    }
 }
 
 <span class="doccomment">/// Bind a preferred [`Digest`] algorithm to an elliptic curve type.
@@ -355,8 +479,38 @@
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;digest&quot;</span>)))]
 </span><span class="kw">pub trait </span>DigestPrimitive: PrimeCurve {
     <span class="doccomment">/// Preferred digest to use when computing ECDSA signatures for this
-    /// elliptic curve. This should be a member of the SHA-2 family.
+    /// elliptic curve. This is typically a member of the SHA-2 family.
+    </span><span class="comment">// TODO(tarcieri): add BlockSizeUser + FixedOutput(Reset) bounds in next breaking release
+    // These bounds ensure the digest algorithm can be used for HMAC-DRBG for RFC6979
     </span><span class="kw">type </span>Digest: Digest;
+
+    <span class="doccomment">/// Compute field bytes for a prehash (message digest), either zero-padding
+    /// or truncating if the prehash size does not match the field size.
+    </span><span class="kw">fn </span>prehash_to_field_bytes(prehash: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;FieldBytes&lt;<span class="self">Self</span>&gt;&gt; {
+        <span class="comment">// Minimum allowed prehash size is half the field size
+        </span><span class="kw">if </span>prehash.len() &lt; <span class="self">Self</span>::UInt::BYTE_SIZE / <span class="number">2 </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new());
+        }
+
+        <span class="kw">let </span><span class="kw-2">mut </span>field_bytes = FieldBytes::&lt;<span class="self">Self</span>&gt;::default();
+
+        <span class="comment">// This is a operation according to RFC6979 Section 2.3.2. and SEC1 Section 2.3.8.
+        // https://datatracker.ietf.org/doc/html/rfc6979#section-2.3.2
+        // https://www.secg.org/sec1-v2.pdf
+        </span><span class="kw">match </span>prehash.len().cmp(<span class="kw-2">&amp;</span><span class="self">Self</span>::UInt::BYTE_SIZE) {
+            cmp::Ordering::Equal =&gt; field_bytes.copy_from_slice(prehash),
+            cmp::Ordering::Less =&gt; {
+                <span class="comment">// If prehash is smaller than the field size, pad with zeroes on the left
+                </span>field_bytes[(<span class="self">Self</span>::UInt::BYTE_SIZE - prehash.len())..].copy_from_slice(prehash);
+            }
+            cmp::Ordering::Greater =&gt; {
+                <span class="comment">// If prehash is larger than the field size, truncate
+                </span>field_bytes.copy_from_slice(<span class="kw-2">&amp;</span>prehash[..<span class="self">Self</span>::UInt::BYTE_SIZE]);
+            }
+        }
+
+        <span class="prelude-val">Ok</span>(field_bytes)
+    }
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;digest&quot;</span>)]
@@ -366,30 +520,6 @@
     &lt;FieldSize&lt;C&gt; <span class="kw">as </span>core::ops::Add&gt;::Output: ArrayLength&lt;u8&gt;,
 {
     <span class="kw">type </span>Digest = C::Digest;
-}
-
-<span class="doccomment">/// Deterministically compute ECDSA ephemeral scalar `k` using the method
-/// described in RFC6979.
-///
-/// Accepts the following parameters:
-/// - `x`: secret key
-/// - `z`: message scalar (i.e. message digest reduced mod p)
-/// - `ad`: optional additional data, e.g. added entropy from an RNG
-</span><span class="attr">#[cfg(all(feature = <span class="string">&quot;sign&quot;</span>))]
-#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;sign&quot;</span>)))]
-</span><span class="kw">pub fn </span>rfc6979_generate_k&lt;C, D&gt;(
-    x: <span class="kw-2">&amp;</span>NonZeroScalar&lt;C&gt;,
-    z: <span class="kw-2">&amp;</span>Scalar&lt;C&gt;,
-    ad: <span class="kw-2">&amp;</span>[u8],
-) -&gt; Zeroizing&lt;NonZeroScalar&lt;C&gt;&gt;
-<span class="kw">where
-    </span>C: PrimeCurve + ProjectiveArithmetic,
-    D: FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt; + BlockInput + Clone + Default + Reset + Update,
-{
-    <span class="comment">// TODO(tarcieri): avoid this conversion
-    </span><span class="kw">let </span>x = Zeroizing::new(ScalarCore::&lt;C&gt;::from(x));
-    <span class="kw">let </span>k = rfc6979::generate_k::&lt;D, C::UInt&gt;(x.as_uint(), <span class="kw-2">&amp;</span>C::ORDER, <span class="kw-2">&amp;</span>z.to_repr(), ad);
-    Zeroizing::new(NonZeroScalar::&lt;C&gt;::from_uint(<span class="kw-2">*</span>k).unwrap())
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="ecdsa" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

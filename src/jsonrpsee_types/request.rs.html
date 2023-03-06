@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-types-0.15.1/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_types/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-types-0.16.2/src/request.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>request.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_types/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -254,6 +254,23 @@
 <a href="#254" id="254">254</a>
 <a href="#255" id="255">255</a>
 <a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 //
 // Permission is hereby granted, free of charge, to any
@@ -283,7 +300,9 @@
 </span><span class="doccomment">//! Types to handle JSON-RPC requests according to the [spec](https://www.jsonrpc.org/specification#request-object).
 //! Some types come with a &quot;*Ser&quot; variant that implements [`serde::Serialize`]; these are used in the client.
 
-</span><span class="kw">use </span><span class="kw">crate</span>::params::{Id, ParamsSer, TwoPointZero};
+</span><span class="kw">use </span>std::borrow::Cow <span class="kw">as </span>StdCow;
+
+<span class="kw">use </span><span class="kw">crate</span>::params::{Id, TwoPointZero};
 <span class="kw">use </span>beef::Cow;
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">use </span>serde_json::value::RawValue;
@@ -312,7 +331,7 @@
 }
 
 <span class="doccomment">/// JSON-RPC Invalid request as defined in the [spec](https://www.jsonrpc.org/specification#request-object).
-</span><span class="attr">#[derive(Deserialize, Debug, PartialEq)]
+</span><span class="attr">#[derive(Deserialize, Debug, PartialEq, Eq)]
 </span><span class="kw">pub struct </span>InvalidRequest&lt;<span class="lifetime">&#39;a</span>&gt; {
 	<span class="doccomment">/// Request ID
 	</span><span class="attr">#[serde(borrow)]
@@ -345,20 +364,29 @@
 	<span class="doccomment">/// JSON-RPC version.
 	</span><span class="kw">pub </span>jsonrpc: TwoPointZero,
 	<span class="doccomment">/// Request ID
-	</span><span class="kw">pub </span>id: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Id&lt;<span class="lifetime">&#39;a</span>&gt;,
+	</span><span class="kw">pub </span>id: Id&lt;<span class="lifetime">&#39;a</span>&gt;,
 	<span class="doccomment">/// Name of the method to be invoked.
-	</span><span class="comment">// NOTE: as this type only implements serialize
-	// `#[serde(borrow)]` and `Cow&lt;&#39;a, str&gt;` is not needed.
-	</span><span class="kw">pub </span>method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+	</span><span class="comment">// NOTE: as this type only implements serialize `#[serde(borrow)]` is not needed.
+	</span><span class="kw">pub </span>method: Cow&lt;<span class="lifetime">&#39;a</span>, str&gt;,
 	<span class="doccomment">/// Parameter values of the request.
 	</span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-	</span><span class="kw">pub </span>params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+	</span><span class="kw">pub </span>params: <span class="prelude-ty">Option</span>&lt;StdCow&lt;<span class="lifetime">&#39;a</span>, RawValue&gt;&gt;,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; RequestSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="doccomment">/// Create a new serializable JSON-RPC request.
-	</span><span class="kw">pub fn </span>new(id: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Id&lt;<span class="lifetime">&#39;a</span>&gt;, method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;) -&gt; <span class="self">Self </span>{
-		<span class="self">Self </span>{ jsonrpc: TwoPointZero, id, method, params }
+	<span class="doccomment">/// Create a borrowed serializable JSON-RPC method call.
+	</span><span class="kw">pub fn </span>borrowed(id: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Id&lt;<span class="lifetime">&#39;a</span>&gt;, method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw">impl </span>AsRef&lt;str&gt;, params: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RawValue&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			jsonrpc: TwoPointZero,
+			id: id.clone(),
+			method: method.as_ref().into(),
+			params: params.map(StdCow::Borrowed),
+		}
+	}
+
+	<span class="doccomment">/// Create a owned serializable JSON-RPC method call.
+	</span><span class="kw">pub fn </span>owned(id: Id&lt;<span class="lifetime">&#39;a</span>&gt;, method: <span class="kw">impl </span>Into&lt;String&gt;, params: <span class="prelude-ty">Option</span>&lt;Box&lt;RawValue&gt;&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ jsonrpc: TwoPointZero, id, method: method.into().into(), params: params.map(StdCow::Owned) }
 	}
 }
 
@@ -368,25 +396,29 @@
 	<span class="doccomment">/// JSON-RPC version.
 	</span><span class="kw">pub </span>jsonrpc: TwoPointZero,
 	<span class="doccomment">/// Name of the method to be invoked.
-	</span><span class="comment">// NOTE: as this type only implements serialize
-	// `#[serde(borrow)]` and `Cow&lt;&#39;a, str&gt;` is not needed.
-	</span><span class="kw">pub </span>method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str,
+	</span><span class="comment">// NOTE: as this type only implements serialize `#[serde(borrow)]` is not needed.
+	</span><span class="kw">pub </span>method: Cow&lt;<span class="lifetime">&#39;a</span>, str&gt;,
 	<span class="doccomment">/// Parameter values of the request.
 	</span><span class="attr">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
-	</span><span class="kw">pub </span>params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;,
+	</span><span class="kw">pub </span>params: <span class="prelude-ty">Option</span>&lt;StdCow&lt;<span class="lifetime">&#39;a</span>, RawValue&gt;&gt;,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; NotificationSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="doccomment">/// Create a new serializable JSON-RPC request.
-	</span><span class="kw">pub fn </span>new(method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, params: <span class="prelude-ty">Option</span>&lt;ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt;&gt;) -&gt; <span class="self">Self </span>{
-		<span class="self">Self </span>{ jsonrpc: TwoPointZero, method, params }
+	<span class="doccomment">/// Create a borrowed serializable JSON-RPC notification.
+	</span><span class="kw">pub fn </span>borrowed(method: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw">impl </span>AsRef&lt;str&gt;, params: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RawValue&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ jsonrpc: TwoPointZero, method: method.as_ref().into(), params: params.map(StdCow::Borrowed) }
+	}
+
+	<span class="doccomment">/// Create an owned serializable JSON-RPC notification.
+	</span><span class="kw">pub fn </span>owned(method: <span class="kw">impl </span>Into&lt;String&gt;, params: <span class="prelude-ty">Option</span>&lt;Box&lt;RawValue&gt;&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ jsonrpc: TwoPointZero, method: method.into().into(), params: params.map(StdCow::Owned) }
 	}
 }
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>test {
-	<span class="kw">use super</span>::{Id, InvalidRequest, Notification, NotificationSer, ParamsSer, Request, RequestSer, TwoPointZero};
-	<span class="kw">use </span>serde_json::{value::RawValue, Value};
+	<span class="kw">use super</span>::{Id, InvalidRequest, Notification, NotificationSer, Request, RequestSer, StdCow, TwoPointZero};
+	<span class="kw">use </span>serde_json::value::RawValue;
 
 	<span class="kw">fn </span>assert_request&lt;<span class="lifetime">&#39;a</span>&gt;(request: Request&lt;<span class="lifetime">&#39;a</span>&gt;, id: Id&lt;<span class="lifetime">&#39;a</span>&gt;, method: <span class="kw-2">&amp;</span>str, params: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt;) {
 		<span class="macro">assert_eq!</span>(request.jsonrpc, TwoPointZero);
@@ -462,31 +494,32 @@
 	</span><span class="kw">fn </span>serialize_call() {
 		<span class="kw">let </span>method = <span class="string">&quot;subtract&quot;</span>;
 		<span class="kw">let </span>id = Id::Number(<span class="number">1</span>); <span class="comment">// It&#39;s enough to check one variant, since the type itself also has tests.
-		</span><span class="kw">let </span>params: ParamsSer = <span class="macro">vec!</span>[Value::Number(<span class="number">42</span>.into()), Value::Number(<span class="number">23</span>.into())].into(); <span class="comment">// Same as above.
-		</span><span class="kw">let </span>test_vector = <span class="kw-2">&amp;</span>[
+		</span><span class="kw">let </span>params = <span class="prelude-val">Some</span>(RawValue::from_string(<span class="string">&quot;[42,23]&quot;</span>.into()).unwrap());
+
+		<span class="kw">let </span>test_vector: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, <span class="prelude-ty">Option</span>&lt;<span class="kw">_</span>&gt;, <span class="prelude-ty">Option</span>&lt;<span class="kw">_</span>&gt;, <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str)] = <span class="kw-2">&amp;</span>[
 			<span class="comment">// With all fields set.
 			</span>(
 				<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;subtract&quot;,&quot;params&quot;:[42,23]}&quot;#</span>,
-				<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>id),
-				<span class="prelude-val">Some</span>(params.clone()),
+				<span class="prelude-val">Some</span>(id.clone()),
+				params.clone(),
 				method,
 			),
 			<span class="comment">// Escaped method name.
-			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;\&quot;m&quot;}&quot;#</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>id), <span class="prelude-val">None</span>, <span class="string">&quot;\&quot;m&quot;</span>),
+			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;\&quot;m&quot;}&quot;#</span>, <span class="prelude-val">Some</span>(id.clone()), <span class="prelude-val">None</span>, <span class="string">&quot;\&quot;m&quot;</span>),
 			<span class="comment">// Without ID field.
-			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:null,&quot;method&quot;:&quot;subtract&quot;,&quot;params&quot;:[42,23]}&quot;#</span>, <span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(params), method),
+			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:null,&quot;method&quot;:&quot;subtract&quot;,&quot;params&quot;:[42,23]}&quot;#</span>, <span class="prelude-val">None</span>, params, method),
 			<span class="comment">// Without params field
-			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;subtract&quot;}&quot;#</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>id), <span class="prelude-val">None</span>, method),
+			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;subtract&quot;}&quot;#</span>, <span class="prelude-val">Some</span>(id), <span class="prelude-val">None</span>, method),
 			<span class="comment">// Without params and ID.
 			</span>(<span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:null,&quot;method&quot;:&quot;subtract&quot;}&quot;#</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, method),
 		];
 
-		<span class="kw">for </span>(ser, id, params, method) <span class="kw">in </span>test_vector.iter().cloned() {
+		<span class="kw">for </span>(ser, id, params, method) <span class="kw">in </span>test_vector.into_iter().cloned() {
 			<span class="kw">let </span>request = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer {
 				jsonrpc: TwoPointZero,
-				method,
-				id: id.unwrap_or(<span class="kw-2">&amp;</span>Id::Null),
-				params,
+				method: method.into(),
+				id: id.unwrap_or(Id::Null),
+				params: params.map(StdCow::Owned),
 			})
 			.unwrap();
 
@@ -497,7 +530,8 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>serialize_notif() {
 		<span class="kw">let </span>exp = <span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;say_hello&quot;,&quot;params&quot;:[&quot;hello&quot;]}&quot;#</span>;
-		<span class="kw">let </span>req = NotificationSer::new(<span class="string">&quot;say_hello&quot;</span>, <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="string">&quot;hello&quot;</span>.into()].into()));
+		<span class="kw">let </span>params = <span class="prelude-val">Some</span>(RawValue::from_string(<span class="string">r#&quot;[&quot;hello&quot;]&quot;#</span>.into()).unwrap());
+		<span class="kw">let </span>req = NotificationSer::owned(<span class="string">&quot;say_hello&quot;</span>, params);
 		<span class="kw">let </span>ser = serde_json::to_string(<span class="kw-2">&amp;</span>req).unwrap();
 		<span class="macro">assert_eq!</span>(exp, ser);
 	}
@@ -505,7 +539,7 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>serialize_notif_escaped_method_name() {
 		<span class="kw">let </span>exp = <span class="string">r#&quot;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;\&quot;method\&quot;&quot;}&quot;#</span>;
-		<span class="kw">let </span>req = NotificationSer::new(<span class="string">&quot;\&quot;method\&quot;&quot;</span>, <span class="prelude-val">None</span>);
+		<span class="kw">let </span>req = NotificationSer::owned(<span class="string">&quot;\&quot;method\&quot;&quot;</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>ser = serde_json::to_string(<span class="kw-2">&amp;</span>req).unwrap();
 		<span class="macro">assert_eq!</span>(exp, ser);
 	}

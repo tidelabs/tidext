@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/ops.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ops.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/ops.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ops.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2949,14 +2949,40 @@
 <a href="#2949" id="2949">2949</a>
 <a href="#2950" id="2950">2950</a>
 <a href="#2951" id="2951">2951</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::{boxed::Box, vec::Vec};
-<span class="kw">use </span><span class="kw">crate</span>::io;
-<span class="kw">use super</span>::{
-	Serialize, Deserialize, Error,
-	Uint8, VarUint32, CountedList, BlockType,
-	Uint32, Uint64, CountedListWriter,
-	VarInt32, VarInt64,
+<a href="#2952" id="2952">2952</a>
+<a href="#2953" id="2953">2953</a>
+<a href="#2954" id="2954">2954</a>
+<a href="#2955" id="2955">2955</a>
+<a href="#2956" id="2956">2956</a>
+<a href="#2957" id="2957">2957</a>
+<a href="#2958" id="2958">2958</a>
+<a href="#2959" id="2959">2959</a>
+<a href="#2960" id="2960">2960</a>
+<a href="#2961" id="2961">2961</a>
+<a href="#2962" id="2962">2962</a>
+<a href="#2963" id="2963">2963</a>
+<a href="#2964" id="2964">2964</a>
+<a href="#2965" id="2965">2965</a>
+<a href="#2966" id="2966">2966</a>
+<a href="#2967" id="2967">2967</a>
+<a href="#2968" id="2968">2968</a>
+<a href="#2969" id="2969">2969</a>
+<a href="#2970" id="2970">2970</a>
+<a href="#2971" id="2971">2971</a>
+<a href="#2972" id="2972">2972</a>
+<a href="#2973" id="2973">2973</a>
+<a href="#2974" id="2974">2974</a>
+<a href="#2975" id="2975">2975</a>
+<a href="#2976" id="2976">2976</a>
+<a href="#2977" id="2977">2977</a>
+<a href="#2978" id="2978">2978</a>
+<a href="#2979" id="2979">2979</a>
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+	BlockType, CountedList, CountedListWriter, Deserialize, Error, Serialize, Uint32, Uint64,
+	Uint8, VarInt32, VarInt64, VarUint32,
 };
+<span class="kw">use </span><span class="kw">crate</span>::io;
+<span class="kw">use </span>alloc::{boxed::Box, vec::Vec};
 <span class="kw">use </span>core::fmt;
 
 <span class="doccomment">/// List of instructions (usually inside a block section).
@@ -2975,10 +3001,14 @@
 	}
 
 	<span class="doccomment">/// List of individual instructions.
-	</span><span class="kw">pub fn </span>elements(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Instruction] { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0 </span>}
+	</span><span class="kw">pub fn </span>elements(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[Instruction] {
+		<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0
+	</span>}
 
 	<span class="doccomment">/// Individual instructions, mutable.
-	</span><span class="kw">pub fn </span>elements_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Vec&lt;Instruction&gt; { <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0 </span>}
+	</span><span class="kw">pub fn </span>elements_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Vec&lt;Instruction&gt; {
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0
+	</span>}
 }
 
 <span class="kw">impl </span>Deserialize <span class="kw">for </span>Instructions {
@@ -2993,13 +3023,14 @@
 			<span class="kw">if </span>instruction.is_terminal() {
 				block_count -= <span class="number">1</span>;
 			} <span class="kw">else if </span>instruction.is_block() {
-				block_count = block_count.checked_add(<span class="number">1</span>).ok_or(Error::Other(<span class="string">&quot;too many instructions&quot;</span>))<span class="question-mark">?</span>;
+				block_count =
+					block_count.checked_add(<span class="number">1</span>).ok_or(Error::Other(<span class="string">&quot;too many instructions&quot;</span>))<span class="question-mark">?</span>;
 			}
 
 			instructions.push(instruction);
 			<span class="kw">if </span>block_count == <span class="number">0 </span>{
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 
 		<span class="prelude-val">Ok</span>(Instructions(instructions))
@@ -3045,8 +3076,8 @@
 			<span class="kw">let </span>is_terminal = instruction.is_terminal();
 			instructions.push(instruction);
 			<span class="kw">if </span>is_terminal {
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 
 		<span class="prelude-val">Ok</span>(InitExpr(instructions))
@@ -3246,21 +3277,21 @@
 	F32ReinterpretI32,
 	F64ReinterpretI64,
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 	</span>Atomics(AtomicsInstruction),
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 	</span>Simd(SimdInstruction),
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 	</span>SignExt(SignExtInstruction),
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 	</span>Bulk(BulkInstruction),
 }
 
 <span class="attr">#[allow(missing_docs)]
-#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 </span><span class="kw">pub enum </span>AtomicsInstruction {
 	AtomicWake(MemArg),
@@ -3340,7 +3371,7 @@
 }
 
 <span class="attr">#[allow(missing_docs)]
-#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 </span><span class="kw">pub enum </span>SimdInstruction {
 	V128Const(Box&lt;[u8; <span class="number">16</span>]&gt;),
@@ -3497,7 +3528,7 @@
 }
 
 <span class="attr">#[allow(missing_docs)]
-#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 </span><span class="kw">pub enum </span>SignExtInstruction {
 	I32Extend8S,
@@ -3508,7 +3539,7 @@
 }
 
 <span class="attr">#[allow(missing_docs)]
-#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 </span><span class="kw">pub enum </span>BulkInstruction {
 	MemoryInit(u32),
@@ -3520,7 +3551,7 @@
 	TableCopy,
 }
 
-<span class="attr">#[cfg(any(feature=<span class="string">&quot;simd&quot;</span>, feature=<span class="string">&quot;atomics&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;simd&quot;</span>, feature = <span class="string">&quot;atomics&quot;</span>))]
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[allow(missing_docs)]
 </span><span class="kw">pub struct </span>MemArg {
@@ -3538,20 +3569,14 @@
 <span class="kw">impl </span>Instruction {
 	<span class="doccomment">/// Is this instruction starts the new block (which should end with terminal instruction).
 	</span><span class="kw">pub fn </span>is_block(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-		<span class="kw">match </span><span class="self">self </span>{
-			<span class="kw-2">&amp;</span>Instruction::Block(<span class="kw">_</span>) | <span class="kw-2">&amp;</span>Instruction::Loop(<span class="kw">_</span>) | <span class="kw-2">&amp;</span>Instruction::If(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
-			<span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
-		}
+		<span class="macro">matches!</span>(<span class="self">self</span>, <span class="kw-2">&amp;</span>Instruction::Block(<span class="kw">_</span>) | <span class="kw-2">&amp;</span>Instruction::Loop(<span class="kw">_</span>) | <span class="kw-2">&amp;</span>Instruction::If(<span class="kw">_</span>))
 	}
 
 	<span class="doccomment">/// Is this instruction determines the termination of instruction sequence?
 	///
 	/// `true` for `Instruction::End`
 	</span><span class="kw">pub fn </span>is_terminal(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-		<span class="kw">match </span><span class="self">self </span>{
-			<span class="kw-2">&amp;</span>Instruction::End =&gt; <span class="bool-val">true</span>,
-			<span class="kw">_ </span>=&gt; <span class="bool-val">false</span>,
-		}
+		<span class="macro">matches!</span>(<span class="self">self</span>, <span class="kw-2">&amp;</span>Instruction::End)
 	}
 }
 
@@ -3736,7 +3761,7 @@
 	<span class="kw">pub const </span>F32REINTERPRETI32: u8 = <span class="number">0xbe</span>;
 	<span class="kw">pub const </span>F64REINTERPRETI64: u8 = <span class="number">0xbf</span>;
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 	</span><span class="kw">pub mod </span>sign_ext {
 		<span class="kw">pub const </span>I32_EXTEND8_S: u8 = <span class="number">0xc0</span>;
 		<span class="kw">pub const </span>I32_EXTEND16_S: u8 = <span class="number">0xc1</span>;
@@ -3745,7 +3770,7 @@
 		<span class="kw">pub const </span>I64_EXTEND32_S: u8 = <span class="number">0xc4</span>;
 	}
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 	</span><span class="kw">pub mod </span>atomics {
 		<span class="kw">pub const </span>ATOMIC_PREFIX: u8 = <span class="number">0xfe</span>;
 		<span class="kw">pub const </span>ATOMIC_WAKE: u8 = <span class="number">0x00</span>;
@@ -3824,7 +3849,7 @@
 		<span class="kw">pub const </span>I64_ATOMIC_RMW_CMPXCHG32U: u8 = <span class="number">0x4e</span>;
 	}
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 	</span><span class="kw">pub mod </span>simd {
 		<span class="comment">// https://github.com/WebAssembly/simd/blob/master/proposals/simd/BinarySIMD.md
 		</span><span class="kw">pub const </span>SIMD_PREFIX: u8 = <span class="number">0xfd</span>;
@@ -3990,7 +4015,7 @@
 		<span class="kw">pub const </span>F64X2_CONVERT_U_I64X2: u32 = <span class="number">0xb2</span>;
 	}
 
-	<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+	<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 	</span><span class="kw">pub mod </span>bulk {
 		<span class="kw">pub const </span>BULK_PREFIX: u8 = <span class="number">0xfc</span>;
 		<span class="kw">pub const </span>MEMORY_INIT: u8 = <span class="number">0x08</span>;
@@ -4007,331 +4032,348 @@
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
-		<span class="kw">use </span><span class="self">self</span>::Instruction::<span class="kw-2">*</span>;
-		<span class="kw">use </span><span class="self">self</span>::opcodes::<span class="kw-2">*</span>;
+		<span class="kw">use </span><span class="self">self</span>::{opcodes::<span class="kw-2">*</span>, Instruction::<span class="kw-2">*</span>};
 
-		<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+		<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 		</span><span class="kw">use </span><span class="self">self</span>::opcodes::sign_ext::<span class="kw-2">*</span>;
 
 		<span class="kw">let </span>val: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
 
-		<span class="prelude-val">Ok</span>(
-			<span class="kw">match </span>val {
-				UNREACHABLE =&gt; Unreachable,
-				NOP =&gt; Nop,
-				BLOCK =&gt; Block(BlockType::deserialize(reader)<span class="question-mark">?</span>),
-				LOOP =&gt; Loop(BlockType::deserialize(reader)<span class="question-mark">?</span>),
-				IF =&gt; If(BlockType::deserialize(reader)<span class="question-mark">?</span>),
-				ELSE =&gt; Else,
-				END =&gt; End,
+		<span class="prelude-val">Ok</span>(<span class="kw">match </span>val {
+			UNREACHABLE =&gt; Unreachable,
+			NOP =&gt; Nop,
+			BLOCK =&gt; Block(BlockType::deserialize(reader)<span class="question-mark">?</span>),
+			LOOP =&gt; Loop(BlockType::deserialize(reader)<span class="question-mark">?</span>),
+			IF =&gt; If(BlockType::deserialize(reader)<span class="question-mark">?</span>),
+			ELSE =&gt; Else,
+			END =&gt; End,
 
-				BR =&gt; Br(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				BRIF =&gt; BrIf(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				BRTABLE =&gt; {
-					<span class="kw">let </span>t1: Vec&lt;u32&gt; = CountedList::&lt;VarUint32&gt;::deserialize(reader)<span class="question-mark">?
-						</span>.into_inner()
-						.into_iter()
-						.map(Into::into)
-						.collect();
+			BR =&gt; Br(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			BRIF =&gt; BrIf(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			BRTABLE =&gt; {
+				<span class="kw">let </span>t1: Vec&lt;u32&gt; = CountedList::&lt;VarUint32&gt;::deserialize(reader)<span class="question-mark">?
+					</span>.into_inner()
+					.into_iter()
+					.map(Into::into)
+					.collect();
 
-					BrTable(Box::new(BrTableData {
-						table: t1.into_boxed_slice(),
-						default: VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					}))
-				},
-				RETURN =&gt; Return,
-				CALL =&gt; Call(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				CALLINDIRECT =&gt; {
-					<span class="kw">let </span>signature: u32 = VarUint32::deserialize(reader)<span class="question-mark">?</span>.into();
-					<span class="kw">let </span>table_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
-					<span class="kw">if </span>table_ref != <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidTableReference(table_ref)); }
-
-					CallIndirect(
-						signature,
-						table_ref,
-					)
-				},
-				DROP =&gt; Drop,
-				SELECT =&gt; Select,
-
-				GETLOCAL =&gt; GetLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				SETLOCAL =&gt; SetLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				TEELOCAL =&gt; TeeLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				GETGLOBAL =&gt; GetGlobal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				SETGLOBAL =&gt; SetGlobal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32LOAD =&gt; I32Load(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD =&gt; I64Load(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				F32LOAD =&gt; F32Load(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				F64LOAD =&gt; F64Load(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32LOAD8S =&gt; I32Load8S(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32LOAD8U =&gt; I32Load8U(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32LOAD16S =&gt; I32Load16S(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32LOAD16U =&gt; I32Load16U(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD8S =&gt; I64Load8S(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD8U =&gt; I64Load8U(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD16S =&gt; I64Load16S(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD16U =&gt; I64Load16U(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD32S =&gt; I64Load32S(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64LOAD32U =&gt; I64Load32U(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32STORE =&gt; I32Store(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64STORE =&gt; I64Store(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				F32STORE =&gt; F32Store(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				F64STORE =&gt; F64Store(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32STORE8 =&gt; I32Store8(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I32STORE16 =&gt; I32Store16(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64STORE8 =&gt; I64Store8(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64STORE16 =&gt; I64Store16(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-				I64STORE32 =&gt; I64Store32(
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
-					VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-
-
-				CURRENTMEMORY =&gt; {
-					<span class="kw">let </span>mem_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
-					<span class="kw">if </span>mem_ref != <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidMemoryReference(mem_ref)); }
-					CurrentMemory(mem_ref)
-				},
-				GROWMEMORY =&gt; {
-					<span class="kw">let </span>mem_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
-					<span class="kw">if </span>mem_ref != <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidMemoryReference(mem_ref)); }
-					GrowMemory(mem_ref)
+				BrTable(Box::new(BrTableData {
+					table: t1.into_boxed_slice(),
+					default: VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				}))
+			},
+			RETURN =&gt; Return,
+			CALL =&gt; Call(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			CALLINDIRECT =&gt; {
+				<span class="kw">let </span>signature: u32 = VarUint32::deserialize(reader)<span class="question-mark">?</span>.into();
+				<span class="kw">let </span>table_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
+				<span class="kw">if </span>table_ref != <span class="number">0 </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidTableReference(table_ref))
 				}
 
-				I32CONST =&gt; I32Const(VarInt32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				I64CONST =&gt; I64Const(VarInt64::deserialize(reader)<span class="question-mark">?</span>.into()),
-				F32CONST =&gt; F32Const(Uint32::deserialize(reader)<span class="question-mark">?</span>.into()),
-				F64CONST =&gt; F64Const(Uint64::deserialize(reader)<span class="question-mark">?</span>.into()),
-				I32EQZ =&gt; I32Eqz,
-				I32EQ =&gt; I32Eq,
-				I32NE =&gt; I32Ne,
-				I32LTS =&gt; I32LtS,
-				I32LTU =&gt; I32LtU,
-				I32GTS =&gt; I32GtS,
-				I32GTU =&gt; I32GtU,
-				I32LES =&gt; I32LeS,
-				I32LEU =&gt; I32LeU,
-				I32GES =&gt; I32GeS,
-				I32GEU =&gt; I32GeU,
+				CallIndirect(signature, table_ref)
+			},
+			DROP =&gt; Drop,
+			SELECT =&gt; Select,
 
-				I64EQZ =&gt; I64Eqz,
-				I64EQ =&gt; I64Eq,
-				I64NE =&gt; I64Ne,
-				I64LTS =&gt; I64LtS,
-				I64LTU =&gt; I64LtU,
-				I64GTS =&gt; I64GtS,
-				I64GTU =&gt; I64GtU,
-				I64LES =&gt; I64LeS,
-				I64LEU =&gt; I64LeU,
-				I64GES =&gt; I64GeS,
-				I64GEU =&gt; I64GeU,
+			GETLOCAL =&gt; GetLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			SETLOCAL =&gt; SetLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			TEELOCAL =&gt; TeeLocal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			GETGLOBAL =&gt; GetGlobal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			SETGLOBAL =&gt; SetGlobal(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
 
-				F32EQ =&gt; F32Eq,
-				F32NE =&gt; F32Ne,
-				F32LT =&gt; F32Lt,
-				F32GT =&gt; F32Gt,
-				F32LE =&gt; F32Le,
-				F32GE =&gt; F32Ge,
+			I32LOAD =&gt; I32Load(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				F64EQ =&gt; F64Eq,
-				F64NE =&gt; F64Ne,
-				F64LT =&gt; F64Lt,
-				F64GT =&gt; F64Gt,
-				F64LE =&gt; F64Le,
-				F64GE =&gt; F64Ge,
+			I64LOAD =&gt; I64Load(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				I32CLZ =&gt; I32Clz,
-				I32CTZ =&gt; I32Ctz,
-				I32POPCNT =&gt; I32Popcnt,
-				I32ADD =&gt; I32Add,
-				I32SUB =&gt; I32Sub,
-				I32MUL =&gt; I32Mul,
-				I32DIVS =&gt; I32DivS,
-				I32DIVU =&gt; I32DivU,
-				I32REMS =&gt; I32RemS,
-				I32REMU =&gt; I32RemU,
-				I32AND =&gt; I32And,
-				I32OR =&gt; I32Or,
-				I32XOR =&gt; I32Xor,
-				I32SHL =&gt; I32Shl,
-				I32SHRS =&gt; I32ShrS,
-				I32SHRU =&gt; I32ShrU,
-				I32ROTL =&gt; I32Rotl,
-				I32ROTR =&gt; I32Rotr,
+			F32LOAD =&gt; F32Load(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				I64CLZ =&gt; I64Clz,
-				I64CTZ =&gt; I64Ctz,
-				I64POPCNT =&gt; I64Popcnt,
-				I64ADD =&gt; I64Add,
-				I64SUB =&gt; I64Sub,
-				I64MUL =&gt; I64Mul,
-				I64DIVS =&gt; I64DivS,
-				I64DIVU =&gt; I64DivU,
-				I64REMS =&gt; I64RemS,
-				I64REMU =&gt; I64RemU,
-				I64AND =&gt; I64And,
-				I64OR =&gt; I64Or,
-				I64XOR =&gt; I64Xor,
-				I64SHL =&gt; I64Shl,
-				I64SHRS =&gt; I64ShrS,
-				I64SHRU =&gt; I64ShrU,
-				I64ROTL =&gt; I64Rotl,
-				I64ROTR =&gt; I64Rotr,
-				F32ABS =&gt; F32Abs,
-				F32NEG =&gt; F32Neg,
-				F32CEIL =&gt; F32Ceil,
-				F32FLOOR =&gt; F32Floor,
-				F32TRUNC =&gt; F32Trunc,
-				F32NEAREST =&gt; F32Nearest,
-				F32SQRT =&gt; F32Sqrt,
-				F32ADD =&gt; F32Add,
-				F32SUB =&gt; F32Sub,
-				F32MUL =&gt; F32Mul,
-				F32DIV =&gt; F32Div,
-				F32MIN =&gt; F32Min,
-				F32MAX =&gt; F32Max,
-				F32COPYSIGN =&gt; F32Copysign,
-				F64ABS =&gt; F64Abs,
-				F64NEG =&gt; F64Neg,
-				F64CEIL =&gt; F64Ceil,
-				F64FLOOR =&gt; F64Floor,
-				F64TRUNC =&gt; F64Trunc,
-				F64NEAREST =&gt; F64Nearest,
-				F64SQRT =&gt; F64Sqrt,
-				F64ADD =&gt; F64Add,
-				F64SUB =&gt; F64Sub,
-				F64MUL =&gt; F64Mul,
-				F64DIV =&gt; F64Div,
-				F64MIN =&gt; F64Min,
-				F64MAX =&gt; F64Max,
-				F64COPYSIGN =&gt; F64Copysign,
+			F64LOAD =&gt; F64Load(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				I32WRAPI64 =&gt; I32WrapI64,
-				I32TRUNCSF32 =&gt; I32TruncSF32,
-				I32TRUNCUF32 =&gt; I32TruncUF32,
-				I32TRUNCSF64 =&gt; I32TruncSF64,
-				I32TRUNCUF64 =&gt; I32TruncUF64,
-				I64EXTENDSI32 =&gt; I64ExtendSI32,
-				I64EXTENDUI32 =&gt; I64ExtendUI32,
-				I64TRUNCSF32 =&gt; I64TruncSF32,
-				I64TRUNCUF32 =&gt; I64TruncUF32,
-				I64TRUNCSF64 =&gt; I64TruncSF64,
-				I64TRUNCUF64 =&gt; I64TruncUF64,
-				F32CONVERTSI32 =&gt; F32ConvertSI32,
-				F32CONVERTUI32 =&gt; F32ConvertUI32,
-				F32CONVERTSI64 =&gt; F32ConvertSI64,
-				F32CONVERTUI64 =&gt; F32ConvertUI64,
-				F32DEMOTEF64 =&gt; F32DemoteF64,
-				F64CONVERTSI32 =&gt; F64ConvertSI32,
-				F64CONVERTUI32 =&gt; F64ConvertUI32,
-				F64CONVERTSI64 =&gt; F64ConvertSI64,
-				F64CONVERTUI64 =&gt; F64ConvertUI64,
-				F64PROMOTEF32 =&gt; F64PromoteF32,
+			I32LOAD8S =&gt; I32Load8S(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				I32REINTERPRETF32 =&gt; I32ReinterpretF32,
-				I64REINTERPRETF64 =&gt; I64ReinterpretF64,
-				F32REINTERPRETI32 =&gt; F32ReinterpretI32,
-				F64REINTERPRETI64 =&gt; F64ReinterpretI64,
+			I32LOAD8U =&gt; I32Load8U(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
 
-				<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
-				</span>I32_EXTEND8_S |
-				I32_EXTEND16_S |
-				I64_EXTEND8_S |
-				I64_EXTEND16_S |
-				I64_EXTEND32_S =&gt; <span class="kw">match </span>val {
-					I32_EXTEND8_S =&gt; SignExt(SignExtInstruction::I32Extend8S),
-					I32_EXTEND16_S =&gt; SignExt(SignExtInstruction::I32Extend16S),
-					I64_EXTEND8_S =&gt; SignExt(SignExtInstruction::I64Extend8S),
-					I64_EXTEND16_S =&gt; SignExt(SignExtInstruction::I64Extend16S),
-					I64_EXTEND32_S =&gt; SignExt(SignExtInstruction::I64Extend32S),
-					<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val)),
+			I32LOAD16S =&gt; I32Load16S(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I32LOAD16U =&gt; I32Load16U(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD8S =&gt; I64Load8S(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD8U =&gt; I64Load8U(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD16S =&gt; I64Load16S(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD16U =&gt; I64Load16U(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD32S =&gt; I64Load32S(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64LOAD32U =&gt; I64Load32U(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I32STORE =&gt; I32Store(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64STORE =&gt; I64Store(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			F32STORE =&gt; F32Store(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			F64STORE =&gt; F64Store(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I32STORE8 =&gt; I32Store8(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I32STORE16 =&gt; I32Store16(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64STORE8 =&gt; I64Store8(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64STORE16 =&gt; I64Store16(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			I64STORE32 =&gt; I64Store32(
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+				VarUint32::deserialize(reader)<span class="question-mark">?</span>.into(),
+			),
+
+			CURRENTMEMORY =&gt; {
+				<span class="kw">let </span>mem_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
+				<span class="kw">if </span>mem_ref != <span class="number">0 </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidMemoryReference(mem_ref))
 				}
+				CurrentMemory(mem_ref)
+			},
+			GROWMEMORY =&gt; {
+				<span class="kw">let </span>mem_ref: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
+				<span class="kw">if </span>mem_ref != <span class="number">0 </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidMemoryReference(mem_ref))
+				}
+				GrowMemory(mem_ref)
+			},
 
-				<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
-				</span>atomics::ATOMIC_PREFIX =&gt; <span class="kw">return </span>deserialize_atomic(reader),
+			I32CONST =&gt; I32Const(VarInt32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			I64CONST =&gt; I64Const(VarInt64::deserialize(reader)<span class="question-mark">?</span>.into()),
+			F32CONST =&gt; F32Const(Uint32::deserialize(reader)<span class="question-mark">?</span>.into()),
+			F64CONST =&gt; F64Const(Uint64::deserialize(reader)<span class="question-mark">?</span>.into()),
+			I32EQZ =&gt; I32Eqz,
+			I32EQ =&gt; I32Eq,
+			I32NE =&gt; I32Ne,
+			I32LTS =&gt; I32LtS,
+			I32LTU =&gt; I32LtU,
+			I32GTS =&gt; I32GtS,
+			I32GTU =&gt; I32GtU,
+			I32LES =&gt; I32LeS,
+			I32LEU =&gt; I32LeU,
+			I32GES =&gt; I32GeS,
+			I32GEU =&gt; I32GeU,
 
-				<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
-				</span>simd::SIMD_PREFIX =&gt; <span class="kw">return </span>deserialize_simd(reader),
+			I64EQZ =&gt; I64Eqz,
+			I64EQ =&gt; I64Eq,
+			I64NE =&gt; I64Ne,
+			I64LTS =&gt; I64LtS,
+			I64LTU =&gt; I64LtU,
+			I64GTS =&gt; I64GtS,
+			I64GTU =&gt; I64GtU,
+			I64LES =&gt; I64LeS,
+			I64LEU =&gt; I64LeU,
+			I64GES =&gt; I64GeS,
+			I64GEU =&gt; I64GeU,
 
-				<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
-				</span>bulk::BULK_PREFIX =&gt; <span class="kw">return </span>deserialize_bulk(reader),
+			F32EQ =&gt; F32Eq,
+			F32NE =&gt; F32Ne,
+			F32LT =&gt; F32Lt,
+			F32GT =&gt; F32Gt,
+			F32LE =&gt; F32Le,
+			F32GE =&gt; F32Ge,
 
-				<span class="kw">_ </span>=&gt; { <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val)); }
-			}
-		)
+			F64EQ =&gt; F64Eq,
+			F64NE =&gt; F64Ne,
+			F64LT =&gt; F64Lt,
+			F64GT =&gt; F64Gt,
+			F64LE =&gt; F64Le,
+			F64GE =&gt; F64Ge,
+
+			I32CLZ =&gt; I32Clz,
+			I32CTZ =&gt; I32Ctz,
+			I32POPCNT =&gt; I32Popcnt,
+			I32ADD =&gt; I32Add,
+			I32SUB =&gt; I32Sub,
+			I32MUL =&gt; I32Mul,
+			I32DIVS =&gt; I32DivS,
+			I32DIVU =&gt; I32DivU,
+			I32REMS =&gt; I32RemS,
+			I32REMU =&gt; I32RemU,
+			I32AND =&gt; I32And,
+			I32OR =&gt; I32Or,
+			I32XOR =&gt; I32Xor,
+			I32SHL =&gt; I32Shl,
+			I32SHRS =&gt; I32ShrS,
+			I32SHRU =&gt; I32ShrU,
+			I32ROTL =&gt; I32Rotl,
+			I32ROTR =&gt; I32Rotr,
+
+			I64CLZ =&gt; I64Clz,
+			I64CTZ =&gt; I64Ctz,
+			I64POPCNT =&gt; I64Popcnt,
+			I64ADD =&gt; I64Add,
+			I64SUB =&gt; I64Sub,
+			I64MUL =&gt; I64Mul,
+			I64DIVS =&gt; I64DivS,
+			I64DIVU =&gt; I64DivU,
+			I64REMS =&gt; I64RemS,
+			I64REMU =&gt; I64RemU,
+			I64AND =&gt; I64And,
+			I64OR =&gt; I64Or,
+			I64XOR =&gt; I64Xor,
+			I64SHL =&gt; I64Shl,
+			I64SHRS =&gt; I64ShrS,
+			I64SHRU =&gt; I64ShrU,
+			I64ROTL =&gt; I64Rotl,
+			I64ROTR =&gt; I64Rotr,
+			F32ABS =&gt; F32Abs,
+			F32NEG =&gt; F32Neg,
+			F32CEIL =&gt; F32Ceil,
+			F32FLOOR =&gt; F32Floor,
+			F32TRUNC =&gt; F32Trunc,
+			F32NEAREST =&gt; F32Nearest,
+			F32SQRT =&gt; F32Sqrt,
+			F32ADD =&gt; F32Add,
+			F32SUB =&gt; F32Sub,
+			F32MUL =&gt; F32Mul,
+			F32DIV =&gt; F32Div,
+			F32MIN =&gt; F32Min,
+			F32MAX =&gt; F32Max,
+			F32COPYSIGN =&gt; F32Copysign,
+			F64ABS =&gt; F64Abs,
+			F64NEG =&gt; F64Neg,
+			F64CEIL =&gt; F64Ceil,
+			F64FLOOR =&gt; F64Floor,
+			F64TRUNC =&gt; F64Trunc,
+			F64NEAREST =&gt; F64Nearest,
+			F64SQRT =&gt; F64Sqrt,
+			F64ADD =&gt; F64Add,
+			F64SUB =&gt; F64Sub,
+			F64MUL =&gt; F64Mul,
+			F64DIV =&gt; F64Div,
+			F64MIN =&gt; F64Min,
+			F64MAX =&gt; F64Max,
+			F64COPYSIGN =&gt; F64Copysign,
+
+			I32WRAPI64 =&gt; I32WrapI64,
+			I32TRUNCSF32 =&gt; I32TruncSF32,
+			I32TRUNCUF32 =&gt; I32TruncUF32,
+			I32TRUNCSF64 =&gt; I32TruncSF64,
+			I32TRUNCUF64 =&gt; I32TruncUF64,
+			I64EXTENDSI32 =&gt; I64ExtendSI32,
+			I64EXTENDUI32 =&gt; I64ExtendUI32,
+			I64TRUNCSF32 =&gt; I64TruncSF32,
+			I64TRUNCUF32 =&gt; I64TruncUF32,
+			I64TRUNCSF64 =&gt; I64TruncSF64,
+			I64TRUNCUF64 =&gt; I64TruncUF64,
+			F32CONVERTSI32 =&gt; F32ConvertSI32,
+			F32CONVERTUI32 =&gt; F32ConvertUI32,
+			F32CONVERTSI64 =&gt; F32ConvertSI64,
+			F32CONVERTUI64 =&gt; F32ConvertUI64,
+			F32DEMOTEF64 =&gt; F32DemoteF64,
+			F64CONVERTSI32 =&gt; F64ConvertSI32,
+			F64CONVERTUI32 =&gt; F64ConvertUI32,
+			F64CONVERTSI64 =&gt; F64ConvertSI64,
+			F64CONVERTUI64 =&gt; F64ConvertUI64,
+			F64PROMOTEF32 =&gt; F64PromoteF32,
+
+			I32REINTERPRETF32 =&gt; I32ReinterpretF32,
+			I64REINTERPRETF64 =&gt; I64ReinterpretF64,
+			F32REINTERPRETI32 =&gt; F32ReinterpretI32,
+			F64REINTERPRETI64 =&gt; F64ReinterpretI64,
+
+			<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
+			</span>I32_EXTEND8_S | I32_EXTEND16_S | I64_EXTEND8_S | I64_EXTEND16_S | I64_EXTEND32_S =&gt; <span class="kw">match </span>val {
+				I32_EXTEND8_S =&gt; SignExt(SignExtInstruction::I32Extend8S),
+				I32_EXTEND16_S =&gt; SignExt(SignExtInstruction::I32Extend16S),
+				I64_EXTEND8_S =&gt; SignExt(SignExtInstruction::I64Extend8S),
+				I64_EXTEND16_S =&gt; SignExt(SignExtInstruction::I64Extend16S),
+				I64_EXTEND32_S =&gt; SignExt(SignExtInstruction::I64Extend32S),
+				<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val)),
+			},
+
+			<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
+			</span>atomics::ATOMIC_PREFIX =&gt; <span class="kw">return </span>deserialize_atomic(reader),
+
+			<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
+			</span>simd::SIMD_PREFIX =&gt; <span class="kw">return </span>deserialize_simd(reader),
+
+			<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
+			</span>bulk::BULK_PREFIX =&gt; <span class="kw">return </span>deserialize_bulk(reader),
+
+			<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val)),
+		})
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="kw">fn </span>deserialize_atomic&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;Instruction, Error&gt; {
-	<span class="kw">use </span><span class="self">self</span>::AtomicsInstruction::<span class="kw-2">*</span>;
-	<span class="kw">use </span><span class="self">self</span>::opcodes::atomics::<span class="kw-2">*</span>;
+	<span class="kw">use </span><span class="self">self</span>::{opcodes::atomics::<span class="kw-2">*</span>, AtomicsInstruction::<span class="kw-2">*</span>};
 
 	<span class="kw">let </span>val: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
 	<span class="kw">let </span>mem = MemArg::deserialize(reader)<span class="question-mark">?</span>;
@@ -4371,6 +4413,14 @@
 		I64_ATOMIC_RMW_SUB16U =&gt; I64AtomicRmwSub16u(mem),
 		I64_ATOMIC_RMW_SUB32U =&gt; I64AtomicRmwSub32u(mem),
 
+		I32_ATOMIC_RMW_AND =&gt; I32AtomicRmwAnd(mem),
+		I64_ATOMIC_RMW_AND =&gt; I64AtomicRmwAnd(mem),
+		I32_ATOMIC_RMW_AND8U =&gt; I32AtomicRmwAnd8u(mem),
+		I32_ATOMIC_RMW_AND16U =&gt; I32AtomicRmwAnd16u(mem),
+		I64_ATOMIC_RMW_AND8U =&gt; I64AtomicRmwAnd8u(mem),
+		I64_ATOMIC_RMW_AND16U =&gt; I64AtomicRmwAnd16u(mem),
+		I64_ATOMIC_RMW_AND32U =&gt; I64AtomicRmwAnd32u(mem),
+
 		I32_ATOMIC_RMW_OR =&gt; I32AtomicRmwOr(mem),
 		I64_ATOMIC_RMW_OR =&gt; I64AtomicRmwOr(mem),
 		I32_ATOMIC_RMW_OR8U =&gt; I32AtomicRmwOr8u(mem),
@@ -4407,10 +4457,9 @@
 	}))
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 </span><span class="kw">fn </span>deserialize_simd&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;Instruction, Error&gt; {
-	<span class="kw">use </span><span class="self">self</span>::SimdInstruction::<span class="kw-2">*</span>;
-	<span class="kw">use </span><span class="self">self</span>::opcodes::simd::<span class="kw-2">*</span>;
+	<span class="kw">use </span><span class="self">self</span>::{opcodes::simd::<span class="kw-2">*</span>, SimdInstruction::<span class="kw-2">*</span>};
 
 	<span class="kw">let </span>val = VarUint32::deserialize(reader)<span class="question-mark">?</span>.into();
 	<span class="prelude-val">Ok</span>(Instruction::Simd(<span class="kw">match </span>val {
@@ -4418,7 +4467,7 @@
 			<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0</span>; <span class="number">16</span>];
 			reader.read(<span class="kw-2">&amp;mut </span>buf)<span class="question-mark">?</span>;
 			V128Const(Box::new(buf))
-		}
+		},
 		V128_LOAD =&gt; V128Load(MemArg::deserialize(reader)<span class="question-mark">?</span>),
 		V128_STORE =&gt; V128Store(MemArg::deserialize(reader)<span class="question-mark">?</span>),
 		I8X16_SPLAT =&gt; I8x16Splat,
@@ -4445,7 +4494,7 @@
 			<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0</span>; <span class="number">16</span>];
 			reader.read(<span class="kw-2">&amp;mut </span>buf)<span class="question-mark">?</span>;
 			V8x16Shuffle(Box::new(buf))
-		}
+		},
 		I8X16_ADD =&gt; I8x16Add,
 		I16X8_ADD =&gt; I16x8Add,
 		I32X4_ADD =&gt; I32x4Add,
@@ -4579,10 +4628,9 @@
 	}))
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 </span><span class="kw">fn </span>deserialize_bulk&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;Instruction, Error&gt; {
-	<span class="kw">use </span><span class="self">self</span>::BulkInstruction::<span class="kw-2">*</span>;
-	<span class="kw">use </span><span class="self">self</span>::opcodes::bulk::<span class="kw-2">*</span>;
+	<span class="kw">use </span><span class="self">self</span>::{opcodes::bulk::<span class="kw-2">*</span>, BulkInstruction::<span class="kw-2">*</span>};
 
 	<span class="kw">let </span>val: u8 = Uint8::deserialize(reader)<span class="question-mark">?</span>.into();
 	<span class="prelude-val">Ok</span>(Instruction::Bulk(<span class="kw">match </span>val {
@@ -4591,40 +4639,40 @@
 				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val))
 			}
 			MemoryInit(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into())
-		}
+		},
 		MEMORY_DROP =&gt; MemoryDrop(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
 		MEMORY_FILL =&gt; {
 			<span class="kw">if </span>u8::from(Uint8::deserialize(reader)<span class="question-mark">?</span>) != <span class="number">0 </span>{
 				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val))
 			}
 			MemoryFill
-		}
+		},
 		MEMORY_COPY =&gt; {
 			<span class="kw">if </span>u8::from(Uint8::deserialize(reader)<span class="question-mark">?</span>) != <span class="number">0 </span>{
 				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val))
 			}
 			MemoryCopy
-		}
+		},
 
 		TABLE_INIT =&gt; {
 			<span class="kw">if </span>u8::from(Uint8::deserialize(reader)<span class="question-mark">?</span>) != <span class="number">0 </span>{
 				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val))
 			}
 			TableInit(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into())
-		}
+		},
 		TABLE_DROP =&gt; TableDrop(VarUint32::deserialize(reader)<span class="question-mark">?</span>.into()),
 		TABLE_COPY =&gt; {
 			<span class="kw">if </span>u8::from(Uint8::deserialize(reader)<span class="question-mark">?</span>) != <span class="number">0 </span>{
 				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val))
 			}
 			TableCopy
-		}
+		},
 
 		<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownOpcode(val)),
 	}))
 }
 
-<span class="attr">#[cfg(any(feature=<span class="string">&quot;simd&quot;</span>, feature=<span class="string">&quot;atomics&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;simd&quot;</span>, feature = <span class="string">&quot;atomics&quot;</span>))]
 </span><span class="kw">impl </span>Deserialize <span class="kw">for </span>MemArg {
 	<span class="kw">type </span>Error = Error;
 
@@ -4636,62 +4684,61 @@
 }
 
 <span class="macro">macro_rules! </span>op {
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr) =&gt; ({
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr) =&gt; {{
 		<span class="kw">let </span>b: u8 = <span class="macro-nonterminal">$byte</span>;
 		<span class="macro-nonterminal">$writer</span>.write(<span class="kw-2">&amp;</span>[b])<span class="question-mark">?</span>;
-	});
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$s</span>: block) =&gt; ({
+	}};
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$s</span>: block) =&gt; {{
 		<span class="macro">op!</span>(<span class="macro-nonterminal">$writer</span>, <span class="macro-nonterminal">$byte</span>);
 		<span class="macro-nonterminal">$s</span>;
-	});
+	}};
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="macro">macro_rules! </span>atomic {
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$mem</span>:expr) =&gt; ({
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$mem</span>:expr) =&gt; {{
 		<span class="macro-nonterminal">$writer</span>.write(<span class="kw-2">&amp;</span>[ATOMIC_PREFIX, <span class="macro-nonterminal">$byte</span>])<span class="question-mark">?</span>;
 		MemArg::serialize(<span class="macro-nonterminal">$mem</span>, <span class="macro-nonterminal">$writer</span>)<span class="question-mark">?</span>;
-	});
+	}};
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 </span><span class="macro">macro_rules! </span>simd {
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$other</span>:expr) =&gt; ({
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$other</span>:expr) =&gt; {{
 		<span class="macro-nonterminal">$writer</span>.write(<span class="kw-2">&amp;</span>[SIMD_PREFIX])<span class="question-mark">?</span>;
 		VarUint32::from(<span class="macro-nonterminal">$byte</span>).serialize(<span class="macro-nonterminal">$writer</span>)<span class="question-mark">?</span>;
 		<span class="macro-nonterminal">$other</span>;
-	})
+	}};
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 </span><span class="macro">macro_rules! </span>bulk {
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr) =&gt; ({
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr) =&gt; {{
 		<span class="macro-nonterminal">$writer</span>.write(<span class="kw-2">&amp;</span>[BULK_PREFIX, <span class="macro-nonterminal">$byte</span>])<span class="question-mark">?</span>;
-	});
-	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$remaining</span>:expr) =&gt; ({
+	}};
+	(<span class="macro-nonterminal">$writer</span>: expr, <span class="macro-nonterminal">$byte</span>: expr, <span class="macro-nonterminal">$remaining</span>:expr) =&gt; {{
 		<span class="macro">bulk!</span>(<span class="macro-nonterminal">$writer</span>, <span class="macro-nonterminal">$byte</span>);
 		<span class="macro-nonterminal">$remaining</span>;
-	});
+	}};
 }
 
 <span class="kw">impl </span>Serialize <span class="kw">for </span>Instruction {
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
-		<span class="kw">use </span><span class="self">self</span>::Instruction::<span class="kw-2">*</span>;
-		<span class="kw">use </span><span class="self">self</span>::opcodes::<span class="kw-2">*</span>;
+		<span class="kw">use </span><span class="self">self</span>::{opcodes::<span class="kw-2">*</span>, Instruction::<span class="kw-2">*</span>};
 
 		<span class="kw">match </span><span class="self">self </span>{
 			Unreachable =&gt; <span class="macro">op!</span>(writer, UNREACHABLE),
 			Nop =&gt; <span class="macro">op!</span>(writer, NOP),
 			Block(block_type) =&gt; <span class="macro">op!</span>(writer, BLOCK, {
-			   block_type.serialize(writer)<span class="question-mark">?</span>;
+				block_type.serialize(writer)<span class="question-mark">?</span>;
 			}),
 			Loop(block_type) =&gt; <span class="macro">op!</span>(writer, LOOP, {
-			   block_type.serialize(writer)<span class="question-mark">?</span>;
+				block_type.serialize(writer)<span class="question-mark">?</span>;
 			}),
 			If(block_type) =&gt; <span class="macro">op!</span>(writer, IF, {
-			   block_type.serialize(writer)<span class="question-mark">?</span>;
+				block_type.serialize(writer)<span class="question-mark">?</span>;
 			}),
 			Else =&gt; <span class="macro">op!</span>(writer, ELSE),
 			End =&gt; <span class="macro">op!</span>(writer, END),
@@ -4704,7 +4751,7 @@
 			BrTable(<span class="kw-2">ref </span>table) =&gt; <span class="macro">op!</span>(writer, BRTABLE, {
 				<span class="kw">let </span>list_writer = CountedListWriter::&lt;VarUint32, <span class="kw">_</span>&gt;(
 					table.table.len(),
-					table.table.into_iter().map(|x| VarUint32::from(<span class="kw-2">*</span>x)),
+					table.table.iter().map(|x| VarUint32::from(<span class="kw-2">*</span>x)),
 				);
 				list_writer.serialize(writer)<span class="question-mark">?</span>;
 				VarUint32::from(table.default).serialize(writer)<span class="question-mark">?</span>;
@@ -4975,22 +5022,22 @@
 			F32ReinterpretI32 =&gt; <span class="macro">op!</span>(writer, F32REINTERPRETI32),
 			F64ReinterpretI64 =&gt; <span class="macro">op!</span>(writer, F64REINTERPRETI64),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 			</span>SignExt(<span class="kw-2">ref </span>a) =&gt; <span class="kw">match </span><span class="kw-2">*</span>a {
 				SignExtInstruction::I32Extend8S =&gt; <span class="macro">op!</span>(writer, sign_ext::I32_EXTEND8_S),
 				SignExtInstruction::I32Extend16S =&gt; <span class="macro">op!</span>(writer, sign_ext::I32_EXTEND16_S),
 				SignExtInstruction::I64Extend8S =&gt; <span class="macro">op!</span>(writer, sign_ext::I64_EXTEND8_S),
 				SignExtInstruction::I64Extend16S =&gt; <span class="macro">op!</span>(writer, sign_ext::I64_EXTEND16_S),
 				SignExtInstruction::I64Extend32S =&gt; <span class="macro">op!</span>(writer, sign_ext::I64_EXTEND32_S),
-			}
+			},
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 			</span>Atomics(a) =&gt; <span class="kw">return </span>a.serialize(writer),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 			</span>Simd(a) =&gt; <span class="kw">return </span>a.serialize(writer),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 			</span>Bulk(a) =&gt; <span class="kw">return </span>a.serialize(writer),
 		}
 
@@ -4998,13 +5045,12 @@
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="kw">impl </span>Serialize <span class="kw">for </span>AtomicsInstruction {
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
-		<span class="kw">use </span><span class="self">self</span>::AtomicsInstruction::<span class="kw-2">*</span>;
-		<span class="kw">use </span><span class="self">self</span>::opcodes::atomics::<span class="kw-2">*</span>;
+		<span class="kw">use </span><span class="self">self</span>::{opcodes::atomics::<span class="kw-2">*</span>, AtomicsInstruction::<span class="kw-2">*</span>};
 
 		<span class="kw">match </span><span class="self">self </span>{
 			AtomicWake(m) =&gt; <span class="macro">atomic!</span>(writer, ATOMIC_WAKE, m),
@@ -5087,24 +5133,23 @@
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 </span><span class="kw">impl </span>Serialize <span class="kw">for </span>SimdInstruction {
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
-		<span class="kw">use </span><span class="self">self</span>::SimdInstruction::<span class="kw-2">*</span>;
-		<span class="kw">use </span><span class="self">self</span>::opcodes::simd::<span class="kw-2">*</span>;
+		<span class="kw">use </span><span class="self">self</span>::{opcodes::simd::<span class="kw-2">*</span>, SimdInstruction::<span class="kw-2">*</span>};
 
 		<span class="kw">match </span><span class="self">self </span>{
 			V128Const(<span class="kw-2">ref </span>c) =&gt; <span class="macro">simd!</span>(writer, V128_CONST, writer.write(<span class="kw-2">&amp;</span>c[..])<span class="question-mark">?</span>),
 			V128Load(m) =&gt; <span class="macro">simd!</span>(writer, V128_LOAD, MemArg::serialize(m, writer)<span class="question-mark">?</span>),
 			V128Store(m) =&gt; <span class="macro">simd!</span>(writer, V128_STORE, MemArg::serialize(m, writer)<span class="question-mark">?</span>),
-			I8x16Splat =&gt; <span class="macro">simd!</span>(writer, I8X16_SPLAT, ()),
-			I16x8Splat =&gt; <span class="macro">simd!</span>(writer, I16X8_SPLAT, ()),
-			I32x4Splat =&gt; <span class="macro">simd!</span>(writer, I32X4_SPLAT, ()),
-			I64x2Splat =&gt; <span class="macro">simd!</span>(writer, I64X2_SPLAT, ()),
-			F32x4Splat =&gt; <span class="macro">simd!</span>(writer, F32X4_SPLAT, ()),
-			F64x2Splat =&gt; <span class="macro">simd!</span>(writer, F64X2_SPLAT, ()),
+			I8x16Splat =&gt; <span class="macro">simd!</span>(writer, I8X16_SPLAT, {}),
+			I16x8Splat =&gt; <span class="macro">simd!</span>(writer, I16X8_SPLAT, {}),
+			I32x4Splat =&gt; <span class="macro">simd!</span>(writer, I32X4_SPLAT, {}),
+			I64x2Splat =&gt; <span class="macro">simd!</span>(writer, I64X2_SPLAT, {}),
+			F32x4Splat =&gt; <span class="macro">simd!</span>(writer, F32X4_SPLAT, {}),
+			F64x2Splat =&gt; <span class="macro">simd!</span>(writer, F64X2_SPLAT, {}),
 			I8x16ExtractLaneS(i) =&gt; <span class="macro">simd!</span>(writer, I8X16_EXTRACT_LANE_S, writer.write(<span class="kw-2">&amp;</span>[i])<span class="question-mark">?</span>),
 			I8x16ExtractLaneU(i) =&gt; <span class="macro">simd!</span>(writer, I8X16_EXTRACT_LANE_U, writer.write(<span class="kw-2">&amp;</span>[i])<span class="question-mark">?</span>),
 			I16x8ExtractLaneS(i) =&gt; <span class="macro">simd!</span>(writer, I16X8_EXTRACT_LANE_S, writer.write(<span class="kw-2">&amp;</span>[i])<span class="question-mark">?</span>),
@@ -5120,146 +5165,145 @@
 			F32x4ReplaceLane(i) =&gt; <span class="macro">simd!</span>(writer, F32X4_REPLACE_LANE, writer.write(<span class="kw-2">&amp;</span>[i])<span class="question-mark">?</span>),
 			F64x2ReplaceLane(i) =&gt; <span class="macro">simd!</span>(writer, F64X2_REPLACE_LANE, writer.write(<span class="kw-2">&amp;</span>[i])<span class="question-mark">?</span>),
 			V8x16Shuffle(<span class="kw-2">ref </span>i) =&gt; <span class="macro">simd!</span>(writer, V8X16_SHUFFLE, writer.write(<span class="kw-2">&amp;</span>i[..])<span class="question-mark">?</span>),
-			I8x16Add =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD, ()),
-			I16x8Add =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD, ()),
-			I32x4Add =&gt; <span class="macro">simd!</span>(writer, I32X4_ADD, ()),
-			I64x2Add =&gt; <span class="macro">simd!</span>(writer, I64X2_ADD, ()),
-			I8x16Sub =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB, ()),
-			I16x8Sub =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB, ()),
-			I32x4Sub =&gt; <span class="macro">simd!</span>(writer, I32X4_SUB, ()),
-			I64x2Sub =&gt; <span class="macro">simd!</span>(writer, I64X2_SUB, ()),
-			I8x16Mul =&gt; <span class="macro">simd!</span>(writer, I8X16_MUL, ()),
-			I16x8Mul =&gt; <span class="macro">simd!</span>(writer, I16X8_MUL, ()),
-			I32x4Mul =&gt; <span class="macro">simd!</span>(writer, I32X4_MUL, ()),
-			<span class="comment">// I64x2Mul =&gt; simd!(writer, I64X2_MUL, ()),
-			</span>I8x16Neg =&gt; <span class="macro">simd!</span>(writer, I8X16_NEG, ()),
-			I16x8Neg =&gt; <span class="macro">simd!</span>(writer, I16X8_NEG, ()),
-			I32x4Neg =&gt; <span class="macro">simd!</span>(writer, I32X4_NEG, ()),
-			I64x2Neg =&gt; <span class="macro">simd!</span>(writer, I64X2_NEG, ()),
-			I8x16AddSaturateS =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD_SATURATE_S, ()),
-			I8x16AddSaturateU =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD_SATURATE_U, ()),
-			I16x8AddSaturateS =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD_SATURATE_S, ()),
-			I16x8AddSaturateU =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD_SATURATE_U, ()),
-			I8x16SubSaturateS =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB_SATURATE_S, ()),
-			I8x16SubSaturateU =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB_SATURATE_U, ()),
-			I16x8SubSaturateS =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB_SATURATE_S, ()),
-			I16x8SubSaturateU =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB_SATURATE_U, ()),
-			I8x16Shl =&gt; <span class="macro">simd!</span>(writer, I8X16_SHL, ()),
-			I16x8Shl =&gt; <span class="macro">simd!</span>(writer, I16X8_SHL, ()),
-			I32x4Shl =&gt; <span class="macro">simd!</span>(writer, I32X4_SHL, ()),
-			I64x2Shl =&gt; <span class="macro">simd!</span>(writer, I64X2_SHL, ()),
-			I8x16ShrS =&gt; <span class="macro">simd!</span>(writer, I8X16_SHR_S, ()),
-			I8x16ShrU =&gt; <span class="macro">simd!</span>(writer, I8X16_SHR_U, ()),
-			I16x8ShrS =&gt; <span class="macro">simd!</span>(writer, I16X8_SHR_S, ()),
-			I16x8ShrU =&gt; <span class="macro">simd!</span>(writer, I16X8_SHR_U, ()),
-			I32x4ShrU =&gt; <span class="macro">simd!</span>(writer, I32X4_SHR_U, ()),
-			I32x4ShrS =&gt; <span class="macro">simd!</span>(writer, I32X4_SHR_S, ()),
-			I64x2ShrU =&gt; <span class="macro">simd!</span>(writer, I64X2_SHR_U, ()),
-			I64x2ShrS =&gt; <span class="macro">simd!</span>(writer, I64X2_SHR_S, ()),
-			V128And =&gt; <span class="macro">simd!</span>(writer, V128_AND, ()),
-			V128Or =&gt; <span class="macro">simd!</span>(writer, V128_OR, ()),
-			V128Xor =&gt; <span class="macro">simd!</span>(writer, V128_XOR, ()),
-			V128Not =&gt; <span class="macro">simd!</span>(writer, V128_NOT, ()),
-			V128Bitselect =&gt; <span class="macro">simd!</span>(writer, V128_BITSELECT, ()),
-			I8x16AnyTrue =&gt; <span class="macro">simd!</span>(writer, I8X16_ANY_TRUE, ()),
-			I16x8AnyTrue =&gt; <span class="macro">simd!</span>(writer, I16X8_ANY_TRUE, ()),
-			I32x4AnyTrue =&gt; <span class="macro">simd!</span>(writer, I32X4_ANY_TRUE, ()),
-			I64x2AnyTrue =&gt; <span class="macro">simd!</span>(writer, I64X2_ANY_TRUE, ()),
-			I8x16AllTrue =&gt; <span class="macro">simd!</span>(writer, I8X16_ALL_TRUE, ()),
-			I16x8AllTrue =&gt; <span class="macro">simd!</span>(writer, I16X8_ALL_TRUE, ()),
-			I32x4AllTrue =&gt; <span class="macro">simd!</span>(writer, I32X4_ALL_TRUE, ()),
-			I64x2AllTrue =&gt; <span class="macro">simd!</span>(writer, I64X2_ALL_TRUE, ()),
-			I8x16Eq =&gt; <span class="macro">simd!</span>(writer, I8X16_EQ, ()),
-			I16x8Eq =&gt; <span class="macro">simd!</span>(writer, I16X8_EQ, ()),
-			I32x4Eq =&gt; <span class="macro">simd!</span>(writer, I32X4_EQ, ()),
-			<span class="comment">// I64x2Eq =&gt; simd!(writer, I64X2_EQ, ()),
-			</span>F32x4Eq =&gt; <span class="macro">simd!</span>(writer, F32X4_EQ, ()),
-			F64x2Eq =&gt; <span class="macro">simd!</span>(writer, F64X2_EQ, ()),
-			I8x16Ne =&gt; <span class="macro">simd!</span>(writer, I8X16_NE, ()),
-			I16x8Ne =&gt; <span class="macro">simd!</span>(writer, I16X8_NE, ()),
-			I32x4Ne =&gt; <span class="macro">simd!</span>(writer, I32X4_NE, ()),
-			<span class="comment">// I64x2Ne =&gt; simd!(writer, I64X2_NE, ()),
-			</span>F32x4Ne =&gt; <span class="macro">simd!</span>(writer, F32X4_NE, ()),
-			F64x2Ne =&gt; <span class="macro">simd!</span>(writer, F64X2_NE, ()),
-			I8x16LtS =&gt; <span class="macro">simd!</span>(writer, I8X16_LT_S, ()),
-			I8x16LtU =&gt; <span class="macro">simd!</span>(writer, I8X16_LT_U, ()),
-			I16x8LtS =&gt; <span class="macro">simd!</span>(writer, I16X8_LT_S, ()),
-			I16x8LtU =&gt; <span class="macro">simd!</span>(writer, I16X8_LT_U, ()),
-			I32x4LtS =&gt; <span class="macro">simd!</span>(writer, I32X4_LT_S, ()),
-			I32x4LtU =&gt; <span class="macro">simd!</span>(writer, I32X4_LT_U, ()),
-			<span class="comment">// I64x2LtS =&gt; simd!(writer, I64X2_LT_S, ()),
-			// I64x2LtU =&gt; simd!(writer, I64X2_LT_U, ()),
-			</span>F32x4Lt =&gt; <span class="macro">simd!</span>(writer, F32X4_LT, ()),
-			F64x2Lt =&gt; <span class="macro">simd!</span>(writer, F64X2_LT, ()),
-			I8x16LeS =&gt; <span class="macro">simd!</span>(writer, I8X16_LE_S, ()),
-			I8x16LeU =&gt; <span class="macro">simd!</span>(writer, I8X16_LE_U, ()),
-			I16x8LeS =&gt; <span class="macro">simd!</span>(writer, I16X8_LE_S, ()),
-			I16x8LeU =&gt; <span class="macro">simd!</span>(writer, I16X8_LE_U, ()),
-			I32x4LeS =&gt; <span class="macro">simd!</span>(writer, I32X4_LE_S, ()),
-			I32x4LeU =&gt; <span class="macro">simd!</span>(writer, I32X4_LE_U, ()),
-			<span class="comment">// I64x2LeS =&gt; simd!(writer, I64X2_LE_S, ()),
-			// I64x2LeU =&gt; simd!(writer, I64X2_LE_U, ()),
-			</span>F32x4Le =&gt; <span class="macro">simd!</span>(writer, F32X4_LE, ()),
-			F64x2Le =&gt; <span class="macro">simd!</span>(writer, F64X2_LE, ()),
-			I8x16GtS =&gt; <span class="macro">simd!</span>(writer, I8X16_GT_S, ()),
-			I8x16GtU =&gt; <span class="macro">simd!</span>(writer, I8X16_GT_U, ()),
-			I16x8GtS =&gt; <span class="macro">simd!</span>(writer, I16X8_GT_S, ()),
-			I16x8GtU =&gt; <span class="macro">simd!</span>(writer, I16X8_GT_U, ()),
-			I32x4GtS =&gt; <span class="macro">simd!</span>(writer, I32X4_GT_S, ()),
-			I32x4GtU =&gt; <span class="macro">simd!</span>(writer, I32X4_GT_U, ()),
-			<span class="comment">// I64x2GtS =&gt; simd!(writer, I64X2_GT_S, ()),
-			// I64x2GtU =&gt; simd!(writer, I64X2_GT_U, ()),
-			</span>F32x4Gt =&gt; <span class="macro">simd!</span>(writer, F32X4_GT, ()),
-			F64x2Gt =&gt; <span class="macro">simd!</span>(writer, F64X2_GT, ()),
-			I8x16GeS =&gt; <span class="macro">simd!</span>(writer, I8X16_GE_S, ()),
-			I8x16GeU =&gt; <span class="macro">simd!</span>(writer, I8X16_GE_U, ()),
-			I16x8GeS =&gt; <span class="macro">simd!</span>(writer, I16X8_GE_S, ()),
-			I16x8GeU =&gt; <span class="macro">simd!</span>(writer, I16X8_GE_U, ()),
-			I32x4GeS =&gt; <span class="macro">simd!</span>(writer, I32X4_GE_S, ()),
-			I32x4GeU =&gt; <span class="macro">simd!</span>(writer, I32X4_GE_U, ()),
-			<span class="comment">// I64x2GeS =&gt; simd!(writer, I64X2_GE_S, ()),
-			// I64x2GeU =&gt; simd!(writer, I64X2_GE_U, ()),
-			</span>F32x4Ge =&gt; <span class="macro">simd!</span>(writer, F32X4_GE, ()),
-			F64x2Ge =&gt; <span class="macro">simd!</span>(writer, F64X2_GE, ()),
-			F32x4Neg =&gt; <span class="macro">simd!</span>(writer, F32X4_NEG, ()),
-			F64x2Neg =&gt; <span class="macro">simd!</span>(writer, F64X2_NEG, ()),
-			F32x4Abs =&gt; <span class="macro">simd!</span>(writer, F32X4_ABS, ()),
-			F64x2Abs =&gt; <span class="macro">simd!</span>(writer, F64X2_ABS, ()),
-			F32x4Min =&gt; <span class="macro">simd!</span>(writer, F32X4_MIN, ()),
-			F64x2Min =&gt; <span class="macro">simd!</span>(writer, F64X2_MIN, ()),
-			F32x4Max =&gt; <span class="macro">simd!</span>(writer, F32X4_MAX, ()),
-			F64x2Max =&gt; <span class="macro">simd!</span>(writer, F64X2_MAX, ()),
-			F32x4Add =&gt; <span class="macro">simd!</span>(writer, F32X4_ADD, ()),
-			F64x2Add =&gt; <span class="macro">simd!</span>(writer, F64X2_ADD, ()),
-			F32x4Sub =&gt; <span class="macro">simd!</span>(writer, F32X4_SUB, ()),
-			F64x2Sub =&gt; <span class="macro">simd!</span>(writer, F64X2_SUB, ()),
-			F32x4Div =&gt; <span class="macro">simd!</span>(writer, F32X4_DIV, ()),
-			F64x2Div =&gt; <span class="macro">simd!</span>(writer, F64X2_DIV, ()),
-			F32x4Mul =&gt; <span class="macro">simd!</span>(writer, F32X4_MUL, ()),
-			F64x2Mul =&gt; <span class="macro">simd!</span>(writer, F64X2_MUL, ()),
-			F32x4Sqrt =&gt; <span class="macro">simd!</span>(writer, F32X4_SQRT, ()),
-			F64x2Sqrt =&gt; <span class="macro">simd!</span>(writer, F64X2_SQRT, ()),
-			F32x4ConvertSI32x4 =&gt; <span class="macro">simd!</span>(writer, F32X4_CONVERT_S_I32X4, ()),
-			F32x4ConvertUI32x4 =&gt; <span class="macro">simd!</span>(writer, F32X4_CONVERT_U_I32X4, ()),
-			F64x2ConvertSI64x2 =&gt; <span class="macro">simd!</span>(writer, F64X2_CONVERT_S_I64X2, ()),
-			F64x2ConvertUI64x2 =&gt; <span class="macro">simd!</span>(writer, F64X2_CONVERT_U_I64X2, ()),
-			I32x4TruncSF32x4Sat =&gt; <span class="macro">simd!</span>(writer, I32X4_TRUNC_S_F32X4_SAT, ()),
-			I32x4TruncUF32x4Sat =&gt; <span class="macro">simd!</span>(writer, I32X4_TRUNC_U_F32X4_SAT, ()),
-			I64x2TruncSF64x2Sat =&gt; <span class="macro">simd!</span>(writer, I64X2_TRUNC_S_F64X2_SAT, ()),
-			I64x2TruncUF64x2Sat =&gt; <span class="macro">simd!</span>(writer, I64X2_TRUNC_U_F64X2_SAT, ()),
+			I8x16Add =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD, {}),
+			I16x8Add =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD, {}),
+			I32x4Add =&gt; <span class="macro">simd!</span>(writer, I32X4_ADD, {}),
+			I64x2Add =&gt; <span class="macro">simd!</span>(writer, I64X2_ADD, {}),
+			I8x16Sub =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB, {}),
+			I16x8Sub =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB, {}),
+			I32x4Sub =&gt; <span class="macro">simd!</span>(writer, I32X4_SUB, {}),
+			I64x2Sub =&gt; <span class="macro">simd!</span>(writer, I64X2_SUB, {}),
+			I8x16Mul =&gt; <span class="macro">simd!</span>(writer, I8X16_MUL, {}),
+			I16x8Mul =&gt; <span class="macro">simd!</span>(writer, I16X8_MUL, {}),
+			I32x4Mul =&gt; <span class="macro">simd!</span>(writer, I32X4_MUL, {}),
+			<span class="comment">// I64x2Mul =&gt; simd!(writer, I64X2_MUL, {}),
+			</span>I8x16Neg =&gt; <span class="macro">simd!</span>(writer, I8X16_NEG, {}),
+			I16x8Neg =&gt; <span class="macro">simd!</span>(writer, I16X8_NEG, {}),
+			I32x4Neg =&gt; <span class="macro">simd!</span>(writer, I32X4_NEG, {}),
+			I64x2Neg =&gt; <span class="macro">simd!</span>(writer, I64X2_NEG, {}),
+			I8x16AddSaturateS =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD_SATURATE_S, {}),
+			I8x16AddSaturateU =&gt; <span class="macro">simd!</span>(writer, I8X16_ADD_SATURATE_U, {}),
+			I16x8AddSaturateS =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD_SATURATE_S, {}),
+			I16x8AddSaturateU =&gt; <span class="macro">simd!</span>(writer, I16X8_ADD_SATURATE_U, {}),
+			I8x16SubSaturateS =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB_SATURATE_S, {}),
+			I8x16SubSaturateU =&gt; <span class="macro">simd!</span>(writer, I8X16_SUB_SATURATE_U, {}),
+			I16x8SubSaturateS =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB_SATURATE_S, {}),
+			I16x8SubSaturateU =&gt; <span class="macro">simd!</span>(writer, I16X8_SUB_SATURATE_U, {}),
+			I8x16Shl =&gt; <span class="macro">simd!</span>(writer, I8X16_SHL, {}),
+			I16x8Shl =&gt; <span class="macro">simd!</span>(writer, I16X8_SHL, {}),
+			I32x4Shl =&gt; <span class="macro">simd!</span>(writer, I32X4_SHL, {}),
+			I64x2Shl =&gt; <span class="macro">simd!</span>(writer, I64X2_SHL, {}),
+			I8x16ShrS =&gt; <span class="macro">simd!</span>(writer, I8X16_SHR_S, {}),
+			I8x16ShrU =&gt; <span class="macro">simd!</span>(writer, I8X16_SHR_U, {}),
+			I16x8ShrS =&gt; <span class="macro">simd!</span>(writer, I16X8_SHR_S, {}),
+			I16x8ShrU =&gt; <span class="macro">simd!</span>(writer, I16X8_SHR_U, {}),
+			I32x4ShrU =&gt; <span class="macro">simd!</span>(writer, I32X4_SHR_U, {}),
+			I32x4ShrS =&gt; <span class="macro">simd!</span>(writer, I32X4_SHR_S, {}),
+			I64x2ShrU =&gt; <span class="macro">simd!</span>(writer, I64X2_SHR_U, {}),
+			I64x2ShrS =&gt; <span class="macro">simd!</span>(writer, I64X2_SHR_S, {}),
+			V128And =&gt; <span class="macro">simd!</span>(writer, V128_AND, {}),
+			V128Or =&gt; <span class="macro">simd!</span>(writer, V128_OR, {}),
+			V128Xor =&gt; <span class="macro">simd!</span>(writer, V128_XOR, {}),
+			V128Not =&gt; <span class="macro">simd!</span>(writer, V128_NOT, {}),
+			V128Bitselect =&gt; <span class="macro">simd!</span>(writer, V128_BITSELECT, {}),
+			I8x16AnyTrue =&gt; <span class="macro">simd!</span>(writer, I8X16_ANY_TRUE, {}),
+			I16x8AnyTrue =&gt; <span class="macro">simd!</span>(writer, I16X8_ANY_TRUE, {}),
+			I32x4AnyTrue =&gt; <span class="macro">simd!</span>(writer, I32X4_ANY_TRUE, {}),
+			I64x2AnyTrue =&gt; <span class="macro">simd!</span>(writer, I64X2_ANY_TRUE, {}),
+			I8x16AllTrue =&gt; <span class="macro">simd!</span>(writer, I8X16_ALL_TRUE, {}),
+			I16x8AllTrue =&gt; <span class="macro">simd!</span>(writer, I16X8_ALL_TRUE, {}),
+			I32x4AllTrue =&gt; <span class="macro">simd!</span>(writer, I32X4_ALL_TRUE, {}),
+			I64x2AllTrue =&gt; <span class="macro">simd!</span>(writer, I64X2_ALL_TRUE, {}),
+			I8x16Eq =&gt; <span class="macro">simd!</span>(writer, I8X16_EQ, {}),
+			I16x8Eq =&gt; <span class="macro">simd!</span>(writer, I16X8_EQ, {}),
+			I32x4Eq =&gt; <span class="macro">simd!</span>(writer, I32X4_EQ, {}),
+			<span class="comment">// I64x2Eq =&gt; simd!(writer, I64X2_EQ, {}),
+			</span>F32x4Eq =&gt; <span class="macro">simd!</span>(writer, F32X4_EQ, {}),
+			F64x2Eq =&gt; <span class="macro">simd!</span>(writer, F64X2_EQ, {}),
+			I8x16Ne =&gt; <span class="macro">simd!</span>(writer, I8X16_NE, {}),
+			I16x8Ne =&gt; <span class="macro">simd!</span>(writer, I16X8_NE, {}),
+			I32x4Ne =&gt; <span class="macro">simd!</span>(writer, I32X4_NE, {}),
+			<span class="comment">// I64x2Ne =&gt; simd!(writer, I64X2_NE, {}),
+			</span>F32x4Ne =&gt; <span class="macro">simd!</span>(writer, F32X4_NE, {}),
+			F64x2Ne =&gt; <span class="macro">simd!</span>(writer, F64X2_NE, {}),
+			I8x16LtS =&gt; <span class="macro">simd!</span>(writer, I8X16_LT_S, {}),
+			I8x16LtU =&gt; <span class="macro">simd!</span>(writer, I8X16_LT_U, {}),
+			I16x8LtS =&gt; <span class="macro">simd!</span>(writer, I16X8_LT_S, {}),
+			I16x8LtU =&gt; <span class="macro">simd!</span>(writer, I16X8_LT_U, {}),
+			I32x4LtS =&gt; <span class="macro">simd!</span>(writer, I32X4_LT_S, {}),
+			I32x4LtU =&gt; <span class="macro">simd!</span>(writer, I32X4_LT_U, {}),
+			<span class="comment">// I64x2LtS =&gt; simd!(writer, I64X2_LT_S, {}),
+			// I64x2LtU =&gt; simd!(writer, I64X2_LT_U, {}),
+			</span>F32x4Lt =&gt; <span class="macro">simd!</span>(writer, F32X4_LT, {}),
+			F64x2Lt =&gt; <span class="macro">simd!</span>(writer, F64X2_LT, {}),
+			I8x16LeS =&gt; <span class="macro">simd!</span>(writer, I8X16_LE_S, {}),
+			I8x16LeU =&gt; <span class="macro">simd!</span>(writer, I8X16_LE_U, {}),
+			I16x8LeS =&gt; <span class="macro">simd!</span>(writer, I16X8_LE_S, {}),
+			I16x8LeU =&gt; <span class="macro">simd!</span>(writer, I16X8_LE_U, {}),
+			I32x4LeS =&gt; <span class="macro">simd!</span>(writer, I32X4_LE_S, {}),
+			I32x4LeU =&gt; <span class="macro">simd!</span>(writer, I32X4_LE_U, {}),
+			<span class="comment">// I64x2LeS =&gt; simd!(writer, I64X2_LE_S, {}),
+			// I64x2LeU =&gt; simd!(writer, I64X2_LE_U, {}),
+			</span>F32x4Le =&gt; <span class="macro">simd!</span>(writer, F32X4_LE, {}),
+			F64x2Le =&gt; <span class="macro">simd!</span>(writer, F64X2_LE, {}),
+			I8x16GtS =&gt; <span class="macro">simd!</span>(writer, I8X16_GT_S, {}),
+			I8x16GtU =&gt; <span class="macro">simd!</span>(writer, I8X16_GT_U, {}),
+			I16x8GtS =&gt; <span class="macro">simd!</span>(writer, I16X8_GT_S, {}),
+			I16x8GtU =&gt; <span class="macro">simd!</span>(writer, I16X8_GT_U, {}),
+			I32x4GtS =&gt; <span class="macro">simd!</span>(writer, I32X4_GT_S, {}),
+			I32x4GtU =&gt; <span class="macro">simd!</span>(writer, I32X4_GT_U, {}),
+			<span class="comment">// I64x2GtS =&gt; simd!(writer, I64X2_GT_S, {}),
+			// I64x2GtU =&gt; simd!(writer, I64X2_GT_U, {}),
+			</span>F32x4Gt =&gt; <span class="macro">simd!</span>(writer, F32X4_GT, {}),
+			F64x2Gt =&gt; <span class="macro">simd!</span>(writer, F64X2_GT, {}),
+			I8x16GeS =&gt; <span class="macro">simd!</span>(writer, I8X16_GE_S, {}),
+			I8x16GeU =&gt; <span class="macro">simd!</span>(writer, I8X16_GE_U, {}),
+			I16x8GeS =&gt; <span class="macro">simd!</span>(writer, I16X8_GE_S, {}),
+			I16x8GeU =&gt; <span class="macro">simd!</span>(writer, I16X8_GE_U, {}),
+			I32x4GeS =&gt; <span class="macro">simd!</span>(writer, I32X4_GE_S, {}),
+			I32x4GeU =&gt; <span class="macro">simd!</span>(writer, I32X4_GE_U, {}),
+			<span class="comment">// I64x2GeS =&gt; simd!(writer, I64X2_GE_S, {}),
+			// I64x2GeU =&gt; simd!(writer, I64X2_GE_U, {}),
+			</span>F32x4Ge =&gt; <span class="macro">simd!</span>(writer, F32X4_GE, {}),
+			F64x2Ge =&gt; <span class="macro">simd!</span>(writer, F64X2_GE, {}),
+			F32x4Neg =&gt; <span class="macro">simd!</span>(writer, F32X4_NEG, {}),
+			F64x2Neg =&gt; <span class="macro">simd!</span>(writer, F64X2_NEG, {}),
+			F32x4Abs =&gt; <span class="macro">simd!</span>(writer, F32X4_ABS, {}),
+			F64x2Abs =&gt; <span class="macro">simd!</span>(writer, F64X2_ABS, {}),
+			F32x4Min =&gt; <span class="macro">simd!</span>(writer, F32X4_MIN, {}),
+			F64x2Min =&gt; <span class="macro">simd!</span>(writer, F64X2_MIN, {}),
+			F32x4Max =&gt; <span class="macro">simd!</span>(writer, F32X4_MAX, {}),
+			F64x2Max =&gt; <span class="macro">simd!</span>(writer, F64X2_MAX, {}),
+			F32x4Add =&gt; <span class="macro">simd!</span>(writer, F32X4_ADD, {}),
+			F64x2Add =&gt; <span class="macro">simd!</span>(writer, F64X2_ADD, {}),
+			F32x4Sub =&gt; <span class="macro">simd!</span>(writer, F32X4_SUB, {}),
+			F64x2Sub =&gt; <span class="macro">simd!</span>(writer, F64X2_SUB, {}),
+			F32x4Div =&gt; <span class="macro">simd!</span>(writer, F32X4_DIV, {}),
+			F64x2Div =&gt; <span class="macro">simd!</span>(writer, F64X2_DIV, {}),
+			F32x4Mul =&gt; <span class="macro">simd!</span>(writer, F32X4_MUL, {}),
+			F64x2Mul =&gt; <span class="macro">simd!</span>(writer, F64X2_MUL, {}),
+			F32x4Sqrt =&gt; <span class="macro">simd!</span>(writer, F32X4_SQRT, {}),
+			F64x2Sqrt =&gt; <span class="macro">simd!</span>(writer, F64X2_SQRT, {}),
+			F32x4ConvertSI32x4 =&gt; <span class="macro">simd!</span>(writer, F32X4_CONVERT_S_I32X4, {}),
+			F32x4ConvertUI32x4 =&gt; <span class="macro">simd!</span>(writer, F32X4_CONVERT_U_I32X4, {}),
+			F64x2ConvertSI64x2 =&gt; <span class="macro">simd!</span>(writer, F64X2_CONVERT_S_I64X2, {}),
+			F64x2ConvertUI64x2 =&gt; <span class="macro">simd!</span>(writer, F64X2_CONVERT_U_I64X2, {}),
+			I32x4TruncSF32x4Sat =&gt; <span class="macro">simd!</span>(writer, I32X4_TRUNC_S_F32X4_SAT, {}),
+			I32x4TruncUF32x4Sat =&gt; <span class="macro">simd!</span>(writer, I32X4_TRUNC_U_F32X4_SAT, {}),
+			I64x2TruncSF64x2Sat =&gt; <span class="macro">simd!</span>(writer, I64X2_TRUNC_S_F64X2_SAT, {}),
+			I64x2TruncUF64x2Sat =&gt; <span class="macro">simd!</span>(writer, I64X2_TRUNC_U_F64X2_SAT, {}),
 		}
 
 		<span class="prelude-val">Ok</span>(())
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 </span><span class="kw">impl </span>Serialize <span class="kw">for </span>BulkInstruction {
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
-		<span class="kw">use </span><span class="self">self</span>::BulkInstruction::<span class="kw-2">*</span>;
-		<span class="kw">use </span><span class="self">self</span>::opcodes::bulk::<span class="kw-2">*</span>;
+		<span class="kw">use </span><span class="self">self</span>::{opcodes::bulk::<span class="kw-2">*</span>, BulkInstruction::<span class="kw-2">*</span>};
 
 		<span class="kw">match </span><span class="self">self </span>{
 			MemoryInit(seg) =&gt; <span class="macro">bulk!</span>(writer, MEMORY_INIT, {
@@ -5281,7 +5325,7 @@
 	}
 }
 
-<span class="attr">#[cfg(any(feature=<span class="string">&quot;simd&quot;</span>, feature=<span class="string">&quot;atomics&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">&quot;simd&quot;</span>, feature = <span class="string">&quot;atomics&quot;</span>))]
 </span><span class="kw">impl </span>Serialize <span class="kw">for </span>MemArg {
 	<span class="kw">type </span>Error = Error;
 
@@ -5293,15 +5337,15 @@
 }
 
 <span class="macro">macro_rules! </span>fmt_op {
-	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr) =&gt; ({
+	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr) =&gt; {{
 		<span class="macro">write!</span>(<span class="macro-nonterminal">$f</span>, <span class="string">&quot;{}&quot;</span>, <span class="macro-nonterminal">$mnemonic</span>)
-	});
-	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr, <span class="macro-nonterminal">$immediate</span>: expr) =&gt; ({
+	}};
+	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr, <span class="macro-nonterminal">$immediate</span>: expr) =&gt; {{
 		<span class="macro">write!</span>(<span class="macro-nonterminal">$f</span>, <span class="string">&quot;{} {}&quot;</span>, <span class="macro-nonterminal">$mnemonic</span>, <span class="macro-nonterminal">$immediate</span>)
-	});
-	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr, <span class="macro-nonterminal">$immediate1</span>: expr, <span class="macro-nonterminal">$immediate2</span>: expr) =&gt; ({
+	}};
+	(<span class="macro-nonterminal">$f</span>: expr, <span class="macro-nonterminal">$mnemonic</span>: expr, <span class="macro-nonterminal">$immediate1</span>: expr, <span class="macro-nonterminal">$immediate2</span>: expr) =&gt; {{
 		<span class="macro">write!</span>(<span class="macro-nonterminal">$f</span>, <span class="string">&quot;{} {} {}&quot;</span>, <span class="macro-nonterminal">$mnemonic</span>, <span class="macro-nonterminal">$immediate1</span>, <span class="macro-nonterminal">$immediate2</span>)
-	});
+	}};
 }
 
 <span class="kw">impl </span>fmt::Display <span class="kw">for </span>Instruction {
@@ -5313,18 +5357,24 @@
 			Nop =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;nop&quot;</span>),
 			Block(BlockType::NoResult) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;block&quot;</span>),
 			Block(BlockType::Value(value_type)) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;block&quot;</span>, value_type),
+			<span class="attr">#[cfg(feature = <span class="string">&quot;multi_value&quot;</span>)]
+			</span>Block(BlockType::TypeIndex(idx)) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;block type_idx={}&quot;</span>, idx),
 			Loop(BlockType::NoResult) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;loop&quot;</span>),
 			Loop(BlockType::Value(value_type)) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;loop&quot;</span>, value_type),
+			<span class="attr">#[cfg(feature = <span class="string">&quot;multi_value&quot;</span>)]
+			</span>Loop(BlockType::TypeIndex(idx)) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;loop type_idx={}&quot;</span>, idx),
 			If(BlockType::NoResult) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;if&quot;</span>),
 			If(BlockType::Value(value_type)) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;if&quot;</span>, value_type),
+			<span class="attr">#[cfg(feature = <span class="string">&quot;multi_value&quot;</span>)]
+			</span>If(BlockType::TypeIndex(idx)) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;if type_idx={}&quot;</span>, idx),
 			Else =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;else&quot;</span>),
 			End =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;end&quot;</span>),
-			Br(idx) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;br&quot;</span>,  idx),
-			BrIf(idx) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;br_if&quot;</span>,  idx),
+			Br(idx) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;br&quot;</span>, idx),
+			BrIf(idx) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;br_if&quot;</span>, idx),
 			BrTable(<span class="kw-2">ref </span>table) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;br_table&quot;</span>, table.default),
 			Return =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;return&quot;</span>),
 			Call(index) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;call&quot;</span>, index),
-			CallIndirect(index, <span class="kw">_</span>) =&gt;  <span class="macro">fmt_op!</span>(f, <span class="string">&quot;call_indirect&quot;</span>, index),
+			CallIndirect(index, <span class="kw">_</span>) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;call_indirect&quot;</span>, index),
 			Drop =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;drop&quot;</span>),
 			Select =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;select&quot;</span>),
 			GetLocal(index) =&gt; <span class="macro">fmt_op!</span>(f, <span class="string">&quot;get_local&quot;</span>, index),
@@ -5547,28 +5597,28 @@
 			F32ReinterpretI32 =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;f32.reinterpret/i32&quot;</span>),
 			F64ReinterpretI64 =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;f64.reinterpret/i64&quot;</span>),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;sign_ext&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;sign_ext&quot;</span>)]
 			</span>SignExt(<span class="kw-2">ref </span>i) =&gt; <span class="kw">match </span>i {
 				SignExtInstruction::I32Extend8S =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;i32.extend8_s&quot;</span>),
 				SignExtInstruction::I32Extend16S =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;i32.extend16_s&quot;</span>),
 				SignExtInstruction::I64Extend8S =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;i64.extend8_s&quot;</span>),
 				SignExtInstruction::I64Extend16S =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;i64.extend16_s&quot;</span>),
 				SignExtInstruction::I64Extend32S =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;i64.extend32_s&quot;</span>),
-			}
+			},
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 			</span>Atomics(<span class="kw-2">ref </span>i) =&gt; i.fmt(f),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 			</span>Simd(<span class="kw-2">ref </span>i) =&gt; i.fmt(f),
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 			</span>Bulk(<span class="kw-2">ref </span>i) =&gt; i.fmt(f),
 		}
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="kw">impl </span>fmt::Display <span class="kw">for </span>AtomicsInstruction {
 	<span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
 		<span class="kw">use </span><span class="self">self</span>::AtomicsInstruction::<span class="kw-2">*</span>;
@@ -5652,7 +5702,7 @@
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;simd&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;simd&quot;</span>)]
 </span><span class="kw">impl </span>fmt::Display <span class="kw">for </span>SimdInstruction {
 	<span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
 		<span class="kw">use </span><span class="self">self</span>::SimdInstruction::<span class="kw-2">*</span>;
@@ -5813,7 +5863,7 @@
 	}
 }
 
-<span class="attr">#[cfg(feature=<span class="string">&quot;bulk&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;bulk&quot;</span>)]
 </span><span class="kw">impl </span>fmt::Display <span class="kw">for </span>BulkInstruction {
 	<span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
 		<span class="kw">use </span><span class="self">self</span>::BulkInstruction::<span class="kw-2">*</span>;
@@ -5857,20 +5907,26 @@
 <span class="attr">#[test]
 </span><span class="kw">fn </span>ifelse() {
 	<span class="comment">// see if-else.wast/if-else.wasm
-	</span><span class="kw">let </span>instruction_list = <span class="kw">super</span>::deserialize_buffer::&lt;Instructions&gt;(<span class="kw-2">&amp;</span>[<span class="number">0x04</span>, <span class="number">0x7F</span>, <span class="number">0x41</span>, <span class="number">0x05</span>, <span class="number">0x05</span>, <span class="number">0x41</span>, <span class="number">0x07</span>, <span class="number">0x0B</span>, <span class="number">0x0B</span>])
-		.expect(<span class="string">&quot;valid hex of if instruction&quot;</span>);
+	</span><span class="kw">let </span>instruction_list = <span class="kw">super</span>::deserialize_buffer::&lt;Instructions&gt;(<span class="kw-2">&amp;</span>[
+		<span class="number">0x04</span>, <span class="number">0x7F</span>, <span class="number">0x41</span>, <span class="number">0x05</span>, <span class="number">0x05</span>, <span class="number">0x41</span>, <span class="number">0x07</span>, <span class="number">0x0B</span>, <span class="number">0x0B</span>,
+	])
+	.expect(<span class="string">&quot;valid hex of if instruction&quot;</span>);
 	<span class="kw">let </span>instructions = instruction_list.elements();
-	<span class="kw">match </span><span class="kw-2">&amp;</span>instructions[<span class="number">0</span>] {
-		<span class="kw-2">&amp;</span>Instruction::If(<span class="kw">_</span>) =&gt; (),
+	<span class="kw">match </span>instructions[<span class="number">0</span>] {
+		Instruction::If(<span class="kw">_</span>) =&gt; (),
 		<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should be deserialized as if instruction&quot;</span>),
 	}
-	<span class="kw">let </span>before_else = instructions.iter().skip(<span class="number">1</span>)
-		.take_while(|op| <span class="kw">match </span><span class="kw-2">**</span>op { Instruction::Else =&gt; <span class="bool-val">false</span>, <span class="kw">_ </span>=&gt; <span class="bool-val">true </span>}).count();
-	<span class="kw">let </span>after_else = instructions.iter().skip(<span class="number">1</span>)
-		.skip_while(|op| <span class="kw">match </span><span class="kw-2">**</span>op { Instruction::Else =&gt; <span class="bool-val">false</span>, <span class="kw">_ </span>=&gt; <span class="bool-val">true </span>})
-		.take_while(|op| <span class="kw">match </span><span class="kw-2">**</span>op { Instruction::End =&gt; <span class="bool-val">false</span>, <span class="kw">_ </span>=&gt; <span class="bool-val">true </span>})
-		.count()
-		- <span class="number">1</span>; <span class="comment">// minus Instruction::Else itself
+	<span class="kw">let </span>before_else = instructions
+		.iter()
+		.skip(<span class="number">1</span>)
+		.take_while(|op| !<span class="macro">matches!</span>(<span class="kw-2">**</span>op, Instruction::Else))
+		.count();
+	<span class="kw">let </span>after_else = instructions
+		.iter()
+		.skip(<span class="number">1</span>)
+		.skip_while(|op| !<span class="macro">matches!</span>(<span class="kw-2">**</span>op, Instruction::Else))
+		.take_while(|op| !<span class="macro">matches!</span>(<span class="kw-2">**</span>op, Instruction::End))
+		.count() - <span class="number">1</span>; <span class="comment">// minus Instruction::Else itself
 	</span><span class="macro">assert_eq!</span>(before_else, after_else);
 }
 
@@ -5893,12 +5949,12 @@
 
 <span class="attr">#[test]
 </span><span class="kw">fn </span>instructions_hashset() {
-	<span class="kw">use </span><span class="self">self</span>::Instruction::{Call, Block, Drop};
+	<span class="kw">use </span><span class="self">self</span>::Instruction::{Block, Call, Drop};
 	<span class="kw">use </span><span class="kw">super</span>::types::{BlockType::Value, ValueType};
 
 	<span class="kw">let </span>set: std::collections::HashSet&lt;Instruction&gt; =
 		<span class="macro">vec!</span>[Call(<span class="number">1</span>), Block(Value(ValueType::I32)), Drop].into_iter().collect();
-	<span class="macro">assert_eq!</span>(set.contains(<span class="kw-2">&amp;</span>Drop), <span class="bool-val">true</span>)
+	<span class="macro">assert!</span>(set.contains(<span class="kw-2">&amp;</span>Drop));
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="parity_wasm" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

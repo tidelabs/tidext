@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.5.1/src/tag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../der/index.html">
-                        <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.6.1/src/tag.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tag.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../der/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -433,6 +433,30 @@
 <a href="#432" id="432">432</a>
 <a href="#433" id="433">433</a>
 <a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
+<a href="#450" id="450">450</a>
+<a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
+<a href="#457" id="457">457</a>
+<a href="#458" id="458">458</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ASN.1 tags.
 
 </span><span class="kw">mod </span>class;
@@ -441,7 +465,7 @@
 
 <span class="kw">pub use </span><span class="self">self</span>::{class::Class, mode::TagMode, number::TagNumber};
 
-<span class="kw">use crate</span>::{Decodable, Decoder, DerOrd, Encodable, Encoder, Error, ErrorKind, Length, <span class="prelude-ty">Result</span>};
+<span class="kw">use crate</span>::{Decode, DerOrd, Encode, Error, ErrorKind, Length, Reader, <span class="prelude-ty">Result</span>, Writer};
 <span class="kw">use </span>core::{cmp::Ordering, fmt};
 
 <span class="doccomment">/// Indicator bit for constructed form encoding (i.e. vs primitive form)
@@ -502,6 +526,9 @@
     <span class="doccomment">/// `OBJECT IDENTIFIER` tag: `6`.
     </span>ObjectIdentifier,
 
+    <span class="doccomment">/// `REAL` tag: `9`.
+    </span>Real,
+
     <span class="doccomment">/// `ENUMERATED` tag: `10`.
     </span>Enumerated,
 
@@ -519,6 +546,12 @@
 
     <span class="doccomment">/// `PrintableString` tag: `19`.
     </span>PrintableString,
+
+    <span class="doccomment">/// `TeletexString` tag: `20`.
+    </span>TeletexString,
+
+    <span class="doccomment">/// `VideotexString` tag: `21`.
+    </span>VideotexString,
 
     <span class="doccomment">/// `IA5String` tag: `22`.
     </span>Ia5String,
@@ -624,12 +657,15 @@
             Tag::OctetString =&gt; <span class="number">0x04</span>,
             Tag::Null =&gt; <span class="number">0x05</span>,
             Tag::ObjectIdentifier =&gt; <span class="number">0x06</span>,
+            Tag::Real =&gt; <span class="number">0x09</span>,
             Tag::Enumerated =&gt; <span class="number">0x0A</span>,
             Tag::Utf8String =&gt; <span class="number">0x0C</span>,
             Tag::Sequence =&gt; <span class="number">0x10 </span>| CONSTRUCTED_FLAG,
             Tag::Set =&gt; <span class="number">0x11 </span>| CONSTRUCTED_FLAG,
             Tag::NumericString =&gt; <span class="number">0x12</span>,
             Tag::PrintableString =&gt; <span class="number">0x13</span>,
+            Tag::TeletexString =&gt; <span class="number">0x14</span>,
+            Tag::VideotexString =&gt; <span class="number">0x15</span>,
             Tag::Ia5String =&gt; <span class="number">0x16</span>,
             Tag::UtcTime =&gt; <span class="number">0x17</span>,
             Tag::GeneralizedTime =&gt; <span class="number">0x18</span>,
@@ -692,10 +728,13 @@
             <span class="number">0x04 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::OctetString),
             <span class="number">0x05 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::Null),
             <span class="number">0x06 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::ObjectIdentifier),
+            <span class="number">0x09 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::Real),
             <span class="number">0x0A </span>=&gt; <span class="prelude-val">Ok</span>(Tag::Enumerated),
             <span class="number">0x0C </span>=&gt; <span class="prelude-val">Ok</span>(Tag::Utf8String),
             <span class="number">0x12 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::NumericString),
             <span class="number">0x13 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::PrintableString),
+            <span class="number">0x14 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::TeletexString),
+            <span class="number">0x15 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::VideotexString),
             <span class="number">0x16 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::Ia5String),
             <span class="number">0x17 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::UtcTime),
             <span class="number">0x18 </span>=&gt; <span class="prelude-val">Ok</span>(Tag::GeneralizedTime),
@@ -732,19 +771,19 @@
     }
 }
 
-<span class="kw">impl </span>Decodable&lt;<span class="lifetime">&#39;_</span>&gt; <span class="kw">for </span>Tag {
-    <span class="kw">fn </span>decode(decoder: <span class="kw-2">&amp;mut </span>Decoder&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        decoder.byte().and_then(<span class="self">Self</span>::try_from)
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Decode&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>Tag {
+    <span class="kw">fn </span>decode&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        reader.read_byte().and_then(<span class="self">Self</span>::try_from)
     }
 }
 
-<span class="kw">impl </span>Encodable <span class="kw">for </span>Tag {
+<span class="kw">impl </span>Encode <span class="kw">for </span>Tag {
     <span class="kw">fn </span>encoded_len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Length&gt; {
         <span class="prelude-val">Ok</span>(Length::ONE)
     }
 
-    <span class="kw">fn </span>encode(<span class="kw-2">&amp;</span><span class="self">self</span>, encoder: <span class="kw-2">&amp;mut </span>Encoder&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
-        encoder.byte(<span class="self">self</span>.into())
+    <span class="kw">fn </span>encode(<span class="kw-2">&amp;</span><span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Writer) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+        writer.write_byte(<span class="self">self</span>.into())
     }
 }
 
@@ -765,11 +804,14 @@
             Tag::OctetString =&gt; f.write_str(<span class="string">&quot;OCTET STRING&quot;</span>),
             Tag::Null =&gt; f.write_str(<span class="string">&quot;NULL&quot;</span>),
             Tag::ObjectIdentifier =&gt; f.write_str(<span class="string">&quot;OBJECT IDENTIFIER&quot;</span>),
+            Tag::Real =&gt; f.write_str(<span class="string">&quot;REAL&quot;</span>),
             Tag::Enumerated =&gt; f.write_str(<span class="string">&quot;ENUMERATED&quot;</span>),
             Tag::Utf8String =&gt; f.write_str(<span class="string">&quot;UTF8String&quot;</span>),
             Tag::Set =&gt; f.write_str(<span class="string">&quot;SET&quot;</span>),
             Tag::NumericString =&gt; f.write_str(<span class="string">&quot;NumericString&quot;</span>),
             Tag::PrintableString =&gt; f.write_str(<span class="string">&quot;PrintableString&quot;</span>),
+            Tag::TeletexString =&gt; f.write_str(<span class="string">&quot;TeletexString&quot;</span>),
+            Tag::VideotexString =&gt; f.write_str(<span class="string">&quot;VideotexString&quot;</span>),
             Tag::Ia5String =&gt; f.write_str(<span class="string">&quot;IA5String&quot;</span>),
             Tag::UtcTime =&gt; f.write_str(<span class="string">&quot;UTCTime&quot;</span>),
             Tag::GeneralizedTime =&gt; f.write_str(<span class="string">&quot;GeneralizedTime&quot;</span>),
@@ -782,7 +824,8 @@
             } =&gt; <span class="macro">write!</span>(
                 f,
                 <span class="string">&quot;APPLICATION [{}] ({})&quot;</span>,
-                number, FIELD_TYPE[constructed <span class="kw">as </span>usize]
+                number,
+                FIELD_TYPE[usize::from(constructed)]
             ),
             Tag::ContextSpecific {
                 constructed,
@@ -790,7 +833,8 @@
             } =&gt; <span class="macro">write!</span>(
                 f,
                 <span class="string">&quot;CONTEXT-SPECIFIC [{}] ({})&quot;</span>,
-                number, FIELD_TYPE[constructed <span class="kw">as </span>usize]
+                number,
+                FIELD_TYPE[usize::from(constructed)]
             ),
             Tag::Private {
                 constructed,
@@ -798,7 +842,8 @@
             } =&gt; <span class="macro">write!</span>(
                 f,
                 <span class="string">&quot;PRIVATE [{}] ({})&quot;</span>,
-                number, FIELD_TYPE[constructed <span class="kw">as </span>usize]
+                number,
+                FIELD_TYPE[usize::from(constructed)]
             ),
         }
     }
@@ -823,11 +868,14 @@
         <span class="macro">assert_eq!</span>(Tag::OctetString.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::Null.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::ObjectIdentifier.class(), Class::Universal);
+        <span class="macro">assert_eq!</span>(Tag::Real.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::Enumerated.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::Utf8String.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::Set.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::NumericString.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::PrintableString.class(), Class::Universal);
+        <span class="macro">assert_eq!</span>(Tag::TeletexString.class(), Class::Universal);
+        <span class="macro">assert_eq!</span>(Tag::VideotexString.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::Ia5String.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::UtcTime.class(), Class::Universal);
         <span class="macro">assert_eq!</span>(Tag::GeneralizedTime.class(), Class::Universal);

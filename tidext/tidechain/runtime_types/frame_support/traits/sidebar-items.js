@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["misc",""],["schedule",""],["tokens",""]]};
+window.SIDEBAR_ITEMS = {"mod":[["misc",""],["preimages",""],["tokens",""]]};

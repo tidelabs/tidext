@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/const-oid-0.7.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../const_oid/index.html">
-                        <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/const-oid-0.9.2/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../const_oid/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -246,35 +246,102 @@
 <a href="#245" id="245">245</a>
 <a href="#246" id="246">246</a>
 <a href="#247" id="247">247</a>
+<a href="#248" id="248">248</a>
+<a href="#249" id="249">249</a>
+<a href="#250" id="250">250</a>
+<a href="#251" id="251">251</a>
+<a href="#252" id="252">252</a>
+<a href="#253" id="253">253</a>
+<a href="#254" id="254">254</a>
+<a href="#255" id="255">255</a>
+<a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
 </pre><pre class="rust"><code><span class="attr">#![no_std]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
 #![doc(
-    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;</span>,
-    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;</span>,
-    html_root_url = <span class="string">&quot;https://docs.rs/const-oid/0.7.1&quot;
+    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg&quot;</span>,
+    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg&quot;
 </span>)]
-#![forbid(unsafe_code, clippy::unwrap_used)]
-#![warn(missing_docs, rust_2018_idioms)]
+#![forbid(unsafe_code)]
+#![warn(
+    clippy::integer_arithmetic,
+    clippy::panic,
+    clippy::panic_in_result_fn,
+    clippy::unwrap_used,
+    missing_docs,
+    rust_2018_idioms,
+    unused_lifetimes,
+    unused_qualifications
+)]
 
 #[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">extern crate </span>std;
 
 <span class="attr">#[macro_use]
-</span><span class="kw">mod </span>macros;
+</span><span class="kw">mod </span>checked;
 
 <span class="kw">mod </span>arcs;
 <span class="kw">mod </span>encoder;
 <span class="kw">mod </span>error;
 <span class="kw">mod </span>parser;
 
+<span class="attr">#[cfg(feature = <span class="string">&quot;db&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;db&quot;</span>)))]
+</span><span class="kw">pub mod </span>db;
+
 <span class="kw">pub use crate</span>::{
     arcs::{Arc, Arcs},
     error::{Error, <span class="prelude-ty">Result</span>},
 };
 
-<span class="kw">use </span><span class="kw">crate</span>::arcs::{RootArcs, ARC_MAX_BYTES, ARC_MAX_LAST_OCTET};
+<span class="kw">use </span><span class="kw">crate</span>::encoder::Encoder;
 <span class="kw">use </span>core::{fmt, str::FromStr};
+
+<span class="doccomment">/// A trait which associates an OID with a type.
+</span><span class="kw">pub trait </span>AssociatedOid {
+    <span class="doccomment">/// The OID associated with this type.
+    </span><span class="kw">const </span>OID: ObjectIdentifier;
+}
+
+<span class="doccomment">/// A trait which associates a dynamic, `&amp;self`-dependent OID with a type,
+/// which may change depending on the type&#39;s value.
+///
+/// This trait is object safe and auto-impl&#39;d for any types which impl
+/// [`AssociatedOid`].
+</span><span class="kw">pub trait </span>DynAssociatedOid {
+    <span class="doccomment">/// Get the OID associated with this value.
+    </span><span class="kw">fn </span>oid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ObjectIdentifier;
+}
+
+<span class="kw">impl</span>&lt;T: AssociatedOid&gt; DynAssociatedOid <span class="kw">for </span>T {
+    <span class="kw">fn </span>oid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ObjectIdentifier {
+        T::OID
+    }
+}
 
 <span class="doccomment">/// Object identifier (OID).
 ///
@@ -303,101 +370,75 @@
 <span class="attr">#[allow(clippy::len_without_is_empty)]
 </span><span class="kw">impl </span>ObjectIdentifier {
     <span class="doccomment">/// Maximum size of a BER/DER-encoded OID in bytes.
-    </span><span class="kw">pub const </span>MAX_SIZE: usize = <span class="number">39</span>; <span class="comment">// 32-bytes total w\ 1-byte length
+    </span><span class="kw">pub const </span>MAX_SIZE: usize = <span class="number">39</span>; <span class="comment">// makes `ObjectIdentifier` 40-bytes total w\ 1-byte length
 
-    </span><span class="doccomment">/// Parse an [`ObjectIdentifier`] from the dot-delimited string form, e.g.:
+    </span><span class="doccomment">/// Parse an [`ObjectIdentifier`] from the dot-delimited string form,
+    /// panicking on parse errors.
+    ///
+    /// This function exists as a workaround for `unwrap` not yet being
+    /// stable in `const fn` contexts, and is intended to allow the result to
+    /// be bound to a constant value:
     ///
     /// ```
     /// use const_oid::ObjectIdentifier;
     ///
-    /// pub const MY_OID: ObjectIdentifier = ObjectIdentifier::new(&quot;1.2.840.113549.1.1.1&quot;);
+    /// pub const MY_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap(&quot;1.2.840.113549.1.1.1&quot;);
     /// ```
     ///
-    /// # Panics
+    /// In future versions of Rust it should be possible to replace this with
+    /// `ObjectIdentifier::new(...).unwrap()`.
     ///
-    /// This method panics in the event the OID is malformed according to the
-    /// &quot;Validity&quot; rules given in the toplevel documentation for this type.
-    ///
-    /// For that reason this method is *ONLY* recommended for use in constants
-    /// (where it will generate a compiler error instead).
-    ///
-    /// To parse an OID from a `&amp;str` slice fallibly and without panicking,
-    /// use the [`FromStr`][1] impl instead (or via `str`&#39;s [`parse`][2]
-    /// method).
-    ///
-    /// [1]: ./struct.ObjectIdentifier.html#impl-FromStr
-    /// [2]: https://doc.rust-lang.org/nightly/std/primitive.str.html#method.parse
-    </span><span class="kw">pub const fn </span>new(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self </span>{
-        parser::Parser::parse(s).finish()
+    /// Use [`ObjectIdentifier::new`] for fallible parsing.
+    </span><span class="comment">// TODO(tarcieri): remove this when `Result::unwrap` is `const fn`
+    </span><span class="kw">pub const fn </span>new_unwrap(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span><span class="self">Self</span>::new(s) {
+            <span class="prelude-val">Ok</span>(oid) =&gt; oid,
+            <span class="prelude-val">Err</span>(err) =&gt; err.panic(),
+        }
+    }
+
+    <span class="doccomment">/// Parse an [`ObjectIdentifier`] from the dot-delimited string form.
+    </span><span class="kw">pub const fn </span>new(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="comment">// TODO(tarcieri): use `?` when stable in `const fn`
+        </span><span class="kw">match </span>parser::Parser::parse(s) {
+            <span class="prelude-val">Ok</span>(parser) =&gt; parser.finish(),
+            <span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(err),
+        }
     }
 
     <span class="doccomment">/// Parse an OID from a slice of [`Arc`] values (i.e. integers).
-    </span><span class="kw">pub fn </span>from_arcs(arcs: <span class="kw-2">&amp;</span>[Arc]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="self">Self</span>::MAX_SIZE];
+    </span><span class="kw">pub fn </span>from_arcs(arcs: <span class="kw">impl </span>IntoIterator&lt;Item = Arc&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>encoder = Encoder::new();
 
-        bytes[<span class="number">0</span>] = <span class="kw">match </span><span class="kw-2">*</span>arcs {
-            [first, second, <span class="kw">_</span>, ..] =&gt; RootArcs::new(first, second)<span class="question-mark">?</span>.into(),
-            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error),
-        };
-
-        <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="number">1</span>;
-
-        <span class="kw">for </span><span class="kw-2">&amp;</span>arc <span class="kw">in </span><span class="kw-2">&amp;</span>arcs[<span class="number">2</span>..] {
-            offset += encoder::write_base128(<span class="kw-2">&amp;mut </span>bytes[offset..], arc)<span class="question-mark">?</span>;
+        <span class="kw">for </span>arc <span class="kw">in </span>arcs {
+            encoder = encoder.arc(arc)<span class="question-mark">?</span>;
         }
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
-            bytes,
-            length: offset <span class="kw">as </span>u8,
-        })
+        encoder.finish()
     }
 
     <span class="doccomment">/// Parse an OID from from its BER/DER encoding.
     </span><span class="kw">pub fn </span>from_bytes(ber_bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>len = ber_bytes.len();
 
-        <span class="kw">if </span>!(<span class="number">2</span>..=<span class="self">Self</span>::MAX_SIZE).contains(<span class="kw-2">&amp;</span>len) {
-            <span class="kw">return </span><span class="prelude-val">Err</span>(Error);
+        <span class="kw">match </span>len {
+            <span class="number">0 </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::Empty),
+            <span class="number">3</span>..=<span class="self">Self</span>::MAX_SIZE =&gt; (),
+            <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::NotEnoughArcs),
         }
-
-        <span class="comment">// Validate root arcs are in range
-        </span>ber_bytes
-            .get(<span class="number">0</span>)
-            .cloned()
-            .ok_or(Error)
-            .and_then(RootArcs::try_from)<span class="question-mark">?</span>;
-
-        <span class="comment">// Validate lower arcs are well-formed
-        </span><span class="kw">let </span><span class="kw-2">mut </span>arc_offset = <span class="number">1</span>;
-        <span class="kw">let </span><span class="kw-2">mut </span>arc_bytes = <span class="number">0</span>;
-
-        <span class="comment">// TODO(tarcieri): consolidate this with `Arcs::next`?
-        </span><span class="kw">while </span>arc_offset &lt; len {
-            <span class="kw">match </span>ber_bytes.get(arc_offset + arc_bytes).cloned() {
-                <span class="prelude-val">Some</span>(byte) =&gt; {
-                    <span class="kw">if </span>(arc_bytes == ARC_MAX_BYTES) &amp;&amp; (byte &amp; ARC_MAX_LAST_OCTET != <span class="number">0</span>) {
-                        <span class="comment">// Overflowed `Arc` (u32)
-                        </span><span class="kw">return </span><span class="prelude-val">Err</span>(Error);
-                    }
-
-                    arc_bytes += <span class="number">1</span>;
-
-                    <span class="kw">if </span>byte &amp; <span class="number">0b10000000 </span>== <span class="number">0 </span>{
-                        arc_offset += arc_bytes;
-                        arc_bytes = <span class="number">0</span>;
-                    }
-                }
-                <span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error), <span class="comment">// truncated OID
-            </span>}
-        }
-
         <span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="self">Self</span>::MAX_SIZE];
         bytes[..len].copy_from_slice(ber_bytes);
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+        <span class="kw">let </span>oid = <span class="self">Self </span>{
             bytes,
             length: len <span class="kw">as </span>u8,
-        })
+        };
+
+        <span class="comment">// Ensure arcs are well-formed
+        </span><span class="kw">let </span><span class="kw-2">mut </span>arcs = oid.arcs();
+        <span class="kw">while </span>arcs.try_next()<span class="question-mark">?</span>.is_some() {}
+
+        <span class="prelude-val">Ok</span>(oid)
     }
 
     <span class="doccomment">/// Get the BER/DER serialization of this OID as bytes.
@@ -415,10 +456,29 @@
 
     <span class="doccomment">/// Iterate over the arcs (a.k.a. nodes) of an [`ObjectIdentifier`].
     ///
-    /// Returns [`Arcs`], an iterator over `Arc` values representing the value
-    /// of each arc/node.
+    /// Returns [`Arcs`], an iterator over [`Arc`] values.
     </span><span class="kw">pub fn </span>arcs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Arcs&lt;<span class="lifetime">&#39;_</span>&gt; {
         Arcs::new(<span class="self">self</span>)
+    }
+
+    <span class="doccomment">/// Get the length of this [`ObjectIdentifier`] in arcs.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.arcs().count()
+    }
+
+    <span class="doccomment">/// Get the parent OID of this one (if applicable).
+    </span><span class="kw">pub fn </span>parent(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>num_arcs = <span class="self">self</span>.len().checked_sub(<span class="number">1</span>)<span class="question-mark">?</span>;
+        <span class="self">Self</span>::from_arcs(<span class="self">self</span>.arcs().take(num_arcs)).ok()
+    }
+
+    <span class="doccomment">/// Push an additional arc onto this OID, returning the child OID.
+    </span><span class="kw">pub const fn </span>push_arc(<span class="self">self</span>, arc: Arc) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="comment">// TODO(tarcieri): use `?` when stable in `const fn`
+        </span><span class="kw">match </span>Encoder::extend(<span class="self">self</span>).arc(arc) {
+            <span class="prelude-val">Ok</span>(encoder) =&gt; encoder.finish(),
+            <span class="prelude-val">Err</span>(err) =&gt; <span class="prelude-val">Err</span>(err),
+        }
     }
 }
 
@@ -432,29 +492,7 @@
     <span class="kw">type </span><span class="prelude-val">Err </span>= Error;
 
     <span class="kw">fn </span>from_str(string: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>split = string.split(<span class="string">&#39;.&#39;</span>);
-        <span class="kw">let </span>first_arc = split.next().and_then(|s| s.parse().ok()).ok_or(Error)<span class="question-mark">?</span>;
-        <span class="kw">let </span>second_arc = split.next().and_then(|s| s.parse().ok()).ok_or(Error)<span class="question-mark">?</span>;
-
-        <span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="self">Self</span>::MAX_SIZE];
-        bytes[<span class="number">0</span>] = RootArcs::new(first_arc, second_arc)<span class="question-mark">?</span>.into();
-
-        <span class="kw">let </span><span class="kw-2">mut </span>offset = <span class="number">1</span>;
-
-        <span class="kw">for </span>s <span class="kw">in </span>split {
-            <span class="kw">let </span>arc = s.parse().map_err(|<span class="kw">_</span>| Error)<span class="question-mark">?</span>;
-            offset += encoder::write_base128(<span class="kw-2">&amp;mut </span>bytes[offset..], arc)<span class="question-mark">?</span>;
-        }
-
-        <span class="kw">if </span>offset &gt; <span class="number">1 </span>{
-            <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
-                bytes,
-                length: offset <span class="kw">as </span>u8,
-            })
-        } <span class="kw">else </span>{
-            <span class="comment">// Minimum 3 arcs
-            </span><span class="prelude-val">Err</span>(Error)
-        }
+        <span class="self">Self</span>::new(string)
     }
 }
 
@@ -485,12 +523,40 @@
         <span class="kw">for </span>(i, arc) <span class="kw">in </span><span class="self">self</span>.arcs().enumerate() {
             <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, arc)<span class="question-mark">?</span>;
 
-            <span class="kw">if </span>i &lt; len - <span class="number">1 </span>{
-                <span class="macro">write!</span>(f, <span class="string">&quot;.&quot;</span>)<span class="question-mark">?</span>;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(j) = i.checked_add(<span class="number">1</span>) {
+                <span class="kw">if </span>j &lt; len {
+                    <span class="macro">write!</span>(f, <span class="string">&quot;.&quot;</span>)<span class="question-mark">?</span>;
+                }
             }
         }
 
         <span class="prelude-val">Ok</span>(())
+    }
+}
+
+<span class="comment">// Implement by hand because the derive would create invalid values.
+// Use the constructor to create a valid oid with at least 3 arcs.
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;arbitrary&quot;</span>)]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; arbitrary::Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>ObjectIdentifier {
+    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>arbitrary::Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>first = u.int_in_range(<span class="number">0</span>..=arcs::ARC_MAX_FIRST)<span class="question-mark">?</span>;
+        <span class="kw">let </span>second = u.int_in_range(<span class="number">0</span>..=arcs::ARC_MAX_SECOND)<span class="question-mark">?</span>;
+        <span class="kw">let </span>third = u.arbitrary()<span class="question-mark">?</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>oid = <span class="self">Self</span>::from_arcs([first, second, third])
+            .map_err(|<span class="kw">_</span>| arbitrary::Error::IncorrectFormat)<span class="question-mark">?</span>;
+
+        <span class="kw">for </span>arc <span class="kw">in </span>u.arbitrary_iter()<span class="question-mark">? </span>{
+            oid = oid
+                .push_arc(arc<span class="question-mark">?</span>)
+                .map_err(|<span class="kw">_</span>| arbitrary::Error::IncorrectFormat)<span class="question-mark">?</span>;
+        }
+
+        <span class="prelude-val">Ok</span>(oid)
+    }
+
+    <span class="kw">fn </span>size_hint(depth: usize) -&gt; (usize, <span class="prelude-ty">Option</span>&lt;usize&gt;) {
+        (Arc::size_hint(depth).<span class="number">0</span>.saturating_mul(<span class="number">3</span>), <span class="prelude-val">None</span>)
     }
 }
 </code></pre></div>

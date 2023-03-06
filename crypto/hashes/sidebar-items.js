@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["blake2b",""],["sha",""]],"trait":[["Digest","Convinience wrapper trait covering functionality of cryptographic hash functions with fixed output size."]],"type":[["Output","Output array of [`OutputSizeUser`] implementors."]]};
+window.SIDEBAR_ITEMS = {"mod":[["blake2b",""],["sha",""]],"trait":[["Digest","Convenience wrapper trait covering functionality of cryptographic hash functions with fixed output size."]],"type":[["Output","Output array of [`OutputSizeUser`] implementors."]]};

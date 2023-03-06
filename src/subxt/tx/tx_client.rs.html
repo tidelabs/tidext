@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/subxt/src/tx/tx_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tx_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/subxt/src/tx/tx_client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tx_client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -393,6 +393,14 @@
 <a href="#393" id="393">393</a>
 <a href="#394" id="394">394</a>
 <a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
@@ -403,27 +411,29 @@
         OfflineClientT,
         OnlineClientT,
     },
+    config::{
+        Config,
+        ExtrinsicParams,
+        Hasher,
+    },
     error::Error,
     tx::{
-        ExtrinsicParams,
-        Signer,
+        Signer <span class="kw">as </span>SignerT,
         TxProgress,
     },
     utils::{
         Encoded,
         PhantomDataSendSync,
     },
-    Config,
 };
 <span class="kw">use </span>codec::{
     Compact,
     Encode,
 };
 <span class="kw">use </span>derivative::Derivative;
-<span class="kw">use </span>sp_runtime::{
-    traits::Hash,
-    ApplyExtrinsicResult,
-};
+
+<span class="comment">// This is returned from an API below, so expose it here.
+</span><span class="kw">pub use </span><span class="kw">crate</span>::rpc::types::DryRunResult;
 
 <span class="doccomment">/// A client for working with transactions.
 </span><span class="attr">#[derive(Derivative)]
@@ -474,7 +484,7 @@
     {
         <span class="kw">let </span>metadata = <span class="self">self</span>.client.metadata();
         <span class="kw">let </span><span class="kw-2">mut </span>bytes = Vec::new();
-        call.encode_call_data(<span class="kw-2">&amp;</span>metadata, <span class="kw-2">&amp;mut </span>bytes)<span class="question-mark">?</span>;
+        call.encode_call_data_to(<span class="kw-2">&amp;</span>metadata, <span class="kw-2">&amp;mut </span>bytes)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(bytes)
     }
 
@@ -496,7 +506,7 @@
             <span class="comment">// transaction protocol version (4) (is not signed, so no 1 bit at the front).
             </span><span class="number">4u8</span>.encode_to(<span class="kw-2">&amp;mut </span>encoded_inner);
             <span class="comment">// encode call data after this byte.
-            </span>call.encode_call_data(<span class="kw-2">&amp;</span><span class="self">self</span>.client.metadata(), <span class="kw-2">&amp;mut </span>encoded_inner)<span class="question-mark">?</span>;
+            </span>call.encode_call_data_to(<span class="kw-2">&amp;</span><span class="self">self</span>.client.metadata(), <span class="kw-2">&amp;mut </span>encoded_inner)<span class="question-mark">?</span>;
             <span class="comment">// now, prefix byte length:
             </span><span class="kw">let </span>len = Compact(
                 u32::try_from(encoded_inner.len())
@@ -516,15 +526,16 @@
     }
 
     <span class="doccomment">/// Creates a raw signed extrinsic without submitting it.
-    </span><span class="kw">pub fn </span>create_signed_with_nonce&lt;Call&gt;(
+    </span><span class="kw">pub fn </span>create_signed_with_nonce&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
         account_nonce: T::Index,
         other_params: &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;SubmittableExtrinsic&lt;T, C&gt;, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
     {
         <span class="comment">// 1. Validate this call against the current node metadata if the call comes
         // with a hash allowing us to do so.
@@ -561,7 +572,7 @@
             additional_and_extra_params.encode_extra_to(<span class="kw-2">&amp;mut </span>bytes);
             additional_and_extra_params.encode_additional_to(<span class="kw-2">&amp;mut </span>bytes);
             <span class="kw">if </span>bytes.len() &gt; <span class="number">256 </span>{
-                signer.sign(<span class="kw-2">&amp;</span>sp_core::blake2_256(<span class="kw-2">&amp;</span>bytes))
+                signer.sign(T::Hasher::hash_of(<span class="kw-2">&amp;</span>Encoded(bytes)).as_ref())
             } <span class="kw">else </span>{
                 signer.sign(<span class="kw-2">&amp;</span>bytes)
             }
@@ -609,24 +620,22 @@
     C: OnlineClientT&lt;T&gt;,
 {
     <span class="doccomment">/// Creates a raw signed extrinsic, without submitting it.
-    </span><span class="kw">pub async fn </span>create_signed&lt;Call&gt;(
+    </span><span class="kw">pub async fn </span>create_signed&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
         other_params: &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;SubmittableExtrinsic&lt;T, C&gt;, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
     {
         <span class="comment">// Get nonce from the node.
-        </span><span class="kw">let </span>account_nonce = <span class="kw">if let </span><span class="prelude-val">Some</span>(nonce) = signer.nonce() {
-            nonce
-        } <span class="kw">else </span>{
-            <span class="self">self</span>.client
-                .rpc()
-                .system_account_next_index(signer.account_id())
-                .<span class="kw">await</span><span class="question-mark">?
-        </span>};
+        </span><span class="kw">let </span>account_nonce = <span class="self">self
+            </span>.client
+            .rpc()
+            .system_account_next_index(signer.account_id())
+            .<span class="kw">await</span><span class="question-mark">?</span>;
 
         <span class="self">self</span>.create_signed_with_nonce(call, signer, account_nonce, other_params)
     }
@@ -636,13 +645,14 @@
     ///
     /// Returns a [`TxProgress`], which can be used to track the status of the transaction
     /// and obtain details about it, once it has made it into a block.
-    </span><span class="kw">pub async fn </span>sign_and_submit_then_watch_default&lt;Call&gt;(
+    </span><span class="kw">pub async fn </span>sign_and_submit_then_watch_default&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;TxProgress&lt;T, C&gt;, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
         &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams: Default,
     {
         <span class="self">self</span>.sign_and_submit_then_watch(call, signer, Default::default())
@@ -653,14 +663,15 @@
     ///
     /// Returns a [`TxProgress`], which can be used to track the status of the transaction
     /// and obtain details about it, once it has made it into a block.
-    </span><span class="kw">pub async fn </span>sign_and_submit_then_watch&lt;Call&gt;(
+    </span><span class="kw">pub async fn </span>sign_and_submit_then_watch&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
         other_params: &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;TxProgress&lt;T, C&gt;, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
     {
         <span class="self">self</span>.create_signed(call, signer, other_params)
             .<span class="kw">await</span><span class="question-mark">?
@@ -678,13 +689,14 @@
     ///
     /// Success does not mean the extrinsic has been included in the block, just that it is valid
     /// and has been included in the transaction pool.
-    </span><span class="kw">pub async fn </span>sign_and_submit_default&lt;Call&gt;(
+    </span><span class="kw">pub async fn </span>sign_and_submit_default&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;T::Hash, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
         &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams: Default,
     {
         <span class="self">self</span>.sign_and_submit(call, signer, Default::default()).<span class="kw">await
@@ -698,14 +710,15 @@
     ///
     /// Success does not mean the extrinsic has been included in the block, just that it is valid
     /// and has been included in the transaction pool.
-    </span><span class="kw">pub async fn </span>sign_and_submit&lt;Call&gt;(
+    </span><span class="kw">pub async fn </span>sign_and_submit&lt;Call, Signer&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         call: <span class="kw-2">&amp;</span>Call,
-        signer: <span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Signer&lt;T&gt; + Send + Sync),
+        signer: <span class="kw-2">&amp;</span>Signer,
         other_params: &lt;T::ExtrinsicParams <span class="kw">as </span>ExtrinsicParams&lt;T::Index, T::Hash&gt;&gt;::OtherParams,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;T::Hash, Error&gt;
     <span class="kw">where
         </span>Call: TxPayload,
+        Signer: SignerT&lt;T&gt;,
     {
         <span class="self">self</span>.create_signed(call, signer, other_params)
             .<span class="kw">await</span><span class="question-mark">?
@@ -745,6 +758,12 @@
     </span><span class="kw">pub fn </span>encoded(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.encoded.<span class="number">0
     </span>}
+
+    <span class="doccomment">/// Consumes [`SubmittableExtrinsic`] and returns the SCALE encoded
+    /// extrinsic bytes.
+    </span><span class="kw">pub fn </span>into_encoded(<span class="self">self</span>) -&gt; Vec&lt;u8&gt; {
+        <span class="self">self</span>.encoded.<span class="number">0
+    </span>}
 }
 
 <span class="kw">impl</span>&lt;T, C&gt; SubmittableExtrinsic&lt;T, C&gt;
@@ -758,7 +777,7 @@
     /// and obtain details about it, once it has made it into a block.
     </span><span class="kw">pub async fn </span>submit_and_watch(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;TxProgress&lt;T, C&gt;, Error&gt; {
         <span class="comment">// Get a hash of the extrinsic (we&#39;ll need this later).
-        </span><span class="kw">let </span>ext_hash = T::Hashing::hash_of(<span class="kw-2">&amp;</span><span class="self">self</span>.encoded);
+        </span><span class="kw">let </span>ext_hash = T::Hasher::hash_of(<span class="kw-2">&amp;</span><span class="self">self</span>.encoded);
 
         <span class="comment">// Submit and watch for transaction progress.
         </span><span class="kw">let </span>sub = <span class="self">self</span>.client.rpc().watch_extrinsic(<span class="kw-2">&amp;</span><span class="self">self</span>.encoded).<span class="kw">await</span><span class="question-mark">?</span>;
@@ -780,11 +799,8 @@
 
     <span class="doccomment">/// Submits the extrinsic to the dry_run RPC, to test if it would succeed.
     ///
-    /// Returns `Ok` with an [`ApplyExtrinsicResult`], which is the result of applying of an extrinsic.
-    </span><span class="kw">pub async fn </span>dry_run(
-        <span class="kw-2">&amp;</span><span class="self">self</span>,
-        at: <span class="prelude-ty">Option</span>&lt;T::Hash&gt;,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;ApplyExtrinsicResult, Error&gt; {
+    /// Returns `Ok` with a [`DryRunResult`], which is the result of attempting to dry run the extrinsic.
+    </span><span class="kw">pub async fn </span>dry_run(<span class="kw-2">&amp;</span><span class="self">self</span>, at: <span class="prelude-ty">Option</span>&lt;T::Hash&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;DryRunResult, Error&gt; {
         <span class="self">self</span>.client.rpc().dry_run(<span class="self">self</span>.encoded(), at).<span class="kw">await
     </span>}
 }

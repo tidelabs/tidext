@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["H256",""],["U256",""]]};
+window.SIDEBAR_ITEMS = {"struct":[["U256",""]]};

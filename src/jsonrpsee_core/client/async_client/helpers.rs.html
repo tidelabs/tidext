@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.15.1/src/client/async_client/helpers.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>helpers.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.16.2/src/client/async_client/helpers.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>helpers.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -262,6 +262,25 @@
 <a href="#262" id="262">262</a>
 <a href="#263" id="263">263</a>
 <a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 //
 // Permission is hereby granted, free of charge, to any
@@ -290,6 +309,8 @@
 
 </span><span class="kw">use </span><span class="kw">crate</span>::client::async_client::manager::{RequestManager, RequestStatus};
 <span class="kw">use </span><span class="kw">crate</span>::client::{RequestMessage, TransportSenderT};
+<span class="kw">use </span><span class="kw">crate</span>::params::ArrayParams;
+<span class="kw">use </span><span class="kw">crate</span>::traits::ToRpcParams;
 <span class="kw">use </span><span class="kw">crate</span>::Error;
 
 <span class="kw">use </span>futures_channel::mpsc;
@@ -299,26 +320,30 @@
 <span class="kw">use </span>jsonrpsee_types::error::CallError;
 <span class="kw">use </span>jsonrpsee_types::response::SubscriptionError;
 <span class="kw">use </span>jsonrpsee_types::{
-	ErrorResponse, Id, Notification, ParamsSer, RequestSer, Response, SubscriptionId, SubscriptionResponse,
+	ErrorObject, ErrorResponse, Id, Notification, RequestSer, Response, SubscriptionId, SubscriptionResponse,
 };
 <span class="kw">use </span>serde_json::Value <span class="kw">as </span>JsonValue;
+<span class="kw">use </span>std::ops::Range;
+
+<span class="attr">#[derive(Debug, Clone)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>InnerBatchResponse {
+	<span class="kw">pub</span>(<span class="kw">crate</span>) id: u64,
+	<span class="kw">pub</span>(<span class="kw">crate</span>) result: <span class="prelude-ty">Result</span>&lt;JsonValue, ErrorObject&lt;<span class="lifetime">&#39;static</span>&gt;&gt;,
+}
 
 <span class="doccomment">/// Attempts to process a batch response.
 ///
 /// On success the result is sent to the frontend.
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>process_batch_response(manager: <span class="kw-2">&amp;mut </span>RequestManager, rps: Vec&lt;Response&lt;JsonValue&gt;&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-	<span class="kw">let </span><span class="kw-2">mut </span>digest = Vec::with_capacity(rps.len());
-	<span class="kw">let </span><span class="kw-2">mut </span>ordered_responses = <span class="macro">vec!</span>[JsonValue::Null; rps.len()];
-	<span class="kw">let </span><span class="kw-2">mut </span>rps_unordered: Vec&lt;<span class="kw">_</span>&gt; = Vec::with_capacity(rps.len());
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>process_batch_response(
+	manager: <span class="kw-2">&amp;mut </span>RequestManager,
+	rps: Vec&lt;InnerBatchResponse&gt;,
+	range: Range&lt;u64&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+	<span class="kw">let </span><span class="kw-2">mut </span>responses = Vec::with_capacity(rps.len());
 
-	<span class="kw">for </span>rp <span class="kw">in </span>rps {
-		<span class="kw">let </span>id = rp.id.into_owned();
-		digest.push(id.clone());
-		rps_unordered.push((id, rp.result));
-	}
+	<span class="kw">let </span>start_idx = range.start;
 
-	digest.sort_unstable();
-	<span class="kw">let </span>batch_state = <span class="kw">match </span>manager.complete_pending_batch(digest) {
+	<span class="kw">let </span>batch_state = <span class="kw">match </span>manager.complete_pending_batch(range.clone()) {
 		<span class="prelude-val">Some</span>(state) =&gt; state,
 		<span class="prelude-val">None </span>=&gt; {
 			<span class="macro">tracing::warn!</span>(<span class="string">&quot;Received unknown batch response&quot;</span>);
@@ -326,12 +351,23 @@
 		}
 	};
 
-	<span class="kw">for </span>(id, rp) <span class="kw">in </span>rps_unordered {
-		<span class="kw">let </span>pos =
-			batch_state.order.get(<span class="kw-2">&amp;</span>id).copied().expect(<span class="string">&quot;All request IDs valid checked by RequestManager above; qed&quot;</span>);
-		ordered_responses[pos] = rp;
+	<span class="kw">for _ in </span>range {
+		<span class="kw">let </span>err_obj = ErrorObject::borrowed(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="string">&quot;&quot;</span>, <span class="prelude-val">None</span>);
+		responses.push(<span class="prelude-val">Err</span>(err_obj));
 	}
-	<span class="kw">let _ </span>= batch_state.send_back.send(<span class="prelude-val">Ok</span>(ordered_responses));
+
+	<span class="kw">for </span>rp <span class="kw">in </span>rps {
+		<span class="kw">let </span>maybe_elem =
+			rp.id.checked_sub(start_idx).and_then(|p| p.try_into().ok()).and_then(|p: usize| responses.get_mut(p));
+
+		<span class="kw">if let </span><span class="prelude-val">Some</span>(elem) = maybe_elem {
+			<span class="kw-2">*</span>elem = rp.result;
+		} <span class="kw">else </span>{
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidRequestId);
+		}
+	}
+
+	<span class="kw">let _ </span>= batch_state.send_back.send(<span class="prelude-val">Ok</span>(responses));
 	<span class="prelude-val">Ok</span>(())
 }
 
@@ -348,7 +384,7 @@
 	<span class="kw">let </span>request_id = <span class="kw">match </span>manager.get_request_id_by_subscription_id(<span class="kw-2">&amp;</span>sub_id) {
 		<span class="prelude-val">Some</span>(request_id) =&gt; request_id,
 		<span class="prelude-val">None </span>=&gt; {
-			<span class="macro">tracing::warn!</span>(<span class="string">&quot;Subscription ID: {:?} is not an active subscription&quot;</span>, sub_id);
+			<span class="macro">tracing::warn!</span>(<span class="string">&quot;Subscription {:?} is not active&quot;</span>, sub_id);
 			<span class="kw">return </span><span class="prelude-val">Err</span>(<span class="prelude-val">None</span>);
 		}
 	};
@@ -364,7 +400,7 @@
 			}
 		},
 		<span class="prelude-val">None </span>=&gt; {
-			<span class="macro">tracing::warn!</span>(<span class="string">&quot;Subscription ID: {:?} is not an active subscription&quot;</span>, sub_id);
+			<span class="macro">tracing::warn!</span>(<span class="string">&quot;Subscription {:?} is not active&quot;</span>, sub_id);
 			<span class="prelude-val">Err</span>(<span class="prelude-val">None</span>)
 		}
 	}
@@ -382,7 +418,7 @@
 	<span class="kw">let </span>request_id = <span class="kw">match </span>manager.get_request_id_by_subscription_id(<span class="kw-2">&amp;</span>sub_id) {
 		<span class="prelude-val">Some</span>(request_id) =&gt; request_id,
 		<span class="prelude-val">None </span>=&gt; {
-			<span class="macro">tracing::error!</span>(<span class="string">&quot;The server tried to close down an invalid subscription: {:?}&quot;</span>, sub_id);
+			<span class="macro">tracing::error!</span>(<span class="string">&quot;The server tried to close an invalid subscription: {:?}&quot;</span>, sub_id);
 			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidSubscriptionId);
 		}
 	};
@@ -402,7 +438,7 @@
 			<span class="prelude-val">Err</span>(err) =&gt; {
 				<span class="macro">tracing::error!</span>(<span class="string">&quot;Error sending notification, dropping handler for {:?} error: {:?}&quot;</span>, notif.method, err);
 				<span class="kw">let _ </span>= manager.remove_notification_handler(notif.method.into_owned());
-				<span class="prelude-val">Err</span>(Error::Internal(err.into_send_error()))
+				<span class="prelude-val">Err</span>(err.into_send_error().into())
 			}
 		},
 		<span class="prelude-val">None </span>=&gt; {
@@ -486,10 +522,12 @@
 	sub_id: SubscriptionId&lt;<span class="lifetime">&#39;static</span>&gt;,
 ) -&gt; <span class="prelude-ty">Option</span>&lt;RequestMessage&gt; {
 	<span class="kw">let </span>(unsub_req_id, <span class="kw">_</span>, unsub, sub_id) = manager.remove_subscription(sub_req_id, sub_id)<span class="question-mark">?</span>;
-	<span class="kw">let </span>sub_id_slice: <span class="kw-2">&amp;</span>[JsonValue] = <span class="kw-2">&amp;</span>[sub_id.into()];
-	<span class="comment">// TODO: https://github.com/paritytech/jsonrpsee/issues/275
-	</span><span class="kw">let </span>params = ParamsSer::ArrayRef(sub_id_slice);
-	<span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::new(<span class="kw-2">&amp;</span>unsub_req_id, <span class="kw-2">&amp;</span>unsub, <span class="prelude-val">Some</span>(params))).ok()<span class="question-mark">?</span>;
+
+	<span class="kw">let </span><span class="kw-2">mut </span>params = ArrayParams::new();
+	params.insert(sub_id).ok()<span class="question-mark">?</span>;
+	<span class="kw">let </span>params = params.to_rpc_params().ok()<span class="question-mark">?</span>;
+
+	<span class="kw">let </span>raw = serde_json::to_string(<span class="kw-2">&amp;</span>RequestSer::owned(unsub_req_id.clone(), unsub, params)).ok()<span class="question-mark">?</span>;
 	<span class="prelude-val">Some</span>(RequestMessage { raw, id: unsub_req_id, send_back: <span class="prelude-val">None </span>})
 }
 

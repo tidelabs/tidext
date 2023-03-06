@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/state-machine/src/basic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>basic.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/state-machine/src/basic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>basic.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -440,49 +440,9 @@
 <a href="#440" id="440">440</a>
 <a href="#441" id="441">441</a>
 <a href="#442" id="442">442</a>
-<a href="#443" id="443">443</a>
-<a href="#444" id="444">444</a>
-<a href="#445" id="445">445</a>
-<a href="#446" id="446">446</a>
-<a href="#447" id="447">447</a>
-<a href="#448" id="448">448</a>
-<a href="#449" id="449">449</a>
-<a href="#450" id="450">450</a>
-<a href="#451" id="451">451</a>
-<a href="#452" id="452">452</a>
-<a href="#453" id="453">453</a>
-<a href="#454" id="454">454</a>
-<a href="#455" id="455">455</a>
-<a href="#456" id="456">456</a>
-<a href="#457" id="457">457</a>
-<a href="#458" id="458">458</a>
-<a href="#459" id="459">459</a>
-<a href="#460" id="460">460</a>
-<a href="#461" id="461">461</a>
-<a href="#462" id="462">462</a>
-<a href="#463" id="463">463</a>
-<a href="#464" id="464">464</a>
-<a href="#465" id="465">465</a>
-<a href="#466" id="466">466</a>
-<a href="#467" id="467">467</a>
-<a href="#468" id="468">468</a>
-<a href="#469" id="469">469</a>
-<a href="#470" id="470">470</a>
-<a href="#471" id="471">471</a>
-<a href="#472" id="472">472</a>
-<a href="#473" id="473">473</a>
-<a href="#474" id="474">474</a>
-<a href="#475" id="475">475</a>
-<a href="#476" id="476">476</a>
-<a href="#477" id="477">477</a>
-<a href="#478" id="478">478</a>
-<a href="#479" id="479">479</a>
-<a href="#480" id="480">480</a>
-<a href="#481" id="481">481</a>
-<a href="#482" id="482">482</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -499,14 +459,13 @@
 
 </span><span class="doccomment">//! Basic implementation for Externalities.
 
-</span><span class="kw">use crate</span>::{Backend, StorageKey, StorageValue};
+</span><span class="kw">use crate</span>::{Backend, OverlayedChanges, StorageKey, StorageValue};
 <span class="kw">use </span>codec::Encode;
 <span class="kw">use </span>hash_db::Hasher;
 <span class="kw">use </span>log::warn;
 <span class="kw">use </span>sp_core::{
 	storage::{
-		well_known_keys::is_child_storage_key, ChildInfo, StateVersion, Storage, StorageChild,
-		TrackedStorageKey,
+		well_known_keys::is_child_storage_key, ChildInfo, StateVersion, Storage, TrackedStorageKey,
 	},
 	traits::Externalities,
 	Blake2Hasher,
@@ -517,20 +476,19 @@
 	any::{Any, TypeId},
 	collections::BTreeMap,
 	iter::FromIterator,
-	ops::Bound,
 };
 
 <span class="doccomment">/// Simple Map-based Externalities impl.
 </span><span class="attr">#[derive(Debug)]
 </span><span class="kw">pub struct </span>BasicExternalities {
-	inner: Storage,
+	overlay: OverlayedChanges,
 	extensions: Extensions,
 }
 
 <span class="kw">impl </span>BasicExternalities {
 	<span class="doccomment">/// Create a new instance of `BasicExternalities`
 	</span><span class="kw">pub fn </span>new(inner: Storage) -&gt; <span class="self">Self </span>{
-		BasicExternalities { inner, extensions: Default::default() }
+		BasicExternalities { overlay: inner.into(), extensions: Default::default() }
 	}
 
 	<span class="doccomment">/// New basic externalities with empty storage.
@@ -539,13 +497,34 @@
 	}
 
 	<span class="doccomment">/// Insert key/value
-	</span><span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, k: StorageKey, v: StorageValue) -&gt; <span class="prelude-ty">Option</span>&lt;StorageValue&gt; {
-		<span class="self">self</span>.inner.top.insert(k, v)
+	</span><span class="kw">pub fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, k: StorageKey, v: StorageValue) {
+		<span class="self">self</span>.overlay.set_storage(k, <span class="prelude-val">Some</span>(v));
 	}
 
 	<span class="doccomment">/// Consume self and returns inner storages
 	</span><span class="kw">pub fn </span>into_storages(<span class="self">self</span>) -&gt; Storage {
-		<span class="self">self</span>.inner
+		Storage {
+			top: <span class="self">self
+				</span>.overlay
+				.changes()
+				.filter_map(|(k, v)| v.value().map(|v| (k.to_vec(), v.to_vec())))
+				.collect(),
+			children_default: <span class="self">self
+				</span>.overlay
+				.children()
+				.map(|(iter, i)| {
+					(
+						i.storage_key().to_vec(),
+						sp_core::storage::StorageChild {
+							data: iter
+								.filter_map(|(k, v)| v.value().map(|v| (k.to_vec(), v.to_vec())))
+								.collect(),
+							child_info: i.clone(),
+						},
+					)
+				})
+				.collect(),
+		}
 	}
 
 	<span class="doccomment">/// Execute the given closure `f` with the externalities set and initialized with `storage`.
@@ -555,13 +534,7 @@
 		storage: <span class="kw-2">&amp;mut </span>sp_core::storage::Storage,
 		f: <span class="kw">impl </span>FnOnce() -&gt; R,
 	) -&gt; R {
-		<span class="kw">let </span><span class="kw-2">mut </span>ext = <span class="self">Self </span>{
-			inner: Storage {
-				top: std::mem::take(<span class="kw-2">&amp;mut </span>storage.top),
-				children_default: std::mem::take(<span class="kw-2">&amp;mut </span>storage.children_default),
-			},
-			extensions: Default::default(),
-		};
+		<span class="kw">let </span><span class="kw-2">mut </span>ext = <span class="self">Self</span>::new(std::mem::take(storage));
 
 		<span class="kw">let </span>r = ext.execute_with(f);
 
@@ -590,15 +563,26 @@
 
 <span class="kw">impl </span>PartialEq <span class="kw">for </span>BasicExternalities {
 	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>BasicExternalities) -&gt; bool {
-		<span class="self">self</span>.inner.top.eq(<span class="kw-2">&amp;</span>other.inner.top) &amp;&amp;
-			<span class="self">self</span>.inner.children_default.eq(<span class="kw-2">&amp;</span>other.inner.children_default)
+		<span class="self">self</span>.overlay.changes().map(|(k, v)| (k, v.value())).collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;() ==
+			other.overlay.changes().map(|(k, v)| (k, v.value())).collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;() &amp;&amp;
+			<span class="self">self</span>.overlay
+				.children()
+				.map(|(iter, i)| (i, iter.map(|(k, v)| (k, v.value())).collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;()))
+				.collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;() ==
+				other
+					.overlay
+					.children()
+					.map(|(iter, i)| {
+						(i, iter.map(|(k, v)| (k, v.value())).collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;())
+					})
+					.collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;()
 	}
 }
 
 <span class="kw">impl </span>FromIterator&lt;(StorageKey, StorageValue)&gt; <span class="kw">for </span>BasicExternalities {
 	<span class="kw">fn </span>from_iter&lt;I: IntoIterator&lt;Item = (StorageKey, StorageValue)&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
 		<span class="kw">let </span><span class="kw-2">mut </span>t = <span class="self">Self</span>::default();
-		t.inner.top.extend(iter);
+		iter.into_iter().for_each(|(k, v)| t.insert(k, v));
 		t
 	}
 }
@@ -610,11 +594,8 @@
 }
 
 <span class="kw">impl </span>From&lt;BTreeMap&lt;StorageKey, StorageValue&gt;&gt; <span class="kw">for </span>BasicExternalities {
-	<span class="kw">fn </span>from(hashmap: BTreeMap&lt;StorageKey, StorageValue&gt;) -&gt; <span class="self">Self </span>{
-		BasicExternalities {
-			inner: Storage { top: hashmap, children_default: Default::default() },
-			extensions: Default::default(),
-		}
+	<span class="kw">fn </span>from(map: BTreeMap&lt;StorageKey, StorageValue&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::from_iter(map.into_iter())
 	}
 }
 
@@ -622,7 +603,7 @@
 	<span class="kw">fn </span>set_offchain_storage(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _key: <span class="kw-2">&amp;</span>[u8], _value: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;) {}
 
 	<span class="kw">fn </span>storage(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;StorageValue&gt; {
-		<span class="self">self</span>.inner.top.get(key).cloned()
+		<span class="self">self</span>.overlay.storage(key).and_then(|v| v.map(|v| v.to_vec()))
 	}
 
 	<span class="kw">fn </span>storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
@@ -630,11 +611,7 @@
 	}
 
 	<span class="kw">fn </span>child_storage(<span class="kw-2">&amp;</span><span class="self">self</span>, child_info: <span class="kw-2">&amp;</span>ChildInfo, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;StorageValue&gt; {
-		<span class="self">self</span>.inner
-			.children_default
-			.get(child_info.storage_key())
-			.and_then(|child| child.data.get(key))
-			.cloned()
+		<span class="self">self</span>.overlay.child_storage(child_info, key).and_then(|v| v.map(|v| v.to_vec()))
 	}
 
 	<span class="kw">fn </span>child_storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, child_info: <span class="kw-2">&amp;</span>ChildInfo, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
@@ -642,16 +619,13 @@
 	}
 
 	<span class="kw">fn </span>next_storage_key(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;StorageKey&gt; {
-		<span class="kw">let </span>range = (Bound::Excluded(key), Bound::Unbounded);
-		<span class="self">self</span>.inner.top.range::&lt;[u8], <span class="kw">_</span>&gt;(range).next().map(|(k, <span class="kw">_</span>)| k).cloned()
+		<span class="self">self</span>.overlay.iter_after(key).find_map(|(k, v)| v.value().map(|<span class="kw">_</span>| k.to_vec()))
 	}
 
 	<span class="kw">fn </span>next_child_storage_key(<span class="kw-2">&amp;</span><span class="self">self</span>, child_info: <span class="kw-2">&amp;</span>ChildInfo, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;StorageKey&gt; {
-		<span class="kw">let </span>range = (Bound::Excluded(key), Bound::Unbounded);
-		<span class="self">self</span>.inner
-			.children_default
-			.get(child_info.storage_key())
-			.and_then(|child| child.data.range::&lt;[u8], <span class="kw">_</span>&gt;(range).next().map(|(k, <span class="kw">_</span>)| k).cloned())
+		<span class="self">self</span>.overlay
+			.child_iter_after(child_info.storage_key(), key)
+			.find_map(|(k, v)| v.value().map(|<span class="kw">_</span>| k.to_vec()))
 	}
 
 	<span class="kw">fn </span>place_storage(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: StorageKey, maybe_value: <span class="prelude-ty">Option</span>&lt;StorageValue&gt;) {
@@ -660,14 +634,7 @@
 			<span class="kw">return
 		</span>}
 
-		<span class="kw">match </span>maybe_value {
-			<span class="prelude-val">Some</span>(value) =&gt; {
-				<span class="self">self</span>.inner.top.insert(key, value);
-			},
-			<span class="prelude-val">None </span>=&gt; {
-				<span class="self">self</span>.inner.top.remove(<span class="kw-2">&amp;</span>key);
-			},
-		}
+		<span class="self">self</span>.overlay.set_storage(key, maybe_value)
 	}
 
 	<span class="kw">fn </span>place_child_storage(
@@ -676,19 +643,7 @@
 		key: StorageKey,
 		value: <span class="prelude-ty">Option</span>&lt;StorageValue&gt;,
 	) {
-		<span class="kw">let </span>child_map = <span class="self">self
-			</span>.inner
-			.children_default
-			.entry(child_info.storage_key().to_vec())
-			.or_insert_with(|| StorageChild {
-				data: Default::default(),
-				child_info: child_info.to_owned(),
-			});
-		<span class="kw">if let </span><span class="prelude-val">Some</span>(value) = value {
-			child_map.data.insert(key, value);
-		} <span class="kw">else </span>{
-			child_map.data.remove(<span class="kw-2">&amp;</span>key);
-		}
+		<span class="self">self</span>.overlay.set_child_storage(child_info, key, value);
 	}
 
 	<span class="kw">fn </span>kill_child_storage(
@@ -697,12 +652,7 @@
 		_maybe_limit: <span class="prelude-ty">Option</span>&lt;u32&gt;,
 		_maybe_cursor: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
 	) -&gt; MultiRemovalResults {
-		<span class="kw">let </span>count = <span class="self">self
-			</span>.inner
-			.children_default
-			.remove(child_info.storage_key())
-			.map(|c| c.data.len())
-			.unwrap_or(<span class="number">0</span>) <span class="kw">as </span>u32;
+		<span class="kw">let </span>count = <span class="self">self</span>.overlay.clear_child_storage(child_info);
 		MultiRemovalResults { maybe_cursor: <span class="prelude-val">None</span>, backend: count, unique: count, loops: count }
 	}
 
@@ -721,19 +671,7 @@
 			<span class="kw">return </span>MultiRemovalResults { maybe_cursor, backend: <span class="number">0</span>, unique: <span class="number">0</span>, loops: <span class="number">0 </span>}
 		}
 
-		<span class="kw">let </span>to_remove = <span class="self">self
-			</span>.inner
-			.top
-			.range::&lt;[u8], <span class="kw">_</span>&gt;((Bound::Included(prefix), Bound::Unbounded))
-			.map(|(k, <span class="kw">_</span>)| k)
-			.take_while(|k| k.starts_with(prefix))
-			.cloned()
-			.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-
-		<span class="kw">let </span>count = to_remove.len() <span class="kw">as </span>u32;
-		<span class="kw">for </span>key <span class="kw">in </span>to_remove {
-			<span class="self">self</span>.inner.top.remove(<span class="kw-2">&amp;</span>key);
-		}
+		<span class="kw">let </span>count = <span class="self">self</span>.overlay.clear_prefix(prefix);
 		MultiRemovalResults { maybe_cursor: <span class="prelude-val">None</span>, backend: count, unique: count, loops: count }
 	}
 
@@ -744,56 +682,37 @@
 		_maybe_limit: <span class="prelude-ty">Option</span>&lt;u32&gt;,
 		_maybe_cursor: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
 	) -&gt; MultiRemovalResults {
-		<span class="kw">if let </span><span class="prelude-val">Some</span>(child) = <span class="self">self</span>.inner.children_default.get_mut(child_info.storage_key()) {
-			<span class="kw">let </span>to_remove = child
-				.data
-				.range::&lt;[u8], <span class="kw">_</span>&gt;((Bound::Included(prefix), Bound::Unbounded))
-				.map(|(k, <span class="kw">_</span>)| k)
-				.take_while(|k| k.starts_with(prefix))
-				.cloned()
-				.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-
-			<span class="kw">let </span>count = to_remove.len() <span class="kw">as </span>u32;
-			<span class="kw">for </span>key <span class="kw">in </span>to_remove {
-				child.data.remove(<span class="kw-2">&amp;</span>key);
-			}
-			MultiRemovalResults { maybe_cursor: <span class="prelude-val">None</span>, backend: count, unique: count, loops: count }
-		} <span class="kw">else </span>{
-			MultiRemovalResults { maybe_cursor: <span class="prelude-val">None</span>, backend: <span class="number">0</span>, unique: <span class="number">0</span>, loops: <span class="number">0 </span>}
-		}
+		<span class="kw">let </span>count = <span class="self">self</span>.overlay.clear_child_prefix(child_info, prefix);
+		MultiRemovalResults { maybe_cursor: <span class="prelude-val">None</span>, backend: count, unique: count, loops: count }
 	}
 
 	<span class="kw">fn </span>storage_append(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: Vec&lt;u8&gt;, value: Vec&lt;u8&gt;) {
-		<span class="kw">let </span>current = <span class="self">self</span>.inner.top.entry(key).or_default();
-		<span class="kw">crate</span>::ext::StorageAppend::new(current).append(value);
+		<span class="kw">let </span>current_value = <span class="self">self</span>.overlay.value_mut_or_insert_with(<span class="kw-2">&amp;</span>key, || Default::default());
+		<span class="kw">crate</span>::ext::StorageAppend::new(current_value).append(value);
 	}
 
 	<span class="kw">fn </span>storage_root(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state_version: StateVersion) -&gt; Vec&lt;u8&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>top = <span class="self">self</span>.inner.top.clone();
-		<span class="kw">let </span>prefixed_keys: Vec&lt;<span class="kw">_</span>&gt; = <span class="self">self
-			</span>.inner
-			.children_default
-			.iter()
-			.map(|(_k, v)| (v.child_info.prefixed_storage_key(), v.child_info.clone()))
-			.collect();
+		<span class="kw">let </span><span class="kw-2">mut </span>top = <span class="self">self
+			</span>.overlay
+			.changes()
+			.filter_map(|(k, v)| v.value().map(|v| (k.clone(), v.clone())))
+			.collect::&lt;BTreeMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;();
 		<span class="comment">// Single child trie implementation currently allows using the same child
 		// empty root for all child trie. Using null storage key until multiple
 		// type of child trie support.
 		</span><span class="kw">let </span>empty_hash = empty_child_trie_root::&lt;LayoutV1&lt;Blake2Hasher&gt;&gt;();
-		<span class="kw">for </span>(prefixed_storage_key, child_info) <span class="kw">in </span>prefixed_keys {
+		<span class="kw">for </span>child_info <span class="kw">in </span><span class="self">self</span>.overlay.children().map(|d| d.<span class="number">1</span>.clone()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;() {
 			<span class="kw">let </span>child_root = <span class="self">self</span>.child_storage_root(<span class="kw-2">&amp;</span>child_info, state_version);
 			<span class="kw">if </span>empty_hash[..] == child_root[..] {
-				top.remove(prefixed_storage_key.as_slice());
+				top.remove(child_info.prefixed_storage_key().as_slice());
 			} <span class="kw">else </span>{
-				top.insert(prefixed_storage_key.into_inner(), child_root);
+				top.insert(child_info.prefixed_storage_key().into_inner(), child_root);
 			}
 		}
 
 		<span class="kw">match </span>state_version {
-			StateVersion::V0 =&gt;
-				LayoutV0::&lt;Blake2Hasher&gt;::trie_root(<span class="self">self</span>.inner.top.clone()).as_ref().into(),
-			StateVersion::V1 =&gt;
-				LayoutV1::&lt;Blake2Hasher&gt;::trie_root(<span class="self">self</span>.inner.top.clone()).as_ref().into(),
+			StateVersion::V0 =&gt; LayoutV0::&lt;Blake2Hasher&gt;::trie_root(top).as_ref().into(),
+			StateVersion::V1 =&gt; LayoutV1::&lt;Blake2Hasher&gt;::trie_root(top).as_ref().into(),
 		}
 	}
 
@@ -802,10 +721,11 @@
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		state_version: StateVersion,
 	) -&gt; Vec&lt;u8&gt; {
-		<span class="kw">if let </span><span class="prelude-val">Some</span>(child) = <span class="self">self</span>.inner.children_default.get(child_info.storage_key()) {
-			<span class="kw">let </span>delta = child.data.iter().map(|(k, v)| (k.as_ref(), <span class="prelude-val">Some</span>(v.as_ref())));
+		<span class="kw">if let </span><span class="prelude-val">Some</span>((data, child_info)) = <span class="self">self</span>.overlay.child_changes(child_info.storage_key()) {
+			<span class="kw">let </span>delta =
+				data.into_iter().map(|(k, v)| (k.as_ref(), v.value().map(|v| v.as_slice())));
 			<span class="kw">crate</span>::in_memory_backend::new_in_mem::&lt;Blake2Hasher, HashKey&lt;<span class="kw">_</span>&gt;&gt;()
-				.child_storage_root(<span class="kw-2">&amp;</span>child.child_info, delta, state_version)
+				.child_storage_root(<span class="kw-2">&amp;</span>child_info, delta, state_version)
 				.<span class="number">0
 		</span>} <span class="kw">else </span>{
 			empty_child_trie_root::&lt;LayoutV1&lt;Blake2Hasher&gt;&gt;()
@@ -814,15 +734,15 @@
 	}
 
 	<span class="kw">fn </span>storage_start_transaction(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Transactions are not supported by BasicExternalities&quot;</span>);
+		<span class="self">self</span>.overlay.start_transaction()
 	}
 
 	<span class="kw">fn </span>storage_rollback_transaction(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Transactions are not supported by BasicExternalities&quot;</span>);
+		<span class="self">self</span>.overlay.rollback_transaction().map_err(drop)
 	}
 
 	<span class="kw">fn </span>storage_commit_transaction(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), ()&gt; {
-		<span class="macro">unimplemented!</span>(<span class="string">&quot;Transactions are not supported by BasicExternalities&quot;</span>);
+		<span class="self">self</span>.overlay.commit_transaction().map_err(drop)
 	}
 
 	<span class="kw">fn </span>wipe(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {}
@@ -878,7 +798,6 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use </span>hex_literal::hex;
 	<span class="kw">use </span>sp_core::{
 		map,
 		storage::{well_known_keys::CODE, Storage, StorageChild},
@@ -890,10 +809,11 @@
 		ext.set_storage(<span class="string">b&quot;doe&quot;</span>.to_vec(), <span class="string">b&quot;reindeer&quot;</span>.to_vec());
 		ext.set_storage(<span class="string">b&quot;dog&quot;</span>.to_vec(), <span class="string">b&quot;puppy&quot;</span>.to_vec());
 		ext.set_storage(<span class="string">b&quot;dogglesworth&quot;</span>.to_vec(), <span class="string">b&quot;cat&quot;</span>.to_vec());
-		<span class="kw">const </span>ROOT: [u8; <span class="number">32</span>] =
-			<span class="macro">hex!</span>(<span class="string">&quot;39245109cef3758c2eed2ccba8d9b370a917850af3824bc8348d505df2c298fa&quot;</span>);
+		<span class="kw">let </span>root = array_bytes::hex2bytes_unchecked(
+			<span class="string">&quot;39245109cef3758c2eed2ccba8d9b370a917850af3824bc8348d505df2c298fa&quot;</span>,
+		);
 
-		<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>ext.storage_root(StateVersion::default())[..], <span class="kw-2">&amp;</span>ROOT);
+		<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>ext.storage_root(StateVersion::default())[..], <span class="kw-2">&amp;</span>root);
 	}
 
 	<span class="attr">#[test]

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/section.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>section.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/section.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>section.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1051,137 +1051,15 @@
 <a href="#1051" id="1051">1051</a>
 <a href="#1052" id="1052">1052</a>
 <a href="#1053" id="1053">1053</a>
-<a href="#1054" id="1054">1054</a>
-<a href="#1055" id="1055">1055</a>
-<a href="#1056" id="1056">1056</a>
-<a href="#1057" id="1057">1057</a>
-<a href="#1058" id="1058">1058</a>
-<a href="#1059" id="1059">1059</a>
-<a href="#1060" id="1060">1060</a>
-<a href="#1061" id="1061">1061</a>
-<a href="#1062" id="1062">1062</a>
-<a href="#1063" id="1063">1063</a>
-<a href="#1064" id="1064">1064</a>
-<a href="#1065" id="1065">1065</a>
-<a href="#1066" id="1066">1066</a>
-<a href="#1067" id="1067">1067</a>
-<a href="#1068" id="1068">1068</a>
-<a href="#1069" id="1069">1069</a>
-<a href="#1070" id="1070">1070</a>
-<a href="#1071" id="1071">1071</a>
-<a href="#1072" id="1072">1072</a>
-<a href="#1073" id="1073">1073</a>
-<a href="#1074" id="1074">1074</a>
-<a href="#1075" id="1075">1075</a>
-<a href="#1076" id="1076">1076</a>
-<a href="#1077" id="1077">1077</a>
-<a href="#1078" id="1078">1078</a>
-<a href="#1079" id="1079">1079</a>
-<a href="#1080" id="1080">1080</a>
-<a href="#1081" id="1081">1081</a>
-<a href="#1082" id="1082">1082</a>
-<a href="#1083" id="1083">1083</a>
-<a href="#1084" id="1084">1084</a>
-<a href="#1085" id="1085">1085</a>
-<a href="#1086" id="1086">1086</a>
-<a href="#1087" id="1087">1087</a>
-<a href="#1088" id="1088">1088</a>
-<a href="#1089" id="1089">1089</a>
-<a href="#1090" id="1090">1090</a>
-<a href="#1091" id="1091">1091</a>
-<a href="#1092" id="1092">1092</a>
-<a href="#1093" id="1093">1093</a>
-<a href="#1094" id="1094">1094</a>
-<a href="#1095" id="1095">1095</a>
-<a href="#1096" id="1096">1096</a>
-<a href="#1097" id="1097">1097</a>
-<a href="#1098" id="1098">1098</a>
-<a href="#1099" id="1099">1099</a>
-<a href="#1100" id="1100">1100</a>
-<a href="#1101" id="1101">1101</a>
-<a href="#1102" id="1102">1102</a>
-<a href="#1103" id="1103">1103</a>
-<a href="#1104" id="1104">1104</a>
-<a href="#1105" id="1105">1105</a>
-<a href="#1106" id="1106">1106</a>
-<a href="#1107" id="1107">1107</a>
-<a href="#1108" id="1108">1108</a>
-<a href="#1109" id="1109">1109</a>
-<a href="#1110" id="1110">1110</a>
-<a href="#1111" id="1111">1111</a>
-<a href="#1112" id="1112">1112</a>
-<a href="#1113" id="1113">1113</a>
-<a href="#1114" id="1114">1114</a>
-<a href="#1115" id="1115">1115</a>
-<a href="#1116" id="1116">1116</a>
-<a href="#1117" id="1117">1117</a>
-<a href="#1118" id="1118">1118</a>
-<a href="#1119" id="1119">1119</a>
-<a href="#1120" id="1120">1120</a>
-<a href="#1121" id="1121">1121</a>
-<a href="#1122" id="1122">1122</a>
-<a href="#1123" id="1123">1123</a>
-<a href="#1124" id="1124">1124</a>
-<a href="#1125" id="1125">1125</a>
-<a href="#1126" id="1126">1126</a>
-<a href="#1127" id="1127">1127</a>
-<a href="#1128" id="1128">1128</a>
-<a href="#1129" id="1129">1129</a>
-<a href="#1130" id="1130">1130</a>
-<a href="#1131" id="1131">1131</a>
-<a href="#1132" id="1132">1132</a>
-<a href="#1133" id="1133">1133</a>
-<a href="#1134" id="1134">1134</a>
-<a href="#1135" id="1135">1135</a>
-<a href="#1136" id="1136">1136</a>
-<a href="#1137" id="1137">1137</a>
-<a href="#1138" id="1138">1138</a>
-<a href="#1139" id="1139">1139</a>
-<a href="#1140" id="1140">1140</a>
-<a href="#1141" id="1141">1141</a>
-<a href="#1142" id="1142">1142</a>
-<a href="#1143" id="1143">1143</a>
-<a href="#1144" id="1144">1144</a>
-<a href="#1145" id="1145">1145</a>
-<a href="#1146" id="1146">1146</a>
-<a href="#1147" id="1147">1147</a>
-<a href="#1148" id="1148">1148</a>
-<a href="#1149" id="1149">1149</a>
-<a href="#1150" id="1150">1150</a>
-<a href="#1151" id="1151">1151</a>
-<a href="#1152" id="1152">1152</a>
-<a href="#1153" id="1153">1153</a>
-<a href="#1154" id="1154">1154</a>
-<a href="#1155" id="1155">1155</a>
-<a href="#1156" id="1156">1156</a>
-<a href="#1157" id="1157">1157</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::{vec::Vec, borrow::ToOwned, string::String};
-<span class="kw">use crate</span>::{io, elements};
-<span class="kw">use super</span>::{
-	Serialize,
-	Deserialize,
-	Error,
-	VarUint7,
-	VarUint32,
-	CountedList,
-	ImportEntry,
-	MemoryType,
-	TableType,
-	ExportEntry,
-	GlobalEntry,
-	Func,
-	FuncBody,
-	ElementSegment,
-	DataSegment,
-	CountedWriter,
-	CountedListWriter,
-	External,
-	serialize,
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+	serialize, CountedList, CountedListWriter, CountedWriter, DataSegment, Deserialize,
+	ElementSegment, Error, ExportEntry, External, Func, FuncBody, GlobalEntry, ImportEntry,
+	MemoryType, Serialize, TableType, VarUint32, VarUint7,
 };
+<span class="kw">use crate</span>::{elements, io};
+<span class="kw">use </span>alloc::{borrow::ToOwned, string::String, vec::Vec};
 
-<span class="kw">use </span><span class="kw">super</span>::types::Type;
-<span class="kw">use </span><span class="kw">super</span>::name_section::NameSection;
-<span class="kw">use </span><span class="kw">super</span>::reloc_section::RelocSection;
+<span class="kw">use super</span>::{name_section::NameSection, reloc_section::RelocSection, types::Type};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;reduced-stack-buffer&quot;</span>)]
 </span><span class="kw">const </span>ENTRIES_BUFFER_LENGTH: usize = <span class="number">256</span>;
@@ -1243,62 +1121,36 @@
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span>id = <span class="kw">match </span>VarUint7::deserialize(reader) {
 			<span class="comment">// todo: be more selective detecting no more section
-			</span><span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; { <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnexpectedEof); },
+			</span><span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnexpectedEof),
 			<span class="prelude-val">Ok</span>(id) =&gt; id,
 		};
 
-		<span class="prelude-val">Ok</span>(
-			<span class="kw">match </span>id.into() {
-				<span class="number">0 </span>=&gt; {
-					Section::Custom(CustomSection::deserialize(reader)<span class="question-mark">?</span>.into())
-				},
-				<span class="number">1 </span>=&gt; {
-					Section::Type(TypeSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">2 </span>=&gt; {
-					Section::Import(ImportSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">3 </span>=&gt; {
-					Section::Function(FunctionSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">4 </span>=&gt; {
-					Section::Table(TableSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">5 </span>=&gt; {
-					Section::Memory(MemorySection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">6 </span>=&gt; {
-					Section::Global(GlobalSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">7 </span>=&gt; {
-					Section::Export(ExportSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">8 </span>=&gt; {
-					<span class="kw">let </span><span class="kw-2">mut </span>section_reader = SectionReader::new(reader)<span class="question-mark">?</span>;
-					<span class="kw">let </span>start_idx = VarUint32::deserialize(<span class="kw-2">&amp;mut </span>section_reader)<span class="question-mark">?</span>;
-					section_reader.close()<span class="question-mark">?</span>;
-					Section::Start(start_idx.into())
-				},
-				<span class="number">9 </span>=&gt; {
-					Section::Element(ElementSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">10 </span>=&gt; {
-					Section::Code(CodeSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">11 </span>=&gt; {
-					Section::Data(DataSection::deserialize(reader)<span class="question-mark">?</span>)
-				},
-				<span class="number">12 </span>=&gt; {
-					<span class="kw">let </span><span class="kw-2">mut </span>section_reader = SectionReader::new(reader)<span class="question-mark">?</span>;
-					<span class="kw">let </span>count = VarUint32::deserialize(<span class="kw-2">&amp;mut </span>section_reader)<span class="question-mark">?</span>;
-					section_reader.close()<span class="question-mark">?</span>;
-					Section::DataCount(count.into())
-				},
-				invalid_id =&gt; {
-					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidSectionId(invalid_id))
-				},
-			}
-		)
+		<span class="prelude-val">Ok</span>(<span class="kw">match </span>id.into() {
+			<span class="number">0 </span>=&gt; Section::Custom(CustomSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">1 </span>=&gt; Section::Type(TypeSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">2 </span>=&gt; Section::Import(ImportSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">3 </span>=&gt; Section::Function(FunctionSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">4 </span>=&gt; Section::Table(TableSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">5 </span>=&gt; Section::Memory(MemorySection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">6 </span>=&gt; Section::Global(GlobalSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">7 </span>=&gt; Section::Export(ExportSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">8 </span>=&gt; {
+				<span class="kw">let </span><span class="kw-2">mut </span>section_reader = SectionReader::new(reader)<span class="question-mark">?</span>;
+				<span class="kw">let </span>start_idx = VarUint32::deserialize(<span class="kw-2">&amp;mut </span>section_reader)<span class="question-mark">?</span>;
+				section_reader.close()<span class="question-mark">?</span>;
+				Section::Start(start_idx.into())
+			},
+			<span class="number">9 </span>=&gt; Section::Element(ElementSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">10 </span>=&gt; Section::Code(CodeSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">11 </span>=&gt; Section::Data(DataSection::deserialize(reader)<span class="question-mark">?</span>),
+			<span class="number">12 </span>=&gt; {
+				<span class="kw">let </span><span class="kw-2">mut </span>section_reader = SectionReader::new(reader)<span class="question-mark">?</span>;
+				<span class="kw">let </span>count = VarUint32::deserialize(<span class="kw-2">&amp;mut </span>section_reader)<span class="question-mark">?</span>;
+				section_reader.close()<span class="question-mark">?</span>;
+				Section::DataCount(count.into())
+			},
+			invalid_id =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidSectionId(invalid_id)),
+		})
 	}
 }
 
@@ -1369,10 +1221,8 @@
 			},
 			Section::Name(name_section) =&gt; {
 				VarUint7::from(<span class="number">0x00</span>).serialize(writer)<span class="question-mark">?</span>;
-				<span class="kw">let </span>custom = CustomSection {
-					name: <span class="string">&quot;name&quot;</span>.to_owned(),
-					payload: serialize(name_section)<span class="question-mark">?</span>,
-				};
+				<span class="kw">let </span>custom =
+					CustomSection { name: <span class="string">&quot;name&quot;</span>.to_owned(), payload: serialize(name_section)<span class="question-mark">? </span>};
 				custom.serialize(writer)<span class="question-mark">?</span>;
 			},
 			Section::Reloc(reloc_section) =&gt; {
@@ -1416,13 +1266,10 @@
 	<span class="kw">pub fn </span>new&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, elements::Error&gt; {
 		<span class="kw">let </span>length = u32::from(VarUint32::deserialize(reader)<span class="question-mark">?</span>) <span class="kw">as </span>usize;
 		<span class="kw">let </span>inner_buffer = <span class="macro">buffered_read!</span>(ENTRIES_BUFFER_LENGTH, length, reader);
-		<span class="kw">let </span>buf_length = inner_buffer.len();
+		<span class="kw">let </span>declared_length = inner_buffer.len();
 		<span class="kw">let </span>cursor = io::Cursor::new(inner_buffer);
 
-		<span class="prelude-val">Ok</span>(SectionReader {
-			cursor: cursor,
-			declared_length: buf_length,
-		})
+		<span class="prelude-val">Ok</span>(SectionReader { cursor, declared_length })
 	}
 
 	<span class="kw">pub fn </span>close(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), io::Error&gt; {
@@ -1438,15 +1285,15 @@
 }
 
 <span class="kw">impl </span>io::Read <span class="kw">for </span>SectionReader {
-    <span class="kw">fn </span>read(<span class="kw-2">&amp;mut </span><span class="self">self</span>, buf: <span class="kw-2">&amp;mut </span>[u8]) -&gt; io::Result&lt;()&gt; {
+	<span class="kw">fn </span>read(<span class="kw-2">&amp;mut </span><span class="self">self</span>, buf: <span class="kw-2">&amp;mut </span>[u8]) -&gt; io::Result&lt;()&gt; {
 		<span class="self">self</span>.cursor.read(buf)<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
 	}
 }
 
-<span class="kw">fn </span>read_entries&lt;R: io::Read, T: Deserialize&lt;Error=elements::Error&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R)
-	-&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;T&gt;, elements::Error&gt;
-{
+<span class="kw">fn </span>read_entries&lt;R: io::Read, T: Deserialize&lt;Error = elements::Error&gt;&gt;(
+	reader: <span class="kw-2">&amp;mut </span>R,
+) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;T&gt;, elements::Error&gt; {
 	<span class="kw">let </span><span class="kw-2">mut </span>section_reader = SectionReader::new(reader)<span class="question-mark">?</span>;
 	<span class="kw">let </span>result = CountedList::&lt;T&gt;::deserialize(<span class="kw-2">&amp;mut </span>section_reader)<span class="question-mark">?</span>.into_inner();
 	section_reader.close()<span class="question-mark">?</span>;
@@ -1496,7 +1343,7 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>cursor = io::Cursor::new(<span class="kw-2">&amp;</span>buf[..]);
 		<span class="kw">let </span>name = String::deserialize(<span class="kw-2">&amp;mut </span>cursor)<span class="question-mark">?</span>;
 		<span class="kw">let </span>payload = buf[cursor.position() <span class="kw">as </span>usize..].to_vec();
-		<span class="prelude-val">Ok</span>(CustomSection { name: name, payload: payload })
+		<span class="prelude-val">Ok</span>(CustomSection { name, payload })
 	}
 }
 
@@ -1549,10 +1396,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;Type, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;Type, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1581,15 +1426,17 @@
 
 	<span class="doccomment">/// Returns number of functions.
 	</span><span class="kw">pub fn </span>functions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
-		<span class="self">self</span>.<span class="number">0</span>.iter()
-			.filter(|entry| <span class="kw">match </span>entry.external() { <span class="kw-2">&amp;</span>External::Function(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>, <span class="kw">_ </span>=&gt; <span class="bool-val">false </span>})
+		<span class="self">self</span>.<span class="number">0
+			</span>.iter()
+			.filter(|entry| <span class="macro">matches!</span>(<span class="kw-2">*</span>entry.external(), External::Function(<span class="kw">_</span>)))
 			.count()
 	}
 
 	<span class="doccomment">/// Returns number of globals
 	</span><span class="kw">pub fn </span>globals(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
-		<span class="self">self</span>.<span class="number">0</span>.iter()
-			.filter(|entry| <span class="kw">match </span>entry.external() { <span class="kw-2">&amp;</span>External::Global(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>, <span class="kw">_ </span>=&gt; <span class="bool-val">false </span>})
+		<span class="self">self</span>.<span class="number">0
+			</span>.iter()
+			.filter(|entry| <span class="macro">matches!</span>(entry.external(), <span class="kw-2">&amp;</span>External::Global(<span class="kw">_</span>)))
 			.count()
 	}
 }
@@ -1608,10 +1455,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;ImportEntry, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;ImportEntry, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1655,7 +1500,7 @@
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
 		<span class="kw">let </span>counted_list = CountedListWriter::&lt;VarUint32, <span class="kw">_</span>&gt;(
 			data.len(),
-			data.into_iter().map(|func| func.type_ref().into())
+			data.into_iter().map(|func| func.type_ref().into()),
 		);
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
@@ -1698,10 +1543,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;TableType, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;TableType, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1743,10 +1586,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;MemoryType, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;MemoryType, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1788,10 +1629,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;GlobalEntry, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;GlobalEntry, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1833,10 +1672,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;ExportEntry, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;ExportEntry, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1878,10 +1715,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;FuncBody, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;FuncBody, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1923,10 +1758,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;ElementSegment, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;ElementSegment, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1968,10 +1801,8 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>counted_writer = CountedWriter::new(writer);
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">0</span>;
-		<span class="kw">let </span>counted_list = CountedListWriter::&lt;DataSegment, <span class="kw">_</span>&gt;(
-			data.len(),
-			data.into_iter().map(Into::into),
-		);
+		<span class="kw">let </span>counted_list =
+			CountedListWriter::&lt;DataSegment, <span class="kw">_</span>&gt;(data.len(), data.into_iter().map(Into::into));
 		counted_list.serialize(<span class="kw-2">&amp;mut </span>counted_writer)<span class="question-mark">?</span>;
 		counted_writer.done()<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
@@ -1981,24 +1812,23 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
 
-	<span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::{
-		deserialize_buffer, deserialize_file, ValueType, InitExpr, DataSegment,
-		serialize, ElementSegment, Instructions, BlockType, Local, FuncBody,
+	<span class="kw">use super</span>::{
+		<span class="kw">super</span>::{
+			deserialize_buffer, deserialize_file, serialize, BlockType, DataSegment,
+			ElementSegment, FuncBody, InitExpr, Instructions, Local, ValueType,
+		},
+		CodeSection, DataSection, ElementSection, Section, Type, TypeSection,
 	};
-	<span class="kw">use super</span>::{Section, TypeSection, Type, DataSection, ElementSection, CodeSection};
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>import_section() {
 		<span class="kw">let </span>module = deserialize_file(<span class="string">&quot;./res/cases/v1/test5.wasm&quot;</span>).expect(<span class="string">&quot;Should be deserialized&quot;</span>);
 		<span class="kw">let </span><span class="kw-2">mut </span>found = <span class="bool-val">false</span>;
 		<span class="kw">for </span>section <span class="kw">in </span>module.sections() {
-			<span class="kw">match </span>section {
-				<span class="kw-2">&amp;</span>Section::Import(<span class="kw-2">ref </span>import_section) =&gt; {
-					<span class="macro">assert_eq!</span>(<span class="number">25</span>, import_section.entries().len());
-					found = <span class="bool-val">true
-				</span>},
-				<span class="kw">_ </span>=&gt; { }
-			}
+			<span class="kw">if let </span>Section::Import(<span class="kw-2">ref </span>import_section) = <span class="kw-2">*</span>section {
+				<span class="macro">assert_eq!</span>(<span class="number">25</span>, import_section.entries().len());
+				found = <span class="bool-val">true
+			</span>}
 		}
 		<span class="macro">assert!</span>(found, <span class="string">&quot;There should be import section in test5.wasm&quot;</span>);
 	}
@@ -2006,20 +1836,14 @@
 	<span class="kw">fn </span>functions_test_payload() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8] {
 		<span class="kw-2">&amp;</span>[
 			<span class="comment">// functions section id
-			</span><span class="number">0x03u8</span>,
-			<span class="comment">// functions section length
-			</span><span class="number">0x87</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x0</span>,
-			<span class="comment">// number of functions
-			</span><span class="number">0x04</span>,
-			<span class="comment">// type reference 1
-			</span><span class="number">0x01</span>,
-			<span class="comment">// type reference 2
-			</span><span class="number">0x86</span>, <span class="number">0x80</span>, <span class="number">0x00</span>,
-			<span class="comment">// type reference 3
-			</span><span class="number">0x09</span>,
-			<span class="comment">// type reference 4
-			</span><span class="number">0x33
-		</span>]
+			</span><span class="number">0x03u8</span>, <span class="comment">// functions section length
+			</span><span class="number">0x87</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x0</span>,  <span class="comment">// number of functions
+			</span><span class="number">0x04</span>, <span class="comment">// type reference 1
+			</span><span class="number">0x01</span>, <span class="comment">// type reference 2
+			</span><span class="number">0x86</span>, <span class="number">0x80</span>, <span class="number">0x00</span>, <span class="comment">// type reference 3
+			</span><span class="number">0x09</span>, <span class="comment">// type reference 4
+			</span><span class="number">0x33</span>,
+		]
 	}
 
 	<span class="attr">#[test]
@@ -2031,7 +1855,7 @@
 			Section::Function(<span class="kw">_</span>) =&gt; {},
 			<span class="kw">_ </span>=&gt; {
 				<span class="macro">panic!</span>(<span class="string">&quot;Payload should be recognized as functions section&quot;</span>)
-			}
+			},
 		}
 	}
 
@@ -2040,13 +1864,8 @@
 		<span class="kw">let </span>section: Section =
 			deserialize_buffer(functions_test_payload()).expect(<span class="string">&quot;section to be deserialized&quot;</span>);
 
-		<span class="kw">match </span>section {
-			Section::Function(fn_section) =&gt; {
-				<span class="macro">assert_eq!</span>(<span class="number">4</span>, fn_section.entries().len(), <span class="string">&quot;There should be 4 functions total&quot;</span>);
-			},
-			<span class="kw">_ </span>=&gt; {
-				<span class="comment">// will be catched by dedicated test
-			</span>}
+		<span class="kw">if let </span>Section::Function(fn_section) = section {
+			<span class="macro">assert_eq!</span>(<span class="number">4</span>, fn_section.entries().len(), <span class="string">&quot;There should be 4 functions total&quot;</span>);
 		}
 	}
 
@@ -2055,43 +1874,27 @@
 		<span class="kw">let </span>section: Section =
 			deserialize_buffer(functions_test_payload()).expect(<span class="string">&quot;section to be deserialized&quot;</span>);
 
-		<span class="kw">match </span>section {
-			Section::Function(fn_section) =&gt; {
-				<span class="macro">assert_eq!</span>(<span class="number">6</span>, fn_section.entries()[<span class="number">1</span>].type_ref());
-			},
-			<span class="kw">_ </span>=&gt; {
-				<span class="comment">// will be catched by dedicated test
-			</span>}
+		<span class="kw">if let </span>Section::Function(fn_section) = section {
+			<span class="macro">assert_eq!</span>(<span class="number">6</span>, fn_section.entries()[<span class="number">1</span>].type_ref());
 		}
 	}
 
 	<span class="kw">fn </span>types_test_payload() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8] {
 		<span class="kw-2">&amp;</span>[
 			<span class="comment">// section length
-			</span><span class="number">11</span>,
-
-			<span class="comment">// 2 functions
-			</span><span class="number">2</span>,
-			<span class="comment">// func 1, form =1
-			</span><span class="number">0x60</span>,
-			<span class="comment">// param_count=1
-			</span><span class="number">1</span>,
-				<span class="comment">// first param
-				</span><span class="number">0x7e</span>, <span class="comment">// i64
+			</span><span class="number">11</span>,   <span class="comment">// 2 functions
+			</span><span class="number">2</span>,    <span class="comment">// func 1, form =1
+			</span><span class="number">0x60</span>, <span class="comment">// param_count=1
+			</span><span class="number">1</span>,    <span class="comment">// first param
+			</span><span class="number">0x7e</span>, <span class="comment">// i64
 			// no return params
-			</span><span class="number">0x00</span>,
-
-			<span class="comment">// func 2, form=1
-			</span><span class="number">0x60</span>,
-			<span class="comment">// param_count=2
-			</span><span class="number">2</span>,
-				<span class="comment">// first param
-				</span><span class="number">0x7e</span>,
-				<span class="comment">// second param
-				</span><span class="number">0x7d</span>,
-			<span class="comment">// return param (is_present, param_type)
-			</span><span class="number">0x01</span>, <span class="number">0x7e
-		</span>]
+			</span><span class="number">0x00</span>, <span class="comment">// func 2, form=1
+			</span><span class="number">0x60</span>, <span class="comment">// param_count=2
+			</span><span class="number">2</span>,    <span class="comment">// first param
+			</span><span class="number">0x7e</span>, <span class="comment">// second param
+			</span><span class="number">0x7d</span>, <span class="comment">// return param (is_present, param_type)
+			</span><span class="number">0x01</span>, <span class="number">0x7e</span>,
+		]
 	}
 
 	<span class="attr">#[test]
@@ -2107,10 +1910,7 @@
 		<span class="kw">let </span>type_section: TypeSection =
 			deserialize_buffer(types_test_payload()).expect(<span class="string">&quot;type_section be deserialized&quot;</span>);
 
-		<span class="kw">let </span>t1 = <span class="kw">match </span><span class="kw-2">&amp;</span>type_section.types()[<span class="number">1</span>] {
-			<span class="kw-2">&amp;</span>Type::Function(<span class="kw-2">ref </span>func_type) =&gt; func_type
-		};
-
+		<span class="kw">let </span>Type::Function(<span class="kw-2">ref </span>t1) = type_section.types()[<span class="number">1</span>];
 		<span class="macro">assert_eq!</span>(<span class="macro">vec!</span>[ValueType::I64], t1.results());
 		<span class="macro">assert_eq!</span>(<span class="number">2</span>, t1.params().len());
 	}
@@ -2118,27 +1918,19 @@
 	<span class="kw">fn </span>export_payload() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8] {
 		<span class="kw-2">&amp;</span>[
 			<span class="comment">// section id
-			</span><span class="number">0x07</span>,
-			<span class="comment">// section length
-			</span><span class="number">28</span>,
-			<span class="comment">// 6 entries
+			</span><span class="number">0x07</span>, <span class="comment">// section length
+			</span><span class="number">28</span>,   <span class="comment">// 6 entries
 			</span><span class="number">6</span>,
 			<span class="comment">// func &quot;A&quot;, index 6
 			// [name_len(1-5 bytes), name_bytes(name_len, internal_kind(1byte), internal_index(1-5 bytes)])
-			</span><span class="number">0x01</span>, <span class="number">0x41</span>,  <span class="number">0x01</span>, <span class="number">0x86</span>, <span class="number">0x80</span>, <span class="number">0x00</span>,
-			<span class="comment">// func &quot;B&quot;, index 8
-			</span><span class="number">0x01</span>, <span class="number">0x42</span>,  <span class="number">0x01</span>, <span class="number">0x86</span>, <span class="number">0x00</span>,
-			<span class="comment">// func &quot;C&quot;, index 7
-			</span><span class="number">0x01</span>, <span class="number">0x43</span>,  <span class="number">0x01</span>, <span class="number">0x07</span>,
-			<span class="comment">// memory &quot;D&quot;, index 0
-			</span><span class="number">0x01</span>, <span class="number">0x44</span>,  <span class="number">0x02</span>, <span class="number">0x00</span>,
-			<span class="comment">// func &quot;E&quot;, index 1
-			</span><span class="number">0x01</span>, <span class="number">0x45</span>,  <span class="number">0x01</span>, <span class="number">0x01</span>,
-			<span class="comment">// func &quot;F&quot;, index 2
-			</span><span class="number">0x01</span>, <span class="number">0x46</span>,  <span class="number">0x01</span>, <span class="number">0x02
-		</span>]
+			</span><span class="number">0x01</span>, <span class="number">0x41</span>, <span class="number">0x01</span>, <span class="number">0x86</span>, <span class="number">0x80</span>, <span class="number">0x00</span>, <span class="comment">// func &quot;B&quot;, index 8
+			</span><span class="number">0x01</span>, <span class="number">0x42</span>, <span class="number">0x01</span>, <span class="number">0x86</span>, <span class="number">0x00</span>, <span class="comment">// func &quot;C&quot;, index 7
+			</span><span class="number">0x01</span>, <span class="number">0x43</span>, <span class="number">0x01</span>, <span class="number">0x07</span>, <span class="comment">// memory &quot;D&quot;, index 0
+			</span><span class="number">0x01</span>, <span class="number">0x44</span>, <span class="number">0x02</span>, <span class="number">0x00</span>, <span class="comment">// func &quot;E&quot;, index 1
+			</span><span class="number">0x01</span>, <span class="number">0x45</span>, <span class="number">0x01</span>, <span class="number">0x01</span>, <span class="comment">// func &quot;F&quot;, index 2
+			</span><span class="number">0x01</span>, <span class="number">0x46</span>, <span class="number">0x01</span>, <span class="number">0x02</span>,
+		]
 	}
-
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>export_detect() {
@@ -2149,43 +1941,37 @@
 			Section::Export(<span class="kw">_</span>) =&gt; {},
 			<span class="kw">_ </span>=&gt; {
 				<span class="macro">panic!</span>(<span class="string">&quot;Payload should be recognized as export section&quot;</span>)
-			}
+			},
 		}
 	}
 
 	<span class="kw">fn </span>code_payload() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8] {
 		<span class="kw-2">&amp;</span>[
 			<span class="comment">// sectionid
-			</span><span class="number">0x0Au8</span>,
-			<span class="comment">// section length, 32
-			</span><span class="number">0x20</span>,
-			<span class="comment">// body count
-			</span><span class="number">0x01</span>,
-			<span class="comment">// body 1, length 30
-			</span><span class="number">0x1E</span>,
-			<span class="number">0x01</span>, <span class="number">0x01</span>, <span class="number">0x7F</span>, <span class="comment">// local i32 (one collection of length one of type i32)
+			</span><span class="number">0x0Au8</span>, <span class="comment">// section length, 32
+			</span><span class="number">0x20</span>,   <span class="comment">// body count
+			</span><span class="number">0x01</span>,   <span class="comment">// body 1, length 30
+			</span><span class="number">0x1E</span>, <span class="number">0x01</span>, <span class="number">0x01</span>, <span class="number">0x7F</span>, <span class="comment">// local i32 (one collection of length one of type i32)
 			</span><span class="number">0x02</span>, <span class="number">0x7F</span>, <span class="comment">// block i32
-				</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
-				</span><span class="number">0x21</span>, <span class="number">0x01</span>, <span class="comment">// set_local 1
-				</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
-				</span><span class="number">0x20</span>, <span class="number">0x00</span>, <span class="comment">// get_local 0
-				</span><span class="number">0x6A</span>,       <span class="comment">// i32.add
-				</span><span class="number">0x24</span>, <span class="number">0x00</span>, <span class="comment">// set_global 0
-				</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
-				</span><span class="number">0x41</span>, <span class="number">0x0F</span>, <span class="comment">// i32.const 15
-				</span><span class="number">0x6A</span>,       <span class="comment">// i32.add
-				</span><span class="number">0x41</span>, <span class="number">0x70</span>, <span class="comment">// i32.const -16
-				</span><span class="number">0x71</span>,       <span class="comment">// i32.and
-				</span><span class="number">0x24</span>, <span class="number">0x00</span>, <span class="comment">// set_global 0
-				</span><span class="number">0x20</span>, <span class="number">0x01</span>, <span class="comment">// get_local 1
-			</span><span class="number">0x0B</span>,
-			<span class="number">0x0B</span>,
+			</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
+			</span><span class="number">0x21</span>, <span class="number">0x01</span>, <span class="comment">// set_local 1
+			</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
+			</span><span class="number">0x20</span>, <span class="number">0x00</span>, <span class="comment">// get_local 0
+			</span><span class="number">0x6A</span>, <span class="comment">// i32.add
+			</span><span class="number">0x24</span>, <span class="number">0x00</span>, <span class="comment">// set_global 0
+			</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">// get_global 0
+			</span><span class="number">0x41</span>, <span class="number">0x0F</span>, <span class="comment">// i32.const 15
+			</span><span class="number">0x6A</span>, <span class="comment">// i32.add
+			</span><span class="number">0x41</span>, <span class="number">0x70</span>, <span class="comment">// i32.const -16
+			</span><span class="number">0x71</span>, <span class="comment">// i32.and
+			</span><span class="number">0x24</span>, <span class="number">0x00</span>, <span class="comment">// set_global 0
+			</span><span class="number">0x20</span>, <span class="number">0x01</span>, <span class="comment">// get_local 1
+			</span><span class="number">0x0B</span>, <span class="number">0x0B</span>,
 		]
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>code_detect() {
-
 		<span class="kw">let </span>section: Section =
 			deserialize_buffer(code_payload()).expect(<span class="string">&quot;section to be deserialized&quot;</span>);
 
@@ -2193,45 +1979,45 @@
 			Section::Code(<span class="kw">_</span>) =&gt; {},
 			<span class="kw">_ </span>=&gt; {
 				<span class="macro">panic!</span>(<span class="string">&quot;Payload should be recognized as a code section&quot;</span>)
-			}
+			},
 		}
 	}
 
 	<span class="kw">fn </span>data_payload() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8] {
 		<span class="kw-2">&amp;</span>[
-			<span class="number">0x0bu8</span>,  <span class="comment">// section id
-			</span><span class="number">20</span>,      <span class="comment">// 20 bytes overall
-			</span><span class="number">0x01</span>,    <span class="comment">// number of segments
-			</span><span class="number">0x00</span>,    <span class="comment">// index
-			</span><span class="number">0x0b</span>,    <span class="comment">// just `end` op
-			</span><span class="number">0x10</span>,
-			<span class="comment">// 16x 0x00
-			</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
-			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
-			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
-			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00
-		</span>]
+			<span class="number">0x0bu8</span>, <span class="comment">// section id
+			</span><span class="number">20</span>,     <span class="comment">// 20 bytes overall
+			</span><span class="number">0x01</span>,   <span class="comment">// number of segments
+			</span><span class="number">0x00</span>,   <span class="comment">// index
+			</span><span class="number">0x0b</span>,   <span class="comment">// just `end` op
+			</span><span class="number">0x10</span>,   <span class="comment">// 16x 0x00
+			</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
+			<span class="number">0x00</span>, <span class="number">0x00</span>,
+		]
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>data_section_ser() {
-		<span class="kw">let </span>data_section = DataSection::with_entries(
-			<span class="macro">vec!</span>[DataSegment::new(<span class="number">0u32</span>, <span class="prelude-val">Some</span>(InitExpr::empty()), <span class="macro">vec!</span>[<span class="number">0u8</span>; <span class="number">16</span>])]
-		);
+		<span class="kw">let </span>data_section = DataSection::with_entries(<span class="macro">vec!</span>[DataSegment::new(
+			<span class="number">0u32</span>,
+			<span class="prelude-val">Some</span>(InitExpr::empty()),
+			<span class="macro">vec!</span>[<span class="number">0u8</span>; <span class="number">16</span>],
+		)]);
 
 		<span class="kw">let </span>buf = serialize(data_section).expect(<span class="string">&quot;Data section to be serialized&quot;</span>);
 
-		<span class="macro">assert_eq!</span>(buf, <span class="macro">vec!</span>[
-			<span class="number">20u8</span>, <span class="comment">// 19 bytes overall
-			</span><span class="number">0x01</span>, <span class="comment">// number of segments
-			</span><span class="number">0x00</span>, <span class="comment">// index
-			</span><span class="number">0x0b</span>, <span class="comment">// just `end` op
-			</span><span class="number">16</span>,   <span class="comment">// value of length 16
-			</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="comment">// 16x 0x00 as in initialization
-			</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
-			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,
-			<span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00
-		</span>]);
+		<span class="macro">assert_eq!</span>(
+			buf,
+			<span class="macro">vec!</span>[
+				<span class="number">20u8</span>, <span class="comment">// 19 bytes overall
+				</span><span class="number">0x01</span>, <span class="comment">// number of segments
+				</span><span class="number">0x00</span>, <span class="comment">// index
+				</span><span class="number">0x0b</span>, <span class="comment">// just `end` op
+				</span><span class="number">16</span>,   <span class="comment">// value of length 16
+				</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="comment">// 16x 0x00 as in initialization
+				</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00
+			</span>]
+		);
 	}
 
 	<span class="attr">#[test]
@@ -2243,65 +2029,71 @@
 			Section::Data(<span class="kw">_</span>) =&gt; {},
 			<span class="kw">_ </span>=&gt; {
 				<span class="macro">panic!</span>(<span class="string">&quot;Payload should be recognized as a data section&quot;</span>)
-			}
+			},
 		}
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>element_section_ser() {
-		<span class="kw">let </span>element_section = ElementSection::with_entries(
-			<span class="macro">vec!</span>[ElementSegment::new(<span class="number">0u32</span>, <span class="prelude-val">Some</span>(InitExpr::empty()), <span class="macro">vec!</span>[<span class="number">0u32</span>; <span class="number">4</span>])]
-		);
+		<span class="kw">let </span>element_section = ElementSection::with_entries(<span class="macro">vec!</span>[ElementSegment::new(
+			<span class="number">0u32</span>,
+			<span class="prelude-val">Some</span>(InitExpr::empty()),
+			<span class="macro">vec!</span>[<span class="number">0u32</span>; <span class="number">4</span>],
+		)]);
 
 		<span class="kw">let </span>buf = serialize(element_section).expect(<span class="string">&quot;Element section to be serialized&quot;</span>);
 
-		<span class="macro">assert_eq!</span>(buf, <span class="macro">vec!</span>[
-			<span class="number">08u8</span>, <span class="comment">// 8 bytes overall
-			</span><span class="number">0x01</span>, <span class="comment">// number of segments
-			</span><span class="number">0x00</span>, <span class="comment">// index
-			</span><span class="number">0x0b</span>, <span class="comment">// just `end` op
-			</span><span class="number">0x04</span>, <span class="comment">// 4 elements
-			</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00 </span><span class="comment">// 4x 0x00 as in initialization
-		</span>]);
+		<span class="macro">assert_eq!</span>(
+			buf,
+			<span class="macro">vec!</span>[
+				<span class="number">8u8</span>,  <span class="comment">// 8 bytes overall
+				</span><span class="number">0x01</span>, <span class="comment">// number of segments
+				</span><span class="number">0x00</span>, <span class="comment">// index
+				</span><span class="number">0x0b</span>, <span class="comment">// just `end` op
+				</span><span class="number">0x04</span>, <span class="comment">// 4 elements
+				</span><span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00 </span><span class="comment">// 4x 0x00 as in initialization
+			</span>]
+		);
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>code_section_ser() {
 		<span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::Instruction::<span class="kw-2">*</span>;
 
-		<span class="kw">let </span>code_section = CodeSection::with_bodies(
-			<span class="macro">vec!</span>[
-				FuncBody::new(
-					<span class="macro">vec!</span>[Local::new(<span class="number">1</span>, ValueType::I32)],
-					Instructions::new(<span class="macro">vec!</span>[
-						Block(BlockType::Value(ValueType::I32)),
-						GetGlobal(<span class="number">0</span>),
-						End,
-						End,
-					])
-				)
-			]);
+		<span class="kw">let </span>code_section = CodeSection::with_bodies(<span class="macro">vec!</span>[FuncBody::new(
+			<span class="macro">vec!</span>[Local::new(<span class="number">1</span>, ValueType::I32)],
+			Instructions::new(<span class="macro">vec!</span>[
+				Block(BlockType::Value(ValueType::I32)),
+				GetGlobal(<span class="number">0</span>),
+				End,
+				End,
+			]),
+		)]);
 
 		<span class="kw">let </span>buf = serialize(code_section).expect(<span class="string">&quot;Code section to be serialized&quot;</span>);
 
-		<span class="macro">assert_eq!</span>(buf, <span class="macro">vec!</span>[
-			<span class="number">11u8</span>,            <span class="comment">// 11 bytes total section size
-			</span><span class="number">0x01</span>,            <span class="comment">// 1 function
-			  </span><span class="number">9</span>,             <span class="comment">//   function #1 total code size
-			  </span><span class="number">1</span>,             <span class="comment">//   1 local variable declaration
-			  </span><span class="number">1</span>,             <span class="comment">//      amount of variables
-			  </span><span class="number">0x7f</span>,          <span class="comment">//      type of variable (7-bit, -0x01), negative
-			  </span><span class="number">0x02</span>,          <span class="comment">//   block
-				</span><span class="number">0x7f</span>,        <span class="comment">//      block return type (7-bit, -0x01), negative
-				</span><span class="number">0x23</span>, <span class="number">0x00</span>,  <span class="comment">//      get_global(0)
-				</span><span class="number">0x0b</span>,        <span class="comment">//   block end
-			</span><span class="number">0x0b</span>,            <span class="comment">// function end
-		</span>]);
+		<span class="macro">assert_eq!</span>(
+			buf,
+			<span class="macro">vec!</span>[
+				<span class="number">11u8</span>, <span class="comment">// 11 bytes total section size
+				</span><span class="number">0x01</span>, <span class="comment">// 1 function
+				</span><span class="number">9</span>,    <span class="comment">//   function #1 total code size
+				</span><span class="number">1</span>,    <span class="comment">//   1 local variable declaration
+				</span><span class="number">1</span>,    <span class="comment">//      amount of variables
+				</span><span class="number">0x7f</span>, <span class="comment">//      type of variable (7-bit, -0x01), negative
+				</span><span class="number">0x02</span>, <span class="comment">//   block
+				</span><span class="number">0x7f</span>, <span class="comment">//      block return type (7-bit, -0x01), negative
+				</span><span class="number">0x23</span>, <span class="number">0x00</span>, <span class="comment">//      get_global(0)
+				</span><span class="number">0x0b</span>, <span class="comment">//   block end
+				</span><span class="number">0x0b</span>, <span class="comment">// function end
+			</span>]
+		);
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>start_section() {
-		<span class="kw">let </span>section: Section = deserialize_buffer(<span class="kw-2">&amp;</span>[<span class="number">08u8</span>, <span class="number">01u8</span>, <span class="number">00u8</span>]).expect(<span class="string">&quot;Start section to deserialize&quot;</span>);
+		<span class="kw">let </span>section: Section =
+			deserialize_buffer(<span class="kw-2">&amp;</span>[<span class="number">8u8</span>, <span class="number">1u8</span>, <span class="number">0u8</span>]).expect(<span class="string">&quot;Start section to deserialize&quot;</span>);
 		<span class="kw">if let </span>Section::Start(<span class="kw">_</span>) = section {
 		} <span class="kw">else </span>{
 			<span class="macro">panic!</span>(<span class="string">&quot;Payload should be a start section&quot;</span>);
@@ -2309,7 +2101,7 @@
 
 		<span class="kw">let </span>serialized = serialize(section).expect(<span class="string">&quot;Start section to successfully serializen&quot;</span>);
 
-		<span class="macro">assert_eq!</span>(serialized, <span class="macro">vec!</span>[<span class="number">08u8</span>, <span class="number">01u8</span>, <span class="number">00u8</span>]);
+		<span class="macro">assert_eq!</span>(serialized, <span class="macro">vec!</span>[<span class="number">8u8</span>, <span class="number">1u8</span>, <span class="number">0u8</span>]);
 	}
 }
 </code></pre></div>

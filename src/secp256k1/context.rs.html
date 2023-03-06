@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/secp256k1-0.21.3/src/context.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../secp256k1/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/secp256k1-0.24.3/src/context.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>context.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../secp256k1/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -413,27 +413,41 @@
 <a href="#413" id="413">413</a>
 <a href="#414" id="414">414</a>
 <a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
 </pre><pre class="rust"><code><span class="kw">use </span>core::marker::PhantomData;
 <span class="kw">use </span>core::mem::ManuallyDrop;
-<span class="kw">use </span>ffi::{<span class="self">self</span>, CPtr, types::AlignedType};
-<span class="kw">use </span>ffi::types::{c_uint, c_void};
-<span class="kw">use </span>Error;
-<span class="kw">use </span>Secp256k1;
 
-<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;alloc&quot;</span>))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;alloc&quot;</span>))))]
+<span class="kw">use crate</span>::{Error, Secp256k1};
+<span class="kw">use </span><span class="kw">crate</span>::ffi::{<span class="self">self</span>, CPtr, types::AlignedType};
+<span class="kw">use </span><span class="kw">crate</span>::ffi::types::{c_uint, c_void};
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;alloc&quot;</span>)))]
 </span><span class="kw">pub use </span><span class="self">self</span>::alloc_only::<span class="kw-2">*</span>;
 
 <span class="attr">#[cfg(all(feature = <span class="string">&quot;global-context&quot;</span>, feature = <span class="string">&quot;std&quot;</span>))]
 #[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;global-context&quot;</span>, feature = <span class="string">&quot;std&quot;</span>))))]
 </span><span class="doccomment">/// Module implementing a singleton pattern for a global `Secp256k1` context.
 </span><span class="kw">pub mod </span>global {
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rand-std&quot;</span>)]
-    </span><span class="kw">use </span>rand;
 
     <span class="kw">use </span>std::ops::Deref;
     <span class="kw">use </span>std::sync::Once;
-    <span class="kw">use </span>{Secp256k1, All};
+
+    <span class="kw">use crate</span>::{All, Secp256k1};
 
     <span class="doccomment">/// Proxy struct for global `SECP256K1` context.
     </span><span class="attr">#[derive(Debug, Copy, Clone)]
@@ -463,7 +477,7 @@
             <span class="kw">static </span><span class="kw-2">mut </span>CONTEXT: <span class="prelude-ty">Option</span>&lt;Secp256k1&lt;All&gt;&gt; = <span class="prelude-val">None</span>;
             ONCE.call_once(|| <span class="kw">unsafe </span>{
                 <span class="kw">let </span><span class="kw-2">mut </span>ctx = Secp256k1::new();
-                <span class="attr">#[cfg(all(feature = <span class="string">&quot;rand-std&quot;</span>, not(feature = <span class="string">&quot;global-context-less-secure&quot;</span>)))]
+                <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;rand-std&quot;</span>, not(feature = <span class="string">&quot;global-context-less-secure&quot;</span>)))]
                 </span>{
                     ctx.randomize(<span class="kw-2">&amp;mut </span>rand::thread_rng());
                 }
@@ -519,23 +533,22 @@
     <span class="kw">impl</span>&lt;<span class="lifetime">&#39;buf</span>&gt; Sealed <span class="kw">for </span>SignOnlyPreallocated&lt;<span class="lifetime">&#39;buf</span>&gt; {}
 }
 
-<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;alloc&quot;</span>))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;alloc&quot;</span>))))]
+<span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(any(feature = <span class="string">&quot;alloc&quot;</span>))))]
 </span><span class="kw">mod </span>alloc_only {
-    <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-    </span><span class="kw">use </span>std::alloc;
-    <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-    </span><span class="kw">use </span>alloc::alloc;
+    <span class="kw">use </span><span class="kw">crate</span>::alloc::alloc;
 
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rand-std&quot;</span>)]
-    </span><span class="kw">use </span>rand;
+    <span class="kw">use </span>core::marker::PhantomData;
+
+    <span class="kw">use </span><span class="kw">super</span>::private;
+    <span class="kw">use </span><span class="kw">crate</span>::ffi::{<span class="self">self</span>, types::{c_uint, c_void}};
+    <span class="kw">use crate</span>::{Secp256k1, Signing, Verification, Context, AlignedType};
 
     <span class="kw">impl </span>private::Sealed <span class="kw">for </span>SignOnly {}
     <span class="kw">impl </span>private::Sealed <span class="kw">for </span>All {}
     <span class="kw">impl </span>private::Sealed <span class="kw">for </span>VerifyOnly {}
 
-    <span class="kw">use super</span>::<span class="kw-2">*</span>;
-    <span class="kw">const </span>ALIGN_TO: usize = ::core::mem::align_of::&lt;AlignedType&gt;();
+    <span class="kw">const </span>ALIGN_TO: usize = core::mem::align_of::&lt;AlignedType&gt;();
 
     <span class="doccomment">/// Represents the set of capabilities needed for signing.
     </span><span class="attr">#[cfg_attr(docsrs, doc(cfg(any(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;alloc&quot;</span>))))]
@@ -605,7 +618,7 @@
         /// ctx.seeded_randomize(&amp;seed);
         /// # }
         /// ```
-        </span><span class="attr">#[allow(unused_mut)]    </span><span class="comment">// Unused when `rand-std` is not enabled.
+        </span><span class="attr">#[cfg_attr(not(feature = <span class="string">&quot;rand-std&quot;</span>), allow(clippy::let_and_return, unused_mut))]
         </span><span class="kw">pub fn </span>gen_new() -&gt; Secp256k1&lt;C&gt; {
             <span class="attr">#[cfg(target_arch = <span class="string">&quot;wasm32&quot;</span>)]
             </span>ffi::types::sanity_checks_for_wasm();
@@ -613,18 +626,21 @@
             <span class="kw">let </span>size = <span class="kw">unsafe </span>{ ffi::secp256k1_context_preallocated_size(C::FLAGS) };
             <span class="kw">let </span>layout = alloc::Layout::from_size_align(size, ALIGN_TO).unwrap();
             <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{alloc::alloc(layout)};
-            <span class="kw">let </span><span class="kw-2">mut </span>ctx = Secp256k1 {
+
+            <span class="attr">#[allow(unused_mut)] </span><span class="comment">// ctx is not mutated under some feature combinations.
+            </span><span class="kw">let </span><span class="kw-2">mut </span>ctx = Secp256k1 {
                 ctx: <span class="kw">unsafe </span>{ ffi::secp256k1_context_preallocated_create(ptr <span class="kw">as </span><span class="kw-2">*mut </span>c_void, C::FLAGS) },
                 phantom: PhantomData,
                 size,
             };
 
-            <span class="attr">#[cfg(feature = <span class="string">&quot;rand-std&quot;</span>)]
+            <span class="attr">#[cfg(all(not(target_arch = <span class="string">&quot;wasm32&quot;</span>), feature = <span class="string">&quot;rand-std&quot;</span>, not(feature = <span class="string">&quot;global-context-less-secure&quot;</span>)))]
             </span>{
                 ctx.randomize(<span class="kw-2">&amp;mut </span>rand::thread_rng());
             }
 
-            ctx
+            <span class="attr">#[allow(clippy::let_and_return)] </span><span class="comment">// as for unusted_mut
+            </span>ctx
         }
     }
 
@@ -714,8 +730,22 @@
     </span>}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;buf</span>, C: Context + <span class="lifetime">&#39;buf</span>&gt; Secp256k1&lt;C&gt; {
-    <span class="doccomment">/// Lets you create a context with preallocated buffer in a generic manner(sign/verify/all)
+<span class="doccomment">/// Trait marking that a particular context object internally points to
+/// memory that must outlive `&#39;a`
+///
+/// # Safety
+///
+/// This trait is used internally to gate which context markers can safely
+/// be used with the `preallocated_gen_new` function. Do not implement it
+/// on your own structures.
+</span><span class="kw">pub unsafe trait </span>PreallocatedContext&lt;<span class="lifetime">&#39;a</span>&gt; {}
+
+<span class="kw">unsafe impl</span>&lt;<span class="lifetime">&#39;buf</span>&gt; PreallocatedContext&lt;<span class="lifetime">&#39;buf</span>&gt; <span class="kw">for </span>AllPreallocated&lt;<span class="lifetime">&#39;buf</span>&gt; {}
+<span class="kw">unsafe impl</span>&lt;<span class="lifetime">&#39;buf</span>&gt; PreallocatedContext&lt;<span class="lifetime">&#39;buf</span>&gt; <span class="kw">for </span>SignOnlyPreallocated&lt;<span class="lifetime">&#39;buf</span>&gt; {}
+<span class="kw">unsafe impl</span>&lt;<span class="lifetime">&#39;buf</span>&gt; PreallocatedContext&lt;<span class="lifetime">&#39;buf</span>&gt; <span class="kw">for </span>VerifyOnlyPreallocated&lt;<span class="lifetime">&#39;buf</span>&gt; {}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;buf</span>, C: Context + PreallocatedContext&lt;<span class="lifetime">&#39;buf</span>&gt;&gt; Secp256k1&lt;C&gt; {
+    <span class="doccomment">/// Lets you create a context with a preallocated buffer in a generic manner (sign/verify/all).
     </span><span class="kw">pub fn </span>preallocated_gen_new(buf: <span class="kw-2">&amp;</span><span class="lifetime">&#39;buf </span><span class="kw-2">mut </span>[AlignedType]) -&gt; <span class="prelude-ty">Result</span>&lt;Secp256k1&lt;C&gt;, Error&gt; {
         <span class="attr">#[cfg(target_arch = <span class="string">&quot;wasm32&quot;</span>)]
         </span>ffi::types::sanity_checks_for_wasm();

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/primitives.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitives.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/primitives.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitives.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -907,10 +907,17 @@
 <a href="#907" id="907">907</a>
 <a href="#908" id="908">908</a>
 <a href="#909" id="909">909</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::{string::String, vec::Vec};
-<span class="kw">use crate</span>::{io, elements};
-<span class="kw">use super</span>::{Error, Deserialize, Serialize};
-
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+<a href="#914" id="914">914</a>
+<a href="#915" id="915">915</a>
+<a href="#916" id="916">916</a>
+<a href="#917" id="917">917</a>
+</pre><pre class="rust"><code><span class="kw">use super</span>::{Deserialize, Error, Serialize};
+<span class="kw">use crate</span>::{elements, io};
+<span class="kw">use </span>alloc::{string::String, vec::Vec};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;reduced-stack-buffer&quot;</span>)]
 </span><span class="kw">const </span>PRIMITIVES_BUFFER_LENGTH: usize = <span class="number">256</span>;
@@ -956,7 +963,9 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>shift = <span class="number">0</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>u8buf = [<span class="number">0u8</span>; <span class="number">1</span>];
 		<span class="kw">loop </span>{
-			<span class="kw">if </span>shift &gt; <span class="number">31 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarUint32); }
+			<span class="kw">if </span>shift &gt; <span class="number">31 </span>{
+				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarUint32)
+			}
 
 			reader.read(<span class="kw-2">&amp;mut </span>u8buf)<span class="question-mark">?</span>;
 			<span class="kw">let </span>b = u8buf[<span class="number">0</span>] <span class="kw">as </span>u32;
@@ -964,10 +973,10 @@
 			shift += <span class="number">7</span>;
 			<span class="kw">if </span>(b &gt;&gt; <span class="number">7</span>) == <span class="number">0 </span>{
 				<span class="kw">if </span>shift &gt;= <span class="number">32 </span>&amp;&amp; (b <span class="kw">as </span>u8).leading_zeros() &lt; <span class="number">4 </span>{
-					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32);
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32)
 				}
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 		<span class="prelude-val">Ok</span>(VarUint32(res))
 	}
@@ -986,7 +995,9 @@
 				buf[<span class="number">0</span>] |= <span class="number">0b1000_0000</span>;
 			}
 			writer.write(<span class="kw-2">&amp;</span>buf[..])<span class="question-mark">?</span>;
-			<span class="kw">if </span>v == <span class="number">0 </span>{ <span class="kw">break</span>; }
+			<span class="kw">if </span>v == <span class="number">0 </span>{
+				<span class="kw">break
+			</span>}
 		}
 
 		<span class="prelude-val">Ok</span>(())
@@ -1012,7 +1023,9 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>shift = <span class="number">0</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>u8buf = [<span class="number">0u8</span>; <span class="number">1</span>];
 		<span class="kw">loop </span>{
-			<span class="kw">if </span>shift &gt; <span class="number">63 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarUint64); }
+			<span class="kw">if </span>shift &gt; <span class="number">63 </span>{
+				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarUint64)
+			}
 
 			reader.read(<span class="kw-2">&amp;mut </span>u8buf)<span class="question-mark">?</span>;
 			<span class="kw">let </span>b = u8buf[<span class="number">0</span>] <span class="kw">as </span>u64;
@@ -1020,10 +1033,10 @@
 			shift += <span class="number">7</span>;
 			<span class="kw">if </span>(b &gt;&gt; <span class="number">7</span>) == <span class="number">0 </span>{
 				<span class="kw">if </span>shift &gt;= <span class="number">64 </span>&amp;&amp; (b <span class="kw">as </span>u8).leading_zeros() &lt; <span class="number">7 </span>{
-					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64);
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64)
 				}
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 		<span class="prelude-val">Ok</span>(VarUint64(res))
 	}
@@ -1042,7 +1055,9 @@
 				buf[<span class="number">0</span>] |= <span class="number">0b1000_0000</span>;
 			}
 			writer.write(<span class="kw-2">&amp;</span>buf[..])<span class="question-mark">?</span>;
-			<span class="kw">if </span>v == <span class="number">0 </span>{ <span class="kw">break</span>; }
+			<span class="kw">if </span>v == <span class="number">0 </span>{
+				<span class="kw">break
+			</span>}
 		}
 
 		<span class="prelude-val">Ok</span>(())
@@ -1116,11 +1131,13 @@
 
 		<span class="comment">// check if number is not continued!
 		</span><span class="kw">if </span>u8buf[<span class="number">0</span>] &amp; <span class="number">0b1000_0000 </span>!= <span class="number">0 </span>{
-			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt7(u8buf[<span class="number">0</span>]));
+			<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt7(u8buf[<span class="number">0</span>]))
 		}
 
 		<span class="comment">// expand sign
-		</span><span class="kw">if </span>u8buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000 </span>{ u8buf[<span class="number">0</span>] |= <span class="number">0b1000_0000 </span>}
+		</span><span class="kw">if </span>u8buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000 </span>{
+			u8buf[<span class="number">0</span>] |= <span class="number">0b1000_0000
+		</span>}
 
 		<span class="prelude-val">Ok</span>(VarInt7(u8buf[<span class="number">0</span>] <span class="kw">as </span>i8))
 	}
@@ -1132,7 +1149,10 @@
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
 		<span class="comment">// todo check range?
 		</span><span class="kw">let </span><span class="kw-2">mut </span>b: u8 = <span class="self">self</span>.<span class="number">0 </span><span class="kw">as </span>u8;
-		<span class="kw">if </span><span class="self">self</span>.<span class="number">0 </span>&lt; <span class="number">0 </span>{ b |= <span class="number">0b0100_0000</span>; b &amp;= <span class="number">0b0111_1111</span>; }
+		<span class="kw">if </span><span class="self">self</span>.<span class="number">0 </span>&lt; <span class="number">0 </span>{
+			b |= <span class="number">0b0100_0000</span>;
+			b &amp;= <span class="number">0b0111_1111</span>;
+		}
 		writer.write(<span class="kw-2">&amp;</span>[b])<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
 	}
@@ -1174,7 +1194,6 @@
 	}
 }
 
-
 <span class="doccomment">/// 32-bit signed integer, encoded in LEB128 (can be 1-5 bytes length).
 </span><span class="attr">#[derive(Debug, Copy, Clone, PartialEq)]
 </span><span class="kw">pub struct </span>VarInt32(i32);
@@ -1199,7 +1218,9 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>shift = <span class="number">0</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>u8buf = [<span class="number">0u8</span>; <span class="number">1</span>];
 		<span class="kw">loop </span>{
-			<span class="kw">if </span>shift &gt; <span class="number">31 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32); }
+			<span class="kw">if </span>shift &gt; <span class="number">31 </span>{
+				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32)
+			}
 			reader.read(<span class="kw-2">&amp;mut </span>u8buf)<span class="question-mark">?</span>;
 			<span class="kw">let </span>b = u8buf[<span class="number">0</span>];
 
@@ -1211,15 +1232,13 @@
 					res |= (<span class="number">1i32 </span>&lt;&lt; shift).wrapping_neg();
 				} <span class="kw">else if </span>shift &gt;= <span class="number">32 </span>&amp;&amp; b &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000 </span>{
 					<span class="kw">if </span>(!(b | <span class="number">0b1000_0000</span>)).leading_zeros() &lt; <span class="number">5 </span>{
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32);
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32)
 					}
-				} <span class="kw">else if </span>shift &gt;= <span class="number">32 </span>&amp;&amp; b &amp; <span class="number">0b0100_0000 </span>== <span class="number">0 </span>{
-					<span class="kw">if </span>b.leading_zeros() &lt; <span class="number">5 </span>{
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32);
-					}
+				} <span class="kw">else if </span>shift &gt;= <span class="number">32 </span>&amp;&amp; b &amp; <span class="number">0b0100_0000 </span>== <span class="number">0 </span>&amp;&amp; b.leading_zeros() &lt; <span class="number">5 </span>{
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt32)
 				}
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 		<span class="prelude-val">Ok</span>(VarInt32(res))
 	}
@@ -1235,7 +1254,9 @@
 		<span class="kw">while </span>more {
 			buf[<span class="number">0</span>] = (v &amp; <span class="number">0b0111_1111</span>) <span class="kw">as </span>u8;
 			v &gt;&gt;= <span class="number">7</span>;
-			<span class="kw">if </span>(v == <span class="number">0 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0</span>) || (v == -<span class="number">1 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000</span>)  {
+			<span class="kw">if </span>(v == <span class="number">0 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0</span>) ||
+				(v == -<span class="number">1 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000</span>)
+			{
 				more = <span class="bool-val">false
 			</span>} <span class="kw">else </span>{
 				buf[<span class="number">0</span>] |= <span class="number">0b1000_0000
@@ -1273,7 +1294,9 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>u8buf = [<span class="number">0u8</span>; <span class="number">1</span>];
 
 		<span class="kw">loop </span>{
-			<span class="kw">if </span>shift &gt; <span class="number">63 </span>{ <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64); }
+			<span class="kw">if </span>shift &gt; <span class="number">63 </span>{
+				<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64)
+			}
 			reader.read(<span class="kw-2">&amp;mut </span>u8buf)<span class="question-mark">?</span>;
 			<span class="kw">let </span>b = u8buf[<span class="number">0</span>];
 
@@ -1285,13 +1308,13 @@
 					res |= (<span class="number">1i64 </span>&lt;&lt; shift).wrapping_neg();
 				} <span class="kw">else if </span>shift &gt;= <span class="number">64 </span>&amp;&amp; b &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000 </span>{
 					<span class="kw">if </span>(b | <span class="number">0b1000_0000</span>) <span class="kw">as </span>i8 != -<span class="number">1 </span>{
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64);
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64)
 					}
 				} <span class="kw">else if </span>shift &gt;= <span class="number">64 </span>&amp;&amp; b != <span class="number">0 </span>{
-					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64);
+					<span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidVarInt64)
 				}
-				<span class="kw">break</span>;
-			}
+				<span class="kw">break
+			</span>}
 		}
 		<span class="prelude-val">Ok</span>(VarInt64(res))
 	}
@@ -1307,7 +1330,9 @@
 		<span class="kw">while </span>more {
 			buf[<span class="number">0</span>] = (v &amp; <span class="number">0b0111_1111</span>) <span class="kw">as </span>u8;
 			v &gt;&gt;= <span class="number">7</span>;
-			<span class="kw">if </span>(v == <span class="number">0 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0</span>) || (v == -<span class="number">1 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000</span>)  {
+			<span class="kw">if </span>(v == <span class="number">0 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0</span>) ||
+				(v == -<span class="number">1 </span>&amp;&amp; buf[<span class="number">0</span>] &amp; <span class="number">0b0100_0000 </span>== <span class="number">0b0100_0000</span>)
+			{
 				more = <span class="bool-val">false
 			</span>} <span class="kw">else </span>{
 				buf[<span class="number">0</span>] |= <span class="number">0b1000_0000
@@ -1351,7 +1376,9 @@
 }
 
 <span class="kw">impl </span>From&lt;u32&gt; <span class="kw">for </span>Uint32 {
-	<span class="kw">fn </span>from(u: u32) -&gt; <span class="self">Self </span>{ Uint32(u) }
+	<span class="kw">fn </span>from(u: u32) -&gt; <span class="self">Self </span>{
+		Uint32(u)
+	}
 }
 
 <span class="doccomment">/// 64-bit unsigned integer, encoded in little endian.
@@ -1379,7 +1406,9 @@
 }
 
 <span class="kw">impl </span>From&lt;u64&gt; <span class="kw">for </span>Uint64 {
-	<span class="kw">fn </span>from(u: u64) -&gt; <span class="self">Self </span>{ Uint64(u) }
+	<span class="kw">fn </span>from(u: u64) -&gt; <span class="self">Self </span>{
+		Uint64(u)
+	}
 }
 
 <span class="kw">impl </span>From&lt;Uint64&gt; <span class="kw">for </span>u64 {
@@ -1387,7 +1416,6 @@
 		var.<span class="number">0
 	</span>}
 }
-
 
 <span class="doccomment">/// VarUint1, 1-bit value (0/1).
 </span><span class="attr">#[derive(Debug, Copy, Clone, PartialEq)]
@@ -1414,7 +1442,7 @@
 		<span class="kw">match </span>u8buf[<span class="number">0</span>] {
 			<span class="number">0 </span>=&gt; <span class="prelude-val">Ok</span>(VarUint1(<span class="bool-val">false</span>)),
 			<span class="number">1 </span>=&gt; <span class="prelude-val">Ok</span>(VarUint1(<span class="bool-val">true</span>)),
-			v @ <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(Error::InvalidVarUint1(v)),
+			v =&gt; <span class="prelude-val">Err</span>(Error::InvalidVarUint1(v)),
 		}
 	}
 }
@@ -1423,9 +1451,7 @@
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
-		writer.write(<span class="kw-2">&amp;</span>[
-			<span class="kw">if </span><span class="self">self</span>.<span class="number">0 </span>{ <span class="number">1u8 </span>} <span class="kw">else </span>{ <span class="number">0u8 </span>}
-		])<span class="question-mark">?</span>;
+		writer.write(<span class="kw-2">&amp;</span>[<span class="kw">if </span><span class="self">self</span>.<span class="number">0 </span>{ <span class="number">1u8 </span>} <span class="kw">else </span>{ <span class="number">0u8 </span>}])<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(())
 	}
 }
@@ -1436,9 +1462,9 @@
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span>length = u32::from(VarUint32::deserialize(reader)<span class="question-mark">?</span>) <span class="kw">as </span>usize;
 		<span class="kw">if </span>length &gt; <span class="number">0 </span>{
-			String::from_utf8(<span class="macro">buffered_read!</span>(PRIMITIVES_BUFFER_LENGTH, length, reader)).map_err(|<span class="kw">_</span>| Error::NonUtf8String)
-		}
-		<span class="kw">else </span>{
+			String::from_utf8(<span class="macro">buffered_read!</span>(PRIMITIVES_BUFFER_LENGTH, length, reader))
+				.map_err(|<span class="kw">_</span>| Error::NonUtf8String)
+		} <span class="kw">else </span>{
 			<span class="prelude-val">Ok</span>(String::new())
 		}
 	}
@@ -1461,16 +1487,23 @@
 
 <span class="kw">impl</span>&lt;T: Deserialize&gt; CountedList&lt;T&gt; {
 	<span class="doccomment">/// Destroy counted list returing inner vector.
-	</span><span class="kw">pub fn </span>into_inner(<span class="self">self</span>) -&gt; Vec&lt;T&gt; { <span class="self">self</span>.<span class="number">0 </span>}
+	</span><span class="kw">pub fn </span>into_inner(<span class="self">self</span>) -&gt; Vec&lt;T&gt; {
+		<span class="self">self</span>.<span class="number">0
+	</span>}
 }
 
-<span class="kw">impl</span>&lt;T: Deserialize&gt; Deserialize <span class="kw">for </span>CountedList&lt;T&gt; <span class="kw">where </span>T::Error: From&lt;Error&gt; {
+<span class="kw">impl</span>&lt;T: Deserialize&gt; Deserialize <span class="kw">for </span>CountedList&lt;T&gt;
+<span class="kw">where
+	</span>T::Error: From&lt;Error&gt;,
+{
 	<span class="kw">type </span>Error = T::Error;
 
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span>count: usize = VarUint32::deserialize(reader)<span class="question-mark">?</span>.into();
 		<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
-		<span class="kw">for _ in </span><span class="number">0</span>..count { result.push(T::deserialize(reader)<span class="question-mark">?</span>); }
+		<span class="kw">for _ in </span><span class="number">0</span>..count {
+			result.push(T::deserialize(reader)<span class="question-mark">?</span>);
+		}
 		<span class="prelude-val">Ok</span>(CountedList(result))
 	}
 }
@@ -1486,10 +1519,7 @@
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, W: <span class="lifetime">&#39;a </span>+ io::Write&gt; CountedWriter&lt;<span class="lifetime">&#39;a</span>, W&gt; {
 	<span class="doccomment">/// New counted writer on top of the given serial writer.
 	</span><span class="kw">pub fn </span>new(writer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>W) -&gt; <span class="self">Self </span>{
-		CountedWriter {
-			writer: writer,
-			data: Vec::new(),
-		}
+		CountedWriter { writer, data: Vec::new() }
 	}
 
 	<span class="doccomment">/// Finish counted writer routing, which writes accumulated length
@@ -1515,9 +1545,14 @@
 <span class="doccomment">/// Helper struct to write series of `T` preceded by the length of the sequence
 /// serialized as VarUint32.
 </span><span class="attr">#[derive(Debug, Clone)]
-</span><span class="kw">pub struct </span>CountedListWriter&lt;I: Serialize&lt;Error=elements::Error&gt;, T: IntoIterator&lt;Item=I&gt;&gt;(<span class="kw">pub </span>usize, <span class="kw">pub </span>T);
+</span><span class="kw">pub struct </span>CountedListWriter&lt;I: Serialize&lt;Error = elements::Error&gt;, T: IntoIterator&lt;Item = I&gt;&gt;(
+	<span class="kw">pub </span>usize,
+	<span class="kw">pub </span>T,
+);
 
-<span class="kw">impl</span>&lt;I: Serialize&lt;Error=elements::Error&gt;, T: IntoIterator&lt;Item=I&gt;&gt; Serialize <span class="kw">for </span>CountedListWriter&lt;I, T&gt; {
+<span class="kw">impl</span>&lt;I: Serialize&lt;Error = elements::Error&gt;, T: IntoIterator&lt;Item = I&gt;&gt; Serialize
+	<span class="kw">for </span>CountedListWriter&lt;I, T&gt;
+{
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), <span class="self">Self</span>::Error&gt; {
@@ -1525,18 +1560,21 @@
 		<span class="kw">let </span>data = <span class="self">self</span>.<span class="number">1</span>;
 		<span class="kw">let </span>len: VarUint32 = len_us.into();
 		len.serialize(writer)<span class="question-mark">?</span>;
-		<span class="kw">for </span>data_element <span class="kw">in </span>data { data_element.serialize(writer)<span class="question-mark">? </span>}
+		<span class="kw">for </span>data_element <span class="kw">in </span>data {
+			data_element.serialize(writer)<span class="question-mark">?
+		</span>}
 
 		<span class="prelude-val">Ok</span>(())
 	}
 }
 
-
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
 
-	<span class="kw">use </span><span class="kw">super</span>::<span class="kw">super</span>::{deserialize_buffer, Serialize};
-	<span class="kw">use super</span>::{CountedList, VarInt7, VarUint32, VarInt32, VarInt64, VarUint64};
+	<span class="kw">use super</span>::{
+		<span class="kw">super</span>::{deserialize_buffer, Serialize},
+		CountedList, VarInt32, VarInt64, VarInt7, VarUint32, VarUint64,
+	};
 	<span class="kw">use </span><span class="kw">crate</span>::elements::Error;
 
 	<span class="kw">fn </span>varuint32_ser_test(val: u32, expected: Vec&lt;u8&gt;) {
@@ -1677,7 +1715,9 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint64_bad_extended() {
-		<span class="kw">let </span>res = deserialize_buffer::&lt;VarInt64&gt;(<span class="kw-2">&amp;</span>[<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x6f</span>][..]);
+		<span class="kw">let </span>res = deserialize_buffer::&lt;VarInt64&gt;(
+			<span class="kw-2">&amp;</span>[<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x6f</span>][..],
+		);
 		<span class="macro">assert!</span>(res.is_err());
 	}
 
@@ -1703,71 +1743,55 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint64_too_long() {
-		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarInt64&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
-			).is_err()
-		);
+		<span class="macro">assert!</span>(deserialize_buffer::&lt;VarInt64&gt;(
+			<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
+		)
+		.is_err());
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint32_too_long() {
-		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarInt32&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
-			).is_err()
-		);
+		<span class="macro">assert!</span>(deserialize_buffer::&lt;VarInt32&gt;(<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],).is_err());
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varuint64_too_long() {
-		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarUint64&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
-			).is_err()
-		);
+		<span class="macro">assert!</span>(deserialize_buffer::&lt;VarUint64&gt;(
+			<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
+		)
+		.is_err());
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varuint32_too_long() {
 		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarUint32&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],
-			).is_err()
+			deserialize_buffer::&lt;VarUint32&gt;(<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x00</span>][..],).is_err()
 		);
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varuint32_too_long_trailing() {
-		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarUint32&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x7f</span>][..],
-			).is_err()
-		);
+		<span class="macro">assert!</span>(deserialize_buffer::&lt;VarUint32&gt;(<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x7f</span>][..],).is_err());
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varuint64_too_long_trailing() {
-		<span class="macro">assert!</span>(
-			deserialize_buffer::&lt;VarUint64&gt;(
-				<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x04</span>][..],
-			).is_err()
-		);
+		<span class="macro">assert!</span>(deserialize_buffer::&lt;VarUint64&gt;(
+			<span class="kw-2">&amp;</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x04</span>][..],
+		)
+		.is_err());
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint32_min() {
-		varint32_serde_test(
-			<span class="macro">vec!</span>[<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x78</span>],
-			-<span class="number">2147483648</span>,
-		);
+		varint32_serde_test(<span class="macro">vec!</span>[<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x78</span>], -<span class="number">2147483648</span>);
 	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint7_invalid() {
 		<span class="kw">match </span>deserialize_buffer::&lt;VarInt7&gt;(<span class="kw-2">&amp;</span>[<span class="number">240</span>]) {
 			<span class="prelude-val">Err</span>(Error::InvalidVarInt7(<span class="kw">_</span>)) =&gt; {},
-			<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should be invalid varint7 error!&quot;</span>)
+			<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should be invalid varint7 error!&quot;</span>),
 		}
 	}
 
@@ -1778,9 +1802,9 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varuint32_too_long_nulled() {
-		<span class="kw">match </span>deserialize_buffer::&lt;VarUint32&gt;(
-			<span class="kw-2">&amp;</span>[<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x78</span>]
-		) {
+		<span class="kw">match </span>deserialize_buffer::&lt;VarUint32&gt;(<span class="kw-2">&amp;</span>[
+			<span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x78</span>,
+		]) {
 			<span class="prelude-val">Err</span>(Error::InvalidVarUint32) =&gt; {},
 			<span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should be invalid varuint32&quot;</span>),
 		}
@@ -1788,23 +1812,15 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>varint32_max() {
-		varint32_serde_test(
-			<span class="macro">vec!</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x07</span>],
-			<span class="number">2147483647</span>,
-		);
+		varint32_serde_test(<span class="macro">vec!</span>[<span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0xff</span>, <span class="number">0x07</span>], <span class="number">2147483647</span>);
 	}
-
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>counted_list() {
 		<span class="kw">let </span>payload = [
 			<span class="number">133u8</span>, <span class="comment">//(128+5), length is 5
-				</span><span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x0</span>, <span class="comment">// padding
-			</span><span class="number">0x01</span>,
-			<span class="number">0x7d</span>,
-			<span class="number">0x05</span>,
-			<span class="number">0x07</span>,
-			<span class="number">0x09</span>,
+			</span><span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x80</span>, <span class="number">0x0</span>, <span class="comment">// padding
+			</span><span class="number">0x01</span>, <span class="number">0x7d</span>, <span class="number">0x05</span>, <span class="number">0x07</span>, <span class="number">0x09</span>,
 		];
 
 		<span class="kw">let </span>list: CountedList&lt;VarInt7&gt; =

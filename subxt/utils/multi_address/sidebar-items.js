@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["MultiAddress","A multi-format address wrapper for on-chain accounts. This is a simplified version of Substrate’s `sp_runtime::MultiAddress`. To obtain more functionality, convert this into that type (this conversion functionality is provided via `From` impls if the `substrate-compat` feature is enabled)."]]};

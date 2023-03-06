@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/builder/export.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>export.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/builder/export.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>export.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -114,12 +114,16 @@
 <a href="#114" id="114">114</a>
 <a href="#115" id="115">115</a>
 <a href="#116" id="116">116</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::{borrow::ToOwned, string::String};
-<span class="kw">use </span><span class="kw">super</span>::invoke::{Invoke, Identity};
+<a href="#117" id="117">117</a>
+<a href="#118" id="118">118</a>
+<a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">super</span>::invoke::{Identity, Invoke};
 <span class="kw">use </span><span class="kw">crate</span>::elements;
+<span class="kw">use </span>alloc::{borrow::ToOwned, string::String};
 
 <span class="doccomment">/// Export entry builder
-</span><span class="kw">pub struct </span>ExportBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>ExportBuilder&lt;F = Identity&gt; {
 	callback: F,
 	field: String,
 	binding: elements::Internal,
@@ -132,15 +136,16 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; ExportBuilder&lt;F&gt; {
+<span class="kw">impl </span>Default <span class="kw">for </span>ExportBuilder {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::new()
+	}
+}
 
+<span class="kw">impl</span>&lt;F&gt; ExportBuilder&lt;F&gt; {
 	<span class="doccomment">/// New export entry builder in the specified chained context
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		ExportBuilder {
-			callback: callback,
-			field: String::new(),
-			binding: elements::Internal::Function(<span class="number">0</span>),
-		}
+		ExportBuilder { callback, field: String::new(), binding: elements::Internal::Function(<span class="number">0</span>) }
 	}
 
 	<span class="doccomment">/// Set the field name of the export entry
@@ -161,7 +166,10 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;F&gt; ExportBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;elements::ExportEntry&gt; {
+<span class="kw">impl</span>&lt;F&gt; ExportBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::ExportEntry&gt;,
+{
 	<span class="doccomment">/// Finalize export entry builder spawning the resulting struct
 	</span><span class="kw">pub fn </span>build(<span class="self">self</span>) -&gt; F::Result {
 		<span class="self">self</span>.callback.invoke(elements::ExportEntry::new(<span class="self">self</span>.field, <span class="self">self</span>.binding))
@@ -176,18 +184,18 @@
 }
 
 <span class="doccomment">/// Internal mapping builder for export entry
-</span><span class="kw">pub struct </span>ExportInternalBuilder&lt;F=Identity&gt; {
+</span><span class="kw">pub struct </span>ExportInternalBuilder&lt;F = Identity&gt; {
 	callback: F,
 	binding: elements::Internal,
 }
 
-<span class="kw">impl</span>&lt;F&gt; ExportInternalBuilder&lt;F&gt; <span class="kw">where </span>F: Invoke&lt;elements::Internal&gt; {
+<span class="kw">impl</span>&lt;F&gt; ExportInternalBuilder&lt;F&gt;
+<span class="kw">where
+	</span>F: Invoke&lt;elements::Internal&gt;,
+{
 	<span class="doccomment">/// New export entry internal mapping for the chained context
 	</span><span class="kw">pub fn </span>with_callback(callback: F) -&gt; <span class="self">Self </span>{
-		ExportInternalBuilder{
-			callback: callback,
-			binding: elements::Internal::Function(<span class="number">0</span>),
-		}
+		ExportInternalBuilder { callback, binding: elements::Internal::Function(<span class="number">0</span>) }
 	}
 
 	<span class="doccomment">/// Map to function by index

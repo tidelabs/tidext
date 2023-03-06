@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/src/storage/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/src/storage/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1832,9 +1832,85 @@
 <a href="#1832" id="1832">1832</a>
 <a href="#1833" id="1833">1833</a>
 <a href="#1834" id="1834">1834</a>
+<a href="#1835" id="1835">1835</a>
+<a href="#1836" id="1836">1836</a>
+<a href="#1837" id="1837">1837</a>
+<a href="#1838" id="1838">1838</a>
+<a href="#1839" id="1839">1839</a>
+<a href="#1840" id="1840">1840</a>
+<a href="#1841" id="1841">1841</a>
+<a href="#1842" id="1842">1842</a>
+<a href="#1843" id="1843">1843</a>
+<a href="#1844" id="1844">1844</a>
+<a href="#1845" id="1845">1845</a>
+<a href="#1846" id="1846">1846</a>
+<a href="#1847" id="1847">1847</a>
+<a href="#1848" id="1848">1848</a>
+<a href="#1849" id="1849">1849</a>
+<a href="#1850" id="1850">1850</a>
+<a href="#1851" id="1851">1851</a>
+<a href="#1852" id="1852">1852</a>
+<a href="#1853" id="1853">1853</a>
+<a href="#1854" id="1854">1854</a>
+<a href="#1855" id="1855">1855</a>
+<a href="#1856" id="1856">1856</a>
+<a href="#1857" id="1857">1857</a>
+<a href="#1858" id="1858">1858</a>
+<a href="#1859" id="1859">1859</a>
+<a href="#1860" id="1860">1860</a>
+<a href="#1861" id="1861">1861</a>
+<a href="#1862" id="1862">1862</a>
+<a href="#1863" id="1863">1863</a>
+<a href="#1864" id="1864">1864</a>
+<a href="#1865" id="1865">1865</a>
+<a href="#1866" id="1866">1866</a>
+<a href="#1867" id="1867">1867</a>
+<a href="#1868" id="1868">1868</a>
+<a href="#1869" id="1869">1869</a>
+<a href="#1870" id="1870">1870</a>
+<a href="#1871" id="1871">1871</a>
+<a href="#1872" id="1872">1872</a>
+<a href="#1873" id="1873">1873</a>
+<a href="#1874" id="1874">1874</a>
+<a href="#1875" id="1875">1875</a>
+<a href="#1876" id="1876">1876</a>
+<a href="#1877" id="1877">1877</a>
+<a href="#1878" id="1878">1878</a>
+<a href="#1879" id="1879">1879</a>
+<a href="#1880" id="1880">1880</a>
+<a href="#1881" id="1881">1881</a>
+<a href="#1882" id="1882">1882</a>
+<a href="#1883" id="1883">1883</a>
+<a href="#1884" id="1884">1884</a>
+<a href="#1885" id="1885">1885</a>
+<a href="#1886" id="1886">1886</a>
+<a href="#1887" id="1887">1887</a>
+<a href="#1888" id="1888">1888</a>
+<a href="#1889" id="1889">1889</a>
+<a href="#1890" id="1890">1890</a>
+<a href="#1891" id="1891">1891</a>
+<a href="#1892" id="1892">1892</a>
+<a href="#1893" id="1893">1893</a>
+<a href="#1894" id="1894">1894</a>
+<a href="#1895" id="1895">1895</a>
+<a href="#1896" id="1896">1896</a>
+<a href="#1897" id="1897">1897</a>
+<a href="#1898" id="1898">1898</a>
+<a href="#1899" id="1899">1899</a>
+<a href="#1900" id="1900">1900</a>
+<a href="#1901" id="1901">1901</a>
+<a href="#1902" id="1902">1902</a>
+<a href="#1903" id="1903">1903</a>
+<a href="#1904" id="1904">1904</a>
+<a href="#1905" id="1905">1905</a>
+<a href="#1906" id="1906">1906</a>
+<a href="#1907" id="1907">1907</a>
+<a href="#1908" id="1908">1908</a>
+<a href="#1909" id="1909">1909</a>
+<a href="#1910" id="1910">1910</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -1861,9 +1937,10 @@
 <span class="kw">use </span>codec::{Decode, Encode, EncodeLike, FullCodec, FullEncode};
 <span class="kw">use </span>sp_core::storage::ChildInfo;
 <span class="kw">use </span>sp_runtime::generic::{Digest, DigestItem};
-<span class="kw">use </span>sp_std::{marker::PhantomData, prelude::<span class="kw-2">*</span>};
+<span class="kw">use </span>sp_std::{collections::btree_set::BTreeSet, marker::PhantomData, prelude::<span class="kw-2">*</span>};
 
 <span class="kw">pub use </span><span class="self">self</span>::{
+	stream_iter::StorageStreamIter,
 	transactional::{
 		in_storage_layer, with_storage_layer, with_transaction, with_transaction_unchecked,
 	},
@@ -1880,6 +1957,8 @@
 </span><span class="kw">pub mod </span>generator;
 <span class="kw">pub mod </span>hashed;
 <span class="kw">pub mod </span>migration;
+<span class="kw">pub mod </span>storage_noop_guard;
+<span class="kw">mod </span>stream_iter;
 <span class="kw">pub mod </span>transactional;
 <span class="kw">pub mod </span>types;
 <span class="kw">pub mod </span>unhashed;
@@ -1944,6 +2023,12 @@
 
 	<span class="doccomment">/// Mutate the value if closure returns `Ok`
 	</span><span class="kw">fn </span>try_mutate&lt;R, E, F: FnOnce(<span class="kw-2">&amp;mut </span><span class="self">Self</span>::Query) -&gt; <span class="prelude-ty">Result</span>&lt;R, E&gt;&gt;(f: F) -&gt; <span class="prelude-ty">Result</span>&lt;R, E&gt;;
+
+	<span class="doccomment">/// Mutate the value. Deletes the item if mutated to a `None`.
+	</span><span class="kw">fn </span>mutate_exists&lt;R, F: FnOnce(<span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;T&gt;) -&gt; R&gt;(f: F) -&gt; R;
+
+	<span class="doccomment">/// Mutate the value if closure returns `Ok`. Deletes the item if mutated to a `None`.
+	</span><span class="kw">fn </span>try_mutate_exists&lt;R, E, F: FnOnce(<span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;R, E&gt;&gt;(f: F) -&gt; <span class="prelude-ty">Result</span>&lt;R, E&gt;;
 
 	<span class="doccomment">/// Clear the storage value.
 	</span><span class="kw">fn </span>kill();
@@ -2388,6 +2473,12 @@
 	<span class="kw">where
 		</span>KArg1: <span class="question-mark">?</span>Sized + EncodeLike&lt;K1&gt;;
 
+	<span class="doccomment">/// Does any value under the first key `k1` (explicitly) exist in storage?
+	/// Might have unexpected behaviour with empty keys, e.g. `[]`.
+	</span><span class="kw">fn </span>contains_prefix&lt;KArg1&gt;(k1: KArg1) -&gt; bool
+	<span class="kw">where
+		</span>KArg1: EncodeLike&lt;K1&gt;;
+
 	<span class="doccomment">/// Iterate over values that share the first key.
 	</span><span class="kw">fn </span>iter_prefix_values&lt;KArg1&gt;(k1: KArg1) -&gt; PrefixIterator&lt;V&gt;
 	<span class="kw">where
@@ -2561,6 +2652,12 @@
 		limit: u32,
 		maybe_cursor: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
 	) -&gt; sp_io::MultiRemovalResults
+	<span class="kw">where
+		</span>K: HasKeyPrefix&lt;KP&gt;;
+
+	<span class="doccomment">/// Does any value under a `partial_key` prefix (explicitly) exist in storage?
+	/// Might have unexpected behaviour with empty keys, e.g. `[]`.
+	</span><span class="kw">fn </span>contains_prefix&lt;KP&gt;(partial_key: KP) -&gt; bool
 	<span class="kw">where
 		</span>K: HasKeyPrefix&lt;KP&gt;;
 
@@ -3136,6 +3233,7 @@
 	<span class="kw">impl</span>&lt;T, S&gt; Sealed <span class="kw">for </span>WeakBoundedVec&lt;T, S&gt; {}
 	<span class="kw">impl</span>&lt;K, V, S&gt; Sealed <span class="kw">for </span>bounded_btree_map::BoundedBTreeMap&lt;K, V, S&gt; {}
 	<span class="kw">impl</span>&lt;T, S&gt; Sealed <span class="kw">for </span>bounded_btree_set::BoundedBTreeSet&lt;T, S&gt; {}
+	<span class="kw">impl</span>&lt;T: Encode&gt; Sealed <span class="kw">for </span>BTreeSet&lt;T&gt; {}
 
 	<span class="macro">macro_rules! </span>impl_sealed_for_tuple {
 		($(<span class="macro-nonterminal">$elem</span>:ident),+) =&gt; {
@@ -3167,6 +3265,9 @@
 
 <span class="kw">impl</span>&lt;T: Encode&gt; StorageAppend&lt;T&gt; <span class="kw">for </span>Vec&lt;T&gt; {}
 <span class="kw">impl</span>&lt;T: Encode&gt; StorageDecodeLength <span class="kw">for </span>Vec&lt;T&gt; {}
+
+<span class="kw">impl</span>&lt;T: Encode&gt; StorageAppend&lt;T&gt; <span class="kw">for </span>BTreeSet&lt;T&gt; {}
+<span class="kw">impl</span>&lt;T: Encode&gt; StorageDecodeLength <span class="kw">for </span>BTreeSet&lt;T&gt; {}
 
 <span class="doccomment">/// We abuse the fact that SCALE does not put any marker into the encoding, i.e. we only encode the
 /// internal vec and we can append to this vec. We have a test that ensures that if the `Digest`
@@ -3306,7 +3407,7 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>test {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use crate</span>::{assert_ok, hash::Identity, Twox128};
+	<span class="kw">use crate</span>::{assert_ok, hash::Identity, pallet_prelude::NMapKey, Twox128};
 	<span class="kw">use </span>bounded_vec::BoundedVec;
 	<span class="kw">use </span>frame_support::traits::ConstU32;
 	<span class="kw">use </span>generator::StorageValue <span class="kw">as _</span>;
@@ -3601,6 +3702,39 @@
 	<span class="attr">#[<span class="kw">crate</span>::storage_alias]
 	</span><span class="kw">type </span>FooDoubleMap =
 		StorageDoubleMap&lt;Prefix, Twox128, u32, Twox128, u32, BoundedVec&lt;u32, ConstU32&lt;<span class="number">7</span>&gt;&gt;&gt;;
+	<span class="attr">#[<span class="kw">crate</span>::storage_alias]
+	</span><span class="kw">type </span>FooTripleMap = StorageNMap&lt;
+		Prefix,
+		(NMapKey&lt;Twox128, u32&gt;, NMapKey&lt;Twox128, u32&gt;, NMapKey&lt;Twox128, u32&gt;),
+		u64,
+	&gt;;
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>contains_prefix_works() {
+		TestExternalities::default().execute_with(|| {
+			<span class="comment">// Test double maps
+			</span><span class="macro">assert!</span>(FooDoubleMap::iter_prefix_values(<span class="number">1</span>).next().is_none());
+			<span class="macro">assert_eq!</span>(FooDoubleMap::contains_prefix(<span class="number">1</span>), <span class="bool-val">false</span>);
+
+			<span class="macro">assert_ok!</span>(FooDoubleMap::try_append(<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>));
+			<span class="macro">assert_ok!</span>(FooDoubleMap::try_append(<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>));
+			<span class="macro">assert!</span>(FooDoubleMap::iter_prefix_values(<span class="number">1</span>).next().is_some());
+			<span class="macro">assert!</span>(FooDoubleMap::contains_prefix(<span class="number">1</span>));
+			FooDoubleMap::remove(<span class="number">1</span>, <span class="number">1</span>);
+			<span class="macro">assert_eq!</span>(FooDoubleMap::contains_prefix(<span class="number">1</span>), <span class="bool-val">false</span>);
+
+			<span class="comment">// Test N Maps
+			</span><span class="macro">assert!</span>(FooTripleMap::iter_prefix_values((<span class="number">1</span>,)).next().is_none());
+			<span class="macro">assert_eq!</span>(FooTripleMap::contains_prefix((<span class="number">1</span>,)), <span class="bool-val">false</span>);
+
+			FooTripleMap::insert((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="number">4</span>);
+			FooTripleMap::insert((<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="number">4</span>);
+			<span class="macro">assert!</span>(FooTripleMap::iter_prefix_values((<span class="number">1</span>,)).next().is_some());
+			<span class="macro">assert!</span>(FooTripleMap::contains_prefix((<span class="number">1</span>,)));
+			FooTripleMap::remove((<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>));
+			<span class="macro">assert_eq!</span>(FooTripleMap::contains_prefix((<span class="number">1</span>,)), <span class="bool-val">false</span>);
+		});
+	}
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>try_append_works() {
@@ -3663,6 +3797,24 @@
 				FooDoubleMap::get(<span class="number">2</span>, <span class="number">1</span>).unwrap(),
 				BoundedVec::&lt;u32, ConstU32&lt;<span class="number">7</span>&gt;&gt;::try_from(<span class="macro">vec!</span>[<span class="number">4</span>, <span class="number">5</span>]).unwrap(),
 			);
+		});
+	}
+
+	<span class="attr">#[<span class="kw">crate</span>::storage_alias]
+	</span><span class="kw">type </span>FooSet = StorageValue&lt;Prefix, BTreeSet&lt;u32&gt;&gt;;
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>btree_set_append_and_decode_len_works() {
+		TestExternalities::default().execute_with(|| {
+			<span class="kw">let </span>btree = BTreeSet::from([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);
+			FooSet::put(btree);
+
+			FooSet::append(<span class="number">4</span>);
+			FooSet::append(<span class="number">5</span>);
+			FooSet::append(<span class="number">6</span>);
+			FooSet::append(<span class="number">7</span>);
+
+			<span class="macro">assert_eq!</span>(FooSet::decode_len().unwrap(), <span class="number">7</span>);
 		});
 	}
 }

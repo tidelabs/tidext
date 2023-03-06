@@ -480,6 +480,14 @@
 <a href="#480" id="480">480</a>
 <a href="#481" id="481">481</a>
 <a href="#482" id="482">482</a>
+<a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
+<a href="#487" id="487">487</a>
+<a href="#488" id="488">488</a>
+<a href="#489" id="489">489</a>
+<a href="#490" id="490">490</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
@@ -501,17 +509,15 @@
   TidechainCall, TidechainConfig, TidefiKeyring, TidefiRuntime,
 };
 <span class="kw">use </span>pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
-<span class="kw">use </span>parity_scale_codec::Encode;
-<span class="kw">use </span>sp_runtime::MultiAddress;
+<span class="kw">use </span>sp_core::{
+  blake2_256,
+  crypto::{Ss58AddressFormat, Ss58Codec},
+};
 <span class="kw">use </span>std::sync::Arc;
 <span class="kw">use </span>subxt::{
   error::{DispatchError, TransactionError},
   events::Phase,
-  ext::sp_core::{
-    blake2_256,
-    crypto::{Ss58AddressFormat, Ss58Codec},
-  },
-  rpc::{rpc_params, SubstrateTxStatus},
+  rpc::{rpc_params, types::SubstrateTxStatus},
   utils::Encoded,
 };
 <span class="kw">use </span>tidefi_primitives::{
@@ -566,7 +572,7 @@
     <span class="doccomment">/// Nominate validators
     </span><span class="attr">#[tidext::pallet = <span class="string">&quot;staking&quot;</span>]
     #[tidext::substitute_params = (
-      value.iter().map(|v| MultiAddress::Id(v.clone())).collect(),
+      value.iter().map(|v| sp_runtime::MultiAddress::Id(v.clone())).collect(),
     )]
     </span><span class="kw">fn </span>nominate(<span class="kw-2">&amp;</span><span class="self">self</span>, value: Vec&lt;AccountId&gt;);
 
@@ -576,7 +582,7 @@
     /// If `reward_destination` is not set, it default to `RewardDestination::Staked`
     </span><span class="attr">#[tidext::pallet = <span class="string">&quot;staking&quot;</span>]
     #[tidext::substitute_params = (
-      MultiAddress::Id(controller),
+      sp_runtime::MultiAddress::Id(controller),
       value,
       reward_destination.unwrap_or(RewardDestination::Staked).into(),
     )]
@@ -757,7 +763,7 @@
               .extrinsics
               .iter()
               .position(|ext| {
-                <span class="kw">let </span>hash = blake2_256(<span class="kw-2">&amp;</span>ext.encode());
+                <span class="kw">let </span>hash = blake2_256(<span class="kw-2">&amp;</span>ext.<span class="number">0</span>);
                 hash == ext_hash
               })
               .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))<span class="question-mark">?</span>;
@@ -807,7 +813,9 @@
               <span class="self">self
               </span>.runtime()
               .storage()
-              .fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().account_stakes(account_id), <span class="prelude-val">None</span>)
+              .at(<span class="prelude-val">None</span>)
+              .<span class="kw">await</span><span class="question-mark">?
+              </span>.fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().account_stakes(account_id))
               .<span class="kw">await</span><span class="question-mark">?
               </span>.unwrap_or_default()
               .into_iter()
@@ -824,7 +832,9 @@
               <span class="self">self
               </span>.runtime()
               .storage()
-              .fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().account_stakes(account_id), <span class="prelude-val">None</span>)
+              .at(<span class="prelude-val">None</span>)
+              .<span class="kw">await</span><span class="question-mark">?
+              </span>.fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().account_stakes(account_id))
               .<span class="kw">await</span><span class="question-mark">?
               </span>.unwrap_or_default()
               .into_iter()
@@ -912,7 +922,9 @@
             <span class="self">self
             </span>.runtime()
             .storage()
-            .fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().staking_pool(currency_id), <span class="prelude-val">None</span>)
+            .at(<span class="prelude-val">None</span>)
+            .<span class="kw">await</span><span class="question-mark">?
+            </span>.fetch(<span class="kw-2">&amp;</span>current_runtime.storage().tidefi_staking().staking_pool(currency_id))
             .<span class="kw">await</span><span class="question-mark">?
             </span>.unwrap_or_default()
         }
@@ -929,7 +941,9 @@
             <span class="self">self
             </span>.runtime()
             .storage()
-            .fetch(<span class="kw-2">&amp;</span>current_runtime.storage().balances().total_issuance(), <span class="prelude-val">None</span>)
+            .at(<span class="prelude-val">None</span>)
+            .<span class="kw">await</span><span class="question-mark">?
+            </span>.fetch(<span class="kw-2">&amp;</span>current_runtime.storage().balances().total_issuance())
             .<span class="kw">await</span><span class="question-mark">?
             </span>.unwrap_or_default()
           }
@@ -941,7 +955,9 @@
             <span class="self">self
             </span>.runtime()
             .storage()
-            .fetch(<span class="kw-2">&amp;</span>current_runtime.storage().assets().asset(wrapped_token), <span class="prelude-val">None</span>)
+            .at(<span class="prelude-val">None</span>)
+            .<span class="kw">await</span><span class="question-mark">?
+            </span>.fetch(<span class="kw-2">&amp;</span>current_runtime.storage().assets().asset(wrapped_token))
             .<span class="kw">await</span><span class="question-mark">?
             </span>.map(|asset| asset.supply)
             .unwrap_or_default()

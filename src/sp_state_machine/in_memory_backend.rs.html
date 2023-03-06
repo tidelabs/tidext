@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/state-machine/src/in_memory_backend.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>in_memory_backend.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/state-machine/src/in_memory_backend.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>in_memory_backend.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -243,9 +243,10 @@
 <a href="#243" id="243">243</a>
 <a href="#244" id="244">244</a>
 <a href="#245" id="245">245</a>
+<a href="#246" id="246">246</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -264,6 +265,7 @@
 
 </span><span class="kw">use crate</span>::{
 	backend::Backend, trie_backend::TrieBackend, StorageCollection, StorageKey, StorageValue,
+	TrieBackendBuilder,
 };
 <span class="kw">use </span>codec::Codec;
 <span class="kw">use </span>hash_db::Hasher;
@@ -291,7 +293,7 @@
 {
 	<span class="kw">let </span>db = GenericMemoryDB::default();
 	<span class="comment">// V1 is same as V0 for an empty trie.
-	</span>TrieBackend::new(db, empty_trie_root::&lt;LayoutV1&lt;H&gt;&gt;())
+	</span>TrieBackendBuilder::new(db, empty_trie_root::&lt;LayoutV1&lt;H&gt;&gt;()).build()
 }
 
 <span class="kw">impl</span>&lt;H: Hasher, KF&gt; TrieBackend&lt;GenericMemoryDB&lt;H, KF&gt;, H&gt;
@@ -332,14 +334,14 @@
 	</span><span class="kw">pub fn </span>update_backend(<span class="kw-2">&amp;</span><span class="self">self</span>, root: H::Out, changes: GenericMemoryDB&lt;H, KF&gt;) -&gt; <span class="self">Self </span>{
 		<span class="kw">let </span><span class="kw-2">mut </span>clone = <span class="self">self</span>.backend_storage().clone();
 		clone.consolidate(changes);
-		<span class="self">Self</span>::new(clone, root)
+		TrieBackendBuilder::new(clone, root).build()
 	}
 
 	<span class="doccomment">/// Apply the given transaction to this backend and set the root to the given value.
 	</span><span class="kw">pub fn </span>apply_transaction(<span class="kw-2">&amp;mut </span><span class="self">self</span>, root: H::Out, transaction: GenericMemoryDB&lt;H, KF&gt;) {
 		<span class="kw">let </span><span class="kw-2">mut </span>storage = sp_std::mem::take(<span class="self">self</span>).into_storage();
 		storage.consolidate(transaction);
-		<span class="kw-2">*</span><span class="self">self </span>= TrieBackend::new(storage, root);
+		<span class="kw-2">*</span><span class="self">self </span>= TrieBackendBuilder::new(storage, root).build();
 	}
 
 	<span class="doccomment">/// Compare with another in-memory backend.
@@ -354,7 +356,7 @@
 	KF: KeyFunction&lt;H&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
-		TrieBackend::new(<span class="self">self</span>.backend_storage().clone(), <span class="kw-2">*</span><span class="self">self</span>.root())
+		TrieBackendBuilder::new(<span class="self">self</span>.backend_storage().clone(), <span class="kw-2">*</span><span class="self">self</span>.root()).build()
 	}
 }
 
@@ -401,8 +403,8 @@
 	<span class="kw">fn </span>from((inners, state_version): (Storage, StateVersion)) -&gt; <span class="self">Self </span>{
 		<span class="kw">let </span><span class="kw-2">mut </span>inner: HashMap&lt;<span class="prelude-ty">Option</span>&lt;ChildInfo&gt;, BTreeMap&lt;StorageKey, StorageValue&gt;&gt; = inners
 			.children_default
-			.into_iter()
-			.map(|(_k, c)| (<span class="prelude-val">Some</span>(c.child_info), c.data))
+			.into_values()
+			.map(|c| (<span class="prelude-val">Some</span>(c.child_info), c.data))
 			.collect();
 		inner.insert(<span class="prelude-val">None</span>, inners.top);
 		(inner, state_version).into()
@@ -448,7 +450,7 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use </span><span class="kw">crate</span>::backend::Backend;
+	<span class="kw">use </span><span class="kw">crate</span>::backend::{AsTrieBackend, Backend};
 	<span class="kw">use </span>sp_core::storage::StateVersion;
 	<span class="kw">use </span>sp_runtime::traits::BlakeTwo256;
 
@@ -463,7 +465,7 @@
 			<span class="macro">vec!</span>[(<span class="prelude-val">Some</span>(child_info.clone()), <span class="macro">vec!</span>[(<span class="string">b&quot;2&quot;</span>.to_vec(), <span class="prelude-val">Some</span>(<span class="string">b&quot;3&quot;</span>.to_vec()))])],
 			state_version,
 		);
-		<span class="kw">let </span>trie_backend = storage.as_trie_backend().unwrap();
+		<span class="kw">let </span>trie_backend = storage.as_trie_backend();
 		<span class="macro">assert_eq!</span>(trie_backend.child_storage(child_info, <span class="string">b&quot;2&quot;</span>).unwrap(), <span class="prelude-val">Some</span>(<span class="string">b&quot;3&quot;</span>.to_vec()));
 		<span class="kw">let </span>storage_key = child_info.prefixed_storage_key();
 		<span class="macro">assert!</span>(trie_backend.storage(storage_key.as_slice()).unwrap().is_some());

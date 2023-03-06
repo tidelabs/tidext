@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/trie/src/storage_proof.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage_proof.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_trie/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/trie/src/storage_proof.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage_proof.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_trie/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -188,9 +188,21 @@
 <a href="#188" id="188">188</a>
 <a href="#189" id="189">189</a>
 <a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2020-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -208,7 +220,11 @@
 </span><span class="kw">use </span>codec::{Decode, Encode};
 <span class="kw">use </span>hash_db::{HashDB, Hasher};
 <span class="kw">use </span>scale_info::TypeInfo;
-<span class="kw">use </span>sp_std::{collections::btree_set::BTreeSet, iter::IntoIterator, vec::Vec};
+<span class="kw">use </span>sp_std::{
+	collections::btree_set::BTreeSet,
+	iter::{DoubleEndedIterator, IntoIterator},
+	vec::Vec,
+};
 <span class="comment">// Note that `LayoutV1` usage here (proof compaction) is compatible
 // with `LayoutV0`.
 </span><span class="kw">use </span><span class="kw">crate</span>::LayoutV1 <span class="kw">as </span>Layout;
@@ -244,10 +260,16 @@
 		<span class="self">self</span>.trie_nodes.is_empty()
 	}
 
+	<span class="doccomment">/// Convert into an iterator over encoded trie nodes in lexicographical order constructed
+	/// from the proof.
+	</span><span class="kw">pub fn </span>into_iter_nodes(<span class="self">self</span>) -&gt; <span class="kw">impl </span>Sized + DoubleEndedIterator&lt;Item = Vec&lt;u8&gt;&gt; {
+		<span class="self">self</span>.trie_nodes.into_iter()
+	}
+
 	<span class="doccomment">/// Create an iterator over encoded trie nodes in lexicographical order constructed
 	/// from the proof.
-	</span><span class="kw">pub fn </span>iter_nodes(<span class="self">self</span>) -&gt; StorageProofNodeIterator {
-		StorageProofNodeIterator::new(<span class="self">self</span>)
+	</span><span class="kw">pub fn </span>iter_nodes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Sized + DoubleEndedIterator&lt;Item = <span class="kw-2">&amp;</span>Vec&lt;u8&gt;&gt; {
+		<span class="self">self</span>.trie_nodes.iter()
 	}
 
 	<span class="doccomment">/// Convert into plain node vector.
@@ -260,14 +282,19 @@
 		<span class="self">self</span>.into()
 	}
 
+	<span class="doccomment">/// Creates a [`MemoryDB`](crate::MemoryDB) from `Self` reference.
+	</span><span class="kw">pub fn </span>to_memory_db&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">crate</span>::MemoryDB&lt;H&gt; {
+		<span class="self">self</span>.into()
+	}
+
 	<span class="doccomment">/// Merges multiple storage proofs covering potentially different sets of keys into one proof
 	/// covering all keys. The merged proof output may be smaller than the aggregate size of the
 	/// input proofs due to deduplication of trie nodes.
 	</span><span class="kw">pub fn </span>merge(proofs: <span class="kw">impl </span>IntoIterator&lt;Item = <span class="self">Self</span>&gt;) -&gt; <span class="self">Self </span>{
 		<span class="kw">let </span>trie_nodes = proofs
 			.into_iter()
-			.flat_map(|proof| proof.iter_nodes())
-			.collect::&lt;sp_std::collections::btree_set::BTreeSet&lt;<span class="kw">_</span>&gt;&gt;()
+			.flat_map(|proof| proof.into_iter_nodes())
+			.collect::&lt;BTreeSet&lt;<span class="kw">_</span>&gt;&gt;()
 			.into_iter()
 			.collect();
 
@@ -278,8 +305,18 @@
 	</span><span class="kw">pub fn </span>into_compact_proof&lt;H: Hasher&gt;(
 		<span class="self">self</span>,
 		root: H::Out,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;CompactProof, <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&gt;&gt; {
-		<span class="kw">crate</span>::encode_compact::&lt;Layout&lt;H&gt;&gt;(<span class="self">self</span>, root)
+	) -&gt; <span class="prelude-ty">Result</span>&lt;CompactProof, <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&lt;H::Out&gt;&gt;&gt; {
+		<span class="kw">let </span>db = <span class="self">self</span>.into_memory_db();
+		<span class="kw">crate</span>::encode_compact::&lt;Layout&lt;H&gt;, <span class="kw">crate</span>::MemoryDB&lt;H&gt;&gt;(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)
+	}
+
+	<span class="doccomment">/// Encode as a compact proof with default trie layout.
+	</span><span class="kw">pub fn </span>to_compact_proof&lt;H: Hasher&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		root: H::Out,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;CompactProof, <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&lt;H::Out&gt;&gt;&gt; {
+		<span class="kw">let </span>db = <span class="self">self</span>.to_memory_db();
+		<span class="kw">crate</span>::encode_compact::&lt;Layout&lt;H&gt;, <span class="kw">crate</span>::MemoryDB&lt;H&gt;&gt;(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;</span>root)
 	}
 
 	<span class="doccomment">/// Returns the estimated encoded size of the compact proof.
@@ -296,6 +333,12 @@
 
 <span class="kw">impl</span>&lt;H: Hasher&gt; From&lt;StorageProof&gt; <span class="kw">for </span><span class="kw">crate</span>::MemoryDB&lt;H&gt; {
 	<span class="kw">fn </span>from(proof: StorageProof) -&gt; <span class="self">Self </span>{
+		From::from(<span class="kw-2">&amp;</span>proof)
+	}
+}
+
+<span class="kw">impl</span>&lt;H: Hasher&gt; From&lt;<span class="kw-2">&amp;</span>StorageProof&gt; <span class="kw">for </span><span class="kw">crate</span>::MemoryDB&lt;H&gt; {
+	<span class="kw">fn </span>from(proof: <span class="kw-2">&amp;</span>StorageProof) -&gt; <span class="self">Self </span>{
 		<span class="kw">let </span><span class="kw-2">mut </span>db = <span class="kw">crate</span>::MemoryDB::default();
 		proof.iter_nodes().for_each(|n| {
 			db.insert(<span class="kw">crate</span>::EMPTY_PREFIX, <span class="kw-2">&amp;</span>n);
@@ -320,7 +363,7 @@
 	</span><span class="kw">pub fn </span>to_storage_proof&lt;H: Hasher&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		expected_root: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>H::Out&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;(StorageProof, H::Out), <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&gt;&gt; {
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(StorageProof, H::Out), <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&lt;H::Out&gt;&gt;&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>db = <span class="kw">crate</span>::MemoryDB::&lt;H&gt;::new(<span class="kw-2">&amp;</span>[]);
 		<span class="kw">let </span>root = <span class="kw">crate</span>::decode_compact::&lt;Layout&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
 			<span class="kw-2">&amp;mut </span>db,
@@ -347,7 +390,8 @@
 	</span><span class="kw">pub fn </span>to_memory_db&lt;H: Hasher&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		expected_root: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>H::Out&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;(<span class="kw">crate</span>::MemoryDB&lt;H&gt;, H::Out), <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&gt;&gt; {
+	) -&gt; <span class="prelude-ty">Result</span>&lt;(<span class="kw">crate</span>::MemoryDB&lt;H&gt;, H::Out), <span class="kw">crate</span>::CompactProofError&lt;H::Out, <span class="kw">crate</span>::Error&lt;H::Out&gt;&gt;&gt;
+	{
 		<span class="kw">let </span><span class="kw-2">mut </span>db = <span class="kw">crate</span>::MemoryDB::&lt;H&gt;::new(<span class="kw-2">&amp;</span>[]);
 		<span class="kw">let </span>root = <span class="kw">crate</span>::decode_compact::&lt;Layout&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
 			<span class="kw-2">&amp;mut </span>db,
@@ -356,26 +400,6 @@
 		)<span class="question-mark">?</span>;
 
 		<span class="prelude-val">Ok</span>((db, root))
-	}
-}
-
-<span class="doccomment">/// An iterator over trie nodes constructed from a storage proof. The nodes are not guaranteed to
-/// be traversed in any particular order.
-</span><span class="kw">pub struct </span>StorageProofNodeIterator {
-	inner: &lt;BTreeSet&lt;Vec&lt;u8&gt;&gt; <span class="kw">as </span>IntoIterator&gt;::IntoIter,
-}
-
-<span class="kw">impl </span>StorageProofNodeIterator {
-	<span class="kw">fn </span>new(proof: StorageProof) -&gt; <span class="self">Self </span>{
-		StorageProofNodeIterator { inner: proof.trie_nodes.into_iter() }
-	}
-}
-
-<span class="kw">impl </span>Iterator <span class="kw">for </span>StorageProofNodeIterator {
-	<span class="kw">type </span>Item = Vec&lt;u8&gt;;
-
-	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
-		<span class="self">self</span>.inner.next()
 	}
 }
 </code></pre></div>

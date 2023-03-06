@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.15.1/src/error.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-core-0.16.2/src/error.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -229,6 +229,9 @@
 <a href="#229" id="229">229</a>
 <a href="#230" id="230">230</a>
 <a href="#231" id="231">231</a>
+<a href="#232" id="232">232</a>
+<a href="#233" id="233">233</a>
+<a href="#234" id="234">234</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 //
 // Permission is hereby granted, free of charge, to any
@@ -263,7 +266,7 @@
 };
 
 <span class="doccomment">/// Convenience type for displaying errors.
-</span><span class="attr">#[derive(Clone, Debug, PartialEq)]
+</span><span class="attr">#[derive(Clone, Debug, PartialEq, Eq)]
 </span><span class="kw">pub struct </span>Mismatch&lt;T&gt; {
 	<span class="doccomment">/// Expected value.
 	</span><span class="kw">pub </span>expected: T,
@@ -363,6 +366,9 @@
 	<span class="doccomment">/// Not implemented for HTTP clients.
 	</span><span class="attr">#[error(<span class="string">&quot;Not implemented&quot;</span>)]
 	</span>HttpNotImplemented,
+	<span class="doccomment">/// Empty batch request.
+	</span><span class="attr">#[error(<span class="string">&quot;Empty batch request is not allowed&quot;</span>)]
+	</span>EmptyBatchRequest,
 }
 
 <span class="kw">impl </span>Error {
@@ -377,9 +383,9 @@
 	}
 }
 
-<span class="kw">impl </span>Into&lt;ErrorObjectOwned&gt; <span class="kw">for </span>Error {
-	<span class="kw">fn </span>into(<span class="self">self</span>) -&gt; ErrorObjectOwned {
-		<span class="kw">match </span><span class="self">self </span>{
+<span class="kw">impl </span>From&lt;Error&gt; <span class="kw">for </span>ErrorObjectOwned {
+	<span class="kw">fn </span>from(err: Error) -&gt; <span class="self">Self </span>{
+		<span class="kw">match </span>err {
 			Error::Call(CallError::Custom(err)) =&gt; err,
 			Error::Call(CallError::InvalidParams(e)) =&gt; {
 				ErrorObject::owned(INVALID_PARAMS_CODE, e.to_string(), <span class="prelude-val">None</span>::&lt;()&gt;)
@@ -387,7 +393,7 @@
 			Error::Call(CallError::Failed(e)) =&gt; {
 				ErrorObject::owned(CALL_EXECUTION_FAILED_CODE, e.to_string(), <span class="prelude-val">None</span>::&lt;()&gt;)
 			}
-			<span class="kw">_ </span>=&gt; ErrorObject::owned(UNKNOWN_ERROR_CODE, <span class="self">self</span>.to_string(), <span class="prelude-val">None</span>::&lt;()&gt;),
+			<span class="kw">_ </span>=&gt; ErrorObject::owned(UNKNOWN_ERROR_CODE, err.to_string(), <span class="prelude-val">None</span>::&lt;()&gt;),
 		}
 	}
 }
@@ -404,18 +410,18 @@
 	</span>Failed(ErrorObject&lt;<span class="lifetime">&#39;static</span>&gt;),
 }
 
-<span class="kw">impl </span>Into&lt;ErrorObjectOwned&gt; <span class="kw">for </span>SubscriptionClosed {
-	<span class="kw">fn </span>into(<span class="self">self</span>) -&gt; ErrorObjectOwned {
-		<span class="kw">match </span><span class="self">self </span>{
-			<span class="self">Self</span>::RemotePeerAborted =&gt; {
+<span class="kw">impl </span>From&lt;SubscriptionClosed&gt; <span class="kw">for </span>ErrorObjectOwned {
+	<span class="kw">fn </span>from(err: SubscriptionClosed) -&gt; <span class="self">Self </span>{
+		<span class="kw">match </span>err {
+			SubscriptionClosed::RemotePeerAborted =&gt; {
 				ErrorObject::owned(SUBSCRIPTION_CLOSED, <span class="string">&quot;Subscription was closed by the remote peer&quot;</span>, <span class="prelude-val">None</span>::&lt;()&gt;)
 			}
-			<span class="self">Self</span>::Success =&gt; ErrorObject::owned(
+			SubscriptionClosed::Success =&gt; ErrorObject::owned(
 				SUBSCRIPTION_CLOSED,
 				<span class="string">&quot;Subscription was completed by the server successfully&quot;</span>,
 				<span class="prelude-val">None</span>::&lt;()&gt;,
 			),
-			<span class="self">Self</span>::Failed(err) =&gt; err,
+			SubscriptionClosed::Failed(err) =&gt; err,
 		}
 	}
 }

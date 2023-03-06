@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/byte-slice-cast-1.2.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../byte_slice_cast/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/byte-slice-cast-1.2.2/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../byte_slice_cast/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1000,9 +1000,6 @@
 <a href="#1000" id="1000">1000</a>
 <a href="#1001" id="1001">1001</a>
 <a href="#1002" id="1002">1002</a>
-<a href="#1003" id="1003">1003</a>
-<a href="#1004" id="1004">1004</a>
-<a href="#1005" id="1005">1005</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2017,2018 Sebastian Dröge &lt;sebastian@centricular.com&gt;
 //
 // Licensed under the MIT license, see the LICENSE file or &lt;http://opensource.org/licenses/MIT&gt;
@@ -1565,14 +1562,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1588,15 +1585,12 @@
         <span class="kw">let </span>slice: [u16; <span class="number">8</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>];
         <span class="kw">let </span>bytes = slice.as_byte_slice();
 
-        <span class="kw">let </span>error = (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;().unwrap_err().to_string();
+        <span class="kw">let </span>error = (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;().unwrap_err().to_string();
         <span class="macro">assert_eq!</span>(
             error,
             <span class="string">&quot;cannot cast a &amp;[u8] into a &amp;[u16]: the slice&#39;s address is not divisible by the minimum alignment (2) of u16&quot;</span>,
         );
-        <span class="kw">let </span>error = (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>])
-            .as_slice_of::&lt;u16&gt;()
-            .unwrap_err()
-            .to_string();
+        <span class="kw">let </span>error = (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;().unwrap_err().to_string();
         <span class="macro">assert_eq!</span>(
             error,
             <span class="string">&quot;cannot cast a &amp;[u8] into a &amp;[u16]: the size (15) of the slice is not divisible by the size (2) of u16&quot;
@@ -1615,14 +1609,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u32&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u32&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u32&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u32&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u32&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u32&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u32&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1644,14 +1638,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u64&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u64&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u64&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u64&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u64&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u64&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u64&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1691,14 +1685,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;usize&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;usize&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;usize&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;usize&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">3</span>]).as_slice_of::&lt;usize&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">3</span>]).as_slice_of::&lt;usize&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;usize&quot;</span>,
                 src_slice_size: <span class="number">3</span>,
@@ -1732,14 +1726,14 @@
         };
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;f32&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;f32&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;f32&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;f32&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;f32&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;f32&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;f32&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1773,14 +1767,14 @@
         };
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;f64&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;f64&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;f64&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;f64&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;f64&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;f64&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;f64&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1803,14 +1797,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1833,14 +1827,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1864,14 +1858,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1894,14 +1888,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1925,14 +1919,14 @@
         }
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">1</span>..]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;u16&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;mut </span>bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">15</span>]).as_mut_slice_of::&lt;u16&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;u16&quot;</span>,
                 src_slice_size: <span class="number">15</span>,
@@ -1989,14 +1983,14 @@
         };
 
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">1</span>..]).as_slice_of::&lt;[u16; <span class="number">3</span>]&gt;(),
+            (bytes[<span class="number">1</span>..]).as_slice_of::&lt;[u16; <span class="number">3</span>]&gt;(),
             <span class="prelude-val">Err</span>(Error::AlignmentMismatch {
                 dst_type: <span class="string">&quot;[u16 ; N]&quot;</span>,
                 dst_minimum_alignment: mem::align_of::&lt;[u16; <span class="number">3</span>]&gt;()
             })
         );
         <span class="macro">assert_eq!</span>(
-            (<span class="kw-2">&amp;</span>bytes[<span class="number">0</span>..<span class="number">4</span>]).as_slice_of::&lt;[u16; <span class="number">3</span>]&gt;(),
+            (bytes[<span class="number">0</span>..<span class="number">4</span>]).as_slice_of::&lt;[u16; <span class="number">3</span>]&gt;(),
             <span class="prelude-val">Err</span>(Error::LengthMismatch {
                 dst_type: <span class="string">&quot;[u16 ; N]&quot;</span>,
                 src_slice_size: <span class="number">4</span>,

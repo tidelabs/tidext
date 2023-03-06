@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.5.0/src/scale_impls/encode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scale_value/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.6.0/src/scale_impls/encode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scale_value/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -803,33 +803,6 @@
 <a href="#803" id="803">803</a>
 <a href="#804" id="804">804</a>
 <a href="#805" id="805">805</a>
-<a href="#806" id="806">806</a>
-<a href="#807" id="807">807</a>
-<a href="#808" id="808">808</a>
-<a href="#809" id="809">809</a>
-<a href="#810" id="810">810</a>
-<a href="#811" id="811">811</a>
-<a href="#812" id="812">812</a>
-<a href="#813" id="813">813</a>
-<a href="#814" id="814">814</a>
-<a href="#815" id="815">815</a>
-<a href="#816" id="816">816</a>
-<a href="#817" id="817">817</a>
-<a href="#818" id="818">818</a>
-<a href="#819" id="819">819</a>
-<a href="#820" id="820">820</a>
-<a href="#821" id="821">821</a>
-<a href="#822" id="822">822</a>
-<a href="#823" id="823">823</a>
-<a href="#824" id="824">824</a>
-<a href="#825" id="825">825</a>
-<a href="#826" id="826">826</a>
-<a href="#827" id="827">827</a>
-<a href="#828" id="828">828</a>
-<a href="#829" id="829">829</a>
-<a href="#830" id="830">830</a>
-<a href="#831" id="831">831</a>
-<a href="#832" id="832">832</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2022 Parity Technologies (UK) Ltd. (admin@parity.io)
 // This file is a part of the scale-value crate.
 //
@@ -845,16 +818,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-</span><span class="kw">use super</span>::{
-	bit_sequence::{get_bitsequence_details, BitOrderTy, BitSequenceError, BitStoreTy},
-	type_id::TypeId,
-	ScaleTypeDef <span class="kw">as </span>TypeDef,
-};
+</span><span class="kw">use super</span>::{type_id::TypeId, ScaleTypeDef <span class="kw">as </span>TypeDef};
 <span class="kw">use </span><span class="kw">crate</span>::value::{Composite, Primitive, Value, ValueDef, Variant};
-<span class="kw">use </span>bitvec::{
-	order::{Lsb0, Msb0},
-	vec::BitVec,
-};
 <span class="kw">use </span>codec::{Compact, Encode};
 <span class="kw">use </span>scale_info::{
 	form::PortableForm, Field, PortableRegistry, TypeDefArray, TypeDefBitSequence, TypeDefCompact,
@@ -862,7 +827,7 @@
 };
 
 <span class="doccomment">/// An error encoding a [`Value`] into SCALE bytes.
-</span><span class="attr">#[derive(Debug, Clone, thiserror::Error, PartialEq)]
+</span><span class="attr">#[derive(Debug, Clone, thiserror::Error, PartialEq, Eq)]
 </span><span class="kw">pub enum </span>EncodeError&lt;T&gt; {
 	<span class="doccomment">/// The composite type we&#39;re trying to encode is the wrong length for the type we&#39;re trying to encode it into.
 	</span><span class="attr">#[error(<span class="string">&quot;Composite type is the wrong length; expected length is {expected_len}, but got {}&quot;</span>, actual.len())]
@@ -908,6 +873,9 @@
 	</span><span class="attr">#[error(<span class="string">&quot;The type {0} cannot be compact encoded&quot;</span>)]
 	</span>CannotCompactEncode(TypeId),
 }
+
+<span class="doccomment">/// An error that can occur attempting to encode a bit sequence.
+</span><span class="kw">pub type </span>BitSequenceError = scale_bits::scale::format::FromMetadataError;
 
 <span class="doccomment">/// Attempt to SCALE Encode a Value according to the [`TypeId`] and
 /// [`PortableRegistry`] provided.
@@ -1384,11 +1352,17 @@
 	types: <span class="kw-2">&amp;</span>PortableRegistry,
 	bytes: <span class="kw-2">&amp;mut </span>Vec&lt;u8&gt;,
 ) -&gt; <span class="prelude-ty">Result</span>&lt;(), EncodeError&lt;T&gt;&gt; {
-	<span class="comment">// First, try to convert whatever we have into a vec of bools:
-	</span><span class="kw">let </span>bools: Vec&lt;bool&gt; = <span class="kw">match </span><span class="kw-2">&amp;</span>value.value {
-		ValueDef::BitSequence(bits) =&gt; bits.iter().by_vals().collect(),
+	<span class="kw">let </span>format =
+		scale_bits::Format::from_metadata(ty, types).map_err(EncodeError::BitSequenceError)<span class="question-mark">?</span>;
+
+	<span class="kw">match </span><span class="kw-2">&amp;</span>value.value {
+		ValueDef::BitSequence(bits) =&gt; {
+			<span class="comment">// Bits can be encoded easily enough:
+			</span>scale_bits::encode_using_format_to(bits.iter(), format, bytes)
+		}
 		ValueDef::Composite(Composite::Unnamed(vals)) =&gt; {
-			<span class="kw">let </span><span class="kw-2">mut </span>bools = Vec::with_capacity(vals.len());
+			<span class="comment">// For composite bools we need to find and store them first:
+			</span><span class="kw">let </span><span class="kw-2">mut </span>bools = Vec::with_capacity(vals.len());
 			<span class="kw">for </span>val <span class="kw">in </span>vals {
 				<span class="kw">match </span>val.value {
 					ValueDef::Primitive(Primitive::Bool(b)) =&gt; bools.push(b),
@@ -1400,38 +1374,11 @@
 					}
 				}
 			}
-			bools
+			<span class="comment">// And then we can encode them:
+			</span>scale_bits::encode_using_format_to(bools.into_iter(), format, bytes)
 		}
 		<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(EncodeError::WrongShape { actual: value.clone(), expected: type_id }),
 	};
-
-	<span class="comment">// next, turn those bools into a bit sequence of the expected shape.
-	</span><span class="kw">match </span>get_bitsequence_details(ty, types).map_err(EncodeError::BitSequenceError)<span class="question-mark">? </span>{
-		(BitStoreTy::U8, BitOrderTy::Lsb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u8, Lsb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U16, BitOrderTy::Lsb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u16, Lsb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U32, BitOrderTy::Lsb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u32, Lsb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U64, BitOrderTy::Lsb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u64, Lsb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U8, BitOrderTy::Msb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u8, Msb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U16, BitOrderTy::Msb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u16, Msb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U32, BitOrderTy::Msb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u32, Msb0&gt;&gt;().encode_to(bytes);
-		}
-		(BitStoreTy::U64, BitOrderTy::Msb0) =&gt; {
-			bools.into_iter().collect::&lt;BitVec&lt;u64, Msb0&gt;&gt;().encode_to(bytes);
-		}
-	}
 
 	<span class="prelude-val">Ok</span>(())
 }
@@ -1598,27 +1545,26 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>can_encode_bitvecs() {
-		<span class="kw">use </span>bitvec::{
-			bitvec,
-			order::{Lsb0, Msb0},
-		};
+		<span class="kw">use </span>scale_bits::bits;
 
-		<span class="kw">let </span>bits = <span class="macro">bitvec!</span>[u8, Lsb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>];
-		<span class="kw">let </span>value = Value::bit_sequence(bits);
-
-		<span class="comment">// Support encoding our Value to the different underlying formats that bitvec can have:
-
-		</span>assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u8, Lsb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u8, Msb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u16, Lsb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u16, Msb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u32, Lsb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u32, Msb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-
-		assert_can_encode_to_type(value.clone(), <span class="macro">bitvec!</span>[u64, Lsb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
-		assert_can_encode_to_type(value, <span class="macro">bitvec!</span>[u64, Msb0; <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]);
+		<span class="comment">// We have more thorough tests of bitvec encoding in scale-bits.
+		// Here we just do a basic confirmation that bool composites or
+		// bitsequences encode to the bits we&#39;d expect.
+		</span>assert_can_encode_to_type(
+			Value::bit_sequence(<span class="macro">bits!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]),
+			<span class="macro">bits!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],
+		);
+		assert_can_encode_to_type(
+			Value::unnamed_composite(<span class="macro">vec!</span>[
+				Value::bool(<span class="bool-val">false</span>),
+				Value::bool(<span class="bool-val">true</span>),
+				Value::bool(<span class="bool-val">true</span>),
+				Value::bool(<span class="bool-val">false</span>),
+				Value::bool(<span class="bool-val">false</span>),
+				Value::bool(<span class="bool-val">true</span>),
+			]),
+			<span class="macro">bits!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>],
+		);
 	}
 
 	<span class="attr">#[test]

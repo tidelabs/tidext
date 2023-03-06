@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.5.1/src/asn1/printable_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>printable_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../der/index.html">
-                        <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.6.1/src/asn1/printable_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>printable_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../der/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -167,35 +167,23 @@
 <a href="#166" id="166">166</a>
 <a href="#167" id="167">167</a>
 <a href="#168" id="168">168</a>
-<a href="#169" id="169">169</a>
-<a href="#170" id="170">170</a>
-<a href="#171" id="171">171</a>
-<a href="#172" id="172">172</a>
-<a href="#173" id="173">173</a>
-<a href="#174" id="174">174</a>
-<a href="#175" id="175">175</a>
-<a href="#176" id="176">176</a>
-<a href="#177" id="177">177</a>
-<a href="#178" id="178">178</a>
-<a href="#179" id="179">179</a>
-<a href="#180" id="180">180</a>
-<a href="#181" id="181">181</a>
-<a href="#182" id="182">182</a>
-<a href="#183" id="183">183</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ASN.1 `PrintableString` support.
 
 </span><span class="kw">use crate</span>::{
-    asn1::Any, ByteSlice, DecodeValue, Decoder, EncodeValue, Encoder, Error, FixedTag, Length,
-    OrdIsValueOrd, <span class="prelude-ty">Result</span>, StrSlice, Tag,
+    asn1::AnyRef, ord::OrdIsValueOrd, ByteSlice, DecodeValue, EncodeValue, Error, FixedTag, Header,
+    Length, Reader, <span class="prelude-ty">Result</span>, StrSlice, Tag, Writer,
 };
-<span class="kw">use </span>core::{fmt, str};
+<span class="kw">use </span>core::{fmt, ops::Deref, str};
 
 <span class="doccomment">/// ASN.1 `PrintableString` type.
 ///
-/// Supports a subset the ASCII character set (desribed below).
+/// Supports a subset the ASCII character set (described below).
 ///
-/// For UTF-8, use [`Utf8String`][`crate::asn1::Utf8String`] instead. For the
-/// full ASCII character set, use [`Ia5String`][`crate::asn1::Ia5String`].
+/// For UTF-8, use [`Utf8StringRef`][`crate::asn1::Utf8StringRef`] instead.
+/// For the full ASCII character set, use
+/// [`Ia5StringRef`][`crate::asn1::Ia5StringRef`].
+///
+/// This is a zero-copy reference type which borrows from the input data.
 ///
 /// # Supported characters
 ///
@@ -217,12 +205,12 @@
 /// - `=`
 /// - `?`
 </span><span class="attr">#[derive(Copy, Clone, Eq, PartialEq, PartialOrd, Ord)]
-</span><span class="kw">pub struct </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+</span><span class="kw">pub struct </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Inner value
     </span>inner: StrSlice&lt;<span class="lifetime">&#39;a</span>&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="doccomment">/// Create a new ASN.1 `PrintableString`.
     </span><span class="kw">pub fn </span>new&lt;T&gt;(input: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt;
     <span class="kw">where
@@ -230,7 +218,7 @@
     {
         <span class="kw">let </span>input = input.as_ref();
 
-        <span class="comment">// Validate all characters are within PrintedString&#39;s allowed set
+        <span class="comment">// Validate all characters are within PrintableString&#39;s allowed set
         </span><span class="kw">for </span><span class="kw-2">&amp;</span>c <span class="kw">in </span>input.iter() {
             <span class="kw">match </span>c {
                 <span class="string">b&#39;A&#39;</span>..=<span class="string">b&#39;Z&#39;
@@ -256,95 +244,77 @@
             .map(|inner| <span class="self">Self </span>{ inner })
             .map_err(|<span class="kw">_</span>| <span class="self">Self</span>::TAG.value_error())
     }
+}
 
-    <span class="doccomment">/// Borrow the string as a `str`.
-    </span><span class="kw">pub fn </span>as_str(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str {
-        <span class="self">self</span>.inner.as_str()
-    }
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Deref <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">type </span>Target = StrSlice&lt;<span class="lifetime">&#39;a</span>&gt;;
 
-    <span class="doccomment">/// Borrow the string as bytes.
-    </span><span class="kw">pub fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
-        <span class="self">self</span>.inner.as_bytes()
-    }
-
-    <span class="doccomment">/// Get the length of the inner byte slice.
-    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Length {
-        <span class="self">self</span>.inner.len()
-    }
-
-    <span class="doccomment">/// Is the inner string empty?
-    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.inner.is_empty()
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.inner
     }
 }
 
-<span class="kw">impl </span>AsRef&lt;str&gt; <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;_</span>&gt; {
+<span class="kw">impl </span>AsRef&lt;str&gt; <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;_</span>&gt; {
     <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
         <span class="self">self</span>.as_str()
     }
 }
 
-<span class="kw">impl </span>AsRef&lt;[u8]&gt; <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;_</span>&gt; {
+<span class="kw">impl </span>AsRef&lt;[u8]&gt; <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;_</span>&gt; {
     <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
         <span class="self">self</span>.as_bytes()
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; DecodeValue&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>decode_value(decoder: <span class="kw-2">&amp;mut </span>Decoder&lt;<span class="lifetime">&#39;a</span>&gt;, length: Length) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="self">Self</span>::new(ByteSlice::decode_value(decoder, length)<span class="question-mark">?</span>.as_bytes())
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; DecodeValue&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>decode_value&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R, header: Header) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="self">Self</span>::new(ByteSlice::decode_value(reader, header)<span class="question-mark">?</span>.as_slice())
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; EncodeValue <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; EncodeValue <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">fn </span>value_len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Length&gt; {
         <span class="self">self</span>.inner.value_len()
     }
 
-    <span class="kw">fn </span>encode_value(<span class="kw-2">&amp;</span><span class="self">self</span>, encoder: <span class="kw-2">&amp;mut </span>Encoder&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
-        <span class="self">self</span>.inner.encode_value(encoder)
+    <span class="kw">fn </span>encode_value(<span class="kw-2">&amp;</span><span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Writer) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+        <span class="self">self</span>.inner.encode_value(writer)
     }
 }
 
-<span class="kw">impl </span>FixedTag <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;_</span>&gt; {
+<span class="kw">impl </span>FixedTag <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;_</span>&gt; {
     <span class="kw">const </span>TAG: Tag = Tag::PrintableString;
 }
 
-<span class="kw">impl </span>OrdIsValueOrd <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;_</span>&gt; {}
+<span class="kw">impl </span>OrdIsValueOrd <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;_</span>&gt; {}
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>from(value: <span class="kw-2">&amp;</span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>from(value: <span class="kw-2">&amp;</span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
         <span class="kw-2">*</span>value
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; TryFrom&lt;Any&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; TryFrom&lt;AnyRef&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">type </span>Error = Error;
 
-    <span class="kw">fn </span>try_from(any: Any&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
+    <span class="kw">fn </span>try_from(any: AnyRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt;&gt; {
         any.decode_into()
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>Any&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>from(printable_string: PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; Any&lt;<span class="lifetime">&#39;a</span>&gt; {
-        Any::from_tag_and_value(Tag::PrintableString, printable_string.inner.into())
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>AnyRef&lt;<span class="lifetime">&#39;a</span>&gt; {
+    <span class="kw">fn </span>from(printable_string: PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; AnyRef&lt;<span class="lifetime">&#39;a</span>&gt; {
+        AnyRef::from_tag_and_value(Tag::PrintableString, printable_string.inner.into())
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
-    <span class="kw">fn </span>from(printable_string: PrintableString&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] {
-        printable_string.as_bytes()
-    }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; fmt::Display <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; fmt::Display <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
         f.write_str(<span class="self">self</span>.as_str())
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; fmt::Debug <span class="kw">for </span>PrintableString&lt;<span class="lifetime">&#39;a</span>&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; fmt::Debug <span class="kw">for </span>PrintableStringRef&lt;<span class="lifetime">&#39;a</span>&gt; {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
         <span class="macro">write!</span>(f, <span class="string">&quot;PrintableString({:?})&quot;</span>, <span class="self">self</span>.as_str())
     }
@@ -352,8 +322,8 @@
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
-    <span class="kw">use </span><span class="kw">super</span>::PrintableString;
-    <span class="kw">use </span><span class="kw">crate</span>::Decodable;
+    <span class="kw">use </span><span class="kw">super</span>::PrintableStringRef;
+    <span class="kw">use </span><span class="kw">crate</span>::Decode;
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>parse_bytes() {
@@ -361,7 +331,7 @@
             <span class="number">0x13</span>, <span class="number">0x0b</span>, <span class="number">0x54</span>, <span class="number">0x65</span>, <span class="number">0x73</span>, <span class="number">0x74</span>, <span class="number">0x20</span>, <span class="number">0x55</span>, <span class="number">0x73</span>, <span class="number">0x65</span>, <span class="number">0x72</span>, <span class="number">0x20</span>, <span class="number">0x31</span>,
         ];
 
-        <span class="kw">let </span>printable_string = PrintableString::from_der(example_bytes).unwrap();
+        <span class="kw">let </span>printable_string = PrintableStringRef::from_der(example_bytes).unwrap();
         <span class="macro">assert_eq!</span>(printable_string.as_str(), <span class="string">&quot;Test User 1&quot;</span>);
     }
 }

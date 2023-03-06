@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.13.4/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.14.8/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -420,28 +420,30 @@
 <a href="#419" id="419">419</a>
 <a href="#420" id="420">420</a>
 <a href="#421" id="421">421</a>
-<a href="#422" id="422">422</a>
-<a href="#423" id="423">423</a>
-<a href="#424" id="424">424</a>
-<a href="#425" id="425">425</a>
-<a href="#426" id="426">426</a>
-<a href="#427" id="427">427</a>
-<a href="#428" id="428">428</a>
-<a href="#429" id="429">429</a>
-<a href="#430" id="430">430</a>
-<a href="#431" id="431">431</a>
-<a href="#432" id="432">432</a>
-<a href="#433" id="433">433</a>
-<a href="#434" id="434">434</a>
-<a href="#435" id="435">435</a>
-<a href="#436" id="436">436</a>
-<a href="#437" id="437">437</a>
-<a href="#438" id="438">438</a>
-<a href="#439" id="439">439</a>
-<a href="#440" id="440">440</a>
-<a href="#441" id="441">441</a>
-<a href="#442" id="442">442</a>
-</pre><pre class="rust"><code><span class="attr">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+</pre><pre class="rust"><code><span class="attr">#![no_std]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+#![doc(
+    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;</span>,
+    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;
+</span>)]
+#![forbid(unsafe_code)]
+#![warn(
+    clippy::cast_lossless,
+    clippy::cast_possible_truncation,
+    clippy::cast_possible_wrap,
+    clippy::cast_precision_loss,
+    clippy::cast_sign_loss,
+    clippy::checked_conversions,
+    clippy::implicit_saturating_sub,
+    clippy::panic,
+    clippy::panic_in_result_fn,
+    clippy::unwrap_used,
+    missing_docs,
+    rust_2018_idioms,
+    unused_lifetimes,
+    unused_qualifications
+)]
 
 </span><span class="doccomment">//! ## `serde` support
 //!
@@ -474,17 +476,7 @@
 //! [`ring-compat`]: https://docs.rs/ring-compat
 //! [*ring*]: https://docs.rs/ring
 
-</span><span class="attr">#![no_std]
-#![cfg_attr(docsrs, feature(doc_cfg))]
-#![forbid(unsafe_code, clippy::unwrap_used)]
-#![warn(missing_docs, rust_2018_idioms)]
-#![doc(
-    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;</span>,
-    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg&quot;</span>,
-    html_root_url = <span class="string">&quot;https://docs.rs/ecdsa/0.13.4&quot;
-</span>)]
-
-#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
 </span><span class="kw">extern crate </span>alloc;
 
 <span class="kw">mod </span>recovery;
@@ -543,11 +535,7 @@
 };
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
-</span><span class="kw">use </span>elliptic_curve::serde::{ser, Serialize};
-
-<span class="comment">// TODO(tarcieri): support deserialization with the `arithmetic` feature disabled
-</span><span class="attr">#[cfg(all(feature = <span class="string">&quot;arithmetic&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))]
-</span><span class="kw">use </span>elliptic_curve::serde::{de, Deserialize};
+</span><span class="kw">use </span>serdect::serde::{de, ser, Deserialize, Serialize};
 
 <span class="doccomment">/// Size of a fixed sized signature for the given elliptic curve.
 </span><span class="kw">pub type </span>SignatureSize&lt;C&gt; = &lt;FieldSize&lt;C&gt; <span class="kw">as </span>Add&gt;::Output;
@@ -713,12 +701,13 @@
     SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
 {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
-        <span class="macro">write!</span>(
-            f,
-            <span class="string">&quot;ecdsa::Signature&lt;{:?}&gt;({:?})&quot;</span>,
-            C::default(),
-            <span class="self">self</span>.as_ref()
-        )
+        <span class="macro">write!</span>(f, <span class="string">&quot;ecdsa::Signature&lt;{:?}&gt;(&quot;</span>, C::default())<span class="question-mark">?</span>;
+
+        <span class="kw">for </span><span class="kw-2">&amp;</span>byte <span class="kw">in </span><span class="self">self</span>.as_ref() {
+            <span class="macro">write!</span>(f, <span class="string">&quot;{:02X}&quot;</span>, byte)<span class="question-mark">?</span>;
+        }
+
+        <span class="macro">write!</span>(f, <span class="string">&quot;)&quot;</span>)
     }
 }
 
@@ -798,7 +787,8 @@
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new());
         }
 
-        <span class="kw">if </span>!hex
+        <span class="comment">// This check is mainly to ensure `hex.split_at` below won&#39;t panic
+        </span><span class="kw">if </span>!hex
             .as_bytes()
             .iter()
             .all(|<span class="kw-2">&amp;</span>byte| <span class="macro">matches!</span>(byte, <span class="string">b&#39;0&#39;</span>..=<span class="string">b&#39;9&#39; </span>| <span class="string">b&#39;a&#39;</span>..=<span class="string">b&#39;z&#39; </span>| <span class="string">b&#39;A&#39;</span>..=<span class="string">b&#39;Z&#39;</span>))
@@ -827,60 +817,28 @@
     </span>C: PrimeCurve,
     SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
 {
-    <span class="attr">#[cfg(not(feature = <span class="string">&quot;alloc&quot;</span>))]
-    </span><span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; core::result::Result&lt;S::Ok, S::Error&gt;
+    <span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; core::result::Result&lt;S::Ok, S::Error&gt;
     <span class="kw">where
         </span>S: ser::Serializer,
     {
-        <span class="self">self</span>.as_ref().serialize(serializer)
-    }
-
-    <span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
-    </span><span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; core::result::Result&lt;S::Ok, S::Error&gt;
-    <span class="kw">where
-        </span>S: ser::Serializer,
-    {
-        <span class="kw">use </span>alloc::string::ToString;
-        <span class="kw">if </span>serializer.is_human_readable() {
-            <span class="self">self</span>.to_string().serialize(serializer)
-        } <span class="kw">else </span>{
-            <span class="self">self</span>.as_ref().serialize(serializer)
-        }
+        serdect::array::serialize_hex_upper_or_bin(<span class="kw-2">&amp;</span><span class="self">self</span>.bytes, serializer)
     }
 }
 
-<span class="comment">// TODO(tarcieri): support deserialization with the `arithmetic` feature disabled
-</span><span class="attr">#[cfg(all(feature = <span class="string">&quot;arithmetic&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))]
-#[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;arithmetic&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))))]
+<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;serde&quot;</span>)))]
 </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, C&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>Signature&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + ScalarArithmetic,
+    </span>C: PrimeCurve,
     SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
 {
-    <span class="attr">#[cfg(not(feature = <span class="string">&quot;alloc&quot;</span>))]
-    </span><span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; core::result::Result&lt;<span class="self">Self</span>, D::Error&gt;
+    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; core::result::Result&lt;<span class="self">Self</span>, D::Error&gt;
     <span class="kw">where
         </span>D: de::Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
     {
-        <span class="kw">use </span>de::Error;
-        &lt;<span class="kw-2">&amp;</span>[u8]&gt;::deserialize(deserializer)
-            .and_then(|bytes| <span class="self">Self</span>::try_from(bytes).map_err(D::Error::custom))
-    }
-
-    <span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
-    </span><span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; core::result::Result&lt;<span class="self">Self</span>, D::Error&gt;
-    <span class="kw">where
-        </span>D: de::Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
-    {
-        <span class="kw">use </span>de::Error;
-        <span class="kw">if </span>deserializer.is_human_readable() {
-            &lt;<span class="kw-2">&amp;</span>str&gt;::deserialize(deserializer)<span class="question-mark">?
-                </span>.parse()
-                .map_err(D::Error::custom)
-        } <span class="kw">else </span>{
-            &lt;<span class="kw-2">&amp;</span>[u8]&gt;::deserialize(deserializer)
-                .and_then(|bytes| <span class="self">Self</span>::try_from(bytes).map_err(D::Error::custom))
-        }
+        <span class="kw">let </span><span class="kw-2">mut </span>bytes = SignatureBytes::&lt;C&gt;::default();
+        serdect::array::deserialize_hex_or_bin(<span class="kw-2">&amp;mut </span>bytes, deserializer)<span class="question-mark">?</span>;
+        <span class="self">Self</span>::try_from(bytes.as_slice()).map_err(de::Error::custom)
     }
 }
 </code></pre></div>

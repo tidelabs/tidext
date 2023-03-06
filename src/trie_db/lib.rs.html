@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.23.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.25.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -511,6 +511,233 @@
 <a href="#511" id="511">511</a>
 <a href="#512" id="512">512</a>
 <a href="#513" id="513">513</a>
+<a href="#514" id="514">514</a>
+<a href="#515" id="515">515</a>
+<a href="#516" id="516">516</a>
+<a href="#517" id="517">517</a>
+<a href="#518" id="518">518</a>
+<a href="#519" id="519">519</a>
+<a href="#520" id="520">520</a>
+<a href="#521" id="521">521</a>
+<a href="#522" id="522">522</a>
+<a href="#523" id="523">523</a>
+<a href="#524" id="524">524</a>
+<a href="#525" id="525">525</a>
+<a href="#526" id="526">526</a>
+<a href="#527" id="527">527</a>
+<a href="#528" id="528">528</a>
+<a href="#529" id="529">529</a>
+<a href="#530" id="530">530</a>
+<a href="#531" id="531">531</a>
+<a href="#532" id="532">532</a>
+<a href="#533" id="533">533</a>
+<a href="#534" id="534">534</a>
+<a href="#535" id="535">535</a>
+<a href="#536" id="536">536</a>
+<a href="#537" id="537">537</a>
+<a href="#538" id="538">538</a>
+<a href="#539" id="539">539</a>
+<a href="#540" id="540">540</a>
+<a href="#541" id="541">541</a>
+<a href="#542" id="542">542</a>
+<a href="#543" id="543">543</a>
+<a href="#544" id="544">544</a>
+<a href="#545" id="545">545</a>
+<a href="#546" id="546">546</a>
+<a href="#547" id="547">547</a>
+<a href="#548" id="548">548</a>
+<a href="#549" id="549">549</a>
+<a href="#550" id="550">550</a>
+<a href="#551" id="551">551</a>
+<a href="#552" id="552">552</a>
+<a href="#553" id="553">553</a>
+<a href="#554" id="554">554</a>
+<a href="#555" id="555">555</a>
+<a href="#556" id="556">556</a>
+<a href="#557" id="557">557</a>
+<a href="#558" id="558">558</a>
+<a href="#559" id="559">559</a>
+<a href="#560" id="560">560</a>
+<a href="#561" id="561">561</a>
+<a href="#562" id="562">562</a>
+<a href="#563" id="563">563</a>
+<a href="#564" id="564">564</a>
+<a href="#565" id="565">565</a>
+<a href="#566" id="566">566</a>
+<a href="#567" id="567">567</a>
+<a href="#568" id="568">568</a>
+<a href="#569" id="569">569</a>
+<a href="#570" id="570">570</a>
+<a href="#571" id="571">571</a>
+<a href="#572" id="572">572</a>
+<a href="#573" id="573">573</a>
+<a href="#574" id="574">574</a>
+<a href="#575" id="575">575</a>
+<a href="#576" id="576">576</a>
+<a href="#577" id="577">577</a>
+<a href="#578" id="578">578</a>
+<a href="#579" id="579">579</a>
+<a href="#580" id="580">580</a>
+<a href="#581" id="581">581</a>
+<a href="#582" id="582">582</a>
+<a href="#583" id="583">583</a>
+<a href="#584" id="584">584</a>
+<a href="#585" id="585">585</a>
+<a href="#586" id="586">586</a>
+<a href="#587" id="587">587</a>
+<a href="#588" id="588">588</a>
+<a href="#589" id="589">589</a>
+<a href="#590" id="590">590</a>
+<a href="#591" id="591">591</a>
+<a href="#592" id="592">592</a>
+<a href="#593" id="593">593</a>
+<a href="#594" id="594">594</a>
+<a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+<a href="#598" id="598">598</a>
+<a href="#599" id="599">599</a>
+<a href="#600" id="600">600</a>
+<a href="#601" id="601">601</a>
+<a href="#602" id="602">602</a>
+<a href="#603" id="603">603</a>
+<a href="#604" id="604">604</a>
+<a href="#605" id="605">605</a>
+<a href="#606" id="606">606</a>
+<a href="#607" id="607">607</a>
+<a href="#608" id="608">608</a>
+<a href="#609" id="609">609</a>
+<a href="#610" id="610">610</a>
+<a href="#611" id="611">611</a>
+<a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
+<a href="#615" id="615">615</a>
+<a href="#616" id="616">616</a>
+<a href="#617" id="617">617</a>
+<a href="#618" id="618">618</a>
+<a href="#619" id="619">619</a>
+<a href="#620" id="620">620</a>
+<a href="#621" id="621">621</a>
+<a href="#622" id="622">622</a>
+<a href="#623" id="623">623</a>
+<a href="#624" id="624">624</a>
+<a href="#625" id="625">625</a>
+<a href="#626" id="626">626</a>
+<a href="#627" id="627">627</a>
+<a href="#628" id="628">628</a>
+<a href="#629" id="629">629</a>
+<a href="#630" id="630">630</a>
+<a href="#631" id="631">631</a>
+<a href="#632" id="632">632</a>
+<a href="#633" id="633">633</a>
+<a href="#634" id="634">634</a>
+<a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
+<a href="#676" id="676">676</a>
+<a href="#677" id="677">677</a>
+<a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
+<a href="#686" id="686">686</a>
+<a href="#687" id="687">687</a>
+<a href="#688" id="688">688</a>
+<a href="#689" id="689">689</a>
+<a href="#690" id="690">690</a>
+<a href="#691" id="691">691</a>
+<a href="#692" id="692">692</a>
+<a href="#693" id="693">693</a>
+<a href="#694" id="694">694</a>
+<a href="#695" id="695">695</a>
+<a href="#696" id="696">696</a>
+<a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
+<a href="#704" id="704">704</a>
+<a href="#705" id="705">705</a>
+<a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
+<a href="#713" id="713">713</a>
+<a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2017, 2021 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -535,14 +762,14 @@
 </span><span class="kw">mod </span>rstd {
 	<span class="kw">pub use </span>std::{
 		borrow, boxed, cmp, collections::VecDeque, convert, error::Error, fmt, hash, iter, marker,
-		mem, ops, rc, result, vec,
+		mem, ops, rc, result, sync, vec,
 	};
 }
 
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">mod </span>rstd {
-	<span class="kw">pub use </span>alloc::{boxed, collections::VecDeque, rc, vec};
-	<span class="kw">pub use </span>core::{borrow, cmp, convert, fmt, hash, iter, marker, mem, ops, result};
+	<span class="kw">pub use </span>alloc::{borrow, boxed, collections::VecDeque, rc, sync, vec};
+	<span class="kw">pub use </span>core::{cmp, convert, fmt, hash, iter, marker, mem, ops, result};
 	<span class="kw">pub trait </span>Error {}
 	<span class="kw">impl</span>&lt;T&gt; Error <span class="kw">for </span>T {}
 }
@@ -552,6 +779,7 @@
 
 <span class="kw">use </span><span class="self">self</span>::rstd::{boxed::Box, vec::Vec};
 <span class="kw">use </span>hash_db::MaybeDebug;
+<span class="kw">use </span>node::NodeOwned;
 
 <span class="kw">pub mod </span>node;
 <span class="kw">pub mod </span>proof;
@@ -575,15 +803,15 @@
 	fatdbmut::FatDBMut,
 	lookup::Lookup,
 	nibble::{nibble_ops, NibbleSlice, NibbleVec},
-	recorder::{Record, Recorder},
+	recorder::Recorder,
 	sectriedb::SecTrieDB,
 	sectriedbmut::SecTrieDBMut,
-	triedb::{TrieDB, TrieDBIterator, TrieDBKeyIterator},
-	triedbmut::{ChildReference, TrieDBMut, Value},
+	triedb::{TrieDB, TrieDBBuilder, TrieDBIterator, TrieDBKeyIterator},
+	triedbmut::{ChildReference, TrieDBMut, TrieDBMutBuilder, Value},
 };
 <span class="kw">pub use crate</span>::{
 	iter_build::{trie_visit, ProcessEncodedNode, TrieBuilder, TrieRoot, TrieRootUnhashed},
-	iterator::TrieDBNodeIterator,
+	iterator::{TrieDBNodeIterator, TrieDBRawIterator},
 	node_codec::{NodeCodec, Partial},
 	trie_codec::{decode_compact, decode_compact_from_iter, encode_compact},
 };
@@ -654,35 +882,98 @@
 </span><span class="kw">pub type </span><span class="prelude-ty">Result</span>&lt;T, H, E&gt; = <span class="kw">crate</span>::rstd::result::Result&lt;T, Box&lt;TrieError&lt;H, E&gt;&gt;&gt;;
 
 <span class="doccomment">/// Trie-Item type used for iterators over trie data.
-</span><span class="kw">pub type </span>TrieItem&lt;<span class="lifetime">&#39;a</span>, U, E&gt; = <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, DBValue), U, E&gt;;
+</span><span class="kw">pub type </span>TrieItem&lt;U, E&gt; = <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, DBValue), U, E&gt;;
 
 <span class="doccomment">/// Trie-Item type used for iterators over trie key only.
-</span><span class="kw">pub type </span>TrieKeyItem&lt;<span class="lifetime">&#39;a</span>, U, E&gt; = <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, U, E&gt;;
+</span><span class="kw">pub type </span>TrieKeyItem&lt;U, E&gt; = <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, U, E&gt;;
 
 <span class="doccomment">/// Description of what kind of query will be made to the trie.
-///
-/// This is implemented for any &amp;mut recorder (where the query will return
-/// a DBValue), any function taking raw bytes (where no recording will be made),
-/// or any tuple of (&amp;mut Recorder, FnOnce(&amp;[u8]))
 </span><span class="kw">pub trait </span>Query&lt;H: Hasher&gt; {
 	<span class="doccomment">/// Output item.
 	</span><span class="kw">type </span>Item;
 
 	<span class="doccomment">/// Decode a byte-slice into the desired item.
 	</span><span class="kw">fn </span>decode(<span class="self">self</span>, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="self">Self</span>::Item;
-
-	<span class="doccomment">/// Record that a node has been passed through.
-	</span><span class="kw">fn </span>record(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _hash: <span class="kw-2">&amp;</span>H::Out, _data: <span class="kw-2">&amp;</span>[u8], _depth: u32) {}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H: Hasher&gt; Query&lt;H&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Recorder&lt;H::Out&gt; {
-	<span class="kw">type </span>Item = DBValue;
-	<span class="kw">fn </span>decode(<span class="self">self</span>, value: <span class="kw-2">&amp;</span>[u8]) -&gt; DBValue {
-		value.to_vec()
+<span class="doccomment">/// Used to report the trie access to the [`TrieRecorder`].
+///
+/// As the trie can use a [`TrieCache`], there are multiple kinds of accesses.
+/// If a cache is used, [`Self::Key`] and [`Self::NodeOwned`] are possible
+/// values. Otherwise only [`Self::EncodedNode`] is a possible value.
+</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Debug))]
+</span><span class="kw">pub enum </span>TrieAccess&lt;<span class="lifetime">&#39;a</span>, H&gt; {
+	<span class="doccomment">/// The given [`NodeOwned`] was accessed using its `hash`.
+	</span>NodeOwned { hash: H, node_owned: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NodeOwned&lt;H&gt; },
+	<span class="doccomment">/// The given `encoded_node` was accessed using its `hash`.
+	</span>EncodedNode { hash: H, encoded_node: rstd::borrow::Cow&lt;<span class="lifetime">&#39;a</span>, [u8]&gt; },
+	<span class="doccomment">/// The given `value` was accessed using its `hash`.
+	///
+	/// The given `full_key` is the key to access this value in the trie.
+	///
+	/// Should map to [`RecordedForKey::Value`] when checking the recorder.
+	</span>Value { hash: H, value: rstd::borrow::Cow&lt;<span class="lifetime">&#39;a</span>, [u8]&gt;, full_key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] },
+	<span class="doccomment">/// The hash of the value for the given `full_key` was accessed.
+	///
+	/// Should map to [`RecordedForKey::Hash`] when checking the recorder.
+	</span>Hash { full_key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] },
+	<span class="doccomment">/// The value/hash for `full_key` was accessed, but it couldn&#39;t be found in the trie.
+	///
+	/// Should map to [`RecordedForKey::Value`] when checking the recorder.
+	</span>NonExisting { full_key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8] },
+}
+
+<span class="doccomment">/// Result of [`TrieRecorder::trie_nodes_recorded_for_key`].
+</span><span class="attr">#[derive(Debug, Clone, Copy)]
+</span><span class="kw">pub enum </span>RecordedForKey {
+	<span class="doccomment">/// We recorded all trie nodes up to the value for a storage key.
+	///
+	/// This should be returned when the recorder has seen the following [`TrieAccess`]:
+	///
+	/// - [`TrieAccess::Value`]: If we see this [`TrieAccess`], it means we have recorded all the
+	///   trie nodes up to the value.
+	/// - [`TrieAccess::NonExisting`]: If we see this [`TrieAccess`], it means we have recorded all
+	///   the necessary  trie nodes to prove that the value doesn&#39;t exist in the trie.
+	</span>Value,
+	<span class="doccomment">/// We recorded all trie nodes up to the value hash for a storage key.
+	///
+	/// If we have a [`RecordedForKey::Value`], it means that we also have the hash of this value.
+	/// This also means that if we first have recorded the hash of a value and then also record the
+	/// value, the access should be upgraded to [`RecordedForKey::Value`].
+	///
+	/// This should be returned when the recorder has seen the following [`TrieAccess`]:
+	///
+	/// - [`TrieAccess::Hash`]: If we see this [`TrieAccess`], it means we have recorded all trie
+	///   nodes to have the hash of the value.
+	</span>Hash,
+	<span class="doccomment">/// We haven&#39;t recorded any trie nodes yet for a storage key.
+	///
+	/// This means we have not seen any [`TrieAccess`] referencing the searched key.
+	</span><span class="prelude-val">None</span>,
+}
+
+<span class="kw">impl </span>RecordedForKey {
+	<span class="doccomment">/// Is `self` equal to [`Self::None`]?
+	</span><span class="kw">pub fn </span>is_none(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+		<span class="macro">matches!</span>(<span class="self">self</span>, <span class="self">Self</span>::None)
 	}
-	<span class="kw">fn </span>record(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hash: <span class="kw-2">&amp;</span>H::Out, data: <span class="kw-2">&amp;</span>[u8], depth: u32) {
-		(<span class="kw-2">&amp;mut **</span><span class="self">self</span>).record(hash, data, depth);
-	}
+}
+
+<span class="doccomment">/// A trie recorder that can be used to record all kind of [`TrieAccess`]&#39;s.
+///
+/// To build a trie proof a recorder is required that records all trie accesses. These recorded trie
+/// accesses can then be used to create the proof.
+</span><span class="kw">pub trait </span>TrieRecorder&lt;H&gt; {
+	<span class="doccomment">/// Record the given [`TrieAccess`].
+	///
+	/// Depending on the [`TrieAccess`] a call of [`Self::trie_nodes_recorded_for_key`] afterwards
+	/// must return the correct recorded state.
+	</span><span class="kw">fn </span>record&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, access: TrieAccess&lt;<span class="lifetime">&#39;a</span>, H&gt;);
+
+	<span class="doccomment">/// Check if we have recorded any trie nodes for the given `key`.
+	///
+	/// Returns [`RecordedForKey`] to express the state of the recorded trie nodes.
+	</span><span class="kw">fn </span>trie_nodes_recorded_for_key(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; RecordedForKey;
 }
 
 <span class="kw">impl</span>&lt;F, T, H: Hasher&gt; Query&lt;H&gt; <span class="kw">for </span>F
@@ -692,19 +983,6 @@
 	<span class="kw">type </span>Item = T;
 	<span class="kw">fn </span>decode(<span class="self">self</span>, value: <span class="kw-2">&amp;</span>[u8]) -&gt; T {
 		(<span class="self">self</span>)(value)
-	}
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, F, T, H: Hasher&gt; Query&lt;H&gt; <span class="kw">for </span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Recorder&lt;H::Out&gt;, F)
-<span class="kw">where
-	</span>F: FnOnce(<span class="kw-2">&amp;</span>[u8]) -&gt; T,
-{
-	<span class="kw">type </span>Item = T;
-	<span class="kw">fn </span>decode(<span class="self">self</span>, value: <span class="kw-2">&amp;</span>[u8]) -&gt; T {
-		(<span class="self">self</span>.<span class="number">1</span>)(value)
-	}
-	<span class="kw">fn </span>record(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hash: <span class="kw-2">&amp;</span>H::Out, data: <span class="kw-2">&amp;</span>[u8], depth: u32) {
-		<span class="self">self</span>.<span class="number">0</span>.record(hash, data, depth)
 	}
 }
 
@@ -723,23 +1001,21 @@
 		<span class="self">self</span>.get(key).map(|x| x.is_some())
 	}
 
+	<span class="doccomment">/// Returns the hash of the value for `key`.
+	</span><span class="kw">fn </span>get_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;TrieHash&lt;L&gt;&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
+
 	<span class="doccomment">/// What is the value of the given key in this trie?
-	</span><span class="kw">fn </span>get&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;key</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;key </span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;DBValue&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;
-	<span class="kw">where
-		</span><span class="lifetime">&#39;a</span>: <span class="lifetime">&#39;key</span>,
-	{
+	</span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;DBValue&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="self">self</span>.get_with(key, |v: <span class="kw-2">&amp;</span>[u8]| v.to_vec())
 	}
 
 	<span class="doccomment">/// Search for the key with the given query parameter. See the docs of the `Query`
 	/// trait for more details.
-	</span><span class="kw">fn </span>get_with&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;key</span>, Q: Query&lt;L::Hash&gt;&gt;(
-		<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
-		key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;key </span>[u8],
+	</span><span class="kw">fn </span>get_with&lt;Q: Query&lt;L::Hash&gt;&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		key: <span class="kw-2">&amp;</span>[u8],
 		query: Q,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;
-	<span class="kw">where
-		</span><span class="lifetime">&#39;a</span>: <span class="lifetime">&#39;key</span>;
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
 
 	<span class="doccomment">/// Returns a depth-first iterator over the elements of trie.
 	</span><span class="kw">fn </span>iter&lt;<span class="lifetime">&#39;a</span>&gt;(
@@ -817,20 +1093,19 @@
 
 <span class="doccomment">/// Trie factory.
 </span><span class="attr">#[derive(Default, Clone)]
-</span><span class="kw">pub struct </span>TrieFactory&lt;L: TrieLayout&gt; {
+</span><span class="kw">pub struct </span>TrieFactory {
 	spec: TrieSpec,
-	layout: L,
 }
 
 <span class="doccomment">/// All different kinds of tries.
 /// This is used to prevent a heap allocation for every created trie.
-</span><span class="kw">pub enum </span>TrieKinds&lt;<span class="lifetime">&#39;db</span>, L: TrieLayout&gt; {
+</span><span class="kw">pub enum </span>TrieKinds&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; {
 	<span class="doccomment">/// A generic trie db.
-	</span>Generic(TrieDB&lt;<span class="lifetime">&#39;db</span>, L&gt;),
+	</span>Generic(TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;),
 	<span class="doccomment">/// A secure trie db.
-	</span>Secure(SecTrieDB&lt;<span class="lifetime">&#39;db</span>, L&gt;),
+	</span>Secure(SecTrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;),
 	<span class="doccomment">/// A fat trie db.
-	</span>Fat(FatDB&lt;<span class="lifetime">&#39;db</span>, L&gt;),
+	</span>Fat(FatDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;),
 }
 
 <span class="comment">// wrapper macro for making the match easier to deal with.
@@ -844,7 +1119,7 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L: TrieLayout&gt; Trie&lt;L&gt; <span class="kw">for </span>TrieKinds&lt;<span class="lifetime">&#39;db</span>, L&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt; Trie&lt;L&gt; <span class="kw">for </span>TrieKinds&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; {
 	<span class="kw">fn </span>root(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>TrieHash&lt;L&gt; {
 		<span class="macro">wrapper!</span>(<span class="self">self</span>, root,)
 	}
@@ -857,14 +1132,15 @@
 		<span class="macro">wrapper!</span>(<span class="self">self</span>, contains, key)
 	}
 
-	<span class="kw">fn </span>get_with&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;key</span>, Q: Query&lt;L::Hash&gt;&gt;(
-		<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
-		key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;key </span>[u8],
+	<span class="kw">fn </span>get_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;TrieHash&lt;L&gt;&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="macro">wrapper!</span>(<span class="self">self</span>, get_hash, key)
+	}
+
+	<span class="kw">fn </span>get_with&lt;Q: Query&lt;L::Hash&gt;&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		key: <span class="kw-2">&amp;</span>[u8],
 		query: Q,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;
-	<span class="kw">where
-		</span><span class="lifetime">&#39;a</span>: <span class="lifetime">&#39;key</span>,
-	{
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="macro">wrapper!</span>(<span class="self">self</span>, get_with, key, query)
 	}
 
@@ -889,51 +1165,48 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; TrieFactory&lt;L&gt;
-<span class="kw">where
-	</span>L: TrieLayout + <span class="lifetime">&#39;db</span>,
-{
+<span class="kw">impl </span>TrieFactory {
 	<span class="doccomment">/// Creates new factory.
-	</span><span class="kw">pub fn </span>new(spec: TrieSpec, layout: L) -&gt; <span class="self">Self </span>{
-		TrieFactory { spec, layout }
+	</span><span class="kw">pub fn </span>new(spec: TrieSpec) -&gt; <span class="self">Self </span>{
+		TrieFactory { spec }
 	}
 
 	<span class="doccomment">/// Create new immutable instance of Trie.
-	</span><span class="kw">pub fn </span>readonly(
+	</span><span class="kw">pub fn </span>readonly&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L: TrieLayout&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw">dyn </span>HashDBRef&lt;L::Hash, DBValue&gt;,
 		root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieHash&lt;L&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;TrieKinds&lt;<span class="lifetime">&#39;db</span>, L&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	) -&gt; TrieKinds&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; {
 		<span class="kw">match </span><span class="self">self</span>.spec {
-			TrieSpec::Generic =&gt; <span class="prelude-val">Ok</span>(TrieKinds::Generic(TrieDB::new(db, root)<span class="question-mark">?</span>)),
-			TrieSpec::Secure =&gt; <span class="prelude-val">Ok</span>(TrieKinds::Secure(SecTrieDB::new(db, root)<span class="question-mark">?</span>)),
-			TrieSpec::Fat =&gt; <span class="prelude-val">Ok</span>(TrieKinds::Fat(FatDB::new(db, root)<span class="question-mark">?</span>)),
+			TrieSpec::Generic =&gt; TrieKinds::Generic(TrieDBBuilder::new(db, root).build()),
+			TrieSpec::Secure =&gt; TrieKinds::Secure(SecTrieDB::new(db, root)),
+			TrieSpec::Fat =&gt; TrieKinds::Fat(FatDB::new(db, root)),
 		}
 	}
 
 	<span class="doccomment">/// Create new mutable instance of Trie.
-	</span><span class="kw">pub fn </span>create(
+	</span><span class="kw">pub fn </span>create&lt;<span class="lifetime">&#39;db</span>, L: TrieLayout + <span class="lifetime">&#39;db</span>&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span><span class="kw">dyn </span>HashDB&lt;L::Hash, DBValue&gt;,
 		root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span>TrieHash&lt;L&gt;,
 	) -&gt; Box&lt;<span class="kw">dyn </span>TrieMut&lt;L&gt; + <span class="lifetime">&#39;db</span>&gt; {
 		<span class="kw">match </span><span class="self">self</span>.spec {
-			TrieSpec::Generic =&gt; Box::new(TrieDBMut::&lt;L&gt;::new(db, root)),
+			TrieSpec::Generic =&gt; Box::new(TrieDBMutBuilder::&lt;L&gt;::new(db, root).build()),
 			TrieSpec::Secure =&gt; Box::new(SecTrieDBMut::&lt;L&gt;::new(db, root)),
 			TrieSpec::Fat =&gt; Box::new(FatDBMut::&lt;L&gt;::new(db, root)),
 		}
 	}
 
 	<span class="doccomment">/// Create new mutable instance of trie and check for errors.
-	</span><span class="kw">pub fn </span>from_existing(
+	</span><span class="kw">pub fn </span>from_existing&lt;<span class="lifetime">&#39;db</span>, L: TrieLayout + <span class="lifetime">&#39;db</span>&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span><span class="kw">dyn </span>HashDB&lt;L::Hash, DBValue&gt;,
 		root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw-2">mut </span>TrieHash&lt;L&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;Box&lt;<span class="kw">dyn </span>TrieMut&lt;L&gt; + <span class="lifetime">&#39;db</span>&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	) -&gt; Box&lt;<span class="kw">dyn </span>TrieMut&lt;L&gt; + <span class="lifetime">&#39;db</span>&gt; {
 		<span class="kw">match </span><span class="self">self</span>.spec {
-			TrieSpec::Generic =&gt; <span class="prelude-val">Ok</span>(Box::new(TrieDBMut::&lt;L&gt;::from_existing(db, root)<span class="question-mark">?</span>)),
-			TrieSpec::Secure =&gt; <span class="prelude-val">Ok</span>(Box::new(SecTrieDBMut::&lt;L&gt;::from_existing(db, root)<span class="question-mark">?</span>)),
-			TrieSpec::Fat =&gt; <span class="prelude-val">Ok</span>(Box::new(FatDBMut::&lt;L&gt;::from_existing(db, root)<span class="question-mark">?</span>)),
+			TrieSpec::Generic =&gt; Box::new(TrieDBMutBuilder::&lt;L&gt;::from_existing(db, root).build()),
+			TrieSpec::Secure =&gt; Box::new(SecTrieDBMut::&lt;L&gt;::from_existing(db, root)),
+			TrieSpec::Fat =&gt; Box::new(FatDBMut::&lt;L&gt;::from_existing(db, root)),
 		}
 	}
 
@@ -1024,5 +1297,186 @@
 </span><span class="kw">pub type </span>TrieHash&lt;L&gt; = &lt;&lt;L <span class="kw">as </span>TrieLayout&gt;::Hash <span class="kw">as </span>Hasher&gt;::Out;
 <span class="doccomment">/// Alias accessor to `NodeCodec` associated `Error` type from a `TrieLayout`.
 </span><span class="kw">pub type </span>CError&lt;L&gt; = &lt;&lt;L <span class="kw">as </span>TrieLayout&gt;::Codec <span class="kw">as </span>NodeCodec&gt;::Error;
+
+<span class="doccomment">/// A value as cached by the [`TrieCache`].
+</span><span class="attr">#[derive(Clone, Debug)]
+</span><span class="kw">pub enum </span>CachedValue&lt;H&gt; {
+	<span class="doccomment">/// The value doesn&#39;t exist in the trie.
+	</span>NonExisting,
+	<span class="doccomment">/// We cached the hash, because we did not yet accessed the data.
+	</span>ExistingHash(H),
+	<span class="doccomment">/// The value exists in the trie.
+	</span>Existing {
+		<span class="doccomment">/// The hash of the value.
+		</span>hash: H,
+		<span class="doccomment">/// The actual data of the value stored as [`BytesWeak`].
+		///
+		/// The original data [`Bytes`] is stored in the trie node
+		/// that is also cached by the [`TrieCache`]. If this node is dropped,
+		/// this data will also not be &quot;upgradeable&quot; anymore.
+		</span>data: BytesWeak,
+	},
+}
+
+<span class="kw">impl</span>&lt;H: Copy&gt; CachedValue&lt;H&gt; {
+	<span class="doccomment">/// Returns the data of the value.
+	///
+	/// If a value doesn&#39;t exist in the trie or only the value hash is cached, this function returns
+	/// `None`. If the reference to the data couldn&#39;t be upgraded (see [`Bytes::upgrade`]), this
+	/// function returns `Some(None)`, aka the data needs to be fetched again from the trie.
+	</span><span class="kw">pub fn </span>data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Option</span>&lt;Bytes&gt;&gt; {
+		<span class="kw">match </span><span class="self">self </span>{
+			<span class="self">Self</span>::Existing { data, .. } =&gt; <span class="prelude-val">Some</span>(data.upgrade()),
+			<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
+		}
+	}
+
+	<span class="doccomment">/// Returns the hash of the value.
+	///
+	/// Returns only `None` when the value doesn&#39;t exist.
+	</span><span class="kw">pub fn </span>hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;H&gt; {
+		<span class="kw">match </span><span class="self">self </span>{
+			<span class="self">Self</span>::ExistingHash(hash) | <span class="self">Self</span>::Existing { hash, .. } =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">*</span>hash),
+			<span class="self">Self</span>::NonExisting =&gt; <span class="prelude-val">None</span>,
+		}
+	}
+}
+
+<span class="kw">impl</span>&lt;H&gt; From&lt;(Bytes, H)&gt; <span class="kw">for </span>CachedValue&lt;H&gt; {
+	<span class="kw">fn </span>from(value: (Bytes, H)) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::Existing { hash: value.<span class="number">1</span>, data: value.<span class="number">0</span>.into() }
+	}
+}
+
+<span class="kw">impl</span>&lt;H&gt; From&lt;H&gt; <span class="kw">for </span>CachedValue&lt;H&gt; {
+	<span class="kw">fn </span>from(value: H) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>::ExistingHash(value)
+	}
+}
+
+<span class="kw">impl</span>&lt;H&gt; From&lt;<span class="prelude-ty">Option</span>&lt;(Bytes, H)&gt;&gt; <span class="kw">for </span>CachedValue&lt;H&gt; {
+	<span class="kw">fn </span>from(value: <span class="prelude-ty">Option</span>&lt;(Bytes, H)&gt;) -&gt; <span class="self">Self </span>{
+		value.map_or(<span class="self">Self</span>::NonExisting, |v| <span class="self">Self</span>::Existing { hash: v.<span class="number">1</span>, data: v.<span class="number">0</span>.into() })
+	}
+}
+
+<span class="kw">impl</span>&lt;H&gt; From&lt;<span class="prelude-ty">Option</span>&lt;H&gt;&gt; <span class="kw">for </span>CachedValue&lt;H&gt; {
+	<span class="kw">fn </span>from(value: <span class="prelude-ty">Option</span>&lt;H&gt;) -&gt; <span class="self">Self </span>{
+		value.map_or(<span class="self">Self</span>::NonExisting, |v| <span class="self">Self</span>::ExistingHash(v))
+	}
+}
+
+<span class="doccomment">/// A cache that can be used to speed-up certain operations when accessing the trie.
+///
+/// The [`TrieDB`]/[`TrieDBMut`] by default are working with the internal hash-db in a non-owning
+/// mode. This means that for every lookup in the trie, every node is always fetched and decoded on
+/// the fly. Fetching and decoding a node always takes some time and can kill the performance of any
+/// application that is doing quite a lot of trie lookups. To circumvent this performance
+/// degradation, a cache can be used when looking up something in the trie. Any cache that should be
+/// used with the [`TrieDB`]/[`TrieDBMut`] needs to implement this trait.
+///
+/// The trait is laying out a two level cache, first the trie nodes cache and then the value cache.
+/// The trie nodes cache, as the name indicates, is for caching trie nodes as [`NodeOwned`]. These
+/// trie nodes are referenced by their hash. The value cache is caching [`CachedValue`]&#39;s and these
+/// are referenced by the key to look them up in the trie. As multiple different tries can have
+/// different values under the same key, it up to the cache implementation to ensure that the
+/// correct value is returned. As each trie has a different root, this root can be used to
+/// differentiate values under the same key.
+</span><span class="kw">pub trait </span>TrieCache&lt;NC: NodeCodec&gt; {
+	<span class="doccomment">/// Lookup value for the given `key`.
+	///
+	/// Returns the `None` if the `key` is unknown or otherwise `Some(_)` with the associated
+	/// value.
+	///
+	/// [`Self::cache_data_for_key`] is used to make the cache aware of data that is associated
+	/// to a `key`.
+	///
+	/// # Attention
+	///
+	/// The cache can be used for different tries, aka with different roots. This means
+	/// that the cache implementation needs to take care of always returning the correct value
+	/// for the current trie root.
+	</span><span class="kw">fn </span>lookup_value_for_key(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>CachedValue&lt;NC::HashOut&gt;&gt;;
+
+	<span class="doccomment">/// Cache the given `value` for the given `key`.
+	///
+	/// # Attention
+	///
+	/// The cache can be used for different tries, aka with different roots. This means
+	/// that the cache implementation needs to take care of caching `value` for the current
+	/// trie root.
+	</span><span class="kw">fn </span>cache_value_for_key(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8], value: CachedValue&lt;NC::HashOut&gt;);
+
+	<span class="doccomment">/// Get or insert a [`NodeOwned`].
+	///
+	/// The cache implementation should look up based on the given `hash` if the node is already
+	/// known. If the node is not yet known, the given `fetch_node` function can be used to fetch
+	/// the particular node.
+	///
+	/// Returns the [`NodeOwned`] or an error that happened on fetching the node.
+	</span><span class="kw">fn </span>get_or_insert_node(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		hash: NC::HashOut,
+		fetch_node: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>FnMut() -&gt; <span class="prelude-ty">Result</span>&lt;NodeOwned&lt;NC::HashOut&gt;, NC::HashOut, NC::Error&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>NodeOwned&lt;NC::HashOut&gt;, NC::HashOut, NC::Error&gt;;
+
+	<span class="doccomment">/// Get the [`NodeOwned`] that corresponds to the given `hash`.
+	</span><span class="kw">fn </span>get_node(<span class="kw-2">&amp;mut </span><span class="self">self</span>, hash: <span class="kw-2">&amp;</span>NC::HashOut) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>NodeOwned&lt;NC::HashOut&gt;&gt;;
+}
+
+<span class="doccomment">/// A container for storing bytes.
+///
+/// This uses a reference counted pointer internally, so it is cheap to clone this object.
+</span><span class="attr">#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+</span><span class="kw">pub struct </span>Bytes(rstd::sync::Arc&lt;[u8]&gt;);
+
+<span class="kw">impl </span>rstd::ops::Deref <span class="kw">for </span>Bytes {
+	<span class="kw">type </span>Target = [u8];
+
+	<span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+		<span class="self">self</span>.<span class="number">0</span>.deref()
+	}
+}
+
+<span class="kw">impl </span>From&lt;Vec&lt;u8&gt;&gt; <span class="kw">for </span>Bytes {
+	<span class="kw">fn </span>from(bytes: Vec&lt;u8&gt;) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>(bytes.into())
+	}
+}
+
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>[u8]&gt; <span class="kw">for </span>Bytes {
+	<span class="kw">fn </span>from(bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>(bytes.into())
+	}
+}
+
+<span class="kw">impl</span>&lt;T: AsRef&lt;[u8]&gt;&gt; PartialEq&lt;T&gt; <span class="kw">for </span>Bytes {
+	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>T) -&gt; bool {
+		<span class="self">self</span>.as_ref() == other.as_ref()
+	}
+}
+
+<span class="doccomment">/// A weak reference of [`Bytes`].
+///
+/// A weak reference means that it doesn&#39;t prevent [`Bytes`] from being dropped because
+/// it holds a non-owning reference to the associated [`Bytes`] object. With [`Self::upgrade`] it
+/// is possible to upgrade it again to [`Bytes`] if the reference is still valid.
+</span><span class="attr">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>BytesWeak(rstd::sync::Weak&lt;[u8]&gt;);
+
+<span class="kw">impl </span>BytesWeak {
+	<span class="doccomment">/// Upgrade to [`Bytes`].
+	///
+	/// Returns `None` when the inner value was already dropped.
+	</span><span class="kw">pub fn </span>upgrade(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Bytes&gt; {
+		<span class="self">self</span>.<span class="number">0</span>.upgrade().map(Bytes)
+	}
+}
+
+<span class="kw">impl </span>From&lt;Bytes&gt; <span class="kw">for </span>BytesWeak {
+	<span class="kw">fn </span>from(bytes: Bytes) -&gt; <span class="self">Self </span>{
+		<span class="self">Self</span>(rstd::sync::Arc::downgrade(<span class="kw-2">&amp;</span>bytes.<span class="number">0</span>))
+	}
+}
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="trie_db" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

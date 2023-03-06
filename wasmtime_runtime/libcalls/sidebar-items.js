@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":[["relocs","This module contains functions which are used for resolving relocations at runtime if necessary."],["trampolines","Actually public trampolines which are used by the runtime as the entrypoint for libcalls."]]};

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/state-machine/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/state-machine/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2226,77 +2226,9 @@
 <a href="#2226" id="2226">2226</a>
 <a href="#2227" id="2227">2227</a>
 <a href="#2228" id="2228">2228</a>
-<a href="#2229" id="2229">2229</a>
-<a href="#2230" id="2230">2230</a>
-<a href="#2231" id="2231">2231</a>
-<a href="#2232" id="2232">2232</a>
-<a href="#2233" id="2233">2233</a>
-<a href="#2234" id="2234">2234</a>
-<a href="#2235" id="2235">2235</a>
-<a href="#2236" id="2236">2236</a>
-<a href="#2237" id="2237">2237</a>
-<a href="#2238" id="2238">2238</a>
-<a href="#2239" id="2239">2239</a>
-<a href="#2240" id="2240">2240</a>
-<a href="#2241" id="2241">2241</a>
-<a href="#2242" id="2242">2242</a>
-<a href="#2243" id="2243">2243</a>
-<a href="#2244" id="2244">2244</a>
-<a href="#2245" id="2245">2245</a>
-<a href="#2246" id="2246">2246</a>
-<a href="#2247" id="2247">2247</a>
-<a href="#2248" id="2248">2248</a>
-<a href="#2249" id="2249">2249</a>
-<a href="#2250" id="2250">2250</a>
-<a href="#2251" id="2251">2251</a>
-<a href="#2252" id="2252">2252</a>
-<a href="#2253" id="2253">2253</a>
-<a href="#2254" id="2254">2254</a>
-<a href="#2255" id="2255">2255</a>
-<a href="#2256" id="2256">2256</a>
-<a href="#2257" id="2257">2257</a>
-<a href="#2258" id="2258">2258</a>
-<a href="#2259" id="2259">2259</a>
-<a href="#2260" id="2260">2260</a>
-<a href="#2261" id="2261">2261</a>
-<a href="#2262" id="2262">2262</a>
-<a href="#2263" id="2263">2263</a>
-<a href="#2264" id="2264">2264</a>
-<a href="#2265" id="2265">2265</a>
-<a href="#2266" id="2266">2266</a>
-<a href="#2267" id="2267">2267</a>
-<a href="#2268" id="2268">2268</a>
-<a href="#2269" id="2269">2269</a>
-<a href="#2270" id="2270">2270</a>
-<a href="#2271" id="2271">2271</a>
-<a href="#2272" id="2272">2272</a>
-<a href="#2273" id="2273">2273</a>
-<a href="#2274" id="2274">2274</a>
-<a href="#2275" id="2275">2275</a>
-<a href="#2276" id="2276">2276</a>
-<a href="#2277" id="2277">2277</a>
-<a href="#2278" id="2278">2278</a>
-<a href="#2279" id="2279">2279</a>
-<a href="#2280" id="2280">2280</a>
-<a href="#2281" id="2281">2281</a>
-<a href="#2282" id="2282">2282</a>
-<a href="#2283" id="2283">2283</a>
-<a href="#2284" id="2284">2284</a>
-<a href="#2285" id="2285">2285</a>
-<a href="#2286" id="2286">2286</a>
-<a href="#2287" id="2287">2287</a>
-<a href="#2288" id="2288">2288</a>
-<a href="#2289" id="2289">2289</a>
-<a href="#2290" id="2290">2290</a>
-<a href="#2291" id="2291">2291</a>
-<a href="#2292" id="2292">2292</a>
-<a href="#2293" id="2293">2293</a>
-<a href="#2294" id="2294">2294</a>
-<a href="#2295" id="2295">2295</a>
-<a href="#2296" id="2296">2296</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -2324,8 +2256,6 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">mod </span>in_memory_backend;
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>overlayed_changes;
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">mod </span>proving_backend;
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">mod </span>read_only;
 <span class="kw">mod </span>stats;
@@ -2421,7 +2351,7 @@
 }
 
 <span class="kw">pub use crate</span>::{
-	backend::Backend,
+	backend::{Backend, IterArgs, KeysIter, PairsIter, StorageIterator},
 	error::{Error, ExecutionError},
 	ext::Ext,
 	overlayed_changes::{
@@ -2430,7 +2360,7 @@
 		StorageTransactionCache, StorageValue,
 	},
 	stats::{StateMachineStats, UsageInfo, UsageUnit},
-	trie_backend::TrieBackend,
+	trie_backend::{TrieBackend, TrieBackendBuilder},
 	trie_backend_essence::{Storage, TrieBackendStorage},
 };
 
@@ -2440,11 +2370,9 @@
 		basic::BasicExternalities,
 		error::{Error, ExecutionError},
 		in_memory_backend::{new_in_mem, new_in_mem_hash_key},
-		proving_backend::{
-			create_proof_check_backend, ProofRecorder, ProvingBackend, ProvingBackendRecorder,
-		},
 		read_only::{InspectState, ReadOnlyExternalities},
 		testing::TestExternalities,
+		trie_backend::create_proof_check_backend,
 	};
 	<span class="kw">pub use </span>sp_trie::{
 		trie_types::{TrieDBMutV0, TrieDBMutV1},
@@ -2454,38 +2382,34 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">mod </span>execution {
+	<span class="kw">use </span><span class="kw">crate</span>::backend::AsTrieBackend;
+
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
-	<span class="kw">use </span>codec::{Codec, Decode, Encode};
+	<span class="kw">use </span>codec::Codec;
 	<span class="kw">use </span>hash_db::Hasher;
 	<span class="kw">use </span>smallvec::SmallVec;
 	<span class="kw">use </span>sp_core::{
 		hexdisplay::HexDisplay,
 		storage::{ChildInfo, ChildType, PrefixedStorageKey},
-		traits::{CodeExecutor, ReadRuntimeVersionExt, RuntimeCode, SpawnNamed},
-		NativeOrEncoded, NeverNativeValue,
+		traits::{CallContext, CodeExecutor, ReadRuntimeVersionExt, RuntimeCode, SpawnNamed},
 	};
 	<span class="kw">use </span>sp_externalities::Extensions;
 	<span class="kw">use </span>std::{
 		collections::{HashMap, HashSet},
 		fmt,
-		panic::UnwindSafe,
-		result,
 	};
 
 	<span class="kw">const </span>PROOF_CLOSE_TRANSACTION: <span class="kw-2">&amp;</span>str = <span class="string">&quot;\
 		Closing a transaction that was started in this function. Client initiated transactions
 		are protected from being closed by the runtime. qed&quot;</span>;
 
-	<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type </span>CallResult&lt;R, E&gt; = <span class="prelude-ty">Result</span>&lt;NativeOrEncoded&lt;R&gt;, E&gt;;
+	<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">type </span>CallResult&lt;E&gt; = <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, E&gt;;
 
 	<span class="doccomment">/// Default handler of the execution manager.
-	</span><span class="kw">pub type </span>DefaultHandler&lt;R, E&gt; = <span class="kw">fn</span>(CallResult&lt;R, E&gt;, CallResult&lt;R, E&gt;) -&gt; CallResult&lt;R, E&gt;;
+	</span><span class="kw">pub type </span>DefaultHandler&lt;E&gt; = <span class="kw">fn</span>(CallResult&lt;E&gt;, CallResult&lt;E&gt;) -&gt; CallResult&lt;E&gt;;
 
 	<span class="doccomment">/// Trie backend with in-memory storage.
 	</span><span class="kw">pub type </span>InMemoryBackend&lt;H&gt; = TrieBackend&lt;MemoryDB&lt;H&gt;, H&gt;;
-
-	<span class="doccomment">/// Proving Trie backend with in-memory storage.
-	</span><span class="kw">pub type </span>InMemoryProvingBackend&lt;<span class="lifetime">&#39;a</span>, H&gt; = ProvingBackend&lt;<span class="lifetime">&#39;a</span>, MemoryDB&lt;H&gt;, H&gt;;
 
 	<span class="doccomment">/// Strategy for executing a call into the runtime.
 	</span><span class="attr">#[derive(Copy, Clone, Eq, PartialEq, Debug)]
@@ -2544,9 +2468,7 @@
 
 	<span class="kw">impl </span>ExecutionStrategy {
 		<span class="doccomment">/// Gets the corresponding manager for the execution strategy.
-		</span><span class="kw">pub fn </span>get_manager&lt;E: fmt::Debug, R: Decode + Encode&gt;(
-			<span class="self">self</span>,
-		) -&gt; ExecutionManager&lt;DefaultHandler&lt;R, E&gt;&gt; {
+		</span><span class="kw">pub fn </span>get_manager&lt;E: fmt::Debug&gt;(<span class="self">self</span>) -&gt; ExecutionManager&lt;DefaultHandler&lt;E&gt;&gt; {
 			<span class="kw">match </span><span class="self">self </span>{
 				ExecutionStrategy::AlwaysWasm =&gt;
 					ExecutionManager::AlwaysWasm(BackendTrustLevel::Trusted),
@@ -2566,19 +2488,19 @@
 	}
 
 	<span class="doccomment">/// Evaluate to ExecutionManager::NativeElseWasm, without having to figure out the type.
-	</span><span class="kw">pub fn </span>native_else_wasm&lt;E, R: Decode&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;R, E&gt;&gt; {
+	</span><span class="kw">pub fn </span>native_else_wasm&lt;E&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;E&gt;&gt; {
 		ExecutionManager::NativeElseWasm
 	}
 
 	<span class="doccomment">/// Evaluate to ExecutionManager::AlwaysWasm with trusted backend, without having to figure out
 	/// the type.
-	</span><span class="kw">fn </span>always_wasm&lt;E, R: Decode&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;R, E&gt;&gt; {
+	</span><span class="kw">fn </span>always_wasm&lt;E&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;E&gt;&gt; {
 		ExecutionManager::AlwaysWasm(BackendTrustLevel::Trusted)
 	}
 
 	<span class="doccomment">/// Evaluate ExecutionManager::AlwaysWasm with untrusted backend, without having to figure out
 	/// the type.
-	</span><span class="kw">fn </span>always_untrusted_wasm&lt;E, R: Decode&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;R, E&gt;&gt; {
+	</span><span class="kw">fn </span>always_untrusted_wasm&lt;E&gt;() -&gt; ExecutionManager&lt;DefaultHandler&lt;E&gt;&gt; {
 		ExecutionManager::AlwaysWasm(BackendTrustLevel::Untrusted)
 	}
 
@@ -2601,6 +2523,7 @@
 		///
 		/// Used for logging.
 		</span>parent_hash: <span class="prelude-ty">Option</span>&lt;H::Out&gt;,
+		context: CallContext,
 	}
 
 	<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, B, H, Exec&gt; Drop <span class="kw">for </span>StateMachine&lt;<span class="lifetime">&#39;a</span>, B, H, Exec&gt;
@@ -2630,6 +2553,7 @@
 			<span class="kw-2">mut </span>extensions: Extensions,
 			runtime_code: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>RuntimeCode,
 			spawn_handle: <span class="kw">impl </span>SpawnNamed + Send + <span class="lifetime">&#39;static</span>,
+			context: CallContext,
 		) -&gt; <span class="self">Self </span>{
 			extensions.register(ReadRuntimeVersionExt::new(exec.clone()));
 			extensions.register(sp_core::traits::TaskExecutorExt::new(spawn_handle));
@@ -2645,6 +2569,7 @@
 				runtime_code,
 				stats: StateMachineStats::default(),
 				parent_hash: <span class="prelude-val">None</span>,
+				context,
 			}
 		}
 
@@ -2680,23 +2605,10 @@
 		</span><span class="kw">pub fn </span>execute(<span class="kw-2">&amp;mut </span><span class="self">self</span>, strategy: ExecutionStrategy) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
 			<span class="comment">// We are not giving a native call and thus we are sure that the result can never be a
 			// native value.
-			</span><span class="self">self</span>.execute_using_consensus_failure_handler::&lt;<span class="kw">_</span>, NeverNativeValue, <span class="kw">fn</span>() -&gt; <span class="kw">_</span>&gt;(
-				strategy.get_manager(),
-				<span class="prelude-val">None</span>,
-			)
-			.map(NativeOrEncoded::into_encoded)
+			</span><span class="self">self</span>.execute_using_consensus_failure_handler(strategy.get_manager())
 		}
 
-		<span class="kw">fn </span>execute_aux&lt;R, NC&gt;(
-			<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-			use_native: bool,
-			native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
-		) -&gt; (CallResult&lt;R, Exec::Error&gt;, bool)
-		<span class="kw">where
-			</span>R: Decode + Encode + PartialEq,
-			NC: FnOnce() -&gt; result::Result&lt;R, Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;&gt;
-				+ UnwindSafe,
-		{
+		<span class="kw">fn </span>execute_aux(<span class="kw-2">&amp;mut </span><span class="self">self</span>, use_native: bool) -&gt; (CallResult&lt;Exec::Error&gt;, bool) {
 			<span class="kw">let </span><span class="kw-2">mut </span>cache = StorageTransactionCache::default();
 
 			<span class="kw">let </span>cache = <span class="kw">match </span><span class="self">self</span>.storage_transaction_cache.as_mut() {
@@ -2727,7 +2639,7 @@
 				<span class="self">self</span>.method,
 				<span class="self">self</span>.call_data,
 				use_native,
-				native_call,
+				<span class="self">self</span>.context,
 			);
 
 			<span class="self">self</span>.overlay
@@ -2745,26 +2657,20 @@
 			(result, was_native)
 		}
 
-		<span class="kw">fn </span>execute_call_with_both_strategy&lt;Handler, R, NC&gt;(
+		<span class="kw">fn </span>execute_call_with_both_strategy&lt;Handler&gt;(
 			<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-			<span class="kw-2">mut </span>native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
 			on_consensus_failure: Handler,
-		) -&gt; CallResult&lt;R, Exec::Error&gt;
+		) -&gt; CallResult&lt;Exec::Error&gt;
 		<span class="kw">where
-			</span>R: Decode + Encode + PartialEq,
-			NC: FnOnce() -&gt; result::Result&lt;R, Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;&gt;
-				+ UnwindSafe,
-			Handler: FnOnce(
-				CallResult&lt;R, Exec::Error&gt;,
-				CallResult&lt;R, Exec::Error&gt;,
-			) -&gt; CallResult&lt;R, Exec::Error&gt;,
+			</span>Handler:
+				FnOnce(CallResult&lt;Exec::Error&gt;, CallResult&lt;Exec::Error&gt;) -&gt; CallResult&lt;Exec::Error&gt;,
 		{
 			<span class="self">self</span>.overlay.start_transaction();
-			<span class="kw">let </span>(result, was_native) = <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>, native_call.take());
+			<span class="kw">let </span>(result, was_native) = <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>);
 
 			<span class="kw">if </span>was_native {
 				<span class="self">self</span>.overlay.rollback_transaction().expect(PROOF_CLOSE_TRANSACTION);
-				<span class="kw">let </span>(wasm_result, <span class="kw">_</span>) = <span class="self">self</span>.execute_aux(<span class="bool-val">false</span>, native_call);
+				<span class="kw">let </span>(wasm_result, <span class="kw">_</span>) = <span class="self">self</span>.execute_aux(<span class="bool-val">false</span>);
 
 				<span class="kw">if </span>(result.is_ok() &amp;&amp;
 					wasm_result.is_ok() &amp;&amp; result.as_ref().ok() == wasm_result.as_ref().ok()) ||
@@ -2780,26 +2686,17 @@
 			}
 		}
 
-		<span class="kw">fn </span>execute_call_with_native_else_wasm_strategy&lt;R, NC&gt;(
-			<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-			<span class="kw-2">mut </span>native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
-		) -&gt; CallResult&lt;R, Exec::Error&gt;
-		<span class="kw">where
-			</span>R: Decode + Encode + PartialEq,
-			NC: FnOnce() -&gt; result::Result&lt;R, Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;&gt;
-				+ UnwindSafe,
-		{
+		<span class="kw">fn </span>execute_call_with_native_else_wasm_strategy(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; CallResult&lt;Exec::Error&gt; {
 			<span class="self">self</span>.overlay.start_transaction();
-			<span class="kw">let </span>(result, was_native) = <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>, native_call.take());
+			<span class="kw">let </span>(result, was_native) = <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>);
 
 			<span class="kw">if </span>!was_native || result.is_ok() {
 				<span class="self">self</span>.overlay.commit_transaction().expect(PROOF_CLOSE_TRANSACTION);
 				result
 			} <span class="kw">else </span>{
 				<span class="self">self</span>.overlay.rollback_transaction().expect(PROOF_CLOSE_TRANSACTION);
-				<span class="kw">let </span>(wasm_result, <span class="kw">_</span>) = <span class="self">self</span>.execute_aux(<span class="bool-val">false</span>, native_call);
-				wasm_result
-			}
+				<span class="self">self</span>.execute_aux(<span class="bool-val">false</span>).<span class="number">0
+			</span>}
 		}
 
 		<span class="doccomment">/// Execute a call using the given state backend, overlayed changes, and call executor.
@@ -2811,35 +2708,29 @@
 		///
 		/// Returns the result of the executed function either in native representation `R` or
 		/// in SCALE encoded representation.
-		</span><span class="kw">pub fn </span>execute_using_consensus_failure_handler&lt;Handler, R, NC&gt;(
+		</span><span class="kw">pub fn </span>execute_using_consensus_failure_handler&lt;Handler&gt;(
 			<span class="kw-2">&amp;mut </span><span class="self">self</span>,
 			manager: ExecutionManager&lt;Handler&gt;,
-			<span class="kw-2">mut </span>native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
-		) -&gt; <span class="prelude-ty">Result</span>&lt;NativeOrEncoded&lt;R&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
+		) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 		<span class="kw">where
-			</span>R: Decode + Encode + PartialEq,
-			NC: FnOnce() -&gt; result::Result&lt;R, Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;&gt;
-				+ UnwindSafe,
-			Handler: FnOnce(
-				CallResult&lt;R, Exec::Error&gt;,
-				CallResult&lt;R, Exec::Error&gt;,
-			) -&gt; CallResult&lt;R, Exec::Error&gt;,
+			</span>Handler:
+				FnOnce(CallResult&lt;Exec::Error&gt;, CallResult&lt;Exec::Error&gt;) -&gt; CallResult&lt;Exec::Error&gt;,
 		{
 			<span class="kw">let </span>result = {
 				<span class="kw">match </span>manager {
-					ExecutionManager::Both(on_consensus_failure) =&gt; <span class="self">self
-						</span>.execute_call_with_both_strategy(native_call.take(), on_consensus_failure),
+					ExecutionManager::Both(on_consensus_failure) =&gt;
+						<span class="self">self</span>.execute_call_with_both_strategy(on_consensus_failure),
 					ExecutionManager::NativeElseWasm =&gt;
-						<span class="self">self</span>.execute_call_with_native_else_wasm_strategy(native_call.take()),
+						<span class="self">self</span>.execute_call_with_native_else_wasm_strategy(),
 					ExecutionManager::AlwaysWasm(trust_level) =&gt; {
 						<span class="kw">let </span>_abort_guard = <span class="kw">match </span>trust_level {
 							BackendTrustLevel::Trusted =&gt; <span class="prelude-val">None</span>,
 							BackendTrustLevel::Untrusted =&gt;
 								<span class="prelude-val">Some</span>(sp_panic_handler::AbortGuard::never_abort()),
 						};
-						<span class="self">self</span>.execute_aux(<span class="bool-val">false</span>, native_call).<span class="number">0
+						<span class="self">self</span>.execute_aux(<span class="bool-val">false</span>).<span class="number">0
 					</span>},
-					ExecutionManager::NativeWhenPossible =&gt; <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>, native_call).<span class="number">0</span>,
+					ExecutionManager::NativeWhenPossible =&gt; <span class="self">self</span>.execute_aux(<span class="bool-val">true</span>).<span class="number">0</span>,
 				}
 			};
 
@@ -2858,15 +2749,13 @@
 		runtime_code: <span class="kw-2">&amp;</span>RuntimeCode,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, StorageProof), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>B: Backend&lt;H&gt;,
+		</span>B: AsTrieBackend&lt;H&gt;,
 		H: Hasher,
 		H::Out: Ord + <span class="lifetime">&#39;static </span>+ codec::Codec,
 		Exec: CodeExecutor + Clone + <span class="lifetime">&#39;static</span>,
 		Spawn: SpawnNamed + Send + <span class="lifetime">&#39;static</span>,
 	{
-		<span class="kw">let </span>trie_backend = backend
-			.as_trie_backend()
-			.ok_or_else(|| Box::new(ExecutionError::UnableToGenerateProof) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+		<span class="kw">let </span>trie_backend = backend.as_trie_backend();
 		prove_execution_on_trie_backend::&lt;<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
 			trie_backend,
 			overlay,
@@ -2875,6 +2764,7 @@
 			method,
 			call_data,
 			runtime_code,
+			Default::default(),
 		)
 	}
 
@@ -2895,6 +2785,7 @@
 		method: <span class="kw-2">&amp;</span>str,
 		call_data: <span class="kw-2">&amp;</span>[u8],
 		runtime_code: <span class="kw-2">&amp;</span>RuntimeCode,
+		extensions: Extensions,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, StorageProof), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
 		</span>S: trie_backend_essence::TrieBackendStorage&lt;H&gt;,
@@ -2903,24 +2794,27 @@
 		Exec: CodeExecutor + <span class="lifetime">&#39;static </span>+ Clone,
 		Spawn: SpawnNamed + Send + <span class="lifetime">&#39;static</span>,
 	{
-		<span class="kw">let </span>proving_backend = proving_backend::ProvingBackend::new(trie_backend);
-		<span class="kw">let </span><span class="kw-2">mut </span>sm = StateMachine::&lt;<span class="kw">_</span>, H, Exec&gt;::new(
+		<span class="kw">let </span>proving_backend =
+			TrieBackendBuilder::wrap(trie_backend).with_recorder(Default::default()).build();
+
+		<span class="kw">let </span>result = StateMachine::&lt;<span class="kw">_</span>, H, Exec&gt;::new(
 			<span class="kw-2">&amp;</span>proving_backend,
 			overlay,
 			exec,
 			method,
 			call_data,
-			Extensions::default(),
+			extensions,
 			runtime_code,
 			spawn_handle,
-		);
+			CallContext::Offchain,
+		)
+		.execute_using_consensus_failure_handler::&lt;<span class="kw">_</span>&gt;(always_wasm())<span class="question-mark">?</span>;
 
-		<span class="kw">let </span>result = sm.execute_using_consensus_failure_handler::&lt;<span class="kw">_</span>, NeverNativeValue, <span class="kw">fn</span>() -&gt; <span class="kw">_</span>&gt;(
-			always_wasm(),
-			<span class="prelude-val">None</span>,
-		)<span class="question-mark">?</span>;
-		<span class="kw">let </span>proof = sm.backend.extract_proof();
-		<span class="prelude-val">Ok</span>((result.into_encoded(), proof))
+		<span class="kw">let </span>proof = proving_backend
+			.extract_proof()
+			.expect(<span class="string">&quot;A recorder was set and thus, a storage proof can be extracted; qed&quot;</span>);
+
+		<span class="prelude-val">Ok</span>((result, proof))
 	}
 
 	<span class="doccomment">/// Check execution proof, generated by `prove_execution` call.
@@ -2935,7 +2829,7 @@
 		runtime_code: <span class="kw-2">&amp;</span>RuntimeCode,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>H: Hasher,
+		</span>H: Hasher + <span class="lifetime">&#39;static</span>,
 		Exec: CodeExecutor + Clone + <span class="lifetime">&#39;static</span>,
 		H::Out: Ord + <span class="lifetime">&#39;static </span>+ codec::Codec,
 		Spawn: SpawnNamed + Send + <span class="lifetime">&#39;static</span>,
@@ -2968,7 +2862,7 @@
 		Exec: CodeExecutor + Clone + <span class="lifetime">&#39;static</span>,
 		Spawn: SpawnNamed + Send + <span class="lifetime">&#39;static</span>,
 	{
-		<span class="kw">let </span><span class="kw-2">mut </span>sm = StateMachine::&lt;<span class="kw">_</span>, H, Exec&gt;::new(
+		StateMachine::&lt;<span class="kw">_</span>, H, Exec&gt;::new(
 			trie_backend,
 			overlay,
 			exec,
@@ -2977,27 +2871,21 @@
 			Extensions::default(),
 			runtime_code,
 			spawn_handle,
-		);
-
-		sm.execute_using_consensus_failure_handler::&lt;<span class="kw">_</span>, NeverNativeValue, <span class="kw">fn</span>() -&gt; <span class="kw">_</span>&gt;(
-			always_untrusted_wasm(),
-			<span class="prelude-val">None</span>,
+			CallContext::Offchain,
 		)
-		.map(NativeOrEncoded::into_encoded)
+		.execute_using_consensus_failure_handler(always_untrusted_wasm())
 	}
 
 	<span class="doccomment">/// Generate storage read proof.
 	</span><span class="kw">pub fn </span>prove_read&lt;B, H, I&gt;(backend: B, keys: I) -&gt; <span class="prelude-ty">Result</span>&lt;StorageProof, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>B: Backend&lt;H&gt;,
+		</span>B: AsTrieBackend&lt;H&gt;,
 		H: Hasher,
 		H::Out: Ord + Codec,
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
 	{
-		<span class="kw">let </span>trie_backend = backend
-			.as_trie_backend()
-			.ok_or_else(|| Box::new(ExecutionError::UnableToGenerateProof) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+		<span class="kw">let </span>trie_backend = backend.as_trie_backend();
 		prove_read_on_trie_backend(trie_backend, keys)
 	}
 
@@ -3125,13 +3013,11 @@
 		start_at: <span class="kw-2">&amp;</span>[Vec&lt;u8&gt;],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(StorageProof, u32), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>B: Backend&lt;H&gt;,
+		</span>B: AsTrieBackend&lt;H&gt;,
 		H: Hasher,
 		H::Out: Ord + Codec,
 	{
-		<span class="kw">let </span>trie_backend = backend
-			.as_trie_backend()
-			.ok_or_else(|| Box::new(ExecutionError::UnableToGenerateProof) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+		<span class="kw">let </span>trie_backend = backend.as_trie_backend();
 		prove_range_read_with_child_with_size_on_trie_backend(trie_backend, size_limit, start_at)
 	}
 
@@ -3152,7 +3038,9 @@
 			<span class="kw">return </span><span class="prelude-val">Err</span>(Box::new(<span class="string">&quot;Invalid start of range.&quot;</span>))
 		}
 
-		<span class="kw">let </span>proving_backend = proving_backend::ProvingBackend::&lt;S, H&gt;::new(trie_backend);
+		<span class="kw">let </span>recorder = sp_trie::recorder::Recorder::default();
+		<span class="kw">let </span>proving_backend =
+			TrieBackendBuilder::wrap(trie_backend).with_recorder(recorder.clone()).build();
 		<span class="kw">let </span><span class="kw-2">mut </span>count = <span class="number">0</span>;
 
 		<span class="kw">let </span><span class="kw-2">mut </span>child_roots = HashSet::new();
@@ -3189,47 +3077,36 @@
 
 			<span class="kw">let </span>start_at_ref = start_at.as_ref().map(AsRef::as_ref);
 			<span class="kw">let </span><span class="kw-2">mut </span>switch_child_key = <span class="prelude-val">None</span>;
-			<span class="kw">let </span><span class="kw-2">mut </span>first = start_at.is_some();
-			<span class="kw">let </span>completed = proving_backend
-				.apply_to_key_values_while(
-					child_info.as_ref(),
-					<span class="prelude-val">None</span>,
-					start_at_ref,
-					|key, value| {
-						<span class="kw">if </span>first &amp;&amp;
-							start_at_ref
-								.as_ref()
-								.map(|start| <span class="kw-2">&amp;</span>key.as_slice() &gt; start)
-								.unwrap_or(<span class="bool-val">true</span>)
-						{
-							first = <span class="bool-val">false</span>;
-						}
-
-						<span class="kw">if </span>first {
-							<span class="bool-val">true
-						</span>} <span class="kw">else if </span>depth &lt; MAX_NESTED_TRIE_DEPTH &amp;&amp;
-							sp_core::storage::well_known_keys::is_child_storage_key(
-								key.as_slice(),
-							) {
-							count += <span class="number">1</span>;
-							<span class="kw">if </span>!child_roots.contains(value.as_slice()) {
-								child_roots.insert(value);
-								switch_child_key = <span class="prelude-val">Some</span>(key);
-								<span class="bool-val">false
-							</span>} <span class="kw">else </span>{
-								<span class="comment">// do not add two child trie with same root
-								</span><span class="bool-val">true
-							</span>}
-						} <span class="kw">else if </span>proving_backend.estimate_encoded_size() &lt;= size_limit {
-							count += <span class="number">1</span>;
-							<span class="bool-val">true
-						</span>} <span class="kw">else </span>{
-							<span class="bool-val">false
-						</span>}
-					},
-					<span class="bool-val">false</span>,
-				)
+			<span class="kw">let </span><span class="kw-2">mut </span>iter = proving_backend
+				.pairs(IterArgs {
+					child_info,
+					start_at: start_at_ref,
+					start_at_exclusive: <span class="bool-val">true</span>,
+					..IterArgs::default()
+				})
 				.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+
+			<span class="kw">while let </span><span class="prelude-val">Some</span>(item) = iter.next() {
+				<span class="kw">let </span>(key, value) = item.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+
+				<span class="kw">if </span>depth &lt; MAX_NESTED_TRIE_DEPTH &amp;&amp;
+					sp_core::storage::well_known_keys::is_child_storage_key(key.as_slice())
+				{
+					count += <span class="number">1</span>;
+					<span class="comment">// do not add two child trie with same root
+					</span><span class="kw">if </span>!child_roots.contains(value.as_slice()) {
+						child_roots.insert(value);
+						switch_child_key = <span class="prelude-val">Some</span>(key);
+						<span class="kw">break
+					</span>}
+				} <span class="kw">else if </span>recorder.estimate_encoded_size() &lt;= size_limit {
+					count += <span class="number">1</span>;
+				} <span class="kw">else </span>{
+					<span class="kw">break
+				</span>}
+			}
+
+			<span class="kw">let </span>completed = iter.was_complete();
 
 			<span class="kw">if </span>switch_child_key.is_none() {
 				<span class="kw">if </span>depth == <span class="number">1 </span>{
@@ -3244,7 +3121,11 @@
 				start_at = <span class="prelude-val">None</span>;
 			}
 		}
-		<span class="prelude-val">Ok</span>((proving_backend.extract_proof(), count))
+
+		<span class="kw">let </span>proof = proving_backend
+			.extract_proof()
+			.expect(<span class="string">&quot;A recorder was set and thus, a storage proof can be extracted; qed&quot;</span>);
+		<span class="prelude-val">Ok</span>((proof, count))
 	}
 
 	<span class="doccomment">/// Generate range storage read proof.
@@ -3256,13 +3137,11 @@
 		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(StorageProof, u32), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>B: Backend&lt;H&gt;,
+		</span>B: AsTrieBackend&lt;H&gt;,
 		H: Hasher,
 		H::Out: Ord + Codec,
 	{
-		<span class="kw">let </span>trie_backend = backend
-			.as_trie_backend()
-			.ok_or_else(|| Box::new(ExecutionError::UnableToGenerateProof) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+		<span class="kw">let </span>trie_backend = backend.as_trie_backend();
 		prove_range_read_with_size_on_trie_backend(
 			trie_backend,
 			child_info,
@@ -3285,25 +3164,35 @@
 		H: Hasher,
 		H::Out: Ord + Codec,
 	{
-		<span class="kw">let </span>proving_backend = proving_backend::ProvingBackend::&lt;S, H&gt;::new(trie_backend);
+		<span class="kw">let </span>recorder = sp_trie::recorder::Recorder::default();
+		<span class="kw">let </span>proving_backend =
+			TrieBackendBuilder::wrap(trie_backend).with_recorder(recorder.clone()).build();
 		<span class="kw">let </span><span class="kw-2">mut </span>count = <span class="number">0</span>;
-		proving_backend
-			.apply_to_key_values_while(
-				child_info,
+		<span class="kw">let </span>iter = proving_backend
+			<span class="comment">// NOTE: Even though the loop below doesn&#39;t use these values
+			//       this *must* fetch both the keys and the values so that
+			//       the proof is correct.
+			</span>.pairs(IterArgs {
+				child_info: child_info.cloned(),
 				prefix,
 				start_at,
-				|_key, _value| {
-					<span class="kw">if </span>count == <span class="number">0 </span>|| proving_backend.estimate_encoded_size() &lt;= size_limit {
-						count += <span class="number">1</span>;
-						<span class="bool-val">true
-					</span>} <span class="kw">else </span>{
-						<span class="bool-val">false
-					</span>}
-				},
-				<span class="bool-val">false</span>,
-			)
+				..IterArgs::default()
+			})
 			.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>((proving_backend.extract_proof(), count))
+
+		<span class="kw">for </span>item <span class="kw">in </span>iter {
+			item.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+			<span class="kw">if </span>count == <span class="number">0 </span>|| recorder.estimate_encoded_size() &lt;= size_limit {
+				count += <span class="number">1</span>;
+			} <span class="kw">else </span>{
+				<span class="kw">break
+			</span>}
+		}
+
+		<span class="kw">let </span>proof = proving_backend
+			.extract_proof()
+			.expect(<span class="string">&quot;A recorder was set and thus, a storage proof can be extracted; qed&quot;</span>);
+		<span class="prelude-val">Ok</span>((proof, count))
 	}
 
 	<span class="doccomment">/// Generate child storage read proof.
@@ -3313,15 +3202,13 @@
 		keys: I,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;StorageProof, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>B: Backend&lt;H&gt;,
+		</span>B: AsTrieBackend&lt;H&gt;,
 		H: Hasher,
 		H::Out: Ord + Codec,
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
 	{
-		<span class="kw">let </span>trie_backend = backend
-			.as_trie_backend()
-			.ok_or_else(|| Box::new(ExecutionError::UnableToGenerateProof) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+		<span class="kw">let </span>trie_backend = backend.as_trie_backend();
 		prove_child_read_on_trie_backend(trie_backend, child_info, keys)
 	}
 
@@ -3337,13 +3224,17 @@
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
 	{
-		<span class="kw">let </span>proving_backend = proving_backend::ProvingBackend::&lt;<span class="kw">_</span>, H&gt;::new(trie_backend);
+		<span class="kw">let </span>proving_backend =
+			TrieBackendBuilder::wrap(trie_backend).with_recorder(Default::default()).build();
 		<span class="kw">for </span>key <span class="kw">in </span>keys.into_iter() {
 			proving_backend
 				.storage(key.as_ref())
 				.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
 		}
-		<span class="prelude-val">Ok</span>(proving_backend.extract_proof())
+
+		<span class="prelude-val">Ok</span>(proving_backend
+			.extract_proof()
+			.expect(<span class="string">&quot;A recorder was set and thus, a storage proof can be extracted; qed&quot;</span>))
 	}
 
 	<span class="doccomment">/// Generate storage read proof on pre-created trie backend.
@@ -3359,13 +3250,17 @@
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
 	{
-		<span class="kw">let </span>proving_backend = proving_backend::ProvingBackend::&lt;<span class="kw">_</span>, H&gt;::new(trie_backend);
+		<span class="kw">let </span>proving_backend =
+			TrieBackendBuilder::wrap(trie_backend).with_recorder(Default::default()).build();
 		<span class="kw">for </span>key <span class="kw">in </span>keys.into_iter() {
 			proving_backend
 				.child_storage(child_info, key.as_ref())
 				.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
 		}
-		<span class="prelude-val">Ok</span>(proving_backend.extract_proof())
+
+		<span class="prelude-val">Ok</span>(proving_backend
+			.extract_proof()
+			.expect(<span class="string">&quot;A recorder was set and thus, a storage proof can be extracted; qed&quot;</span>))
 	}
 
 	<span class="doccomment">/// Check storage read proof, generated by `prove_read` call.
@@ -3375,7 +3270,7 @@
 		keys: I,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;HashMap&lt;Vec&lt;u8&gt;, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>H: Hasher,
+		</span>H: Hasher + <span class="lifetime">&#39;static</span>,
 		H::Out: Ord + Codec,
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
@@ -3400,7 +3295,7 @@
 		start_at: <span class="kw-2">&amp;</span>[Vec&lt;u8&gt;],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(KeyValueStates, usize), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>H: Hasher,
+		</span>H: Hasher + <span class="lifetime">&#39;static</span>,
 		H::Out: Ord + Codec,
 	{
 		<span class="kw">let </span>proving_backend = create_proof_check_backend::&lt;H&gt;(root, proof)<span class="question-mark">?</span>;
@@ -3417,7 +3312,7 @@
 		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;(Vec&lt;u8&gt;, Vec&lt;u8&gt;)&gt;, bool), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>H: Hasher,
+		</span>H: Hasher + <span class="lifetime">&#39;static</span>,
 		H::Out: Ord + Codec,
 	{
 		<span class="kw">let </span>proving_backend = create_proof_check_backend::&lt;H&gt;(root, proof)<span class="question-mark">?</span>;
@@ -3438,7 +3333,7 @@
 		keys: I,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;HashMap&lt;Vec&lt;u8&gt;, <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt;&gt;, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;
 	<span class="kw">where
-		</span>H: Hasher,
+		</span>H: Hasher + <span class="lifetime">&#39;static</span>,
 		H::Out: Ord + Codec,
 		I: IntoIterator,
 		I::Item: AsRef&lt;[u8]&gt;,
@@ -3499,20 +3394,25 @@
 		H::Out: Ord + Codec,
 	{
 		<span class="kw">let </span><span class="kw-2">mut </span>values = Vec::new();
-		<span class="kw">let </span>result = proving_backend.apply_to_key_values_while(
-			child_info,
-			prefix,
-			start_at,
-			|key, value| {
-				values.push((key.to_vec(), value.to_vec()));
-				count.as_ref().map_or(<span class="bool-val">true</span>, |c| (values.len() <span class="kw">as </span>u32) &lt; <span class="kw-2">*</span>c)
-			},
-			<span class="bool-val">true</span>,
-		);
-		<span class="kw">match </span>result {
-			<span class="prelude-val">Ok</span>(completed) =&gt; <span class="prelude-val">Ok</span>((values, completed)),
-			<span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;),
+		<span class="kw">let </span><span class="kw-2">mut </span>iter = proving_backend
+			.pairs(IterArgs {
+				child_info: child_info.cloned(),
+				prefix,
+				start_at,
+				stop_on_incomplete_database: <span class="bool-val">true</span>,
+				..IterArgs::default()
+			})
+			.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+
+		<span class="kw">while let </span><span class="prelude-val">Some</span>(item) = iter.next() {
+			<span class="kw">let </span>(key, value) = item.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+			values.push((key, value));
+			<span class="kw">if </span>!count.as_ref().map_or(<span class="bool-val">true</span>, |c| (values.len() <span class="kw">as </span>u32) &lt; <span class="kw-2">*</span>c) {
+				<span class="kw">break
+			</span>}
 		}
+
+		<span class="prelude-val">Ok</span>((values, iter.was_complete()))
 	}
 
 	<span class="doccomment">/// Check storage range proof on pre-created proving backend.
@@ -3581,46 +3481,34 @@
 			};
 			<span class="kw">let </span>start_at_ref = start_at.as_ref().map(AsRef::as_ref);
 			<span class="kw">let </span><span class="kw-2">mut </span>switch_child_key = <span class="prelude-val">None</span>;
-			<span class="kw">let </span><span class="kw-2">mut </span>first = start_at.is_some();
-			<span class="kw">let </span>completed = proving_backend
-				.apply_to_key_values_while(
-					child_info.as_ref(),
-					<span class="prelude-val">None</span>,
-					start_at_ref,
-					|key, value| {
-						<span class="kw">if </span>first &amp;&amp;
-							start_at_ref
-								.as_ref()
-								.map(|start| <span class="kw-2">&amp;</span>key.as_slice() &gt; start)
-								.unwrap_or(<span class="bool-val">true</span>)
-						{
-							first = <span class="bool-val">false</span>;
-						}
 
-						<span class="kw">if </span>!first {
-							values.push((key.to_vec(), value.to_vec()));
-						}
-						<span class="kw">if </span>first {
-							<span class="bool-val">true
-						</span>} <span class="kw">else if </span>depth &lt; MAX_NESTED_TRIE_DEPTH &amp;&amp;
-							sp_core::storage::well_known_keys::is_child_storage_key(
-								key.as_slice(),
-							) {
-							<span class="kw">if </span>child_roots.contains(value.as_slice()) {
-								<span class="comment">// Do not add two chid trie with same root.
-								</span><span class="bool-val">true
-							</span>} <span class="kw">else </span>{
-								child_roots.insert(value.clone());
-								switch_child_key = <span class="prelude-val">Some</span>((key, value));
-								<span class="bool-val">false
-							</span>}
-						} <span class="kw">else </span>{
-							<span class="bool-val">true
-						</span>}
-					},
-					<span class="bool-val">true</span>,
-				)
+			<span class="kw">let </span><span class="kw-2">mut </span>iter = proving_backend
+				.pairs(IterArgs {
+					child_info,
+					start_at: start_at_ref,
+					start_at_exclusive: <span class="bool-val">true</span>,
+					stop_on_incomplete_database: <span class="bool-val">true</span>,
+					..IterArgs::default()
+				})
 				.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+
+			<span class="kw">while let </span><span class="prelude-val">Some</span>(item) = iter.next() {
+				<span class="kw">let </span>(key, value) = item.map_err(|e| Box::new(e) <span class="kw">as </span>Box&lt;<span class="kw">dyn </span>Error&gt;)<span class="question-mark">?</span>;
+				values.push((key.to_vec(), value.to_vec()));
+
+				<span class="kw">if </span>depth &lt; MAX_NESTED_TRIE_DEPTH &amp;&amp;
+					sp_core::storage::well_known_keys::is_child_storage_key(key.as_slice())
+				{
+					<span class="comment">// Do not add two chid trie with same root.
+					</span><span class="kw">if </span>!child_roots.contains(value.as_slice()) {
+						child_roots.insert(value.clone());
+						switch_child_key = <span class="prelude-val">Some</span>((key, value));
+						<span class="kw">break
+					</span>}
+				}
+			}
+
+			<span class="kw">let </span>completed = iter.was_complete();
 
 			<span class="kw">if </span>switch_child_key.is_none() {
 				<span class="kw">if </span>!completed {
@@ -3642,23 +3530,23 @@
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
-	<span class="kw">use super</span>::{ext::Ext, <span class="kw-2">*</span>};
+	<span class="kw">use super</span>::{backend::AsTrieBackend, ext::Ext, <span class="kw-2">*</span>};
 	<span class="kw">use crate</span>::{execution::CallResult, in_memory_backend::new_in_mem_hash_key};
 	<span class="kw">use </span>assert_matches::assert_matches;
-	<span class="kw">use </span>codec::{Decode, Encode};
+	<span class="kw">use </span>codec::Encode;
 	<span class="kw">use </span>sp_core::{
 		map,
 		storage::{ChildInfo, StateVersion},
 		testing::TaskExecutor,
-		traits::{CodeExecutor, Externalities, RuntimeCode},
-		NativeOrEncoded, NeverNativeValue,
+		traits::{CallContext, CodeExecutor, Externalities, RuntimeCode},
+		H256,
 	};
 	<span class="kw">use </span>sp_runtime::traits::BlakeTwo256;
-	<span class="kw">use </span>std::{
-		collections::{BTreeMap, HashMap},
-		panic::UnwindSafe,
-		result,
+	<span class="kw">use </span>sp_trie::{
+		trie_types::{TrieDBMutBuilderV0, TrieDBMutBuilderV1},
+		KeySpacedDBMut, PrefixedMemoryDB,
 	};
+	<span class="kw">use </span>std::collections::{BTreeMap, HashMap};
 
 	<span class="attr">#[derive(Clone)]
 	</span><span class="kw">struct </span>DummyCodeExecutor {
@@ -3670,28 +3558,21 @@
 	<span class="kw">impl </span>CodeExecutor <span class="kw">for </span>DummyCodeExecutor {
 		<span class="kw">type </span>Error = u8;
 
-		<span class="kw">fn </span>call&lt;
-			R: Encode + Decode + PartialEq,
-			NC: FnOnce() -&gt; result::Result&lt;R, Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;&gt; + UnwindSafe,
-		&gt;(
+		<span class="kw">fn </span>call(
 			<span class="kw-2">&amp;</span><span class="self">self</span>,
 			ext: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Externalities,
 			<span class="kw">_</span>: <span class="kw-2">&amp;</span>RuntimeCode,
 			_method: <span class="kw-2">&amp;</span>str,
 			_data: <span class="kw-2">&amp;</span>[u8],
 			use_native: bool,
-			native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
-		) -&gt; (CallResult&lt;R, <span class="self">Self</span>::Error&gt;, bool) {
+			<span class="kw">_</span>: CallContext,
+		) -&gt; (CallResult&lt;<span class="self">Self</span>::Error&gt;, bool) {
 			<span class="kw">let </span>using_native = use_native &amp;&amp; <span class="self">self</span>.native_available;
-			<span class="kw">match </span>(using_native, <span class="self">self</span>.native_succeeds, <span class="self">self</span>.fallback_succeeds, native_call) {
-				(<span class="bool-val">true</span>, <span class="bool-val">true</span>, <span class="kw">_</span>, <span class="prelude-val">Some</span>(call)) =&gt; {
-					<span class="kw">let </span>res = sp_externalities::set_and_run_with_externalities(ext, call);
-					(res.map(NativeOrEncoded::Native).map_err(|<span class="kw">_</span>| <span class="number">0</span>), <span class="bool-val">true</span>)
-				},
-				(<span class="bool-val">true</span>, <span class="bool-val">true</span>, <span class="kw">_</span>, <span class="prelude-val">None</span>) | (<span class="bool-val">false</span>, <span class="kw">_</span>, <span class="bool-val">true</span>, <span class="prelude-val">None</span>) =&gt; (
-					<span class="prelude-val">Ok</span>(NativeOrEncoded::Encoded(<span class="macro">vec!</span>[
+			<span class="kw">match </span>(using_native, <span class="self">self</span>.native_succeeds, <span class="self">self</span>.fallback_succeeds) {
+				(<span class="bool-val">true</span>, <span class="bool-val">true</span>, <span class="kw">_</span>) | (<span class="bool-val">false</span>, <span class="kw">_</span>, <span class="bool-val">true</span>) =&gt; (
+					<span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[
 						ext.storage(<span class="string">b&quot;value1&quot;</span>).unwrap()[<span class="number">0</span>] + ext.storage(<span class="string">b&quot;value2&quot;</span>).unwrap()[<span class="number">0</span>],
-					])),
+					]),
 					using_native,
 				),
 				<span class="kw">_ </span>=&gt; (<span class="prelude-val">Err</span>(<span class="number">0</span>), using_native),
@@ -3715,7 +3596,7 @@
 		execute_works_inner(StateVersion::V1);
 	}
 	<span class="kw">fn </span>execute_works_inner(state_version: StateVersion) {
-		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span><span class="kw-2">mut </span>overlayed_changes = Default::default();
 		<span class="kw">let </span>wasm_code = RuntimeCode::empty();
 
@@ -3732,6 +3613,7 @@
 			Default::default(),
 			<span class="kw-2">&amp;</span>wasm_code,
 			TaskExecutor::new(),
+			CallContext::Offchain,
 		);
 
 		<span class="macro">assert_eq!</span>(state_machine.execute(ExecutionStrategy::NativeWhenPossible).unwrap(), <span class="macro">vec!</span>[<span class="number">66</span>]);
@@ -3743,7 +3625,7 @@
 		execute_works_with_native_else_wasm_inner(StateVersion::V1);
 	}
 	<span class="kw">fn </span>execute_works_with_native_else_wasm_inner(state_version: StateVersion) {
-		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span><span class="kw-2">mut </span>overlayed_changes = Default::default();
 		<span class="kw">let </span>wasm_code = RuntimeCode::empty();
 
@@ -3760,6 +3642,7 @@
 			Default::default(),
 			<span class="kw-2">&amp;</span>wasm_code,
 			TaskExecutor::new(),
+			CallContext::Offchain,
 		);
 
 		<span class="macro">assert_eq!</span>(state_machine.execute(ExecutionStrategy::NativeElseWasm).unwrap(), <span class="macro">vec!</span>[<span class="number">66</span>]);
@@ -3772,7 +3655,7 @@
 	}
 	<span class="kw">fn </span>dual_execution_strategy_detects_consensus_failure_inner(state_version: StateVersion) {
 		<span class="kw">let </span><span class="kw-2">mut </span>consensus_failed = <span class="bool-val">false</span>;
-		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span><span class="kw-2">mut </span>overlayed_changes = Default::default();
 		<span class="kw">let </span>wasm_code = RuntimeCode::empty();
 
@@ -3789,16 +3672,14 @@
 			Default::default(),
 			<span class="kw-2">&amp;</span>wasm_code,
 			TaskExecutor::new(),
+			CallContext::Offchain,
 		);
 
 		<span class="macro">assert!</span>(state_machine
-			.execute_using_consensus_failure_handler::&lt;<span class="kw">_</span>, NeverNativeValue, <span class="kw">fn</span>() -&gt; <span class="kw">_</span>&gt;(
-				ExecutionManager::Both(|we, _ne| {
-					consensus_failed = <span class="bool-val">true</span>;
-					we
-				}),
-				<span class="prelude-val">None</span>,
-			)
+			.execute_using_consensus_failure_handler(ExecutionManager::Both(|we, _ne| {
+				consensus_failed = <span class="bool-val">true</span>;
+				we
+			}),)
 			.is_err());
 		<span class="macro">assert!</span>(consensus_failed);
 	}
@@ -3816,7 +3697,7 @@
 		};
 
 		<span class="comment">// fetch execution proof from &#39;remote&#39; full node
-		</span><span class="kw">let </span><span class="kw-2">mut </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		</span><span class="kw">let </span><span class="kw-2">mut </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>remote_root = remote_backend.storage_root(std::iter::empty(), state_version).<span class="number">0</span>;
 		<span class="kw">let </span>(remote_result, remote_proof) = prove_execution(
 			<span class="kw-2">&amp;mut </span>remote_backend,
@@ -3856,7 +3737,7 @@
 			<span class="string">b&quot;bbb&quot;</span>.to_vec() =&gt; <span class="string">b&quot;3&quot;</span>.to_vec()
 		];
 		<span class="kw">let </span>state = InMemoryBackend::&lt;BlakeTwo256&gt;::from((initial, StateVersion::default()));
-		<span class="kw">let </span>backend = state.as_trie_backend().unwrap();
+		<span class="kw">let </span>backend = state.as_trie_backend();
 
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 		overlay.set_storage(<span class="string">b&quot;aba&quot;</span>.to_vec(), <span class="prelude-val">Some</span>(<span class="string">b&quot;1312&quot;</span>.to_vec()));
@@ -4012,7 +3893,7 @@
 		<span class="kw">let </span>child_info = ChildInfo::new_default(<span class="string">b&quot;sub1&quot;</span>);
 		<span class="kw">let </span>child_info = <span class="kw-2">&amp;</span>child_info;
 		<span class="kw">let </span>state = new_in_mem_hash_key::&lt;BlakeTwo256&gt;();
-		<span class="kw">let </span>backend = state.as_trie_backend().unwrap();
+		<span class="kw">let </span>backend = state.as_trie_backend();
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>cache = StorageTransactionCache::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>ext = Ext::new(<span class="kw-2">&amp;mut </span>overlay, <span class="kw-2">&amp;mut </span>cache, backend, <span class="prelude-val">None</span>);
@@ -4028,7 +3909,7 @@
 		<span class="kw">let </span>reference_data = <span class="macro">vec!</span>[<span class="string">b&quot;data1&quot;</span>.to_vec(), <span class="string">b&quot;2&quot;</span>.to_vec(), <span class="string">b&quot;D3&quot;</span>.to_vec(), <span class="string">b&quot;d4&quot;</span>.to_vec()];
 		<span class="kw">let </span>key = <span class="string">b&quot;key&quot;</span>.to_vec();
 		<span class="kw">let </span>state = new_in_mem_hash_key::&lt;BlakeTwo256&gt;();
-		<span class="kw">let </span>backend = state.as_trie_backend().unwrap();
+		<span class="kw">let </span>backend = state.as_trie_backend();
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 		<span class="kw">let </span><span class="kw-2">mut </span>cache = StorageTransactionCache::default();
 		{
@@ -4065,7 +3946,7 @@
 		<span class="kw">let </span>key = <span class="string">b&quot;events&quot;</span>.to_vec();
 		<span class="kw">let </span><span class="kw-2">mut </span>cache = StorageTransactionCache::default();
 		<span class="kw">let </span>state = new_in_mem_hash_key::&lt;BlakeTwo256&gt;();
-		<span class="kw">let </span>backend = state.as_trie_backend().unwrap();
+		<span class="kw">let </span>backend = state.as_trie_backend();
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 
 		<span class="comment">// For example, block initialization with event.
@@ -4136,7 +4017,7 @@
 		</span><span class="kw">let </span>child_info = <span class="kw-2">&amp;</span>child_info;
 		<span class="kw">let </span>missing_child_info = <span class="kw-2">&amp;</span>missing_child_info;
 		<span class="comment">// fetch read proof from &#39;remote&#39; full node
-		</span><span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		</span><span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>remote_root = remote_backend.storage_root(std::iter::empty(), state_version).<span class="number">0</span>;
 		<span class="kw">let </span>remote_proof = prove_read(remote_backend, <span class="kw-2">&amp;</span>[<span class="string">b&quot;value2&quot;</span>]).unwrap();
 		<span class="kw">let </span>remote_proof = test_compact(remote_proof, <span class="kw-2">&amp;</span>remote_root);
@@ -4153,7 +4034,7 @@
 		);
 		<span class="macro">assert_eq!</span>(local_result2, <span class="bool-val">false</span>);
 		<span class="comment">// on child trie
-		</span><span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		</span><span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>remote_root = remote_backend.storage_root(std::iter::empty(), state_version).<span class="number">0</span>;
 		<span class="kw">let </span>remote_proof = prove_child_read(remote_backend, child_info, <span class="kw-2">&amp;</span>[<span class="string">b&quot;value3&quot;</span>]).unwrap();
 		<span class="kw">let </span>remote_proof = test_compact(remote_proof, <span class="kw-2">&amp;</span>remote_root);
@@ -4192,7 +4073,7 @@
 		<span class="kw">use </span>rand::{rngs::SmallRng, RngCore, SeedableRng};
 		<span class="kw">let </span><span class="kw-2">mut </span>storage: HashMap&lt;<span class="prelude-ty">Option</span>&lt;ChildInfo&gt;, BTreeMap&lt;StorageKey, StorageValue&gt;&gt; =
 			Default::default();
-		<span class="kw">let </span><span class="kw-2">mut </span>seed = [<span class="number">0</span>; <span class="number">16</span>];
+		<span class="kw">let </span><span class="kw-2">mut </span>seed = [<span class="number">0</span>; <span class="number">32</span>];
 		<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="number">50u32 </span>{
 			<span class="kw">let </span><span class="kw-2">mut </span>child_infos = Vec::new();
 			<span class="kw">let </span>seed_partial = <span class="kw-2">&amp;mut </span>seed[<span class="number">0</span>..<span class="number">4</span>];
@@ -4220,8 +4101,8 @@
 
 			<span class="kw">let </span>trie: InMemoryBackend&lt;BlakeTwo256&gt; =
 				(storage.clone(), StateVersion::default()).into();
-			<span class="kw">let </span>trie_root = trie.root();
-			<span class="kw">let </span>backend = <span class="kw">crate</span>::ProvingBackend::new(<span class="kw-2">&amp;</span>trie);
+			<span class="kw">let </span>trie_root = <span class="kw-2">*</span>trie.root();
+			<span class="kw">let </span>backend = TrieBackendBuilder::wrap(<span class="kw-2">&amp;</span>trie).with_recorder(Default::default()).build();
 			<span class="kw">let </span><span class="kw-2">mut </span>queries = Vec::new();
 			<span class="kw">for </span>c <span class="kw">in </span><span class="number">0</span>..(<span class="number">5 </span>+ nb_child_trie / <span class="number">2</span>) {
 				<span class="comment">// random existing query
@@ -4266,10 +4147,10 @@
 				}
 			}
 
-			<span class="kw">let </span>storage_proof = backend.extract_proof();
+			<span class="kw">let </span>storage_proof = backend.extract_proof().expect(<span class="string">&quot;Failed to extract proof&quot;</span>);
 			<span class="kw">let </span>remote_proof = test_compact(storage_proof, <span class="kw-2">&amp;</span>trie_root);
 			<span class="kw">let </span>proof_check =
-				create_proof_check_backend::&lt;BlakeTwo256&gt;(<span class="kw-2">*</span>trie_root, remote_proof).unwrap();
+				create_proof_check_backend::&lt;BlakeTwo256&gt;(trie_root, remote_proof).unwrap();
 
 			<span class="kw">for </span>(child_info, key, expected) <span class="kw">in </span>queries {
 				<span class="macro">assert_eq!</span>(
@@ -4283,19 +4164,21 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>prove_read_with_size_limit_works() {
 		<span class="kw">let </span>state_version = StateVersion::V0;
-		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>remote_root = remote_backend.storage_root(::std::iter::empty(), state_version).<span class="number">0</span>;
 		<span class="kw">let </span>(proof, count) =
 			prove_range_read_with_size(remote_backend, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="number">0</span>, <span class="prelude-val">None</span>).unwrap();
 		<span class="comment">// Always contains at least some nodes.
-		</span><span class="macro">assert_eq!</span>(proof.into_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">3</span>);
+		</span><span class="macro">assert_eq!</span>(proof.to_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">3</span>);
 		<span class="macro">assert_eq!</span>(count, <span class="number">1</span>);
+		<span class="macro">assert_eq!</span>(proof.encoded_size(), <span class="number">443</span>);
 
-		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>(proof, count) =
 			prove_range_read_with_size(remote_backend, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="number">800</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[])).unwrap();
-		<span class="macro">assert_eq!</span>(proof.clone().into_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">9</span>);
+		<span class="macro">assert_eq!</span>(proof.to_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">9</span>);
 		<span class="macro">assert_eq!</span>(count, <span class="number">85</span>);
+		<span class="macro">assert_eq!</span>(proof.encoded_size(), <span class="number">857</span>);
 		<span class="kw">let </span>(results, completed) = read_range_proof_check::&lt;BlakeTwo256&gt;(
 			remote_root,
 			proof.clone(),
@@ -4314,11 +4197,13 @@
 		<span class="macro">assert_eq!</span>(results.len() <span class="kw">as </span>u32, <span class="number">101</span>);
 		<span class="macro">assert_eq!</span>(completed, <span class="bool-val">false</span>);
 
-		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>(proof, count) =
 			prove_range_read_with_size(remote_backend, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="number">50000</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[])).unwrap();
-		<span class="macro">assert_eq!</span>(proof.clone().into_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">11</span>);
+		<span class="macro">assert_eq!</span>(proof.to_memory_db::&lt;BlakeTwo256&gt;().drain().len(), <span class="number">11</span>);
 		<span class="macro">assert_eq!</span>(count, <span class="number">132</span>);
+		<span class="macro">assert_eq!</span>(proof.encoded_size(), <span class="number">990</span>);
+
 		<span class="kw">let </span>(results, completed) =
 			read_range_proof_check::&lt;BlakeTwo256&gt;(remote_root, proof, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
 				.unwrap();
@@ -4327,11 +4212,37 @@
 	}
 
 	<span class="attr">#[test]
+	</span><span class="kw">fn </span>prove_read_with_size_limit_proof_size() {
+		<span class="kw">let </span><span class="kw-2">mut </span>root = H256::default();
+		<span class="kw">let </span><span class="kw-2">mut </span>mdb = PrefixedMemoryDB::&lt;BlakeTwo256&gt;::default();
+		{
+			<span class="kw">let </span><span class="kw-2">mut </span>mdb = KeySpacedDBMut::new(<span class="kw-2">&amp;mut </span>mdb, <span class="string">b&quot;&quot;</span>);
+			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilderV1::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root).build();
+			trie.insert(<span class="string">b&quot;value1&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">123</span>; <span class="number">1</span>]).unwrap();
+			trie.insert(<span class="string">b&quot;value2&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">123</span>; <span class="number">10</span>]).unwrap();
+			trie.insert(<span class="string">b&quot;value3&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">123</span>; <span class="number">100</span>]).unwrap();
+			trie.insert(<span class="string">b&quot;value4&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">123</span>; <span class="number">1000</span>]).unwrap();
+		}
+
+		<span class="kw">let </span>remote_backend: TrieBackend&lt;PrefixedMemoryDB&lt;BlakeTwo256&gt;, BlakeTwo256&gt; =
+			TrieBackendBuilder::new(mdb, root)
+				.with_optional_cache(<span class="prelude-val">None</span>)
+				.with_optional_recorder(<span class="prelude-val">None</span>)
+				.build();
+
+		<span class="kw">let </span>(proof, count) =
+			prove_range_read_with_size(remote_backend, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="number">1000</span>, <span class="prelude-val">None</span>).unwrap();
+
+		<span class="macro">assert_eq!</span>(proof.encoded_size(), <span class="number">1267</span>);
+		<span class="macro">assert_eq!</span>(count, <span class="number">3</span>);
+	}
+
+	<span class="attr">#[test]
 	</span><span class="kw">fn </span>inner_state_versioning_switch_proofs() {
 		<span class="kw">let </span><span class="kw-2">mut </span>state_version = StateVersion::V0;
 		<span class="kw">let </span>(<span class="kw-2">mut </span>mdb, <span class="kw-2">mut </span>root) = trie_backend::tests::test_db(state_version);
 		{
-			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutV0::from_existing(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root).unwrap();
+			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilderV0::from_existing(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root).build();
 			trie.insert(<span class="string">b&quot;foo&quot;</span>, <span class="macro">vec!</span>[<span class="number">1u8</span>; <span class="number">1_000</span>].as_slice()) <span class="comment">// big inner hash
 				</span>.expect(<span class="string">&quot;insert failed&quot;</span>);
 			trie.insert(<span class="string">b&quot;foo2&quot;</span>, <span class="macro">vec!</span>[<span class="number">3u8</span>; <span class="number">16</span>].as_slice()) <span class="comment">// no inner hash
@@ -4341,7 +4252,7 @@
 		}
 
 		<span class="kw">let </span>check_proof = |mdb, root, state_version| -&gt; StorageProof {
-			<span class="kw">let </span>remote_backend = TrieBackend::new(mdb, root);
+			<span class="kw">let </span>remote_backend = TrieBackendBuilder::new(mdb, root).build();
 			<span class="kw">let </span>remote_root = remote_backend.storage_root(std::iter::empty(), state_version).<span class="number">0</span>;
 			<span class="kw">let </span>remote_proof = prove_read(remote_backend, <span class="kw-2">&amp;</span>[<span class="string">b&quot;foo222&quot;</span>]).unwrap();
 			<span class="comment">// check proof locally
@@ -4365,7 +4276,7 @@
 		<span class="comment">// do switch
 		</span>state_version = StateVersion::V1;
 		{
-			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutV1::from_existing(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root).unwrap();
+			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilderV1::from_existing(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root).build();
 			trie.insert(<span class="string">b&quot;foo222&quot;</span>, <span class="macro">vec!</span>[<span class="number">5u8</span>; <span class="number">100</span>].as_slice()) <span class="comment">// inner hash
 				</span>.expect(<span class="string">&quot;insert failed&quot;</span>);
 			<span class="comment">// update with same value do change
@@ -4384,10 +4295,10 @@
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>prove_range_with_child_works() {
 		<span class="kw">let </span>state_version = StateVersion::V0;
-		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>remote_root = remote_backend.storage_root(std::iter::empty(), state_version).<span class="number">0</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>start_at = smallvec::SmallVec::&lt;[Vec&lt;u8&gt;; <span class="number">2</span>]&gt;::new();
-		<span class="kw">let </span>trie_backend = remote_backend.as_trie_backend().unwrap();
+		<span class="kw">let </span>trie_backend = remote_backend.as_trie_backend();
 		<span class="kw">let </span>max_iter = <span class="number">1000</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>nb_loop = <span class="number">0</span>;
 		<span class="kw">loop </span>{
@@ -4402,7 +4313,7 @@
 			)
 			.unwrap();
 			<span class="comment">// Always contains at least some nodes.
-			</span><span class="macro">assert!</span>(proof.clone().into_memory_db::&lt;BlakeTwo256&gt;().drain().len() &gt; <span class="number">0</span>);
+			</span><span class="macro">assert!</span>(proof.to_memory_db::&lt;BlakeTwo256&gt;().drain().len() &gt; <span class="number">0</span>);
 			<span class="macro">assert!</span>(count &lt; <span class="number">3</span>); <span class="comment">// when doing child we include parent and first child key.
 
 			</span><span class="kw">let </span>(result, completed_depth) = read_range_proof_check_with_child::&lt;BlakeTwo256&gt;(
@@ -4434,7 +4345,7 @@
 		</span><span class="kw">let </span>child_info2 = ChildInfo::new_default(<span class="string">b&quot;sub2&quot;</span>);
 		<span class="comment">// this root will be include in proof
 		</span><span class="kw">let </span>child_info3 = ChildInfo::new_default(<span class="string">b&quot;sub&quot;</span>);
-		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version);
+		<span class="kw">let </span>remote_backend = trie_backend::tests::test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 		<span class="kw">let </span>long_vec: Vec&lt;u8&gt; = (<span class="number">0</span>..<span class="number">1024usize</span>).map(|<span class="kw">_</span>| <span class="number">8u8</span>).collect();
 		<span class="kw">let </span>(remote_root, transaction) = remote_backend.full_storage_root(
 			std::iter::empty(),
@@ -4466,9 +4377,9 @@
 			.into_iter(),
 			state_version,
 		);
-		<span class="kw">let </span><span class="kw-2">mut </span>remote_storage = remote_backend.into_storage();
+		<span class="kw">let </span><span class="kw-2">mut </span>remote_storage = remote_backend.backend_storage().clone();
 		remote_storage.consolidate(transaction);
-		<span class="kw">let </span>remote_backend = TrieBackend::new(remote_storage, remote_root);
+		<span class="kw">let </span>remote_backend = TrieBackendBuilder::new(remote_storage, remote_root).build();
 		<span class="kw">let </span>remote_proof = prove_child_read(remote_backend, <span class="kw-2">&amp;</span>child_info1, <span class="kw-2">&amp;</span>[<span class="string">b&quot;key1&quot;</span>]).unwrap();
 		<span class="kw">let </span>size = remote_proof.encoded_size();
 		<span class="kw">let </span>remote_proof = test_compact(remote_proof, <span class="kw-2">&amp;</span>remote_root);
@@ -4494,7 +4405,7 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 
 		<span class="kw">let </span><span class="kw-2">mut </span>transaction = {
-			<span class="kw">let </span>backend = test_trie(state_version);
+			<span class="kw">let </span>backend = test_trie(state_version, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
 			<span class="kw">let </span><span class="kw-2">mut </span>cache = StorageTransactionCache::default();
 			<span class="kw">let </span><span class="kw-2">mut </span>ext = Ext::new(<span class="kw-2">&amp;mut </span>overlay, <span class="kw-2">&amp;mut </span>cache, <span class="kw-2">&amp;</span>backend, <span class="prelude-val">None</span>);
 			ext.set_child_storage(<span class="kw-2">&amp;</span>child_info_1, <span class="string">b&quot;abc&quot;</span>.to_vec(), <span class="string">b&quot;def&quot;</span>.to_vec());
@@ -4520,7 +4431,7 @@
 			<span class="string">b&quot;bbb&quot;</span>.to_vec() =&gt; <span class="string">b&quot;&quot;</span>.to_vec()
 		];
 		<span class="kw">let </span>state = InMemoryBackend::&lt;BlakeTwo256&gt;::from((initial, StateVersion::default()));
-		<span class="kw">let </span>backend = state.as_trie_backend().unwrap();
+		<span class="kw">let </span>backend = state.as_trie_backend();
 
 		<span class="kw">let </span><span class="kw-2">mut </span>overlay = OverlayedChanges::default();
 		overlay.start_transaction();
@@ -4541,53 +4452,6 @@
 		}
 		overlay.commit_transaction().unwrap();
 		<span class="macro">assert_eq!</span>(overlay.storage(<span class="string">b&quot;ccc&quot;</span>), <span class="prelude-val">Some</span>(<span class="prelude-val">None</span>));
-	}
-
-	<span class="attr">#[test]
-	</span><span class="kw">fn </span>runtime_registered_extensions_are_removed_after_execution() {
-		<span class="kw">let </span>state_version = StateVersion::default();
-		<span class="kw">use </span>sp_externalities::ExternalitiesExt;
-		<span class="macro">sp_externalities::decl_extension! </span>{
-			<span class="kw">struct </span>DummyExt(u32);
-		}
-
-		<span class="kw">let </span>backend = trie_backend::tests::test_trie(state_version);
-		<span class="kw">let </span><span class="kw-2">mut </span>overlayed_changes = Default::default();
-		<span class="kw">let </span>wasm_code = RuntimeCode::empty();
-
-		<span class="kw">let </span><span class="kw-2">mut </span>state_machine = StateMachine::new(
-			<span class="kw-2">&amp;</span>backend,
-			<span class="kw-2">&amp;mut </span>overlayed_changes,
-			<span class="kw-2">&amp;</span>DummyCodeExecutor {
-				native_available: <span class="bool-val">true</span>,
-				native_succeeds: <span class="bool-val">true</span>,
-				fallback_succeeds: <span class="bool-val">false</span>,
-			},
-			<span class="string">&quot;test&quot;</span>,
-			<span class="kw-2">&amp;</span>[],
-			Default::default(),
-			<span class="kw-2">&amp;</span>wasm_code,
-			TaskExecutor::new(),
-		);
-
-		<span class="kw">let </span>run_state_machine = |state_machine: <span class="kw-2">&amp;mut </span>StateMachine&lt;<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;| {
-			state_machine
-				.execute_using_consensus_failure_handler::&lt;<span class="kw">fn</span>(<span class="kw">_</span>, <span class="kw">_</span>) -&gt; <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
-					ExecutionManager::NativeWhenPossible,
-					<span class="prelude-val">Some</span>(|| {
-						sp_externalities::with_externalities(|<span class="kw-2">mut </span>ext| {
-							ext.register_extension(DummyExt(<span class="number">2</span>)).unwrap();
-						})
-						.unwrap();
-
-						<span class="prelude-val">Ok</span>(())
-					}),
-				)
-				.unwrap();
-		};
-
-		run_state_machine(<span class="kw-2">&amp;mut </span>state_machine);
-		run_state_machine(<span class="kw-2">&amp;mut </span>state_machine);
 	}
 }
 </code></pre></div>

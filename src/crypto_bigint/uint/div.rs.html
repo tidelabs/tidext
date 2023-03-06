@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/crypto-bigint-0.3.2/src/uint/div.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>div.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../crypto_bigint/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/crypto-bigint-0.4.9/src/uint/div.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>div.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../crypto_bigint/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -460,15 +460,48 @@
 <a href="#459" id="459">459</a>
 <a href="#460" id="460">460</a>
 <a href="#461" id="461">461</a>
+<a href="#462" id="462">462</a>
+<a href="#463" id="463">463</a>
+<a href="#464" id="464">464</a>
+<a href="#465" id="465">465</a>
+<a href="#466" id="466">466</a>
+<a href="#467" id="467">467</a>
+<a href="#468" id="468">468</a>
+<a href="#469" id="469">469</a>
+<a href="#470" id="470">470</a>
+<a href="#471" id="471">471</a>
+<a href="#472" id="472">472</a>
+<a href="#473" id="473">473</a>
+<a href="#474" id="474">474</a>
+<a href="#475" id="475">475</a>
+<a href="#476" id="476">476</a>
+<a href="#477" id="477">477</a>
+<a href="#478" id="478">478</a>
+<a href="#479" id="479">479</a>
+<a href="#480" id="480">480</a>
+<a href="#481" id="481">481</a>
+<a href="#482" id="482">482</a>
+<a href="#483" id="483">483</a>
+<a href="#484" id="484">484</a>
+<a href="#485" id="485">485</a>
+<a href="#486" id="486">486</a>
+<a href="#487" id="487">487</a>
+<a href="#488" id="488">488</a>
+<a href="#489" id="489">489</a>
+<a href="#490" id="490">490</a>
+<a href="#491" id="491">491</a>
+<a href="#492" id="492">492</a>
+<a href="#493" id="493">493</a>
+<a href="#494" id="494">494</a>
+<a href="#495" id="495">495</a>
+<a href="#496" id="496">496</a>
 </pre><pre class="rust"><code><span class="doccomment">//! [`UInt`] division operations.
 
 </span><span class="kw">use </span><span class="kw">super</span>::UInt;
-<span class="kw">use </span><span class="kw">crate</span>::limb::{LimbInt, LimbUInt};
+<span class="kw">use </span><span class="kw">crate</span>::limb::Word;
 <span class="kw">use crate</span>::{Integer, Limb, NonZero, Wrapping};
 <span class="kw">use </span>core::ops::{Div, DivAssign, Rem, RemAssign};
 <span class="kw">use </span>subtle::{Choice, CtOption};
-
-<span class="kw">const </span>LIMB_BIT_SIZE_M_1: usize = Limb::BIT_SIZE - <span class="number">1</span>;
 
 <span class="kw">impl</span>&lt;<span class="kw">const </span>LIMBS: usize&gt; UInt&lt;LIMBS&gt; {
     <span class="doccomment">/// Computes `self` / `rhs`, returns the quotient (q), remainder (r)
@@ -481,36 +514,28 @@
     /// When used with a fixed `rhs`, this function is constant-time with respect
     /// to `self`.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>ct_div_rem(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>, u8) {
-        <span class="kw">let </span><span class="kw-2">mut </span>bd = <span class="self">self</span>.bits().saturating_sub(rhs.bits());
+        <span class="kw">let </span>mb = rhs.bits_vartime();
+        <span class="kw">let </span><span class="kw-2">mut </span>bd = (LIMBS * Limb::BIT_SIZE) - mb;
         <span class="kw">let </span><span class="kw-2">mut </span>rem = <span class="kw-2">*</span><span class="self">self</span>;
         <span class="kw">let </span><span class="kw-2">mut </span>quo = <span class="self">Self</span>::ZERO;
-
         <span class="kw">let </span><span class="kw-2">mut </span>c = rhs.shl_vartime(bd);
-        <span class="kw">let </span><span class="kw-2">mut </span>e = <span class="self">Self</span>::ONE.shl_vartime(bd);
 
         <span class="kw">loop </span>{
-            <span class="kw">let </span><span class="kw-2">mut </span>r: <span class="self">Self </span>= rem.wrapping_sub(<span class="kw-2">&amp;</span>c);
-            <span class="kw">let </span>d = -(((<span class="number">1 </span>- (r.limbs[LIMBS - <span class="number">1</span>].<span class="number">0 </span>&gt;&gt; LIMB_BIT_SIZE_M_1)) &amp; <span class="number">1</span>) <span class="kw">as </span>LimbInt);
-            <span class="kw">let </span>d = d <span class="kw">as </span>LimbUInt;
-            rem = <span class="self">Self</span>::ct_select(rem, r, d);
-            r = quo;
-            r = r.wrapping_add(<span class="kw-2">&amp;</span>e);
-            quo = <span class="self">Self</span>::ct_select(quo, r, d);
+            <span class="kw">let </span>(<span class="kw-2">mut </span>r, borrow) = rem.sbb(<span class="kw-2">&amp;</span>c, Limb::ZERO);
+            rem = <span class="self">Self</span>::ct_select(r, rem, borrow.<span class="number">0</span>);
+            r = quo.bitor(<span class="kw-2">&amp;</span><span class="self">Self</span>::ONE);
+            quo = <span class="self">Self</span>::ct_select(r, quo, borrow.<span class="number">0</span>);
             <span class="kw">if </span>bd == <span class="number">0 </span>{
                 <span class="kw">break</span>;
             }
             bd -= <span class="number">1</span>;
             c = c.shr_vartime(<span class="number">1</span>);
-            e = e.shr_vartime(<span class="number">1</span>);
+            quo = quo.shl_vartime(<span class="number">1</span>);
         }
-        <span class="comment">// If `self`&lt;rhs
-        // set quo and rem to Self::ZERO
-        </span><span class="kw">let </span>res = <span class="self">self</span>.ct_cmp(rhs) + <span class="number">1</span>;
-        <span class="kw">let </span>gt = Limb::is_nonzero(Limb(res <span class="kw">as </span>LimbUInt));
-        quo = <span class="self">Self</span>::ct_select(<span class="self">Self</span>::ZERO, quo, gt);
-        rem = <span class="self">Self</span>::ct_select(<span class="self">Self</span>::ZERO, rem, gt);
-        <span class="kw">let </span>is_some = rhs.ct_is_nonzero() &amp; <span class="number">1</span>;
-        (quo, rem, is_some <span class="kw">as </span>u8)
+
+        <span class="kw">let </span>is_some = Limb(mb <span class="kw">as </span>Word).is_nonzero();
+        quo = <span class="self">Self</span>::ct_select(<span class="self">Self</span>::ZERO, quo, is_some);
+        (quo, rem, (is_some &amp; <span class="number">1</span>) <span class="kw">as </span>u8)
     }
 
     <span class="doccomment">/// Computes `self` % `rhs`, returns the remainder and
@@ -521,29 +546,49 @@
     /// When used with a fixed `rhs`, this function is constant-time with respect
     /// to `self`.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>ct_reduce(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; (<span class="self">Self</span>, u8) {
-        <span class="kw">let </span><span class="kw-2">mut </span>bd = <span class="self">self</span>.bits().saturating_sub(rhs.bits());
+        <span class="kw">let </span>mb = rhs.bits_vartime();
+        <span class="kw">let </span><span class="kw-2">mut </span>bd = (LIMBS * Limb::BIT_SIZE) - mb;
         <span class="kw">let </span><span class="kw-2">mut </span>rem = <span class="kw-2">*</span><span class="self">self</span>;
-
         <span class="kw">let </span><span class="kw-2">mut </span>c = rhs.shl_vartime(bd);
 
         <span class="kw">loop </span>{
-            <span class="kw">let </span>r: <span class="self">Self </span>= rem.wrapping_sub(<span class="kw-2">&amp;</span>c);
-            <span class="kw">let </span>d = -(((<span class="number">1 </span>- (r.limbs[LIMBS - <span class="number">1</span>].<span class="number">0 </span>&gt;&gt; LIMB_BIT_SIZE_M_1)) &amp; <span class="number">1</span>) <span class="kw">as </span>LimbInt);
-            <span class="kw">let </span>d = d <span class="kw">as </span>LimbUInt;
-            rem = <span class="self">Self</span>::ct_select(rem, r, d);
+            <span class="kw">let </span>(r, borrow) = rem.sbb(<span class="kw-2">&amp;</span>c, Limb::ZERO);
+            rem = <span class="self">Self</span>::ct_select(r, rem, borrow.<span class="number">0</span>);
             <span class="kw">if </span>bd == <span class="number">0 </span>{
                 <span class="kw">break</span>;
             }
             bd -= <span class="number">1</span>;
             c = c.shr_vartime(<span class="number">1</span>);
         }
-        <span class="comment">// If `self`&lt;rhs
-        // set rem to Self::ZERO
-        </span><span class="kw">let </span>res = <span class="self">self</span>.ct_cmp(rhs) + <span class="number">1</span>;
-        <span class="kw">let </span>gt = Limb::is_nonzero(Limb(res <span class="kw">as </span>LimbUInt));
-        rem = <span class="self">Self</span>::ct_select(<span class="self">Self</span>::ZERO, rem, gt);
-        <span class="kw">let </span>is_some = rhs.ct_is_nonzero() &amp; <span class="number">1</span>;
-        (rem, is_some <span class="kw">as </span>u8)
+
+        <span class="kw">let </span>is_some = Limb(mb <span class="kw">as </span>Word).is_nonzero();
+        (rem, (is_some &amp; <span class="number">1</span>) <span class="kw">as </span>u8)
+    }
+
+    <span class="doccomment">/// Computes `self` % 2^k. Faster than reduce since its a power of 2.
+    /// Limited to 2^16-1 since UInt doesn&#39;t support higher.
+    </span><span class="kw">pub const fn </span>reduce2k(<span class="kw-2">&amp;</span><span class="self">self</span>, k: usize) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>highest = (LIMBS - <span class="number">1</span>) <span class="kw">as </span>u32;
+        <span class="kw">let </span>index = k <span class="kw">as </span>u32 / (Limb::BIT_SIZE <span class="kw">as </span>u32);
+        <span class="kw">let </span>res = Limb::ct_cmp(Limb::from_u32(index), Limb::from_u32(highest)) - <span class="number">1</span>;
+        <span class="kw">let </span>le = Limb::is_nonzero(Limb(res <span class="kw">as </span>Word));
+        <span class="kw">let </span>word = Limb::ct_select(Limb::from_u32(highest), Limb::from_u32(index), le).<span class="number">0 </span><span class="kw">as </span>usize;
+
+        <span class="kw">let </span>base = k % Limb::BIT_SIZE;
+        <span class="kw">let </span>mask = (<span class="number">1 </span>&lt;&lt; base) - <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>out = <span class="kw-2">*</span><span class="self">self</span>;
+
+        <span class="kw">let </span>outmask = Limb(out.limbs[word].<span class="number">0 </span>&amp; mask);
+
+        out.limbs[word] = Limb::ct_select(out.limbs[word], outmask, le);
+
+        <span class="kw">let </span><span class="kw-2">mut </span>i = word + <span class="number">1</span>;
+        <span class="kw">while </span>i &lt; LIMBS {
+            out.limbs[i] = Limb::ZERO;
+            i += <span class="number">1</span>;
+        }
+
+        out
     }
 
     <span class="doccomment">/// Computes self / rhs, returns the quotient, remainder
@@ -565,7 +610,7 @@
     /// This function exists, so that all operations are accounted for in the wrapping operations.
     </span><span class="kw">pub const fn </span>wrapping_div(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>(q, <span class="kw">_</span>, c) = <span class="self">self</span>.ct_div_rem(rhs);
-        <span class="macro">const_assert!</span>(c == <span class="number">1</span>, <span class="string">&quot;divide by zero&quot;</span>);
+        <span class="macro">assert!</span>(c == <span class="number">1</span>, <span class="string">&quot;divide by zero&quot;</span>);
         q
     }
 
@@ -581,7 +626,7 @@
     /// This function exists, so that all operations are accounted for in the wrapping operations.
     </span><span class="kw">pub const fn </span>wrapping_rem(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>(r, c) = <span class="self">self</span>.ct_reduce(rhs);
-        <span class="macro">const_assert!</span>(c == <span class="number">1</span>, <span class="string">&quot;modulo zero&quot;</span>);
+        <span class="macro">assert!</span>(c == <span class="number">1</span>, <span class="string">&quot;modulo zero&quot;</span>);
         r
     }
 
@@ -818,24 +863,30 @@
     </span><span class="kw">use </span>{
         <span class="kw">crate</span>::{CheckedMul, Random},
         rand_chacha::ChaChaRng,
+        rand_core::RngCore,
         rand_core::SeedableRng,
     };
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>div_word() {
-        <span class="kw">for </span>(n, d, e) <span class="kw">in </span><span class="kw-2">&amp;</span>[
-            (<span class="number">200u64</span>, <span class="number">2u64</span>, <span class="number">100u64</span>),
-            (<span class="number">100u64</span>, <span class="number">25u64</span>, <span class="number">4u64</span>),
-            (<span class="number">100u64</span>, <span class="number">10u64</span>, <span class="number">10u64</span>),
-            (<span class="number">1024u64</span>, <span class="number">8u64</span>, <span class="number">128u64</span>),
+        <span class="kw">for </span>(n, d, e, ee) <span class="kw">in </span><span class="kw-2">&amp;</span>[
+            (<span class="number">200u64</span>, <span class="number">2u64</span>, <span class="number">100u64</span>, <span class="number">0</span>),
+            (<span class="number">100u64</span>, <span class="number">25u64</span>, <span class="number">4u64</span>, <span class="number">0</span>),
+            (<span class="number">100u64</span>, <span class="number">10u64</span>, <span class="number">10u64</span>, <span class="number">0</span>),
+            (<span class="number">1024u64</span>, <span class="number">8u64</span>, <span class="number">128u64</span>, <span class="number">0</span>),
+            (<span class="number">27u64</span>, <span class="number">13u64</span>, <span class="number">2u64</span>, <span class="number">1u64</span>),
+            (<span class="number">26u64</span>, <span class="number">13u64</span>, <span class="number">2u64</span>, <span class="number">0u64</span>),
+            (<span class="number">14u64</span>, <span class="number">13u64</span>, <span class="number">1u64</span>, <span class="number">1u64</span>),
+            (<span class="number">13u64</span>, <span class="number">13u64</span>, <span class="number">1u64</span>, <span class="number">0u64</span>),
+            (<span class="number">12u64</span>, <span class="number">13u64</span>, <span class="number">0u64</span>, <span class="number">12u64</span>),
+            (<span class="number">1u64</span>, <span class="number">13u64</span>, <span class="number">0u64</span>, <span class="number">1u64</span>),
         ] {
             <span class="kw">let </span>lhs = U256::from(<span class="kw-2">*</span>n);
             <span class="kw">let </span>rhs = U256::from(<span class="kw-2">*</span>d);
-            <span class="kw">let </span>expected = U256::from(<span class="kw-2">*</span>e);
             <span class="kw">let </span>(q, r, is_some) = lhs.ct_div_rem(<span class="kw-2">&amp;</span>rhs);
             <span class="macro">assert_eq!</span>(is_some, <span class="number">1</span>);
-            <span class="macro">assert_eq!</span>(expected, q);
-            <span class="macro">assert_eq!</span>(U256::default(), r);
+            <span class="macro">assert_eq!</span>(U256::from(<span class="kw-2">*</span>e), q);
+            <span class="macro">assert_eq!</span>(U256::from(<span class="kw-2">*</span>ee), r);
         }
     }
 
@@ -859,19 +910,21 @@
     </span><span class="kw">fn </span>div_max() {
         <span class="kw">let </span><span class="kw-2">mut </span>a = U256::ZERO;
         <span class="kw">let </span><span class="kw-2">mut </span>b = U256::ZERO;
-        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(LimbUInt::MAX);
+        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(Word::MAX);
         <span class="kw">let </span>q = a.wrapping_div(<span class="kw-2">&amp;</span>b);
         <span class="macro">assert_eq!</span>(q, UInt::ZERO);
-        a.limbs[a.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">1 </span>&lt;&lt; HI_BIT - <span class="number">7</span>);
-        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">0x82 </span>&lt;&lt; HI_BIT - <span class="number">7</span>);
+        a.limbs[a.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">1 </span>&lt;&lt; (HI_BIT - <span class="number">7</span>));
+        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">0x82 </span>&lt;&lt; (HI_BIT - <span class="number">7</span>));
         <span class="kw">let </span>q = a.wrapping_div(<span class="kw-2">&amp;</span>b);
         <span class="macro">assert_eq!</span>(q, UInt::ZERO);
     }
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>div_zero() {
-        <span class="kw">let </span>(<span class="kw">_</span>, <span class="kw">_</span>, is_some) = U256::ONE.ct_div_rem(<span class="kw-2">&amp;</span>U256::ZERO);
+        <span class="kw">let </span>(q, r, is_some) = U256::ONE.ct_div_rem(<span class="kw-2">&amp;</span>U256::ZERO);
         <span class="macro">assert_eq!</span>(is_some, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(q, U256::ZERO);
+        <span class="macro">assert_eq!</span>(r, U256::ONE);
     }
 
     <span class="attr">#[test]
@@ -891,8 +944,10 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>reduce_zero() {
-        <span class="kw">let </span>(<span class="kw">_</span>, is_some) = U256::from(<span class="number">10u8</span>).ct_reduce(<span class="kw-2">&amp;</span>U256::ZERO);
+        <span class="kw">let </span>u = U256::from(<span class="number">10u8</span>);
+        <span class="kw">let </span>(r, is_some) = u.ct_reduce(<span class="kw-2">&amp;</span>U256::ZERO);
         <span class="macro">assert_eq!</span>(is_some, <span class="number">0</span>);
+        <span class="macro">assert_eq!</span>(r, u);
     }
 
     <span class="attr">#[test]
@@ -912,13 +967,28 @@
     </span><span class="kw">fn </span>reduce_max() {
         <span class="kw">let </span><span class="kw-2">mut </span>a = U256::ZERO;
         <span class="kw">let </span><span class="kw-2">mut </span>b = U256::ZERO;
-        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(LimbUInt::MAX);
+        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(Word::MAX);
         <span class="kw">let </span>r = a.wrapping_rem(<span class="kw-2">&amp;</span>b);
         <span class="macro">assert_eq!</span>(r, UInt::ZERO);
-        a.limbs[a.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">1 </span>&lt;&lt; HI_BIT - <span class="number">7</span>);
-        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">0x82 </span>&lt;&lt; HI_BIT - <span class="number">7</span>);
+        a.limbs[a.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">1 </span>&lt;&lt; (HI_BIT - <span class="number">7</span>));
+        b.limbs[b.limbs.len() - <span class="number">1</span>] = Limb(<span class="number">0x82 </span>&lt;&lt; (HI_BIT - <span class="number">7</span>));
         <span class="kw">let </span>r = a.wrapping_rem(<span class="kw-2">&amp;</span>b);
-        <span class="macro">assert_eq!</span>(r, UInt::ZERO);
+        <span class="macro">assert_eq!</span>(r, a);
+    }
+
+    <span class="attr">#[cfg(feature = <span class="string">&quot;rand&quot;</span>)]
+    #[test]
+    </span><span class="kw">fn </span>reduce2krand() {
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = ChaChaRng::from_seed([<span class="number">7u8</span>; <span class="number">32</span>]);
+        <span class="kw">for _ in </span><span class="number">0</span>..<span class="number">25 </span>{
+            <span class="kw">let </span>num = U256::random(<span class="kw-2">&amp;mut </span>rng);
+            <span class="kw">let </span>k = (rng.next_u32() % <span class="number">256</span>) <span class="kw">as </span>usize;
+            <span class="kw">let </span>den = U256::ONE.shl_vartime(k);
+
+            <span class="kw">let </span>a = num.reduce2k(k);
+            <span class="kw">let </span>e = num.wrapping_rem(<span class="kw-2">&amp;</span>den);
+            <span class="macro">assert_eq!</span>(a, e);
+        }
     }
 }
 </code></pre></div>

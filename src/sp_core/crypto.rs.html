@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/core/src/crypto.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>crypto.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/core/src/crypto.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>crypto.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_core/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1411,9 +1411,33 @@
 <a href="#1411" id="1411">1411</a>
 <a href="#1412" id="1412">1412</a>
 <a href="#1413" id="1413">1413</a>
+<a href="#1414" id="1414">1414</a>
+<a href="#1415" id="1415">1415</a>
+<a href="#1416" id="1416">1416</a>
+<a href="#1417" id="1417">1417</a>
+<a href="#1418" id="1418">1418</a>
+<a href="#1419" id="1419">1419</a>
+<a href="#1420" id="1420">1420</a>
+<a href="#1421" id="1421">1421</a>
+<a href="#1422" id="1422">1422</a>
+<a href="#1423" id="1423">1423</a>
+<a href="#1424" id="1424">1424</a>
+<a href="#1425" id="1425">1425</a>
+<a href="#1426" id="1426">1426</a>
+<a href="#1427" id="1427">1427</a>
+<a href="#1428" id="1428">1428</a>
+<a href="#1429" id="1429">1429</a>
+<a href="#1430" id="1430">1430</a>
+<a href="#1431" id="1431">1431</a>
+<a href="#1432" id="1432">1432</a>
+<a href="#1433" id="1433">1433</a>
+<a href="#1434" id="1434">1434</a>
+<a href="#1435" id="1435">1435</a>
+<a href="#1436" id="1436">1436</a>
+<a href="#1437" id="1437">1437</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -1497,20 +1521,27 @@
 }
 
 <span class="doccomment">/// An error with the interpretation of a secret.
-</span><span class="attr">#[derive(Debug, Clone, PartialEq, Eq)]
+</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(thiserror::Error))]
+#[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg(feature = <span class="string">&quot;full_crypto&quot;</span>)]
 </span><span class="kw">pub enum </span>SecretStringError {
 	<span class="doccomment">/// The overall format was invalid (e.g. the seed phrase contained symbols).
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid format&quot;</span>))]
 	</span>InvalidFormat,
 	<span class="doccomment">/// The seed phrase provided is not a valid BIP39 phrase.
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid phrase&quot;</span>))]
 	</span>InvalidPhrase,
 	<span class="doccomment">/// The supplied password was invalid.
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid password&quot;</span>))]
 	</span>InvalidPassword,
 	<span class="doccomment">/// The seed is invalid (bad content).
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid seed&quot;</span>))]
 	</span>InvalidSeed,
 	<span class="doccomment">/// The seed has an invalid length.
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid seed length&quot;</span>))]
 	</span>InvalidSeedLength,
 	<span class="doccomment">/// The derivation path was invalid (e.g. contains soft junctions when they are not supported).
+	</span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, error(<span class="string">&quot;Invalid path&quot;</span>))]
 	</span>InvalidPath,
 }
 
@@ -1545,9 +1576,7 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>cc: [u8; JUNCTION_ID_LEN] = Default::default();
 		index.using_encoded(|data| {
 			<span class="kw">if </span>data.len() &gt; JUNCTION_ID_LEN {
-				<span class="kw">let </span>hash_result = blake2_rfc::blake2b::blake2b(JUNCTION_ID_LEN, <span class="kw-2">&amp;</span>[], data);
-				<span class="kw">let </span>hash = hash_result.as_bytes();
-				cc.copy_from_slice(hash);
+				cc.copy_from_slice(<span class="kw-2">&amp;</span>sp_core_hashing::blake2_256(data));
 			} <span class="kw">else </span>{
 				cc[<span class="number">0</span>..data.len()].copy_from_slice(data);
 			}
@@ -1705,7 +1734,7 @@
 		}
 
 		<span class="kw">let </span>hash = ss58hash(<span class="kw-2">&amp;</span>data[<span class="number">0</span>..body_len + prefix_len]);
-		<span class="kw">let </span>checksum = <span class="kw-2">&amp;</span>hash.as_bytes()[<span class="number">0</span>..CHECKSUM_LEN];
+		<span class="kw">let </span>checksum = <span class="kw-2">&amp;</span>hash[<span class="number">0</span>..CHECKSUM_LEN];
 		<span class="kw">if </span>data[body_len + prefix_len..body_len + prefix_len + CHECKSUM_LEN] != <span class="kw-2">*</span>checksum {
 			<span class="comment">// Invalid checksum.
 			</span><span class="kw">return </span><span class="prelude-val">Err</span>(PublicError::InvalidChecksum)
@@ -1746,7 +1775,7 @@
 		};
 		v.extend(<span class="self">self</span>.as_ref());
 		<span class="kw">let </span>r = ss58hash(<span class="kw-2">&amp;</span>v);
-		v.extend(<span class="kw-2">&amp;</span>r.as_bytes()[<span class="number">0</span>..<span class="number">2</span>]);
+		v.extend(<span class="kw-2">&amp;</span>r[<span class="number">0</span>..<span class="number">2</span>]);
 		v.to_base58()
 	}
 
@@ -1779,11 +1808,13 @@
 </span><span class="kw">const </span>PREFIX: <span class="kw-2">&amp;</span>[u8] = <span class="string">b&quot;SS58PRE&quot;</span>;
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">fn </span>ss58hash(data: <span class="kw-2">&amp;</span>[u8]) -&gt; blake2_rfc::blake2b::Blake2bResult {
-	<span class="kw">let </span><span class="kw-2">mut </span>context = blake2_rfc::blake2b::Blake2b::new(<span class="number">64</span>);
-	context.update(PREFIX);
-	context.update(data);
-	context.finalize()
+</span><span class="kw">fn </span>ss58hash(data: <span class="kw-2">&amp;</span>[u8]) -&gt; Vec&lt;u8&gt; {
+	<span class="kw">use </span>blake2::{Blake2b512, Digest};
+
+	<span class="kw">let </span><span class="kw-2">mut </span>ctx = Blake2b512::new();
+	ctx.update(PREFIX);
+	ctx.update(data);
+	ctx.finalize().to_vec()
 }
 
 <span class="doccomment">/// Default prefix number
@@ -1834,7 +1865,7 @@
 		<span class="kw">let </span>cap = SS58_REGEX.captures(s).ok_or(PublicError::InvalidFormat)<span class="question-mark">?</span>;
 		<span class="kw">let </span>s = cap.name(<span class="string">&quot;ss58&quot;</span>).map(|r| r.as_str()).unwrap_or(DEV_ADDRESS);
 		<span class="kw">let </span>addr = <span class="kw">if let </span><span class="prelude-val">Some</span>(stripped) = s.strip_prefix(<span class="string">&quot;0x&quot;</span>) {
-			<span class="kw">let </span>d = hex::decode(stripped).map_err(|<span class="kw">_</span>| PublicError::InvalidFormat)<span class="question-mark">?</span>;
+			<span class="kw">let </span>d = array_bytes::hex2bytes(stripped).map_err(|<span class="kw">_</span>| PublicError::InvalidFormat)<span class="question-mark">?</span>;
 			<span class="self">Self</span>::from_slice(<span class="kw-2">&amp;</span>d).map_err(|()| PublicError::BadLength)<span class="question-mark">?
 		</span>} <span class="kw">else </span>{
 			<span class="self">Self</span>::from_ss58check(s)<span class="question-mark">?
@@ -2027,10 +2058,7 @@
 	<span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
 		<span class="kw">let </span>hex_or_ss58_without_prefix = s.trim_start_matches(<span class="string">&quot;0x&quot;</span>);
 		<span class="kw">if </span>hex_or_ss58_without_prefix.len() == <span class="number">64 </span>{
-			<span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="number">32</span>];
-			hex::decode_to_slice(hex_or_ss58_without_prefix, <span class="kw-2">&amp;mut </span>bytes)
-				.map_err(|<span class="kw">_</span>| <span class="string">&quot;invalid hex address.&quot;</span>)
-				.map(|<span class="kw">_</span>| <span class="self">Self</span>::from(bytes))
+			array_bytes::hex_n_into(hex_or_ss58_without_prefix).map_err(|<span class="kw">_</span>| <span class="string">&quot;invalid hex address.&quot;</span>)
 		} <span class="kw">else </span>{
 			<span class="self">Self</span>::from_ss58check(s).map_err(|<span class="kw">_</span>| <span class="string">&quot;invalid ss58 address.&quot;</span>)
 		}
@@ -2356,7 +2384,7 @@
 			password_override.or_else(|| password.as_ref().map(|p| p.expose_secret().as_str()));
 
 		<span class="kw">let </span>(root, seed) = <span class="kw">if let </span><span class="prelude-val">Some</span>(stripped) = phrase.expose_secret().strip_prefix(<span class="string">&quot;0x&quot;</span>) {
-			hex::decode(stripped)
+			array_bytes::hex2bytes(stripped)
 				.ok()
 				.and_then(|seed_vec| {
 					<span class="kw">let </span><span class="kw-2">mut </span>seed = <span class="self">Self</span>::Seed::default();
@@ -2400,6 +2428,11 @@
 </span><span class="kw">pub trait </span>Wraps: Sized {
 	<span class="doccomment">/// The inner type it is wrapping.
 	</span><span class="kw">type </span>Inner: IsWrappedBy&lt;<span class="self">Self</span>&gt;;
+
+	<span class="doccomment">/// Get a reference to the inner type that is wrapped.
+	</span><span class="kw">fn </span>as_inner_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Inner {
+		<span class="self">Self</span>::Inner::from_ref(<span class="self">self</span>)
+	}
 }
 
 <span class="kw">impl</span>&lt;T, Outer&gt; IsWrappedBy&lt;Outer&gt; <span class="kw">for </span>T
@@ -2540,7 +2573,6 @@
 </span><span class="kw">mod </span>tests {
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 	<span class="kw">use </span><span class="kw">crate</span>::DeriveJunction;
-	<span class="kw">use </span>hex_literal::hex;
 
 	<span class="attr">#[derive(Clone, Eq, PartialEq, Debug)]
 	</span><span class="kw">enum </span>TestPair {
@@ -2682,7 +2714,7 @@
 	</span><span class="kw">fn </span>interpret_std_seed_should_work() {
 		<span class="macro">assert_eq!</span>(
 			TestPair::from_string(<span class="string">&quot;0x0123456789abcdef&quot;</span>, <span class="prelude-val">None</span>),
-			<span class="prelude-val">Ok</span>(TestPair::Seed(<span class="macro">hex!</span>[<span class="string">&quot;0123456789abcdef&quot;</span>][..].to_owned()))
+			<span class="prelude-val">Ok</span>(TestPair::Seed(array_bytes::hex2bytes_unchecked(<span class="string">&quot;0123456789abcdef&quot;</span>)))
 		);
 	}
 
@@ -2725,6 +2757,14 @@
 			})
 		);
 		<span class="macro">assert_eq!</span>(
+			TestPair::from_string(<span class="string">&quot;hello world/0123456789012345678901234567890123456789&quot;</span>, <span class="prelude-val">None</span>),
+			<span class="prelude-val">Ok</span>(TestPair::Standard {
+				phrase: <span class="string">&quot;hello world&quot;</span>.to_owned(),
+				password: <span class="prelude-val">None</span>,
+				path: <span class="macro">vec!</span>[DeriveJunction::soft(<span class="string">&quot;0123456789012345678901234567890123456789&quot;</span>)]
+			})
+		);
+		<span class="macro">assert_eq!</span>(
 			TestPair::from_string(<span class="string">&quot;hello world//1&quot;</span>, <span class="prelude-val">None</span>),
 			<span class="prelude-val">Ok</span>(TestPair::Standard {
 				phrase: <span class="string">&quot;hello world&quot;</span>.to_owned(),
@@ -2738,6 +2778,14 @@
 				phrase: <span class="string">&quot;hello world&quot;</span>.to_owned(),
 				password: <span class="prelude-val">None</span>,
 				path: <span class="macro">vec!</span>[DeriveJunction::hard(<span class="string">&quot;DOT&quot;</span>)]
+			})
+		);
+		<span class="macro">assert_eq!</span>(
+			TestPair::from_string(<span class="string">&quot;hello world//0123456789012345678901234567890123456789&quot;</span>, <span class="prelude-val">None</span>),
+			<span class="prelude-val">Ok</span>(TestPair::Standard {
+				phrase: <span class="string">&quot;hello world&quot;</span>.to_owned(),
+				password: <span class="prelude-val">None</span>,
+				path: <span class="macro">vec!</span>[DeriveJunction::hard(<span class="string">&quot;0123456789012345678901234567890123456789&quot;</span>)]
 			})
 		);
 		<span class="macro">assert_eq!</span>(

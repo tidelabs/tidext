@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/arithmetic/scalar/wide64.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>wide64.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/arithmetic/scalar/wide64.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>wide64.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -296,8 +296,8 @@
     <span class="doccomment">/// Multiplies two scalars without modulo reduction, producing up to a 512-bit scalar.
     </span><span class="attr">#[inline(always)] </span><span class="comment">// only used in Scalar::mul(), so won&#39;t cause binary bloat
     </span><span class="kw">pub fn </span>mul_wide(a: <span class="kw-2">&amp;</span>Scalar, b: <span class="kw-2">&amp;</span>Scalar) -&gt; <span class="self">Self </span>{
-        <span class="kw">let </span>a = a.<span class="number">0</span>.to_uint_array();
-        <span class="kw">let </span>b = b.<span class="number">0</span>.to_uint_array();
+        <span class="kw">let </span>a = a.<span class="number">0</span>.to_words();
+        <span class="kw">let </span>b = b.<span class="number">0</span>.to_words();
 
         <span class="comment">// 160 bit accumulator.
         </span><span class="kw">let </span>c0 = <span class="number">0</span>;
@@ -330,7 +330,7 @@
         <span class="kw">let </span>(l6, c0, _c1) = (c0, c1, <span class="number">0</span>);
         <span class="kw">let </span>l7 = c0;
 
-        <span class="self">Self</span>(U512::from_uint_array([l0, l1, l2, l3, l4, l5, l6, l7]))
+        <span class="self">Self</span>(U512::from_words([l0, l1, l2, l3, l4, l5, l6, l7]))
     }
 
     <span class="doccomment">/// Multiplies `a` by `b` (without modulo reduction) divide the result by `2^shift`
@@ -339,54 +339,54 @@
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>mul_shift_vartime(a: <span class="kw-2">&amp;</span>Scalar, b: <span class="kw-2">&amp;</span>Scalar, shift: usize) -&gt; Scalar {
         <span class="macro">debug_assert!</span>(shift &gt;= <span class="number">256</span>);
 
-        <span class="kw">fn </span>ifelse(c: bool, x: u64, y: u64) -&gt; u64 {
-            <span class="kw">if </span>c {
-                x
-            } <span class="kw">else </span>{
-                y
-            }
-        }
-
-        <span class="kw">let </span>l = <span class="self">Self</span>::mul_wide(a, b).<span class="number">0</span>.to_uint_array();
+        <span class="kw">let </span>l = <span class="self">Self</span>::mul_wide(a, b).<span class="number">0</span>.to_words();
         <span class="kw">let </span>shiftlimbs = shift &gt;&gt; <span class="number">6</span>;
         <span class="kw">let </span>shiftlow = shift &amp; <span class="number">0x3F</span>;
         <span class="kw">let </span>shifthigh = <span class="number">64 </span>- shiftlow;
-        <span class="kw">let </span>r0 = ifelse(
-            shift &lt; <span class="number">512</span>,
-            (l[shiftlimbs] &gt;&gt; shiftlow)
-                | ifelse(
-                    shift &lt; <span class="number">448 </span>&amp;&amp; shiftlow != <span class="number">0</span>,
-                    l[<span class="number">1 </span>+ shiftlimbs] &lt;&lt; shifthigh,
-                    <span class="number">0</span>,
-                ),
-            <span class="number">0</span>,
-        );
 
-        <span class="kw">let </span>r1 = ifelse(
-            shift &lt; <span class="number">448</span>,
-            (l[<span class="number">1 </span>+ shiftlimbs] &gt;&gt; shiftlow)
-                | ifelse(
-                    shift &lt; <span class="number">448 </span>&amp;&amp; shiftlow != <span class="number">0</span>,
-                    l[<span class="number">2 </span>+ shiftlimbs] &lt;&lt; shifthigh,
-                    <span class="number">0</span>,
-                ),
-            <span class="number">0</span>,
-        );
+        <span class="kw">let </span>r0 = <span class="kw">if </span>shift &lt; <span class="number">512 </span>{
+            <span class="kw">let </span>lo = l[shiftlimbs] &gt;&gt; shiftlow;
+            <span class="kw">let </span>hi = <span class="kw">if </span>shift &lt; <span class="number">448 </span>&amp;&amp; shiftlow != <span class="number">0 </span>{
+                l[<span class="number">1 </span>+ shiftlimbs] &lt;&lt; shifthigh
+            } <span class="kw">else </span>{
+                <span class="number">0
+            </span>};
+            hi | lo
+        } <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
 
-        <span class="kw">let </span>r2 = ifelse(
-            shift &lt; <span class="number">384</span>,
-            (l[<span class="number">2 </span>+ shiftlimbs] &gt;&gt; shiftlow)
-                | ifelse(
-                    shift &lt; <span class="number">320 </span>&amp;&amp; shiftlow != <span class="number">0</span>,
-                    l[<span class="number">3 </span>+ shiftlimbs] &lt;&lt; shifthigh,
-                    <span class="number">0</span>,
-                ),
-            <span class="number">0</span>,
-        );
+        <span class="kw">let </span>r1 = <span class="kw">if </span>shift &lt; <span class="number">448 </span>{
+            <span class="kw">let </span>lo = l[<span class="number">1 </span>+ shiftlimbs] &gt;&gt; shiftlow;
+            <span class="kw">let </span>hi = <span class="kw">if </span>shift &lt; <span class="number">384 </span>&amp;&amp; shiftlow != <span class="number">0 </span>{
+                l[<span class="number">2 </span>+ shiftlimbs] &lt;&lt; shifthigh
+            } <span class="kw">else </span>{
+                <span class="number">0
+            </span>};
+            hi | lo
+        } <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
 
-        <span class="kw">let </span>r3 = ifelse(shift &lt; <span class="number">320</span>, l[<span class="number">3 </span>+ shiftlimbs] &gt;&gt; shiftlow, <span class="number">0</span>);
+        <span class="kw">let </span>r2 = <span class="kw">if </span>shift &lt; <span class="number">384 </span>{
+            <span class="kw">let </span>lo = l[<span class="number">2 </span>+ shiftlimbs] &gt;&gt; shiftlow;
+            <span class="kw">let </span>hi = <span class="kw">if </span>shift &lt; <span class="number">320 </span>&amp;&amp; shiftlow != <span class="number">0 </span>{
+                l[<span class="number">3 </span>+ shiftlimbs] &lt;&lt; shifthigh
+            } <span class="kw">else </span>{
+                <span class="number">0
+            </span>};
+            hi | lo
+        } <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
 
-        <span class="kw">let </span>res = Scalar(U256::from_uint_array([r0, r1, r2, r3]));
+        <span class="kw">let </span>r3 = <span class="kw">if </span>shift &lt; <span class="number">320 </span>{
+            l[<span class="number">3 </span>+ shiftlimbs] &gt;&gt; shiftlow
+        } <span class="kw">else </span>{
+            <span class="number">0
+        </span>};
+
+        <span class="kw">let </span>res = Scalar(U256::from_words([r0, r1, r2, r3]));
 
         <span class="comment">// Check the highmost discarded bit and round up if it is set.
         </span><span class="kw">let </span>c = (l[(shift - <span class="number">1</span>) &gt;&gt; <span class="number">6</span>] &gt;&gt; ((shift - <span class="number">1</span>) &amp; <span class="number">0x3f</span>)) &amp; <span class="number">1</span>;
@@ -405,7 +405,7 @@
             ORDER
         };
 
-        <span class="kw">let </span>w = <span class="self">self</span>.<span class="number">0</span>.to_uint_array();
+        <span class="kw">let </span>w = <span class="self">self</span>.<span class="number">0</span>.to_words();
         <span class="kw">let </span>n0 = w[<span class="number">4</span>];
         <span class="kw">let </span>n1 = w[<span class="number">5</span>];
         <span class="kw">let </span>n2 = w[<span class="number">6</span>];

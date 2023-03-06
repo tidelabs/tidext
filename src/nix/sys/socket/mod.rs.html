@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.24.2/src/sys/socket/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../nix/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/nix-0.24.3/src/sys/socket/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../nix/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2171,6 +2171,30 @@
 <a href="#2171" id="2171">2171</a>
 <a href="#2172" id="2172">2172</a>
 <a href="#2173" id="2173">2173</a>
+<a href="#2174" id="2174">2174</a>
+<a href="#2175" id="2175">2175</a>
+<a href="#2176" id="2176">2176</a>
+<a href="#2177" id="2177">2177</a>
+<a href="#2178" id="2178">2178</a>
+<a href="#2179" id="2179">2179</a>
+<a href="#2180" id="2180">2180</a>
+<a href="#2181" id="2181">2181</a>
+<a href="#2182" id="2182">2182</a>
+<a href="#2183" id="2183">2183</a>
+<a href="#2184" id="2184">2184</a>
+<a href="#2185" id="2185">2185</a>
+<a href="#2186" id="2186">2186</a>
+<a href="#2187" id="2187">2187</a>
+<a href="#2188" id="2188">2188</a>
+<a href="#2189" id="2189">2189</a>
+<a href="#2190" id="2190">2190</a>
+<a href="#2191" id="2191">2191</a>
+<a href="#2192" id="2192">2192</a>
+<a href="#2193" id="2193">2193</a>
+<a href="#2194" id="2194">2194</a>
+<a href="#2195" id="2195">2195</a>
+<a href="#2196" id="2196">2196</a>
+<a href="#2197" id="2197">2197</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Socket interface functions
 //!
 //! [Further reading](https://man7.org/linux/man-pages/man7/socket.7.html)
@@ -2178,7 +2202,7 @@
 <span class="kw">use crate</span>::{<span class="prelude-ty">Result</span>, errno::Errno};
 <span class="kw">use </span>libc::{<span class="self">self</span>, c_void, c_int, iovec, socklen_t, size_t,
         CMSG_FIRSTHDR, CMSG_NXTHDR, CMSG_DATA, CMSG_LEN};
-<span class="kw">use </span>std::convert::TryInto;
+<span class="kw">use </span>std::convert::{TryFrom, TryInto};
 <span class="kw">use </span>std::{mem, ptr, slice};
 <span class="kw">use </span>std::os::unix::io::RawFd;
 <span class="attr">#[cfg(feature = <span class="string">&quot;net&quot;</span>)]
@@ -2292,6 +2316,24 @@
     <span class="doccomment">/// Provides a reliable datagram layer that does not
     /// guarantee ordering.
     </span>Rdm = libc::SOCK_RDM,
+}
+<span class="comment">// The TryFrom impl could&#39;ve been derived using libc_enum!.  But for
+// backwards-compatibility with Nix-0.25.0 we manually implement it, so as to
+// keep the old variant names.
+</span><span class="kw">impl </span>TryFrom&lt;i32&gt; <span class="kw">for </span>SockType {
+    <span class="kw">type </span>Error = <span class="kw">crate</span>::Error;
+
+    <span class="kw">fn </span>try_from(x: i32) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">match </span>x {
+            libc::SOCK_STREAM =&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Stream),
+            libc::SOCK_DGRAM =&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Datagram),
+            libc::SOCK_SEQPACKET =&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::SeqPacket),
+            libc::SOCK_RAW =&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Raw),
+            <span class="attr">#[cfg(not(any(target_os = <span class="string">&quot;haiku&quot;</span>)))]
+            </span>libc::SOCK_RDM =&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Rdm),
+            <span class="kw">_ </span>=&gt; <span class="prelude-val">Err</span>(Errno::EINVAL)
+        }
+    }
 }
 
 <span class="doccomment">/// Constants used in [`socket`](fn.socket.html) and [`socketpair`](fn.socketpair.html)
@@ -2996,7 +3038,9 @@
     </span><span class="kw">unsafe fn </span>decode_from(header: <span class="kw-2">&amp;</span>cmsghdr) -&gt; ControlMessageOwned
     {
         <span class="kw">let </span>p = CMSG_DATA(header);
-        <span class="kw">let </span>len = header <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ as </span>usize + header.cmsg_len <span class="kw">as </span>usize
+        <span class="comment">// The cast is not unnecessary on all platforms.
+        </span><span class="attr">#[allow(clippy::unnecessary_cast)]
+        </span><span class="kw">let </span>len = header <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ as </span>usize + header.cmsg_len <span class="kw">as </span>usize
             - p <span class="kw">as </span>usize;
         <span class="kw">match </span>(header.cmsg_level, header.cmsg_type) {
             (libc::SOL_SOCKET, libc::SCM_RIGHTS) =&gt; {
@@ -3575,7 +3619,7 @@
     // because subsequent code will not clear the padding bytes.
     </span><span class="kw">let </span><span class="kw-2">mut </span>cmsg_buffer = <span class="macro">vec!</span>[<span class="number">0u8</span>; capacity];
 
-    <span class="kw">let </span>mhdr = pack_mhdr_to_send(<span class="kw-2">&amp;mut </span>cmsg_buffer[..], <span class="kw-2">&amp;</span>iov, <span class="kw-2">&amp;</span>cmsgs, addr);
+    <span class="kw">let </span>mhdr = pack_mhdr_to_send(<span class="kw-2">&amp;mut </span>cmsg_buffer[..], iov, cmsgs, addr);
 
     <span class="kw">let </span>ret = <span class="kw">unsafe </span>{ libc::sendmsg(fd, <span class="kw-2">&amp;</span>mhdr, flags.bits()) };
 
@@ -3759,7 +3803,7 @@
             }
         );
 
-        (msg_controllen <span class="kw">as </span>usize, <span class="kw-2">&amp;mut </span>d.cmsg_buffer)
+        (msg_controllen, <span class="kw-2">&amp;mut </span>d.cmsg_buffer)
     }).collect();
 
     <span class="kw">let </span>timeout = <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>t) = timeout {
@@ -3778,7 +3822,9 @@
         .zip(addresses.iter().map(|addr| <span class="kw">unsafe</span>{addr.assume_init()}))
         .zip(results.into_iter())
         .map(|((mmsghdr, address), (msg_controllen, cmsg_buffer))| {
-            <span class="kw">unsafe </span>{
+            <span class="comment">// The cast is not unnecessary on all platforms.
+            </span><span class="attr">#[allow(clippy::unnecessary_cast)]
+            </span><span class="kw">unsafe </span>{
                 read_mhdr(
                     mmsghdr.msg_hdr,
                     mmsghdr.msg_len <span class="kw">as </span>isize,
@@ -3791,16 +3837,18 @@
         .collect())
 }
 
-<span class="kw">unsafe fn </span>read_mhdr&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, S&gt;(
+<span class="kw">unsafe fn </span>read_mhdr&lt;<span class="lifetime">&#39;a</span>, S&gt;(
     mhdr: msghdr,
     r: isize,
     msg_controllen: usize,
     address: S,
-    cmsg_buffer: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span><span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="kw-2">mut </span>Vec&lt;u8&gt;&gt;
-) -&gt; RecvMsg&lt;<span class="lifetime">&#39;b</span>, S&gt;
+    cmsg_buffer: <span class="kw-2">&amp;mut </span><span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>Vec&lt;u8&gt;&gt;
+) -&gt; RecvMsg&lt;<span class="lifetime">&#39;a</span>, S&gt;
     <span class="kw">where </span>S: SockaddrLike
 {
-    <span class="kw">let </span>cmsghdr = {
+    <span class="comment">// The cast is not unnecessary on all platforms.
+    </span><span class="attr">#[allow(clippy::unnecessary_cast)]
+    </span><span class="kw">let </span>cmsghdr = {
         <span class="kw">if </span>mhdr.msg_controllen &gt; <span class="number">0 </span>{
             <span class="comment">// got control message(s)
             </span>cmsg_buffer
@@ -4247,7 +4295,7 @@
     <span class="kw">match </span>c_int::from(addr.ss_family) {
         <span class="attr">#[cfg(feature = <span class="string">&quot;net&quot;</span>)]
         </span>libc::AF_INET =&gt; {
-            <span class="macro">assert!</span>(len <span class="kw">as </span>usize &gt;= mem::size_of::&lt;sockaddr_in&gt;());
+            <span class="macro">assert!</span>(len &gt;= mem::size_of::&lt;sockaddr_in&gt;());
             <span class="kw">let </span>sin = <span class="kw">unsafe </span>{
                 <span class="kw-2">*</span>(addr <span class="kw">as </span><span class="kw-2">*const </span>sockaddr_storage <span class="kw">as </span><span class="kw-2">*const </span>sockaddr_in)
             };
@@ -4255,7 +4303,7 @@
         }
         <span class="attr">#[cfg(feature = <span class="string">&quot;net&quot;</span>)]
         </span>libc::AF_INET6 =&gt; {
-            <span class="macro">assert!</span>(len <span class="kw">as </span>usize &gt;= mem::size_of::&lt;sockaddr_in6&gt;());
+            <span class="macro">assert!</span>(len &gt;= mem::size_of::&lt;sockaddr_in6&gt;());
             <span class="kw">let </span>sin6 = <span class="kw">unsafe </span>{
                 <span class="kw-2">*</span>(addr <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ as </span><span class="kw-2">*const </span>sockaddr_in6)
             };

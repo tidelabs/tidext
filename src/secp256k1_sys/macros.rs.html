@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/secp256k1-sys-0.4.2/src/macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>macros.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../secp256k1_sys/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/secp256k1-sys-0.6.1/src/macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>macros.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../secp256k1_sys/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -194,26 +194,26 @@
         <span class="kw">impl </span>Copy <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{}
 
         <span class="kw">impl </span><span class="macro-nonterminal">$thing </span>{
-            <span class="attr">#[inline]
-            </span><span class="doccomment">/// Converts the object to a raw pointer for FFI interfacing
+            <span class="doccomment">/// Converts the object to a raw pointer for FFI interfacing
+            </span><span class="attr">#[inline]
             </span><span class="kw">pub fn </span>as_ptr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const </span><span class="macro-nonterminal">$ty </span>{
                 <span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref </span>dat) = <span class="self">self</span>;
                 dat.as_ptr()
             }
 
-            <span class="attr">#[inline]
-            </span><span class="doccomment">/// Converts the object to a mutable raw pointer for FFI interfacing
+            <span class="doccomment">/// Converts the object to a mutable raw pointer for FFI interfacing
+            </span><span class="attr">#[inline]
             </span><span class="kw">pub fn </span>as_mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span><span class="macro-nonterminal">$ty </span>{
                 <span class="kw">let </span><span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref mut </span>dat) = <span class="self">self</span>;
                 dat.as_mut_ptr()
             }
 
-            <span class="attr">#[inline]
-            </span><span class="doccomment">/// Returns the length of the object as an array
+            <span class="doccomment">/// Returns the length of the object as an array
+            </span><span class="attr">#[inline]
             </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize { <span class="macro-nonterminal">$len </span>}
 
-            <span class="attr">#[inline]
-            </span><span class="doccomment">/// Returns whether the object as an array is empty
+            <span class="doccomment">/// Returns whether the object as an array is empty
+            </span><span class="attr">#[inline]
             </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool { <span class="bool-val">false </span>}
         }
 
@@ -243,14 +243,14 @@
 
         <span class="kw">impl </span>PartialOrd <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>) -&gt; <span class="prelude-ty">Option</span>&lt;::core::cmp::Ordering&gt; {
+            </span><span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>) -&gt; <span class="prelude-ty">Option</span>&lt;core::cmp::Ordering&gt; {
                 <span class="self">self</span>[..].partial_cmp(<span class="kw-2">&amp;</span>other[..])
             }
         }
 
         <span class="kw">impl </span>Ord <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>) -&gt; ::core::cmp::Ordering {
+            </span><span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>) -&gt; core::cmp::Ordering {
                 <span class="self">self</span>[..].cmp(<span class="kw-2">&amp;</span>other[..])
             }
         }
@@ -263,7 +263,7 @@
             }
         }
 
-        <span class="kw">impl </span>::core::ops::Index&lt;usize&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+        <span class="kw">impl </span>core::ops::Index&lt;usize&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="kw">type </span>Output = <span class="macro-nonterminal">$ty</span>;
 
             <span class="attr">#[inline]
@@ -273,41 +273,41 @@
             }
         }
 
-        <span class="kw">impl </span>::core::ops::Index&lt;::core::ops::Range&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+        <span class="kw">impl </span>core::ops::Index&lt;core::ops::Range&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="kw">type </span>Output = [<span class="macro-nonterminal">$ty</span>];
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: ::core::ops::Range&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
+            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: core::ops::Range&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
                 <span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref </span>dat) = <span class="self">self</span>;
                 <span class="kw-2">&amp;</span>dat[index]
             }
         }
 
-        <span class="kw">impl </span>::core::ops::Index&lt;::core::ops::RangeTo&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+        <span class="kw">impl </span>core::ops::Index&lt;core::ops::RangeTo&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="kw">type </span>Output = [<span class="macro-nonterminal">$ty</span>];
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: ::core::ops::RangeTo&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
+            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: core::ops::RangeTo&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
                 <span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref </span>dat) = <span class="self">self</span>;
                 <span class="kw-2">&amp;</span>dat[index]
             }
         }
 
-        <span class="kw">impl </span>::core::ops::Index&lt;::core::ops::RangeFrom&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+        <span class="kw">impl </span>core::ops::Index&lt;core::ops::RangeFrom&lt;usize&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="kw">type </span>Output = [<span class="macro-nonterminal">$ty</span>];
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: ::core::ops::RangeFrom&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
+            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: core::ops::RangeFrom&lt;usize&gt;) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
                 <span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref </span>dat) = <span class="self">self</span>;
                 <span class="kw-2">&amp;</span>dat[index]
             }
         }
 
-        <span class="kw">impl </span>::core::ops::Index&lt;::core::ops::RangeFull&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+        <span class="kw">impl </span>core::ops::Index&lt;core::ops::RangeFull&gt; <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
             <span class="kw">type </span>Output = [<span class="macro-nonterminal">$ty</span>];
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: ::core::ops::RangeFull) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
+            </span><span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: core::ops::RangeFull) -&gt; <span class="kw-2">&amp;</span>[<span class="macro-nonterminal">$ty</span>] {
                 <span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$thing</span>(<span class="kw-2">ref </span>dat) = <span class="self">self</span>;
                 <span class="kw-2">&amp;</span>dat[..]
             }
@@ -316,7 +316,7 @@
             <span class="kw">type </span>Target = <span class="macro-nonterminal">$ty</span>;
             <span class="kw">fn </span>as_c_ptr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const </span><span class="self">Self</span>::Target {
                 <span class="kw">if </span><span class="self">self</span>.is_empty() {
-                    ::core::ptr::null()
+                    core::ptr::null()
                 } <span class="kw">else </span>{
                     <span class="self">self</span>.as_ptr()
                 }
@@ -324,7 +324,7 @@
 
             <span class="kw">fn </span>as_mut_c_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span><span class="self">Self</span>::Target {
                 <span class="kw">if </span><span class="self">self</span>.is_empty() {
-                    ::core::ptr::null::&lt;<span class="self">Self</span>::Target&gt;() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_
+                    core::ptr::null::&lt;<span class="self">Self</span>::Target&gt;() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_
                 </span>} <span class="kw">else </span>{
                     <span class="self">self</span>.as_mut_ptr()
                 }
@@ -336,8 +336,8 @@
 <span class="attr">#[macro_export]
 </span><span class="macro">macro_rules! </span>impl_raw_debug {
     (<span class="macro-nonterminal">$thing</span>:ident) =&gt; {
-        <span class="kw">impl </span>::core::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
-            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>::core::fmt::Formatter) -&gt; ::core::fmt::Result {
+        <span class="kw">impl </span>core::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$thing </span>{
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>core::fmt::Formatter) -&gt; core::fmt::Result {
                 <span class="kw">for </span>i <span class="kw">in </span><span class="self">self</span>[..].iter().cloned() {
                     <span class="macro">write!</span>(f, <span class="string">&quot;{:02x}&quot;</span>, i)<span class="question-mark">?</span>;
                 }

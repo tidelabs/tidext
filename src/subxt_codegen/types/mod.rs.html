@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/codegen/src/types/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/codegen/src/types/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -265,18 +265,177 @@
 <a href="#265" id="265">265</a>
 <a href="#266" id="266">266</a>
 <a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
+<a href="#341" id="341">341</a>
+<a href="#342" id="342">342</a>
+<a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
+<a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
+<a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
 
 </span><span class="kw">mod </span>composite_def;
 <span class="kw">mod </span>derives;
+<span class="kw">mod </span>substitutes;
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests;
 <span class="kw">mod </span>type_def;
 <span class="kw">mod </span>type_def_params;
 <span class="kw">mod </span>type_path;
 
+<span class="kw">use </span>darling::FromMeta;
 <span class="kw">use </span>proc_macro2::{
     Ident,
     Span,
@@ -293,10 +452,7 @@
     Type,
     TypeDef,
 };
-<span class="kw">use </span>std::collections::{
-    BTreeMap,
-    HashMap,
-};
+<span class="kw">use </span>std::collections::BTreeMap;
 
 <span class="kw">pub use </span><span class="self">self</span>::{
     composite_def::{
@@ -308,12 +464,12 @@
         Derives,
         DerivesRegistry,
     },
+    substitutes::TypeSubstitutes,
     type_def::TypeDefGen,
     type_def_params::TypeDefParameters,
     type_path::{
         TypeParameter,
         TypePath,
-        TypePathSubstitute,
         TypePathType,
     },
 };
@@ -328,9 +484,11 @@
     <span class="doccomment">/// Registry of type definitions to be transformed into Rust type definitions.
     </span>type_registry: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>PortableRegistry,
     <span class="doccomment">/// User defined overrides for generated types.
-    </span>type_substitutes: HashMap&lt;String, syn::TypePath&gt;,
+    </span>type_substitutes: TypeSubstitutes,
     <span class="doccomment">/// Set of derives with which to annotate generated types.
     </span>derives: DerivesRegistry,
+    <span class="doccomment">/// The `subxt` crate access path in the generated code.
+    </span>crate_path: CratePath,
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; TypeGenerator&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -338,8 +496,9 @@
     </span><span class="kw">pub fn </span>new(
         type_registry: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>PortableRegistry,
         root_mod: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
-        type_substitutes: HashMap&lt;String, syn::TypePath&gt;,
+        type_substitutes: TypeSubstitutes,
         derives: DerivesRegistry,
+        crate_path: CratePath,
     ) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>root_mod_ident = Ident::new(root_mod, Span::call_site());
         <span class="self">Self </span>{
@@ -347,59 +506,47 @@
             type_registry,
             type_substitutes,
             derives,
+            crate_path,
         }
     }
 
     <span class="doccomment">/// Generate a module containing all types defined in the supplied type registry.
     </span><span class="kw">pub fn </span>generate_types_mod(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Module {
-        <span class="kw">let </span><span class="kw-2">mut </span>root_mod =
-            Module::new(<span class="self">self</span>.types_mod_ident.clone(), <span class="self">self</span>.types_mod_ident.clone());
+        <span class="kw">let </span>root_mod_ident = <span class="kw-2">&amp;</span><span class="self">self</span>.types_mod_ident;
+        <span class="kw">let </span><span class="kw-2">mut </span>root_mod = Module::new(root_mod_ident.clone(), root_mod_ident.clone());
 
-        <span class="kw">for </span>(id, ty) <span class="kw">in </span><span class="self">self</span>.type_registry.types().iter().enumerate() {
-            <span class="kw">if </span>ty.ty().path().namespace().is_empty() {
-                <span class="comment">// prelude types e.g. Option/Result have no namespace, so we don&#39;t generate them
-                </span><span class="kw">continue
+        <span class="kw">for </span>ty <span class="kw">in </span><span class="self">self</span>.type_registry.types() {
+            <span class="kw">let </span>path = ty.ty().path();
+            <span class="comment">// Don&#39;t generate a type if it was substituted - the target type might
+            // not be in the type registry + our resolution already performs the substitution.
+            </span><span class="kw">if </span><span class="self">self</span>.type_substitutes.for_path(path).is_some() {
+                <span class="kw">continue
             </span>}
-            <span class="self">self</span>.insert_type(
-                ty.ty().clone(),
-                id <span class="kw">as </span>u32,
-                ty.ty().path().namespace().to_vec(),
-                <span class="kw-2">&amp;</span><span class="self">self</span>.types_mod_ident,
-                <span class="kw-2">&amp;mut </span>root_mod,
-            )
+
+            <span class="kw">let </span>namespace = path.namespace();
+            <span class="comment">// prelude types e.g. Option/Result have no namespace, so we don&#39;t generate them
+            </span><span class="kw">if </span>namespace.is_empty() {
+                <span class="kw">continue
+            </span>}
+
+            <span class="comment">// Lazily create submodules for the encountered namespace path, if they don&#39;t exist
+            </span><span class="kw">let </span>innermost_module = namespace
+                .iter()
+                .map(|segment| Ident::new(segment, Span::call_site()))
+                .fold(<span class="kw-2">&amp;mut </span>root_mod, |module, ident| {
+                    module
+                        .children
+                        .entry(ident.clone())
+                        .or_insert_with(|| Module::new(ident, root_mod_ident.clone()))
+                });
+
+            innermost_module.types.insert(
+                path.clone(),
+                TypeDefGen::from_type(ty.ty(), <span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.crate_path),
+            );
         }
 
         root_mod
-    }
-
-    <span class="kw">fn </span>insert_type(
-        <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
-        ty: Type&lt;PortableForm&gt;,
-        id: u32,
-        path: Vec&lt;String&gt;,
-        root_mod_ident: <span class="kw-2">&amp;</span>Ident,
-        module: <span class="kw-2">&amp;mut </span>Module,
-    ) {
-        <span class="kw">let </span>joined_path = path.join(<span class="string">&quot;::&quot;</span>);
-        <span class="kw">if </span><span class="self">self</span>.type_substitutes.contains_key(<span class="kw-2">&amp;</span>joined_path) {
-            <span class="kw">return
-        </span>}
-
-        <span class="kw">let </span>segment = path.first().expect(<span class="string">&quot;path has at least one segment&quot;</span>);
-        <span class="kw">let </span>mod_ident = Ident::new(segment, Span::call_site());
-
-        <span class="kw">let </span>child_mod = module
-            .children
-            .entry(mod_ident.clone())
-            .or_insert_with(|| Module::new(mod_ident, root_mod_ident.clone()));
-
-        <span class="kw">if </span>path.len() == <span class="number">1 </span>{
-            child_mod
-                .types
-                .insert(ty.path().clone(), TypeDefGen::from_type(ty, <span class="self">self</span>));
-        } <span class="kw">else </span>{
-            <span class="self">self</span>.insert_type(ty, id, path[<span class="number">1</span>..].to_vec(), root_mod_ident, child_mod)
-        }
     }
 
     <span class="doccomment">/// # Panics
@@ -408,16 +555,50 @@
     </span><span class="kw">pub fn </span>resolve_type(<span class="kw-2">&amp;</span><span class="self">self</span>, id: u32) -&gt; Type&lt;PortableForm&gt; {
         <span class="self">self</span>.type_registry
             .resolve(id)
-            .unwrap_or_else(|| <span class="macro">panic!</span>(<span class="string">&quot;No type with id {} found&quot;</span>, id))
+            .unwrap_or_else(|| <span class="macro">panic!</span>(<span class="string">&quot;No type with id {id} found&quot;</span>))
             .clone()
     }
 
-    <span class="doccomment">/// # Panics
+    <span class="doccomment">/// Get the type path for a field of a struct or an enum variant, providing any generic
+    /// type parameters from the containing type. This is for identifying where a generic type
+    /// parameter is used in a field type e.g.
+    ///
+    /// ```rust
+    /// struct S&lt;T&gt; {
+    ///     a: T, // `T` is the &quot;parent&quot; type param from the containing type.
+    ///     b: Vec&lt;Option&lt;T&gt;&gt;, // nested use of generic type param `T`.
+    /// }
+    /// ```
+    ///
+    /// This allows generating the correct generic field type paths.
+    ///
+    /// # Panics
     ///
     /// If no type with the given id found in the type registry.
-    </span><span class="kw">pub fn </span>resolve_type_path(
+    </span><span class="kw">pub fn </span>resolve_field_type_path(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         id: u32,
+        parent_type_params: <span class="kw-2">&amp;</span>[TypeParameter],
+    ) -&gt; TypePath {
+        <span class="self">self</span>.resolve_type_path_recurse(id, <span class="bool-val">true</span>, parent_type_params)
+    }
+
+    <span class="doccomment">/// Get the type path for the given type identifier.
+    ///
+    /// # Panics
+    ///
+    /// If no type with the given id found in the type registry.
+    </span><span class="kw">pub fn </span>resolve_type_path(<span class="kw-2">&amp;</span><span class="self">self</span>, id: u32) -&gt; TypePath {
+        <span class="self">self</span>.resolve_type_path_recurse(id, <span class="bool-val">false</span>, <span class="kw-2">&amp;</span>[])
+    }
+
+    <span class="doccomment">/// Visit each node in a possibly nested type definition to produce a type path.
+    ///
+    /// e.g `Result&lt;GenericStruct&lt;NestedGenericStruct&lt;T&gt;&gt;, String&gt;`
+    </span><span class="kw">fn </span>resolve_type_path_recurse(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        id: u32,
+        is_field: bool,
         parent_type_params: <span class="kw-2">&amp;</span>[TypeParameter],
     ) -&gt; TypePath {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(parent_type_param) = parent_type_params
@@ -438,40 +619,105 @@
             )
         }
 
-        <span class="kw">let </span>params_type_ids = <span class="kw">match </span>ty.type_def() {
-            TypeDef::Array(arr) =&gt; <span class="macro">vec!</span>[arr.type_param().id()],
-            TypeDef::Sequence(seq) =&gt; <span class="macro">vec!</span>[seq.type_param().id()],
-            TypeDef::Tuple(tuple) =&gt; tuple.fields().iter().map(|f| f.id()).collect(),
-            TypeDef::Compact(compact) =&gt; <span class="macro">vec!</span>[compact.type_param().id()],
-            TypeDef::BitSequence(seq) =&gt; {
-                <span class="macro">vec!</span>[seq.bit_order_type().id(), seq.bit_store_type().id()]
+        <span class="kw">let </span>params: Vec&lt;<span class="kw">_</span>&gt; = ty
+            .type_params()
+            .iter()
+            .filter_map(|f| {
+                f.ty().map(|f| {
+                    <span class="self">self</span>.resolve_type_path_recurse(f.id(), <span class="bool-val">false</span>, parent_type_params)
+                })
+            })
+            .collect();
+
+        <span class="kw">let </span>ty = <span class="kw">match </span>ty.type_def() {
+            TypeDef::Composite(<span class="kw">_</span>) | TypeDef::Variant(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>((path, params)) = <span class="self">self
+                    </span>.type_substitutes
+                    .for_path_with_params(ty.path(), <span class="kw-2">&amp;</span>params)
+                {
+                    TypePathType::Path {
+                        path: syn::TypePath {
+                            qself: <span class="prelude-val">None</span>,
+                            path: path.clone(),
+                        },
+                        params: params.to_vec(),
+                    }
+                } <span class="kw">else </span>{
+                    TypePathType::from_type_def_path(
+                        ty.path(),
+                        <span class="self">self</span>.types_mod_ident.clone(),
+                        params,
+                    )
+                }
             }
-            <span class="kw">_ </span>=&gt; {
-                ty.type_params()
-                    .iter()
-                    .filter_map(|f| f.ty().map(|f| f.id()))
-                    .collect()
+            TypeDef::Primitive(primitive) =&gt; {
+                TypePathType::Primitive {
+                    def: primitive.clone(),
+                }
+            }
+            TypeDef::Array(arr) =&gt; {
+                TypePathType::Array {
+                    len: arr.len() <span class="kw">as </span>usize,
+                    of: Box::new(<span class="self">self</span>.resolve_type_path_recurse(
+                        arr.type_param().id(),
+                        <span class="bool-val">false</span>,
+                        parent_type_params,
+                    )),
+                }
+            }
+            TypeDef::Sequence(seq) =&gt; {
+                TypePathType::Vec {
+                    of: Box::new(<span class="self">self</span>.resolve_type_path_recurse(
+                        seq.type_param().id(),
+                        <span class="bool-val">false</span>,
+                        parent_type_params,
+                    )),
+                }
+            }
+            TypeDef::Tuple(tuple) =&gt; {
+                TypePathType::Tuple {
+                    elements: tuple
+                        .fields()
+                        .iter()
+                        .map(|f| {
+                            <span class="self">self</span>.resolve_type_path_recurse(
+                                f.id(),
+                                <span class="bool-val">false</span>,
+                                parent_type_params,
+                            )
+                        })
+                        .collect(),
+                }
+            }
+            TypeDef::Compact(compact) =&gt; {
+                TypePathType::Compact {
+                    inner: Box::new(<span class="self">self</span>.resolve_type_path_recurse(
+                        compact.type_param().id(),
+                        <span class="bool-val">false</span>,
+                        parent_type_params,
+                    )),
+                    is_field,
+                    crate_path: <span class="self">self</span>.crate_path.clone(),
+                }
+            }
+            TypeDef::BitSequence(bitseq) =&gt; {
+                TypePathType::BitVec {
+                    bit_order_type: Box::new(<span class="self">self</span>.resolve_type_path_recurse(
+                        bitseq.bit_order_type().id(),
+                        <span class="bool-val">false</span>,
+                        parent_type_params,
+                    )),
+                    bit_store_type: Box::new(<span class="self">self</span>.resolve_type_path_recurse(
+                        bitseq.bit_store_type().id(),
+                        <span class="bool-val">false</span>,
+                        parent_type_params,
+                    )),
+                    crate_path: <span class="self">self</span>.crate_path.clone(),
+                }
             }
         };
 
-        <span class="kw">let </span>params = params_type_ids
-            .iter()
-            .map(|tp| <span class="self">self</span>.resolve_type_path(<span class="kw-2">*</span>tp, parent_type_params))
-            .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
-
-        <span class="kw">let </span>joined_path = ty.path().segments().join(<span class="string">&quot;::&quot;</span>);
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(substitute_type_path) = <span class="self">self</span>.type_substitutes.get(<span class="kw-2">&amp;</span>joined_path) {
-            TypePath::Substitute(TypePathSubstitute {
-                path: substitute_type_path.clone(),
-                params,
-            })
-        } <span class="kw">else </span>{
-            TypePath::Type(TypePathType {
-                ty,
-                params,
-                root_mod_ident: <span class="self">self</span>.types_mod_ident.clone(),
-            })
-        }
+        TypePath::Type(ty)
     }
 
     <span class="doccomment">/// Returns the derives to be applied to all generated types.
@@ -495,7 +741,7 @@
     name: Ident,
     root_mod: Ident,
     children: BTreeMap&lt;Ident, Module&gt;,
-    types: BTreeMap&lt;scale_info::Path&lt;scale_info::form::PortableForm&gt;, TypeDefGen&gt;,
+    types: BTreeMap&lt;scale_info::Path&lt;PortableForm&gt;, TypeDefGen&gt;,
 }
 
 <span class="kw">impl </span>ToTokens <span class="kw">for </span>Module {
@@ -530,6 +776,74 @@
     <span class="doccomment">/// Returns the module ident.
     </span><span class="kw">pub fn </span>ident(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Ident {
         <span class="kw-2">&amp;</span><span class="self">self</span>.name
+    }
+
+    <span class="doccomment">/// Returns this `Module`s child `mod`s.
+    </span><span class="kw">pub fn </span>children(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (<span class="kw-2">&amp;</span>Ident, <span class="kw-2">&amp;</span>Module)&gt; {
+        <span class="self">self</span>.children.iter()
+    }
+
+    <span class="doccomment">/// Returns the generated types.
+    </span><span class="kw">pub fn </span>types(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+    ) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (<span class="kw-2">&amp;</span>scale_info::Path&lt;PortableForm&gt;, <span class="kw-2">&amp;</span>TypeDefGen)&gt; {
+        <span class="self">self</span>.types.iter()
+    }
+
+    <span class="doccomment">/// Returns the root `mod` used for resolving type paths.
+    </span><span class="kw">pub fn </span>root_mod(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Ident {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.root_mod
+    }
+}
+
+<span class="attr">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>CratePath(syn::Path);
+
+<span class="kw">impl </span>CratePath {
+    <span class="doccomment">/// Create a new `CratePath` from a `syn::Path`.
+    </span><span class="kw">pub fn </span>new(path: syn::Path) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(path)
+    }
+}
+
+<span class="kw">impl </span>Default <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(<span class="macro">syn::parse_quote!</span>(::subxt))
+    }
+}
+
+<span class="kw">impl </span>From&lt;syn::Path&gt; <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>from(path: syn::Path) -&gt; <span class="self">Self </span>{
+        CratePath::new(path)
+    }
+}
+
+<span class="kw">impl </span>ToTokens <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>to_tokens(<span class="kw-2">&amp;</span><span class="self">self</span>, tokens: <span class="kw-2">&amp;mut </span>TokenStream) {
+        <span class="self">self</span>.<span class="number">0</span>.to_tokens(tokens)
+    }
+}
+
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>str&gt; <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>from(crate_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>(syn::Path::from_string(crate_path).unwrap_or_else(|err| {
+            <span class="macro">panic!</span>(<span class="string">&quot;failed converting {crate_path:?} to `syn::Path`: {err:?}&quot;</span>);
+        }))
+    }
+}
+
+<span class="kw">impl </span>From&lt;String&gt; <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>from(crate_path: String) -&gt; <span class="self">Self </span>{
+        CratePath::from(crate_path.as_str())
+    }
+}
+
+<span class="kw">impl </span>From&lt;<span class="prelude-ty">Option</span>&lt;String&gt;&gt; <span class="kw">for </span>CratePath {
+    <span class="kw">fn </span>from(maybe_crate_path: <span class="prelude-ty">Option</span>&lt;String&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span>maybe_crate_path {
+            <span class="prelude-val">None </span>=&gt; CratePath::default(),
+            <span class="prelude-val">Some</span>(crate_path) =&gt; crate_path.into(),
+        }
     }
 }
 </code></pre></div>

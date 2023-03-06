@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.9.1/src/module.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>module.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../wasmi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.13.2/src/module.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>module.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../wasmi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -896,25 +896,51 @@
 <a href="#896" id="896">896</a>
 <a href="#897" id="897">897</a>
 <a href="#898" id="898">898</a>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::func::{FuncBody, FuncInstance, FuncRef};
-<span class="kw">use </span><span class="kw">crate</span>::global::{GlobalInstance, GlobalRef};
-<span class="kw">use </span><span class="kw">crate</span>::host::Externals;
-<span class="kw">use </span><span class="kw">crate</span>::imports::ImportResolver;
-<span class="kw">use </span><span class="kw">crate</span>::memory::MemoryRef;
-<span class="kw">use </span><span class="kw">crate</span>::memory_units::Pages;
-<span class="kw">use </span><span class="kw">crate</span>::runner::StackRecycler;
-<span class="kw">use </span><span class="kw">crate</span>::table::TableRef;
-<span class="kw">use </span><span class="kw">crate</span>::types::{GlobalDescriptor, MemoryDescriptor, TableDescriptor};
-<span class="kw">use crate</span>::{Error, MemoryInstance, Module, RuntimeValue, Signature, TableInstance, Trap};
-<span class="kw">use </span>alloc::collections::BTreeMap;
+<a href="#899" id="899">899</a>
+<a href="#900" id="900">900</a>
+<a href="#901" id="901">901</a>
+<a href="#902" id="902">902</a>
+<a href="#903" id="903">903</a>
+<a href="#904" id="904">904</a>
+<a href="#905" id="905">905</a>
+<a href="#906" id="906">906</a>
+<a href="#907" id="907">907</a>
+<a href="#908" id="908">908</a>
+<a href="#909" id="909">909</a>
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+    func::{FuncBody, FuncInstance, FuncRef},
+    global::{GlobalInstance, GlobalRef},
+    host::Externals,
+    imports::ImportResolver,
+    memory::MemoryRef,
+    memory_units::Pages,
+    nan_preserving_float::{F32, F64},
+    runner::StackRecycler,
+    table::TableRef,
+    types::{GlobalDescriptor, MemoryDescriptor, TableDescriptor},
+    Error,
+    MemoryInstance,
+    Module,
+    RuntimeValue,
+    Signature,
+    TableInstance,
+    Trap,
+};
 <span class="kw">use </span>alloc::{
     borrow::ToOwned,
+    collections::BTreeMap,
     rc::Rc,
     string::{String, ToString},
     vec::Vec,
 };
-<span class="kw">use </span>core::cell::{Ref, RefCell};
-<span class="kw">use </span>core::fmt;
+<span class="kw">use </span>core::{
+    cell::{Ref, RefCell},
+    fmt,
+};
 <span class="kw">use </span>parity_wasm::elements::{External, InitExpr, Instruction, Internal, ResizableLimits, Type};
 <span class="kw">use </span>validation::{DEFAULT_MEMORY_INDEX, DEFAULT_TABLE_INDEX};
 
@@ -1251,7 +1277,7 @@
             .map(|gs| gs.entries())
             .unwrap_or(<span class="kw-2">&amp;</span>[])
         {
-            <span class="kw">let </span>init_val = eval_init_expr(global_entry.init_expr(), <span class="kw-2">&amp;*</span>instance);
+            <span class="kw">let </span>init_val = eval_init_expr(global_entry.init_expr(), <span class="kw-2">&amp;</span>instance);
             <span class="kw">let </span>global = GlobalInstance::alloc(init_val, global_entry.global_type().is_mutable());
             instance.push_global(global);
         }
@@ -1427,6 +1453,7 @@
     /// [`NotStartedModuleRef`]: struct.NotStartedModuleRef.html
     /// [`ImportResolver`]: trait.ImportResolver.html
     /// [`assert_no_start`]: struct.NotStartedModuleRef.html#method.assert_no_start
+    </span><span class="attr">#[allow(clippy::new_ret_no_self)]
     </span><span class="kw">pub fn </span>new&lt;<span class="lifetime">&#39;m</span>, I: ImportResolver&gt;(
         loaded_module: <span class="kw-2">&amp;</span><span class="lifetime">&#39;m </span>Module,
         imports: <span class="kw-2">&amp;</span>I,
@@ -1491,10 +1518,10 @@
     ///
     /// ```rust
     /// # extern crate wasmi;
-    /// # extern crate wabt;
+    /// # extern crate wat;
     /// # use wasmi::{ModuleInstance, ImportsBuilder, NopExternals, RuntimeValue};
     /// # fn main() {
-    /// # let wasm_binary: Vec&lt;u8&gt; = wabt::wat2wasm(
+    /// # let wasm_binary: Vec&lt;u8&gt; = wat::parse_str(
     /// #   r#&quot;
     /// #   (module
     /// #       (func (export &quot;add&quot;) (param i32 i32) (result i32)
@@ -1652,9 +1679,10 @@
     ///
     /// This function panics if original module contains `start` function.
     </span><span class="kw">pub fn </span>assert_no_start(<span class="self">self</span>) -&gt; ModuleRef {
-        <span class="kw">if </span><span class="self">self</span>.loaded_module.module().start_section().is_some() {
-            <span class="macro">panic!</span>(<span class="string">&quot;assert_no_start called on module with `start` function&quot;</span>);
-        }
+        <span class="macro">assert!</span>(
+            <span class="self">self</span>.loaded_module.module().start_section().is_none(),
+            <span class="string">&quot;assert_no_start called on module with `start` function&quot;
+        </span>);
         <span class="self">self</span>.instance
     }
 
@@ -1675,8 +1703,8 @@
     <span class="kw">match </span>code[<span class="number">0</span>] {
         Instruction::I32Const(v) =&gt; v.into(),
         Instruction::I64Const(v) =&gt; v.into(),
-        Instruction::F32Const(v) =&gt; RuntimeValue::decode_f32(v),
-        Instruction::F64Const(v) =&gt; RuntimeValue::decode_f64(v),
+        Instruction::F32Const(v) =&gt; F32::from_bits(v).into(),
+        Instruction::F64Const(v) =&gt; F64::from_bits(v).into(),
         Instruction::GetGlobal(idx) =&gt; {
             <span class="kw">let </span>global = module
                 .global_by_index(idx)
@@ -1728,10 +1756,12 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use super</span>::{ExternVal, ModuleInstance};
-    <span class="kw">use </span><span class="kw">crate</span>::func::FuncInstance;
-    <span class="kw">use </span><span class="kw">crate</span>::imports::ImportsBuilder;
-    <span class="kw">use </span><span class="kw">crate</span>::tests::parse_wat;
-    <span class="kw">use </span><span class="kw">crate</span>::types::{Signature, ValueType};
+    <span class="kw">use crate</span>::{func::FuncInstance, imports::ImportsBuilder, types::Signature, Module, ValueType};
+
+    <span class="kw">fn </span>parse_wat(source: <span class="kw-2">&amp;</span>str) -&gt; Module {
+        <span class="kw">let </span>wasm_binary = wat::parse_str(source).expect(<span class="string">&quot;Failed to parse wat source&quot;</span>);
+        Module::from_buffer(wasm_binary).expect(<span class="string">&quot;Failed to load parsed module&quot;</span>)
+    }
 
     <span class="attr">#[should_panic]
     #[test]

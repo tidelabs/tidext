@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/src/traits/tokens/fungibles.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fungibles.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../frame_support/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/src/traits/tokens/fungibles.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fungibles.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../frame_support/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -286,9 +286,53 @@
 <a href="#286" id="286">286</a>
 <a href="#287" id="287">287</a>
 <a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -315,10 +359,13 @@
 
 <span class="kw">pub mod </span>approvals;
 <span class="kw">mod </span>balanced;
+<span class="kw">pub mod </span>enumerable;
+<span class="kw">pub use </span>enumerable::InspectEnumerable;
 <span class="kw">pub mod </span>metadata;
 <span class="kw">pub use </span>balanced::{Balanced, Unbalanced};
 <span class="kw">mod </span>imbalance;
 <span class="kw">pub use </span>imbalance::{CreditOf, DebtOf, HandleImbalanceDrop, Imbalance};
+<span class="kw">pub mod </span>roles;
 
 <span class="doccomment">/// Trait for providing balance-inspection access to a set of named fungible assets.
 </span><span class="kw">pub trait </span>Inspect&lt;AccountId&gt; {
@@ -330,6 +377,12 @@
 
 	<span class="doccomment">/// The total amount of issuance in the system.
 	</span><span class="kw">fn </span>total_issuance(asset: <span class="self">Self</span>::AssetId) -&gt; <span class="self">Self</span>::Balance;
+
+	<span class="doccomment">/// The total amount of issuance in the system excluding those which are controlled by the
+	/// system.
+	</span><span class="kw">fn </span>active_issuance(asset: <span class="self">Self</span>::AssetId) -&gt; <span class="self">Self</span>::Balance {
+		<span class="self">Self</span>::total_issuance(asset)
+	}
 
 	<span class="doccomment">/// The minimum balance any single account may have.
 	</span><span class="kw">fn </span>minimum_balance(asset: <span class="self">Self</span>::AssetId) -&gt; <span class="self">Self</span>::Balance;
@@ -360,6 +413,9 @@
 		who: <span class="kw-2">&amp;</span>AccountId,
 		amount: <span class="self">Self</span>::Balance,
 	) -&gt; WithdrawConsequence&lt;<span class="self">Self</span>::Balance&gt;;
+
+	<span class="doccomment">/// Returns `true` if an `asset` exists.
+	</span><span class="kw">fn </span>asset_exists(asset: <span class="self">Self</span>::AssetId) -&gt; bool;
 }
 
 <span class="doccomment">/// Trait for reading metadata from a fungible asset.
@@ -462,6 +518,12 @@
 		amount: <span class="self">Self</span>::Balance,
 		keep_alive: bool,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Balance, DispatchError&gt;;
+
+	<span class="doccomment">/// Reduce the active issuance by some amount.
+	</span><span class="kw">fn </span>deactivate(<span class="kw">_</span>: <span class="self">Self</span>::AssetId, <span class="kw">_</span>: <span class="self">Self</span>::Balance) {}
+
+	<span class="doccomment">/// Increase the active issuance by some amount, up to the outstanding amount reduced.
+	</span><span class="kw">fn </span>reactivate(<span class="kw">_</span>: <span class="self">Self</span>::AssetId, <span class="kw">_</span>: <span class="self">Self</span>::Balance) {}
 }
 
 <span class="doccomment">/// Trait for inspecting a set of named fungible assets which can be placed on hold.
@@ -552,27 +614,53 @@
 
 <span class="doccomment">/// Trait for providing the ability to destroy existing fungible assets.
 </span><span class="kw">pub trait </span>Destroy&lt;AccountId&gt;: Inspect&lt;AccountId&gt; {
-	<span class="doccomment">/// The witness data needed to destroy an asset.
-	</span><span class="kw">type </span>DestroyWitness;
-
-	<span class="doccomment">/// Provide the appropriate witness data needed to destroy an asset.
-	</span><span class="kw">fn </span>get_destroy_witness(id: <span class="kw-2">&amp;</span><span class="self">Self</span>::AssetId) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::DestroyWitness&gt;;
-
-	<span class="doccomment">/// Destroy an existing fungible asset.
-	/// * `id`: The `AssetId` to be destroyed.
-	/// * `witness`: Any witness data that needs to be provided to complete the operation
-	///   successfully.
+	<span class="doccomment">/// Start the destruction an existing fungible asset.
+	/// * `id`: The `AssetId` to be destroyed. successfully.
 	/// * `maybe_check_owner`: An optional account id that can be used to authorize the destroy
-	///   command. If not provided, we will not do any authorization checks before destroying the
+	///   command. If not provided, no authorization checks will be performed before destroying
 	///   asset.
+	</span><span class="kw">fn </span>start_destroy(id: <span class="self">Self</span>::AssetId, maybe_check_owner: <span class="prelude-ty">Option</span>&lt;AccountId&gt;) -&gt; DispatchResult;
+
+	<span class="doccomment">/// Destroy all accounts associated with a given asset.
+	/// `destroy_accounts` should only be called after `start_destroy` has been called, and the
+	/// asset is in a `Destroying` state
 	///
-	/// If successful, this function will return the actual witness data from the destroyed asset.
-	/// This may be different than the witness data provided, and can be used to refund weight.
-	</span><span class="kw">fn </span>destroy(
-		id: <span class="self">Self</span>::AssetId,
-		witness: <span class="self">Self</span>::DestroyWitness,
-		maybe_check_owner: <span class="prelude-ty">Option</span>&lt;AccountId&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::DestroyWitness, DispatchError&gt;;
+	/// * `id`: The identifier of the asset to be destroyed. This must identify an existing asset.
+	/// * `max_items`: The maximum number of accounts to be destroyed for a given call of the
+	///   function. This value should be small enough to allow the operation fit into a logical
+	///   block.
+	///
+	///	Response:
+	/// * u32: Total number of approvals which were actually destroyed
+	///
+	/// Due to weight restrictions, this function may need to be called multiple
+	/// times to fully destroy all approvals. It will destroy `max_items` approvals at a
+	/// time.
+	</span><span class="kw">fn </span>destroy_accounts(id: <span class="self">Self</span>::AssetId, max_items: u32) -&gt; <span class="prelude-ty">Result</span>&lt;u32, DispatchError&gt;;
+	<span class="doccomment">/// Destroy all approvals associated with a given asset up to the `max_items`
+	/// `destroy_approvals` should only be called after `start_destroy` has been called, and the
+	/// asset is in a `Destroying` state
+	///
+	/// * `id`: The identifier of the asset to be destroyed. This must identify an existing asset.
+	/// * `max_items`: The maximum number of accounts to be destroyed for a given call of the
+	///   function. This value should be small enough to allow the operation fit into a logical
+	///   block.
+	///
+	///	Response:
+	/// * u32: Total number of approvals which were actually destroyed
+	///
+	/// Due to weight restrictions, this function may need to be called multiple
+	/// times to fully destroy all approvals. It will destroy `max_items` approvals at a
+	/// time.
+	</span><span class="kw">fn </span>destroy_approvals(id: <span class="self">Self</span>::AssetId, max_items: u32) -&gt; <span class="prelude-ty">Result</span>&lt;u32, DispatchError&gt;;
+
+	<span class="doccomment">/// Complete destroying asset and unreserve currency.
+	/// `finish_destroy` should only be called after `start_destroy` has been called, and the
+	/// asset is in a `Destroying` state. All accounts or approvals should be destroyed before
+	/// hand.
+	///
+	/// * `id`: The identifier of the asset to be destroyed. This must identify an existing asset.
+	</span><span class="kw">fn </span>finish_destroy(id: <span class="self">Self</span>::AssetId) -&gt; DispatchResult;
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="frame_support" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

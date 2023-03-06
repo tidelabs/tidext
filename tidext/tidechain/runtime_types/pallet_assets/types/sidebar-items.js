@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["ExistenceReason",""]],"struct":[["Approval",""],["AssetAccount",""],["AssetDetails",""],["AssetMetadata",""],["DestroyWitness",""]]};
+window.SIDEBAR_ITEMS = {"enum":[["AssetStatus",""],["ExistenceReason",""]],"struct":[["Approval",""],["AssetAccount",""],["AssetDetails",""],["AssetMetadata",""],["DestroyWitness",""]]};

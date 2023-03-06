@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/arithmetic/src/per_things.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>per_things.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_arithmetic/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/arithmetic/src/per_things.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>per_things.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_arithmetic/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1903,57 +1903,9 @@
 <a href="#1903" id="1903">1903</a>
 <a href="#1904" id="1904">1904</a>
 <a href="#1905" id="1905">1905</a>
-<a href="#1906" id="1906">1906</a>
-<a href="#1907" id="1907">1907</a>
-<a href="#1908" id="1908">1908</a>
-<a href="#1909" id="1909">1909</a>
-<a href="#1910" id="1910">1910</a>
-<a href="#1911" id="1911">1911</a>
-<a href="#1912" id="1912">1912</a>
-<a href="#1913" id="1913">1913</a>
-<a href="#1914" id="1914">1914</a>
-<a href="#1915" id="1915">1915</a>
-<a href="#1916" id="1916">1916</a>
-<a href="#1917" id="1917">1917</a>
-<a href="#1918" id="1918">1918</a>
-<a href="#1919" id="1919">1919</a>
-<a href="#1920" id="1920">1920</a>
-<a href="#1921" id="1921">1921</a>
-<a href="#1922" id="1922">1922</a>
-<a href="#1923" id="1923">1923</a>
-<a href="#1924" id="1924">1924</a>
-<a href="#1925" id="1925">1925</a>
-<a href="#1926" id="1926">1926</a>
-<a href="#1927" id="1927">1927</a>
-<a href="#1928" id="1928">1928</a>
-<a href="#1929" id="1929">1929</a>
-<a href="#1930" id="1930">1930</a>
-<a href="#1931" id="1931">1931</a>
-<a href="#1932" id="1932">1932</a>
-<a href="#1933" id="1933">1933</a>
-<a href="#1934" id="1934">1934</a>
-<a href="#1935" id="1935">1935</a>
-<a href="#1936" id="1936">1936</a>
-<a href="#1937" id="1937">1937</a>
-<a href="#1938" id="1938">1938</a>
-<a href="#1939" id="1939">1939</a>
-<a href="#1940" id="1940">1940</a>
-<a href="#1941" id="1941">1941</a>
-<a href="#1942" id="1942">1942</a>
-<a href="#1943" id="1943">1943</a>
-<a href="#1944" id="1944">1944</a>
-<a href="#1945" id="1945">1945</a>
-<a href="#1946" id="1946">1946</a>
-<a href="#1947" id="1947">1947</a>
-<a href="#1948" id="1948">1948</a>
-<a href="#1949" id="1949">1949</a>
-<a href="#1950" id="1950">1950</a>
-<a href="#1951" id="1951">1951</a>
-<a href="#1952" id="1952">1952</a>
-<a href="#1953" id="1953">1953</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -1988,6 +1940,57 @@
 
 <span class="doccomment">/// Get the upper type of a `PerThing`.
 </span><span class="kw">pub type </span>UpperOf&lt;P&gt; = &lt;P <span class="kw">as </span>PerThing&gt;::Upper;
+
+<span class="kw">pub trait </span>RationalArg:
+	Clone
+	+ Ord
+	+ ops::Div&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::Rem&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::Add&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::AddAssign&lt;<span class="self">Self</span>&gt;
+	+ Unsigned
+	+ Zero
+	+ One
+{
+}
+
+<span class="kw">impl</span>&lt;
+		T: Clone
+			+ Ord
+			+ ops::Div&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::Rem&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::Add&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::AddAssign&lt;<span class="self">Self</span>&gt;
+			+ Unsigned
+			+ Zero
+			+ One,
+	&gt; RationalArg <span class="kw">for </span>T
+{
+}
+
+<span class="kw">pub trait </span>MultiplyArg:
+	Clone
+	+ ops::Rem&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::Div&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::Mul&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ ops::Add&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+	+ Unsigned
+{
+}
+
+<span class="kw">impl</span>&lt;
+		T: Clone
+			+ ops::Rem&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::Div&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::Mul&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ ops::Add&lt;<span class="self">Self</span>, Output = <span class="self">Self</span>&gt;
+			+ Unsigned,
+	&gt; MultiplyArg <span class="kw">for </span>T
+{
+}
+
+<span class="kw">pub trait </span>ReciprocalArg: MultiplyArg + Saturating {}
+<span class="kw">impl</span>&lt;T: MultiplyArg + Saturating&gt; ReciprocalArg <span class="kw">for </span>T {}
 
 <span class="doccomment">/// Something that implements a fixed point ration with an arbitrary granularity `X`, as _parts per
 /// `X`_.
@@ -2113,13 +2116,7 @@
 	/// ```
 	</span><span class="kw">fn </span>mul_floor&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 	<span class="kw">where
-		</span>N: Clone
-			+ UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Mul&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ Unsigned,
+		</span>N: MultiplyArg + UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		overflow_prune_mul::&lt;N, <span class="self">Self</span>&gt;(b, <span class="self">self</span>.deconstruct(), Rounding::Down)
@@ -2142,13 +2139,7 @@
 	/// ```
 	</span><span class="kw">fn </span>mul_ceil&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 	<span class="kw">where
-		</span>N: Clone
-			+ UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Mul&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ Unsigned,
+		</span>N: MultiplyArg + UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		overflow_prune_mul::&lt;N, <span class="self">Self</span>&gt;(b, <span class="self">self</span>.deconstruct(), Rounding::Up)
@@ -2165,14 +2156,7 @@
 	/// ```
 	</span><span class="kw">fn </span>saturating_reciprocal_mul&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 	<span class="kw">where
-		</span>N: Clone
-			+ UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Mul&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ Saturating
-			+ Unsigned,
+		</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		saturating_reciprocal_mul::&lt;N, <span class="self">Self</span>&gt;(b, <span class="self">self</span>.deconstruct(), Rounding::NearestPrefUp)
@@ -2192,14 +2176,7 @@
 	/// ```
 	</span><span class="kw">fn </span>saturating_reciprocal_mul_floor&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 	<span class="kw">where
-		</span>N: Clone
-			+ UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Mul&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ Saturating
-			+ Unsigned,
+		</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		saturating_reciprocal_mul::&lt;N, <span class="self">Self</span>&gt;(b, <span class="self">self</span>.deconstruct(), Rounding::Down)
@@ -2219,14 +2196,7 @@
 	/// ```
 	</span><span class="kw">fn </span>saturating_reciprocal_mul_ceil&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 	<span class="kw">where
-		</span>N: Clone
-			+ UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Mul&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ Saturating
-			+ Unsigned,
+		</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="self">Self</span>::Inner&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		saturating_reciprocal_mul::&lt;N, <span class="self">Self</span>&gt;(b, <span class="self">self</span>.deconstruct(), Rounding::Up)
@@ -2269,17 +2239,7 @@
 	/// ```
 	</span><span class="kw">fn </span>from_rational&lt;N&gt;(p: N, q: N) -&gt; <span class="self">Self
 	</span><span class="kw">where
-		</span>N: Clone
-			+ Ord
-			+ TryInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ TryInto&lt;<span class="self">Self</span>::Upper&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ ops::AddAssign&lt;N&gt;
-			+ Unsigned
-			+ Zero
-			+ One,
+		</span>N: RationalArg + TryInto&lt;<span class="self">Self</span>::Inner&gt; + TryInto&lt;<span class="self">Self</span>::Upper&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		<span class="self">Self</span>::from_rational_with_rounding(p, q, Rounding::Down).unwrap_or_else(|<span class="kw">_</span>| <span class="self">Self</span>::one())
@@ -2341,34 +2301,14 @@
 	/// ```
 	</span><span class="kw">fn </span>from_rational_with_rounding&lt;N&gt;(p: N, q: N, rounding: Rounding) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, ()&gt;
 	<span class="kw">where
-		</span>N: Clone
-			+ Ord
-			+ TryInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ TryInto&lt;<span class="self">Self</span>::Upper&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ ops::AddAssign&lt;N&gt;
-			+ Unsigned
-			+ Zero
-			+ One,
+		</span>N: RationalArg + TryInto&lt;<span class="self">Self</span>::Inner&gt; + TryInto&lt;<span class="self">Self</span>::Upper&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;;
 
 	<span class="doccomment">/// Same as `Self::from_rational`.
 	</span><span class="attr">#[deprecated = <span class="string">&quot;Use from_rational instead&quot;</span>]
 	</span><span class="kw">fn </span>from_rational_approximation&lt;N&gt;(p: N, q: N) -&gt; <span class="self">Self
 	</span><span class="kw">where
-		</span>N: Clone
-			+ Ord
-			+ TryInto&lt;<span class="self">Self</span>::Inner&gt;
-			+ TryInto&lt;<span class="self">Self</span>::Upper&gt;
-			+ ops::Div&lt;N, Output = N&gt;
-			+ ops::Rem&lt;N, Output = N&gt;
-			+ ops::Add&lt;N, Output = N&gt;
-			+ ops::AddAssign&lt;N&gt;
-			+ Unsigned
-			+ Zero
-			+ One,
+		</span>N: RationalArg + TryInto&lt;<span class="self">Self</span>::Inner&gt; + TryInto&lt;<span class="self">Self</span>::Upper&gt;,
 		<span class="self">Self</span>::Inner: Into&lt;N&gt;,
 	{
 		<span class="self">Self</span>::from_rational(p, q)
@@ -2448,13 +2388,7 @@
 <span class="doccomment">/// Overflow-prune multiplication. Accurately multiply a value by `self` without overflowing.
 </span><span class="kw">fn </span>overflow_prune_mul&lt;N, P&gt;(x: N, part: P::Inner, rounding: Rounding) -&gt; N
 <span class="kw">where
-	</span>N: Clone
-		+ UniqueSaturatedInto&lt;P::Inner&gt;
-		+ ops::Div&lt;N, Output = N&gt;
-		+ ops::Mul&lt;N, Output = N&gt;
-		+ ops::Add&lt;N, Output = N&gt;
-		+ ops::Rem&lt;N, Output = N&gt;
-		+ Unsigned,
+	</span>N: MultiplyArg + UniqueSaturatedInto&lt;P::Inner&gt;,
 	P: PerThing,
 	P::Inner: Into&lt;N&gt;,
 {
@@ -2470,12 +2404,7 @@
 /// to `x / denom * numer` for an accurate result.
 </span><span class="kw">fn </span>rational_mul_correction&lt;N, P&gt;(x: N, numer: P::Inner, denom: P::Inner, rounding: Rounding) -&gt; N
 <span class="kw">where
-	</span>N: UniqueSaturatedInto&lt;P::Inner&gt;
-		+ ops::Div&lt;N, Output = N&gt;
-		+ ops::Mul&lt;N, Output = N&gt;
-		+ ops::Add&lt;N, Output = N&gt;
-		+ ops::Rem&lt;N, Output = N&gt;
-		+ Unsigned,
+	</span>N: MultiplyArg + UniqueSaturatedInto&lt;P::Inner&gt;,
 	P: PerThing,
 	P::Inner: Into&lt;N&gt;,
 {
@@ -2756,17 +2685,7 @@
 			</span><span class="attr">#[deprecated = <span class="string">&quot;Use `PerThing::from_rational` instead&quot;</span>]
 			</span><span class="kw">pub fn </span>from_rational_approximation&lt;N&gt;(p: N, q: N) -&gt; <span class="self">Self
 			</span><span class="kw">where
-				</span>N: Clone
-					+ Ord
-					+ TryInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;
-					+ <span class="macro-nonterminal">TryInto</span>&lt;<span class="macro-nonterminal">$upper_type</span>&gt;
-					+ ops::Div&lt;N, Output = N&gt;
-					+ ops::Rem&lt;N, Output = N&gt;
-					+ ops::Add&lt;N, Output = N&gt;
-					+ ops::AddAssign&lt;N&gt;
-					+ Unsigned
-					+ Zero
-					+ One,
+				</span>N: RationalArg+ TryInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; + <span class="macro-nonterminal">TryInto</span>&lt;<span class="macro-nonterminal">$upper_type</span>&gt;,
 				<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;
 			{
 				&lt;<span class="self">Self </span><span class="kw">as </span>PerThing&gt;::from_rational(p, q)
@@ -2775,17 +2694,7 @@
 			<span class="doccomment">/// See [`PerThing::from_rational`].
 			</span><span class="kw">pub fn </span>from_rational&lt;N&gt;(p: N, q: N) -&gt; <span class="self">Self
 			</span><span class="kw">where
-				</span>N: Clone
-					+ Ord
-					+ TryInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;
-					+ <span class="macro-nonterminal">TryInto</span>&lt;<span class="macro-nonterminal">$upper_type</span>&gt;
-					+ ops::Div&lt;N, Output = N&gt;
-					+ ops::Rem&lt;N, Output = N&gt;
-					+ ops::Add&lt;N, Output = N&gt;
-					+ ops::AddAssign&lt;N&gt;
-					+ Unsigned
-					+ Zero
-					+ One,
+				</span>N: RationalArg+ TryInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; + <span class="macro-nonterminal">TryInto</span>&lt;<span class="macro-nonterminal">$upper_type</span>&gt;,
 				<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;
 			{
 				&lt;<span class="self">Self </span><span class="kw">as </span>PerThing&gt;::from_rational(p, q)
@@ -2804,9 +2713,7 @@
 			<span class="doccomment">/// See [`PerThing::mul_floor`].
 			</span><span class="kw">pub fn </span>mul_floor&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 				<span class="kw">where
-					</span>N: Clone + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; +
-						<span class="macro-nonterminal">ops::Rem</span>&lt;N, Output=N&gt; + ops::Div&lt;N, Output=N&gt; + ops::Mul&lt;N, Output=N&gt; +
-						ops::Add&lt;N, Output=N&gt; + Unsigned,
+					</span>N: MultiplyArg + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;,
 					<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;,
 
 			{
@@ -2816,9 +2723,7 @@
 			<span class="doccomment">/// See [`PerThing::mul_ceil`].
 			</span><span class="kw">pub fn </span>mul_ceil&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 				<span class="kw">where
-					</span>N: Clone + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; +
-						<span class="macro-nonterminal">ops::Rem</span>&lt;N, Output=N&gt; + ops::Div&lt;N, Output=N&gt; + ops::Mul&lt;N, Output=N&gt; +
-						ops::Add&lt;N, Output=N&gt; + Unsigned,
+					</span>N: MultiplyArg + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;,
 					<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;,
 			{
 				PerThing::mul_ceil(<span class="self">self</span>, b)
@@ -2827,9 +2732,7 @@
 			<span class="doccomment">/// See [`PerThing::saturating_reciprocal_mul`].
 			</span><span class="kw">pub fn </span>saturating_reciprocal_mul&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 				<span class="kw">where
-					</span>N: Clone + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; + <span class="macro-nonterminal">ops::Rem</span>&lt;N, Output=N&gt; +
-						ops::Div&lt;N, Output=N&gt; + ops::Mul&lt;N, Output=N&gt; + ops::Add&lt;N, Output=N&gt; +
-						Saturating + Unsigned,
+					</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;,
 					<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;,
 			{
 				PerThing::saturating_reciprocal_mul(<span class="self">self</span>, b)
@@ -2838,9 +2741,7 @@
 			<span class="doccomment">/// See [`PerThing::saturating_reciprocal_mul_floor`].
 			</span><span class="kw">pub fn </span>saturating_reciprocal_mul_floor&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 				<span class="kw">where
-					</span>N: Clone + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; + <span class="macro-nonterminal">ops::Rem</span>&lt;N, Output=N&gt; +
-						ops::Div&lt;N, Output=N&gt; + ops::Mul&lt;N, Output=N&gt; + ops::Add&lt;N, Output=N&gt; +
-						Saturating + Unsigned,
+					</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;,
 					<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;,
 			{
 				PerThing::saturating_reciprocal_mul_floor(<span class="self">self</span>, b)
@@ -2849,9 +2750,7 @@
 			<span class="doccomment">/// See [`PerThing::saturating_reciprocal_mul_ceil`].
 			</span><span class="kw">pub fn </span>saturating_reciprocal_mul_ceil&lt;N&gt;(<span class="self">self</span>, b: N) -&gt; N
 				<span class="kw">where
-					</span>N: Clone + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt; + <span class="macro-nonterminal">ops::Rem</span>&lt;N, Output=N&gt; +
-						ops::Div&lt;N, Output=N&gt; + ops::Mul&lt;N, Output=N&gt; + ops::Add&lt;N, Output=N&gt; +
-						Saturating + Unsigned,
+					</span>N: ReciprocalArg + UniqueSaturatedInto&lt;<span class="macro-nonterminal">$</span><span class="kw">type</span>&gt;,
 					<span class="macro-nonterminal">$</span><span class="kw">type</span>: <span class="macro-nonterminal">Into</span>&lt;N&gt;,
 			{
 				PerThing::saturating_reciprocal_mul_ceil(<span class="self">self</span>, b)
@@ -3086,6 +2985,11 @@
 			}
 		}
 
+		<span class="kw">impl </span><span class="macro-nonterminal">$crate::traits::One </span><span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+			<span class="kw">fn </span>one() -&gt; <span class="self">Self </span>{
+				<span class="self">Self</span>::one()
+			}
+		}
 
 		<span class="attr">#[cfg(test)]
 		</span><span class="kw">mod </span><span class="macro-nonterminal">$test_mod </span>{

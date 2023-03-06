@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/macro/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../subxt_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/macro/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../subxt_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -129,6 +129,89 @@
 <a href="#129" id="129">129</a>
 <a href="#130" id="130">130</a>
 <a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
@@ -162,11 +245,9 @@
 //! ```ignore
 //! #[subxt::subxt(
 //!     runtime_metadata_path = &quot;polkadot_metadata.scale&quot;,
+//!     substitute_type(type = &quot;sp_arithmetic::per_things::Perbill&quot;, with = &quot;sp_runtime::Perbill&quot;)
 //! )]
-//! pub mod polkadot {
-//!     #[subxt(substitute_type = &quot;sp_arithmetic::per_things::Perbill&quot;)]
-//!     use sp_runtime::Perbill;
-//! }
+//! pub mod polkadot {}
 //! ```
 //!
 //! This will replace the generated type and any usages with the specified type at the `use` import.
@@ -205,27 +286,55 @@
 //! )]
 //! pub mod polkadot {}
 //! ```
+//!
+//! ### Custom crate path
+//!
+//! In order to specify a custom crate path to be used for the code generation:
+//!
+//! ```ignore
+//! #[subxt::subxt(crate = &quot;crate::path::to::subxt&quot;)]
+//! ```
+//!
+//! By default the path `::subxt` is used.
 
 </span><span class="attr">#![deny(unused_crate_dependencies)]
 
 </span><span class="kw">extern crate </span>proc_macro;
 
+<span class="kw">use </span>std::str::FromStr;
+
 <span class="kw">use </span>darling::FromMeta;
 <span class="kw">use </span>proc_macro::TokenStream;
-<span class="kw">use </span>proc_macro_error::proc_macro_error;
-<span class="kw">use </span>subxt_codegen::DerivesRegistry;
+<span class="kw">use </span>proc_macro_error::{
+    abort,
+    abort_call_site,
+    proc_macro_error,
+};
+<span class="kw">use </span>subxt_codegen::{
+    utils::Uri,
+    DerivesRegistry,
+    TypeSubstitutes,
+};
 <span class="kw">use </span>syn::{
     parse_macro_input,
     punctuated::Punctuated,
+    spanned::Spanned <span class="kw">as _</span>,
 };
 
 <span class="attr">#[derive(Debug, FromMeta)]
 </span><span class="kw">struct </span>RuntimeMetadataArgs {
-    runtime_metadata_path: String,
+    <span class="attr">#[darling(default)]
+    </span>runtime_metadata_path: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="attr">#[darling(default)]
+    </span>runtime_metadata_url: <span class="prelude-ty">Option</span>&lt;String&gt;,
     <span class="attr">#[darling(default)]
     </span>derive_for_all_types: <span class="prelude-ty">Option</span>&lt;Punctuated&lt;syn::Path, <span class="macro">syn::Token!</span>[,]&gt;&gt;,
     <span class="attr">#[darling(multiple)]
     </span>derive_for_type: Vec&lt;DeriveForType&gt;,
+    <span class="attr">#[darling(multiple)]
+    </span>substitute_type: Vec&lt;SubstituteType&gt;,
+    <span class="attr">#[darling(default, rename = <span class="string">&quot;crate&quot;</span>)]
+    </span>crate_path: <span class="prelude-ty">Option</span>&lt;String&gt;,
 }
 
 <span class="attr">#[derive(Debug, FromMeta)]
@@ -233,6 +342,13 @@
     <span class="attr">#[darling(rename = <span class="string">&quot;type&quot;</span>)]
     </span>ty: syn::TypePath,
     derive: Punctuated&lt;syn::Path, <span class="macro">syn::Token!</span>[,]&gt;,
+}
+
+<span class="attr">#[derive(Debug, FromMeta)]
+</span><span class="kw">struct </span>SubstituteType {
+    <span class="attr">#[darling(rename = <span class="string">&quot;type&quot;</span>)]
+    </span>ty: syn::Path,
+    with: syn::Path,
 }
 
 <span class="attr">#[proc_macro_attribute]
@@ -245,20 +361,70 @@
         <span class="prelude-val">Err</span>(e) =&gt; <span class="kw">return </span>TokenStream::from(e.write_errors()),
     };
 
-    <span class="kw">let </span>root = std::env::var(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;.&quot;</span>.into());
-    <span class="kw">let </span>root_path = std::path::Path::new(<span class="kw-2">&amp;</span>root);
-    <span class="kw">let </span>path = root_path.join(args.runtime_metadata_path);
+    <span class="kw">let </span>crate_path = <span class="kw">match </span>args.crate_path {
+        <span class="prelude-val">Some</span>(crate_path) =&gt; crate_path.into(),
+        <span class="prelude-val">None </span>=&gt; subxt_codegen::CratePath::default(),
+    };
+    <span class="kw">let </span><span class="kw-2">mut </span>derives_registry = DerivesRegistry::new(<span class="kw-2">&amp;</span>crate_path);
 
-    <span class="kw">let </span><span class="kw-2">mut </span>derives_registry = DerivesRegistry::default();
     <span class="kw">if let </span><span class="prelude-val">Some</span>(derive_for_all) = args.derive_for_all_types {
         derives_registry.extend_for_all(derive_for_all.iter().cloned());
     }
     <span class="kw">for </span>derives <span class="kw">in </span><span class="kw-2">&amp;</span>args.derive_for_type {
-        derives_registry
-            .extend_for_type(derives.ty.clone(), derives.derive.iter().cloned())
+        derives_registry.extend_for_type(
+            derives.ty.clone(),
+            derives.derive.iter().cloned(),
+            <span class="kw-2">&amp;</span>crate_path,
+        )
     }
 
-    subxt_codegen::generate_runtime_api(item_mod, <span class="kw-2">&amp;</span>path, derives_registry).into()
+    <span class="kw">let </span><span class="kw-2">mut </span>type_substitutes = TypeSubstitutes::new(<span class="kw-2">&amp;</span>crate_path);
+    type_substitutes.extend(args.substitute_type.into_iter().map(
+        |SubstituteType { ty, with }| {
+            (
+                ty,
+                with.try_into()
+                    .unwrap_or_else(|(node, msg): (syn::Path, String)| {
+                        <span class="macro">abort!</span>(node.span(), msg)
+                    }),
+            )
+        },
+    ));
+
+    <span class="kw">match </span>(args.runtime_metadata_path, args.runtime_metadata_url) {
+        (<span class="prelude-val">Some</span>(rest_of_path), <span class="prelude-val">None</span>) =&gt; {
+            <span class="kw">let </span>root = std::env::var(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>).unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;.&quot;</span>.into());
+            <span class="kw">let </span>root_path = std::path::Path::new(<span class="kw-2">&amp;</span>root);
+            <span class="kw">let </span>path = root_path.join(rest_of_path);
+            subxt_codegen::generate_runtime_api_from_path(
+                item_mod,
+                path,
+                derives_registry,
+                type_substitutes,
+                crate_path,
+            )
+            .into()
+        }
+        (<span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(url_string)) =&gt; {
+            <span class="kw">let </span>url = Uri::from_str(<span class="kw-2">&amp;</span>url_string).unwrap_or_else(|<span class="kw">_</span>| {
+                <span class="macro">abort_call_site!</span>(<span class="string">&quot;Cannot download metadata; invalid url: {}&quot;</span>, url_string)
+            });
+            subxt_codegen::generate_runtime_api_from_url(
+                item_mod,
+                <span class="kw-2">&amp;</span>url,
+                derives_registry,
+                type_substitutes,
+                crate_path,
+            )
+            .into()
+        }
+        (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>) =&gt; {
+            <span class="macro">abort_call_site!</span>(<span class="string">&quot;One of &#39;runtime_metadata_path&#39; or &#39;runtime_metadata_url&#39; must be provided&quot;</span>)
+        }
+        (<span class="prelude-val">Some</span>(<span class="kw">_</span>), <span class="prelude-val">Some</span>(<span class="kw">_</span>)) =&gt; {
+            <span class="macro">abort_call_site!</span>(<span class="string">&quot;Only one of &#39;runtime_metadata_path&#39; or &#39;runtime_metadata_url&#39; can be provided&quot;</span>)
+        }
+    }
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="subxt_macro" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

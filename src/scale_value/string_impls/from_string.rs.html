@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.5.0/src/string_impls/from_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>from_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scale_value/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-value-0.6.0/src/string_impls/from_string.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>from_string.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scale_value/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -634,8 +634,6 @@
 <a href="#634" id="634">634</a>
 <a href="#635" id="635">635</a>
 <a href="#636" id="636">636</a>
-<a href="#637" id="637">637</a>
-<a href="#638" id="638">638</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright (C) 2022 Parity Technologies (UK) Ltd. (admin@parity.io)
 // This file is a part of the scale-value crate.
 //
@@ -666,7 +664,7 @@
 }
 
 <span class="doccomment">/// An error parsing the provided string into a Value
-</span><span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+</span><span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub struct </span>ParseError {
 	<span class="doccomment">/// Byte offset into the provided string that the error begins.
 	</span><span class="kw">pub </span>start_loc: usize,
@@ -697,7 +695,7 @@
 }
 
 <span class="doccomment">/// Details about the error that occurred.
-</span><span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+</span><span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseErrorKind {
 	<span class="attr">#[error(<span class="string">&quot;Expected a value&quot;</span>)]
 	</span>ExpectedValue,
@@ -739,7 +737,7 @@
 	};
 }
 
-<span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+<span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseComplexError {
 	<span class="attr">#[error(<span class="string">&quot;The first character in a field name should be alphabetic&quot;</span>)]
 	</span>InvalidStartingCharacterInIdent,
@@ -752,7 +750,7 @@
 }
 <span class="macro">at_between!</span>(ParseComplexError);
 
-<span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+<span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseCharError {
 	<span class="attr">#[error(<span class="string">&quot;Expected a single character&quot;</span>)]
 	</span>ExpectedValidCharacter,
@@ -763,7 +761,7 @@
 }
 <span class="macro">at_between!</span>(ParseCharError);
 
-<span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+<span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseStringError {
 	<span class="attr">#[error(<span class="string">&quot;Expected a closing quote to match the opening quote at position {0}&quot;</span>)]
 	</span>ExpectedClosingQuoteToMatch(usize),
@@ -772,7 +770,7 @@
 }
 <span class="macro">at_between!</span>(ParseStringError);
 
-<span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+<span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseNumberError {
 	<span class="attr">#[error(<span class="string">&quot;Expected one or more digits&quot;</span>)]
 	</span>ExpectedDigit,
@@ -781,7 +779,7 @@
 }
 <span class="macro">at_between!</span>(ParseNumberError);
 
-<span class="attr">#[derive(Debug, Clone, PartialEq, thiserror::Error)]
+<span class="attr">#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
 </span><span class="kw">pub enum </span>ParseBitSequenceError {
 	<span class="attr">#[error(<span class="string">&quot;Expected a closing bracket (&#39;&gt;&#39;) to match the opening one at position {0}&quot;</span>)]
 	</span>ExpectedClosingBracketToMatch(usize),
@@ -913,15 +911,13 @@
 
 <span class="comment">// Parse a bool (`true` or `false`)
 </span><span class="kw">fn </span>parse_bool(t: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>Tokens&lt;Item = char&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;bool&gt; {
-	<span class="kw">let </span>bool = <span class="kw">if </span>t.tokens(<span class="string">&quot;true&quot;</span>.chars()) {
+	<span class="kw">if </span>t.tokens(<span class="string">&quot;true&quot;</span>.chars()) {
 		<span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
 	} <span class="kw">else if </span>t.tokens(<span class="string">&quot;false&quot;</span>.chars()) {
 		<span class="prelude-val">Some</span>(<span class="bool-val">false</span>)
 	} <span class="kw">else </span>{
 		<span class="prelude-val">None
-	</span>};
-
-	bool
+	</span>}
 }
 
 <span class="comment">// Parse a char like `&#39;a&#39;`
@@ -1264,14 +1260,14 @@
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>parse_bit_sequences() {
-		<span class="kw">use </span>bitvec::{bitvec, order::Lsb0};
+		<span class="kw">use </span>scale_bits::bits;
 		<span class="macro">assert_eq!</span>(
 			from(<span class="string">&quot;&lt;011010110101101&gt;&quot;</span>),
-			<span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bitvec!</span>[u8, Lsb0; <span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]))
+			<span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bits!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]))
 		);
-		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;01101&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bitvec!</span>[u8, Lsb0; <span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>])));
-		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;0&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bitvec!</span>[u8, Lsb0; <span class="number">0</span>])));
-		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bitvec!</span>[u8, Lsb0;])));
+		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;01101&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bits!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])));
+		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;0&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bits!</span>[<span class="number">0</span>])));
+		<span class="macro">assert_eq!</span>(from(<span class="string">&quot;&lt;&gt;&quot;</span>), <span class="prelude-val">Ok</span>(Value::bit_sequence(<span class="macro">bits!</span>[])));
 	}
 }
 </code></pre></div>

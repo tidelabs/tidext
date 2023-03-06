@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["ScheduledV3",""]]};
+window.SIDEBAR_ITEMS = {"mod":[["pallet",""]],"struct":[["Scheduled",""]]};

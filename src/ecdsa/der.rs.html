@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.13.4/src/der.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>der.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.14.8/src/der.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>der.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -299,6 +299,55 @@
 <a href="#298" id="298">298</a>
 <a href="#299" id="299">299</a>
 <a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
+<a href="#341" id="341">341</a>
+<a href="#342" id="342">342</a>
+<a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Support for ECDSA signatures encoded as ASN.1 DER.
 
 </span><span class="kw">use crate</span>::{Error, <span class="prelude-ty">Result</span>};
@@ -306,7 +355,7 @@
     fmt,
     ops::{Add, Range},
 };
-<span class="kw">use </span>der::{asn1::UIntBytes, Decodable, Encodable};
+<span class="kw">use </span>der::{asn1::UIntRef, Decode, Encode, Reader};
 <span class="kw">use </span>elliptic_curve::{
     bigint::Encoding <span class="kw">as _</span>,
     consts::U9,
@@ -316,6 +365,9 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
 </span><span class="kw">use </span>alloc::boxed::Box;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serdect::serde::{de, ser, Deserialize, Serialize};
 
 <span class="doccomment">/// Maximum overhead of an ASN.1 DER-encoded ECDSA signature for a given curve:
 /// 9-bytes.
@@ -395,18 +447,18 @@
 
     <span class="doccomment">/// Create an ASN.1 DER encoded signature from big endian `r` and `s` scalars
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>from_scalar_bytes(r: <span class="kw-2">&amp;</span>[u8], s: <span class="kw-2">&amp;</span>[u8]) -&gt; der::Result&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span>r = UIntBytes::new(r)<span class="question-mark">?</span>;
-        <span class="kw">let </span>s = UIntBytes::new(s)<span class="question-mark">?</span>;
+        <span class="kw">let </span>r = UIntRef::new(r)<span class="question-mark">?</span>;
+        <span class="kw">let </span>s = UIntRef::new(s)<span class="question-mark">?</span>;
 
         <span class="kw">let </span><span class="kw-2">mut </span>bytes = SignatureBytes::&lt;C&gt;::default();
-        <span class="kw">let </span><span class="kw-2">mut </span>encoder = der::Encoder::new(<span class="kw-2">&amp;mut </span>bytes);
+        <span class="kw">let </span><span class="kw-2">mut </span>writer = der::SliceWriter::new(<span class="kw-2">&amp;mut </span>bytes);
 
-        encoder.sequence((r.encoded_len()<span class="question-mark">? </span>+ s.encoded_len()<span class="question-mark">?</span>)<span class="question-mark">?</span>, |seq| {
+        writer.sequence((r.encoded_len()<span class="question-mark">? </span>+ s.encoded_len()<span class="question-mark">?</span>)<span class="question-mark">?</span>, |seq| {
             seq.encode(<span class="kw-2">&amp;</span>r)<span class="question-mark">?</span>;
             seq.encode(<span class="kw-2">&amp;</span>s)
         })<span class="question-mark">?</span>;
 
-        encoder
+        writer
             .finish()<span class="question-mark">?
             </span>.try_into()
             .map_err(|<span class="kw">_</span>| der::Tag::Sequence.value_error())
@@ -441,10 +493,13 @@
     &lt;FieldSize&lt;C&gt; <span class="kw">as </span>Add&gt;::Output: Add&lt;MaxOverhead&gt; + ArrayLength&lt;u8&gt;,
 {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
-        f.debug_struct(<span class="string">&quot;asn1::Signature&quot;</span>)
-            .field(<span class="string">&quot;r&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.r())
-            .field(<span class="string">&quot;s&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.s())
-            .finish()
+        <span class="macro">write!</span>(f, <span class="string">&quot;ecdsa::der::Signature&lt;{:?}&gt;(&quot;</span>, C::default())<span class="question-mark">?</span>;
+
+        <span class="kw">for </span><span class="kw-2">&amp;</span>byte <span class="kw">in </span><span class="self">self</span>.as_ref() {
+            <span class="macro">write!</span>(f, <span class="string">&quot;{:02X}&quot;</span>, byte)<span class="question-mark">?</span>;
+        }
+
+        <span class="macro">write!</span>(f, <span class="string">&quot;)&quot;</span>)
     }
 }
 
@@ -457,13 +512,7 @@
     <span class="kw">type </span>Error = Error;
 
     <span class="kw">fn </span>try_from(input: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span>(r, s) = der::Decoder::new(input)
-            .and_then(|<span class="kw-2">mut </span>decoder| {
-                decoder.sequence(|decoder| {
-                    <span class="prelude-val">Ok</span>((UIntBytes::decode(decoder)<span class="question-mark">?</span>, UIntBytes::decode(decoder)<span class="question-mark">?</span>))
-                })
-            })
-            .map_err(|<span class="kw">_</span>| Error::new())<span class="question-mark">?</span>;
+        <span class="kw">let </span>(r, s) = decode_der(input).map_err(|<span class="kw">_</span>| Error::new())<span class="question-mark">?</span>;
 
         <span class="kw">if </span>r.as_bytes().len() &gt; C::UInt::BYTE_SIZE || s.as_bytes().len() &gt; C::UInt::BYTE_SIZE {
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new());
@@ -503,6 +552,55 @@
         bytes[s_begin..].copy_from_slice(sig.s());
         <span class="self">Self</span>::try_from(bytes.as_slice())
     }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;serde&quot;</span>)))]
+</span><span class="kw">impl</span>&lt;C&gt; Serialize <span class="kw">for </span>Signature&lt;C&gt;
+<span class="kw">where
+    </span>C: PrimeCurve,
+    MaxSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
+    &lt;FieldSize&lt;C&gt; <span class="kw">as </span>Add&gt;::Output: Add&lt;MaxOverhead&gt; + ArrayLength&lt;u8&gt;,
+{
+    <span class="kw">fn </span>serialize&lt;S&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, serializer: S) -&gt; core::result::Result&lt;S::Ok, S::Error&gt;
+    <span class="kw">where
+        </span>S: ser::Serializer,
+    {
+        serdect::slice::serialize_hex_upper_or_bin(<span class="kw-2">&amp;</span><span class="self">self</span>.as_bytes(), serializer)
+    }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;serde&quot;</span>)))]
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, C&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>Signature&lt;C&gt;
+<span class="kw">where
+    </span>C: PrimeCurve,
+    MaxSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
+    &lt;FieldSize&lt;C&gt; <span class="kw">as </span>Add&gt;::Output: Add&lt;MaxOverhead&gt; + ArrayLength&lt;u8&gt;,
+{
+    <span class="kw">fn </span>deserialize&lt;D&gt;(deserializer: D) -&gt; core::result::Result&lt;<span class="self">Self</span>, D::Error&gt;
+    <span class="kw">where
+        </span>D: de::Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
+    {
+        <span class="kw">let </span><span class="kw-2">mut </span>buf = SignatureBytes::&lt;C&gt;::default();
+        <span class="kw">let </span>slice = serdect::slice::deserialize_hex_or_bin(<span class="kw-2">&amp;mut </span>buf, deserializer)<span class="question-mark">?</span>;
+        <span class="self">Self</span>::try_from(slice).map_err(de::Error::custom)
+    }
+}
+
+<span class="doccomment">/// Decode the `r` and `s` components of a DER-encoded ECDSA signature.
+</span><span class="kw">fn </span>decode_der(der_bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; der::Result&lt;(UIntRef&lt;<span class="lifetime">&#39;_</span>&gt;, UIntRef&lt;<span class="lifetime">&#39;_</span>&gt;)&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>reader = der::SliceReader::new(der_bytes)<span class="question-mark">?</span>;
+    <span class="kw">let </span>header = der::Header::decode(<span class="kw-2">&amp;mut </span>reader)<span class="question-mark">?</span>;
+    header.tag.assert_eq(der::Tag::Sequence)<span class="question-mark">?</span>;
+
+    <span class="kw">let </span>ret = reader.read_nested(header.length, |reader| {
+        <span class="kw">let </span>r = UIntRef::decode(reader)<span class="question-mark">?</span>;
+        <span class="kw">let </span>s = UIntRef::decode(reader)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>((r, s))
+    })<span class="question-mark">?</span>;
+
+    reader.finish(ret)
 }
 
 <span class="doccomment">/// Locate the range within a slice at which a particular subslice is located

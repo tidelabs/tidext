@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/sec1-0.2.1/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sec1/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/sec1-0.3.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sec1/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -65,7 +65,23 @@
 <a href="#64" id="64">64</a>
 <a href="#65" id="65">65</a>
 <a href="#66" id="66">66</a>
-</pre><pre class="rust"><code><span class="attr">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+<a href="#67" id="67">67</a>
+<a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
+<a href="#70" id="70">70</a>
+<a href="#71" id="71">71</a>
+<a href="#72" id="72">72</a>
+<a href="#73" id="73">73</a>
+<a href="#74" id="74">74</a>
+</pre><pre class="rust"><code><span class="attr">#![no_std]
+#![cfg_attr(docsrs, feature(doc_cfg))]
+#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
+#![doc(
+    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;</span>,
+    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;
+</span>)]
+#![forbid(unsafe_code, clippy::unwrap_used)]
+#![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
 
 </span><span class="doccomment">//! ## `serde` support
 //!
@@ -76,42 +92,39 @@
 //! serializers/deserializers will autodetect if a &quot;human friendly&quot; textual
 //! encoding is being used, and if so encode the points as hexadecimal.
 
-</span><span class="attr">#![no_std]
-#![cfg_attr(docsrs, feature(doc_cfg))]
-#![doc(
-    html_logo_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;</span>,
-    html_favicon_url = <span class="string">&quot;https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg&quot;</span>,
-    html_root_url = <span class="string">&quot;https://docs.rs/sec1/0.2.1&quot;
-</span>)]
-#![forbid(unsafe_code, clippy::unwrap_used)]
-#![warn(missing_docs, rust_2018_idioms, unused_qualifications)]
-
-#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
+#[allow(unused_extern_crates)]
 </span><span class="kw">extern crate </span>alloc;
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">extern crate </span>std;
 
-<span class="kw">pub mod </span>point;
+<span class="attr">#[cfg(feature = <span class="string">&quot;point&quot;</span>)]
+</span><span class="kw">pub mod </span>point;
 
 <span class="kw">mod </span>error;
-<span class="kw">mod </span>parameters;
-<span class="kw">mod </span>private_key;
-<span class="kw">mod </span>traits;
+<span class="attr">#[cfg(feature = <span class="string">&quot;der&quot;</span>)]
+</span><span class="kw">mod </span>parameters;
+<span class="attr">#[cfg(feature = <span class="string">&quot;der&quot;</span>)]
+</span><span class="kw">mod </span>private_key;
+<span class="attr">#[cfg(feature = <span class="string">&quot;der&quot;</span>)]
+</span><span class="kw">mod </span>traits;
 
-<span class="kw">pub use </span>der;
+<span class="attr">#[cfg(feature = <span class="string">&quot;der&quot;</span>)]
+</span><span class="kw">pub use </span>der;
 
-<span class="kw">pub use </span><span class="self">self</span>::{
-    error::{Error, <span class="prelude-ty">Result</span>},
-    parameters::EcParameters,
-    point::EncodedPoint,
-    private_key::EcPrivateKey,
-    traits::DecodeEcPrivateKey,
-};
+<span class="kw">pub use </span><span class="kw">crate</span>::error::{Error, <span class="prelude-ty">Result</span>};
 
-<span class="kw">pub use </span>generic_array::typenum::consts;
+<span class="attr">#[cfg(feature = <span class="string">&quot;point&quot;</span>)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::point::EncodedPoint;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;point&quot;</span>)]
+</span><span class="kw">pub use </span>generic_array::typenum::consts;
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;der&quot;</span>)]
+</span><span class="kw">pub use crate</span>::{parameters::EcParameters, private_key::EcPrivateKey, traits::DecodeEcPrivateKey};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;alloc&quot;</span>)]
-</span><span class="kw">pub use crate</span>::{private_key::document::EcPrivateKeyDocument, traits::EncodeEcPrivateKey};
+</span><span class="kw">pub use </span><span class="kw">crate</span>::traits::EncodeEcPrivateKey;
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pem&quot;</span>)))]
@@ -124,12 +137,15 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
 </span><span class="kw">use </span>pkcs8::ObjectIdentifier;
 
+<span class="attr">#[cfg(all(doc, feature = <span class="string">&quot;serde&quot;</span>))]
+</span><span class="kw">use </span>serdect::serde;
+
 <span class="doccomment">/// Algorithm [`ObjectIdentifier`] for elliptic curve public key cryptography
 /// (`id-ecPublicKey`).
 ///
 /// &lt;http://oid-info.com/get/1.2.840.10045.2.1&gt;
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)))]
-</span><span class="kw">pub const </span>ALGORITHM_OID: ObjectIdentifier = ObjectIdentifier::new(<span class="string">&quot;1.2.840.10045.2.1&quot;</span>);
+</span><span class="kw">pub const </span>ALGORITHM_OID: ObjectIdentifier = ObjectIdentifier::new_unwrap(<span class="string">&quot;1.2.840.10045.2.1&quot;</span>);
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sec1" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

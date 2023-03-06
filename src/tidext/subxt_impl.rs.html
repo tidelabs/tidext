@@ -140,6 +140,15 @@
 <a href="#140" id="140">140</a>
 <a href="#141" id="141">141</a>
 <a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
@@ -167,14 +176,12 @@
 </span><span class="kw">pub struct </span>TidechainConfig;
 <span class="kw">impl </span>Config <span class="kw">for </span>TidechainConfig {
   <span class="kw">type </span>Index = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Index;
-  <span class="kw">type </span>BlockNumber = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::BlockNumber;
   <span class="kw">type </span>Hash = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Hash;
-  <span class="kw">type </span>Hashing = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Hashing;
-  <span class="kw">type </span>AccountId = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::AccountId;
+  <span class="kw">type </span>Hasher = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Hasher;
+  <span class="kw">type </span>AccountId = tidefi_primitives::AccountId;
   <span class="kw">type </span>Address = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Address;
   <span class="kw">type </span>Header = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Header;
   <span class="kw">type </span>Signature = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Signature;
-  <span class="kw">type </span>Extrinsic = &lt;DefaultConfig <span class="kw">as </span>Config&gt;::Extrinsic;
   <span class="kw">type </span>ExtrinsicParams = &lt;PolkadotConfig <span class="kw">as </span>Config&gt;::ExtrinsicParams;
 }
 
@@ -219,8 +226,10 @@
       <span class="kw-2">&amp;</span>[
         <span class="string">&quot;Lagoon6030Runtime&quot;</span>.to_string(),
         <span class="string">&quot;Lagoon6040Runtime&quot;</span>.to_string(),
+        <span class="string">&quot;Lagoon7000Runtime&quot;</span>.to_string(),
         <span class="string">&quot;Tidechain6030Runtime&quot;</span>.to_string(),
         <span class="string">&quot;Tidechain6040Runtime&quot;</span>.to_string(),
+        <span class="string">&quot;Tidechain7000Runtime&quot;</span>.to_string(),
       ]
     );
   }
@@ -274,11 +283,20 @@
 
     <span class="macro">assert_eq!</span>(
       TidefiRuntime::select_runtime(<span class="string">&quot;tidechain&quot;</span>, <span class="number">7000</span>).id(),
-      <span class="string">&quot;Tidechain6040Runtime&quot;</span>.to_string()
+      <span class="string">&quot;Tidechain7000Runtime&quot;</span>.to_string()
     );
     <span class="macro">assert_eq!</span>(
       TidefiRuntime::select_runtime(<span class="string">&quot;lagoon&quot;</span>, <span class="number">7000</span>).id(),
-      <span class="string">&quot;Lagoon6040Runtime&quot;</span>.to_string()
+      <span class="string">&quot;Lagoon7000Runtime&quot;</span>.to_string()
+    );
+
+    <span class="macro">assert_eq!</span>(
+      TidefiRuntime::select_runtime(<span class="string">&quot;tidechain&quot;</span>, <span class="number">8000</span>).id(),
+      <span class="string">&quot;Tidechain7000Runtime&quot;</span>.to_string()
+    );
+    <span class="macro">assert_eq!</span>(
+      TidefiRuntime::select_runtime(<span class="string">&quot;lagoon&quot;</span>, <span class="number">8000</span>).id(),
+      <span class="string">&quot;Lagoon7000Runtime&quot;</span>.to_string()
     );
   }
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.9.1/src/memory/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../wasmi/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.13.2/src/memory/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../wasmi/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -773,23 +773,34 @@
 <a href="#773" id="773">773</a>
 <a href="#774" id="774">774</a>
 <a href="#775" id="775">775</a>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::memory_units::{Bytes, Pages, RoundUpTo};
-<span class="kw">use </span><span class="kw">crate</span>::value::LittleEndianConvert;
-<span class="kw">use </span><span class="kw">crate</span>::Error;
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+    memory_units::{Bytes, Pages, RoundUpTo},
+    value::LittleEndianConvert,
+    Error,
+};
 <span class="kw">use </span>alloc::{rc::Rc, string::ToString, vec::Vec};
 <span class="kw">use </span>core::{
     cell::{Cell, Ref, RefCell, RefMut},
-    cmp, fmt,
+    cmp,
+    fmt,
     ops::Range,
     u32,
 };
 <span class="kw">use </span>parity_wasm::elements::ResizableLimits;
 
-<span class="attr">#[cfg(all(unix, not(feature = <span class="string">&quot;vec_memory&quot;</span>)))]
+<span class="attr">#[cfg(all(feature = <span class="string">&quot;virtual_memory&quot;</span>, target_pointer_width = <span class="string">&quot;64&quot;</span>))]
 #[path = <span class="string">&quot;mmap_bytebuf.rs&quot;</span>]
 </span><span class="kw">mod </span>bytebuf;
 
-<span class="attr">#[cfg(any(not(unix), feature = <span class="string">&quot;vec_memory&quot;</span>))]
+<span class="attr">#[cfg(not(all(feature = <span class="string">&quot;virtual_memory&quot;</span>, target_pointer_width = <span class="string">&quot;64&quot;</span>)))]
 #[path = <span class="string">&quot;vec_bytebuf.rs&quot;</span>]
 </span><span class="kw">mod </span>bytebuf;
 
@@ -892,7 +903,6 @@
     /// [`LINEAR_MEMORY_PAGE_SIZE`]: constant.LINEAR_MEMORY_PAGE_SIZE.html
     </span><span class="kw">pub fn </span>alloc(initial: Pages, maximum: <span class="prelude-ty">Option</span>&lt;Pages&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;MemoryRef, Error&gt; {
         {
-            <span class="kw">use </span>core::convert::TryInto;
             <span class="kw">let </span>initial_u32: u32 = initial.<span class="number">0</span>.try_into().map_err(|<span class="kw">_</span>| {
                 Error::Memory(<span class="macro">format!</span>(<span class="string">&quot;initial ({}) can&#39;t be coerced to u32&quot;</span>, initial.<span class="number">0</span>))
             })<span class="question-mark">?</span>;
@@ -970,13 +980,10 @@
 
     <span class="doccomment">/// Get value from memory at given offset.
     </span><span class="kw">pub fn </span>get_value&lt;T: LittleEndianConvert&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: u32) -&gt; <span class="prelude-ty">Result</span>&lt;T, Error&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="self">self</span>.buffer.borrow_mut();
-        <span class="kw">let </span>region =
-            <span class="self">self</span>.checked_region(<span class="kw-2">&amp;mut </span>buffer, offset <span class="kw">as </span>usize, ::core::mem::size_of::&lt;T&gt;())<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(
-            T::from_little_endian(<span class="kw-2">&amp;</span>buffer.as_slice_mut()[region.range()])
-                .expect(<span class="string">&quot;Slice size is checked&quot;</span>),
-        )
+        <span class="kw">let </span><span class="kw-2">mut </span>bytes = &lt;&lt;T <span class="kw">as </span>LittleEndianConvert&gt;::Bytes <span class="kw">as </span>Default&gt;::default();
+        <span class="self">self</span>.get_into(offset, bytes.as_mut())<span class="question-mark">?</span>;
+        <span class="kw">let </span>value = T::from_le_bytes(bytes);
+        <span class="prelude-val">Ok</span>(value)
     }
 
     <span class="doccomment">/// Copy data from memory at given offset.
@@ -985,6 +992,7 @@
     /// If you can provide a mutable slice you can use [`get_into`].
     ///
     /// [`get_into`]: #method.get_into
+    </span><span class="attr">#[deprecated(since = <span class="string">&quot;0.10.0&quot;</span>, note = <span class="string">&quot;use get_into or get_value method instead&quot;</span>)]
     </span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: u32, size: usize) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, Error&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="self">self</span>.buffer.borrow_mut();
         <span class="kw">let </span>region = <span class="self">self</span>.checked_region(<span class="kw-2">&amp;mut </span>buffer, offset <span class="kw">as </span>usize, size)<span class="question-mark">?</span>;
@@ -1020,11 +1028,8 @@
 
     <span class="doccomment">/// Copy value in the memory at given offset.
     </span><span class="kw">pub fn </span>set_value&lt;T: LittleEndianConvert&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, offset: u32, value: T) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="self">self</span>.buffer.borrow_mut();
-        <span class="kw">let </span>range = <span class="self">self
-            </span>.checked_region(<span class="kw-2">&amp;mut </span>buffer, offset <span class="kw">as </span>usize, ::core::mem::size_of::&lt;T&gt;())<span class="question-mark">?
-            </span>.range();
-        value.into_little_endian(<span class="kw-2">&amp;mut </span>buffer.as_slice_mut()[range]);
+        <span class="kw">let </span>bytes = T::into_le_bytes(value);
+        <span class="self">self</span>.set(offset, bytes.as_ref())<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
@@ -1298,6 +1303,7 @@
     ///
     /// [`get`]: #method.get
     /// [`set`]: #method.set
+    /// [`copy`]: #method.copy
     </span><span class="kw">pub fn </span>with_direct_access_mut&lt;R, F: FnOnce(<span class="kw-2">&amp;mut </span>[u8]) -&gt; R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: F) -&gt; R {
         <span class="kw">let </span><span class="kw-2">mut </span>buf = <span class="self">self</span>.buffer.borrow_mut();
         f(buf.as_slice_mut())
@@ -1312,8 +1318,7 @@
     ///
     /// [`set`]: #method.get
     /// [`clear`]: #method.set
-    </span><span class="attr">#[allow(clippy::needless_lifetimes)]
-    </span><span class="kw">pub fn </span>direct_access&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>) -&gt; <span class="kw">impl </span>AsRef&lt;[u8]&gt; + <span class="lifetime">&#39;a </span>{
+    </span><span class="kw">pub fn </span>direct_access(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>AsRef&lt;[u8]&gt; + <span class="lifetime">&#39;_ </span>{
         <span class="kw">struct </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;(Ref&lt;<span class="lifetime">&#39;a</span>, ByteBuf&gt;);
         <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; AsRef&lt;[u8]&gt; <span class="kw">for </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
             <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
@@ -1333,8 +1338,8 @@
     ///
     /// [`get`]: #method.get
     /// [`set`]: #method.set
-    </span><span class="attr">#[allow(clippy::needless_lifetimes)]
-    </span><span class="kw">pub fn </span>direct_access_mut&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>) -&gt; <span class="kw">impl </span>AsMut&lt;[u8]&gt; + <span class="lifetime">&#39;a </span>{
+    /// [`copy`]: #method.copy
+    </span><span class="kw">pub fn </span>direct_access_mut(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>AsMut&lt;[u8]&gt; + <span class="lifetime">&#39;_ </span>{
         <span class="kw">struct </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt;(RefMut&lt;<span class="lifetime">&#39;a</span>, ByteBuf&gt;);
         <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; AsMut&lt;[u8]&gt; <span class="kw">for </span>Buffer&lt;<span class="lifetime">&#39;a</span>&gt; {
             <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[u8] {
@@ -1350,8 +1355,7 @@
 </span><span class="kw">mod </span>tests {
 
     <span class="kw">use super</span>::{MemoryInstance, MemoryRef, LINEAR_MEMORY_PAGE_SIZE};
-    <span class="kw">use </span><span class="kw">crate</span>::memory_units::Pages;
-    <span class="kw">use </span><span class="kw">crate</span>::Error;
+    <span class="kw">use crate</span>::{memory_units::Pages, Error};
     <span class="kw">use </span>alloc::rc::Rc;
 
     <span class="attr">#[test]
@@ -1387,8 +1391,8 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>ensure_page_size() {
-        <span class="kw">use </span>memory_units::ByteSize;
-        <span class="macro">assert_eq!</span>(LINEAR_MEMORY_PAGE_SIZE, Pages::byte_size());
+        <span class="kw">use </span><span class="kw">crate</span>::memory_units::ByteSize;
+        <span class="macro">assert_eq!</span>(LINEAR_MEMORY_PAGE_SIZE, Pages::BYTE_SIZE);
     }
 
     <span class="kw">fn </span>create_memory(initial_content: <span class="kw-2">&amp;</span>[u8]) -&gt; MemoryInstance {
@@ -1398,11 +1402,23 @@
         mem
     }
 
+    <span class="kw">fn </span>get_into_vec(mem: <span class="kw-2">&amp;</span>MemoryInstance, offset: u32, size: usize) -&gt; Vec&lt;u8&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="macro">vec!</span>[<span class="number">0x00</span>; size];
+        mem.get_into(offset, <span class="kw-2">&amp;mut </span>buffer[..])
+            .unwrap_or_else(|error| {
+                <span class="macro">panic!</span>(
+                    <span class="string">&quot;failed to retrieve data from linear memory at offset {} with size {}: {}&quot;</span>,
+                    offset, size, error
+                )
+            });
+        buffer
+    }
+
     <span class="attr">#[test]
     </span><span class="kw">fn </span>copy_overlaps_1() {
         <span class="kw">let </span>mem = create_memory(<span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         mem.copy(<span class="number">0</span>, <span class="number">4</span>, <span class="number">6</span>).expect(<span class="string">&quot;Successfully copy the elements&quot;</span>);
-        <span class="kw">let </span>result = mem.get(<span class="number">0</span>, <span class="number">10</span>).expect(<span class="string">&quot;Successfully retrieve the result&quot;</span>);
+        <span class="kw">let </span>result = get_into_vec(<span class="kw-2">&amp;</span>mem, <span class="number">0</span>, <span class="number">10</span>);
         <span class="macro">assert_eq!</span>(result, <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);
     }
 
@@ -1410,7 +1426,7 @@
     </span><span class="kw">fn </span>copy_overlaps_2() {
         <span class="kw">let </span>mem = create_memory(<span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         mem.copy(<span class="number">4</span>, <span class="number">0</span>, <span class="number">6</span>).expect(<span class="string">&quot;Successfully copy the elements&quot;</span>);
-        <span class="kw">let </span>result = mem.get(<span class="number">0</span>, <span class="number">10</span>).expect(<span class="string">&quot;Successfully retrieve the result&quot;</span>);
+        <span class="kw">let </span>result = get_into_vec(<span class="kw-2">&amp;</span>mem, <span class="number">0</span>, <span class="number">10</span>);
         <span class="macro">assert_eq!</span>(result, <span class="kw-2">&amp;</span>[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
@@ -1419,7 +1435,7 @@
         <span class="kw">let </span>mem = create_memory(<span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         mem.copy_nonoverlapping(<span class="number">0</span>, <span class="number">10</span>, <span class="number">10</span>)
             .expect(<span class="string">&quot;Successfully copy the elements&quot;</span>);
-        <span class="kw">let </span>result = mem.get(<span class="number">10</span>, <span class="number">10</span>).expect(<span class="string">&quot;Successfully retrieve the result&quot;</span>);
+        <span class="kw">let </span>result = get_into_vec(<span class="kw-2">&amp;</span>mem, <span class="number">10</span>, <span class="number">10</span>);
         <span class="macro">assert_eq!</span>(result, <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
@@ -1452,9 +1468,9 @@
 
         MemoryInstance::transfer(<span class="kw-2">&amp;</span>src, <span class="number">4</span>, <span class="kw-2">&amp;</span>dst, <span class="number">0</span>, <span class="number">3</span>).unwrap();
 
-        <span class="macro">assert_eq!</span>(src.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(get_into_vec(<span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">10</span>), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(
-            dst.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(),
+            get_into_vec(<span class="kw-2">&amp;</span>dst, <span class="number">0</span>, <span class="number">10</span>),
             <span class="kw-2">&amp;</span>[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]
         );
     }
@@ -1465,7 +1481,7 @@
 
         MemoryInstance::transfer(<span class="kw-2">&amp;</span>src, <span class="number">4</span>, <span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">3</span>).unwrap();
 
-        <span class="macro">assert_eq!</span>(src.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(), <span class="kw-2">&amp;</span>[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        <span class="macro">assert_eq!</span>(get_into_vec(<span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">10</span>), <span class="kw-2">&amp;</span>[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attr">#[test]
@@ -1474,7 +1490,7 @@
         <span class="macro">assert!</span>(MemoryInstance::transfer(<span class="kw-2">&amp;</span>src, <span class="number">65535</span>, <span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">3</span>).is_err());
 
         <span class="comment">// Check that memories content left untouched
-        </span><span class="macro">assert_eq!</span>(src.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        </span><span class="macro">assert_eq!</span>(get_into_vec(<span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">10</span>), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
     }
 
     <span class="attr">#[test]
@@ -1487,9 +1503,9 @@
         <span class="macro">assert!</span>(MemoryInstance::transfer(<span class="kw-2">&amp;</span>src, <span class="number">65535</span>, <span class="kw-2">&amp;</span>dst, <span class="number">0</span>, <span class="number">3</span>).is_err());
 
         <span class="comment">// Check that memories content left untouched
-        </span><span class="macro">assert_eq!</span>(src.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
+        </span><span class="macro">assert_eq!</span>(get_into_vec(<span class="kw-2">&amp;</span>src, <span class="number">0</span>, <span class="number">10</span>), <span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         <span class="macro">assert_eq!</span>(
-            dst.get(<span class="number">0</span>, <span class="number">10</span>).unwrap(),
+            get_into_vec(<span class="kw-2">&amp;</span>dst, <span class="number">0</span>, <span class="number">10</span>),
             <span class="kw-2">&amp;</span>[<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]
         );
     }
@@ -1499,7 +1515,7 @@
         <span class="kw">let </span>mem = create_memory(<span class="kw-2">&amp;</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]);
         mem.clear(<span class="number">0</span>, <span class="number">0x4A</span>, <span class="number">10</span>)
             .expect(<span class="string">&quot;To successfully clear the memory&quot;</span>);
-        <span class="kw">let </span>result = mem.get(<span class="number">0</span>, <span class="number">10</span>).expect(<span class="string">&quot;To successfully retrieve the result&quot;</span>);
+        <span class="kw">let </span>result = get_into_vec(<span class="kw-2">&amp;</span>mem, <span class="number">0</span>, <span class="number">10</span>);
         <span class="macro">assert_eq!</span>(result, <span class="kw-2">&amp;</span>[<span class="number">0x4A</span>; <span class="number">10</span>]);
     }
 

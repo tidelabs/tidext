@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Claimed","Claimed vesting."],["VestingScheduleAdded","Added new vesting schedule."],["VestingSchedulesUpdated","Updated vesting schedules."]]};

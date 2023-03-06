@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/ecdsa/verify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>verify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/ecdsa/verify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>verify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -255,13 +255,94 @@
 <a href="#254" id="254">254</a>
 <a href="#255" id="255">255</a>
 <a href="#256" id="256">256</a>
+<a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
+<a href="#268" id="268">268</a>
+<a href="#269" id="269">269</a>
+<a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ECDSA verification support.
 
 </span><span class="kw">use super</span>::{recoverable, Error, Signature};
 <span class="kw">use crate</span>::{
-    AffinePoint, CompressedPoint, EncodedPoint, ProjectivePoint, PublicKey, Scalar, Secp256k1,
+    AffinePoint, CompressedPoint, EncodedPoint, FieldBytes, ProjectivePoint, PublicKey, Scalar,
+    Secp256k1,
 };
-<span class="kw">use </span>ecdsa_core::{hazmat::VerifyPrimitive, signature};
+<span class="kw">use </span>ecdsa_core::{
+    hazmat::VerifyPrimitive,
+    signature::{
+        <span class="self">self</span>,
+        digest::{Digest, FixedOutput},
+        hazmat::PrehashVerifier,
+        DigestVerifier,
+    },
+};
 <span class="kw">use </span>elliptic_curve::{
     bigint::U256,
     consts::U32,
@@ -269,7 +350,6 @@
     sec1::ToEncodedPoint,
     IsHigh,
 };
-<span class="kw">use </span>signature::{digest::Digest, DigestVerifier};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;sha256&quot;</span>)]
 </span><span class="kw">use </span>signature::PrehashSignature;
@@ -282,7 +362,7 @@
 
 <span class="attr">#[cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))]
 #[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))))]
-</span><span class="kw">use </span>elliptic_curve::serde::{de, ser, Deserialize, Serialize};
+</span><span class="kw">use </span>serdect::serde::{de, ser, Deserialize, Serialize};
 
 <span class="doccomment">/// ECDSA/secp256k1 verification key (i.e. public key)
 ///
@@ -329,41 +409,63 @@
     </span>S: PrehashSignature,
     <span class="self">Self</span>: DigestVerifier&lt;S::Digest, S&gt;,
 {
-    <span class="kw">fn </span>verify(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>[u8], signature: <span class="kw-2">&amp;</span>S) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="self">self</span>.verify_digest(S::Digest::new().chain(msg), signature)
+    <span class="kw">fn </span>verify(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>[u8], signature: <span class="kw-2">&amp;</span>S) -&gt; signature::Result&lt;()&gt; {
+        <span class="self">self</span>.verify_digest(S::Digest::new_with_prefix(msg), signature)
     }
 }
 
 <span class="kw">impl</span>&lt;D&gt; DigestVerifier&lt;D, Signature&gt; <span class="kw">for </span>VerifyingKey
 <span class="kw">where
-    </span>D: Digest&lt;OutputSize = U32&gt;,
+    </span>D: Digest + FixedOutput&lt;OutputSize = U32&gt;,
 {
-    <span class="kw">fn </span>verify_digest(<span class="kw-2">&amp;</span><span class="self">self</span>, digest: D, signature: <span class="kw-2">&amp;</span>Signature) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>verify_digest(<span class="kw-2">&amp;</span><span class="self">self</span>, digest: D, signature: <span class="kw-2">&amp;</span>Signature) -&gt; signature::Result&lt;()&gt; {
         <span class="self">self</span>.inner.verify_digest(digest, signature)
     }
 }
 
 <span class="kw">impl</span>&lt;D&gt; DigestVerifier&lt;D, recoverable::Signature&gt; <span class="kw">for </span>VerifyingKey
 <span class="kw">where
-    </span>D: Digest&lt;OutputSize = U32&gt;,
+    </span>D: Digest + FixedOutput&lt;OutputSize = U32&gt;,
 {
-    <span class="kw">fn </span>verify_digest(<span class="kw-2">&amp;</span><span class="self">self</span>, digest: D, signature: <span class="kw-2">&amp;</span>recoverable::Signature) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>verify_digest(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        digest: D,
+        signature: <span class="kw-2">&amp;</span>recoverable::Signature,
+    ) -&gt; signature::Result&lt;()&gt; {
         <span class="self">self</span>.inner
             .verify_digest(digest, <span class="kw-2">&amp;</span>Signature::from(<span class="kw-2">*</span>signature))
     }
 }
 
+<span class="kw">impl </span>PrehashVerifier&lt;Signature&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">fn </span>verify_prehash(<span class="kw-2">&amp;</span><span class="self">self</span>, prehash: <span class="kw-2">&amp;</span>[u8], signature: <span class="kw-2">&amp;</span>Signature) -&gt; signature::Result&lt;()&gt; {
+        <span class="self">self</span>.inner.verify_prehash(prehash, signature)
+    }
+}
+
+<span class="kw">impl </span>PrehashVerifier&lt;recoverable::Signature&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">fn </span>verify_prehash(
+        <span class="kw-2">&amp;</span><span class="self">self</span>,
+        prehash: <span class="kw-2">&amp;</span>[u8],
+        signature: <span class="kw-2">&amp;</span>recoverable::Signature,
+    ) -&gt; signature::Result&lt;()&gt; {
+        <span class="self">self</span>.inner
+            .verify_prehash(prehash, <span class="kw-2">&amp;</span>Signature::from(<span class="kw-2">*</span>signature))
+    }
+}
+
 <span class="kw">impl </span>VerifyPrimitive&lt;Secp256k1&gt; <span class="kw">for </span>AffinePoint {
-    <span class="kw">fn </span>verify_prehashed(<span class="kw-2">&amp;</span><span class="self">self</span>, z: Scalar, signature: <span class="kw-2">&amp;</span>Signature) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="kw">fn </span>verify_prehashed(<span class="kw-2">&amp;</span><span class="self">self</span>, z: FieldBytes, signature: <span class="kw-2">&amp;</span>Signature) -&gt; signature::Result&lt;()&gt; {
         <span class="kw">let </span>r = signature.r();
         <span class="kw">let </span>s = signature.s();
+        <span class="kw">let </span>z = &lt;Scalar <span class="kw">as </span>Reduce&lt;U256&gt;&gt;::from_be_bytes_reduced(z);
 
         <span class="comment">// Ensure signature is &quot;low S&quot; normalized ala BIP 0062
         </span><span class="kw">if </span>s.is_high().into() {
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::new());
         }
 
-        <span class="kw">let </span>s_inv = s.invert().unwrap();
+        <span class="kw">let </span>s_inv = <span class="kw-2">*</span>s.invert();
         <span class="kw">let </span>u1 = z * s_inv;
         <span class="kw">let </span>u2 = <span class="kw-2">*</span>r * s_inv;
 
@@ -410,12 +512,6 @@
     }
 }
 
-<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>AffinePoint&gt; <span class="kw">for </span>VerifyingKey {
-    <span class="kw">fn </span>from(affine_point: <span class="kw-2">&amp;</span>AffinePoint) -&gt; VerifyingKey {
-        VerifyingKey::from_encoded_point(<span class="kw-2">&amp;</span>affine_point.to_encoded_point(<span class="bool-val">false</span>)).unwrap()
-    }
-}
-
 <span class="kw">impl </span>From&lt;ecdsa_core::VerifyingKey&lt;Secp256k1&gt;&gt; <span class="kw">for </span>VerifyingKey {
     <span class="kw">fn </span>from(verifying_key: ecdsa_core::VerifyingKey&lt;Secp256k1&gt;) -&gt; VerifyingKey {
         VerifyingKey {
@@ -436,11 +532,59 @@
     }
 }
 
+<span class="kw">impl </span>TryFrom&lt;AffinePoint&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(affine_point: AffinePoint) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey, Error&gt; {
+        <span class="kw">let </span>inner = PublicKey::try_from(affine_point)
+            .map_err(|<span class="kw">_</span>| Error::new())<span class="question-mark">?
+            </span>.into();
+
+        <span class="prelude-val">Ok</span>(VerifyingKey { inner })
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>AffinePoint&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(affine_point: <span class="kw-2">&amp;</span>AffinePoint) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey, Error&gt; {
+        VerifyingKey::try_from(<span class="kw-2">*</span>affine_point)
+    }
+}
+
 <span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>EncodedPoint&gt; <span class="kw">for </span>VerifyingKey {
     <span class="kw">type </span>Error = Error;
 
     <span class="kw">fn </span>try_from(encoded_point: <span class="kw-2">&amp;</span>EncodedPoint) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
         <span class="self">Self</span>::from_encoded_point(encoded_point)
+    }
+}
+
+<span class="kw">impl </span>From&lt;VerifyingKey&gt; <span class="kw">for </span>ProjectivePoint {
+    <span class="kw">fn </span>from(verifying_key: VerifyingKey) -&gt; ProjectivePoint {
+        PublicKey::from(verifying_key.inner).into()
+    }
+}
+
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>VerifyingKey&gt; <span class="kw">for </span>ProjectivePoint {
+    <span class="kw">fn </span>from(verifying_key: <span class="kw-2">&amp;</span>VerifyingKey) -&gt; ProjectivePoint {
+        PublicKey::from(verifying_key.inner).into()
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;ProjectivePoint&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(point: ProjectivePoint) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey, Error&gt; {
+        AffinePoint::from(point).try_into()
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>ProjectivePoint&gt; <span class="kw">for </span>VerifyingKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(point: <span class="kw-2">&amp;</span>ProjectivePoint) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey, Error&gt; {
+        AffinePoint::from(point).try_into()
     }
 }
 

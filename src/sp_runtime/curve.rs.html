@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/runtime/src/curve.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curve.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/runtime/src/curve.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curve.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -160,9 +160,39 @@
 <a href="#160" id="160">160</a>
 <a href="#161" id="161">161</a>
 <a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -186,12 +216,42 @@
 <span class="kw">use </span>core::ops::Sub;
 
 <span class="doccomment">/// Piecewise Linear function in [0, 1] -&gt; [0, 1].
-</span><span class="attr">#[derive(PartialEq, Eq, sp_core::RuntimeDebug, scale_info::TypeInfo)]
+</span><span class="attr">#[derive(PartialEq, Eq, sp_core::RuntimeDebug)]
 </span><span class="kw">pub struct </span>PiecewiseLinear&lt;<span class="lifetime">&#39;a</span>&gt; {
 	<span class="doccomment">/// Array of points. Must be in order from the lowest abscissas to the highest.
 	</span><span class="kw">pub </span>points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[(Perbill, Perbill)],
 	<span class="doccomment">/// The maximum value that can be returned.
 	</span><span class="kw">pub </span>maximum: Perbill,
+}
+
+<span class="comment">// This can be replaced with
+// #[derive(scale_info::TypeInfo)]
+// #[scale_info(skip_type_params(S))]
+// again once this issue is fixed in the rust compiler: https://github.com/rust-lang/rust/issues/96956
+// Tracking issues: https://github.com/paritytech/substrate/issues/11915
+</span><span class="kw">impl </span>scale_info::TypeInfo <span class="kw">for </span>PiecewiseLinear&lt;<span class="lifetime">&#39;static</span>&gt; {
+	<span class="kw">type </span>Identity = <span class="self">Self</span>;
+	<span class="kw">fn </span>type_info() -&gt; ::scale_info::Type {
+		scale_info::Type::builder()
+			.path(scale_info::Path::new(<span class="string">&quot;PiecewiseLinear&quot;</span>, <span class="string">&quot;sp_runtime::curve&quot;</span>))
+			.type_params(<span class="kw">crate</span>::Vec::new())
+			.docs(<span class="kw-2">&amp;</span>[<span class="string">&quot;Piecewise Linear function in [0, 1] -&gt; [0, 1].&quot;</span>])
+			.composite(
+				scale_info::build::Fields::named()
+					.field(|f| {
+						f.ty::&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span>[(Perbill, Perbill)]&gt;()
+							  .name(<span class="string">&quot;points&quot;</span>)
+							  .type_name(<span class="string">&quot;&amp;&#39;static[(Perbill, Perbill)]&quot;</span>)
+							  .docs(<span class="kw-2">&amp;</span>[<span class="string">&quot;Array of points. Must be in order from the lowest abscissas to the highest.&quot;</span>])
+					})
+					.field(|f| {
+						f.ty::&lt;Perbill&gt;()
+							.name(<span class="string">&quot;maximum&quot;</span>)
+							.type_name(<span class="string">&quot;Perbill&quot;</span>)
+							.docs(<span class="kw-2">&amp;</span>[<span class="string">&quot;The maximum value that can be returned.&quot;</span>])
+					}),
+			)
+	}
 }
 
 <span class="kw">fn </span>abs_sub&lt;N: Ord + Sub&lt;Output = N&gt; + Clone&gt;(a: N, b: N) -&gt; N <span class="kw">where </span>{
@@ -302,7 +362,7 @@
 	};
 
 	<span class="kw">pub fn </span>formal_calculate_for_fraction_times_denominator(n: u64, d: u64) -&gt; u64 {
-		<span class="kw">if </span>n &lt;= Perbill::from_parts(<span class="number">0_500_000_000</span>) * d.clone() {
+		<span class="kw">if </span>n &lt;= Perbill::from_parts(<span class="number">0_500_000_000</span>) * d {
 			n + d / <span class="number">2
 		</span>} <span class="kw">else </span>{
 			(d <span class="kw">as </span>u128 * <span class="number">2 </span>- n <span class="kw">as </span>u128 * <span class="number">2</span>).try_into().unwrap()

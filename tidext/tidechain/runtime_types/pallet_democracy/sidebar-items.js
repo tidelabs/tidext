@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["PreimageStatus",""],["Releases",""]],"mod":[["conviction",""],["pallet",""],["types",""],["vote",""],["vote_threshold",""]]};
+window.SIDEBAR_ITEMS = {"mod":[["conviction",""],["pallet",""],["types",""],["vote",""],["vote_threshold",""]]};

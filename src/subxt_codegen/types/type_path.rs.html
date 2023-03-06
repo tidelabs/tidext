@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/codegen/src/types/type_path.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>type_path.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/codegen/src/types/type_path.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>type_path.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -255,22 +255,30 @@
 <a href="#255" id="255">255</a>
 <a href="#256" id="256">256</a>
 <a href="#257" id="257">257</a>
+<a href="#258" id="258">258</a>
+<a href="#259" id="259">259</a>
+<a href="#260" id="260">260</a>
+<a href="#261" id="261">261</a>
+<a href="#262" id="262">262</a>
+<a href="#263" id="263">263</a>
+<a href="#264" id="264">264</a>
+<a href="#265" id="265">265</a>
+<a href="#266" id="266">266</a>
+<a href="#267" id="267">267</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
 
-</span><span class="kw">use </span>proc_macro2::{
+</span><span class="kw">use </span><span class="kw">crate</span>::CratePath;
+
+<span class="kw">use </span>proc_macro2::{
     Ident,
     TokenStream,
 };
-<span class="kw">use </span>quote::{
-    format_ident,
-    quote,
-};
+<span class="kw">use </span>quote::format_ident;
 <span class="kw">use </span>scale_info::{
     form::PortableForm,
-    Type,
-    TypeDef,
+    Path,
     TypeDefPrimitive,
 };
 <span class="kw">use </span>std::collections::BTreeSet;
@@ -280,7 +288,6 @@
 </span><span class="kw">pub enum </span>TypePath {
     Parameter(TypeParameter),
     Type(TypePathType),
-    Substitute(TypePathSubstitute),
 }
 
 <span class="kw">impl </span>quote::ToTokens <span class="kw">for </span>TypePath {
@@ -295,7 +302,6 @@
         <span class="kw">match </span><span class="self">self </span>{
             TypePath::Parameter(ty_param) =&gt; syn::Type::Path(<span class="macro">parse_quote! </span>{ #ty_param }),
             TypePath::Type(ty) =&gt; ty.to_syn_type(),
-            TypePath::Substitute(sub) =&gt; sub.to_syn_type(),
         }
     }
 
@@ -318,7 +324,6 @@
                 acc.insert(type_parameter.clone());
             }
             <span class="self">Self</span>::Type(type_path) =&gt; type_path.parent_type_params(acc),
-            <span class="self">Self</span>::Substitute(sub) =&gt; sub.parent_type_params(acc),
         }
     }
 
@@ -331,88 +336,147 @@
             <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">None</span>,
         };
 
-        <span class="kw">match </span>ty.ty.type_def() {
-            TypeDef::Sequence(<span class="kw">_</span>) =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>ty.params[<span class="number">0</span>]),
+        <span class="kw">match </span>ty {
+            TypePathType::Vec { <span class="kw-2">ref </span>of } =&gt; <span class="prelude-val">Some</span>(of),
             <span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
         }
     }
 }
 
 <span class="attr">#[derive(Clone, Debug)]
-</span><span class="kw">pub struct </span>TypePathType {
-    <span class="kw">pub</span>(<span class="kw">super</span>) ty: Type&lt;PortableForm&gt;,
-    <span class="kw">pub</span>(<span class="kw">super</span>) params: Vec&lt;TypePath&gt;,
-    <span class="kw">pub</span>(<span class="kw">super</span>) root_mod_ident: Ident,
+</span><span class="kw">pub enum </span>TypePathType {
+    Path {
+        path: syn::TypePath,
+        params: Vec&lt;TypePath&gt;,
+    },
+    Vec {
+        of: Box&lt;TypePath&gt;,
+    },
+    Array {
+        len: usize,
+        of: Box&lt;TypePath&gt;,
+    },
+    Tuple {
+        elements: Vec&lt;TypePath&gt;,
+    },
+    Primitive {
+        def: TypeDefPrimitive,
+    },
+    Compact {
+        inner: Box&lt;TypePath&gt;,
+        is_field: bool,
+        crate_path: CratePath,
+    },
+    BitVec {
+        bit_order_type: Box&lt;TypePath&gt;,
+        bit_store_type: Box&lt;TypePath&gt;,
+        crate_path: CratePath,
+    },
 }
 
 <span class="kw">impl </span>TypePathType {
+    <span class="kw">pub fn </span>from_type_def_path(
+        path: <span class="kw-2">&amp;</span>Path&lt;PortableForm&gt;,
+        root_mod_ident: Ident,
+        params: Vec&lt;TypePath&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>path_segments = path.segments();
+
+        <span class="kw">let </span>path: syn::TypePath = <span class="kw">match </span>path_segments {
+            [] =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Type has no ident&quot;</span>),
+            [ident] =&gt; {
+                <span class="comment">// paths to prelude types
+                </span><span class="kw">match </span>ident.as_str() {
+                    <span class="string">&quot;Option&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::option::Option),
+                    <span class="string">&quot;Result&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::result::Result),
+                    <span class="string">&quot;Cow&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::borrow::Cow),
+                    <span class="string">&quot;BTreeMap&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::collections::BTreeMap),
+                    <span class="string">&quot;BTreeSet&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::collections::BTreeSet),
+                    <span class="string">&quot;Range&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::ops::Range),
+                    <span class="string">&quot;RangeInclusive&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::ops::RangeInclusive),
+                    ident =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unknown prelude type &#39;{ident}&#39;&quot;</span>),
+                }
+            }
+            <span class="kw">_ </span>=&gt; {
+                <span class="comment">// paths to generated types in the root types module
+                </span><span class="kw">let </span><span class="kw-2">mut </span>ty_path = path_segments
+                    .iter()
+                    .map(|s| syn::PathSegment::from(<span class="macro">format_ident!</span>(<span class="string">&quot;{}&quot;</span>, s)))
+                    .collect::&lt;syn::punctuated::Punctuated&lt;
+                        syn::PathSegment,
+                        <span class="macro">syn::Token!</span>[::],
+                    &gt;&gt;();
+                ty_path.insert(<span class="number">0</span>, syn::PathSegment::from(root_mod_ident));
+                <span class="macro">parse_quote!</span>( #ty_path )
+            }
+        };
+        <span class="self">Self</span>::Path { path, params }
+    }
+
+    <span class="doccomment">/// Visits a type path, collecting all the generic type parameters from the containing type.
+    ///
+    /// # Example
+    ///
+    /// ```rust
+    /// struct S&lt;T&gt; {
+    ///     a: Vec&lt;Option&lt;T&gt;&gt;, // the parent type param here is `T`
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>parent_type_params(<span class="kw-2">&amp;</span><span class="self">self</span>, acc: <span class="kw-2">&amp;mut </span>BTreeSet&lt;TypeParameter&gt;) {
+        <span class="kw">match </span><span class="self">self </span>{
+            TypePathType::Path { params, .. } =&gt; {
+                <span class="kw">for </span>p <span class="kw">in </span>params {
+                    p.parent_type_params(acc)
+                }
+            }
+            TypePathType::Vec { of } =&gt; of.parent_type_params(acc),
+            TypePathType::Array { of, .. } =&gt; of.parent_type_params(acc),
+            TypePathType::Tuple { elements } =&gt; {
+                <span class="kw">for </span>e <span class="kw">in </span>elements {
+                    e.parent_type_params(acc)
+                }
+            }
+            TypePathType::Primitive { .. } =&gt; (),
+            TypePathType::Compact { inner, .. } =&gt; inner.parent_type_params(acc),
+            TypePathType::BitVec {
+                bit_order_type,
+                bit_store_type,
+                crate_path: <span class="kw">_</span>,
+            } =&gt; {
+                bit_order_type.parent_type_params(acc);
+                bit_store_type.parent_type_params(acc);
+            }
+        }
+    }
+
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>is_compact(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="macro">matches!</span>(<span class="self">self</span>.ty.type_def(), TypeDef::Compact(<span class="kw">_</span>))
+        <span class="macro">matches!</span>(<span class="self">self</span>, TypePathType::Compact { .. })
     }
 
     <span class="kw">fn </span>to_syn_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; syn::Type {
-        <span class="kw">let </span>params = <span class="kw-2">&amp;</span><span class="self">self</span>.params;
-        <span class="kw">match </span><span class="self">self</span>.ty.type_def() {
-            TypeDef::Composite(<span class="kw">_</span>) | TypeDef::Variant(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let </span>path_segments = <span class="self">self</span>.ty.path().segments();
-
-                <span class="kw">let </span>ty_path: syn::TypePath = <span class="kw">match </span>path_segments {
-                    [] =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Type has no ident&quot;</span>),
-                    [ident] =&gt; {
-                        <span class="comment">// paths to prelude types
-                        </span><span class="kw">match </span>ident.as_str() {
-                            <span class="string">&quot;Option&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::option::Option),
-                            <span class="string">&quot;Result&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::result::Result),
-                            <span class="string">&quot;Cow&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::borrow::Cow),
-                            <span class="string">&quot;BTreeMap&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::collections::BTreeMap),
-                            <span class="string">&quot;BTreeSet&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::std::collections::BTreeSet),
-                            <span class="string">&quot;Range&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::ops::Range),
-                            <span class="string">&quot;RangeInclusive&quot; </span>=&gt; <span class="macro">parse_quote!</span>(::core::ops::RangeInclusive),
-                            ident =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unknown prelude type &#39;{}&#39;&quot;</span>, ident),
-                        }
-                    }
-                    <span class="kw">_ </span>=&gt; {
-                        <span class="comment">// paths to generated types in the root types module
-                        </span><span class="kw">let </span><span class="kw-2">mut </span>ty_path = path_segments
-                            .iter()
-                            .map(|s| syn::PathSegment::from(<span class="macro">format_ident!</span>(<span class="string">&quot;{}&quot;</span>, s)))
-                            .collect::&lt;syn::punctuated::Punctuated&lt;
-                                syn::PathSegment,
-                                <span class="macro">syn::Token!</span>[::],
-                            &gt;&gt;();
-                        ty_path.insert(
-                            <span class="number">0</span>,
-                            syn::PathSegment::from(<span class="self">self</span>.root_mod_ident.clone()),
-                        );
-                        <span class="macro">parse_quote!</span>( #ty_path )
-                    }
-                };
-
-                <span class="kw">let </span>params = <span class="kw-2">&amp;</span><span class="self">self</span>.params;
+        <span class="kw">match </span><span class="kw-2">&amp;</span><span class="self">self </span>{
+            TypePathType::Path { path, params } =&gt; {
                 <span class="kw">let </span>path = <span class="kw">if </span>params.is_empty() {
-                    <span class="macro">parse_quote! </span>{ #ty_path }
+                    <span class="macro">parse_quote! </span>{ #path }
                 } <span class="kw">else </span>{
-                    <span class="macro">parse_quote! </span>{ #ty_path&lt; #( #params ),* &gt; }
+                    <span class="macro">parse_quote! </span>{ #path&lt; #( #params ),* &gt; }
                 };
                 syn::Type::Path(path)
             }
-            TypeDef::Sequence(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let </span>type_param = <span class="kw-2">&amp;</span><span class="self">self</span>.params[<span class="number">0</span>];
-                <span class="kw">let </span>type_path = <span class="macro">parse_quote! </span>{ ::std::vec::Vec&lt;#type_param&gt; };
+            TypePathType::Vec { of } =&gt; {
+                <span class="kw">let </span>type_path = <span class="macro">parse_quote! </span>{ ::std::vec::Vec&lt;#of&gt; };
                 syn::Type::Path(type_path)
             }
-            TypeDef::Array(array) =&gt; {
-                <span class="kw">let </span>array_type = <span class="kw-2">&amp;</span><span class="self">self</span>.params[<span class="number">0</span>];
-                <span class="kw">let </span>array_len = array.len() <span class="kw">as </span>usize;
-                <span class="kw">let </span>array = <span class="macro">parse_quote! </span>{ [#array_type; #array_len] };
+            TypePathType::Array { len, of } =&gt; {
+                <span class="kw">let </span>array = <span class="macro">parse_quote! </span>{ [#of; #len] };
                 syn::Type::Array(array)
             }
-            TypeDef::Tuple(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let </span>tuple = <span class="macro">parse_quote! </span>{ (#( # params, )* ) };
+            TypePathType::Tuple { elements } =&gt; {
+                <span class="kw">let </span>tuple = <span class="macro">parse_quote! </span>{ (#( # elements, )* ) };
                 syn::Type::Tuple(tuple)
             }
-            TypeDef::Primitive(primitive) =&gt; {
-                <span class="kw">let </span>path = <span class="kw">match </span>primitive {
+            TypePathType::Primitive { def } =&gt; {
+                syn::Type::Path(<span class="kw">match </span>def {
                     TypeDefPrimitive::Bool =&gt; <span class="macro">parse_quote!</span>(::core::primitive::bool),
                     TypeDefPrimitive::Char =&gt; <span class="macro">parse_quote!</span>(::core::primitive::char),
                     TypeDefPrimitive::Str =&gt; <span class="macro">parse_quote!</span>(::std::string::String),
@@ -428,36 +492,30 @@
                     TypeDefPrimitive::I64 =&gt; <span class="macro">parse_quote!</span>(::core::primitive::i64),
                     TypeDefPrimitive::I128 =&gt; <span class="macro">parse_quote!</span>(::core::primitive::i128),
                     TypeDefPrimitive::I256 =&gt; <span class="macro">unimplemented!</span>(<span class="string">&quot;not a rust primitive&quot;</span>),
+                })
+            }
+            TypePathType::Compact {
+                inner,
+                is_field,
+                crate_path,
+            } =&gt; {
+                <span class="kw">let </span>path = <span class="kw">if </span><span class="kw-2">*</span>is_field {
+                    <span class="comment">// compact fields can use the inner compact type directly and be annotated with
+                    // the `compact` attribute e.g. `#[codec(compact)] my_compact_field: u128`
+                    </span><span class="macro">parse_quote! </span>( #inner )
+                } <span class="kw">else </span>{
+                    <span class="macro">parse_quote! </span>( #crate_path::ext::codec::Compact&lt;#inner&gt; )
                 };
                 syn::Type::Path(path)
             }
-            TypeDef::Compact(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let </span>compact_type = <span class="kw-2">&amp;</span><span class="self">self</span>.params[<span class="number">0</span>];
-                <span class="macro">parse_quote! </span>( #compact_type )
-            }
-            TypeDef::BitSequence(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let </span>bit_order_type = <span class="kw-2">&amp;</span><span class="self">self</span>.params[<span class="number">0</span>];
-                <span class="kw">let </span>bit_store_type = <span class="kw-2">&amp;</span><span class="self">self</span>.params[<span class="number">1</span>];
-
-                <span class="kw">let </span>type_path = <span class="macro">parse_quote! </span>{ ::subxt::ext::bitvec::vec::BitVec&lt;#bit_store_type, #bit_order_type&gt; };
-
+            TypePathType::BitVec {
+                bit_order_type,
+                bit_store_type,
+                crate_path,
+            } =&gt; {
+                <span class="kw">let </span>type_path = <span class="macro">parse_quote! </span>{ #crate_path::utils::bits::DecodedBits&lt;#bit_store_type, #bit_order_type&gt; };
                 syn::Type::Path(type_path)
             }
-        }
-    }
-
-    <span class="doccomment">/// Returns the type parameters in a path which are inherited from the containing type.
-    ///
-    /// # Example
-    ///
-    /// ```rust
-    /// struct S&lt;T&gt; {
-    ///     a: Vec&lt;Option&lt;T&gt;&gt;, // the parent type param here is `T`
-    /// }
-    /// ```
-    </span><span class="kw">fn </span>parent_type_params(<span class="kw-2">&amp;</span><span class="self">self</span>, acc: <span class="kw-2">&amp;mut </span>BTreeSet&lt;TypeParameter&gt;) {
-        <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.params {
-            p.parent_type_params(acc);
         }
     }
 }
@@ -466,50 +524,12 @@
 </span><span class="kw">pub struct </span>TypeParameter {
     <span class="kw">pub</span>(<span class="kw">super</span>) concrete_type_id: u32,
     <span class="kw">pub</span>(<span class="kw">super</span>) original_name: String,
-    <span class="kw">pub</span>(<span class="kw">super</span>) name: proc_macro2::Ident,
+    <span class="kw">pub</span>(<span class="kw">super</span>) name: Ident,
 }
 
 <span class="kw">impl </span>quote::ToTokens <span class="kw">for </span>TypeParameter {
     <span class="kw">fn </span>to_tokens(<span class="kw-2">&amp;</span><span class="self">self</span>, tokens: <span class="kw-2">&amp;mut </span>TokenStream) {
         <span class="self">self</span>.name.to_tokens(tokens)
-    }
-}
-
-<span class="attr">#[derive(Clone, Debug)]
-</span><span class="kw">pub struct </span>TypePathSubstitute {
-    <span class="kw">pub</span>(<span class="kw">super</span>) path: syn::TypePath,
-    <span class="kw">pub</span>(<span class="kw">super</span>) params: Vec&lt;TypePath&gt;,
-}
-
-<span class="kw">impl </span>quote::ToTokens <span class="kw">for </span>TypePathSubstitute {
-    <span class="kw">fn </span>to_tokens(<span class="kw-2">&amp;</span><span class="self">self</span>, tokens: <span class="kw-2">&amp;mut </span>TokenStream) {
-        <span class="kw">if </span><span class="self">self</span>.params.is_empty() {
-            <span class="self">self</span>.path.to_tokens(tokens)
-        } <span class="kw">else </span>{
-            <span class="kw">let </span>substitute_path = <span class="kw-2">&amp;</span><span class="self">self</span>.path;
-            <span class="kw">let </span>params = <span class="kw-2">&amp;</span><span class="self">self</span>.params;
-            tokens.extend(<span class="macro">quote! </span>{
-                #substitute_path&lt; #( #params ),* &gt;
-            })
-        }
-    }
-}
-
-<span class="kw">impl </span>TypePathSubstitute {
-    <span class="kw">fn </span>parent_type_params(<span class="kw-2">&amp;</span><span class="self">self</span>, acc: <span class="kw-2">&amp;mut </span>BTreeSet&lt;TypeParameter&gt;) {
-        <span class="kw">for </span>p <span class="kw">in </span><span class="kw-2">&amp;</span><span class="self">self</span>.params {
-            p.parent_type_params(acc);
-        }
-    }
-
-    <span class="kw">fn </span>to_syn_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; syn::Type {
-        <span class="kw">if </span><span class="self">self</span>.params.is_empty() {
-            syn::Type::Path(<span class="self">self</span>.path.clone())
-        } <span class="kw">else </span>{
-            <span class="kw">let </span>substitute_path = <span class="kw-2">&amp;</span><span class="self">self</span>.path;
-            <span class="kw">let </span>params = <span class="kw-2">&amp;</span><span class="self">self</span>.params;
-            <span class="macro">parse_quote! </span>( #substitute_path&lt; #( #params ),* &gt; )
-        }
     }
 }
 </code></pre></div>

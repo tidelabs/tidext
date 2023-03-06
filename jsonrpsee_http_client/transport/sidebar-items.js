@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":[["Error","Error that can happen during a request."]],"struct":[["HttpTransportClient","HTTP Transport Client."]]};

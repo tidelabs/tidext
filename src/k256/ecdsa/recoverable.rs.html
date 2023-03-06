@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/ecdsa/recoverable.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>recoverable.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/ecdsa/recoverable.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>recoverable.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -369,6 +369,36 @@
 <a href="#368" id="368">368</a>
 <a href="#369" id="369">369</a>
 <a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Ethereum-style &quot;recoverable signatures&quot;.
 //!
 //! These signatures include an additional [`Id`] field which allows for
@@ -393,16 +423,16 @@
 //!
 //! // Signing
 //! let signing_key = SigningKey::random(&amp;mut OsRng); // Serialize with `::to_bytes()`
-//! let verify_key = signing_key.verifying_key();
+//! let verifying_key = signing_key.verifying_key();
 //! let message = b&quot;ECDSA proves knowledge of a secret number in the context of a single message&quot;;
 //!
 //! // Note: the signature type must be annotated or otherwise inferrable as
 //! // `Signer` has many impls of the `Signer` trait (for both regular and
 //! // recoverable signature types).
 //! let signature: recoverable::Signature = signing_key.sign(message);
-//! let recovered_key = signature.recover_verify_key(message).expect(&quot;couldn&#39;t recover pubkey&quot;);
+//! let recovered_key = signature.recover_verifying_key(message).expect(&quot;couldn&#39;t recover pubkey&quot;);
 //!
-//! assert_eq!(&amp;verify_key, &amp;recovered_key);
+//! assert_eq!(&amp;verifying_key, &amp;recovered_key);
 //! # }
 //! ```
 
@@ -413,7 +443,10 @@
 <span class="attr">#[cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)]
 </span><span class="kw">use crate</span>::{
     ecdsa::{
-        signature::{digest::Digest, DigestVerifier},
+        signature::{
+            digest::{Digest, FixedOutput},
+            hazmat::PrehashVerifier,
+        },
         VerifyingKey,
     },
     elliptic_curve::{
@@ -440,7 +473,7 @@
 /// - `r`: 32-byte integer, big endian
 /// - `s`: 32-byte integer, big endian
 /// - `v`: 1-byte recovery [`Id`]
-</span><span class="attr">#[derive(Copy, Clone)]
+</span><span class="attr">#[derive(Copy, Clone, Eq, PartialEq)]
 </span><span class="kw">pub struct </span>Signature {
     bytes: [u8; SIZE],
 }
@@ -478,7 +511,7 @@
         msg: <span class="kw-2">&amp;</span>[u8],
         signature: <span class="kw-2">&amp;</span><span class="kw">super</span>::Signature,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="self">Self</span>::from_digest_trial_recovery(public_key, Keccak256::new().chain(msg), signature)
+        <span class="self">Self</span>::from_digest_trial_recovery(public_key, Keccak256::new_with_prefix(msg), signature)
     }
 
     <span class="doccomment">/// Given a public key, message digest, and signature, use trial recovery
@@ -492,17 +525,30 @@
         signature: <span class="kw-2">&amp;</span><span class="kw">super</span>::Signature,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt;
     <span class="kw">where
-        </span>D: Clone + Digest&lt;OutputSize = U32&gt;,
+        </span>D: Clone + Digest + FixedOutput&lt;OutputSize = U32&gt;,
     {
+        <span class="self">Self</span>::from_digest_bytes_trial_recovery(public_key, <span class="kw-2">&amp;</span>digest.finalize(), signature)
+    }
+
+    <span class="doccomment">/// Given a public key, message digest, and signature, use trial recovery
+    /// to determine if a suitable recovery ID exists, or return an error
+    /// otherwise.
+    </span><span class="attr">#[cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)]
+    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)))]
+    </span><span class="kw">pub fn </span>from_digest_bytes_trial_recovery(
+        public_key: <span class="kw-2">&amp;</span>VerifyingKey,
+        digest_bytes: <span class="kw-2">&amp;</span>FieldBytes,
+        signature: <span class="kw-2">&amp;</span><span class="kw">super</span>::Signature,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         <span class="kw">let </span>signature = signature.normalize_s().unwrap_or(<span class="kw-2">*</span>signature);
 
         <span class="kw">for </span>recovery_id <span class="kw">in </span><span class="number">0</span>..=<span class="number">1 </span>{
             <span class="kw">if let </span><span class="prelude-val">Ok</span>(recoverable_signature) = Signature::new(<span class="kw-2">&amp;</span>signature, Id(recovery_id)) {
                 <span class="kw">if let </span><span class="prelude-val">Ok</span>(recovered_key) =
-                    recoverable_signature.recover_verify_key_from_digest(digest.clone())
+                    recoverable_signature.recover_verifying_key_from_digest_bytes(digest_bytes)
                 {
                     <span class="kw">if </span>public_key == <span class="kw-2">&amp;</span>recovered_key
-                        &amp;&amp; public_key.verify_digest(digest.clone(), <span class="kw-2">&amp;</span>signature).is_ok()
+                        &amp;&amp; public_key.verify_prehash(digest_bytes, <span class="kw-2">&amp;</span>signature).is_ok()
                     {
                         <span class="kw">return </span><span class="prelude-val">Ok</span>(recoverable_signature);
                     }
@@ -518,19 +564,19 @@
     </span><span class="attr">#[cfg(all(feature = <span class="string">&quot;ecdsa&quot;</span>, feature = <span class="string">&quot;keccak256&quot;</span>))]
     #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)))]
     #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;keccak256&quot;</span>)))]
-    </span><span class="kw">pub fn </span>recover_verify_key(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey&gt; {
-        <span class="self">self</span>.recover_verify_key_from_digest(Keccak256::new().chain(msg))
+    </span><span class="kw">pub fn </span>recover_verifying_key(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey&gt; {
+        <span class="self">self</span>.recover_verifying_key_from_digest(Keccak256::new_with_prefix(msg))
     }
 
     <span class="doccomment">/// Recover the public key used to create the given signature as a
     /// [`VerifyingKey`] from the provided precomputed [`Digest`].
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)]
     #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)))]
-    </span><span class="kw">pub fn </span>recover_verify_key_from_digest&lt;D&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, msg_digest: D) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey&gt;
+    </span><span class="kw">pub fn </span>recover_verifying_key_from_digest&lt;D&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, msg_digest: D) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey&gt;
     <span class="kw">where
         </span>D: Digest&lt;OutputSize = U32&gt;,
     {
-        <span class="self">self</span>.recover_verify_key_from_digest_bytes(<span class="kw-2">&amp;</span>msg_digest.finalize())
+        <span class="self">self</span>.recover_verifying_key_from_digest_bytes(<span class="kw-2">&amp;</span>msg_digest.finalize())
     }
 
     <span class="doccomment">/// Recover the public key used to create the given signature as a
@@ -538,7 +584,7 @@
     </span><span class="attr">#[cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)]
     #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;ecdsa&quot;</span>)))]
     #[allow(non_snake_case, clippy::many_single_char_names)]
-    </span><span class="kw">pub fn </span>recover_verify_key_from_digest_bytes(
+    </span><span class="kw">pub fn </span>recover_verifying_key_from_digest_bytes(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         digest_bytes: <span class="kw-2">&amp;</span>FieldBytes,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;VerifyingKey&gt; {
@@ -552,13 +598,13 @@
         }
 
         <span class="kw">let </span>R = ProjectivePoint::from(R.unwrap());
-        <span class="kw">let </span>r_inv = r.invert().unwrap();
+        <span class="kw">let </span>r_inv = <span class="kw-2">*</span>r.invert();
         <span class="kw">let </span>u1 = -(r_inv * z);
         <span class="kw">let </span>u2 = r_inv * <span class="kw-2">*</span>s;
-        <span class="kw">let </span>pk = ProjectivePoint::lincomb(<span class="kw-2">&amp;</span>ProjectivePoint::GENERATOR, <span class="kw-2">&amp;</span>u1, <span class="kw-2">&amp;</span>R, <span class="kw-2">&amp;</span>u2).to_affine();
+        <span class="kw">let </span>pk = ProjectivePoint::lincomb(<span class="kw-2">&amp;</span>ProjectivePoint::GENERATOR, <span class="kw-2">&amp;</span>u1, <span class="kw-2">&amp;</span>R, <span class="kw-2">&amp;</span>u2);
 
         <span class="comment">// TODO(tarcieri): ensure the signature verifies?
-        </span><span class="prelude-val">Ok</span>(VerifyingKey::from(<span class="kw-2">&amp;</span>pk))
+        </span>VerifyingKey::try_from(pk)
     }
 
     <span class="doccomment">/// Parse the `r` component of this signature to a [`NonZeroScalar`]
@@ -593,16 +639,6 @@
 <span class="kw">impl </span>Debug <span class="kw">for </span>Signature {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
         <span class="macro">write!</span>(f, <span class="string">&quot;RecoverableSignature {{ bytes: {:?}) }}&quot;</span>, <span class="self">self</span>.as_ref())
-    }
-}
-
-<span class="comment">// TODO(tarcieri): derive `Eq` after const generics are available
-</span><span class="kw">impl </span>Eq <span class="kw">for </span>Signature {}
-
-<span class="comment">// TODO(tarcieri): derive `PartialEq` after const generics are available
-</span><span class="kw">impl </span>PartialEq <span class="kw">for </span>Signature {
-    <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
-        <span class="self">self</span>.as_ref().eq(other.as_ref())
     }
 }
 
@@ -694,23 +730,26 @@
     }
 }
 
-<span class="attr">#[cfg(all(test, feature = <span class="string">&quot;ecdsa&quot;</span>, feature = <span class="string">&quot;sha256&quot;</span>))]
+<span class="attr">#[cfg(all(test, feature = <span class="string">&quot;ecdsa&quot;</span>, feature = <span class="string">&quot;keccak256&quot;</span>, feature = <span class="string">&quot;sha256&quot;</span>))]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::Signature;
-    <span class="kw">use </span><span class="kw">crate</span>::EncodedPoint;
+    <span class="kw">use crate</span>::{
+        ecdsa::{signature::Signer, SigningKey},
+        EncodedPoint,
+    };
     <span class="kw">use </span>hex_literal::hex;
     <span class="kw">use </span>sha2::{Digest, Sha256};
 
     <span class="doccomment">/// Signature recovery test vectors
-    </span><span class="kw">struct </span>TestVector {
+    </span><span class="kw">struct </span>RecoveryTestVector {
         pk: [u8; <span class="number">33</span>],
         sig: [u8; <span class="number">65</span>],
         msg: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[u8],
     }
 
-    <span class="kw">const </span>VECTORS: <span class="kw-2">&amp;</span>[TestVector] = <span class="kw-2">&amp;</span>[
+    <span class="kw">const </span>RECOVERY_TEST_VECTORS: <span class="kw-2">&amp;</span>[RecoveryTestVector] = <span class="kw-2">&amp;</span>[
         <span class="comment">// Recovery ID 0
-        </span>TestVector {
+        </span>RecoveryTestVector {
             pk: <span class="macro">hex!</span>(<span class="string">&quot;021a7a569e91dbf60581509c7fc946d1003b60c7dee85299538db6353538d59574&quot;</span>),
             sig: <span class="macro">hex!</span>(
                 <span class="string">&quot;ce53abb3721bafc561408ce8ff99c909f7f0b18a2f788649d6470162ab1aa03239
@@ -719,7 +758,7 @@
             msg: <span class="string">b&quot;example message&quot;</span>,
         },
         <span class="comment">// Recovery ID 1
-        </span>TestVector {
+        </span>RecoveryTestVector {
             pk: <span class="macro">hex!</span>(<span class="string">&quot;036d6caac248af96f6afa7f904f550253a0f3ef3f5aa2fe6838a95b216691468e2&quot;</span>),
             sig: <span class="macro">hex!</span>(
                 <span class="string">&quot;46c05b6368a44b8810d79859441d819b8e7cdc8bfd371e35c53196f4bcacdb5135
@@ -731,12 +770,33 @@
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>public_key_recovery() {
-        <span class="kw">for </span>vector <span class="kw">in </span>VECTORS {
+        <span class="kw">for </span>vector <span class="kw">in </span>RECOVERY_TEST_VECTORS {
             <span class="kw">let </span>sig = Signature::try_from(<span class="kw-2">&amp;</span>vector.sig[..]).unwrap();
-            <span class="kw">let </span>prehash = Sha256::new().chain(vector.msg);
-            <span class="kw">let </span>pk = sig.recover_verify_key_from_digest(prehash).unwrap();
+            <span class="kw">let </span>prehash = Sha256::new_with_prefix(vector.msg);
+            <span class="kw">let </span>pk = sig.recover_verifying_key_from_digest(prehash).unwrap();
             <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>vector.pk[..], EncodedPoint::from(<span class="kw-2">&amp;</span>pk).as_bytes());
         }
+    }
+
+    <span class="doccomment">/// Ensures RFC6979 is implemented in the same way as other Ethereum
+    /// libraries, using HMAC-DRBG-SHA-256 for RFC6979, and Keccak256 for
+    /// hashing the message.
+    ///
+    /// Test vectors adapted from:
+    /// &lt;https://github.com/gakonst/ethers-rs/blob/ba00f549/ethers-signers/src/wallet/private_key.rs#L197&gt;
+    </span><span class="attr">#[test]
+    </span><span class="kw">fn </span>signing_rfc6979() {
+        <span class="kw">let </span>signing_key = SigningKey::from_bytes(<span class="kw-2">&amp;</span><span class="macro">hex!</span>(
+            <span class="string">&quot;4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318&quot;
+        </span>))
+        .unwrap();
+
+        <span class="kw">let </span>msg = <span class="macro">hex!</span>(
+            <span class="string">&quot;e9808504e3b29200831e848094f0109fc8df283027b6285cc889f5aa624eac1f55843b9aca0080018080&quot;
+        </span>);
+
+        <span class="kw">let </span>sig: Signature = signing_key.sign(<span class="kw-2">&amp;</span>msg);
+        <span class="macro">assert_eq!</span>(sig.as_ref(), <span class="kw-2">&amp;</span><span class="macro">hex!</span>(<span class="string">&quot;c9cf86333bcb065d140032ecaab5d9281bde80f21b9687b3e94161de42d51895727a108a0b8d101465414033c3f705a9c7b826e596766046ee1183dbc8aeaa6800&quot;</span>));
     }
 }
 </code></pre></div>

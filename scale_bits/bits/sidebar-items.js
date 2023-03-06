@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Bits","This represents a sequence of boolean values, packed into bits."],["BitsIntoIter","Returned from calling `into_iter` on [`Bits`] via the [`std::iter::IntoIterator`] trait. Allows iteration over each stored bit."],["BitsIter","Returned from calling [`Bits::iter()`]. Allows iteration over each stored bit."]]};

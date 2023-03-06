@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.5.1/src/asn1/utc_time.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utc_time.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../der/index.html">
-                        <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/der-0.6.1/src/asn1/utc_time.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utc_time.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../der/index.html">
+                        <img src="https://raw.githubusercontent.com/RustCrypto/media/6ee8e381/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -203,13 +203,25 @@
 <a href="#202" id="202">202</a>
 <a href="#203" id="203">203</a>
 <a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
+<a href="#212" id="212">212</a>
+<a href="#213" id="213">213</a>
+<a href="#214" id="214">214</a>
+<a href="#215" id="215">215</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ASN.1 `UTCTime` support.
 
 </span><span class="kw">use crate</span>::{
-    asn1::Any,
+    asn1::AnyRef,
     datetime::{<span class="self">self</span>, DateTime},
-    ByteSlice, DecodeValue, Decoder, EncodeValue, Encoder, Error, FixedTag, Length, OrdIsValueOrd,
-    <span class="prelude-ty">Result</span>, Tag,
+    ord::OrdIsValueOrd,
+    DecodeValue, EncodeValue, Error, ErrorKind, FixedTag, Header, Length, Reader, <span class="prelude-ty">Result</span>, Tag,
+    Writer,
 };
 <span class="kw">use </span>core::time::Duration;
 
@@ -239,7 +251,7 @@
 
 <span class="kw">impl </span>UtcTime {
     <span class="doccomment">/// Length of an RFC 5280-flavored ASN.1 DER-encoded [`UtcTime`].
-    </span><span class="kw">pub const </span>LENGTH: Length = Length::new(<span class="number">13</span>);
+    </span><span class="kw">pub const </span>LENGTH: usize = <span class="number">13</span>;
 
     <span class="doccomment">/// Create a [`UtcTime`] from a [`DateTime`].
     </span><span class="kw">pub fn </span>from_date_time(datetime: DateTime) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
@@ -283,12 +295,19 @@
     }
 }
 
-<span class="kw">impl </span>DecodeValue&lt;<span class="lifetime">&#39;_</span>&gt; <span class="kw">for </span>UtcTime {
-    <span class="kw">fn </span>decode_value(decoder: <span class="kw-2">&amp;mut </span>Decoder&lt;<span class="lifetime">&#39;_</span>&gt;, length: Length) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">match </span><span class="kw-2">*</span>ByteSlice::decode_value(decoder, length)<span class="question-mark">?</span>.as_bytes() {
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; DecodeValue&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>UtcTime {
+    <span class="kw">fn </span>decode_value&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R, header: Header) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">if </span><span class="self">Self</span>::LENGTH != usize::try_from(header.length)<span class="question-mark">? </span>{
+            <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">Self</span>::TAG.value_error());
+        }
+
+        <span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="self">Self</span>::LENGTH];
+        reader.read_into(<span class="kw-2">&amp;mut </span>bytes)<span class="question-mark">?</span>;
+
+        <span class="kw">match </span>bytes {
             <span class="comment">// RFC 5280 requires mandatory seconds and Z-normalized time zone
             </span>[year1, year2, mon1, mon2, day1, day2, hour1, hour2, min1, min2, sec1, sec2, <span class="string">b&#39;Z&#39;</span>] =&gt; {
-                <span class="kw">let </span>year = datetime::decode_decimal(<span class="self">Self</span>::TAG, year1, year2)<span class="question-mark">?</span>;
+                <span class="kw">let </span>year = u16::from(datetime::decode_decimal(<span class="self">Self</span>::TAG, year1, year2)<span class="question-mark">?</span>);
                 <span class="kw">let </span>month = datetime::decode_decimal(<span class="self">Self</span>::TAG, mon1, mon2)<span class="question-mark">?</span>;
                 <span class="kw">let </span>day = datetime::decode_decimal(<span class="self">Self</span>::TAG, day1, day2)<span class="question-mark">?</span>;
                 <span class="kw">let </span>hour = datetime::decode_decimal(<span class="self">Self</span>::TAG, hour1, hour2)<span class="question-mark">?</span>;
@@ -297,10 +316,11 @@
 
                 <span class="comment">// RFC 5280 rules for interpreting the year
                 </span><span class="kw">let </span>year = <span class="kw">if </span>year &gt;= <span class="number">50 </span>{
-                    year <span class="kw">as </span>u16 + <span class="number">1900
-                </span>} <span class="kw">else </span>{
-                    year <span class="kw">as </span>u16 + <span class="number">2000
-                </span>};
+                    year.checked_add(<span class="number">1900</span>)
+                } <span class="kw">else </span>{
+                    year.checked_add(<span class="number">2000</span>)
+                }
+                .ok_or(ErrorKind::DateTime)<span class="question-mark">?</span>;
 
                 DateTime::new(year, month, day, hour, minute, second)
                     .map_err(|<span class="kw">_</span>| <span class="self">Self</span>::TAG.value_error())
@@ -313,23 +333,25 @@
 
 <span class="kw">impl </span>EncodeValue <span class="kw">for </span>UtcTime {
     <span class="kw">fn </span>value_len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;Length&gt; {
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span>::LENGTH)
+        <span class="self">Self</span>::LENGTH.try_into()
     }
 
-    <span class="kw">fn </span>encode_value(<span class="kw-2">&amp;</span><span class="self">self</span>, encoder: <span class="kw-2">&amp;mut </span>Encoder&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+    <span class="kw">fn </span>encode_value(<span class="kw-2">&amp;</span><span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span><span class="kw">dyn </span>Writer) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
         <span class="kw">let </span>year = <span class="kw">match </span><span class="self">self</span>.<span class="number">0</span>.year() {
-            y @ <span class="number">1950</span>..=<span class="number">1999 </span>=&gt; y - <span class="number">1900</span>,
-            y @ <span class="number">2000</span>..=<span class="number">2049 </span>=&gt; y - <span class="number">2000</span>,
+            y @ <span class="number">1950</span>..=<span class="number">1999 </span>=&gt; y.checked_sub(<span class="number">1900</span>),
+            y @ <span class="number">2000</span>..=<span class="number">2049 </span>=&gt; y.checked_sub(<span class="number">2000</span>),
             <span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="self">Self</span>::TAG.value_error()),
-        } <span class="kw">as </span>u8;
+        }
+        .and_then(|y| u8::try_from(y).ok())
+        .ok_or(ErrorKind::DateTime)<span class="question-mark">?</span>;
 
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, year)<span class="question-mark">?</span>;
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.month())<span class="question-mark">?</span>;
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.day())<span class="question-mark">?</span>;
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.hour())<span class="question-mark">?</span>;
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.minutes())<span class="question-mark">?</span>;
-        datetime::encode_decimal(encoder, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.seconds())<span class="question-mark">?</span>;
-        encoder.byte(<span class="string">b&#39;Z&#39;</span>)
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, year)<span class="question-mark">?</span>;
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.month())<span class="question-mark">?</span>;
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.day())<span class="question-mark">?</span>;
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.hour())<span class="question-mark">?</span>;
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.minutes())<span class="question-mark">?</span>;
+        datetime::encode_decimal(writer, <span class="self">Self</span>::TAG, <span class="self">self</span>.<span class="number">0</span>.seconds())<span class="question-mark">?</span>;
+        writer.write_byte(<span class="string">b&#39;Z&#39;</span>)
     }
 }
 
@@ -381,10 +403,10 @@
     }
 }
 
-<span class="kw">impl </span>TryFrom&lt;Any&lt;<span class="lifetime">&#39;_</span>&gt;&gt; <span class="kw">for </span>UtcTime {
+<span class="kw">impl </span>TryFrom&lt;AnyRef&lt;<span class="lifetime">&#39;_</span>&gt;&gt; <span class="kw">for </span>UtcTime {
     <span class="kw">type </span>Error = Error;
 
-    <span class="kw">fn </span>try_from(any: Any&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;UtcTime&gt; {
+    <span class="kw">fn </span>try_from(any: AnyRef&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;UtcTime&gt; {
         any.decode_into()
     }
 }
@@ -392,7 +414,7 @@
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>tests {
     <span class="kw">use </span><span class="kw">super</span>::UtcTime;
-    <span class="kw">use crate</span>::{Decodable, Encodable, Encoder};
+    <span class="kw">use crate</span>::{Decode, Encode, SliceWriter};
     <span class="kw">use </span>hex_literal::hex;
 
     <span class="attr">#[test]
@@ -402,7 +424,7 @@
         <span class="macro">assert_eq!</span>(utc_time.to_unix_duration().as_secs(), <span class="number">673573540</span>);
 
         <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">128</span>];
-        <span class="kw">let </span><span class="kw-2">mut </span>encoder = Encoder::new(<span class="kw-2">&amp;mut </span>buf);
+        <span class="kw">let </span><span class="kw-2">mut </span>encoder = SliceWriter::new(<span class="kw-2">&amp;mut </span>buf);
         utc_time.encode(<span class="kw-2">&amp;mut </span>encoder).unwrap();
         <span class="macro">assert_eq!</span>(example_bytes, encoder.finish().unwrap());
     }

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["Block","A representation of a block."],["BlocksClient","A client for working with blocks."],["Extrinsic","A single extrinsic in a block."],["ExtrinsicEvents","The events associated with a given extrinsic."]]};

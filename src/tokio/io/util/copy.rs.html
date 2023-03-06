@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.21.1/src/io/util/copy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>copy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.26.0/src/io/util/copy.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>copy.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -173,6 +173,42 @@
 <a href="#173" id="173">173</a>
 <a href="#174" id="174">174</a>
 <a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
+<a href="#208" id="208">208</a>
+<a href="#209" id="209">209</a>
+<a href="#210" id="210">210</a>
+<a href="#211" id="211">211</a>
 </pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::io::{AsyncRead, AsyncWrite, ReadBuf};
 
 <span class="kw">use </span>std::future::Future;
@@ -202,6 +238,51 @@
         }
     }
 
+    <span class="kw">fn </span>poll_fill_buf&lt;R&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        cx: <span class="kw-2">&amp;mut </span>Context&lt;<span class="lifetime">&#39;_</span>&gt;,
+        reader: Pin&lt;<span class="kw-2">&amp;mut </span>R&gt;,
+    ) -&gt; Poll&lt;io::Result&lt;()&gt;&gt;
+    <span class="kw">where
+        </span>R: AsyncRead + <span class="question-mark">?</span>Sized,
+    {
+        <span class="kw">let </span>me = <span class="kw-2">&amp;mut *</span><span class="self">self</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>buf = ReadBuf::new(<span class="kw-2">&amp;mut </span>me.buf);
+        buf.set_filled(me.cap);
+
+        <span class="kw">let </span>res = reader.poll_read(cx, <span class="kw-2">&amp;mut </span>buf);
+        <span class="kw">if let </span>Poll::Ready(<span class="prelude-val">Ok</span>(<span class="kw">_</span>)) = res {
+            <span class="kw">let </span>filled_len = buf.filled().len();
+            me.read_done = me.cap == filled_len;
+            me.cap = filled_len;
+        }
+        res
+    }
+
+    <span class="kw">fn </span>poll_write_buf&lt;R, W&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        cx: <span class="kw-2">&amp;mut </span>Context&lt;<span class="lifetime">&#39;_</span>&gt;,
+        <span class="kw-2">mut </span>reader: Pin&lt;<span class="kw-2">&amp;mut </span>R&gt;,
+        <span class="kw-2">mut </span>writer: Pin&lt;<span class="kw-2">&amp;mut </span>W&gt;,
+    ) -&gt; Poll&lt;io::Result&lt;usize&gt;&gt;
+    <span class="kw">where
+        </span>R: AsyncRead + <span class="question-mark">?</span>Sized,
+        W: AsyncWrite + <span class="question-mark">?</span>Sized,
+    {
+        <span class="kw">let </span>me = <span class="kw-2">&amp;mut *</span><span class="self">self</span>;
+        <span class="kw">match </span>writer.as_mut().poll_write(cx, <span class="kw-2">&amp;</span>me.buf[me.pos..me.cap]) {
+            Poll::Pending =&gt; {
+                <span class="comment">// Top up the buffer towards full if we can read a bit more
+                // data - this should improve the chances of a large write
+                </span><span class="kw">if </span>!me.read_done &amp;&amp; me.cap &lt; me.buf.len() {
+                    <span class="macro">ready!</span>(me.poll_fill_buf(cx, reader.as_mut()))<span class="question-mark">?</span>;
+                }
+                Poll::Pending
+            }
+            res =&gt; res,
+        }
+    }
+
     <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>poll_copy&lt;R, W&gt;(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         cx: <span class="kw-2">&amp;mut </span>Context&lt;<span class="lifetime">&#39;_</span>&gt;,
@@ -216,10 +297,10 @@
             <span class="comment">// If our buffer is empty, then we need to read some data to
             // continue.
             </span><span class="kw">if </span><span class="self">self</span>.pos == <span class="self">self</span>.cap &amp;&amp; !<span class="self">self</span>.read_done {
-                <span class="kw">let </span>me = <span class="kw-2">&amp;mut *</span><span class="self">self</span>;
-                <span class="kw">let </span><span class="kw-2">mut </span>buf = ReadBuf::new(<span class="kw-2">&amp;mut </span>me.buf);
+                <span class="self">self</span>.pos = <span class="number">0</span>;
+                <span class="self">self</span>.cap = <span class="number">0</span>;
 
-                <span class="kw">match </span>reader.as_mut().poll_read(cx, <span class="kw-2">&amp;mut </span>buf) {
+                <span class="kw">match </span><span class="self">self</span>.poll_fill_buf(cx, reader.as_mut()) {
                     Poll::Ready(<span class="prelude-val">Ok</span>(<span class="kw">_</span>)) =&gt; (),
                     Poll::Ready(<span class="prelude-val">Err</span>(err)) =&gt; <span class="kw">return </span>Poll::Ready(<span class="prelude-val">Err</span>(err)),
                     Poll::Pending =&gt; {
@@ -233,20 +314,11 @@
                         <span class="kw">return </span>Poll::Pending;
                     }
                 }
-
-                <span class="kw">let </span>n = buf.filled().len();
-                <span class="kw">if </span>n == <span class="number">0 </span>{
-                    <span class="self">self</span>.read_done = <span class="bool-val">true</span>;
-                } <span class="kw">else </span>{
-                    <span class="self">self</span>.pos = <span class="number">0</span>;
-                    <span class="self">self</span>.cap = n;
-                }
             }
 
             <span class="comment">// If our buffer has some data, let&#39;s write it out!
             </span><span class="kw">while </span><span class="self">self</span>.pos &lt; <span class="self">self</span>.cap {
-                <span class="kw">let </span>me = <span class="kw-2">&amp;mut *</span><span class="self">self</span>;
-                <span class="kw">let </span>i = <span class="macro">ready!</span>(writer.as_mut().poll_write(cx, <span class="kw-2">&amp;</span>me.buf[me.pos..me.cap]))<span class="question-mark">?</span>;
+                <span class="kw">let </span>i = <span class="macro">ready!</span>(<span class="self">self</span>.poll_write_buf(cx, reader.as_mut(), writer.as_mut()))<span class="question-mark">?</span>;
                 <span class="kw">if </span>i == <span class="number">0 </span>{
                     <span class="kw">return </span>Poll::Ready(<span class="prelude-val">Err</span>(io::Error::new(
                         io::ErrorKind::WriteZero,

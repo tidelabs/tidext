@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["AsRecovered",""],["CancelRecovered",""],["ClaimRecovery",""],["CloseRecovery",""],["CreateRecovery",""],["InitiateRecovery",""],["RemoveRecovery",""],["SetRecovered",""],["TransactionApi",""],["VouchRecovery",""]]};

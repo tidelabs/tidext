@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/memory-db-0.29.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../memory_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/memory-db-0.31.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../memory_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -660,91 +660,6 @@
 <a href="#660" id="660">660</a>
 <a href="#661" id="661">661</a>
 <a href="#662" id="662">662</a>
-<a href="#663" id="663">663</a>
-<a href="#664" id="664">664</a>
-<a href="#665" id="665">665</a>
-<a href="#666" id="666">666</a>
-<a href="#667" id="667">667</a>
-<a href="#668" id="668">668</a>
-<a href="#669" id="669">669</a>
-<a href="#670" id="670">670</a>
-<a href="#671" id="671">671</a>
-<a href="#672" id="672">672</a>
-<a href="#673" id="673">673</a>
-<a href="#674" id="674">674</a>
-<a href="#675" id="675">675</a>
-<a href="#676" id="676">676</a>
-<a href="#677" id="677">677</a>
-<a href="#678" id="678">678</a>
-<a href="#679" id="679">679</a>
-<a href="#680" id="680">680</a>
-<a href="#681" id="681">681</a>
-<a href="#682" id="682">682</a>
-<a href="#683" id="683">683</a>
-<a href="#684" id="684">684</a>
-<a href="#685" id="685">685</a>
-<a href="#686" id="686">686</a>
-<a href="#687" id="687">687</a>
-<a href="#688" id="688">688</a>
-<a href="#689" id="689">689</a>
-<a href="#690" id="690">690</a>
-<a href="#691" id="691">691</a>
-<a href="#692" id="692">692</a>
-<a href="#693" id="693">693</a>
-<a href="#694" id="694">694</a>
-<a href="#695" id="695">695</a>
-<a href="#696" id="696">696</a>
-<a href="#697" id="697">697</a>
-<a href="#698" id="698">698</a>
-<a href="#699" id="699">699</a>
-<a href="#700" id="700">700</a>
-<a href="#701" id="701">701</a>
-<a href="#702" id="702">702</a>
-<a href="#703" id="703">703</a>
-<a href="#704" id="704">704</a>
-<a href="#705" id="705">705</a>
-<a href="#706" id="706">706</a>
-<a href="#707" id="707">707</a>
-<a href="#708" id="708">708</a>
-<a href="#709" id="709">709</a>
-<a href="#710" id="710">710</a>
-<a href="#711" id="711">711</a>
-<a href="#712" id="712">712</a>
-<a href="#713" id="713">713</a>
-<a href="#714" id="714">714</a>
-<a href="#715" id="715">715</a>
-<a href="#716" id="716">716</a>
-<a href="#717" id="717">717</a>
-<a href="#718" id="718">718</a>
-<a href="#719" id="719">719</a>
-<a href="#720" id="720">720</a>
-<a href="#721" id="721">721</a>
-<a href="#722" id="722">722</a>
-<a href="#723" id="723">723</a>
-<a href="#724" id="724">724</a>
-<a href="#725" id="725">725</a>
-<a href="#726" id="726">726</a>
-<a href="#727" id="727">727</a>
-<a href="#728" id="728">728</a>
-<a href="#729" id="729">729</a>
-<a href="#730" id="730">730</a>
-<a href="#731" id="731">731</a>
-<a href="#732" id="732">732</a>
-<a href="#733" id="733">733</a>
-<a href="#734" id="734">734</a>
-<a href="#735" id="735">735</a>
-<a href="#736" id="736">736</a>
-<a href="#737" id="737">737</a>
-<a href="#738" id="738">738</a>
-<a href="#739" id="739">739</a>
-<a href="#740" id="740">740</a>
-<a href="#741" id="741">741</a>
-<a href="#742" id="742">742</a>
-<a href="#743" id="743">743</a>
-<a href="#744" id="744">744</a>
-<a href="#745" id="745">745</a>
-<a href="#746" id="746">746</a>
-<a href="#747" id="747">747</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2017-2020 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -766,13 +681,9 @@
 #[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">extern crate </span>alloc;
 
-<span class="kw">mod </span>malloc_size_of;
-<span class="kw">pub use </span>malloc_size_of::<span class="kw-2">*</span>;
-
 <span class="kw">use </span>hash_db::{
 	AsHashDB, AsPlainDB, HashDB, HashDBRef, Hasher <span class="kw">as </span>KeyHasher, PlainDB, PlainDBRef, Prefix,
 };
-<span class="kw">use </span>parity_util_mem::{MallocShallowSizeOf, MallocSizeOf, MallocSizeOfOps};
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>std::{
 	borrow::Borrow, cmp::Eq, collections::hash_map::Entry, collections::HashMap, hash,
@@ -797,22 +708,12 @@
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">impl</span>&lt;T&gt; MaybeDebug <span class="kw">for </span>T {}
 
-<span class="doccomment">/// The default memory tracker used by [`MemoryDB`].
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">pub type </span>DefaultMemTracker&lt;T&gt; = MemCounter&lt;T&gt;;
-<span class="doccomment">/// The default memory tracker used by [`MemoryDB`].
-</span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-</span><span class="kw">pub type </span>DefaultMemTracker&lt;T&gt; = NoopTracker&lt;T&gt;;
-
 <span class="doccomment">/// Reference-counted memory-based `HashDB` implementation.
 ///
 /// Use `new()` to create a new database. Insert items with `insert()`, remove items
 /// with `remove()`, check for existence with `contains()` and lookup a hash to derive
 /// the data with `get()`. Clear with `clear()` and purge the portions of the data
 /// that have no references with `purge()`.
-///
-/// If you&#39;re not using the `MallocSizeOf` implementation to track memory usage,
-/// set the `M` type parameter to `NoopTracker`.
 ///
 /// # Example
 /// ```rust
@@ -849,48 +750,41 @@
 ///   m.remove(&amp;k, EMPTY_PREFIX);
 ///   assert!(!m.contains(&amp;k, EMPTY_PREFIX));
 /// ```
-</span><span class="kw">pub struct </span>MemoryDB&lt;H, KF, T, M = DefaultMemTracker&lt;T&gt;&gt;
+</span><span class="kw">pub struct </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	KF: KeyFunction&lt;H&gt;,
-	M: MemTracker&lt;T&gt;,
 {
 	data: HashMap&lt;KF::Key, (T, i32)&gt;,
-	<span class="comment">// We cache `size_of(data) - shallow_size_of(data)` to compute
-	// `size_of(data)` incrementally and avoid iterating over the `data`.
-	</span>malloc_tracker: M,
 	hashed_null_node: H::Out,
 	null_node_data: T,
 	_kf: PhantomData&lt;KF&gt;,
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; Clone <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; Clone <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	KF: KeyFunction&lt;H&gt;,
 	T: Clone,
-	M: MemTracker&lt;T&gt; + Copy,
 {
 	<span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
 		<span class="self">Self </span>{
 			data: <span class="self">self</span>.data.clone(),
 			hashed_null_node: <span class="self">self</span>.hashed_null_node,
 			null_node_data: <span class="self">self</span>.null_node_data.clone(),
-			malloc_tracker: <span class="self">self</span>.malloc_tracker,
 			_kf: Default::default(),
 		}
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; PartialEq&lt;MemoryDB&lt;H, KF, T, M&gt;&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; PartialEq&lt;MemoryDB&lt;H, KF, T&gt;&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	KF: KeyFunction&lt;H&gt;,
 	&lt;KF <span class="kw">as </span>KeyFunction&lt;H&gt;&gt;::Key: Eq + MaybeDebug,
 	T: Eq + MaybeDebug,
-	M: MemTracker&lt;T&gt; + PartialEq,
 {
-	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>MemoryDB&lt;H, KF, T, M&gt;) -&gt; bool {
+	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>MemoryDB&lt;H, KF, T&gt;) -&gt; bool {
 		<span class="kw">for </span>a <span class="kw">in </span><span class="self">self</span>.data.iter() {
 			<span class="kw">match </span>other.data.get(<span class="kw-2">&amp;</span>a.<span class="number">0</span>) {
 				<span class="prelude-val">Some</span>(v) <span class="kw">if </span>v != a.<span class="number">1 </span>=&gt; <span class="kw">return </span><span class="bool-val">false</span>,
@@ -902,13 +796,12 @@
 	</span>}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; Eq <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; Eq <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	KF: KeyFunction&lt;H&gt;,
 	&lt;KF <span class="kw">as </span>KeyFunction&lt;H&gt;&gt;::Key: Eq + MaybeDebug,
 	T: Eq + MaybeDebug,
-	M: MemTracker&lt;T&gt; + Eq,
 {
 }
 
@@ -1017,12 +910,11 @@
 	prefixed_key
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; Default <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; Default <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
 	KF: KeyFunction&lt;H&gt;,
-	M: MemTracker&lt;T&gt; + Default,
 {
 	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
 		<span class="self">Self</span>::from_null_node(<span class="kw-2">&amp;</span>[<span class="number">0u8</span>][..], [<span class="number">0u8</span>][..].into())
@@ -1030,12 +922,11 @@
 }
 
 <span class="doccomment">/// Create a new `MemoryDB` from a given null key/data
-</span><span class="kw">impl</span>&lt;H, KF, T, M&gt; MemoryDB&lt;H, KF, T, M&gt;
+</span><span class="kw">impl</span>&lt;H, KF, T&gt; MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default,
 	KF: KeyFunction&lt;H&gt;,
-	M: MemTracker&lt;T&gt;,
 {
 	<span class="doccomment">/// Remove an element and delete it from storage if reference count reaches zero.
 	/// If the value was purged, return the old value.
@@ -1048,7 +939,6 @@
 			Entry::Occupied(<span class="kw-2">mut </span>entry) =&gt;
 				<span class="kw">if </span>entry.get().<span class="number">1 </span>== <span class="number">1 </span>{
 					<span class="kw">let </span>(value, <span class="kw">_</span>) = entry.remove();
-					<span class="self">self</span>.malloc_tracker.on_remove(<span class="kw-2">&amp;</span>value);
 					<span class="prelude-val">Some</span>(value)
 				} <span class="kw">else </span>{
 					entry.get_mut().<span class="number">1 </span>-= <span class="number">1</span>;
@@ -1056,7 +946,6 @@
 				</span>},
 			Entry::Vacant(entry) =&gt; {
 				<span class="kw">let </span>value = T::default();
-				<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 				entry.insert((value, -<span class="number">1</span>));
 				<span class="prelude-val">None
 			</span>},
@@ -1072,12 +961,11 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
 	KF: KeyFunction&lt;H&gt;,
-	M: MemTracker&lt;T&gt; + Default,
 {
 	<span class="doccomment">/// Create a new `MemoryDB` from a given null key/data
 	</span><span class="kw">pub fn </span>from_null_node(null_key: <span class="kw-2">&amp;</span>[u8], null_node_data: T) -&gt; <span class="self">Self </span>{
@@ -1085,7 +973,6 @@
 			data: HashMap::default(),
 			hashed_null_node: H::hash(null_key),
 			null_node_data,
-			malloc_tracker: M::default(),
 			_kf: Default::default(),
 		}
 	}
@@ -1125,25 +1012,19 @@
 	/// }
 	/// ```
 	</span><span class="kw">pub fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-		<span class="self">self</span>.malloc_tracker.on_clear();
 		<span class="self">self</span>.data.clear();
 	}
 
 	<span class="doccomment">/// Purge all zero-referenced data from the database.
 	</span><span class="kw">pub fn </span>purge(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-		<span class="kw">let </span>malloc_tracker = <span class="kw-2">&amp;mut </span><span class="self">self</span>.malloc_tracker;
-		<span class="self">self</span>.data.retain(|<span class="kw">_</span>, (v, rc)| {
+		<span class="self">self</span>.data.retain(|<span class="kw">_</span>, (<span class="kw">_</span>, rc)| {
 			<span class="kw">let </span>keep = <span class="kw-2">*</span>rc != <span class="number">0</span>;
-			<span class="kw">if </span>!keep {
-				malloc_tracker.on_remove(v);
-			}
 			keep
 		});
 	}
 
 	<span class="doccomment">/// Return the internal key-value HashMap, clearing the current state.
 	</span><span class="kw">pub fn </span>drain(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; HashMap&lt;KF::Key, (T, i32)&gt; {
-		<span class="self">self</span>.malloc_tracker.on_clear();
 		mem::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.data)
 	}
 
@@ -1165,15 +1046,12 @@
 			<span class="kw">match </span><span class="self">self</span>.data.entry(key) {
 				Entry::Occupied(<span class="kw-2">mut </span>entry) =&gt; {
 					<span class="kw">if </span>entry.get().<span class="number">1 </span>&lt; <span class="number">0 </span>{
-						<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
-						<span class="self">self</span>.malloc_tracker.on_remove(<span class="kw-2">&amp;</span>entry.get().<span class="number">0</span>);
 						entry.get_mut().<span class="number">0 </span>= value;
 					}
 
 					entry.get_mut().<span class="number">1 </span>+= rc;
 				},
 				Entry::Vacant(entry) =&gt; {
-					<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 					entry.insert((value, rc));
 				},
 			}
@@ -1189,30 +1067,12 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; MallocSizeOf <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
-<span class="kw">where
-	</span>H: KeyHasher,
-	H::Out: MallocSizeOf,
-	T: MallocSizeOf,
-	KF: KeyFunction&lt;H&gt;,
-	KF::Key: MallocSizeOf,
-	M: MemTracker&lt;T&gt;,
-{
-	<span class="kw">fn </span>size_of(<span class="kw-2">&amp;</span><span class="self">self</span>, ops: <span class="kw-2">&amp;mut </span>MallocSizeOfOps) -&gt; usize {
-		<span class="self">self</span>.data.shallow_size_of(ops) +
-			<span class="self">self</span>.malloc_tracker.get_size() +
-			<span class="self">self</span>.null_node_data.size_of(ops) +
-			<span class="self">self</span>.hashed_null_node.size_of(ops)
-	}
-}
-
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; PlainDB&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; PlainDB&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: Send + Sync + KeyFunction&lt;H&gt;,
 	KF::Key: Borrow&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
 		<span class="kw">match </span><span class="self">self</span>.data.get(key.as_ref()) {
@@ -1233,14 +1093,11 @@
 			Entry::Occupied(<span class="kw-2">mut </span>entry) =&gt; {
 				<span class="kw">let </span><span class="kw-2">&amp;mut </span>(<span class="kw-2">ref mut </span>old_value, <span class="kw-2">ref mut </span>rc) = entry.get_mut();
 				<span class="kw">if </span><span class="kw-2">*</span>rc &lt;= <span class="number">0 </span>{
-					<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
-					<span class="self">self</span>.malloc_tracker.on_remove(old_value);
 					<span class="kw-2">*</span>old_value = value;
 				}
 				<span class="kw-2">*</span>rc += <span class="number">1</span>;
 			},
 			Entry::Vacant(entry) =&gt; {
-				<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 				entry.insert((value, <span class="number">1</span>));
 			},
 		}
@@ -1254,20 +1111,18 @@
 			},
 			Entry::Vacant(entry) =&gt; {
 				<span class="kw">let </span>value = T::default();
-				<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 				entry.insert((value, -<span class="number">1</span>));
 			},
 		}
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; PlainDBRef&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; PlainDBRef&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: Send + Sync + KeyFunction&lt;H&gt;,
 	KF::Key: Borrow&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
 		PlainDB::get(<span class="self">self</span>, key)
@@ -1277,12 +1132,11 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; HashDB&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; HashDB&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + AsRef&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: KeyFunction&lt;H&gt; + Send + Sync,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
 		<span class="kw">if </span>key == <span class="kw-2">&amp;</span><span class="self">self</span>.hashed_null_node {
@@ -1318,14 +1172,11 @@
 			Entry::Occupied(<span class="kw-2">mut </span>entry) =&gt; {
 				<span class="kw">let </span><span class="kw-2">&amp;mut </span>(<span class="kw-2">ref mut </span>old_value, <span class="kw-2">ref mut </span>rc) = entry.get_mut();
 				<span class="kw">if </span><span class="kw-2">*</span>rc &lt;= <span class="number">0 </span>{
-					<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
-					<span class="self">self</span>.malloc_tracker.on_remove(old_value);
 					<span class="kw-2">*</span>old_value = value;
 				}
 				<span class="kw-2">*</span>rc += <span class="number">1</span>;
 			},
 			Entry::Vacant(entry) =&gt; {
-				<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 				entry.insert((value, <span class="number">1</span>));
 			},
 		}
@@ -1354,19 +1205,17 @@
 			},
 			Entry::Vacant(entry) =&gt; {
 				<span class="kw">let </span>value = T::default();
-				<span class="self">self</span>.malloc_tracker.on_insert(<span class="kw-2">&amp;</span>value);
 				entry.insert((value, -<span class="number">1</span>));
 			},
 		}
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; HashDBRef&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; HashDBRef&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + AsRef&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: KeyFunction&lt;H&gt; + Send + Sync,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Option</span>&lt;T&gt; {
 		HashDB::get(<span class="self">self</span>, key, prefix)
@@ -1376,13 +1225,12 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; AsPlainDB&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; AsPlainDB&lt;H::Out, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: KeyFunction&lt;H&gt; + Send + Sync,
 	KF::Key: Borrow&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>as_plain_db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw">dyn </span>PlainDB&lt;H::Out, T&gt; {
 		<span class="self">self
@@ -1392,12 +1240,11 @@
 	</span>}
 }
 
-<span class="kw">impl</span>&lt;H, KF, T, M&gt; AsHashDB&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T, M&gt;
+<span class="kw">impl</span>&lt;H, KF, T&gt; AsHashDB&lt;H, T&gt; <span class="kw">for </span>MemoryDB&lt;H, KF, T&gt;
 <span class="kw">where
 	</span>H: KeyHasher,
 	T: Default + PartialEq&lt;T&gt; + AsRef&lt;[u8]&gt; + <span class="kw">for</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt; + Clone + Send + Sync,
 	KF: KeyFunction&lt;H&gt; + Send + Sync,
-	M: MemTracker&lt;T&gt; + Send + Sync,
 {
 	<span class="kw">fn </span>as_hash_db(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw">dyn </span>HashDB&lt;H, T&gt; {
 		<span class="self">self
@@ -1412,7 +1259,6 @@
 	<span class="kw">use super</span>::{HashDB, HashKey, KeyHasher, MemoryDB};
 	<span class="kw">use </span>hash_db::EMPTY_PREFIX;
 	<span class="kw">use </span>keccak_hasher::KeccakHasher;
-	<span class="kw">use </span>parity_util_mem::malloc_size;
 
 	<span class="attr">#[test]
 	</span><span class="kw">fn </span>memorydb_remove_and_purge() {
@@ -1474,22 +1320,6 @@
 		<span class="kw">let </span>(db2, root) = MemoryDB::&lt;KeccakHasher, HashKey&lt;<span class="kw">_</span>&gt;, Vec&lt;u8&gt;&gt;::default_with_root();
 		<span class="macro">assert!</span>(db2.contains(<span class="kw-2">&amp;</span>root, EMPTY_PREFIX));
 		<span class="macro">assert!</span>(db.contains(<span class="kw-2">&amp;</span>root, EMPTY_PREFIX));
-	}
-
-	<span class="attr">#[test]
-	</span><span class="kw">fn </span>malloc_size_of() {
-		<span class="kw">let </span><span class="kw-2">mut </span>db = MemoryDB::&lt;KeccakHasher, HashKey&lt;<span class="kw">_</span>&gt;, Vec&lt;u8&gt;&gt;::default();
-		<span class="kw">for </span>i <span class="kw">in </span><span class="number">0u32</span>..<span class="number">1024 </span>{
-			<span class="kw">let </span>bytes = i.to_be_bytes();
-			<span class="kw">let </span>prefix = (bytes.as_ref(), <span class="prelude-val">None</span>);
-			db.insert(prefix, <span class="kw-2">&amp;</span>bytes);
-		}
-		<span class="macro">assert_eq!</span>(
-			malloc_size(<span class="kw-2">&amp;</span>db),
-			malloc_size(<span class="kw-2">&amp;</span>db.data) +
-				malloc_size(<span class="kw-2">&amp;</span>db.null_node_data) +
-				malloc_size(<span class="kw-2">&amp;</span>db.hashed_null_node)
-		);
 	}
 }
 </code></pre></div>

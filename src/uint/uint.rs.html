@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/uint-0.9.3/src/uint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>uint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../uint/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/uint-0.9.5/src/uint.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>uint.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../uint/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1798,6 +1798,29 @@
 <a href="#1798" id="1798">1798</a>
 <a href="#1799" id="1799">1799</a>
 <a href="#1800" id="1800">1800</a>
+<a href="#1801" id="1801">1801</a>
+<a href="#1802" id="1802">1802</a>
+<a href="#1803" id="1803">1803</a>
+<a href="#1804" id="1804">1804</a>
+<a href="#1805" id="1805">1805</a>
+<a href="#1806" id="1806">1806</a>
+<a href="#1807" id="1807">1807</a>
+<a href="#1808" id="1808">1808</a>
+<a href="#1809" id="1809">1809</a>
+<a href="#1810" id="1810">1810</a>
+<a href="#1811" id="1811">1811</a>
+<a href="#1812" id="1812">1812</a>
+<a href="#1813" id="1813">1813</a>
+<a href="#1814" id="1814">1814</a>
+<a href="#1815" id="1815">1815</a>
+<a href="#1816" id="1816">1816</a>
+<a href="#1817" id="1817">1817</a>
+<a href="#1818" id="1818">1818</a>
+<a href="#1819" id="1819">1819</a>
+<a href="#1820" id="1820">1820</a>
+<a href="#1821" id="1821">1821</a>
+<a href="#1822" id="1822">1822</a>
+<a href="#1823" id="1823">1823</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2020 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or
@@ -2018,7 +2041,6 @@
 		<span class="kw">let </span><span class="macro-nonterminal">$name</span>(<span class="kw-2">ref </span>you) = <span class="macro-nonterminal">$other</span>;
 
 		<span class="kw">let </span><span class="kw-2">mut </span>ret = [<span class="number">0u64</span>; <span class="macro-nonterminal">$n_words</span>];
-		<span class="kw">let </span>ret_ptr = <span class="kw-2">&amp;mut </span>ret <span class="kw">as </span><span class="kw-2">*mut </span>[u64; <span class="macro-nonterminal">$n_words</span>] <span class="kw">as </span><span class="kw-2">*mut </span>u64;
 		<span class="kw">let </span><span class="kw-2">mut </span>carry = <span class="number">0u64</span>;
 		<span class="macro-nonterminal">$</span><span class="macro">crate::static_assertions::const_assert!</span>(<span class="macro-nonterminal">core::isize::MAX </span><span class="kw">as </span>usize / core::mem::size_of::&lt;u64&gt;() &gt; <span class="macro-nonterminal">$n_words</span>);
 
@@ -2033,19 +2055,12 @@
 					<span class="kw">let </span>(res1, overflow1) = (<span class="macro-nonterminal">$</span><span class="kw">fn</span>)(<span class="macro-nonterminal">me</span>[i], you[i]);
 					<span class="kw">let </span>(res2, overflow2) = (<span class="macro-nonterminal">$</span><span class="kw">fn</span>)(<span class="macro-nonterminal">res1</span>, carry);
 
-					<span class="kw">unsafe </span>{
-						<span class="comment">// SAFETY: `i` is within bounds and `i * size_of::&lt;u64&gt;() &lt; isize::MAX`
-						</span><span class="kw-2">*</span>ret_ptr.offset(i <span class="kw">as _</span>) = res2
-					}
+					ret[i] = res2;
 					carry = (overflow1 <span class="kw">as </span>u8 + overflow2 <span class="kw">as </span>u8) <span class="kw">as </span>u64;
 				} <span class="kw">else </span>{
 					<span class="kw">let </span>(res, overflow) = (<span class="macro-nonterminal">$</span><span class="kw">fn</span>)(<span class="macro-nonterminal">me</span>[i], you[i]);
 
-					<span class="kw">unsafe </span>{
-						<span class="comment">// SAFETY: `i` is within bounds and `i * size_of::&lt;u64&gt;() &lt; isize::MAX`
-						</span><span class="kw-2">*</span>ret_ptr.offset(i <span class="kw">as _</span>) = res
-					}
-
+					ret[i] = res;
 					carry = overflow <span class="kw">as </span>u64;
 				}
 			}
@@ -2473,9 +2488,10 @@
 
 			<span class="doccomment">/// Whether this is zero.
 			</span><span class="attr">#[inline]
-			</span><span class="kw">pub fn </span>is_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+			</span><span class="kw">pub const fn </span>is_zero(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
 				<span class="kw">let </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$name</span>(<span class="kw-2">ref </span>arr) = <span class="self">self</span>;
-				<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="macro-nonterminal">$n_words </span>{ <span class="kw">if </span>arr[i] != <span class="number">0 </span>{ <span class="kw">return </span><span class="bool-val">false</span>; } }
+				<span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+				<span class="kw">while </span>i &lt; <span class="macro-nonterminal">$n_words </span>{ <span class="kw">if </span>arr[i] != <span class="number">0 </span>{ <span class="kw">return </span><span class="bool-val">false</span>; } <span class="kw">else </span>{ i += <span class="number">1</span>; } }
 				<span class="kw">return </span><span class="bool-val">true</span>;
 			}
 
@@ -2592,18 +2608,16 @@
 
 			<span class="doccomment">/// One (multiplicative identity) of this type.
 			</span><span class="attr">#[inline]
-			</span><span class="kw">pub fn </span>one() -&gt; <span class="self">Self </span>{
-				From::from(<span class="number">1u64</span>)
+			</span><span class="kw">pub const fn </span>one() -&gt; <span class="self">Self </span>{
+				<span class="kw">let </span><span class="kw-2">mut </span>words = [<span class="number">0</span>; <span class="macro-nonterminal">$n_words</span>];
+				words[<span class="number">0</span>] = <span class="number">1u64</span>;
+				<span class="self">Self</span>(words)
 			}
 
 			<span class="doccomment">/// The maximum value which can be inhabited by this type.
 			</span><span class="attr">#[inline]
-			</span><span class="kw">pub fn </span>max_value() -&gt; <span class="self">Self </span>{
-				<span class="kw">let </span><span class="kw-2">mut </span>result = [<span class="number">0</span>; <span class="macro-nonterminal">$n_words</span>];
-				<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..<span class="macro-nonterminal">$n_words </span>{
-					result[i] = u64::max_value();
-				}
-				<span class="macro-nonterminal">$name</span>(result)
+			</span><span class="kw">pub const fn </span>max_value() -&gt; <span class="self">Self </span>{
+				<span class="self">Self</span>::MAX
 			}
 
 			<span class="kw">fn </span>full_shl(<span class="self">self</span>, shift: u32) -&gt; [u64; <span class="macro-nonterminal">$n_words </span>+ <span class="number">1</span>] {
@@ -2856,7 +2870,7 @@
 				}
 			}
 
-			<span class="doccomment">/// Add with overflow.
+			<span class="doccomment">/// Addition which overflows and returns a flag if it does.
 			</span><span class="attr">#[inline(always)]
 			</span><span class="kw">pub fn </span>overflowing_add(<span class="self">self</span>, other: <span class="macro-nonterminal">$name</span>) -&gt; (<span class="macro-nonterminal">$name</span>, bool) {
 				<span class="macro-nonterminal">$</span><span class="macro">crate::uint_overflowing_binop!</span>(
@@ -2868,10 +2882,10 @@
 				)
 			}
 
-			<span class="doccomment">/// Addition which saturates at the maximum value (Self::max_value()).
+			<span class="doccomment">/// Addition which saturates at the maximum value (Self::MAX).
 			</span><span class="kw">pub fn </span>saturating_add(<span class="self">self</span>, other: <span class="macro-nonterminal">$name</span>) -&gt; <span class="macro-nonterminal">$name </span>{
 				<span class="kw">match </span><span class="self">self</span>.overflowing_add(other) {
-					(<span class="kw">_</span>, <span class="bool-val">true</span>) =&gt; <span class="macro-nonterminal">$name::max_value</span>(),
+					(<span class="kw">_</span>, <span class="bool-val">true</span>) =&gt; <span class="macro-nonterminal">$name::MAX</span>,
 					(val, <span class="bool-val">false</span>) =&gt; val,
 				}
 			}
@@ -2912,6 +2926,15 @@
 				}
 			}
 
+			<span class="doccomment">/// Computes the absolute difference between self and other.
+			</span><span class="kw">pub fn </span>abs_diff(<span class="self">self</span>, other: <span class="macro-nonterminal">$name</span>) -&gt; <span class="macro-nonterminal">$name </span>{
+				<span class="kw">if </span><span class="self">self </span>&gt; other {
+					<span class="self">self</span>.overflowing_sub(other).<span class="number">0
+				</span>} <span class="kw">else </span>{
+					other.overflowing_sub(<span class="self">self</span>).<span class="number">0
+				</span>}
+			}
+
 			<span class="doccomment">/// Multiply with overflow, returning a flag if it does.
 			</span><span class="attr">#[inline(always)]
 			</span><span class="kw">pub fn </span>overflowing_mul(<span class="self">self</span>, other: <span class="macro-nonterminal">$name</span>) -&gt; (<span class="macro-nonterminal">$name</span>, bool) {
@@ -2921,7 +2944,7 @@
 			<span class="doccomment">/// Multiplication which saturates at the maximum value..
 			</span><span class="kw">pub fn </span>saturating_mul(<span class="self">self</span>, other: <span class="macro-nonterminal">$name</span>) -&gt; <span class="macro-nonterminal">$name </span>{
 				<span class="kw">match </span><span class="self">self</span>.overflowing_mul(other) {
-					(<span class="kw">_</span>, <span class="bool-val">true</span>) =&gt; <span class="macro-nonterminal">$name::max_value</span>(),
+					(<span class="kw">_</span>, <span class="bool-val">true</span>) =&gt; <span class="macro-nonterminal">$name::MAX</span>,
 					(val, <span class="bool-val">false</span>) =&gt; val,
 				}
 			}
@@ -3308,6 +3331,12 @@
 			}
 		}
 
+		<span class="kw">impl </span><span class="macro-nonterminal">$crate::core_::ops::BitAndAssign</span>&lt;<span class="macro-nonterminal">$name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+			<span class="kw">fn </span>bitand_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$name</span>) {
+				<span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>&amp; rhs;
+			}
+		}
+
 		<span class="kw">impl </span><span class="macro-nonterminal">$crate::core_::ops::BitXor</span>&lt;<span class="macro-nonterminal">$name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
 			<span class="kw">type </span>Output = <span class="macro-nonterminal">$name</span>;
 
@@ -3323,6 +3352,12 @@
 			}
 		}
 
+		<span class="kw">impl </span><span class="macro-nonterminal">$crate::core_::ops::BitXorAssign</span>&lt;<span class="macro-nonterminal">$name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+			<span class="kw">fn </span>bitxor_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$name</span>) {
+				<span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>^ rhs;
+			}
+		}
+
 		<span class="kw">impl </span><span class="macro-nonterminal">$crate::core_::ops::BitOr</span>&lt;<span class="macro-nonterminal">$name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
 			<span class="kw">type </span>Output = <span class="macro-nonterminal">$name</span>;
 
@@ -3335,6 +3370,12 @@
 					ret[i] = arr1[i] | arr2[i];
 				}
 				<span class="macro-nonterminal">$name</span>(ret)
+			}
+		}
+
+		<span class="kw">impl </span><span class="macro-nonterminal">$crate::core_::ops::BitOrAssign</span>&lt;<span class="macro-nonterminal">$name</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+			<span class="kw">fn </span>bitor_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rhs: <span class="macro-nonterminal">$name</span>) {
+				<span class="kw-2">*</span><span class="self">self </span>= <span class="kw-2">*</span><span class="self">self </span>| rhs;
 			}
 		}
 
@@ -3541,28 +3582,33 @@
 #[doc(hidden)]
 </span><span class="macro">macro_rules! </span>impl_quickcheck_arbitrary_for_uint {
 	(<span class="macro-nonterminal">$uint</span>: ty, <span class="macro-nonterminal">$n_bytes</span>: tt) =&gt; {
-		<span class="kw">impl </span><span class="macro-nonterminal">$crate::qc::Arbitrary </span><span class="kw">for </span><span class="macro-nonterminal">$uint </span>{
-			<span class="kw">fn </span>arbitrary&lt;G: <span class="macro-nonterminal">$crate::qc::Gen</span>&gt;(g: <span class="kw-2">&amp;mut </span>G) -&gt; <span class="self">Self </span>{
-				<span class="kw">let </span><span class="kw-2">mut </span>res = [<span class="number">0u8</span>; <span class="macro-nonterminal">$n_bytes</span>];
-
-				<span class="kw">use </span><span class="macro-nonterminal">$crate::rand07::Rng</span>;
-				<span class="kw">let </span>p: f64 = <span class="macro-nonterminal">$crate::rand07::rngs::OsRng</span>.gen();
+		<span class="kw">impl </span><span class="macro-nonterminal">$crate::quickcheck::Arbitrary </span><span class="kw">for </span><span class="macro-nonterminal">$uint </span>{
+			<span class="kw">fn </span>arbitrary(g: <span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$crate::quickcheck::Gen</span>) -&gt; <span class="self">Self </span>{
+				<span class="kw">let </span>p = usize::arbitrary(g) % <span class="number">100</span>;
 				<span class="comment">// make it more likely to generate smaller numbers that
 				// don&#39;t use up the full $n_bytes
 				</span><span class="kw">let </span>range =
 					<span class="comment">// 10% chance to generate number that uses up to $n_bytes
-					</span><span class="kw">if </span>p &lt; <span class="number">0.1 </span>{
+					</span><span class="kw">if </span>p &lt; <span class="number">10 </span>{
 						<span class="macro-nonterminal">$n_bytes
 					</span><span class="comment">// 10% chance to generate number that uses up to $n_bytes / 2
-					</span>} <span class="kw">else if </span>p &lt; <span class="number">0.2 </span>{
+					</span>} <span class="kw">else if </span>p &lt; <span class="number">20 </span>{
 						<span class="macro-nonterminal">$n_bytes </span>/ <span class="number">2
 					</span><span class="comment">// 80% chance to generate number that uses up to $n_bytes / 5
 					</span>} <span class="kw">else </span>{
 						<span class="macro-nonterminal">$n_bytes </span>/ <span class="number">5
 					</span>};
 
-				<span class="kw">let </span>size = g.gen_range(<span class="number">0</span>, range);
-				g.fill_bytes(<span class="kw-2">&amp;mut </span>res[..size]);
+				<span class="kw">let </span>range = <span class="macro-nonterminal">$crate::core_::cmp::max</span>(range, <span class="number">1</span>);
+				<span class="kw">let </span>size: usize = usize::arbitrary(g) % range;
+
+				<span class="kw">let </span>res: [u8; <span class="macro-nonterminal">$n_bytes</span>] = <span class="macro-nonterminal">$crate::core_::array::from_fn</span>(|i| {
+					<span class="kw">if </span>i &gt; size {
+						<span class="number">0
+					</span>} <span class="kw">else </span>{
+						u8::arbitrary(g)
+					}
+				});
 
 				res.as_ref().into()
 			}

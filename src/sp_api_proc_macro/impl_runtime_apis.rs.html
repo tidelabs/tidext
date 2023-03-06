@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/api/proc-macro/src/impl_runtime_apis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_runtime_apis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api_proc_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/api/proc-macro/src/impl_runtime_apis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_runtime_apis.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api_proc_macro/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -710,48 +710,9 @@
 <a href="#710" id="710">710</a>
 <a href="#711" id="711">711</a>
 <a href="#712" id="712">712</a>
-<a href="#713" id="713">713</a>
-<a href="#714" id="714">714</a>
-<a href="#715" id="715">715</a>
-<a href="#716" id="716">716</a>
-<a href="#717" id="717">717</a>
-<a href="#718" id="718">718</a>
-<a href="#719" id="719">719</a>
-<a href="#720" id="720">720</a>
-<a href="#721" id="721">721</a>
-<a href="#722" id="722">722</a>
-<a href="#723" id="723">723</a>
-<a href="#724" id="724">724</a>
-<a href="#725" id="725">725</a>
-<a href="#726" id="726">726</a>
-<a href="#727" id="727">727</a>
-<a href="#728" id="728">728</a>
-<a href="#729" id="729">729</a>
-<a href="#730" id="730">730</a>
-<a href="#731" id="731">731</a>
-<a href="#732" id="732">732</a>
-<a href="#733" id="733">733</a>
-<a href="#734" id="734">734</a>
-<a href="#735" id="735">735</a>
-<a href="#736" id="736">736</a>
-<a href="#737" id="737">737</a>
-<a href="#738" id="738">738</a>
-<a href="#739" id="739">739</a>
-<a href="#740" id="740">740</a>
-<a href="#741" id="741">741</a>
-<a href="#742" id="742">742</a>
-<a href="#743" id="743">743</a>
-<a href="#744" id="744">744</a>
-<a href="#745" id="745">745</a>
-<a href="#746" id="746">746</a>
-<a href="#747" id="747">747</a>
-<a href="#748" id="748">748</a>
-<a href="#749" id="749">749</a>
-<a href="#750" id="750">750</a>
-<a href="#751" id="751">751</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2018-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -768,12 +729,12 @@
 
 </span><span class="kw">use </span><span class="kw">crate</span>::utils::{
 	extract_all_signature_types, extract_block_type_from_trait_path, extract_impl_trait,
-	extract_parameter_names_types_and_borrows, generate_call_api_at_fn_name, generate_crate_access,
-	generate_hidden_includes, generate_method_runtime_api_impl_name,
-	generate_native_call_generator_fn_name, generate_runtime_mod_name_for_trait,
-	prefix_function_with_trait, return_type_extract_type, AllowSelfRefInParameters,
-	RequireQualifiedTraitPath,
+	extract_parameter_names_types_and_borrows, generate_crate_access, generate_hidden_includes,
+	generate_runtime_mod_name_for_trait, parse_runtime_api_version, prefix_function_with_trait,
+	versioned_trait_name, AllowSelfRefInParameters, RequireQualifiedTraitPath,
 };
+
+<span class="kw">use </span><span class="kw">crate</span>::common::API_VERSION_ATTRIBUTE;
 
 <span class="kw">use </span>proc_macro2::{Span, TokenStream};
 
@@ -784,8 +745,7 @@
 	parse::{Error, Parse, ParseStream, <span class="prelude-ty">Result</span>},
 	parse_macro_input, parse_quote,
 	spanned::Spanned,
-	Attribute, GenericArgument, Ident, ImplItem, ItemImpl, Path, PathArguments, Signature, Type,
-	TypePath,
+	Attribute, Ident, ImplItem, ItemImpl, Path, Signature, Type, TypePath,
 };
 
 <span class="kw">use </span>std::collections::HashSet;
@@ -856,8 +816,10 @@
 	<span class="kw">let </span><span class="kw-2">mut </span>impl_calls = Vec::new();
 
 	<span class="kw">for </span>impl_ <span class="kw">in </span>impls {
+		<span class="kw">let </span>trait_api_ver = extract_api_version(<span class="kw-2">&amp;</span>impl_.attrs, impl_.span())<span class="question-mark">?</span>;
 		<span class="kw">let </span>impl_trait_path = extract_impl_trait(impl_, RequireQualifiedTraitPath::Yes)<span class="question-mark">?</span>;
 		<span class="kw">let </span>impl_trait = extend_with_runtime_decl_path(impl_trait_path.clone());
+		<span class="kw">let </span>impl_trait = extend_with_api_version(impl_trait, trait_api_ver);
 		<span class="kw">let </span>impl_trait_ident = <span class="kw-2">&amp;</span>impl_trait_path
 			.segments
 			.last()
@@ -961,19 +923,6 @@
 			recorder: std::option::Option&lt;#crate_::ProofRecorder&lt;Block&gt;&gt;,
 		}
 
-		<span class="comment">// `RuntimeApi` itself is not threadsafe. However, an instance is only available in a
-		// `ApiRef` object and `ApiRef` also has an associated lifetime. This lifetimes makes it
-		// impossible to move `RuntimeApi` into another thread.
-		</span><span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
-		</span><span class="kw">unsafe impl</span>&lt;Block: #crate_::BlockT, C: #crate_::CallApiAt&lt;Block&gt;&gt; Send
-			<span class="kw">for </span>RuntimeApiImpl&lt;Block, C&gt;
-		{}
-
-		<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
-		</span><span class="kw">unsafe impl</span>&lt;Block: #crate_::BlockT, C: #crate_::CallApiAt&lt;Block&gt;&gt; Sync
-			<span class="kw">for </span>RuntimeApiImpl&lt;Block, C&gt;
-		{}
-
 		<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
 		</span><span class="kw">impl</span>&lt;Block: #crate_::BlockT, C: #crate_::CallApiAt&lt;Block&gt;&gt; #crate_::ApiExt&lt;Block&gt; <span class="kw">for
 			</span>RuntimeApiImpl&lt;Block, C&gt;
@@ -996,7 +945,7 @@
 
 			<span class="kw">fn </span>has_api&lt;A: #crate_::RuntimeApiInfo + <span class="question-mark">?</span>Sized&gt;(
 				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				at: <span class="kw-2">&amp;</span>#crate_::BlockId&lt;Block&gt;,
+				at: &lt;Block <span class="kw">as </span>#crate_::BlockT&gt;::Hash,
 			) -&gt; std::result::Result&lt;bool, #crate_::ApiError&gt; <span class="kw">where </span><span class="self">Self</span>: Sized {
 				#crate_::CallApiAt::&lt;Block&gt;::runtime_version_at(<span class="self">self</span>.call, at)
 					.map(|v| #crate_::RuntimeVersion::has_api_with(<span class="kw-2">&amp;</span>v, <span class="kw-2">&amp;</span>A::ID, |v| v == A::VERSION))
@@ -1004,7 +953,7 @@
 
 			<span class="kw">fn </span>has_api_with&lt;A: #crate_::RuntimeApiInfo + <span class="question-mark">?</span>Sized, P: Fn(u32) -&gt; bool&gt;(
 				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				at: <span class="kw-2">&amp;</span>#crate_::BlockId&lt;Block&gt;,
+				at: &lt;Block <span class="kw">as </span>#crate_::BlockT&gt;::Hash,
 				pred: P,
 			) -&gt; std::result::Result&lt;bool, #crate_::ApiError&gt; <span class="kw">where </span><span class="self">Self</span>: Sized {
 				#crate_::CallApiAt::&lt;Block&gt;::runtime_version_at(<span class="self">self</span>.call, at)
@@ -1013,7 +962,7 @@
 
 			<span class="kw">fn </span>api_version&lt;A: #crate_::RuntimeApiInfo + <span class="question-mark">?</span>Sized&gt;(
 				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				at: <span class="kw-2">&amp;</span>#crate_::BlockId&lt;Block&gt;,
+				at: &lt;Block <span class="kw">as </span>#crate_::BlockT&gt;::Hash,
 			) -&gt; std::result::Result&lt;<span class="prelude-ty">Option</span>&lt;u32&gt;, #crate_::ApiError&gt; <span class="kw">where </span><span class="self">Self</span>: Sized {
 				#crate_::CallApiAt::&lt;Block&gt;::runtime_version_at(<span class="self">self</span>.call, at)
 					.map(|v| #crate_::RuntimeVersion::api_version(<span class="kw-2">&amp;</span>v, <span class="kw-2">&amp;</span>A::ID))
@@ -1027,9 +976,13 @@
 				std::clone::Clone::clone(<span class="kw-2">&amp;</span><span class="self">self</span>.recorder)
 			}
 
-			<span class="kw">fn </span>extract_proof(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; std::option::Option&lt;#crate_::StorageProof&gt; {
-				std::option::Option::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.recorder)
-					.map(|recorder| #crate_::ProofRecorder::&lt;Block&gt;::to_storage_proof(<span class="kw-2">&amp;</span>recorder))
+			<span class="kw">fn </span>extract_proof(
+				<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+			) -&gt; std::option::Option&lt;#crate_::StorageProof&gt; {
+				<span class="kw">let </span>recorder = std::option::Option::take(<span class="kw-2">&amp;mut </span><span class="self">self</span>.recorder);
+				std::option::Option::map(recorder, |recorder| {
+					#crate_::ProofRecorder::&lt;Block&gt;::drain_storage_proof(recorder)
+				})
 			}
 
 			<span class="kw">fn </span>into_storage_changes(
@@ -1040,8 +993,7 @@
 				#crate_::StorageChanges&lt;C::StateBackend, Block&gt;,
 				String
 			&gt; <span class="kw">where </span><span class="self">Self</span>: Sized {
-				<span class="kw">let </span>at = #crate_::BlockId::Hash(std::clone::Clone::clone(<span class="kw-2">&amp;</span>parent_hash));
-				<span class="kw">let </span>state_version = #crate_::CallApiAt::&lt;Block&gt;::runtime_version_at(<span class="self">self</span>.call, <span class="kw-2">&amp;</span>at)
+				<span class="kw">let </span>state_version = #crate_::CallApiAt::&lt;Block&gt;::runtime_version_at(<span class="self">self</span>.call, std::clone::Clone::clone(<span class="kw-2">&amp;</span>parent_hash))
 					.map(|v| #crate_::RuntimeVersion::state_version(<span class="kw-2">&amp;</span>v))
 					.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;Failed to get state version: {}&quot;</span>, e))<span class="question-mark">?</span>;
 
@@ -1077,35 +1029,6 @@
 
 		<span class="attr">#[cfg(any(feature = <span class="string">&quot;std&quot;</span>, test))]
 		</span><span class="kw">impl</span>&lt;Block: #crate_::BlockT, C: #crate_::CallApiAt&lt;Block&gt;&gt; RuntimeApiImpl&lt;Block, C&gt; {
-			<span class="kw">fn </span>call_api_at&lt;
-				R: #crate_::Encode + #crate_::Decode + std::cmp::PartialEq,
-				F: FnOnce(
-					<span class="kw-2">&amp;</span>C,
-					<span class="kw-2">&amp;</span>std::cell::RefCell&lt;#crate_::OverlayedChanges&gt;,
-					<span class="kw-2">&amp;</span>std::cell::RefCell&lt;#crate_::StorageTransactionCache&lt;Block, C::StateBackend&gt;&gt;,
-					<span class="kw-2">&amp;</span>std::option::Option&lt;#crate_::ProofRecorder&lt;Block&gt;&gt;,
-				) -&gt; std::result::Result&lt;#crate_::NativeOrEncoded&lt;R&gt;, E&gt;,
-				E,
-			&gt;(
-				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				call_api_at: F,
-			) -&gt; std::result::Result&lt;#crate_::NativeOrEncoded&lt;R&gt;, E&gt; {
-				<span class="kw">if </span><span class="kw-2">*</span>std::cell::RefCell::borrow(<span class="kw-2">&amp;</span><span class="self">self</span>.commit_on_success) {
-					#crate_::OverlayedChanges::start_transaction(
-						<span class="kw-2">&amp;mut </span>std::cell::RefCell::borrow_mut(<span class="kw-2">&amp;</span><span class="self">self</span>.changes)
-					);
-				}
-				<span class="kw">let </span>res = call_api_at(
-					<span class="kw-2">&amp;</span><span class="self">self</span>.call,
-					<span class="kw-2">&amp;</span><span class="self">self</span>.changes,
-					<span class="kw-2">&amp;</span><span class="self">self</span>.storage_transaction_cache,
-					<span class="kw-2">&amp;</span><span class="self">self</span>.recorder,
-				);
-
-				<span class="self">self</span>.commit_or_rollback(std::result::Result::is_ok(<span class="kw-2">&amp;</span>res));
-				res
-			}
-
 			<span class="kw">fn </span>commit_or_rollback(<span class="kw-2">&amp;</span><span class="self">self</span>, commit: bool) {
 				<span class="kw">let </span>proof = <span class="string">&quot;\
 					We only close a transaction when we opened one ourself.
@@ -1149,6 +1072,24 @@
 	trait_
 }
 
+<span class="kw">fn </span>extend_with_api_version(<span class="kw-2">mut </span>trait_: Path, version: <span class="prelude-ty">Option</span>&lt;u64&gt;) -&gt; Path {
+	<span class="kw">let </span>version = <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = version {
+		v
+	} <span class="kw">else </span>{
+		<span class="comment">// nothing to do
+		</span><span class="kw">return </span>trait_
+	};
+
+	<span class="kw">let </span>trait_name = <span class="kw-2">&amp;mut </span>trait_
+		.segments
+		.last_mut()
+		.expect(<span class="string">&quot;Trait path should always contain at least one item; qed&quot;</span>)
+		.ident;
+	<span class="kw-2">*</span>trait_name = versioned_trait_name(trait_name, version);
+
+	trait_
+}
+
 <span class="doccomment">/// Generates the implementations of the apis for the runtime.
 </span><span class="kw">fn </span>generate_api_impl_for_runtime(impls: <span class="kw-2">&amp;</span>[ItemImpl]) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
 	<span class="kw">let </span><span class="kw-2">mut </span>impls_prepared = Vec::new();
@@ -1156,9 +1097,12 @@
 	<span class="comment">// We put `runtime` before each trait to get the trait that is intended for the runtime and
 	// we put the `RuntimeBlock` as first argument for the trait generics.
 	</span><span class="kw">for </span>impl_ <span class="kw">in </span>impls.iter() {
+		<span class="kw">let </span>trait_api_ver = extract_api_version(<span class="kw-2">&amp;</span>impl_.attrs, impl_.span())<span class="question-mark">?</span>;
+
 		<span class="kw">let </span><span class="kw-2">mut </span>impl_ = impl_.clone();
 		<span class="kw">let </span>trait_ = extract_impl_trait(<span class="kw-2">&amp;</span>impl_, RequireQualifiedTraitPath::Yes)<span class="question-mark">?</span>.clone();
 		<span class="kw">let </span>trait_ = extend_with_runtime_decl_path(trait_);
+		<span class="kw">let </span>trait_ = extend_with_api_version(trait_, trait_api_ver);
 
 		impl_.trait_.as_mut().unwrap().<span class="number">1 </span>= trait_;
 		impl_.attrs = filter_cfg_attrs(<span class="kw-2">&amp;</span>impl_.attrs);
@@ -1175,10 +1119,63 @@
 /// with code that calls into the runtime.
 </span><span class="kw">struct </span>ApiRuntimeImplToApiRuntimeApiImpl&lt;<span class="lifetime">&#39;a</span>&gt; {
 	runtime_block: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TypePath,
-	runtime_mod_path: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Path,
-	runtime_type: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Type,
-	trait_generic_arguments: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[GenericArgument],
-	impl_trait: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>Ident,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ApiRuntimeImplToApiRuntimeApiImpl&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="doccomment">/// Process the given item implementation.
+	</span><span class="kw">fn </span>process(<span class="kw-2">mut </span><span class="self">self</span>, input: ItemImpl) -&gt; ItemImpl {
+		<span class="kw">let </span><span class="kw-2">mut </span>input = <span class="self">self</span>.fold_item_impl(input);
+
+		<span class="kw">let </span>crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
+
+		<span class="comment">// Delete all functions, because all of them are default implemented by
+		// `decl_runtime_apis!`. We only need to implement the `__runtime_api_internal_call_api_at`
+		// function.
+		</span>input.items.clear();
+		input.items.push(<span class="macro">parse_quote! </span>{
+			<span class="kw">fn </span>__runtime_api_internal_call_api_at(
+				<span class="kw-2">&amp;</span><span class="self">self</span>,
+				at: &lt;__SR_API_BLOCK__ <span class="kw">as </span>#crate_::BlockT&gt;::Hash,
+				context: #crate_::ExecutionContext,
+				params: std::vec::Vec&lt;u8&gt;,
+				fn_name: <span class="kw-2">&amp;</span><span class="kw">dyn </span>Fn(#crate_::RuntimeVersion) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+			) -&gt; std::result::Result&lt;std::vec::Vec&lt;u8&gt;, #crate_::ApiError&gt; {
+				<span class="kw">if </span><span class="kw-2">*</span>std::cell::RefCell::borrow(<span class="kw-2">&amp;</span><span class="self">self</span>.commit_on_success) {
+					#crate_::OverlayedChanges::start_transaction(
+						<span class="kw-2">&amp;mut </span>std::cell::RefCell::borrow_mut(<span class="kw-2">&amp;</span><span class="self">self</span>.changes)
+					);
+				}
+
+				<span class="kw">let </span>res = (|| {
+					<span class="kw">let </span>version = #crate_::CallApiAt::&lt;__SR_API_BLOCK__&gt;::runtime_version_at(
+						<span class="self">self</span>.call,
+						at,
+					)<span class="question-mark">?</span>;
+
+					<span class="kw">let </span>params = #crate_::CallApiAtParams {
+						at,
+						function: (<span class="kw-2">*</span>fn_name)(version),
+						arguments: params,
+						overlayed_changes: <span class="kw-2">&amp;</span><span class="self">self</span>.changes,
+						storage_transaction_cache: <span class="kw-2">&amp;</span><span class="self">self</span>.storage_transaction_cache,
+						context,
+						recorder: <span class="kw-2">&amp;</span><span class="self">self</span>.recorder,
+					};
+
+					#crate_::CallApiAt::&lt;__SR_API_BLOCK__&gt;::call_api_at(
+						<span class="self">self</span>.call,
+						params,
+					)
+				})();
+
+				<span class="self">self</span>.commit_or_rollback(std::result::Result::is_ok(<span class="kw-2">&amp;</span>res));
+
+				res
+			}
+		});
+
+		input
+	}
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Fold <span class="kw">for </span>ApiRuntimeImplToApiRuntimeApiImpl&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -1187,108 +1184,6 @@
 			<span class="kw">if </span>input == <span class="kw-2">*</span><span class="self">self</span>.runtime_block { <span class="macro">parse_quote!</span>(__SR_API_BLOCK__) } <span class="kw">else </span>{ input };
 
 		fold::fold_type_path(<span class="self">self</span>, new_ty_path)
-	}
-
-	<span class="kw">fn </span>fold_impl_item_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>input: syn::ImplItemMethod) -&gt; syn::ImplItemMethod {
-		<span class="kw">let </span>block = {
-			<span class="kw">let </span>runtime_mod_path = <span class="self">self</span>.runtime_mod_path;
-			<span class="kw">let </span>runtime = <span class="self">self</span>.runtime_type;
-			<span class="kw">let </span>native_call_generator_ident =
-				generate_native_call_generator_fn_name(<span class="kw-2">&amp;</span>input.sig.ident);
-			<span class="kw">let </span>call_api_at_call = generate_call_api_at_fn_name(<span class="kw-2">&amp;</span>input.sig.ident);
-			<span class="kw">let </span>trait_generic_arguments = <span class="self">self</span>.trait_generic_arguments;
-			<span class="kw">let </span>crate_ = generate_crate_access(HIDDEN_INCLUDES_ID);
-
-			<span class="comment">// Generate the access to the native parameters
-			</span><span class="kw">let </span>param_tuple_access = <span class="kw">if </span>input.sig.inputs.len() == <span class="number">1 </span>{
-				<span class="macro">vec!</span>[<span class="macro">quote!</span>(p)]
-			} <span class="kw">else </span>{
-				input
-					.sig
-					.inputs
-					.iter()
-					.enumerate()
-					.map(|(i, <span class="kw">_</span>)| {
-						<span class="kw">let </span>i = syn::Index::from(i);
-						<span class="macro">quote!</span>( p.#i )
-					})
-					.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;()
-			};
-
-			<span class="kw">let </span>(param_types, error) = <span class="kw">match </span>extract_parameter_names_types_and_borrows(
-				<span class="kw-2">&amp;</span>input.sig,
-				AllowSelfRefInParameters::No,
-			) {
-				<span class="prelude-val">Ok</span>(res) =&gt; (
-					res.into_iter()
-						.map(|v| {
-							<span class="kw">let </span>ty = v.<span class="number">1</span>;
-							<span class="kw">let </span>borrow = v.<span class="number">2</span>;
-							<span class="macro">quote!</span>( #borrow #ty )
-						})
-						.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;(),
-					<span class="prelude-val">None</span>,
-				),
-				<span class="prelude-val">Err</span>(e) =&gt; (Vec::new(), <span class="prelude-val">Some</span>(e.to_compile_error())),
-			};
-
-			<span class="comment">// Rewrite the input parameters.
-			</span>input.sig.inputs = <span class="macro">parse_quote! </span>{
-				<span class="kw-2">&amp;</span><span class="self">self</span>,
-				at: <span class="kw-2">&amp;</span>#crate_::BlockId&lt;__SR_API_BLOCK__&gt;,
-				context: #crate_::ExecutionContext,
-				params: <span class="prelude-ty">Option</span>&lt;( #( #param_types ),* )&gt;,
-				params_encoded: Vec&lt;u8&gt;,
-			};
-
-			input.sig.ident =
-				generate_method_runtime_api_impl_name(<span class="self">self</span>.impl_trait, <span class="kw-2">&amp;</span>input.sig.ident);
-			<span class="kw">let </span>ret_type = return_type_extract_type(<span class="kw-2">&amp;</span>input.sig.output);
-
-			<span class="comment">// Generate the correct return type.
-			</span>input.sig.output = <span class="macro">parse_quote!</span>(
-				-&gt; std::result::Result&lt;#crate_::NativeOrEncoded&lt;#ret_type&gt;, #crate_::ApiError&gt;
-			);
-
-			<span class="comment">// Generate the new method implementation that calls into the runtime.
-			</span><span class="macro">parse_quote!</span>(
-				{
-					<span class="comment">// Get the error to the user (if we have one).
-					</span>#error
-
-					<span class="self">self</span>.call_api_at(
-						|
-							call_runtime_at,
-							changes,
-							storage_transaction_cache,
-							recorder
-						| {
-							#runtime_mod_path #call_api_at_call(
-								call_runtime_at,
-								at,
-								params_encoded,
-								changes,
-								storage_transaction_cache,
-								params.map(|p| {
-									#runtime_mod_path #native_call_generator_ident ::
-										&lt;#runtime, __SR_API_BLOCK__ #(, #trait_generic_arguments )<span class="kw-2">*</span>&gt; (
-										#( #param_tuple_access ),*
-									)
-								}),
-								context,
-								recorder,
-							)
-						}
-					)
-				}
-			)
-		};
-
-		<span class="kw">let </span><span class="kw-2">mut </span>input = fold::fold_impl_item_method(<span class="self">self</span>, input);
-		<span class="comment">// We need to set the block, after we modified the rest of the ast, otherwise we would
-		// modify our generated block as well.
-		</span>input.block = block;
-		input
 	}
 
 	<span class="kw">fn </span>fold_item_impl(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw-2">mut </span>input: ItemImpl) -&gt; ItemImpl {
@@ -1318,6 +1213,8 @@
 				#crate_::StateBackend&lt;#crate_::HashFor&lt;__SR_API_BLOCK__&gt;&gt;
 		});
 
+		where_clause.predicates.push(<span class="macro">parse_quote! </span>{ <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>RuntimeApiImplCall: Send });
+
 		<span class="comment">// Require that all types used in the function signatures are unwind safe.
 		</span>extract_all_signature_types(<span class="kw-2">&amp;</span>input.items).iter().for_each(|i| {
 			where_clause.predicates.push(<span class="macro">parse_quote! </span>{
@@ -1345,45 +1242,55 @@
 
 	<span class="kw">for </span>impl_ <span class="kw">in </span>impls {
 		<span class="kw">let </span>impl_trait_path = extract_impl_trait(impl_, RequireQualifiedTraitPath::Yes)<span class="question-mark">?</span>;
-		<span class="kw">let </span>impl_trait = <span class="kw-2">&amp;</span>impl_trait_path
-			.segments
-			.last()
-			.ok_or_else(|| Error::new(impl_trait_path.span(), <span class="string">&quot;Empty trait path not possible!&quot;</span>))<span class="question-mark">?
-			</span>.clone();
 		<span class="kw">let </span>runtime_block = extract_block_type_from_trait_path(impl_trait_path)<span class="question-mark">?</span>;
-		<span class="kw">let </span>runtime_type = <span class="kw-2">&amp;</span>impl_.self_ty;
 		<span class="kw">let </span><span class="kw-2">mut </span>runtime_mod_path = extend_with_runtime_decl_path(impl_trait_path.clone());
 		<span class="comment">// remove the trait to get just the module path
 		</span>runtime_mod_path.segments.pop();
 
-		<span class="kw">let </span>trait_generic_arguments = <span class="kw">match </span>impl_trait.arguments {
-			PathArguments::Parenthesized(<span class="kw">_</span>) | PathArguments::None =&gt; <span class="macro">vec!</span>[],
-			PathArguments::AngleBracketed(<span class="kw-2">ref </span>b) =&gt; b.args.iter().cloned().collect(),
-		};
+		<span class="kw">let </span>processed_impl =
+			ApiRuntimeImplToApiRuntimeApiImpl { runtime_block }.process(impl_.clone());
 
-		<span class="kw">let </span><span class="kw-2">mut </span>visitor = ApiRuntimeImplToApiRuntimeApiImpl {
-			runtime_block,
-			runtime_mod_path: <span class="kw-2">&amp;</span>runtime_mod_path,
-			runtime_type: <span class="kw-2">&amp;*</span>runtime_type,
-			trait_generic_arguments: <span class="kw-2">&amp;</span>trait_generic_arguments,
-			impl_trait: <span class="kw-2">&amp;</span>impl_trait.ident,
-		};
-
-		result.push(visitor.fold_item_impl(impl_.clone()));
+		result.push(processed_impl);
 	}
 	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>( #( #result )* ))
+}
+
+<span class="kw">fn </span>populate_runtime_api_versions(
+	result: <span class="kw-2">&amp;mut </span>Vec&lt;TokenStream&gt;,
+	sections: <span class="kw-2">&amp;mut </span>Vec&lt;TokenStream&gt;,
+	attrs: Vec&lt;Attribute&gt;,
+	id: Path,
+	version: TokenStream,
+	crate_access: <span class="kw-2">&amp;</span>TokenStream,
+) {
+	result.push(<span class="macro">quote!</span>(
+			#( #attrs )*
+			(#id, #version)
+	));
+
+	sections.push(<span class="macro">quote!</span>(
+		#( #attrs )*
+		<span class="kw">const _</span>: () = {
+			<span class="comment">// All sections with the same name are going to be merged by concatenation.
+			</span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+			#[link_section = <span class="string">&quot;runtime_apis&quot;</span>]
+			</span><span class="kw">static </span>SECTION_CONTENTS: [u8; <span class="number">12</span>] = #crate_access::serialize_runtime_api_info(#id, #version);
+		};
+	));
 }
 
 <span class="doccomment">/// Generates `RUNTIME_API_VERSIONS` that holds all version information about the implemented
 /// runtime apis.
 </span><span class="kw">fn </span>generate_runtime_api_versions(impls: <span class="kw-2">&amp;</span>[ItemImpl]) -&gt; <span class="prelude-ty">Result</span>&lt;TokenStream&gt; {
-	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::with_capacity(impls.len());
-	<span class="kw">let </span><span class="kw-2">mut </span>sections = Vec::with_capacity(impls.len());
+	<span class="kw">let </span><span class="kw-2">mut </span>result = Vec::&lt;TokenStream&gt;::with_capacity(impls.len());
+	<span class="kw">let </span><span class="kw-2">mut </span>sections = Vec::&lt;TokenStream&gt;::with_capacity(impls.len());
 	<span class="kw">let </span><span class="kw-2">mut </span>processed_traits = HashSet::new();
 
 	<span class="kw">let </span>c = generate_crate_access(HIDDEN_INCLUDES_ID);
 
 	<span class="kw">for </span>impl_ <span class="kw">in </span>impls {
+		<span class="kw">let </span>api_ver = extract_api_version(<span class="kw-2">&amp;</span>impl_.attrs, impl_.span())<span class="question-mark">?</span>.map(|a| a <span class="kw">as </span>u32);
+
 		<span class="kw">let </span><span class="kw-2">mut </span>path = extend_with_runtime_decl_path(
 			extract_impl_trait(impl_, RequireQualifiedTraitPath::Yes)<span class="question-mark">?</span>.clone(),
 		);
@@ -1406,23 +1313,11 @@
 		}
 
 		<span class="kw">let </span>id: Path = <span class="macro">parse_quote!</span>( #path ID );
-		<span class="kw">let </span>version: Path = <span class="macro">parse_quote!</span>( #path VERSION );
+		<span class="kw">let </span>version = <span class="macro">quote!</span>( #path VERSION );
 		<span class="kw">let </span>attrs = filter_cfg_attrs(<span class="kw-2">&amp;</span>impl_.attrs);
 
-		result.push(<span class="macro">quote!</span>(
-			#( #attrs )*
-			(#id, #version)
-		));
-
-		sections.push(<span class="macro">quote!</span>(
-			#( #attrs )*
-			<span class="kw">const _</span>: () = {
-				<span class="comment">// All sections with the same name are going to be merged by concatenation.
-				</span><span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-				#[link_section = <span class="string">&quot;runtime_apis&quot;</span>]
-				</span><span class="kw">static </span>SECTION_CONTENTS: [u8; <span class="number">12</span>] = #c::serialize_runtime_api_info(#id, #version);
-			};
-		));
+		<span class="kw">let </span>api_ver = api_ver.map(|a| <span class="macro">quote!</span>( #a )).unwrap_or_else(|| version);
+		populate_runtime_api_versions(<span class="kw-2">&amp;mut </span>result, <span class="kw-2">&amp;mut </span>sections, attrs, id, api_ver, <span class="kw-2">&amp;</span>c)
 	}
 
 	<span class="prelude-val">Ok</span>(<span class="macro">quote!</span>(
@@ -1475,6 +1370,33 @@
 <span class="comment">// Filters all attributes except the cfg ones.
 </span><span class="kw">fn </span>filter_cfg_attrs(attrs: <span class="kw-2">&amp;</span>[Attribute]) -&gt; Vec&lt;Attribute&gt; {
 	attrs.iter().filter(|a| a.path.is_ident(<span class="string">&quot;cfg&quot;</span>)).cloned().collect()
+}
+
+<span class="comment">// Extracts the value of `API_VERSION_ATTRIBUTE` and handles errors.
+// Returns:
+// - Err if the version is malformed
+// - Some(u64) if the version is set
+// - None if the version is not set (this is valid).
+</span><span class="kw">fn </span>extract_api_version(attrs: <span class="kw-2">&amp;</span>Vec&lt;Attribute&gt;, span: Span) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;u64&gt;&gt; {
+	<span class="comment">// First fetch all `API_VERSION_ATTRIBUTE` values (should be only one)
+	</span><span class="kw">let </span>api_ver = attrs
+		.iter()
+		.filter(|a| a.path.is_ident(API_VERSION_ATTRIBUTE))
+		.collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+
+	<span class="kw">if </span>api_ver.len() &gt; <span class="number">1 </span>{
+		<span class="kw">return </span><span class="prelude-val">Err</span>(Error::new(
+			span,
+			<span class="macro">format!</span>(
+				<span class="string">&quot;Found multiple #[{}] attributes for an API implementation. \
+				Each runtime API can have only one version.&quot;</span>,
+				API_VERSION_ATTRIBUTE
+			),
+		))
+	}
+
+	<span class="comment">// Parse the runtime version if there exists one.
+	</span>api_ver.first().map(|v| parse_runtime_api_version(v)).transpose()
 }
 
 <span class="attr">#[cfg(test)]

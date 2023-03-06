@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.21.1/src/runtime/task/core.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>core.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.26.0/src/runtime/task/core.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>core.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -299,6 +299,91 @@
 <a href="#299" id="299">299</a>
 <a href="#300" id="300">300</a>
 <a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
+<a href="#326" id="326">326</a>
+<a href="#327" id="327">327</a>
+<a href="#328" id="328">328</a>
+<a href="#329" id="329">329</a>
+<a href="#330" id="330">330</a>
+<a href="#331" id="331">331</a>
+<a href="#332" id="332">332</a>
+<a href="#333" id="333">333</a>
+<a href="#334" id="334">334</a>
+<a href="#335" id="335">335</a>
+<a href="#336" id="336">336</a>
+<a href="#337" id="337">337</a>
+<a href="#338" id="338">338</a>
+<a href="#339" id="339">339</a>
+<a href="#340" id="340">340</a>
+<a href="#341" id="341">341</a>
+<a href="#342" id="342">342</a>
+<a href="#343" id="343">343</a>
+<a href="#344" id="344">344</a>
+<a href="#345" id="345">345</a>
+<a href="#346" id="346">346</a>
+<a href="#347" id="347">347</a>
+<a href="#348" id="348">348</a>
+<a href="#349" id="349">349</a>
+<a href="#350" id="350">350</a>
+<a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
+<a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
+<a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Core task module.
 //!
 //! # Safety
@@ -312,6 +397,7 @@
 
 </span><span class="kw">use </span><span class="kw">crate</span>::future::Future;
 <span class="kw">use </span><span class="kw">crate</span>::loom::cell::UnsafeCell;
+<span class="kw">use </span><span class="kw">crate</span>::runtime::context;
 <span class="kw">use </span><span class="kw">crate</span>::runtime::task::raw::{<span class="self">self</span>, Vtable};
 <span class="kw">use </span><span class="kw">crate</span>::runtime::task::state::State;
 <span class="kw">use </span><span class="kw">crate</span>::runtime::task::{Id, Schedule};
@@ -325,6 +411,9 @@
 ///
 /// It is critical for `Header` to be the first field as the task structure will
 /// be referenced by both *mut Cell and *mut Header.
+///
+/// Any changes to the layout of this struct _must_ also be reflected in the
+/// const fns in raw.rs.
 </span><span class="attr">#[repr(C)]
 </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>Cell&lt;T: Future, S&gt; {
     <span class="doccomment">/// Hot task state data
@@ -344,15 +433,19 @@
 <span class="doccomment">/// The core of the task.
 ///
 /// Holds the future or output, depending on the stage of execution.
+///
+/// Any changes to the layout of this struct _must_ also be reflected in the
+/// const fns in raw.rs.
+</span><span class="attr">#[repr(C)]
 </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>Core&lt;T: Future, S&gt; {
     <span class="doccomment">/// Scheduler used to drive this future.
     </span><span class="kw">pub</span>(<span class="kw">super</span>) scheduler: S,
 
-    <span class="doccomment">/// Either the future or the output.
-    </span><span class="kw">pub</span>(<span class="kw">super</span>) stage: CoreStage&lt;T&gt;,
-
     <span class="doccomment">/// The task&#39;s ID, used for populating `JoinError`s.
     </span><span class="kw">pub</span>(<span class="kw">super</span>) task_id: Id,
+
+    <span class="doccomment">/// Either the future or the output.
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) stage: CoreStage&lt;T&gt;,
 }
 
 <span class="doccomment">/// Crate public as this is also needed by the pool.
@@ -382,7 +475,7 @@
 
     <span class="doccomment">/// The tracing ID for this instrumented task.
     </span><span class="attr">#[cfg(all(tokio_unstable, feature = <span class="string">&quot;tracing&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">super</span>) id: <span class="prelude-ty">Option</span>&lt;tracing::Id&gt;,
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) tracing_id: <span class="prelude-ty">Option</span>&lt;tracing::Id&gt;,
 }
 
 <span class="kw">unsafe impl </span>Send <span class="kw">for </span>Header {}
@@ -417,7 +510,7 @@
     /// structures.
     </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>new(future: T, scheduler: S, state: State, task_id: Id) -&gt; Box&lt;Cell&lt;T, S&gt;&gt; {
         <span class="attr">#[cfg(all(tokio_unstable, feature = <span class="string">&quot;tracing&quot;</span>))]
-        </span><span class="kw">let </span>id = future.id();
+        </span><span class="kw">let </span>tracing_id = future.id();
         <span class="kw">let </span>result = Box::new(Cell {
             header: Header {
                 state,
@@ -425,7 +518,7 @@
                 vtable: raw::vtable::&lt;T, S&gt;(),
                 owner_id: UnsafeCell::new(<span class="number">0</span>),
                 <span class="attr">#[cfg(all(tokio_unstable, feature = <span class="string">&quot;tracing&quot;</span>))]
-                </span>id,
+                </span>tracing_id,
             },
             core: Core {
                 scheduler,
@@ -444,8 +537,16 @@
         </span>{
             <span class="kw">let </span>trailer_addr = (<span class="kw-2">&amp;</span>result.trailer) <span class="kw">as </span><span class="kw-2">*const </span>Trailer <span class="kw">as </span>usize;
             <span class="kw">let </span>trailer_ptr = <span class="kw">unsafe </span>{ Header::get_trailer(NonNull::from(<span class="kw-2">&amp;</span>result.header)) };
-
             <span class="macro">assert_eq!</span>(trailer_addr, trailer_ptr.as_ptr() <span class="kw">as </span>usize);
+
+            <span class="kw">let </span>scheduler_addr = (<span class="kw-2">&amp;</span>result.core.scheduler) <span class="kw">as </span><span class="kw-2">*const </span>S <span class="kw">as </span>usize;
+            <span class="kw">let </span>scheduler_ptr =
+                <span class="kw">unsafe </span>{ Header::get_scheduler::&lt;S&gt;(NonNull::from(<span class="kw-2">&amp;</span>result.header)) };
+            <span class="macro">assert_eq!</span>(scheduler_addr, scheduler_ptr.as_ptr() <span class="kw">as </span>usize);
+
+            <span class="kw">let </span>id_addr = (<span class="kw-2">&amp;</span>result.core.task_id) <span class="kw">as </span><span class="kw-2">*const </span>Id <span class="kw">as </span>usize;
+            <span class="kw">let </span>id_ptr = <span class="kw">unsafe </span>{ Header::get_id_ptr(NonNull::from(<span class="kw-2">&amp;</span>result.header)) };
+            <span class="macro">assert_eq!</span>(id_addr, id_ptr.as_ptr() <span class="kw">as </span>usize);
         }
 
         result
@@ -456,7 +557,29 @@
     <span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>with_mut&lt;R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw">impl </span>FnOnce(<span class="kw-2">*mut </span>Stage&lt;T&gt;) -&gt; R) -&gt; R {
         <span class="self">self</span>.stage.with_mut(f)
     }
+}
 
+<span class="doccomment">/// Set and clear the task id in the context when the future is executed or
+/// dropped, or when the output produced by the future is dropped.
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>TaskIdGuard {
+    parent_task_id: <span class="prelude-ty">Option</span>&lt;Id&gt;,
+}
+
+<span class="kw">impl </span>TaskIdGuard {
+    <span class="kw">fn </span>enter(id: Id) -&gt; <span class="self">Self </span>{
+        TaskIdGuard {
+            parent_task_id: context::set_current_task_id(<span class="prelude-val">Some</span>(id)),
+        }
+    }
+}
+
+<span class="kw">impl </span>Drop <span class="kw">for </span>TaskIdGuard {
+    <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        context::set_current_task_id(<span class="self">self</span>.parent_task_id);
+    }
+}
+
+<span class="kw">impl</span>&lt;T: Future, S: Schedule&gt; Core&lt;T, S&gt; {
     <span class="doccomment">/// Polls the future.
     ///
     /// # Safety
@@ -472,7 +595,7 @@
     /// heap.
     </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>poll(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut </span>cx: Context&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; Poll&lt;T::Output&gt; {
         <span class="kw">let </span>res = {
-            <span class="self">self</span>.stage.with_mut(|ptr| {
+            <span class="self">self</span>.stage.stage.with_mut(|ptr| {
                 <span class="comment">// Safety: The caller ensures mutual exclusion to the field.
                 </span><span class="kw">let </span>future = <span class="kw">match unsafe </span>{ <span class="kw-2">&amp;mut *</span>ptr } {
                     Stage::Running(future) =&gt; future,
@@ -482,6 +605,7 @@
                 <span class="comment">// Safety: The caller ensures the future is pinned.
                 </span><span class="kw">let </span>future = <span class="kw">unsafe </span>{ Pin::new_unchecked(future) };
 
+                <span class="kw">let </span>_guard = TaskIdGuard::enter(<span class="self">self</span>.task_id);
                 future.poll(<span class="kw-2">&amp;mut </span>cx)
             })
         };
@@ -525,7 +649,7 @@
     </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">fn </span>take_output(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">super</span>::Result&lt;T::Output&gt; {
         <span class="kw">use </span>std::mem;
 
-        <span class="self">self</span>.stage.with_mut(|ptr| {
+        <span class="self">self</span>.stage.stage.with_mut(|ptr| {
             <span class="comment">// Safety:: the caller ensures mutual exclusion to the field.
             </span><span class="kw">match </span>mem::replace(<span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>ptr }, Stage::Consumed) {
                 Stage::Finished(output) =&gt; output,
@@ -535,7 +659,8 @@
     }
 
     <span class="kw">unsafe fn </span>set_stage(<span class="kw-2">&amp;</span><span class="self">self</span>, stage: Stage&lt;T&gt;) {
-        <span class="self">self</span>.stage.with_mut(|ptr| <span class="kw-2">*</span>ptr = stage)
+        <span class="kw">let </span>_guard = TaskIdGuard::enter(<span class="self">self</span>.task_id);
+        <span class="self">self</span>.stage.stage.with_mut(|ptr| <span class="kw-2">*</span>ptr = stage)
     }
 }
 
@@ -570,6 +695,51 @@
         <span class="kw">let </span>offset = me.as_ref().vtable.trailer_offset;
         <span class="kw">let </span>trailer = me.as_ptr().cast::&lt;u8&gt;().add(offset).cast::&lt;Trailer&gt;();
         NonNull::new_unchecked(trailer)
+    }
+
+    <span class="doccomment">/// Gets a pointer to the scheduler of the task containing this `Header`.
+    ///
+    /// # Safety
+    ///
+    /// The provided raw pointer must point at the header of a task.
+    ///
+    /// The generic type S must be set to the correct scheduler type for this
+    /// task.
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">unsafe fn </span>get_scheduler&lt;S&gt;(me: NonNull&lt;Header&gt;) -&gt; NonNull&lt;S&gt; {
+        <span class="kw">let </span>offset = me.as_ref().vtable.scheduler_offset;
+        <span class="kw">let </span>scheduler = me.as_ptr().cast::&lt;u8&gt;().add(offset).cast::&lt;S&gt;();
+        NonNull::new_unchecked(scheduler)
+    }
+
+    <span class="doccomment">/// Gets a pointer to the id of the task containing this `Header`.
+    ///
+    /// # Safety
+    ///
+    /// The provided raw pointer must point at the header of a task.
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">unsafe fn </span>get_id_ptr(me: NonNull&lt;Header&gt;) -&gt; NonNull&lt;Id&gt; {
+        <span class="kw">let </span>offset = me.as_ref().vtable.id_offset;
+        <span class="kw">let </span>id = me.as_ptr().cast::&lt;u8&gt;().add(offset).cast::&lt;Id&gt;();
+        NonNull::new_unchecked(id)
+    }
+
+    <span class="doccomment">/// Gets the id of the task containing this `Header`.
+    ///
+    /// # Safety
+    ///
+    /// The provided raw pointer must point at the header of a task.
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">unsafe fn </span>get_id(me: NonNull&lt;Header&gt;) -&gt; Id {
+        <span class="kw">let </span>ptr = Header::get_id_ptr(me).as_ptr();
+        <span class="kw-2">*</span>ptr
+    }
+
+    <span class="doccomment">/// Gets the tracing id of the task containing this `Header`.
+    ///
+    /// # Safety
+    ///
+    /// The provided raw pointer must point at the header of a task.
+    </span><span class="attr">#[cfg(all(tokio_unstable, feature = <span class="string">&quot;tracing&quot;</span>))]
+    </span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">unsafe fn </span>get_tracing_id(me: <span class="kw-2">&amp;</span>NonNull&lt;Header&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>tracing::Id&gt; {
+        me.as_ref().tracing_id.as_ref()
     }
 }
 

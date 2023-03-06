@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["AddMarketMaker",""],["CancelSwap",""],["ConfirmSwap",""],["RemoveMarketMaker",""],["SetAccountId",""],["SetStatus",""],["TransactionApi",""],["UpdateAssetsValue",""]]};

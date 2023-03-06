@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.10.4/src/arithmetic/affine.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>affine.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/k256-0.11.6/src/arithmetic/affine.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>affine.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../k256/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -396,19 +396,61 @@
 <a href="#395" id="395">395</a>
 <a href="#396" id="396">396</a>
 <a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
+<a href="#432" id="432">432</a>
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
 </pre><pre class="rust"><code><span class="doccomment">//! Affine points
 
 </span><span class="attr">#![allow(clippy::op_ref)]
 
 </span><span class="kw">use super</span>::{FieldElement, ProjectivePoint, CURVE_EQUATION_B};
-<span class="kw">use crate</span>::{CompressedPoint, EncodedPoint, FieldBytes, Scalar, Secp256k1};
+<span class="kw">use crate</span>::{CompressedPoint, EncodedPoint, FieldBytes, PublicKey, Scalar, Secp256k1};
 <span class="kw">use </span>core::ops::{Mul, Neg};
 <span class="kw">use </span>elliptic_curve::{
     group::{prime::PrimeCurveAffine, GroupEncoding},
     sec1::{<span class="self">self</span>, FromEncodedPoint, ToEncodedPoint},
     subtle::{Choice, ConditionallySelectable, ConstantTimeEq, CtOption},
     zeroize::DefaultIsZeroes,
-    AffineArithmetic, AffineXCoordinate, DecompressPoint, Error, <span class="prelude-ty">Result</span>,
+    AffineArithmetic, AffineXCoordinate, DecompactPoint, DecompressPoint, Error, <span class="prelude-ty">Result</span>,
 };
 
 <span class="kw">impl </span>AffineArithmetic <span class="kw">for </span>Secp256k1 {
@@ -416,7 +458,7 @@
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
-</span><span class="kw">use </span>elliptic_curve::serde::{de, ser, Deserialize, Serialize};
+</span><span class="kw">use </span>serdect::serde::{de, ser, Deserialize, Serialize};
 
 <span class="doccomment">/// secp256k1 curve point expressed in affine coordinates.
 ///
@@ -475,6 +517,13 @@
         ]),
         infinity: <span class="number">0</span>,
     };
+}
+
+<span class="kw">impl </span>AffinePoint {
+    <span class="doccomment">/// Create a new [`AffinePoint`] with the given coordinates.
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const fn </span>new(x: FieldElement, y: FieldElement) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ x, y, infinity: <span class="number">0 </span>}
+    }
 }
 
 <span class="kw">impl </span>PrimeCurveAffine <span class="kw">for </span>AffinePoint {
@@ -542,6 +591,34 @@
 
 <span class="kw">impl </span>Eq <span class="kw">for </span>AffinePoint {}
 
+<span class="kw">impl </span>Mul&lt;Scalar&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">type </span>Output = ProjectivePoint;
+
+    <span class="kw">fn </span>mul(<span class="self">self</span>, scalar: Scalar) -&gt; ProjectivePoint {
+        ProjectivePoint::from(<span class="self">self</span>) * scalar
+    }
+}
+
+<span class="kw">impl </span>Mul&lt;<span class="kw-2">&amp;</span>Scalar&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">type </span>Output = ProjectivePoint;
+
+    <span class="kw">fn </span>mul(<span class="self">self</span>, scalar: <span class="kw-2">&amp;</span>Scalar) -&gt; ProjectivePoint {
+        ProjectivePoint::from(<span class="self">self</span>) * scalar
+    }
+}
+
+<span class="kw">impl </span>Neg <span class="kw">for </span>AffinePoint {
+    <span class="kw">type </span>Output = AffinePoint;
+
+    <span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
+        AffinePoint {
+            x: <span class="self">self</span>.x,
+            y: <span class="self">self</span>.y.negate(<span class="number">1</span>).normalize_weak(),
+            infinity: <span class="self">self</span>.infinity,
+        }
+    }
+}
+
 <span class="kw">impl </span>DecompressPoint&lt;Secp256k1&gt; <span class="kw">for </span>AffinePoint {
     <span class="kw">fn </span>decompress(x_bytes: <span class="kw-2">&amp;</span>FieldBytes, y_is_odd: Choice) -&gt; CtOption&lt;<span class="self">Self</span>&gt; {
         FieldElement::from_bytes(x_bytes).and_then(|x| {
@@ -556,13 +633,18 @@
                     beta.is_odd().ct_eq(<span class="kw-2">&amp;</span>y_is_odd),
                 );
 
-                <span class="self">Self </span>{
-                    x,
-                    y: y.normalize(),
-                    infinity: <span class="number">0</span>,
-                }
+                <span class="self">Self</span>::new(x, y.normalize())
             })
         })
+    }
+}
+
+<span class="doccomment">/// Decompaction using Taproot conventions as described in [BIP 340].
+///
+/// [BIP 340]: https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki
+</span><span class="kw">impl </span>DecompactPoint&lt;Secp256k1&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">fn </span>decompact(x_bytes: <span class="kw-2">&amp;</span>FieldBytes) -&gt; CtOption&lt;<span class="self">Self</span>&gt; {
+        <span class="self">Self</span>::decompress(x_bytes, Choice::from(<span class="number">0</span>))
     }
 }
 
@@ -603,10 +685,7 @@
     </span><span class="kw">fn </span>from_encoded_point(encoded_point: <span class="kw-2">&amp;</span>EncodedPoint) -&gt; CtOption&lt;<span class="self">Self</span>&gt; {
         <span class="kw">match </span>encoded_point.coordinates() {
             sec1::Coordinates::Identity =&gt; CtOption::new(<span class="self">Self</span>::IDENTITY, <span class="number">1</span>.into()),
-            sec1::Coordinates::Compact { .. } =&gt; {
-                <span class="comment">// TODO(tarcieri): add decompaction support
-                </span>CtOption::new(<span class="self">Self</span>::default(), <span class="number">0</span>.into())
-            }
+            sec1::Coordinates::Compact { x } =&gt; <span class="self">Self</span>::decompact(x),
             sec1::Coordinates::Compressed { x, y_is_odd } =&gt; {
                 AffinePoint::decompress(x, Choice::from(y_is_odd <span class="kw">as </span>u8))
             }
@@ -619,7 +698,7 @@
                         <span class="comment">// Check that the point is on the curve
                         </span><span class="kw">let </span>lhs = (y * <span class="kw-2">&amp;</span>y).negate(<span class="number">1</span>);
                         <span class="kw">let </span>rhs = x * <span class="kw-2">&amp;</span>x * <span class="kw-2">&amp;</span>x + <span class="kw-2">&amp;</span>CURVE_EQUATION_B;
-                        <span class="kw">let </span>point = AffinePoint { x, y, infinity: <span class="number">0 </span>};
+                        <span class="kw">let </span>point = <span class="self">Self</span>::new(x, y);
                         CtOption::new(point, (lhs + <span class="kw-2">&amp;</span>rhs).normalizes_to_zero())
                     })
                 })
@@ -659,37 +738,42 @@
 }
 
 <span class="kw">impl </span>From&lt;AffinePoint&gt; <span class="kw">for </span>EncodedPoint {
-    <span class="doccomment">/// Returns the SEC1 compressed encoding of this point.
-    </span><span class="kw">fn </span>from(affine_point: AffinePoint) -&gt; EncodedPoint {
+    <span class="kw">fn </span>from(affine_point: AffinePoint) -&gt; EncodedPoint {
+        EncodedPoint::from(<span class="kw-2">&amp;</span>affine_point)
+    }
+}
+
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>AffinePoint&gt; <span class="kw">for </span>EncodedPoint {
+    <span class="kw">fn </span>from(affine_point: <span class="kw-2">&amp;</span>AffinePoint) -&gt; EncodedPoint {
         affine_point.to_encoded_point(<span class="bool-val">true</span>)
     }
 }
 
-<span class="kw">impl </span>Mul&lt;Scalar&gt; <span class="kw">for </span>AffinePoint {
-    <span class="kw">type </span>Output = ProjectivePoint;
-
-    <span class="kw">fn </span>mul(<span class="self">self</span>, scalar: Scalar) -&gt; ProjectivePoint {
-        ProjectivePoint::from(<span class="self">self</span>) * scalar
+<span class="kw">impl </span>From&lt;PublicKey&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">fn </span>from(public_key: PublicKey) -&gt; AffinePoint {
+        <span class="kw-2">*</span>public_key.as_affine()
     }
 }
 
-<span class="kw">impl </span>Mul&lt;<span class="kw-2">&amp;</span>Scalar&gt; <span class="kw">for </span>AffinePoint {
-    <span class="kw">type </span>Output = ProjectivePoint;
-
-    <span class="kw">fn </span>mul(<span class="self">self</span>, scalar: <span class="kw-2">&amp;</span>Scalar) -&gt; ProjectivePoint {
-        ProjectivePoint::from(<span class="self">self</span>) * scalar
+<span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>PublicKey&gt; <span class="kw">for </span>AffinePoint {
+    <span class="kw">fn </span>from(public_key: <span class="kw-2">&amp;</span>PublicKey) -&gt; AffinePoint {
+        AffinePoint::from(<span class="kw-2">*</span>public_key)
     }
 }
 
-<span class="kw">impl </span>Neg <span class="kw">for </span>AffinePoint {
-    <span class="kw">type </span>Output = AffinePoint;
+<span class="kw">impl </span>TryFrom&lt;AffinePoint&gt; <span class="kw">for </span>PublicKey {
+    <span class="kw">type </span>Error = Error;
 
-    <span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
-        AffinePoint {
-            x: <span class="self">self</span>.x,
-            y: <span class="self">self</span>.y.negate(<span class="number">1</span>).normalize_weak(),
-            infinity: <span class="self">self</span>.infinity,
-        }
+    <span class="kw">fn </span>try_from(affine_point: AffinePoint) -&gt; <span class="prelude-ty">Result</span>&lt;PublicKey&gt; {
+        PublicKey::from_affine(affine_point)
+    }
+}
+
+<span class="kw">impl </span>TryFrom&lt;<span class="kw-2">&amp;</span>AffinePoint&gt; <span class="kw">for </span>PublicKey {
+    <span class="kw">type </span>Error = Error;
+
+    <span class="kw">fn </span>try_from(affine_point: <span class="kw-2">&amp;</span>AffinePoint) -&gt; <span class="prelude-ty">Result</span>&lt;PublicKey&gt; {
+        PublicKey::try_from(<span class="kw-2">*</span>affine_point)
     }
 }
 

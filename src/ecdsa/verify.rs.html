@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.13.4/src/verify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>verify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ecdsa-0.14.8/src/verify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>verify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../ecdsa/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/media/8f1a9894/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -269,6 +269,61 @@
 <a href="#268" id="268">268</a>
 <a href="#269" id="269">269</a>
 <a href="#270" id="270">270</a>
+<a href="#271" id="271">271</a>
+<a href="#272" id="272">272</a>
+<a href="#273" id="273">273</a>
+<a href="#274" id="274">274</a>
+<a href="#275" id="275">275</a>
+<a href="#276" id="276">276</a>
+<a href="#277" id="277">277</a>
+<a href="#278" id="278">278</a>
+<a href="#279" id="279">279</a>
+<a href="#280" id="280">280</a>
+<a href="#281" id="281">281</a>
+<a href="#282" id="282">282</a>
+<a href="#283" id="283">283</a>
+<a href="#284" id="284">284</a>
+<a href="#285" id="285">285</a>
+<a href="#286" id="286">286</a>
+<a href="#287" id="287">287</a>
+<a href="#288" id="288">288</a>
+<a href="#289" id="289">289</a>
+<a href="#290" id="290">290</a>
+<a href="#291" id="291">291</a>
+<a href="#292" id="292">292</a>
+<a href="#293" id="293">293</a>
+<a href="#294" id="294">294</a>
+<a href="#295" id="295">295</a>
+<a href="#296" id="296">296</a>
+<a href="#297" id="297">297</a>
+<a href="#298" id="298">298</a>
+<a href="#299" id="299">299</a>
+<a href="#300" id="300">300</a>
+<a href="#301" id="301">301</a>
+<a href="#302" id="302">302</a>
+<a href="#303" id="303">303</a>
+<a href="#304" id="304">304</a>
+<a href="#305" id="305">305</a>
+<a href="#306" id="306">306</a>
+<a href="#307" id="307">307</a>
+<a href="#308" id="308">308</a>
+<a href="#309" id="309">309</a>
+<a href="#310" id="310">310</a>
+<a href="#311" id="311">311</a>
+<a href="#312" id="312">312</a>
+<a href="#313" id="313">313</a>
+<a href="#314" id="314">314</a>
+<a href="#315" id="315">315</a>
+<a href="#316" id="316">316</a>
+<a href="#317" id="317">317</a>
+<a href="#318" id="318">318</a>
+<a href="#319" id="319">319</a>
+<a href="#320" id="320">320</a>
+<a href="#321" id="321">321</a>
+<a href="#322" id="322">322</a>
+<a href="#323" id="323">323</a>
+<a href="#324" id="324">324</a>
+<a href="#325" id="325">325</a>
 </pre><pre class="rust"><code><span class="doccomment">//! ECDSA verification key.
 
 </span><span class="kw">use crate</span>::{
@@ -282,20 +337,24 @@
     sec1::{<span class="self">self</span>, EncodedPoint, FromEncodedPoint, ToEncodedPoint},
     AffinePoint, FieldSize, PointCompression, PrimeCurve, ProjectiveArithmetic, PublicKey, Scalar,
 };
-<span class="kw">use </span>signature::{digest::Digest, DigestVerifier, Verifier};
+<span class="kw">use </span>signature::{
+    digest::{Digest, FixedOutput},
+    hazmat::PrehashVerifier,
+    DigestVerifier, Verifier,
+};
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)]
-</span><span class="kw">use </span>elliptic_curve::{
-    pkcs8::{<span class="self">self</span>, DecodePublicKey},
-    AlgorithmParameters,
-};
+</span><span class="kw">use </span>elliptic_curve::pkcs8::{<span class="self">self</span>, AssociatedOid, DecodePublicKey};
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
+</span><span class="kw">use </span>elliptic_curve::pkcs8::EncodePublicKey;
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
 </span><span class="kw">use </span>core::str::FromStr;
 
 <span class="attr">#[cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))]
 #[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))))]
-</span><span class="kw">use </span>elliptic_curve::serde::{de, ser, Deserialize, Serialize};
+</span><span class="kw">use </span>serdect::serde::{de, ser, Deserialize, Serialize};
 
 <span class="doccomment">/// ECDSA verification key (i.e. public key). Generic over elliptic curves.
 ///
@@ -332,6 +391,16 @@
             .map_err(|<span class="kw">_</span>| Error::new())
     }
 
+    <span class="doccomment">/// Initialize [`VerifyingKey`] from an affine point.
+    ///
+    /// Returns an [`Error`] if the given affine point is the additive identity
+    /// (a.k.a. point at infinity).
+    </span><span class="kw">pub fn </span>from_affine(affine: AffinePoint&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            inner: PublicKey::from_affine(affine).map_err(|<span class="kw">_</span>| Error::new())<span class="question-mark">?</span>,
+        })
+    }
+
     <span class="doccomment">/// Initialize [`VerifyingKey`] from an [`EncodedPoint`].
     </span><span class="kw">pub fn </span>from_encoded_point(public_key: <span class="kw-2">&amp;</span>EncodedPoint&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
         Option::from(PublicKey::&lt;C&gt;::from_encoded_point(public_key))
@@ -344,6 +413,22 @@
     </span><span class="kw">pub fn </span>to_encoded_point(<span class="kw-2">&amp;</span><span class="self">self</span>, compress: bool) -&gt; EncodedPoint&lt;C&gt; {
         <span class="self">self</span>.inner.to_encoded_point(compress)
     }
+
+    <span class="doccomment">/// Borrow the inner [`AffinePoint`] for this public key.
+    </span><span class="kw">pub fn </span>as_affine(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>AffinePoint&lt;C&gt; {
+        <span class="self">self</span>.inner.as_affine()
+    }
+}
+
+<span class="kw">impl</span>&lt;C&gt; AsRef&lt;AffinePoint&lt;C&gt;&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
+<span class="kw">where
+    </span>C: PrimeCurve + ProjectiveArithmetic,
+    AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
+    FieldSize&lt;C&gt;: sec1::ModulusSize,
+{
+    <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>AffinePoint&lt;C&gt; {
+        <span class="self">self</span>.as_affine()
+    }
 }
 
 <span class="kw">impl</span>&lt;C&gt; Copy <span class="kw">for </span>VerifyingKey&lt;C&gt; <span class="kw">where </span>C: PrimeCurve + ProjectiveArithmetic {}
@@ -351,27 +436,39 @@
 <span class="kw">impl</span>&lt;C, D&gt; DigestVerifier&lt;D, Signature&lt;C&gt;&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
     </span>C: PrimeCurve + ProjectiveArithmetic,
-    D: Digest&lt;OutputSize = FieldSize&lt;C&gt;&gt;,
+    D: Digest + FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt;,
     AffinePoint&lt;C&gt;: VerifyPrimitive&lt;C&gt;,
     Scalar&lt;C&gt;: Reduce&lt;C::UInt&gt;,
     SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
 {
     <span class="kw">fn </span>verify_digest(<span class="kw-2">&amp;</span><span class="self">self</span>, msg_digest: D, signature: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
-        <span class="kw">let </span>scalar = Scalar::&lt;C&gt;::from_be_bytes_reduced(msg_digest.finalize());
-        <span class="self">self</span>.inner.as_affine().verify_prehashed(scalar, signature)
+        <span class="self">self</span>.inner.as_affine().verify_digest(msg_digest, signature)
+    }
+}
+
+<span class="kw">impl</span>&lt;C&gt; PrehashVerifier&lt;Signature&lt;C&gt;&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
+<span class="kw">where
+    </span>C: PrimeCurve + ProjectiveArithmetic + DigestPrimitive,
+    AffinePoint&lt;C&gt;: VerifyPrimitive&lt;C&gt;,
+    Scalar&lt;C&gt;: Reduce&lt;C::UInt&gt;,
+    SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
+{
+    <span class="kw">fn </span>verify_prehash(<span class="kw-2">&amp;</span><span class="self">self</span>, prehash: <span class="kw-2">&amp;</span>[u8], signature: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+        <span class="kw">let </span>prehash = C::prehash_to_field_bytes(prehash)<span class="question-mark">?</span>;
+        <span class="self">self</span>.inner.as_affine().verify_prehashed(prehash, signature)
     }
 }
 
 <span class="kw">impl</span>&lt;C&gt; Verifier&lt;Signature&lt;C&gt;&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
     </span>C: PrimeCurve + ProjectiveArithmetic + DigestPrimitive,
-    C::Digest: Digest&lt;OutputSize = FieldSize&lt;C&gt;&gt;,
+    C::Digest: FixedOutput&lt;OutputSize = FieldSize&lt;C&gt;&gt;,
     AffinePoint&lt;C&gt;: VerifyPrimitive&lt;C&gt;,
     Scalar&lt;C&gt;: Reduce&lt;C::UInt&gt;,
     SignatureSize&lt;C&gt;: ArrayLength&lt;u8&gt;,
 {
     <span class="kw">fn </span>verify(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: <span class="kw-2">&amp;</span>[u8], signature: <span class="kw-2">&amp;</span>Signature&lt;C&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
-        <span class="self">self</span>.verify_digest(C::Digest::new().chain(msg), signature)
+        <span class="self">self</span>.verify_digest(C::Digest::new_with_prefix(msg), signature)
     }
 }
 
@@ -472,7 +569,7 @@
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)))]
 </span><span class="kw">impl</span>&lt;C&gt; TryFrom&lt;pkcs8::SubjectPublicKeyInfo&lt;<span class="lifetime">&#39;_</span>&gt;&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + AlgorithmParameters + ProjectiveArithmetic + PointCompression,
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
     AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
     FieldSize&lt;C&gt;: sec1::ModulusSize,
 {
@@ -487,7 +584,7 @@
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pkcs8&quot;</span>)))]
 </span><span class="kw">impl</span>&lt;C&gt; DecodePublicKey <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + AlgorithmParameters + ProjectiveArithmetic + PointCompression,
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
     AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
     FieldSize&lt;C&gt;: sec1::ModulusSize,
 {
@@ -495,9 +592,22 @@
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
 #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pem&quot;</span>)))]
+</span><span class="kw">impl</span>&lt;C&gt; EncodePublicKey <span class="kw">for </span>VerifyingKey&lt;C&gt;
+<span class="kw">where
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
+    AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
+    FieldSize&lt;C&gt;: sec1::ModulusSize,
+{
+    <span class="kw">fn </span>to_public_key_der(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; pkcs8::spki::Result&lt;pkcs8::Document&gt; {
+        <span class="self">self</span>.inner.to_public_key_der()
+    }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;pem&quot;</span>)]
+#[cfg_attr(docsrs, doc(cfg(feature = <span class="string">&quot;pem&quot;</span>)))]
 </span><span class="kw">impl</span>&lt;C&gt; FromStr <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + AlgorithmParameters + ProjectiveArithmetic + PointCompression,
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
     AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
     FieldSize&lt;C&gt;: sec1::ModulusSize,
 {
@@ -512,7 +622,7 @@
 #[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))))]
 </span><span class="kw">impl</span>&lt;C&gt; Serialize <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + AlgorithmParameters + ProjectiveArithmetic + PointCompression,
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
     AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
     FieldSize&lt;C&gt;: sec1::ModulusSize,
 {
@@ -528,7 +638,7 @@
 #[cfg_attr(docsrs, doc(cfg(all(feature = <span class="string">&quot;pem&quot;</span>, feature = <span class="string">&quot;serde&quot;</span>))))]
 </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, C&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>VerifyingKey&lt;C&gt;
 <span class="kw">where
-    </span>C: PrimeCurve + AlgorithmParameters + ProjectiveArithmetic + PointCompression,
+    </span>C: PrimeCurve + AssociatedOid + ProjectiveArithmetic + PointCompression,
     AffinePoint&lt;C&gt;: FromEncodedPoint&lt;C&gt; + ToEncodedPoint&lt;C&gt;,
     FieldSize&lt;C&gt;: sec1::ModulusSize,
 {

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/import_entry.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_entry.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/import_entry.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>import_entry.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -354,15 +354,17 @@
 <a href="#354" id="354">354</a>
 <a href="#355" id="355">355</a>
 <a href="#356" id="356">356</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::string::String;
-<span class="kw">use </span><span class="kw">crate</span>::io;
-<span class="kw">use super</span>::{
-	Deserialize, Serialize, Error, VarUint7, VarInt7, VarUint32, VarUint1, Uint8,
-	ValueType, TableElementType
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+</pre><pre class="rust"><code><span class="kw">use super</span>::{
+	Deserialize, Error, Serialize, TableElementType, Uint8, ValueType, VarInt7, VarUint1,
+	VarUint32, VarUint7,
 };
+<span class="kw">use </span><span class="kw">crate</span>::io;
+<span class="kw">use </span>alloc::string::String;
 
 <span class="kw">const </span>FLAG_HAS_MAX: u8 = <span class="number">0x01</span>;
-<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 </span><span class="kw">const </span>FLAG_SHARED: u8 = <span class="number">0x02</span>;
 
 <span class="doccomment">/// Global definition struct
@@ -375,17 +377,18 @@
 <span class="kw">impl </span>GlobalType {
 	<span class="doccomment">/// New global type
 	</span><span class="kw">pub fn </span>new(content_type: ValueType, is_mutable: bool) -&gt; <span class="self">Self </span>{
-		GlobalType {
-			content_type: content_type,
-			is_mutable: is_mutable,
-		}
+		GlobalType { content_type, is_mutable }
 	}
 
 	<span class="doccomment">/// Type of the global entry
-	</span><span class="kw">pub fn </span>content_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ValueType { <span class="self">self</span>.content_type }
+	</span><span class="kw">pub fn </span>content_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ValueType {
+		<span class="self">self</span>.content_type
+	}
 
 	<span class="doccomment">/// Is global entry is declared as mutable
-	</span><span class="kw">pub fn </span>is_mutable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool { <span class="self">self</span>.is_mutable }
+	</span><span class="kw">pub fn </span>is_mutable(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+		<span class="self">self</span>.is_mutable
+	}
 }
 
 <span class="kw">impl </span>Deserialize <span class="kw">for </span>GlobalType {
@@ -394,10 +397,7 @@
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span>content_type = ValueType::deserialize(reader)<span class="question-mark">?</span>;
 		<span class="kw">let </span>is_mutable = VarUint1::deserialize(reader)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(GlobalType {
-			content_type: content_type,
-			is_mutable: is_mutable.into(),
-		})
+		<span class="prelude-val">Ok</span>(GlobalType { content_type, is_mutable: is_mutable.into() })
 	}
 }
 
@@ -421,17 +421,18 @@
 <span class="kw">impl </span>TableType {
 	<span class="doccomment">/// New table definition
 	</span><span class="kw">pub fn </span>new(min: u32, max: <span class="prelude-ty">Option</span>&lt;u32&gt;) -&gt; <span class="self">Self </span>{
-		TableType {
-			elem_type: TableElementType::AnyFunc,
-			limits: ResizableLimits::new(min, max),
-		}
+		TableType { elem_type: TableElementType::AnyFunc, limits: ResizableLimits::new(min, max) }
 	}
 
 	<span class="doccomment">/// Table memory specification
-	</span><span class="kw">pub fn </span>limits(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ResizableLimits { <span class="kw-2">&amp;</span><span class="self">self</span>.limits }
+	</span><span class="kw">pub fn </span>limits(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ResizableLimits {
+		<span class="kw-2">&amp;</span><span class="self">self</span>.limits
+	}
 
 	<span class="doccomment">/// Table element type
-	</span><span class="kw">pub fn </span>elem_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TableElementType { <span class="self">self</span>.elem_type }
+	</span><span class="kw">pub fn </span>elem_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; TableElementType {
+		<span class="self">self</span>.elem_type
+	}
 }
 
 <span class="kw">impl </span>Deserialize <span class="kw">for </span>TableType {
@@ -440,10 +441,7 @@
 	<span class="kw">fn </span>deserialize&lt;R: io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
 		<span class="kw">let </span>elem_type = TableElementType::deserialize(reader)<span class="question-mark">?</span>;
 		<span class="kw">let </span>limits = ResizableLimits::deserialize(reader)<span class="question-mark">?</span>;
-		<span class="prelude-val">Ok</span>(TableType {
-			elem_type: elem_type,
-			limits: limits,
-		})
+		<span class="prelude-val">Ok</span>(TableType { elem_type, limits })
 	}
 }
 
@@ -476,13 +474,19 @@
 		}
 	}
 	<span class="doccomment">/// Initial size.
-	</span><span class="kw">pub fn </span>initial(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 { <span class="self">self</span>.initial }
+	</span><span class="kw">pub fn </span>initial(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
+		<span class="self">self</span>.initial
+	}
 	<span class="doccomment">/// Maximum size.
-	</span><span class="kw">pub fn </span>maximum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; { <span class="self">self</span>.maximum }
+	</span><span class="kw">pub fn </span>maximum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u32&gt; {
+		<span class="self">self</span>.maximum
+	}
 
 	<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 	</span><span class="doccomment">/// Whether or not this is a shared array buffer.
-	</span><span class="kw">pub fn </span>shared(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool { <span class="self">self</span>.shared }
+	</span><span class="kw">pub fn </span>shared(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+		<span class="self">self</span>.shared
+	}
 }
 
 <span class="kw">impl </span>Deserialize <span class="kw">for </span>ResizableLimits {
@@ -496,7 +500,7 @@
 
 			<span class="comment">// Atomics proposal introduce FLAG_SHARED (0x02). Shared memories can be used only
 			// together with FLAG_HAS_MAX (0x01), hence 0x03.
-			</span><span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+			</span><span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 			</span><span class="number">0x03 </span>=&gt; {},
 
 			<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::InvalidLimitsFlags(flags)),
@@ -511,9 +515,9 @@
 
 		<span class="prelude-val">Ok</span>(ResizableLimits {
 			initial: initial.into(),
-			maximum: maximum,
+			maximum,
 
-			<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+			<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 			</span>shared: flags &amp; FLAG_SHARED != <span class="number">0</span>,
 		})
 	}
@@ -528,7 +532,7 @@
 			flags |= FLAG_HAS_MAX;
 		}
 
-		<span class="attr">#[cfg(feature=<span class="string">&quot;atomics&quot;</span>)]
+		<span class="attr">#[cfg(feature = <span class="string">&quot;atomics&quot;</span>)]
 		</span>{
 			<span class="comment">// If the atomics feature is enabled and if the shared flag is set, add logically
 			// it to the flags.
@@ -655,15 +659,13 @@
 <span class="kw">impl </span>ImportEntry {
 	<span class="doccomment">/// New import entry.
 	</span><span class="kw">pub fn </span>new(module_str: String, field_str: String, external: External) -&gt; <span class="self">Self </span>{
-		ImportEntry {
-			module_str: module_str,
-			field_str: field_str,
-			external: external,
-		}
+		ImportEntry { module_str, field_str, external }
 	}
 
 	<span class="doccomment">/// Module reference of the import entry.
-	</span><span class="kw">pub fn </span>module(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str { <span class="kw-2">&amp;</span><span class="self">self</span>.module_str }
+	</span><span class="kw">pub fn </span>module(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+		<span class="kw-2">&amp;</span><span class="self">self</span>.module_str
+	}
 
 	<span class="doccomment">/// Module reference of the import entry (mutable).
 	</span><span class="kw">pub fn </span>module_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>String {
@@ -671,7 +673,9 @@
 	}
 
 	<span class="doccomment">/// Field reference of the import entry.
-	</span><span class="kw">pub fn </span>field(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str { <span class="kw-2">&amp;</span><span class="self">self</span>.field_str }
+	</span><span class="kw">pub fn </span>field(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+		<span class="kw-2">&amp;</span><span class="self">self</span>.field_str
+	}
 
 	<span class="doccomment">/// Field reference of the import entry (mutable)
 	</span><span class="kw">pub fn </span>field_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>String {
@@ -679,10 +683,14 @@
 	}
 
 	<span class="doccomment">/// Local binidng of the import entry.
-	</span><span class="kw">pub fn </span>external(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>External { <span class="kw-2">&amp;</span><span class="self">self</span>.external }
+	</span><span class="kw">pub fn </span>external(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>External {
+		<span class="kw-2">&amp;</span><span class="self">self</span>.external
+	}
 
 	<span class="doccomment">/// Local binidng of the import entry (mutable)
-	</span><span class="kw">pub fn </span>external_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>External { <span class="kw-2">&amp;mut </span><span class="self">self</span>.external }
+	</span><span class="kw">pub fn </span>external_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>External {
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>.external
+	}
 }
 
 <span class="kw">impl </span>Deserialize <span class="kw">for </span>ImportEntry {
@@ -693,11 +701,7 @@
 		<span class="kw">let </span>field_str = String::deserialize(reader)<span class="question-mark">?</span>;
 		<span class="kw">let </span>external = External::deserialize(reader)<span class="question-mark">?</span>;
 
-		<span class="prelude-val">Ok</span>(ImportEntry {
-			module_str: module_str,
-			field_str: field_str,
-			external: external,
-		})
+		<span class="prelude-val">Ok</span>(ImportEntry { module_str, field_str, external })
 	}
 }
 

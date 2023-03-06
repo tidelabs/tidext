@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/io/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_io/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/io/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_io/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1965,48 +1965,9 @@
 <a href="#1965" id="1965">1965</a>
 <a href="#1966" id="1966">1966</a>
 <a href="#1967" id="1967">1967</a>
-<a href="#1968" id="1968">1968</a>
-<a href="#1969" id="1969">1969</a>
-<a href="#1970" id="1970">1970</a>
-<a href="#1971" id="1971">1971</a>
-<a href="#1972" id="1972">1972</a>
-<a href="#1973" id="1973">1973</a>
-<a href="#1974" id="1974">1974</a>
-<a href="#1975" id="1975">1975</a>
-<a href="#1976" id="1976">1976</a>
-<a href="#1977" id="1977">1977</a>
-<a href="#1978" id="1978">1978</a>
-<a href="#1979" id="1979">1979</a>
-<a href="#1980" id="1980">1980</a>
-<a href="#1981" id="1981">1981</a>
-<a href="#1982" id="1982">1982</a>
-<a href="#1983" id="1983">1983</a>
-<a href="#1984" id="1984">1984</a>
-<a href="#1985" id="1985">1985</a>
-<a href="#1986" id="1986">1986</a>
-<a href="#1987" id="1987">1987</a>
-<a href="#1988" id="1988">1988</a>
-<a href="#1989" id="1989">1989</a>
-<a href="#1990" id="1990">1990</a>
-<a href="#1991" id="1991">1991</a>
-<a href="#1992" id="1992">1992</a>
-<a href="#1993" id="1993">1993</a>
-<a href="#1994" id="1994">1994</a>
-<a href="#1995" id="1995">1995</a>
-<a href="#1996" id="1996">1996</a>
-<a href="#1997" id="1997">1997</a>
-<a href="#1998" id="1998">1998</a>
-<a href="#1999" id="1999">1999</a>
-<a href="#2000" id="2000">2000</a>
-<a href="#2001" id="2001">2001</a>
-<a href="#2002" id="2002">2002</a>
-<a href="#2003" id="2003">2003</a>
-<a href="#2004" id="2004">2004</a>
-<a href="#2005" id="2005">2005</a>
-<a href="#2006" id="2006">2006</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -2046,7 +2007,7 @@
 	hexdisplay::HexDisplay,
 	offchain::{OffchainDbExt, OffchainWorkerExt, TransactionPoolExt},
 	storage::ChildInfo,
-	traits::{RuntimeSpawnExt, TaskExecutorExt},
+	traits::TaskExecutorExt,
 };
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>sp_keystore::{KeystoreExt, SyncCryptoStore};
@@ -2131,8 +2092,8 @@
 </span><span class="attr">#[runtime_interface]
 </span><span class="kw">pub trait </span>Storage {
 	<span class="doccomment">/// Returns the data for `key` in the storage or `None` if the key can not be found.
-	</span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;u8&gt;&gt; {
-		<span class="self">self</span>.storage(key).map(|s| s.to_vec())
+	</span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Option</span>&lt;bytes::Bytes&gt; {
+		<span class="self">self</span>.storage(key).map(|s| bytes::Bytes::from(s.to_vec()))
 	}
 
 	<span class="doccomment">/// Get `key` from storage, placing the value into `value_out` and return the number of
@@ -2704,6 +2665,34 @@
 	}
 }
 
+<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="macro">sp_externalities::decl_extension! </span>{
+	<span class="doccomment">/// Extension to signal to [`crypt::ed25519_verify`] to use the dalek crate.
+	///
+	/// The switch from `ed25519-dalek` to `ed25519-zebra` was a breaking change.
+	/// `ed25519-zebra` is more permissive when it comes to the verification of signatures.
+	/// This means that some chains may fail to sync from genesis when using `ed25519-zebra`.
+	/// So, this extension can be registered to the runtime execution environment to signal
+	/// that `ed25519-dalek` should be used for verification. The extension can be registered
+	/// in the following way:
+	///
+	/// ```nocompile
+	/// client.execution_extensions().set_extensions_factory(
+	/// 	// Let the `UseDalekExt` extension being registered for each runtime invocation
+	/// 	// until the execution happens in the context of block `1000`.
+	/// 	sc_client_api::execution_extensions::ExtensionBeforeBlock::&lt;Block, UseDalekExt&gt;::new(1000)
+	/// );
+	/// ```
+	</span><span class="kw">pub struct </span>UseDalekExt;
+}
+
+<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">impl </span>Default <span class="kw">for </span>UseDalekExt {
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self
+	</span>}
+}
+
 <span class="doccomment">/// Interfaces for working with crypto related types from within the runtime.
 </span><span class="attr">#[runtime_interface]
 </span><span class="kw">pub trait </span>Crypto {
@@ -2753,13 +2742,32 @@
 	///
 	/// Returns `true` when the verification was successful.
 	</span><span class="kw">fn </span>ed25519_verify(sig: <span class="kw-2">&amp;</span>ed25519::Signature, msg: <span class="kw-2">&amp;</span>[u8], pub_key: <span class="kw-2">&amp;</span>ed25519::Public) -&gt; bool {
-		ed25519::Pair::verify(sig, msg, pub_key)
+		<span class="comment">// We don&#39;t want to force everyone needing to call the function in an externalities context.
+		// So, we assume that we should not use dalek when we are not in externalities context.
+		// Otherwise, we check if the extension is present.
+		</span><span class="kw">if </span>sp_externalities::with_externalities(|<span class="kw-2">mut </span>e| e.extension::&lt;UseDalekExt&gt;().is_some())
+			.unwrap_or_default()
+		{
+			<span class="kw">use </span>ed25519_dalek::Verifier;
+
+			<span class="kw">let </span><span class="prelude-val">Ok</span>(public_key) = ed25519_dalek::PublicKey::from_bytes(<span class="kw-2">&amp;</span>pub_key.<span class="number">0</span>) <span class="kw">else </span>{
+				<span class="kw">return </span><span class="bool-val">false
+			</span>};
+
+			<span class="kw">let </span><span class="prelude-val">Ok</span>(sig) = ed25519_dalek::Signature::from_bytes(<span class="kw-2">&amp;</span>sig.<span class="number">0</span>) <span class="kw">else </span>{
+				<span class="kw">return </span><span class="bool-val">false
+			</span>};
+
+			public_key.verify(msg, <span class="kw-2">&amp;</span>sig).is_ok()
+		} <span class="kw">else </span>{
+			ed25519::Pair::verify(sig, msg, pub_key)
+		}
 	}
 
 	<span class="doccomment">/// Register a `ed25519` signature for batch verification.
 	///
 	/// Batch verification must be enabled by calling [`start_batch_verify`].
-	/// If batch verification is not enabled, the signature will be verified immediatley.
+	/// If batch verification is not enabled, the signature will be verified immediately.
 	/// To get the result of the batch verification, [`finish_batch_verify`]
 	/// needs to be called.
 	///
@@ -2786,7 +2794,7 @@
 	<span class="doccomment">/// Register a `sr25519` signature for batch verification.
 	///
 	/// Batch verification must be enabled by calling [`start_batch_verify`].
-	/// If batch verification is not enabled, the signature will be verified immediatley.
+	/// If batch verification is not enabled, the signature will be verified immediately.
 	/// To get the result of the batch verification, [`finish_batch_verify`]
 	/// needs to be called.
 	///
@@ -3570,131 +3578,6 @@
 
 <span class="kw">pub use </span>tracing_setup::init_tracing;
 
-<span class="doccomment">/// Wasm-only interface that provides functions for interacting with the sandbox.
-</span><span class="attr">#[runtime_interface(wasm_only)]
-</span><span class="kw">pub trait </span>Sandbox {
-	<span class="doccomment">/// Instantiate a new sandbox instance with the given `wasm_code`.
-	</span><span class="kw">fn </span>instantiate(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		dispatch_thunk: u32,
-		wasm_code: <span class="kw-2">&amp;</span>[u8],
-		env_def: <span class="kw-2">&amp;</span>[u8],
-		state_ptr: Pointer&lt;u8&gt;,
-	) -&gt; u32 {
-		<span class="self">self</span>.sandbox()
-			.instance_new(dispatch_thunk, wasm_code, env_def, state_ptr.into())
-			.expect(<span class="string">&quot;Failed to instantiate a new sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Invoke `function` in the sandbox with `sandbox_idx`.
-	</span><span class="kw">fn </span>invoke(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		instance_idx: u32,
-		function: <span class="kw-2">&amp;</span>str,
-		args: <span class="kw-2">&amp;</span>[u8],
-		return_val_ptr: Pointer&lt;u8&gt;,
-		return_val_len: u32,
-		state_ptr: Pointer&lt;u8&gt;,
-	) -&gt; u32 {
-		<span class="self">self</span>.sandbox()
-			.invoke(instance_idx, function, args, return_val_ptr, return_val_len, state_ptr.into())
-			.expect(<span class="string">&quot;Failed to invoke function with sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Create a new memory instance with the given `initial` and `maximum` size.
-	</span><span class="kw">fn </span>memory_new(<span class="kw-2">&amp;mut </span><span class="self">self</span>, initial: u32, maximum: u32) -&gt; u32 {
-		<span class="self">self</span>.sandbox()
-			.memory_new(initial, maximum)
-			.expect(<span class="string">&quot;Failed to create new memory with sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Get the memory starting at `offset` from the instance with `memory_idx` into the buffer.
-	</span><span class="kw">fn </span>memory_get(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		memory_idx: u32,
-		offset: u32,
-		buf_ptr: Pointer&lt;u8&gt;,
-		buf_len: u32,
-	) -&gt; u32 {
-		<span class="self">self</span>.sandbox()
-			.memory_get(memory_idx, offset, buf_ptr, buf_len)
-			.expect(<span class="string">&quot;Failed to get memory with sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Set the memory in the given `memory_idx` to the given value at `offset`.
-	</span><span class="kw">fn </span>memory_set(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		memory_idx: u32,
-		offset: u32,
-		val_ptr: Pointer&lt;u8&gt;,
-		val_len: u32,
-	) -&gt; u32 {
-		<span class="self">self</span>.sandbox()
-			.memory_set(memory_idx, offset, val_ptr, val_len)
-			.expect(<span class="string">&quot;Failed to set memory with sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Teardown the memory instance with the given `memory_idx`.
-	</span><span class="kw">fn </span>memory_teardown(<span class="kw-2">&amp;mut </span><span class="self">self</span>, memory_idx: u32) {
-		<span class="self">self</span>.sandbox()
-			.memory_teardown(memory_idx)
-			.expect(<span class="string">&quot;Failed to teardown memory with sandbox&quot;</span>)
-	}
-
-	<span class="doccomment">/// Teardown the sandbox instance with the given `instance_idx`.
-	</span><span class="kw">fn </span>instance_teardown(<span class="kw-2">&amp;mut </span><span class="self">self</span>, instance_idx: u32) {
-		<span class="self">self</span>.sandbox()
-			.instance_teardown(instance_idx)
-			.expect(<span class="string">&quot;Failed to teardown sandbox instance&quot;</span>)
-	}
-
-	<span class="doccomment">/// Get the value from a global with the given `name`. The sandbox is determined by the given
-	/// `instance_idx`.
-	///
-	/// Returns `Some(_)` when the requested global variable could be found.
-	</span><span class="kw">fn </span>get_global_val(
-		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
-		instance_idx: u32,
-		name: <span class="kw-2">&amp;</span>str,
-	) -&gt; <span class="prelude-ty">Option</span>&lt;sp_wasm_interface::Value&gt; {
-		<span class="self">self</span>.sandbox()
-			.get_global_val(instance_idx, name)
-			.expect(<span class="string">&quot;Failed to get global from sandbox&quot;</span>)
-	}
-}
-
-<span class="doccomment">/// Wasm host functions for managing tasks.
-///
-/// This should not be used directly. Use `sp_tasks` for running parallel tasks instead.
-</span><span class="attr">#[runtime_interface(wasm_only)]
-</span><span class="kw">pub trait </span>RuntimeTasks {
-	<span class="doccomment">/// Wasm host function for spawning task.
-	///
-	/// This should not be used directly. Use `sp_tasks::spawn` instead.
-	</span><span class="kw">fn </span>spawn(dispatcher_ref: u32, entry: u32, payload: Vec&lt;u8&gt;) -&gt; u64 {
-		sp_externalities::with_externalities(|<span class="kw-2">mut </span>ext| {
-			<span class="kw">let </span>runtime_spawn = ext
-				.extension::&lt;RuntimeSpawnExt&gt;()
-				.expect(<span class="string">&quot;Cannot spawn without dynamic runtime dispatcher (RuntimeSpawnExt)&quot;</span>);
-			runtime_spawn.spawn_call(dispatcher_ref, entry, payload)
-		})
-		.expect(<span class="string">&quot;`RuntimeTasks::spawn`: called outside of externalities context&quot;</span>)
-	}
-
-	<span class="doccomment">/// Wasm host function for joining a task.
-	///
-	/// This should not be used directly. Use `join` of `sp_tasks::spawn` result instead.
-	</span><span class="kw">fn </span>join(handle: u64) -&gt; Vec&lt;u8&gt; {
-		sp_externalities::with_externalities(|<span class="kw-2">mut </span>ext| {
-			<span class="kw">let </span>runtime_spawn = ext
-				.extension::&lt;RuntimeSpawnExt&gt;()
-				.expect(<span class="string">&quot;Cannot join without dynamic runtime dispatcher (RuntimeSpawnExt)&quot;</span>);
-			runtime_spawn.join(handle)
-		})
-		.expect(<span class="string">&quot;`RuntimeTasks::join`: called outside of externalities context&quot;</span>)
-	}
-}
-
 <span class="doccomment">/// Allocator used by Substrate when executing the Wasm runtime.
 </span><span class="attr">#[cfg(all(target_arch = <span class="string">&quot;wasm32&quot;</span>, not(feature = <span class="string">&quot;std&quot;</span>)))]
 </span><span class="kw">struct </span>WasmAllocator;
@@ -3770,10 +3653,8 @@
 	allocator::HostFunctions,
 	panic_handler::HostFunctions,
 	logging::HostFunctions,
-	sandbox::HostFunctions,
 	<span class="kw">crate</span>::trie::HostFunctions,
 	offchain_index::HostFunctions,
-	runtime_tasks::HostFunctions,
 	transaction_index::HostFunctions,
 );
 
@@ -3793,7 +3674,7 @@
 		t.execute_with(|| {
 			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;hello&quot;</span>), <span class="prelude-val">None</span>);
 			storage::set(<span class="string">b&quot;hello&quot;</span>, <span class="string">b&quot;world&quot;</span>);
-			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;hello&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">b&quot;world&quot;</span>.to_vec()));
+			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;hello&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">b&quot;world&quot;</span>.to_vec().into()));
 			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;foo&quot;</span>), <span class="prelude-val">None</span>);
 			storage::set(<span class="string">b&quot;foo&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>][..]);
 		});
@@ -3805,7 +3686,7 @@
 
 		t.execute_with(|| {
 			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;hello&quot;</span>), <span class="prelude-val">None</span>);
-			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;foo&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">b&quot;bar&quot;</span>.to_vec()));
+			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;foo&quot;</span>), <span class="prelude-val">Some</span>(<span class="string">b&quot;bar&quot;</span>.to_vec().into()));
 		});
 
 		<span class="kw">let </span>value = <span class="macro">vec!</span>[<span class="number">7u8</span>; <span class="number">35</span>];
@@ -3815,7 +3696,7 @@
 
 		t.execute_with(|| {
 			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;hello&quot;</span>), <span class="prelude-val">None</span>);
-			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;foo00&quot;</span>), <span class="prelude-val">Some</span>(value.clone()));
+			<span class="macro">assert_eq!</span>(storage::get(<span class="string">b&quot;foo00&quot;</span>), <span class="prelude-val">Some</span>(value.clone().into()));
 		});
 	}
 
@@ -3901,6 +3782,7 @@
 		ext.register_extension(TaskExecutorExt::new(TaskExecutor::new()));
 		ext.execute_with(|| {
 			<span class="kw">let </span>pair = sr25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
+			<span class="kw">let </span>pair_unused = sr25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
 			crypto::start_batch_verify();
 			<span class="kw">for </span>it <span class="kw">in </span><span class="number">0</span>..<span class="number">70 </span>{
 				<span class="kw">let </span>msg = <span class="macro">format!</span>(<span class="string">&quot;Schnorrkel {}!&quot;</span>, it);
@@ -3908,8 +3790,10 @@
 				crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg.as_bytes(), <span class="kw-2">&amp;</span>pair.public());
 			}
 
-			<span class="comment">// push invlaid
-			</span>crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>zero_sr_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_sr_pub());
+			<span class="comment">// push invalid
+			</span><span class="kw">let </span>msg = <span class="string">b&quot;asdf!&quot;</span>;
+			<span class="kw">let </span>signature = pair.sign(msg);
+			crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair_unused.public());
 			<span class="macro">assert!</span>(!crypto::finish_batch_verify());
 
 			crypto::start_batch_verify();
@@ -3944,10 +3828,10 @@
 		ext.register_extension(TaskExecutorExt::new(TaskExecutor::new()));
 
 		ext.execute_with(|| {
-			<span class="comment">// invalid ed25519 signature
+			<span class="comment">// valid ed25519 signature
 			</span>crypto::start_batch_verify();
 			crypto::ed25519_batch_verify(<span class="kw-2">&amp;</span>zero_ed_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_ed_pub());
-			<span class="macro">assert!</span>(!crypto::finish_batch_verify());
+			<span class="macro">assert!</span>(crypto::finish_batch_verify());
 
 			<span class="comment">// 2 valid ed25519 signatures
 			</span>crypto::start_batch_verify();
@@ -3967,12 +3851,14 @@
 			<span class="comment">// 1 valid, 1 invalid ed25519 signature
 			</span>crypto::start_batch_verify();
 
-			<span class="kw">let </span>pair = ed25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
+			<span class="kw">let </span>pair1 = ed25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
+			<span class="kw">let </span>pair2 = ed25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
 			<span class="kw">let </span>msg = <span class="string">b&quot;Important message&quot;</span>;
-			<span class="kw">let </span>signature = pair.sign(msg);
-			crypto::ed25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair.public());
+			<span class="kw">let </span>signature = pair1.sign(msg);
 
 			crypto::ed25519_batch_verify(<span class="kw-2">&amp;</span>zero_ed_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_ed_pub());
+			crypto::ed25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair1.public());
+			crypto::ed25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair2.public());
 
 			<span class="macro">assert!</span>(!crypto::finish_batch_verify());
 
@@ -3999,14 +3885,50 @@
 			<span class="comment">// 1 valid sr25519, 1 invalid sr25519
 			</span>crypto::start_batch_verify();
 
-			<span class="kw">let </span>pair = sr25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
+			<span class="kw">let </span>pair1 = sr25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
+			<span class="kw">let </span>pair2 = sr25519::Pair::generate_with_phrase(<span class="prelude-val">None</span>).<span class="number">0</span>;
 			<span class="kw">let </span>msg = <span class="string">b&quot;Schnorrkcel!&quot;</span>;
-			<span class="kw">let </span>signature = pair.sign(msg);
-			crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair.public());
+			<span class="kw">let </span>signature = pair1.sign(msg);
 
+			crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair1.public());
+			crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>signature, msg, <span class="kw-2">&amp;</span>pair2.public());
 			crypto::sr25519_batch_verify(<span class="kw-2">&amp;</span>zero_sr_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_sr_pub());
 
 			<span class="macro">assert!</span>(!crypto::finish_batch_verify());
+		});
+	}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>use_dalek_ext_works() {
+		<span class="kw">let </span><span class="kw-2">mut </span>ext = BasicExternalities::default();
+		ext.register_extension(UseDalekExt::default());
+
+		<span class="comment">// With dalek the zero signature should fail to verify.
+		</span>ext.execute_with(|| {
+			<span class="macro">assert!</span>(!crypto::ed25519_verify(<span class="kw-2">&amp;</span>zero_ed_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_ed_pub()));
+		});
+
+		<span class="comment">// But with zebra it should work.
+		</span>BasicExternalities::default().execute_with(|| {
+			<span class="macro">assert!</span>(crypto::ed25519_verify(<span class="kw-2">&amp;</span>zero_ed_sig(), <span class="kw-2">&amp;</span>Vec::new(), <span class="kw-2">&amp;</span>zero_ed_pub()));
+		})
+	}
+
+	<span class="attr">#[test]
+	</span><span class="kw">fn </span>dalek_should_not_panic_on_invalid_signature() {
+		<span class="kw">let </span><span class="kw-2">mut </span>ext = BasicExternalities::default();
+		ext.register_extension(UseDalekExt::default());
+
+		ext.execute_with(|| {
+			<span class="kw">let </span><span class="kw-2">mut </span>bytes = [<span class="number">0u8</span>; <span class="number">64</span>];
+			<span class="comment">// Make it invalid
+			</span>bytes[<span class="number">63</span>] = <span class="number">0b1110_0000</span>;
+
+			<span class="macro">assert!</span>(!crypto::ed25519_verify(
+				<span class="kw-2">&amp;</span>ed25519::Signature::from_raw(bytes),
+				<span class="kw-2">&amp;</span>Vec::new(),
+				<span class="kw-2">&amp;</span>zero_ed_pub()
+			));
 		});
 	}
 }

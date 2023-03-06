@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["fixed_point",""],["per_things",""]]};
+window.SIDEBAR_ITEMS = {"enum":[["ArithmeticError",""]],"mod":[["fixed_point",""],["per_things",""]]};

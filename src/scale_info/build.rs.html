@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-info-2.2.0/src/build.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>build.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../scale_info/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/scale-info-2.3.1/src/build.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>build.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../scale_info/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -590,6 +590,126 @@
 <a href="#590" id="590">590</a>
 <a href="#591" id="591">591</a>
 <a href="#592" id="592">592</a>
+<a href="#593" id="593">593</a>
+<a href="#594" id="594">594</a>
+<a href="#595" id="595">595</a>
+<a href="#596" id="596">596</a>
+<a href="#597" id="597">597</a>
+<a href="#598" id="598">598</a>
+<a href="#599" id="599">599</a>
+<a href="#600" id="600">600</a>
+<a href="#601" id="601">601</a>
+<a href="#602" id="602">602</a>
+<a href="#603" id="603">603</a>
+<a href="#604" id="604">604</a>
+<a href="#605" id="605">605</a>
+<a href="#606" id="606">606</a>
+<a href="#607" id="607">607</a>
+<a href="#608" id="608">608</a>
+<a href="#609" id="609">609</a>
+<a href="#610" id="610">610</a>
+<a href="#611" id="611">611</a>
+<a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
+<a href="#615" id="615">615</a>
+<a href="#616" id="616">616</a>
+<a href="#617" id="617">617</a>
+<a href="#618" id="618">618</a>
+<a href="#619" id="619">619</a>
+<a href="#620" id="620">620</a>
+<a href="#621" id="621">621</a>
+<a href="#622" id="622">622</a>
+<a href="#623" id="623">623</a>
+<a href="#624" id="624">624</a>
+<a href="#625" id="625">625</a>
+<a href="#626" id="626">626</a>
+<a href="#627" id="627">627</a>
+<a href="#628" id="628">628</a>
+<a href="#629" id="629">629</a>
+<a href="#630" id="630">630</a>
+<a href="#631" id="631">631</a>
+<a href="#632" id="632">632</a>
+<a href="#633" id="633">633</a>
+<a href="#634" id="634">634</a>
+<a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
+<a href="#676" id="676">676</a>
+<a href="#677" id="677">677</a>
+<a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
+<a href="#686" id="686">686</a>
+<a href="#687" id="687">687</a>
+<a href="#688" id="688">688</a>
+<a href="#689" id="689">689</a>
+<a href="#690" id="690">690</a>
+<a href="#691" id="691">691</a>
+<a href="#692" id="692">692</a>
+<a href="#693" id="693">693</a>
+<a href="#694" id="694">694</a>
+<a href="#695" id="695">695</a>
+<a href="#696" id="696">696</a>
+<a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
+<a href="#704" id="704">704</a>
+<a href="#705" id="705">705</a>
+<a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -720,7 +840,11 @@
 };
 
 <span class="kw">use crate</span>::{
-    form::MetaForm,
+    form::{
+        Form,
+        MetaForm,
+        PortableForm,
+    },
     Field,
     MetaType,
     Path,
@@ -743,14 +867,14 @@
 
 <span class="doccomment">/// Builds a [`Type`](`crate::Type`)
 </span><span class="attr">#[must_use]
-</span><span class="kw">pub struct </span>TypeBuilder&lt;S = state::PathNotAssigned&gt; {
-    path: <span class="prelude-ty">Option</span>&lt;Path&gt;,
-    type_params: Vec&lt;TypeParameter&gt;,
-    docs: Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
-    marker: PhantomData&lt;<span class="kw">fn</span>() -&gt; S&gt;,
+</span><span class="kw">pub struct </span>TypeBuilder&lt;F: Form = MetaForm, S = state::PathNotAssigned&gt; {
+    path: <span class="prelude-ty">Option</span>&lt;Path&lt;F&gt;&gt;,
+    type_params: Vec&lt;TypeParameter&lt;F&gt;&gt;,
+    docs: Vec&lt;F::String&gt;,
+    marker: PhantomData&lt;<span class="kw">fn</span>() -&gt; (F, S)&gt;,
 }
 
-<span class="kw">impl</span>&lt;S&gt; Default <span class="kw">for </span>TypeBuilder&lt;S&gt; {
+<span class="kw">impl</span>&lt;F: Form, S&gt; Default <span class="kw">for </span>TypeBuilder&lt;F, S&gt; {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         TypeBuilder {
             path: Default::default(),
@@ -761,9 +885,9 @@
     }
 }
 
-<span class="kw">impl </span>TypeBuilder&lt;state::PathNotAssigned&gt; {
+<span class="kw">impl</span>&lt;F: Form&gt; TypeBuilder&lt;F, state::PathNotAssigned&gt; {
     <span class="doccomment">/// Set the Path for the type
-    </span><span class="kw">pub fn </span>path(<span class="self">self</span>, path: Path) -&gt; TypeBuilder&lt;state::PathAssigned&gt; {
+    </span><span class="kw">pub fn </span>path(<span class="self">self</span>, path: Path&lt;F&gt;) -&gt; TypeBuilder&lt;F, state::PathAssigned&gt; {
         TypeBuilder {
             path: <span class="prelude-val">Some</span>(path),
             type_params: <span class="self">self</span>.type_params,
@@ -773,36 +897,50 @@
     }
 }
 
-<span class="kw">impl </span>TypeBuilder&lt;state::PathAssigned&gt; {
-    <span class="kw">fn </span>build&lt;D&gt;(<span class="self">self</span>, type_def: D) -&gt; Type
+<span class="kw">impl</span>&lt;F: Form&gt; TypeBuilder&lt;F, state::PathAssigned&gt; {
+    <span class="kw">fn </span>build&lt;D&gt;(<span class="self">self</span>, type_def: D) -&gt; Type&lt;F&gt;
     <span class="kw">where
-        </span>D: Into&lt;TypeDef&gt;,
+        </span>D: Into&lt;TypeDef&lt;F&gt;&gt;,
     {
         <span class="kw">let </span>path = <span class="self">self</span>.path.expect(<span class="string">&quot;Path not assigned&quot;</span>);
         Type::new(path, <span class="self">self</span>.type_params, type_def, <span class="self">self</span>.docs)
     }
 
     <span class="doccomment">/// Construct a &quot;variant&quot; type i.e an `enum`
-    </span><span class="kw">pub fn </span>variant(<span class="self">self</span>, builder: Variants) -&gt; Type {
+    </span><span class="kw">pub fn </span>variant(<span class="self">self</span>, builder: Variants&lt;F&gt;) -&gt; Type&lt;F&gt; {
         <span class="self">self</span>.build(builder.finalize())
     }
 
     <span class="doccomment">/// Construct a &quot;composite&quot; type i.e. a `struct`
-    </span><span class="kw">pub fn </span>composite&lt;F&gt;(<span class="self">self</span>, fields: FieldsBuilder&lt;F&gt;) -&gt; Type {
+    </span><span class="kw">pub fn </span>composite&lt;T&gt;(<span class="self">self</span>, fields: FieldsBuilder&lt;F, T&gt;) -&gt; Type&lt;F&gt; {
         <span class="self">self</span>.build(TypeDefComposite::new(fields.finalize()))
     }
 }
 
-<span class="kw">impl</span>&lt;S&gt; TypeBuilder&lt;S&gt; {
+<span class="kw">impl</span>&lt;F: Form, S&gt; TypeBuilder&lt;F, S&gt; {
     <span class="doccomment">/// Set the type parameters if it&#39;s a generic type
     </span><span class="kw">pub fn </span>type_params&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, type_params: I) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>I: IntoIterator&lt;Item = TypeParameter&gt;,
+        </span>I: IntoIterator&lt;Item = TypeParameter&lt;F&gt;&gt;,
     {
         <span class="self">self</span>.type_params = type_params.into_iter().collect();
         <span class="self">self
     </span>}
+}
 
+<span class="kw">impl</span>&lt;S&gt; TypeBuilder&lt;PortableForm, S&gt; {
+    <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
+    </span><span class="doccomment">/// Set the type documentation (for types in portable form).
+    </span><span class="kw">pub fn </span>docs_portable&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, docs: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator&lt;Item = &lt;PortableForm <span class="kw">as </span>Form&gt;::String&gt;,
+    {
+        <span class="self">self</span>.docs = docs.into_iter().collect();
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl</span>&lt;S&gt; TypeBuilder&lt;MetaForm, S&gt; {
     <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
     </span><span class="doccomment">/// Set the type documentation
     </span><span class="kw">pub fn </span>docs(<span class="kw-2">mut </span><span class="self">self</span>, docs: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; <span class="self">Self </span>{
@@ -832,33 +970,33 @@
 </span><span class="kw">pub enum </span>UnnamedFields {}
 
 <span class="doccomment">/// Provides FieldsBuilder constructors
-</span><span class="kw">pub enum </span>Fields {}
+</span><span class="kw">pub struct </span>Fields&lt;F: Form&gt;(PhantomData&lt;<span class="kw">fn</span>() -&gt; F&gt;);
 
-<span class="kw">impl </span>Fields {
+<span class="kw">impl</span>&lt;F: Form&gt; Fields&lt;F&gt; {
     <span class="doccomment">/// The type construct has no fields
-    </span><span class="kw">pub fn </span>unit() -&gt; FieldsBuilder&lt;NoFields&gt; {
-        FieldsBuilder::&lt;NoFields&gt;::default()
+    </span><span class="kw">pub fn </span>unit() -&gt; FieldsBuilder&lt;F, NoFields&gt; {
+        FieldsBuilder::&lt;F, NoFields&gt;::default()
     }
 
     <span class="doccomment">/// Fields for a type construct with named fields
-    </span><span class="kw">pub fn </span>named() -&gt; FieldsBuilder&lt;NamedFields&gt; {
+    </span><span class="kw">pub fn </span>named() -&gt; FieldsBuilder&lt;F, NamedFields&gt; {
         FieldsBuilder::default()
     }
 
     <span class="doccomment">/// Fields for a type construct with unnamed fields
-    </span><span class="kw">pub fn </span>unnamed() -&gt; FieldsBuilder&lt;UnnamedFields&gt; {
+    </span><span class="kw">pub fn </span>unnamed() -&gt; FieldsBuilder&lt;F, UnnamedFields&gt; {
         FieldsBuilder::default()
     }
 }
 
 <span class="doccomment">/// Build a set of either all named (e.g. for a struct) or all unnamed (e.g. for a tuple struct)
 </span><span class="attr">#[must_use]
-</span><span class="kw">pub struct </span>FieldsBuilder&lt;T&gt; {
-    fields: Vec&lt;Field&gt;,
+</span><span class="kw">pub struct </span>FieldsBuilder&lt;F: Form, T&gt; {
+    fields: Vec&lt;Field&lt;F&gt;&gt;,
     marker: PhantomData&lt;<span class="kw">fn</span>() -&gt; T&gt;,
 }
 
-<span class="kw">impl</span>&lt;T&gt; Default <span class="kw">for </span>FieldsBuilder&lt;T&gt; {
+<span class="kw">impl</span>&lt;F: Form, T&gt; Default <span class="kw">for </span>FieldsBuilder&lt;F, T&gt; {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             fields: Vec::new(),
@@ -867,12 +1005,14 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T&gt; FieldsBuilder&lt;T&gt; {
+<span class="kw">impl</span>&lt;F: Form, T&gt; FieldsBuilder&lt;F, T&gt; {
     <span class="doccomment">/// Complete building and return the set of fields
-    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Vec&lt;Field&lt;MetaForm&gt;&gt; {
+    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Vec&lt;Field&lt;F&gt;&gt; {
         <span class="self">self</span>.fields
     }
+}
 
+<span class="kw">impl</span>&lt;T&gt; FieldsBuilder&lt;MetaForm, T&gt; {
     <span class="kw">fn </span>push_field(<span class="kw-2">mut </span><span class="self">self</span>, field: Field) -&gt; <span class="self">Self </span>{
         <span class="comment">// filter out fields of PhantomData
         </span><span class="kw">if </span>!field.ty().is_phantom() {
@@ -882,28 +1022,83 @@
     </span>}
 }
 
-<span class="kw">impl </span>FieldsBuilder&lt;NamedFields&gt; {
+<span class="kw">impl </span>FieldsBuilder&lt;MetaForm, NamedFields&gt; {
     <span class="doccomment">/// Add a named field constructed using the builder.
-    </span><span class="kw">pub fn </span>field&lt;F&gt;(<span class="self">self</span>, builder: F) -&gt; <span class="self">Self
+    </span><span class="kw">pub fn </span>field&lt;B&gt;(<span class="self">self</span>, builder: B) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>F: Fn(
+        </span>B: Fn(
             FieldBuilder,
-        )
-            -&gt; FieldBuilder&lt;field_state::NameAssigned, field_state::TypeAssigned&gt;,
+        ) -&gt; FieldBuilder&lt;
+            MetaForm,
+            field_state::NameAssigned,
+            field_state::TypeAssigned,
+        &gt;,
     {
         <span class="kw">let </span>builder = builder(FieldBuilder::new());
         <span class="self">self</span>.push_field(builder.finalize())
     }
 }
 
-<span class="kw">impl </span>FieldsBuilder&lt;UnnamedFields&gt; {
+<span class="kw">impl </span>FieldsBuilder&lt;MetaForm, UnnamedFields&gt; {
     <span class="doccomment">/// Add an unnamed field constructed using the builder.
-    </span><span class="kw">pub fn </span>field&lt;F&gt;(<span class="self">self</span>, builder: F) -&gt; <span class="self">Self
+    </span><span class="kw">pub fn </span>field&lt;B&gt;(<span class="self">self</span>, builder: B) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>F: Fn(
+        </span>B: Fn(
             FieldBuilder,
-        )
-            -&gt; FieldBuilder&lt;field_state::NameNotAssigned, field_state::TypeAssigned&gt;,
+        ) -&gt; FieldBuilder&lt;
+            MetaForm,
+            field_state::NameNotAssigned,
+            field_state::TypeAssigned,
+        &gt;,
+    {
+        <span class="kw">let </span>builder = builder(FieldBuilder::new());
+        <span class="self">self</span>.push_field(builder.finalize())
+    }
+}
+
+<span class="kw">impl</span>&lt;T&gt; FieldsBuilder&lt;PortableForm, T&gt; {
+    <span class="kw">fn </span>push_field(<span class="kw-2">mut </span><span class="self">self</span>, field: Field&lt;PortableForm&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fields.push(field);
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl </span>FieldsBuilder&lt;PortableForm, NamedFields&gt; {
+    <span class="doccomment">/// Add a named field constructed using the builder.
+    </span><span class="kw">pub fn </span>field_portable&lt;B&gt;(<span class="self">self</span>, builder: B) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>B: Fn(
+            FieldBuilder&lt;
+                PortableForm,
+                field_state::NameNotAssigned,
+                field_state::TypeNotAssigned,
+            &gt;,
+        ) -&gt; FieldBuilder&lt;
+            PortableForm,
+            field_state::NameAssigned,
+            field_state::TypeAssigned,
+        &gt;,
+    {
+        <span class="kw">let </span>builder = builder(FieldBuilder::new());
+        <span class="self">self</span>.push_field(builder.finalize())
+    }
+}
+
+<span class="kw">impl </span>FieldsBuilder&lt;PortableForm, UnnamedFields&gt; {
+    <span class="doccomment">/// Add an unnamed field constructed using the builder.
+    </span><span class="kw">pub fn </span>field_portable&lt;B&gt;(<span class="self">self</span>, builder: B) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>B: Fn(
+            FieldBuilder&lt;
+                PortableForm,
+                field_state::NameNotAssigned,
+                field_state::TypeNotAssigned,
+            &gt;,
+        ) -&gt; FieldBuilder&lt;
+            PortableForm,
+            field_state::NameNotAssigned,
+            field_state::TypeAssigned,
+        &gt;,
     {
         <span class="kw">let </span>builder = builder(FieldBuilder::new());
         <span class="self">self</span>.push_field(builder.finalize())
@@ -925,17 +1120,18 @@
 <span class="doccomment">/// Construct a valid [`Field`].
 </span><span class="attr">#[must_use]
 </span><span class="kw">pub struct </span>FieldBuilder&lt;
+    F: Form = MetaForm,
     N = field_state::NameNotAssigned,
     T = field_state::TypeNotAssigned,
 &gt; {
-    name: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
-    ty: <span class="prelude-ty">Option</span>&lt;MetaType&gt;,
-    type_name: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
-    docs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str],
+    name: <span class="prelude-ty">Option</span>&lt;F::String&gt;,
+    ty: <span class="prelude-ty">Option</span>&lt;F::Type&gt;,
+    type_name: <span class="prelude-ty">Option</span>&lt;F::String&gt;,
+    docs: Vec&lt;F::String&gt;,
     marker: PhantomData&lt;<span class="kw">fn</span>() -&gt; (N, T)&gt;,
 }
 
-<span class="kw">impl</span>&lt;N, T&gt; Default <span class="kw">for </span>FieldBuilder&lt;N, T&gt; {
+<span class="kw">impl</span>&lt;F: Form, N, T&gt; Default <span class="kw">for </span>FieldBuilder&lt;F, N, T&gt; {
     <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
         FieldBuilder {
             name: Default::default(),
@@ -947,16 +1143,16 @@
     }
 }
 
-<span class="kw">impl </span>FieldBuilder {
+<span class="kw">impl</span>&lt;F: Form&gt; FieldBuilder&lt;F&gt; {
     <span class="doccomment">/// Create a new FieldBuilder.
     </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
         Default::default()
     }
 }
 
-<span class="kw">impl</span>&lt;T&gt; FieldBuilder&lt;field_state::NameNotAssigned, T&gt; {
+<span class="kw">impl</span>&lt;F: Form, T&gt; FieldBuilder&lt;F, field_state::NameNotAssigned, T&gt; {
     <span class="doccomment">/// Initialize the field name.
-    </span><span class="kw">pub fn </span>name(<span class="self">self</span>, name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str) -&gt; FieldBuilder&lt;field_state::NameAssigned, T&gt; {
+    </span><span class="kw">pub fn </span>name(<span class="self">self</span>, name: F::String) -&gt; FieldBuilder&lt;F, field_state::NameAssigned, T&gt; {
         FieldBuilder {
             name: <span class="prelude-val">Some</span>(name),
             ty: <span class="self">self</span>.ty,
@@ -967,9 +1163,9 @@
     }
 }
 
-<span class="kw">impl</span>&lt;N&gt; FieldBuilder&lt;N, field_state::TypeNotAssigned&gt; {
+<span class="kw">impl</span>&lt;N&gt; FieldBuilder&lt;MetaForm, N, field_state::TypeNotAssigned&gt; {
     <span class="doccomment">/// Initialize the type of the field.
-    </span><span class="kw">pub fn </span>ty&lt;TY&gt;(<span class="self">self</span>) -&gt; FieldBuilder&lt;N, field_state::TypeAssigned&gt;
+    </span><span class="kw">pub fn </span>ty&lt;TY&gt;(<span class="self">self</span>) -&gt; FieldBuilder&lt;MetaForm, N, field_state::TypeAssigned&gt;
     <span class="kw">where
         </span>TY: TypeInfo + <span class="lifetime">&#39;static </span>+ <span class="question-mark">?</span>Sized,
     {
@@ -983,7 +1179,7 @@
     }
 
     <span class="doccomment">/// Initializes the type of the field as a compact type.
-    </span><span class="kw">pub fn </span>compact&lt;TY&gt;(<span class="self">self</span>) -&gt; FieldBuilder&lt;N, field_state::TypeAssigned&gt;
+    </span><span class="kw">pub fn </span>compact&lt;TY&gt;(<span class="self">self</span>) -&gt; FieldBuilder&lt;MetaForm, N, field_state::TypeAssigned&gt;
     <span class="kw">where
         </span>TY: scale::HasCompact + TypeInfo + <span class="lifetime">&#39;static</span>,
     {
@@ -997,9 +1193,25 @@
     }
 }
 
-<span class="kw">impl</span>&lt;N, T&gt; FieldBuilder&lt;N, T&gt; {
+<span class="kw">impl</span>&lt;N&gt; FieldBuilder&lt;PortableForm, N, field_state::TypeNotAssigned&gt; {
+    <span class="doccomment">/// Initialize the type of the field.
+    </span><span class="kw">pub fn </span>ty&lt;T&gt;(<span class="self">self</span>, ty: T) -&gt; FieldBuilder&lt;PortableForm, N, field_state::TypeAssigned&gt;
+    <span class="kw">where
+        </span>T: Into&lt;&lt;PortableForm <span class="kw">as </span>Form&gt;::Type&gt;,
+    {
+        FieldBuilder {
+            name: <span class="self">self</span>.name,
+            ty: <span class="prelude-val">Some</span>(ty.into()),
+            type_name: <span class="self">self</span>.type_name,
+            docs: <span class="self">self</span>.docs,
+            marker: PhantomData,
+        }
+    }
+}
+
+<span class="kw">impl</span>&lt;F: Form, N, T&gt; FieldBuilder&lt;F, N, T&gt; {
     <span class="doccomment">/// Initialize the type name of a field (optional).
-    </span><span class="kw">pub fn </span>type_name(<span class="self">self</span>, type_name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str) -&gt; FieldBuilder&lt;N, T&gt; {
+    </span><span class="kw">pub fn </span>type_name(<span class="self">self</span>, type_name: F::String) -&gt; FieldBuilder&lt;F, N, T&gt; {
         FieldBuilder {
             name: <span class="self">self</span>.name,
             ty: <span class="self">self</span>.ty,
@@ -1008,15 +1220,29 @@
             marker: PhantomData,
         }
     }
+}
 
+<span class="kw">impl</span>&lt;N, T&gt; FieldBuilder&lt;PortableForm, N, T&gt; {
+    <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
+    </span><span class="doccomment">/// Initialize the documentation of a field (for types in portable form, optional).
+    </span><span class="kw">pub fn </span>docs_portable&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, docs: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator&lt;Item = &lt;PortableForm <span class="kw">as </span>Form&gt;::String&gt;,
+    {
+        <span class="self">self</span>.docs = docs.into_iter().collect();
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl</span>&lt;N, T&gt; FieldBuilder&lt;MetaForm, N, T&gt; {
     <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
     </span><span class="doccomment">/// Initialize the documentation of a field (optional).
-    </span><span class="kw">pub fn </span>docs(<span class="self">self</span>, docs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; FieldBuilder&lt;N, T&gt; {
+    </span><span class="kw">pub fn </span>docs(<span class="self">self</span>, docs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; <span class="self">Self </span>{
         FieldBuilder {
             name: <span class="self">self</span>.name,
             ty: <span class="self">self</span>.ty,
             type_name: <span class="self">self</span>.type_name,
-            docs,
+            docs: docs.to_vec(),
             marker: PhantomData,
         }
     }
@@ -1024,7 +1250,7 @@
     <span class="attr">#[cfg(not(feature = <span class="string">&quot;docs&quot;</span>))]
     #[inline]
     </span><span class="doccomment">/// Doc capture is not enabled via the &quot;docs&quot; feature so this is a no-op.
-    </span><span class="kw">pub fn </span>docs(<span class="self">self</span>, _docs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; FieldBuilder&lt;N, T&gt; {
+    </span><span class="kw">pub fn </span>docs(<span class="self">self</span>, _docs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; <span class="self">Self </span>{
         <span class="self">self
     </span>}
 
@@ -1035,15 +1261,15 @@
             name: <span class="self">self</span>.name,
             ty: <span class="self">self</span>.ty,
             type_name: <span class="self">self</span>.type_name,
-            docs,
+            docs: docs.to_vec(),
             marker: PhantomData,
         }
     }
 }
 
-<span class="kw">impl</span>&lt;N&gt; FieldBuilder&lt;N, field_state::TypeAssigned&gt; {
+<span class="kw">impl</span>&lt;F: Form, N&gt; FieldBuilder&lt;F, N, field_state::TypeAssigned&gt; {
     <span class="doccomment">/// Complete building and return a new [`Field`].
-    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Field&lt;MetaForm&gt; {
+    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Field&lt;F&gt; {
         Field::new(
             <span class="self">self</span>.name,
             <span class="self">self</span>.ty.expect(<span class="string">&quot;Type should be set by builder&quot;</span>),
@@ -1056,22 +1282,22 @@
 <span class="doccomment">/// Builds a definition of a variant type i.e an `enum`
 </span><span class="attr">#[derive(Default)]
 #[must_use]
-</span><span class="kw">pub struct </span>Variants {
-    variants: Vec&lt;Variant&gt;,
+</span><span class="kw">pub struct </span>Variants&lt;F: Form = MetaForm&gt; {
+    variants: Vec&lt;Variant&lt;F&gt;&gt;,
 }
 
-<span class="kw">impl </span>Variants {
+<span class="kw">impl</span>&lt;F: Form&gt; Variants&lt;F&gt; {
     <span class="doccomment">/// Create a new [`VariantsBuilder`].
     </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
-        Variants {
+        <span class="self">Self </span>{
             variants: Vec::new(),
         }
     }
 
     <span class="doccomment">/// Add a variant
-    </span><span class="kw">pub fn </span>variant&lt;F&gt;(<span class="kw-2">mut </span><span class="self">self</span>, name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, builder: F) -&gt; <span class="self">Self
+    </span><span class="kw">pub fn </span>variant&lt;B&gt;(<span class="kw-2">mut </span><span class="self">self</span>, name: F::String, builder: B) -&gt; <span class="self">Self
     </span><span class="kw">where
-        </span>F: Fn(VariantBuilder) -&gt; VariantBuilder&lt;variant_state::IndexAssigned&gt;,
+        </span>B: Fn(VariantBuilder&lt;F&gt;) -&gt; VariantBuilder&lt;F, variant_state::IndexAssigned&gt;,
     {
         <span class="kw">let </span>builder = builder(VariantBuilder::new(name));
         <span class="self">self</span>.variants.push(builder.finalize());
@@ -1079,14 +1305,14 @@
     </span>}
 
     <span class="doccomment">/// Add a unit variant (without fields).
-    </span><span class="kw">pub fn </span>variant_unit(<span class="kw-2">mut </span><span class="self">self</span>, name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, index: u8) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>variant_unit(<span class="kw-2">mut </span><span class="self">self</span>, name: F::String, index: u8) -&gt; <span class="self">Self </span>{
         <span class="kw">let </span>builder = VariantBuilder::new(name).index(index);
         <span class="self">self</span>.variants.push(builder.finalize());
         <span class="self">self
     </span>}
 
     <span class="doccomment">/// Construct a new [`TypeDefVariant`] from the initialized builder variants.
-    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; TypeDefVariant {
+    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; TypeDefVariant&lt;F&gt; {
         TypeDefVariant::new(<span class="self">self</span>.variants)
     }
 }
@@ -1101,18 +1327,18 @@
 
 <span class="doccomment">/// Build a [`Variant`].
 </span><span class="attr">#[must_use]
-</span><span class="kw">pub struct </span>VariantBuilder&lt;S = variant_state::IndexNotAssigned&gt; {
-    name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+</span><span class="kw">pub struct </span>VariantBuilder&lt;F: Form, S = variant_state::IndexNotAssigned&gt; {
+    name: F::String,
     index: <span class="prelude-ty">Option</span>&lt;u8&gt;,
-    fields: Vec&lt;Field&lt;MetaForm&gt;&gt;,
+    fields: Vec&lt;Field&lt;F&gt;&gt;,
     discriminant: <span class="prelude-ty">Option</span>&lt;u64&gt;,
-    docs: Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
+    docs: Vec&lt;F::String&gt;,
     marker: PhantomData&lt;S&gt;,
 }
 
-<span class="kw">impl </span>VariantBuilder&lt;variant_state::IndexNotAssigned&gt; {
+<span class="kw">impl</span>&lt;F: Form&gt; VariantBuilder&lt;F, variant_state::IndexNotAssigned&gt; {
     <span class="doccomment">/// Create a new [`VariantBuilder`].
-    </span><span class="kw">pub fn </span>new(name: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>new(name: F::String) -&gt; <span class="self">Self </span>{
         <span class="self">Self </span>{
             name,
             fields: Vec::new(),
@@ -1124,7 +1350,7 @@
     }
 
     <span class="doccomment">/// Set the variant&#39;s codec index.
-    </span><span class="kw">pub fn </span>index(<span class="self">self</span>, index: u8) -&gt; VariantBuilder&lt;variant_state::IndexAssigned&gt; {
+    </span><span class="kw">pub fn </span>index(<span class="self">self</span>, index: u8) -&gt; VariantBuilder&lt;F, variant_state::IndexAssigned&gt; {
         VariantBuilder {
             name: <span class="self">self</span>.name,
             index: <span class="prelude-val">Some</span>(index),
@@ -1136,7 +1362,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;S&gt; VariantBuilder&lt;S&gt; {
+<span class="kw">impl</span>&lt;F: Form, S&gt; VariantBuilder&lt;F, S&gt; {
     <span class="doccomment">/// Set the variant&#39;s discriminant.
     </span><span class="kw">pub fn </span>discriminant(<span class="kw-2">mut </span><span class="self">self</span>, discriminant: u64) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.discriminant = <span class="prelude-val">Some</span>(discriminant);
@@ -1144,11 +1370,25 @@
     </span>}
 
     <span class="doccomment">/// Initialize the variant&#39;s fields.
-    </span><span class="kw">pub fn </span>fields&lt;F&gt;(<span class="kw-2">mut </span><span class="self">self</span>, fields_builder: FieldsBuilder&lt;F&gt;) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">pub fn </span>fields&lt;T&gt;(<span class="kw-2">mut </span><span class="self">self</span>, fields_builder: FieldsBuilder&lt;F, T&gt;) -&gt; <span class="self">Self </span>{
         <span class="self">self</span>.fields = fields_builder.finalize();
         <span class="self">self
     </span>}
+}
 
+<span class="kw">impl</span>&lt;S&gt; VariantBuilder&lt;PortableForm, S&gt; {
+    <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
+    </span><span class="doccomment">/// Initialize the variant&#39;s documentation (for types in portable form).
+    </span><span class="kw">pub fn </span>docs_portable&lt;I&gt;(<span class="kw-2">mut </span><span class="self">self</span>, docs: I) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>I: IntoIterator&lt;Item = &lt;PortableForm <span class="kw">as </span>Form&gt;::String&gt;,
+    {
+        <span class="self">self</span>.docs = docs.into_iter().collect();
+        <span class="self">self
+    </span>}
+}
+
+<span class="kw">impl</span>&lt;S&gt; VariantBuilder&lt;MetaForm, S&gt; {
     <span class="attr">#[cfg(feature = <span class="string">&quot;docs&quot;</span>)]
     </span><span class="doccomment">/// Initialize the variant&#39;s documentation.
     </span><span class="kw">pub fn </span>docs(<span class="kw-2">mut </span><span class="self">self</span>, docs: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str]) -&gt; <span class="self">Self </span>{
@@ -1171,9 +1411,9 @@
     </span>}
 }
 
-<span class="kw">impl </span>VariantBuilder&lt;variant_state::IndexAssigned&gt; {
+<span class="kw">impl</span>&lt;F: Form&gt; VariantBuilder&lt;F, variant_state::IndexAssigned&gt; {
     <span class="doccomment">/// Complete building and create final [`Variant`] instance.
-    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Variant&lt;MetaForm&gt; {
+    </span><span class="kw">pub fn </span>finalize(<span class="self">self</span>) -&gt; Variant&lt;F&gt; {
         Variant::new(
             <span class="self">self</span>.name,
             <span class="self">self</span>.fields,

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/procedural/src/construct_runtime/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support_procedural/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/procedural/src/construct_runtime/parse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support_procedural/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -652,9 +652,43 @@
 <a href="#652" id="652">652</a>
 <a href="#653" id="653">653</a>
 <a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
+<a href="#676" id="676">676</a>
+<a href="#677" id="677">677</a>
+<a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
+<a href="#686" id="686">686</a>
+<a href="#687" id="687">687</a>
+<a href="#688" id="688">688</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -677,7 +711,7 @@
 	parse::{Parse, ParseStream},
 	punctuated::Punctuated,
 	spanned::Spanned,
-	token, Error, Ident, Path, <span class="prelude-ty">Result</span>, Token,
+	token, Attribute, Error, Ident, Path, <span class="prelude-ty">Result</span>, Token,
 };
 
 <span class="kw">mod </span>keyword {
@@ -727,7 +761,14 @@
 <span class="kw">impl </span>Parse <span class="kw">for </span>RuntimeDeclaration {
 	<span class="kw">fn </span>parse(input: ParseStream) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
 		input.parse::&lt;<span class="macro">Token!</span>[<span class="kw">pub</span>]&gt;()<span class="question-mark">?</span>;
-		input.parse::&lt;<span class="macro">Token!</span>[<span class="kw">enum</span>]&gt;()<span class="question-mark">?</span>;
+
+		<span class="comment">// Support either `enum` or `struct`.
+		</span><span class="kw">if </span>input.peek(<span class="macro">Token!</span>[<span class="kw">struct</span>]) {
+			input.parse::&lt;<span class="macro">Token!</span>[<span class="kw">struct</span>]&gt;()<span class="question-mark">?</span>;
+		} <span class="kw">else </span>{
+			input.parse::&lt;<span class="macro">Token!</span>[<span class="kw">enum</span>]&gt;()<span class="question-mark">?</span>;
+		}
+
 		<span class="kw">let </span>name = input.parse::&lt;syn::Ident&gt;()<span class="question-mark">?</span>;
 		<span class="kw">let </span>where_section = input.parse()<span class="question-mark">?</span>;
 		<span class="kw">let </span>pallets =
@@ -832,6 +873,8 @@
 </span><span class="kw">pub struct </span>PalletDeclaration {
 	<span class="doccomment">/// The name of the pallet, e.g.`System` in `System: frame_system`.
 	</span><span class="kw">pub </span>name: Ident,
+	<span class="doccomment">/// Optional attributes tagged right above a pallet declaration.
+	</span><span class="kw">pub </span>attrs: Vec&lt;Attribute&gt;,
 	<span class="doccomment">/// Optional fixed index, e.g. `MyPallet ...  = 3,`.
 	</span><span class="kw">pub </span>index: <span class="prelude-ty">Option</span>&lt;u8&gt;,
 	<span class="doccomment">/// The path of the pallet, e.g. `frame_system` in `System: frame_system`.
@@ -859,6 +902,8 @@
 
 <span class="kw">impl </span>Parse <span class="kw">for </span>PalletDeclaration {
 	<span class="kw">fn </span>parse(input: ParseStream) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>&gt; {
+		<span class="kw">let </span>attrs = input.call(Attribute::parse_outer)<span class="question-mark">?</span>;
+
 		<span class="kw">let </span>name = input.parse()<span class="question-mark">?</span>;
 		<span class="kw">let _</span>: <span class="macro">Token!</span>[:] = input.parse()<span class="question-mark">?</span>;
 		<span class="kw">let </span>path = input.parse()<span class="question-mark">?</span>;
@@ -926,7 +971,7 @@
 			<span class="prelude-val">None
 		</span>};
 
-		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ name, path, instance, pallet_parts, specified_parts, index })
+		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ attrs, name, path, instance, pallet_parts, specified_parts, index })
 	}
 }
 
@@ -1182,6 +1227,8 @@
 	</span><span class="kw">pub </span>instance: <span class="prelude-ty">Option</span>&lt;Ident&gt;,
 	<span class="doccomment">/// The pallet parts to use for the pallet.
 	</span><span class="kw">pub </span>pallet_parts: Vec&lt;PalletPart&gt;,
+	<span class="doccomment">/// Expressions specified inside of a #[cfg] attribute.
+	</span><span class="kw">pub </span>cfg_pattern: Vec&lt;cfg_expr::Expression&gt;,
 }
 
 <span class="kw">impl </span>Pallet {
@@ -1294,11 +1341,32 @@
 				SpecifiedParts::All =&gt; (),
 			}
 
+			<span class="kw">let </span>cfg_pattern = pallet
+				.attrs
+				.iter()
+				.map(|attr| {
+					<span class="kw">if </span>attr.path.segments.len() != <span class="number">1 </span>|| attr.path.segments[<span class="number">0</span>].ident != <span class="string">&quot;cfg&quot; </span>{
+						<span class="kw">let </span>msg = <span class="string">&quot;Unsupported attribute, only #[cfg] is supported on pallet \
+						declarations in `construct_runtime`&quot;</span>;
+						<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(attr.span(), msg))
+					}
+
+					attr.parse_args_with(|input: syn::parse::ParseStream| {
+						<span class="comment">// Required, otherwise the parse stream doesn&#39;t advance and will result in
+						// an error.
+						</span><span class="kw">let </span>input = input.parse::&lt;proc_macro2::TokenStream&gt;()<span class="question-mark">?</span>;
+						cfg_expr::Expression::parse(<span class="kw-2">&amp;</span>input.to_string())
+							.map_err(|e| syn::Error::new(attr.span(), e.to_string()))
+					})
+				})
+				.collect::&lt;<span class="prelude-ty">Result</span>&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;&gt;()<span class="question-mark">?</span>;
+
 			<span class="prelude-val">Ok</span>(Pallet {
 				name: pallet.name,
 				index: final_index,
 				path: pallet.path,
 				instance: pallet.instance,
+				cfg_pattern,
 				pallet_parts,
 			})
 		})

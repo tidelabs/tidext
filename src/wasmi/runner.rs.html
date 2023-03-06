@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.9.1/src/runner.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>runner.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../wasmi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/wasmi-0.13.2/src/runner.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>runner.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../wasmi/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1552,24 +1552,69 @@
 <a href="#1552" id="1552">1552</a>
 <a href="#1553" id="1553">1553</a>
 <a href="#1554" id="1554">1554</a>
-</pre><pre class="rust"><code><span class="attr">#![allow(clippy::unnecessary_wraps)]
-
-</span><span class="kw">use </span><span class="kw">crate</span>::func::{FuncInstance, FuncInstanceInternal, FuncRef};
-<span class="kw">use </span><span class="kw">crate</span>::host::Externals;
-<span class="kw">use </span><span class="kw">crate</span>::isa;
-<span class="kw">use </span><span class="kw">crate</span>::memory::MemoryRef;
-<span class="kw">use </span><span class="kw">crate</span>::memory_units::Pages;
-<span class="kw">use </span><span class="kw">crate</span>::module::ModuleRef;
-<span class="kw">use </span><span class="kw">crate</span>::nan_preserving_float::{F32, F64};
-<span class="kw">use </span><span class="kw">crate</span>::value::{
-    ArithmeticOps, ExtendInto, Float, Integer, LittleEndianConvert, RuntimeValue, TransmuteInto,
-    TryTruncateInto, WrapInto,
+<a href="#1555" id="1555">1555</a>
+<a href="#1556" id="1556">1556</a>
+<a href="#1557" id="1557">1557</a>
+<a href="#1558" id="1558">1558</a>
+<a href="#1559" id="1559">1559</a>
+<a href="#1560" id="1560">1560</a>
+<a href="#1561" id="1561">1561</a>
+<a href="#1562" id="1562">1562</a>
+<a href="#1563" id="1563">1563</a>
+<a href="#1564" id="1564">1564</a>
+<a href="#1565" id="1565">1565</a>
+<a href="#1566" id="1566">1566</a>
+<a href="#1567" id="1567">1567</a>
+<a href="#1568" id="1568">1568</a>
+<a href="#1569" id="1569">1569</a>
+<a href="#1570" id="1570">1570</a>
+<a href="#1571" id="1571">1571</a>
+<a href="#1572" id="1572">1572</a>
+<a href="#1573" id="1573">1573</a>
+<a href="#1574" id="1574">1574</a>
+<a href="#1575" id="1575">1575</a>
+<a href="#1576" id="1576">1576</a>
+<a href="#1577" id="1577">1577</a>
+<a href="#1578" id="1578">1578</a>
+<a href="#1579" id="1579">1579</a>
+<a href="#1580" id="1580">1580</a>
+<a href="#1581" id="1581">1581</a>
+<a href="#1582" id="1582">1582</a>
+<a href="#1583" id="1583">1583</a>
+<a href="#1584" id="1584">1584</a>
+<a href="#1585" id="1585">1585</a>
+<a href="#1586" id="1586">1586</a>
+<a href="#1587" id="1587">1587</a>
+<a href="#1588" id="1588">1588</a>
+<a href="#1589" id="1589">1589</a>
+<a href="#1590" id="1590">1590</a>
+<a href="#1591" id="1591">1591</a>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::{
+    func::{FuncInstance, FuncInstanceInternal, FuncRef},
+    host::Externals,
+    isa,
+    memory::MemoryRef,
+    memory_units::Pages,
+    module::ModuleRef,
+    nan_preserving_float::{F32, F64},
+    value::{
+        ArithmeticOps,
+        ExtendInto,
+        Float,
+        Integer,
+        LittleEndianConvert,
+        TransmuteInto,
+        TryTruncateInto,
+        WrapInto,
+    },
+    RuntimeValue,
+    Signature,
+    Trap,
+    TrapCode,
+    ValueType,
 };
-<span class="kw">use crate</span>::{Signature, Trap, TrapKind, ValueType};
 <span class="kw">use </span>alloc::{boxed::Box, vec::Vec};
-<span class="kw">use </span>core::fmt;
-<span class="kw">use </span>core::ops;
-<span class="kw">use </span>core::{u32, usize};
+<span class="kw">use </span>core::{fmt, ops, u32, usize};
 <span class="kw">use </span>parity_wasm::elements::Local;
 <span class="kw">use </span>validation::{DEFAULT_MEMORY_INDEX, DEFAULT_TABLE_INDEX};
 
@@ -1586,87 +1631,87 @@
 /// spec tests) and not undefined behaviour.
 ///
 /// At the boundary between the interpreter and the outside world we convert to the public
-/// `RuntimeValue` type, which can then be matched on. We can create a `RuntimeValue` from
-/// a `RuntimeValueInternal` only when the type is statically known, which it always is
+/// `Value` type, which can then be matched on. We can create a `Value` from
+/// a `ValueInternal` only when the type is statically known, which it always is
 /// at these boundaries.
 </span><span class="attr">#[derive(Copy, Clone, Debug, PartialEq, Default)]
 #[repr(transparent)]
-</span><span class="kw">struct </span>RuntimeValueInternal(<span class="kw">pub </span>u64);
+</span><span class="kw">struct </span>ValueInternal(<span class="kw">pub </span>u64);
 
-<span class="kw">impl </span>RuntimeValueInternal {
+<span class="kw">impl </span>ValueInternal {
     <span class="kw">pub fn </span>with_type(<span class="self">self</span>, ty: ValueType) -&gt; RuntimeValue {
         <span class="kw">match </span>ty {
-            ValueType::I32 =&gt; RuntimeValue::I32(&lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(<span class="self">self</span>)),
-            ValueType::I64 =&gt; RuntimeValue::I64(&lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(<span class="self">self</span>)),
-            ValueType::F32 =&gt; RuntimeValue::F32(&lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(<span class="self">self</span>)),
-            ValueType::F64 =&gt; RuntimeValue::F64(&lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(<span class="self">self</span>)),
+            ValueType::I32 =&gt; RuntimeValue::I32(&lt;<span class="kw">_</span>&gt;::from_value_internal(<span class="self">self</span>)),
+            ValueType::I64 =&gt; RuntimeValue::I64(&lt;<span class="kw">_</span>&gt;::from_value_internal(<span class="self">self</span>)),
+            ValueType::F32 =&gt; RuntimeValue::F32(&lt;<span class="kw">_</span>&gt;::from_value_internal(<span class="self">self</span>)),
+            ValueType::F64 =&gt; RuntimeValue::F64(&lt;<span class="kw">_</span>&gt;::from_value_internal(<span class="self">self</span>)),
         }
     }
 }
 
-<span class="kw">trait </span>FromRuntimeValueInternal
+<span class="kw">trait </span>FromValueInternal
 <span class="kw">where
     </span><span class="self">Self</span>: Sized,
 {
-    <span class="kw">fn </span>from_runtime_value_internal(val: RuntimeValueInternal) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>from_value_internal(val: ValueInternal) -&gt; <span class="self">Self</span>;
 }
 
-<span class="macro">macro_rules! </span>impl_from_runtime_value_internal {
+<span class="macro">macro_rules! </span>impl_from_value_internal {
 	($(<span class="macro-nonterminal">$t</span>:ty),<span class="kw-2">*</span>) =&gt;	{
 		$(
-			<span class="kw">impl </span>FromRuntimeValueInternal <span class="kw">for </span><span class="macro-nonterminal">$t </span>{
-				<span class="kw">fn </span>from_runtime_value_internal(
-					RuntimeValueInternal(val): RuntimeValueInternal,
+			<span class="kw">impl </span>FromValueInternal <span class="kw">for </span><span class="macro-nonterminal">$t </span>{
+				<span class="kw">fn </span>from_value_internal(
+					ValueInternal(val): ValueInternal,
 				) -&gt; <span class="self">Self </span>{
 					val	<span class="kw">as _
 				</span>}
 			}
 
-			<span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$t</span>&gt; <span class="kw">for </span>RuntimeValueInternal {
+			<span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$t</span>&gt; <span class="kw">for </span>ValueInternal {
 				<span class="kw">fn </span>from(other: <span class="macro-nonterminal">$t</span>) -&gt; <span class="self">Self </span>{
-					RuntimeValueInternal(other <span class="kw">as _</span>)
+					ValueInternal(other <span class="kw">as _</span>)
 				}
 			}
 		)*
 	};
 }
 
-<span class="macro">macro_rules! </span>impl_from_runtime_value_internal_float	{
+<span class="macro">macro_rules! </span>impl_from_value_internal_float	{
 	($(<span class="macro-nonterminal">$t</span>:ty),<span class="kw-2">*</span>) =&gt;	{
 		$(
-			<span class="kw">impl </span>FromRuntimeValueInternal <span class="kw">for </span><span class="macro-nonterminal">$t </span>{
-				<span class="kw">fn </span>from_runtime_value_internal(
-					RuntimeValueInternal(val): RuntimeValueInternal,
+			<span class="kw">impl </span>FromValueInternal <span class="kw">for </span><span class="macro-nonterminal">$t </span>{
+				<span class="kw">fn </span>from_value_internal(
+					ValueInternal(val): ValueInternal,
 				) -&gt; <span class="self">Self </span>{
 					&lt;<span class="macro-nonterminal">$t</span>&gt;::from_bits(val	<span class="kw">as _</span>)
 				}
 			}
 
-			<span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$t</span>&gt; <span class="kw">for </span>RuntimeValueInternal {
+			<span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$t</span>&gt; <span class="kw">for </span>ValueInternal {
 				<span class="kw">fn </span>from(other: <span class="macro-nonterminal">$t</span>) -&gt; <span class="self">Self </span>{
-					RuntimeValueInternal(other.to_bits() <span class="kw">as	_</span>)
+					ValueInternal(other.to_bits() <span class="kw">as	_</span>)
 				}
 			}
 		)*
 	};
 }
 
-<span class="macro">impl_from_runtime_value_internal!</span>(i8, u8, i16, u16, i32, u32, i64, u64);
-<span class="macro">impl_from_runtime_value_internal_float!</span>(f32, f64, F32, F64);
+<span class="macro">impl_from_value_internal!</span>(i8, u8, i16, u16, i32, u32, i64, u64);
+<span class="macro">impl_from_value_internal_float!</span>(f32, f64, F32, F64);
 
-<span class="kw">impl </span>From&lt;bool&gt; <span class="kw">for </span>RuntimeValueInternal {
+<span class="kw">impl </span>From&lt;bool&gt; <span class="kw">for </span>ValueInternal {
     <span class="kw">fn </span>from(other: bool) -&gt; <span class="self">Self </span>{
         (<span class="kw">if </span>other { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>}).into()
     }
 }
 
-<span class="kw">impl </span>FromRuntimeValueInternal <span class="kw">for </span>bool {
-    <span class="kw">fn </span>from_runtime_value_internal(RuntimeValueInternal(val): RuntimeValueInternal) -&gt; <span class="self">Self </span>{
+<span class="kw">impl </span>FromValueInternal <span class="kw">for </span>bool {
+    <span class="kw">fn </span>from_value_internal(ValueInternal(val): ValueInternal) -&gt; <span class="self">Self </span>{
         val != <span class="number">0
     </span>}
 }
 
-<span class="kw">impl </span>From&lt;RuntimeValue&gt; <span class="kw">for </span>RuntimeValueInternal {
+<span class="kw">impl </span>From&lt;RuntimeValue&gt; <span class="kw">for </span>ValueInternal {
     <span class="kw">fn </span>from(other: RuntimeValue) -&gt; <span class="self">Self </span>{
         <span class="kw">match </span>other {
             RuntimeValue::I32(val) =&gt; val.into(),
@@ -1721,6 +1766,7 @@
     call_stack: CallStack,
     return_type: <span class="prelude-ty">Option</span>&lt;ValueType&gt;,
     state: InterpreterState,
+    scratch: Vec&lt;RuntimeValue&gt;,
 }
 
 <span class="kw">impl </span>Interpreter {
@@ -1735,7 +1781,7 @@
             value_stack.push(arg).map_err(
                 <span class="comment">// There is not enough space for pushing initial arguments.
                 // Weird, but bail out anyway.
-                </span>|<span class="kw">_</span>| Trap::from(TrapKind::StackOverflow),
+                </span>|<span class="kw">_</span>| Trap::from(TrapCode::StackOverflow),
             )<span class="question-mark">?</span>;
         }
 
@@ -1750,6 +1796,7 @@
             call_stack,
             return_type,
             state: InterpreterState::Initialized,
+            scratch: Vec::new(),
         })
     }
 
@@ -1793,7 +1840,7 @@
         <span class="kw">if let </span><span class="prelude-val">Some</span>(return_val) = return_val {
             <span class="self">self</span>.value_stack
                 .push(return_val.into())
-                .map_err(Trap::new)<span class="question-mark">?</span>;
+                .map_err(Trap::from)<span class="question-mark">?</span>;
         }
 
         <span class="self">self</span>.run_interpreter_loop(externals)<span class="question-mark">?</span>;
@@ -1830,7 +1877,7 @@
 
             <span class="kw">let </span>function_return = <span class="self">self
                 </span>.do_run_function(<span class="kw-2">&amp;mut </span>function_context, <span class="kw-2">&amp;</span>function_body.code)
-                .map_err(Trap::new)<span class="question-mark">?</span>;
+                .map_err(Trap::from)<span class="question-mark">?</span>;
 
             <span class="kw">match </span>function_return {
                 RunResult::Return =&gt; {
@@ -1842,7 +1889,7 @@
                 }
                 RunResult::NestedCall(nested_func) =&gt; {
                     <span class="kw">if </span><span class="self">self</span>.call_stack.is_full() {
-                        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapKind::StackOverflow.into());
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapCode::StackOverflow.into());
                     }
 
                     <span class="kw">match </span><span class="kw-2">*</span>nested_func.as_internal() {
@@ -1852,34 +1899,41 @@
                             <span class="self">self</span>.call_stack.push(nested_context);
                         }
                         FuncInstanceInternal::Host { <span class="kw-2">ref </span>signature, .. } =&gt; {
-                            <span class="kw">let </span>args = prepare_function_args(signature, <span class="kw-2">&amp;mut </span><span class="self">self</span>.value_stack);
+                            prepare_function_args(
+                                signature,
+                                <span class="kw-2">&amp;mut </span><span class="self">self</span>.value_stack,
+                                <span class="kw-2">&amp;mut </span><span class="self">self</span>.scratch,
+                            );
                             <span class="comment">// We push the function context first. If the VM is not resumable, it does no harm. If it is, we then save the context here.
                             </span><span class="self">self</span>.call_stack.push(function_context);
 
-                            <span class="kw">let </span>return_val =
-                                <span class="kw">match </span>FuncInstance::invoke(<span class="kw-2">&amp;</span>nested_func, <span class="kw-2">&amp;</span>args, externals) {
-                                    <span class="prelude-val">Ok</span>(val) =&gt; val,
-                                    <span class="prelude-val">Err</span>(trap) =&gt; {
-                                        <span class="kw">if </span>trap.kind().is_host() {
-                                            <span class="self">self</span>.state = InterpreterState::Resumable(
-                                                nested_func.signature().return_type(),
-                                            );
-                                        }
-                                        <span class="kw">return </span><span class="prelude-val">Err</span>(trap);
+                            <span class="kw">let </span>return_val = <span class="kw">match </span>FuncInstance::invoke(
+                                <span class="kw-2">&amp;</span>nested_func,
+                                <span class="kw-2">&amp;</span><span class="self">self</span>.scratch,
+                                externals,
+                            ) {
+                                <span class="prelude-val">Ok</span>(val) =&gt; val,
+                                <span class="prelude-val">Err</span>(trap) =&gt; {
+                                    <span class="kw">if </span>trap.is_host() {
+                                        <span class="self">self</span>.state = InterpreterState::Resumable(
+                                            nested_func.signature().return_type(),
+                                        );
                                     }
-                                };
+                                    <span class="kw">return </span><span class="prelude-val">Err</span>(trap);
+                                }
+                            };
 
                             <span class="comment">// Check if `return_val` matches the signature.
                             </span><span class="kw">let </span>value_ty = return_val.as_ref().map(|val| val.value_type());
                             <span class="kw">let </span>expected_ty = nested_func.signature().return_type();
                             <span class="kw">if </span>value_ty != expected_ty {
-                                <span class="kw">return </span><span class="prelude-val">Err</span>(TrapKind::UnexpectedSignature.into());
+                                <span class="kw">return </span><span class="prelude-val">Err</span>(TrapCode::UnexpectedSignature.into());
                             }
 
                             <span class="kw">if let </span><span class="prelude-val">Some</span>(return_val) = return_val {
                                 <span class="self">self</span>.value_stack
                                     .push(return_val.into())
-                                    .map_err(Trap::new)<span class="question-mark">?</span>;
+                                    .map_err(Trap::from)<span class="question-mark">?</span>;
                             }
                         }
                     }
@@ -1892,7 +1946,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         function_context: <span class="kw-2">&amp;mut </span>FunctionContext,
         instructions: <span class="kw-2">&amp;</span>isa::Instructions,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;RunResult, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;RunResult, TrapCode&gt; {
         <span class="kw">let </span><span class="kw-2">mut </span>iter = instructions.iterate_from(function_context.position);
 
         <span class="kw">loop </span>{
@@ -1927,7 +1981,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         instruction: <span class="kw-2">&amp;</span>isa::Instruction,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">match </span>instruction {
             isa::Instruction::Unreachable =&gt; <span class="self">self</span>.run_unreachable(context),
 
@@ -2146,19 +2200,19 @@
     <span class="kw">fn </span>run_unreachable(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         _context: <span class="kw-2">&amp;mut </span>FunctionContext,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
-        <span class="prelude-val">Err</span>(TrapKind::Unreachable)
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
+        <span class="prelude-val">Err</span>(TrapCode::Unreachable)
     }
 
     <span class="kw">fn </span>run_br(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         _context: <span class="kw-2">&amp;mut </span>FunctionContext,
         target: isa::Target,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="prelude-val">Ok</span>(InstructionOutcome::Branch(target))
     }
 
-    <span class="kw">fn </span>run_br_nez(<span class="kw-2">&amp;mut </span><span class="self">self</span>, target: isa::Target) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_br_nez(<span class="kw-2">&amp;mut </span><span class="self">self</span>, target: isa::Target) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>condition = <span class="self">self</span>.value_stack.pop_as();
         <span class="kw">if </span>condition {
             <span class="prelude-val">Ok</span>(InstructionOutcome::Branch(target))
@@ -2167,7 +2221,7 @@
         }
     }
 
-    <span class="kw">fn </span>run_br_eqz(<span class="kw-2">&amp;mut </span><span class="self">self</span>, target: isa::Target) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_br_eqz(<span class="kw-2">&amp;mut </span><span class="self">self</span>, target: isa::Target) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>condition = <span class="self">self</span>.value_stack.pop_as();
         <span class="kw">if </span>condition {
             <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
@@ -2176,7 +2230,7 @@
         }
     }
 
-    <span class="kw">fn </span>run_br_table(<span class="kw-2">&amp;mut </span><span class="self">self</span>, targets: isa::BrTargets) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_br_table(<span class="kw-2">&amp;mut </span><span class="self">self</span>, targets: isa::BrTargets) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>index: u32 = <span class="self">self</span>.value_stack.pop_as();
 
         <span class="kw">let </span>dst = targets.get(index);
@@ -2184,7 +2238,7 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::Branch(dst))
     }
 
-    <span class="kw">fn </span>run_return(<span class="kw-2">&amp;mut </span><span class="self">self</span>, drop_keep: isa::DropKeep) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_return(<span class="kw-2">&amp;mut </span><span class="self">self</span>, drop_keep: isa::DropKeep) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="prelude-val">Ok</span>(InstructionOutcome::Return(drop_keep))
     }
 
@@ -2192,7 +2246,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         func_idx: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>func = context
             .module()
             .func_by_index(func_idx)
@@ -2204,7 +2258,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         signature_idx: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>table_func_idx: u32 = <span class="self">self</span>.value_stack.pop_as();
         <span class="kw">let </span>table = context
             .module()
@@ -2212,8 +2266,8 @@
             .expect(<span class="string">&quot;Due to validation table should exists&quot;</span>);
         <span class="kw">let </span>func_ref = table
             .get(table_func_idx)
-            .map_err(|<span class="kw">_</span>| TrapKind::TableAccessOutOfBounds)<span class="question-mark">?
-            </span>.ok_or(TrapKind::ElemUninitialized)<span class="question-mark">?</span>;
+            .map_err(|<span class="kw">_</span>| TrapCode::TableAccessOutOfBounds)<span class="question-mark">?
+            </span>.ok_or(TrapCode::ElemUninitialized)<span class="question-mark">?</span>;
 
         {
             <span class="kw">let </span>actual_function_type = func_ref.signature();
@@ -2223,40 +2277,40 @@
                 .expect(<span class="string">&quot;Due to validation type should exists&quot;</span>);
 
             <span class="kw">if </span><span class="kw-2">&amp;*</span>required_function_type != actual_function_type {
-                <span class="kw">return </span><span class="prelude-val">Err</span>(TrapKind::UnexpectedSignature);
+                <span class="kw">return </span><span class="prelude-val">Err</span>(TrapCode::UnexpectedSignature);
             }
         }
 
         <span class="prelude-val">Ok</span>(InstructionOutcome::ExecuteCall(func_ref))
     }
 
-    <span class="kw">fn </span>run_drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let _ </span>= <span class="self">self</span>.value_stack.pop();
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_select(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_select(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>(left, mid, right) = <span class="self">self</span>.value_stack.pop_triple();
 
-        <span class="kw">let </span>condition = &lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(right);
+        <span class="kw">let </span>condition = &lt;<span class="kw">_</span>&gt;::from_value_internal(right);
         <span class="kw">let </span>val = <span class="kw">if </span>condition { left } <span class="kw">else </span>{ mid };
         <span class="self">self</span>.value_stack.push(val)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_get_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_get_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>val = <span class="kw-2">*</span><span class="self">self</span>.value_stack.pick_mut(index <span class="kw">as </span>usize);
         <span class="self">self</span>.value_stack.push(val)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_set_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_set_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>val = <span class="self">self</span>.value_stack.pop();
         <span class="kw-2">*</span><span class="self">self</span>.value_stack.pick_mut(index <span class="kw">as </span>usize) = val;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_tee_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_tee_local(<span class="kw-2">&amp;mut </span><span class="self">self</span>, index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>val = <span class="kw-2">*</span><span class="self">self</span>.value_stack.top();
         <span class="kw-2">*</span><span class="self">self</span>.value_stack.pick_mut(index <span class="kw">as </span>usize) = val;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
@@ -2266,7 +2320,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         index: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>global = context
             .module()
             .global_by_index(index)
@@ -2280,7 +2334,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         index: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>val = <span class="self">self</span>.value_stack.pop();
         <span class="kw">let </span>global = context
             .module()
@@ -2296,9 +2350,9 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         offset: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
+        </span>ValueInternal: From&lt;T&gt;,
         T: LittleEndianConvert,
     {
         <span class="kw">let </span>raw_address = <span class="self">self</span>.value_stack.pop_as();
@@ -2308,7 +2362,7 @@
             .expect(<span class="string">&quot;Due to validation memory should exists&quot;</span>);
         <span class="kw">let </span>n: T = m
             .get_value(address)
-            .map_err(|<span class="kw">_</span>| TrapKind::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
+            .map_err(|<span class="kw">_</span>| TrapCode::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
         <span class="self">self</span>.value_stack.push(n.into())<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
@@ -2317,10 +2371,10 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         offset: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
         </span>T: ExtendInto&lt;U&gt;,
-        RuntimeValueInternal: From&lt;U&gt;,
+        ValueInternal: From&lt;U&gt;,
         T: LittleEndianConvert,
     {
         <span class="kw">let </span>raw_address = <span class="self">self</span>.value_stack.pop_as();
@@ -2330,7 +2384,7 @@
             .expect(<span class="string">&quot;Due to validation memory should exists&quot;</span>);
         <span class="kw">let </span>v: T = m
             .get_value(address)
-            .map_err(|<span class="kw">_</span>| TrapKind::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
+            .map_err(|<span class="kw">_</span>| TrapCode::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
         <span class="kw">let </span>stack_value: U = v.extend_into();
         <span class="self">self</span>.value_stack
             .push(stack_value.into())
@@ -2342,9 +2396,9 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         offset: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
         T: LittleEndianConvert,
     {
         <span class="kw">let </span>stack_value = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
@@ -2355,7 +2409,7 @@
             .memory()
             .expect(<span class="string">&quot;Due to validation memory should exists&quot;</span>);
         m.set_value(address, stack_value)
-            .map_err(|<span class="kw">_</span>| TrapKind::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
+            .map_err(|<span class="kw">_</span>| TrapCode::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
@@ -2363,13 +2417,13 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
         offset: u32,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
         T: WrapInto&lt;U&gt;,
         U: LittleEndianConvert,
     {
-        <span class="kw">let </span>stack_value: T = &lt;<span class="kw">_</span>&gt;::from_runtime_value_internal(<span class="self">self</span>.value_stack.pop());
+        <span class="kw">let </span>stack_value: T = &lt;<span class="kw">_</span>&gt;::from_value_internal(<span class="self">self</span>.value_stack.pop());
         <span class="kw">let </span>stack_value = stack_value.wrap_into();
         <span class="kw">let </span>raw_address = <span class="self">self</span>.value_stack.pop_as::&lt;u32&gt;();
         <span class="kw">let </span>address = effective_address(offset, raw_address)<span class="question-mark">?</span>;
@@ -2377,26 +2431,26 @@
             .memory()
             .expect(<span class="string">&quot;Due to validation memory should exists&quot;</span>);
         m.set_value(address, stack_value)
-            .map_err(|<span class="kw">_</span>| TrapKind::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
+            .map_err(|<span class="kw">_</span>| TrapCode::MemoryAccessOutOfBounds)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
     <span class="kw">fn </span>run_current_memory(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>m = context
             .memory()
             .expect(<span class="string">&quot;Due to validation memory should exists&quot;</span>);
         <span class="kw">let </span>s = m.current_size().<span class="number">0</span>;
-        <span class="self">self</span>.value_stack.push(RuntimeValueInternal(s <span class="kw">as _</span>))<span class="question-mark">?</span>;
+        <span class="self">self</span>.value_stack.push(ValueInternal(s <span class="kw">as _</span>))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
     <span class="kw">fn </span>run_grow_memory(
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         context: <span class="kw-2">&amp;mut </span>FunctionContext,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="kw">let </span>pages: u32 = <span class="self">self</span>.value_stack.pop_as();
         <span class="kw">let </span>m = context
             .memory()
@@ -2405,90 +2459,90 @@
             <span class="prelude-val">Ok</span>(Pages(new_size)) =&gt; new_size <span class="kw">as </span>u32,
             <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; u32::MAX, <span class="comment">// Returns -1 (or 0xFFFFFFFF) in case of error.
         </span>};
-        <span class="self">self</span>.value_stack.push(RuntimeValueInternal(m <span class="kw">as _</span>))<span class="question-mark">?</span>;
+        <span class="self">self</span>.value_stack.push(ValueInternal(m <span class="kw">as _</span>))<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_const(<span class="kw-2">&amp;mut </span><span class="self">self</span>, val: RuntimeValue) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt; {
+    <span class="kw">fn </span>run_const(<span class="kw-2">&amp;mut </span><span class="self">self</span>, val: RuntimeValue) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt; {
         <span class="self">self</span>.value_stack
             .push(val.into())
             .map_err(Into::into)
             .map(|<span class="kw">_</span>| InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_relop&lt;T, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: F) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_relop&lt;T, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: F) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
         F: FnOnce(T, T) -&gt; bool,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = <span class="kw">if </span>f(left, right) {
-            RuntimeValueInternal(<span class="number">1</span>)
+            ValueInternal(<span class="number">1</span>)
         } <span class="kw">else </span>{
-            RuntimeValueInternal(<span class="number">0</span>)
+            ValueInternal(<span class="number">0</span>)
         };
         <span class="self">self</span>.value_stack.push(v)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_eqz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_eqz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
         T: PartialEq&lt;T&gt; + Default,
     {
         <span class="kw">let </span>v = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
-        <span class="kw">let </span>v = RuntimeValueInternal(<span class="kw">if </span>v == Default::default() { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>});
+        <span class="kw">let </span>v = ValueInternal(<span class="kw">if </span>v == Default::default() { <span class="number">1 </span>} <span class="kw">else </span>{ <span class="number">0 </span>});
         <span class="self">self</span>.value_stack.push(v)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_eq&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_eq&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialEq&lt;T&gt;,
+        </span>T: FromValueInternal + PartialEq&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left == right)
     }
 
-    <span class="kw">fn </span>run_ne&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_ne&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialEq&lt;T&gt;,
+        </span>T: FromValueInternal + PartialEq&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left != right)
     }
 
-    <span class="kw">fn </span>run_lt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_lt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialOrd&lt;T&gt;,
+        </span>T: FromValueInternal + PartialOrd&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left &lt; right)
     }
 
-    <span class="kw">fn </span>run_gt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_gt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialOrd&lt;T&gt;,
+        </span>T: FromValueInternal + PartialOrd&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left &gt; right)
     }
 
-    <span class="kw">fn </span>run_lte&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_lte&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialOrd&lt;T&gt;,
+        </span>T: FromValueInternal + PartialOrd&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left &lt;= right)
     }
 
-    <span class="kw">fn </span>run_gte&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_gte&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal + PartialOrd&lt;T&gt;,
+        </span>T: FromValueInternal + PartialOrd&lt;T&gt;,
     {
         <span class="self">self</span>.run_relop(|left: T, right: T| left &gt;= right)
     }
 
-    <span class="kw">fn </span>run_unop&lt;T, U, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: F) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_unop&lt;T, U, F&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: F) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
         </span>F: FnOnce(T) -&gt; U,
-        T: FromRuntimeValueInternal,
-        RuntimeValueInternal: From&lt;U&gt;,
+        T: FromValueInternal,
+        ValueInternal: From&lt;U&gt;,
     {
         <span class="kw">let </span>v = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
         <span class="kw">let </span>v = f(v);
@@ -2496,34 +2550,34 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_clz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_clz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Integer&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Integer&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.leading_zeros())
     }
 
-    <span class="kw">fn </span>run_ctz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_ctz&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Integer&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Integer&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.trailing_zeros())
     }
 
-    <span class="kw">fn </span>run_popcnt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_popcnt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Integer&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Integer&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.count_ones())
     }
 
-    <span class="kw">fn </span>run_add&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_add&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: ArithmeticOps&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: ArithmeticOps&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.add(right);
@@ -2531,10 +2585,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_sub&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_sub&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: ArithmeticOps&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: ArithmeticOps&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.sub(right);
@@ -2542,10 +2596,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_mul&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_mul&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: ArithmeticOps&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: ArithmeticOps&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.mul(right);
@@ -2553,10 +2607,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_div&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_div&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: TransmuteInto&lt;U&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: TransmuteInto&lt;U&gt; + FromValueInternal,
         U: ArithmeticOps&lt;U&gt; + TransmuteInto&lt;T&gt;,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
@@ -2567,10 +2621,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_rem&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_rem&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: TransmuteInto&lt;U&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: TransmuteInto&lt;U&gt; + FromValueInternal,
         U: Integer&lt;U&gt; + TransmuteInto&lt;T&gt;,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
@@ -2581,10 +2635,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_and&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_and&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitAnd&gt;::Output&gt;,
-        T: ops::BitAnd&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitAnd&gt;::Output&gt;,
+        T: ops::BitAnd&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.bitand(right);
@@ -2592,10 +2646,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_or&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_or&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitOr&gt;::Output&gt;,
-        T: ops::BitOr&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitOr&gt;::Output&gt;,
+        T: ops::BitOr&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.bitor(right);
@@ -2603,10 +2657,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_xor&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_xor&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitXor&gt;::Output&gt;,
-        T: ops::BitXor&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::BitXor&gt;::Output&gt;,
+        T: ops::BitXor&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.bitxor(right);
@@ -2614,10 +2668,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_shl&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: T) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_shl&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: T) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::Shl&lt;T&gt;&gt;::Output&gt;,
-        T: ops::Shl&lt;T&gt; + ops::BitAnd&lt;T, Output = T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::Shl&lt;T&gt;&gt;::Output&gt;,
+        T: ops::Shl&lt;T&gt; + ops::BitAnd&lt;T, Output = T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.shl(right &amp; mask);
@@ -2625,10 +2679,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_shr&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: U) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_shr&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mask: U) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: TransmuteInto&lt;U&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: TransmuteInto&lt;U&gt; + FromValueInternal,
         U: ops::Shr&lt;U&gt; + ops::BitAnd&lt;U, Output = U&gt;,
         &lt;U <span class="kw">as </span>ops::Shr&lt;U&gt;&gt;::Output: TransmuteInto&lt;T&gt;,
     {
@@ -2640,10 +2694,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_rotl&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_rotl&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Integer&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Integer&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.rotl(right);
@@ -2651,10 +2705,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_rotr&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_rotr&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Integer&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Integer&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.rotr(right);
@@ -2662,66 +2716,66 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_abs&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_abs&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.abs())
     }
 
-    <span class="kw">fn </span>run_neg&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_neg&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::Neg&gt;::Output&gt;,
-        T: ops::Neg + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;&lt;T <span class="kw">as </span>ops::Neg&gt;::Output&gt;,
+        T: ops::Neg + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.neg())
     }
 
-    <span class="kw">fn </span>run_ceil&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_ceil&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.ceil())
     }
 
-    <span class="kw">fn </span>run_floor&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_floor&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.floor())
     }
 
-    <span class="kw">fn </span>run_trunc&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_trunc&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.trunc())
     }
 
-    <span class="kw">fn </span>run_nearest&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_nearest&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.nearest())
     }
 
-    <span class="kw">fn </span>run_sqrt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_sqrt&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.sqrt())
     }
 
-    <span class="kw">fn </span>run_min&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_min&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.min(right);
@@ -2729,10 +2783,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_max&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_max&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.max(right);
@@ -2740,10 +2794,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_copysign&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_copysign&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;T&gt;,
-        T: Float&lt;T&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;T&gt;,
+        T: Float&lt;T&gt; + FromValueInternal,
     {
         <span class="kw">let </span>(left, right) = <span class="self">self</span>.value_stack.pop_pair_as::&lt;T&gt;();
         <span class="kw">let </span>v = left.copysign(right);
@@ -2751,18 +2805,18 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_wrap&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_wrap&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;U&gt;,
-        T: WrapInto&lt;U&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;U&gt;,
+        T: WrapInto&lt;U&gt; + FromValueInternal,
     {
         <span class="self">self</span>.run_unop(|v: T| v.wrap_into())
     }
 
-    <span class="kw">fn </span>run_trunc_to_int&lt;T, U, V&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_trunc_to_int&lt;T, U, V&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;V&gt;,
-        T: TryTruncateInto&lt;U, TrapKind&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;V&gt;,
+        T: TryTruncateInto&lt;U, TrapCode&gt; + FromValueInternal,
         U: TransmuteInto&lt;V&gt;,
     {
         <span class="kw">let </span>v = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
@@ -2773,10 +2827,10 @@
             .map(|<span class="kw">_</span>| InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_extend&lt;T, U, V&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_extend&lt;T, U, V&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;V&gt;,
-        T: ExtendInto&lt;U&gt; + FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;V&gt;,
+        T: ExtendInto&lt;U&gt; + FromValueInternal,
         U: TransmuteInto&lt;V&gt;,
     {
         <span class="kw">let </span>v = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
@@ -2787,10 +2841,10 @@
         <span class="prelude-val">Ok</span>(InstructionOutcome::RunNextInstruction)
     }
 
-    <span class="kw">fn </span>run_reinterpret&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapKind&gt;
+    <span class="kw">fn </span>run_reinterpret&lt;T, U&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;InstructionOutcome, TrapCode&gt;
     <span class="kw">where
-        </span>RuntimeValueInternal: From&lt;U&gt;,
-        T: FromRuntimeValueInternal,
+        </span>ValueInternal: From&lt;U&gt;,
+        T: FromValueInternal,
         T: TransmuteInto&lt;U&gt;,
     {
         <span class="kw">let </span>v = <span class="self">self</span>.value_stack.pop_as::&lt;T&gt;();
@@ -2838,7 +2892,7 @@
         <span class="kw-2">&amp;mut </span><span class="self">self</span>,
         locals: <span class="kw-2">&amp;</span>[Local],
         value_stack: <span class="kw-2">&amp;mut </span>ValueStack,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapKind&gt; {
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapCode&gt; {
         <span class="macro">debug_assert!</span>(!<span class="self">self</span>.is_initialized);
 
         <span class="kw">let </span>num_locals = locals.iter().map(|l| l.count() <span class="kw">as </span>usize).sum();
@@ -2864,9 +2918,9 @@
     }
 }
 
-<span class="kw">fn </span>effective_address(address: u32, offset: u32) -&gt; <span class="prelude-ty">Result</span>&lt;u32, TrapKind&gt; {
+<span class="kw">fn </span>effective_address(address: u32, offset: u32) -&gt; <span class="prelude-ty">Result</span>&lt;u32, TrapCode&gt; {
     <span class="kw">match </span>offset.checked_add(address) {
-        <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Err</span>(TrapKind::MemoryAccessOutOfBounds),
+        <span class="prelude-val">None </span>=&gt; <span class="prelude-val">Err</span>(TrapCode::MemoryAccessOutOfBounds),
         <span class="prelude-val">Some</span>(address) =&gt; <span class="prelude-val">Ok</span>(address),
     }
 }
@@ -2874,20 +2928,23 @@
 <span class="kw">fn </span>prepare_function_args(
     signature: <span class="kw-2">&amp;</span>Signature,
     caller_stack: <span class="kw-2">&amp;mut </span>ValueStack,
-) -&gt; Vec&lt;RuntimeValue&gt; {
-    <span class="kw">let </span><span class="kw-2">mut </span>out = signature
-        .params()
+    host_args: <span class="kw-2">&amp;mut </span>Vec&lt;RuntimeValue&gt;,
+) {
+    <span class="kw">let </span>req_args = signature.params();
+    <span class="kw">let </span>len_args = req_args.len();
+    <span class="kw">let </span>stack_args = caller_stack.pop_slice(len_args);
+    <span class="macro">assert_eq!</span>(len_args, stack_args.len());
+    host_args.clear();
+    <span class="kw">let </span>prepared_args = req_args
         .iter()
-        .rev()
-        .map(|<span class="kw-2">&amp;</span>param_ty| caller_stack.pop().with_type(param_ty))
-        .collect::&lt;Vec&lt;RuntimeValue&gt;&gt;();
-    out.reverse();
-    out
+        .zip(stack_args)
+        .map(|(req_arg, stack_arg)| stack_arg.with_type(<span class="kw-2">*</span>req_arg));
+    host_args.extend(prepared_args);
 }
 
 <span class="kw">pub fn </span>check_function_args(signature: <span class="kw-2">&amp;</span>Signature, args: <span class="kw-2">&amp;</span>[RuntimeValue]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Trap&gt; {
     <span class="kw">if </span>signature.params().len() != args.len() {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapKind::UnexpectedSignature.into());
+        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapCode::UnexpectedSignature.into());
     }
 
     <span class="kw">if </span>signature
@@ -2896,17 +2953,25 @@
         .zip(args.iter().map(|param_value| param_value.value_type()))
         .any(|(expected_type, actual_type)| <span class="kw-2">&amp;</span>actual_type != expected_type)
     {
-        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapKind::UnexpectedSignature.into());
+        <span class="kw">return </span><span class="prelude-val">Err</span>(TrapCode::UnexpectedSignature.into());
     }
 
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="attr">#[derive(Debug)]
-</span><span class="kw">struct </span>ValueStack {
-    buf: Box&lt;[RuntimeValueInternal]&gt;,
+<span class="kw">struct </span>ValueStack {
+    buf: Box&lt;[ValueInternal]&gt;,
     <span class="doccomment">/// Index of the first free place in the stack.
     </span>sp: usize,
+}
+
+<span class="kw">impl </span>core::fmt::Debug <span class="kw">for </span>ValueStack {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+        f.debug_struct(<span class="string">&quot;ValueStack&quot;</span>)
+            .field(<span class="string">&quot;entries&quot;</span>, &amp;&amp;<span class="self">self</span>.buf[..<span class="self">self</span>.sp])
+            .field(<span class="string">&quot;stack_ptr&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.sp)
+            .finish()
+    }
 }
 
 <span class="kw">impl </span>ValueStack {
@@ -2924,17 +2989,17 @@
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>pop_as&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; T
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
     {
         <span class="kw">let </span>value = <span class="self">self</span>.pop();
 
-        T::from_runtime_value_internal(value)
+        T::from_value_internal(value)
     }
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>pop_pair_as&lt;T&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; (T, T)
     <span class="kw">where
-        </span>T: FromRuntimeValueInternal,
+        </span>T: FromValueInternal,
     {
         <span class="kw">let </span>right = <span class="self">self</span>.pop_as();
         <span class="kw">let </span>left = <span class="self">self</span>.pop_as();
@@ -2942,13 +3007,7 @@
     }
 
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>pop_triple(
-        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
-    ) -&gt; (
-        RuntimeValueInternal,
-        RuntimeValueInternal,
-        RuntimeValueInternal,
-    ) {
+    </span><span class="kw">fn </span>pop_triple(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; (ValueInternal, ValueInternal, ValueInternal) {
         <span class="kw">let </span>right = <span class="self">self</span>.pop();
         <span class="kw">let </span>mid = <span class="self">self</span>.pop();
         <span class="kw">let </span>left = <span class="self">self</span>.pop();
@@ -2956,38 +3015,38 @@
     }
 
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>top(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>RuntimeValueInternal {
+    </span><span class="kw">fn </span>top(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>ValueInternal {
         <span class="self">self</span>.pick(<span class="number">1</span>)
     }
 
-    <span class="kw">fn </span>pick(<span class="kw-2">&amp;</span><span class="self">self</span>, depth: usize) -&gt; <span class="kw-2">&amp;</span>RuntimeValueInternal {
+    <span class="kw">fn </span>pick(<span class="kw-2">&amp;</span><span class="self">self</span>, depth: usize) -&gt; <span class="kw-2">&amp;</span>ValueInternal {
         <span class="kw-2">&amp;</span><span class="self">self</span>.buf[<span class="self">self</span>.sp - depth]
     }
 
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>pick_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, depth: usize) -&gt; <span class="kw-2">&amp;mut </span>RuntimeValueInternal {
+    </span><span class="kw">fn </span>pick_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, depth: usize) -&gt; <span class="kw-2">&amp;mut </span>ValueInternal {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.buf[<span class="self">self</span>.sp - depth]
     }
 
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>pop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; RuntimeValueInternal {
+    </span><span class="kw">fn </span>pop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; ValueInternal {
         <span class="self">self</span>.sp -= <span class="number">1</span>;
         <span class="self">self</span>.buf[<span class="self">self</span>.sp]
     }
 
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: RuntimeValueInternal) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapKind&gt; {
-        <span class="kw">let </span>cell = <span class="self">self</span>.buf.get_mut(<span class="self">self</span>.sp).ok_or(TrapKind::StackOverflow)<span class="question-mark">?</span>;
+    </span><span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: ValueInternal) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapCode&gt; {
+        <span class="kw">let </span>cell = <span class="self">self</span>.buf.get_mut(<span class="self">self</span>.sp).ok_or(TrapCode::StackOverflow)<span class="question-mark">?</span>;
         <span class="kw-2">*</span>cell = value;
         <span class="self">self</span>.sp += <span class="number">1</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn </span>extend(<span class="kw-2">&amp;mut </span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapKind&gt; {
+    <span class="kw">fn </span>extend(<span class="kw-2">&amp;mut </span><span class="self">self</span>, len: usize) -&gt; <span class="prelude-ty">Result</span>&lt;(), TrapCode&gt; {
         <span class="kw">let </span>cells = <span class="self">self
             </span>.buf
             .get_mut(<span class="self">self</span>.sp..<span class="self">self</span>.sp + len)
-            .ok_or(TrapKind::StackOverflow)<span class="question-mark">?</span>;
+            .ok_or(TrapCode::StackOverflow)<span class="question-mark">?</span>;
         <span class="kw">for </span>cell <span class="kw">in </span>cells {
             <span class="kw-2">*</span>cell = Default::default();
         }
@@ -2998,6 +3057,21 @@
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.sp
+    }
+
+    <span class="doccomment">/// Pops the last `depth` stack entries and returns them as slice.
+    ///
+    /// Stack entries are returned in the order in which they got pushed
+    /// onto the value stack.
+    ///
+    /// # Panics
+    ///
+    /// If the value stack does not have at least `depth` stack entries.
+    </span><span class="kw">pub fn </span>pop_slice(<span class="kw-2">&amp;mut </span><span class="self">self</span>, depth: usize) -&gt; <span class="kw-2">&amp;</span>[ValueInternal] {
+        <span class="self">self</span>.sp -= depth;
+        <span class="kw">let </span>start = <span class="self">self</span>.sp;
+        <span class="kw">let </span>end = <span class="self">self</span>.sp + depth;
+        <span class="kw-2">&amp;</span><span class="self">self</span>.buf[start..end]
     }
 }
 
@@ -3026,7 +3100,7 @@
 
 <span class="doccomment">/// Used to recycle stacks instead of allocating them repeatedly.
 </span><span class="kw">pub struct </span>StackRecycler {
-    value_stack_buf: <span class="prelude-ty">Option</span>&lt;Box&lt;[RuntimeValueInternal]&gt;&gt;,
+    value_stack_buf: <span class="prelude-ty">Option</span>&lt;Box&lt;[ValueInternal]&gt;&gt;,
     value_stack_limit: usize,
     call_stack_buf: <span class="prelude-ty">Option</span>&lt;Vec&lt;FunctionContext&gt;&gt;,
     call_stack_limit: usize,
@@ -3056,7 +3130,7 @@
     </span><span class="kw">pub fn </span>clear(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(buf) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.value_stack_buf {
             <span class="kw">for </span>cell <span class="kw">in </span>buf.iter_mut() {
-                <span class="kw-2">*</span>cell = RuntimeValueInternal(<span class="number">0</span>);
+                <span class="kw-2">*</span>cell = ValueInternal(<span class="number">0</span>);
             }
         }
     }
@@ -3065,7 +3139,7 @@
         <span class="kw">let </span>limit = this
             .as_ref()
             .map_or(DEFAULT_VALUE_STACK_LIMIT, |this| this.value_stack_limit)
-            / ::core::mem::size_of::&lt;RuntimeValueInternal&gt;();
+            / ::core::mem::size_of::&lt;ValueInternal&gt;();
 
         <span class="kw">let </span>buf = this
             .as_mut()
@@ -3073,7 +3147,7 @@
             .unwrap_or_else(|| {
                 <span class="kw">let </span><span class="kw-2">mut </span>buf = Vec::new();
                 buf.reserve_exact(limit);
-                buf.resize(limit, RuntimeValueInternal(<span class="number">0</span>));
+                buf.resize(limit, ValueInternal(<span class="number">0</span>));
                 buf.into_boxed_slice()
             });
 

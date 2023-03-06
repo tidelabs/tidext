@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/state-machine/src/backend.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>backend.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/state-machine/src/backend.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>backend.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -350,9 +350,113 @@
 <a href="#350" id="350">350</a>
 <a href="#351" id="351">351</a>
 <a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
+<a href="#354" id="354">354</a>
+<a href="#355" id="355">355</a>
+<a href="#356" id="356">356</a>
+<a href="#357" id="357">357</a>
+<a href="#358" id="358">358</a>
+<a href="#359" id="359">359</a>
+<a href="#360" id="360">360</a>
+<a href="#361" id="361">361</a>
+<a href="#362" id="362">362</a>
+<a href="#363" id="363">363</a>
+<a href="#364" id="364">364</a>
+<a href="#365" id="365">365</a>
+<a href="#366" id="366">366</a>
+<a href="#367" id="367">367</a>
+<a href="#368" id="368">368</a>
+<a href="#369" id="369">369</a>
+<a href="#370" id="370">370</a>
+<a href="#371" id="371">371</a>
+<a href="#372" id="372">372</a>
+<a href="#373" id="373">373</a>
+<a href="#374" id="374">374</a>
+<a href="#375" id="375">375</a>
+<a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
+<a href="#432" id="432">432</a>
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
+<a href="#450" id="450">450</a>
+<a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -369,16 +473,156 @@
 
 </span><span class="doccomment">//! State machine backends. These manage the code and storage of contracts.
 
-</span><span class="kw">use crate</span>::{
-	trie_backend::TrieBackend, trie_backend_essence::TrieBackendStorage, ChildStorageCollection,
-	StorageCollection, StorageKey, StorageValue, UsageInfo,
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">crate</span>::trie_backend::TrieBackend;
+<span class="kw">use crate</span>::{
+	trie_backend_essence::TrieBackendStorage, ChildStorageCollection, StorageCollection,
+	StorageKey, StorageValue, UsageInfo,
 };
 <span class="kw">use </span>codec::Encode;
+<span class="kw">use </span>core::marker::PhantomData;
 <span class="kw">use </span>hash_db::Hasher;
 <span class="kw">use </span>sp_core::storage::{ChildInfo, StateVersion, TrackedStorageKey};
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>sp_core::traits::RuntimeCode;
 <span class="kw">use </span>sp_std::vec::Vec;
+
+<span class="doccomment">/// A struct containing arguments for iterating over the storage.
+</span><span class="attr">#[derive(Default)]
+#[non_exhaustive]
+</span><span class="kw">pub struct </span>IterArgs&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="doccomment">/// The prefix of the keys over which to iterate.
+	</span><span class="kw">pub </span>prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
+
+	<span class="doccomment">/// The prefix from which to start the iteration from.
+	///
+	/// This is inclusive and the iteration will include the key which is specified here.
+	</span><span class="kw">pub </span>start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;,
+
+	<span class="doccomment">/// If this is `true` then the iteration will *not* include
+	/// the key specified in `start_at`, if there is such a key.
+	</span><span class="kw">pub </span>start_at_exclusive: bool,
+
+	<span class="doccomment">/// The info of the child trie over which to iterate over.
+	</span><span class="kw">pub </span>child_info: <span class="prelude-ty">Option</span>&lt;ChildInfo&gt;,
+
+	<span class="doccomment">/// Whether to stop iteration when a missing trie node is reached.
+	///
+	/// When a missing trie node is reached the iterator will:
+	///   - return an error if this is set to `false` (default)
+	///   - return `None` if this is set to `true`
+	</span><span class="kw">pub </span>stop_on_incomplete_database: bool,
+}
+
+<span class="doccomment">/// A trait for a raw storage iterator.
+</span><span class="kw">pub trait </span>StorageIterator&lt;H&gt;
+<span class="kw">where
+	</span>H: Hasher,
+{
+	<span class="doccomment">/// The state backend over which the iterator is iterating.
+	</span><span class="kw">type </span>Backend;
+
+	<span class="doccomment">/// The error type.
+	</span><span class="kw">type </span>Error;
+
+	<span class="doccomment">/// Fetches the next key from the storage.
+	</span><span class="kw">fn </span>next_key(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		backend: <span class="kw-2">&amp;</span><span class="self">Self</span>::Backend,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;core::result::Result&lt;StorageKey, <span class="self">Self</span>::Error&gt;&gt;;
+
+	<span class="doccomment">/// Fetches the next key and value from the storage.
+	</span><span class="kw">fn </span>next_pair(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		backend: <span class="kw-2">&amp;</span><span class="self">Self</span>::Backend,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;core::result::Result&lt;(StorageKey, StorageValue), <span class="self">Self</span>::Error&gt;&gt;;
+
+	<span class="doccomment">/// Returns whether the end of iteration was reached without an error.
+	</span><span class="kw">fn </span>was_complete(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
+}
+
+<span class="doccomment">/// An iterator over storage keys and values.
+</span><span class="kw">pub struct </span>PairsIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt;,
+{
+	backend: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>I::Backend&gt;,
+	raw_iter: I,
+	_phantom: PhantomData&lt;H&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H, I&gt; Iterator <span class="kw">for </span>PairsIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt;,
+{
+	<span class="kw">type </span>Item = <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, Vec&lt;u8&gt;), &lt;I <span class="kw">as </span>StorageIterator&lt;H&gt;&gt;::Error&gt;;
+	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+		<span class="self">self</span>.raw_iter.next_pair(<span class="self">self</span>.backend.as_ref()<span class="question-mark">?</span>)
+	}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H, I&gt; Default <span class="kw">for </span>PairsIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt; + Default,
+{
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			backend: Default::default(),
+			raw_iter: Default::default(),
+			_phantom: Default::default(),
+		}
+	}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H, I&gt; PairsIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt; + Default,
+{
+	<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>was_complete(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+		<span class="self">self</span>.raw_iter.was_complete()
+	}
+}
+
+<span class="doccomment">/// An iterator over storage keys.
+</span><span class="kw">pub struct </span>KeysIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt;,
+{
+	backend: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>I::Backend&gt;,
+	raw_iter: I,
+	_phantom: PhantomData&lt;H&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H, I&gt; Iterator <span class="kw">for </span>KeysIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt;,
+{
+	<span class="kw">type </span>Item = <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, &lt;I <span class="kw">as </span>StorageIterator&lt;H&gt;&gt;::Error&gt;;
+	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
+		<span class="self">self</span>.raw_iter.next_key(<span class="self">self</span>.backend.as_ref()<span class="question-mark">?</span>)
+	}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, H, I&gt; Default <span class="kw">for </span>KeysIter&lt;<span class="lifetime">&#39;a</span>, H, I&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	I: StorageIterator&lt;H&gt; + Default,
+{
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			backend: Default::default(),
+			raw_iter: Default::default(),
+			_phantom: Default::default(),
+		}
+	}
+}
 
 <span class="doccomment">/// A state backend is used to read state data and can have changes committed
 /// to it.
@@ -394,13 +638,14 @@
 	<span class="doccomment">/// Type of trie backend storage.
 	</span><span class="kw">type </span>TrieBackendStorage: TrieBackendStorage&lt;H, Overlay = <span class="self">Self</span>::Transaction&gt;;
 
+	<span class="doccomment">/// Type of the raw storage iterator.
+	</span><span class="kw">type </span>RawIter: StorageIterator&lt;H, Backend = <span class="self">Self</span>, Error = <span class="self">Self</span>::Error&gt;;
+
 	<span class="doccomment">/// Get keyed storage or None if there is nothing associated.
 	</span><span class="kw">fn </span>storage(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;, <span class="self">Self</span>::Error&gt;;
 
 	<span class="doccomment">/// Get keyed storage value hash or None if there is nothing associated.
-	</span><span class="kw">fn </span>storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;, <span class="self">Self</span>::Error&gt; {
-		<span class="self">self</span>.storage(key).map(|v| v.map(|v| H::hash(<span class="kw-2">&amp;</span>v)))
-	}
+	</span><span class="kw">fn </span>storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;, <span class="self">Self</span>::Error&gt;;
 
 	<span class="doccomment">/// Get keyed child storage or None if there is nothing associated.
 	</span><span class="kw">fn </span>child_storage(
@@ -414,13 +659,11 @@
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		key: <span class="kw-2">&amp;</span>[u8],
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;, <span class="self">Self</span>::Error&gt; {
-		<span class="self">self</span>.child_storage(child_info, key).map(|v| v.map(|v| H::hash(<span class="kw-2">&amp;</span>v)))
-	}
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;, <span class="self">Self</span>::Error&gt;;
 
 	<span class="doccomment">/// true if a key exists in storage.
 	</span><span class="kw">fn </span>exists_storage(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;bool, <span class="self">Self</span>::Error&gt; {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.storage(key)<span class="question-mark">?</span>.is_some())
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.storage_hash(key)<span class="question-mark">?</span>.is_some())
 	}
 
 	<span class="doccomment">/// true if a key exists in child storage.
@@ -429,7 +672,7 @@
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		key: <span class="kw-2">&amp;</span>[u8],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, <span class="self">Self</span>::Error&gt; {
-		<span class="prelude-val">Ok</span>(<span class="self">self</span>.child_storage(child_info, key)<span class="question-mark">?</span>.is_some())
+		<span class="prelude-val">Ok</span>(<span class="self">self</span>.child_storage_hash(child_info, key)<span class="question-mark">?</span>.is_some())
 	}
 
 	<span class="doccomment">/// Return the next key in storage in lexicographic order or `None` if there is no value.
@@ -441,51 +684,6 @@
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		key: <span class="kw-2">&amp;</span>[u8],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageKey&gt;, <span class="self">Self</span>::Error&gt;;
-
-	<span class="doccomment">/// Iterate over storage starting at key, for a given prefix and child trie.
-	/// Aborts as soon as `f` returns false.
-	/// Warning, this fails at first error when usual iteration skips errors.
-	/// If `allow_missing` is true, iteration stops when it reaches a missing trie node.
-	/// Otherwise an error is produced.
-	///
-	/// Returns `true` if trie end is reached.
-	</span><span class="kw">fn </span>apply_to_key_values_while&lt;F: FnMut(Vec&lt;u8&gt;, Vec&lt;u8&gt;) -&gt; bool&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		f: F,
-		allow_missing: bool,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, <span class="self">Self</span>::Error&gt;;
-
-	<span class="doccomment">/// Retrieve all entries keys of storage and call `f` for each of those keys.
-	/// Aborts as soon as `f` returns false.
-	</span><span class="kw">fn </span>apply_to_keys_while&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8]) -&gt; bool&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		f: F,
-	);
-
-	<span class="doccomment">/// Retrieve all entries keys which start with the given prefix and
-	/// call `f` for each of those keys.
-	</span><span class="kw">fn </span>for_keys_with_prefix&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8])&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8], <span class="kw-2">mut </span>f: F) {
-		<span class="self">self</span>.for_key_values_with_prefix(prefix, |k, _v| f(k))
-	}
-
-	<span class="doccomment">/// Retrieve all entries keys and values of which start with the given prefix and
-	/// call `f` for each of those keys.
-	</span><span class="kw">fn </span>for_key_values_with_prefix&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8], <span class="kw-2">&amp;</span>[u8])&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8], f: F);
-
-	<span class="doccomment">/// Retrieve all child entries keys which start with the given prefix and
-	/// call `f` for each of those keys.
-	</span><span class="kw">fn </span>for_child_keys_with_prefix&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8])&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="kw-2">&amp;</span>ChildInfo,
-		prefix: <span class="kw-2">&amp;</span>[u8],
-		f: F,
-	);
 
 	<span class="doccomment">/// Calculate the storage root, with given delta over what is already stored in
 	/// the backend, and produce a &quot;transaction&quot; that can be used to commit.
@@ -510,27 +708,27 @@
 	<span class="kw">where
 		</span>H::Out: Ord;
 
-	<span class="doccomment">/// Get all key/value pairs into a Vec.
-	</span><span class="kw">fn </span>pairs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;(StorageKey, StorageValue)&gt;;
+	<span class="doccomment">/// Returns a lifetimeless raw storage iterator.
+	</span><span class="kw">fn </span>raw_iter(<span class="kw-2">&amp;</span><span class="self">self</span>, args: IterArgs) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::RawIter, <span class="self">Self</span>::Error&gt;;
 
-	<span class="doccomment">/// Get all keys with given prefix
-	</span><span class="kw">fn </span>keys(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; Vec&lt;StorageKey&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>all = Vec::new();
-		<span class="self">self</span>.for_keys_with_prefix(prefix, |k| all.push(k.to_vec()));
-		all
+	<span class="doccomment">/// Get an iterator over key/value pairs.
+	</span><span class="kw">fn </span>pairs&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, args: IterArgs) -&gt; <span class="prelude-ty">Result</span>&lt;PairsIter&lt;<span class="lifetime">&#39;a</span>, H, <span class="self">Self</span>::RawIter&gt;, <span class="self">Self</span>::Error&gt; {
+		<span class="prelude-val">Ok</span>(PairsIter {
+			backend: <span class="prelude-val">Some</span>(<span class="self">self</span>),
+			raw_iter: <span class="self">self</span>.raw_iter(args)<span class="question-mark">?</span>,
+			_phantom: Default::default(),
+		})
 	}
 
-	<span class="doccomment">/// Get all keys of child storage with given prefix
-	</span><span class="kw">fn </span>child_keys(<span class="kw-2">&amp;</span><span class="self">self</span>, child_info: <span class="kw-2">&amp;</span>ChildInfo, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; Vec&lt;StorageKey&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>all = Vec::new();
-		<span class="self">self</span>.for_child_keys_with_prefix(child_info, prefix, |k| all.push(k.to_vec()));
-		all
+	<span class="doccomment">/// Get an iterator over keys.
+	</span><span class="kw">fn </span>keys&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>, args: IterArgs) -&gt; <span class="prelude-ty">Result</span>&lt;KeysIter&lt;<span class="lifetime">&#39;a</span>, H, <span class="self">Self</span>::RawIter&gt;, <span class="self">Self</span>::Error&gt; {
+		<span class="prelude-val">Ok</span>(KeysIter {
+			backend: <span class="prelude-val">Some</span>(<span class="self">self</span>),
+			raw_iter: <span class="self">self</span>.raw_iter(args)<span class="question-mark">?</span>,
+			_phantom: Default::default(),
+		})
 	}
 
-	<span class="doccomment">/// Try convert into trie backend.
-	</span><span class="kw">fn </span>as_trie_backend(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>TrieBackend&lt;<span class="self">Self</span>::TrieBackendStorage, H&gt;&gt; {
-		<span class="prelude-val">None
-	</span>}
 	<span class="doccomment">/// Calculate the storage root, with given delta over what is already stored
 	/// in the backend, and produce a &quot;transaction&quot; that can be used to commit.
 	/// Does include child storage updates.
@@ -625,6 +823,16 @@
 	}
 }
 
+<span class="doccomment">/// Something that can be converted into a [`TrieBackend`].
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub trait </span>AsTrieBackend&lt;H: Hasher, C = sp_trie::cache::LocalTrieCache&lt;H&gt;&gt; {
+	<span class="doccomment">/// Type of trie backend storage.
+	</span><span class="kw">type </span>TrieBackendStorage: TrieBackendStorage&lt;H&gt;;
+
+	<span class="doccomment">/// Return the type as [`TrieBackend`].
+	</span><span class="kw">fn </span>as_trie_backend(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>TrieBackend&lt;<span class="self">Self</span>::TrieBackendStorage, H, C&gt;;
+}
+
 <span class="doccomment">/// Trait that allows consolidate two transactions together.
 </span><span class="kw">pub trait </span>Consolidate {
 	<span class="doccomment">/// Consolidate two transactions into one.
@@ -657,7 +865,7 @@
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">pub struct </span>BackendRuntimeCode&lt;<span class="lifetime">&#39;a</span>, B, H&gt; {
 	backend: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>B,
-	_marker: std::marker::PhantomData&lt;H&gt;,
+	_marker: PhantomData&lt;H&gt;,
 }
 
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
@@ -680,7 +888,7 @@
 {
 	<span class="doccomment">/// Create a new instance.
 	</span><span class="kw">pub fn </span>new(backend: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>B) -&gt; <span class="self">Self </span>{
-		<span class="self">Self </span>{ backend, _marker: std::marker::PhantomData }
+		<span class="self">Self </span>{ backend, _marker: PhantomData }
 	}
 
 	<span class="doccomment">/// Return the [`RuntimeCode`] build from the wrapped `backend`.

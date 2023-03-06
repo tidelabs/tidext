@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-types-0.15.1/src/params.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>params.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_types/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/jsonrpsee-types-0.16.2/src/params.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>params.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../jsonrpsee_types/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -558,37 +558,6 @@
 <a href="#558" id="558">558</a>
 <a href="#559" id="559">559</a>
 <a href="#560" id="560">560</a>
-<a href="#561" id="561">561</a>
-<a href="#562" id="562">562</a>
-<a href="#563" id="563">563</a>
-<a href="#564" id="564">564</a>
-<a href="#565" id="565">565</a>
-<a href="#566" id="566">566</a>
-<a href="#567" id="567">567</a>
-<a href="#568" id="568">568</a>
-<a href="#569" id="569">569</a>
-<a href="#570" id="570">570</a>
-<a href="#571" id="571">571</a>
-<a href="#572" id="572">572</a>
-<a href="#573" id="573">573</a>
-<a href="#574" id="574">574</a>
-<a href="#575" id="575">575</a>
-<a href="#576" id="576">576</a>
-<a href="#577" id="577">577</a>
-<a href="#578" id="578">578</a>
-<a href="#579" id="579">579</a>
-<a href="#580" id="580">580</a>
-<a href="#581" id="581">581</a>
-<a href="#582" id="582">582</a>
-<a href="#583" id="583">583</a>
-<a href="#584" id="584">584</a>
-<a href="#585" id="585">585</a>
-<a href="#586" id="586">586</a>
-<a href="#587" id="587">587</a>
-<a href="#588" id="588">588</a>
-<a href="#589" id="589">589</a>
-<a href="#590" id="590">590</a>
-<a href="#591" id="591">591</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2021 Parity Technologies (UK) Ltd.
 //
 // Permission is hereby granted, free of charge, to any
@@ -621,7 +590,6 @@
 </span><span class="kw">use </span>std::fmt;
 
 <span class="kw">use </span><span class="kw">crate</span>::error::CallError;
-<span class="kw">use </span>alloc::collections::BTreeMap;
 <span class="kw">use </span>anyhow::anyhow;
 <span class="kw">use </span>beef::Cow;
 <span class="kw">use </span>serde::de::{<span class="self">self</span>, Deserializer, Unexpected, Visitor};
@@ -630,7 +598,7 @@
 <span class="kw">use </span>serde_json::Value <span class="kw">as </span>JsonValue;
 
 <span class="doccomment">/// JSON-RPC v2 marker type.
-</span><span class="attr">#[derive(Clone, Copy, Debug, Default, PartialEq)]
+</span><span class="attr">#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 </span><span class="kw">pub struct </span>TwoPointZero;
 
 <span class="kw">struct </span>TwoPointZeroVisitor;
@@ -732,6 +700,14 @@
 	</span><span class="kw">pub fn </span>into_owned(<span class="self">self</span>) -&gt; Params&lt;<span class="lifetime">&#39;static</span>&gt; {
 		Params(<span class="self">self</span>.<span class="number">0</span>.map(|s| Cow::owned(s.into_owned())))
 	}
+
+	<span class="doccomment">/// Return the length of underlying JSON string in number of bytes.
+	</span><span class="kw">pub fn </span>len_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+		<span class="kw">match </span><span class="self">self</span>.<span class="number">0 </span>{
+			<span class="prelude-val">Some</span>(<span class="kw-2">ref </span>cow) =&gt; cow.len(),
+			<span class="prelude-val">None </span>=&gt; <span class="number">0</span>,
+		}
+	}
 }
 
 <span class="doccomment">/// An `Iterator`-like parser for a sequence of [`Params`].
@@ -741,7 +717,7 @@
 /// params parsing (often) yields values of different types.
 ///
 /// Regards empty array `[]` as no parameters provided.
-</span><span class="attr">#[derive(Debug)]
+</span><span class="attr">#[derive(Debug, Copy, Clone)]
 </span><span class="kw">pub struct </span>ParamsSequence&lt;<span class="lifetime">&#39;a</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str);
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; ParamsSequence&lt;<span class="lifetime">&#39;a</span>&gt; {
@@ -751,7 +727,7 @@
 	{
 		<span class="kw">let </span><span class="kw-2">mut </span>json = <span class="self">self</span>.<span class="number">0</span>;
 		<span class="macro">tracing::trace!</span>(<span class="string">&quot;[next_inner] Params JSON: {:?}&quot;</span>, json);
-		<span class="kw">match </span>json.as_bytes().get(<span class="number">0</span>)<span class="question-mark">? </span>{
+		<span class="kw">match </span>json.as_bytes().first()<span class="question-mark">? </span>{
 			<span class="string">b&#39;]&#39; </span>=&gt; {
 				<span class="self">self</span>.<span class="number">0 </span>= <span class="string">&quot;&quot;</span>;
 
@@ -840,40 +816,6 @@
 			<span class="prelude-val">Some</span>(result) =&gt; result,
 			<span class="prelude-val">None </span>=&gt; <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
 		}
-	}
-}
-
-<span class="doccomment">/// [Serializable JSON-RPC parameters](https://www.jsonrpc.org/specification#parameter_structures)
-///
-/// If your type implements `Into&lt;JsonValue&gt;`, call that in favor of `serde_json::to:value` to
-/// construct the parameters. Because `serde_json::to_value` serializes the type which allocates
-/// whereas `Into&lt;JsonValue&gt;` doesn&#39;t in most cases.
-</span><span class="attr">#[derive(Serialize, Debug, Clone)]
-#[serde(untagged)]
-</span><span class="kw">pub enum </span>ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="doccomment">/// Positional params (heap allocated).
-	</span>Array(Vec&lt;JsonValue&gt;),
-	<span class="doccomment">/// Positional params (slice).
-	</span>ArrayRef(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[JsonValue]),
-	<span class="doccomment">/// Params by name.
-	</span>Map(BTreeMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, JsonValue&gt;),
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;BTreeMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, JsonValue&gt;&gt; <span class="kw">for </span>ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="kw">fn </span>from(map: BTreeMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>str, JsonValue&gt;) -&gt; <span class="self">Self </span>{
-		<span class="self">Self</span>::Map(map)
-	}
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;Vec&lt;JsonValue&gt;&gt; <span class="kw">for </span>ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="kw">fn </span>from(arr: Vec&lt;JsonValue&gt;) -&gt; <span class="self">Self </span>{
-		<span class="self">Self</span>::Array(arr)
-	}
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[JsonValue]&gt; <span class="kw">for </span>ParamsSer&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="kw">fn </span>from(slice: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[JsonValue]) -&gt; <span class="self">Self </span>{
-		<span class="self">Self</span>::ArrayRef(slice)
 	}
 }
 
@@ -989,11 +931,20 @@
 			Id::Str(s) =&gt; Id::Str(Cow::owned(s.into_owned())),
 		}
 	}
+
+	<span class="doccomment">/// Extract the underlying number from the ID.
+	</span><span class="kw">pub fn </span>try_parse_inner_as_number(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;u64&gt; {
+		<span class="kw">match </span><span class="self">self </span>{
+			Id::Null =&gt; <span class="prelude-val">None</span>,
+			Id::Number(num) =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">*</span>num),
+			Id::Str(s) =&gt; s.parse().ok(),
+		}
+	}
 }
 
 <span class="attr">#[cfg(test)]
 </span><span class="kw">mod </span>test {
-	<span class="kw">use super</span>::{Cow, Id, JsonValue, Params, ParamsSer, SubscriptionId, TwoPointZero};
+	<span class="kw">use super</span>::{Cow, Id, JsonValue, Params, SubscriptionId, TwoPointZero};
 	<span class="kw">use </span><span class="kw">crate</span>::response::SubscriptionPayload;
 
 	<span class="attr">#[test]
@@ -1033,29 +984,14 @@
 	}
 
 	<span class="attr">#[test]
-	</span><span class="kw">fn </span>params_serialize() {
-		<span class="kw">let </span>test_vector = <span class="kw-2">&amp;</span>[
-			(<span class="string">&quot;[]&quot;</span>, ParamsSer::Array(serde_json::from_str(<span class="string">&quot;[]&quot;</span>).unwrap())),
-			(<span class="string">&quot;[42,23]&quot;</span>, ParamsSer::Array(serde_json::from_str(<span class="string">&quot;[42,23]&quot;</span>).unwrap())),
-			(
-				<span class="string">r#&quot;{&quot;a&quot;:42,&quot;b&quot;:null,&quot;c&quot;:&quot;aa&quot;}&quot;#</span>,
-				ParamsSer::Map(serde_json::from_str(<span class="string">r#&quot;{&quot;a&quot;:42,&quot;b&quot;:null,&quot;c&quot;:&quot;aa&quot;}&quot;#</span>).unwrap()),
-			),
-		];
-
-		<span class="kw">for </span>(initial_ser, params) <span class="kw">in </span>test_vector {
-			<span class="kw">let </span>serialized = serde_json::to_string(params).unwrap();
-			<span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>serialized, initial_ser);
-		}
-	}
-
-	<span class="attr">#[test]
 	</span><span class="kw">fn </span>params_parse() {
 		<span class="kw">let </span>none = Params::new(<span class="prelude-val">None</span>);
 		<span class="macro">assert!</span>(none.sequence().next::&lt;u64&gt;().is_err());
 		<span class="macro">assert!</span>(none.parse::&lt;<span class="prelude-ty">Option</span>&lt;u64&gt;&gt;().is_ok());
+		<span class="macro">assert_eq!</span>(none.len_bytes(), <span class="number">0</span>);
 
 		<span class="kw">let </span>array_params = Params::new(<span class="prelude-val">Some</span>(<span class="string">&quot;[1, 2, 3]&quot;</span>));
+		<span class="macro">assert_eq!</span>(array_params.len_bytes(), <span class="number">9</span>);
 		<span class="kw">let </span>arr: <span class="prelude-ty">Result</span>&lt;[u64; <span class="number">3</span>], <span class="kw">_</span>&gt; = array_params.parse();
 		<span class="macro">assert!</span>(arr.is_ok());
 
@@ -1067,10 +1003,12 @@
 		<span class="macro">assert!</span>(seq.next::&lt;u64&gt;().is_err());
 
 		<span class="kw">let </span>array_one = Params::new(<span class="prelude-val">Some</span>(<span class="string">&quot;[1]&quot;</span>));
+		<span class="macro">assert_eq!</span>(array_one.len_bytes(), <span class="number">3</span>);
 		<span class="kw">let </span>one: <span class="prelude-ty">Result</span>&lt;u64, <span class="kw">_</span>&gt; = array_one.one();
 		<span class="macro">assert!</span>(one.is_ok());
 
 		<span class="kw">let </span>object_params = Params::new(<span class="prelude-val">Some</span>(<span class="string">r#&quot;{&quot;beef&quot;:99,&quot;dinner&quot;:0}&quot;#</span>));
+		<span class="macro">assert_eq!</span>(object_params.len_bytes(), <span class="number">22</span>);
 		<span class="kw">let </span>obj: <span class="prelude-ty">Result</span>&lt;JsonValue, <span class="kw">_</span>&gt; = object_params.parse();
 		<span class="macro">assert!</span>(obj.is_ok());
 	}

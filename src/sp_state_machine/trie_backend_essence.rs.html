@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/state-machine/src/trie_backend_essence.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>trie_backend_essence.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/state-machine/src/trie_backend_essence.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>trie_backend_essence.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_state_machine/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -744,9 +744,179 @@
 <a href="#744" id="744">744</a>
 <a href="#745" id="745">745</a>
 <a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
+<a href="#794" id="794">794</a>
+<a href="#795" id="795">795</a>
+<a href="#796" id="796">796</a>
+<a href="#797" id="797">797</a>
+<a href="#798" id="798">798</a>
+<a href="#799" id="799">799</a>
+<a href="#800" id="800">800</a>
+<a href="#801" id="801">801</a>
+<a href="#802" id="802">802</a>
+<a href="#803" id="803">803</a>
+<a href="#804" id="804">804</a>
+<a href="#805" id="805">805</a>
+<a href="#806" id="806">806</a>
+<a href="#807" id="807">807</a>
+<a href="#808" id="808">808</a>
+<a href="#809" id="809">809</a>
+<a href="#810" id="810">810</a>
+<a href="#811" id="811">811</a>
+<a href="#812" id="812">812</a>
+<a href="#813" id="813">813</a>
+<a href="#814" id="814">814</a>
+<a href="#815" id="815">815</a>
+<a href="#816" id="816">816</a>
+<a href="#817" id="817">817</a>
+<a href="#818" id="818">818</a>
+<a href="#819" id="819">819</a>
+<a href="#820" id="820">820</a>
+<a href="#821" id="821">821</a>
+<a href="#822" id="822">822</a>
+<a href="#823" id="823">823</a>
+<a href="#824" id="824">824</a>
+<a href="#825" id="825">825</a>
+<a href="#826" id="826">826</a>
+<a href="#827" id="827">827</a>
+<a href="#828" id="828">828</a>
+<a href="#829" id="829">829</a>
+<a href="#830" id="830">830</a>
+<a href="#831" id="831">831</a>
+<a href="#832" id="832">832</a>
+<a href="#833" id="833">833</a>
+<a href="#834" id="834">834</a>
+<a href="#835" id="835">835</a>
+<a href="#836" id="836">836</a>
+<a href="#837" id="837">837</a>
+<a href="#838" id="838">838</a>
+<a href="#839" id="839">839</a>
+<a href="#840" id="840">840</a>
+<a href="#841" id="841">841</a>
+<a href="#842" id="842">842</a>
+<a href="#843" id="843">843</a>
+<a href="#844" id="844">844</a>
+<a href="#845" id="845">845</a>
+<a href="#846" id="846">846</a>
+<a href="#847" id="847">847</a>
+<a href="#848" id="848">848</a>
+<a href="#849" id="849">849</a>
+<a href="#850" id="850">850</a>
+<a href="#851" id="851">851</a>
+<a href="#852" id="852">852</a>
+<a href="#853" id="853">853</a>
+<a href="#854" id="854">854</a>
+<a href="#855" id="855">855</a>
+<a href="#856" id="856">856</a>
+<a href="#857" id="857">857</a>
+<a href="#858" id="858">858</a>
+<a href="#859" id="859">859</a>
+<a href="#860" id="860">860</a>
+<a href="#861" id="861">861</a>
+<a href="#862" id="862">862</a>
+<a href="#863" id="863">863</a>
+<a href="#864" id="864">864</a>
+<a href="#865" id="865">865</a>
+<a href="#866" id="866">866</a>
+<a href="#867" id="867">867</a>
+<a href="#868" id="868">868</a>
+<a href="#869" id="869">869</a>
+<a href="#870" id="870">870</a>
+<a href="#871" id="871">871</a>
+<a href="#872" id="872">872</a>
+<a href="#873" id="873">873</a>
+<a href="#874" id="874">874</a>
+<a href="#875" id="875">875</a>
+<a href="#876" id="876">876</a>
+<a href="#877" id="877">877</a>
+<a href="#878" id="878">878</a>
+<a href="#879" id="879">879</a>
+<a href="#880" id="880">880</a>
+<a href="#881" id="881">881</a>
+<a href="#882" id="882">882</a>
+<a href="#883" id="883">883</a>
+<a href="#884" id="884">884</a>
+<a href="#885" id="885">885</a>
+<a href="#886" id="886">886</a>
+<a href="#887" id="887">887</a>
+<a href="#888" id="888">888</a>
+<a href="#889" id="889">889</a>
+<a href="#890" id="890">890</a>
+<a href="#891" id="891">891</a>
+<a href="#892" id="892">892</a>
+<a href="#893" id="893">893</a>
+<a href="#894" id="894">894</a>
+<a href="#895" id="895">895</a>
+<a href="#896" id="896">896</a>
+<a href="#897" id="897">897</a>
+<a href="#898" id="898">898</a>
+<a href="#899" id="899">899</a>
+<a href="#900" id="900">900</a>
+<a href="#901" id="901">901</a>
+<a href="#902" id="902">902</a>
+<a href="#903" id="903">903</a>
+<a href="#904" id="904">904</a>
+<a href="#905" id="905">905</a>
+<a href="#906" id="906">906</a>
+<a href="#907" id="907">907</a>
+<a href="#908" id="908">908</a>
+<a href="#909" id="909">909</a>
+<a href="#910" id="910">910</a>
+<a href="#911" id="911">911</a>
+<a href="#912" id="912">912</a>
+<a href="#913" id="913">913</a>
+<a href="#914" id="914">914</a>
+<a href="#915" id="915">915</a>
+<a href="#916" id="916">916</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -764,23 +934,31 @@
 </span><span class="doccomment">//! Trie-based state machine backend essence used to read values
 //! from storage.
 
-</span><span class="kw">use crate</span>::{backend::Consolidate, debug, warn, StorageKey, StorageValue};
-<span class="kw">use </span>codec::Encode;
+</span><span class="kw">use crate</span>::{
+	backend::{Consolidate, IterArgs, StorageIterator},
+	trie_backend::AsLocalTrieCache,
+	warn, StorageKey, StorageValue,
+};
+<span class="kw">use </span>codec::Codec;
 <span class="kw">use </span>hash_db::{<span class="self">self</span>, AsHashDB, HashDB, HashDBRef, Hasher, Prefix};
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span>parking_lot::RwLock;
 <span class="kw">use </span>sp_core::storage::{ChildInfo, ChildType, StateVersion};
-<span class="kw">use </span>sp_std::{boxed::Box, vec::Vec};
+<span class="kw">use </span>sp_std::{boxed::Box, marker::PhantomData, vec::Vec};
+<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">use </span>sp_trie::recorder::Recorder;
 <span class="kw">use </span>sp_trie::{
-	child_delta_trie_root, delta_trie_root, empty_child_trie_root, read_child_trie_value,
-	read_trie_value,
-	trie_types::{TrieDB, TrieError},
-	DBValue, KeySpacedDB, LayoutV1 <span class="kw">as </span>Layout, Trie, TrieDBIterator, TrieDBKeyIterator,
+	child_delta_trie_root, delta_trie_root, empty_child_trie_root, read_child_trie_hash,
+	read_child_trie_value, read_trie_value,
+	trie_types::{TrieDBBuilder, TrieError},
+	DBValue, KeySpacedDB, NodeCodec, Trie, TrieCache, TrieDBRawIterator, TrieRecorder,
 };
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">use </span>std::collections::HashMap;
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">use </span>std::sync::Arc;
+</span><span class="kw">use </span>std::{collections::HashMap, sync::Arc};
+
+<span class="comment">// In this module, we only use layout for read operation and empty root,
+// where V1 and V0 are equivalent.
+</span><span class="kw">use </span>sp_trie::LayoutV1 <span class="kw">as </span>Layout;
 
 <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="macro">macro_rules! </span>format {
@@ -813,19 +991,149 @@
 	}
 }
 
+<span class="kw">enum </span>IterState {
+	Pending,
+	FinishedComplete,
+	FinishedIncomplete,
+}
+
+<span class="doccomment">/// A raw iterator over the storage.
+</span><span class="kw">pub struct </span>RawIter&lt;S, H, C&gt;
+<span class="kw">where
+	</span>H: Hasher,
+{
+	stop_on_incomplete_database: bool,
+	skip_if_first: <span class="prelude-ty">Option</span>&lt;StorageKey&gt;,
+	root: H::Out,
+	child_info: <span class="prelude-ty">Option</span>&lt;ChildInfo&gt;,
+	trie_iter: TrieDBRawIterator&lt;Layout&lt;H&gt;&gt;,
+	state: IterState,
+	_phantom: PhantomData&lt;(S, C)&gt;,
+}
+
+<span class="kw">impl</span>&lt;S, H, C&gt; RawIter&lt;S, H, C&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	S: TrieBackendStorage&lt;H&gt;,
+	H::Out: Codec + Ord,
+	C: AsLocalTrieCache&lt;H&gt; + Send + Sync,
+{
+	<span class="attr">#[inline]
+	</span><span class="kw">fn </span>prepare&lt;R&gt;(
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>,
+		backend: <span class="kw-2">&amp;</span>TrieBackendEssence&lt;S, H, C&gt;,
+		callback: <span class="kw">impl </span>FnOnce(
+			<span class="kw-2">&amp;</span>sp_trie::TrieDB&lt;Layout&lt;H&gt;&gt;,
+			<span class="kw-2">&amp;mut </span>TrieDBRawIterator&lt;Layout&lt;H&gt;&gt;,
+		) -&gt; <span class="prelude-ty">Option</span>&lt;core::result::Result&lt;R, Box&lt;TrieError&lt;&lt;H <span class="kw">as </span>Hasher&gt;::Out&gt;&gt;&gt;&gt;,
+	) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;R&gt;&gt; {
+		<span class="kw">if </span>!<span class="macro">matches!</span>(<span class="self">self</span>.state, IterState::Pending) {
+			<span class="kw">return </span><span class="prelude-val">None
+		</span>}
+
+		<span class="kw">let </span>result = backend.with_trie_db(<span class="self">self</span>.root, <span class="self">self</span>.child_info.as_ref(), |db| {
+			callback(<span class="kw-2">&amp;</span>db, <span class="kw-2">&amp;mut </span><span class="self">self</span>.trie_iter)
+		});
+		<span class="kw">match </span>result {
+			<span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(key_value)) =&gt; <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(key_value)),
+			<span class="prelude-val">None </span>=&gt; {
+				<span class="self">self</span>.state = IterState::FinishedComplete;
+				<span class="prelude-val">None
+			</span>},
+			<span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(error)) =&gt; {
+				<span class="self">self</span>.state = IterState::FinishedIncomplete;
+				<span class="kw">if </span><span class="macro">matches!</span>(<span class="kw-2">*</span>error, TrieError::IncompleteDatabase(<span class="kw">_</span>)) &amp;&amp;
+					<span class="self">self</span>.stop_on_incomplete_database
+				{
+					<span class="prelude-val">None
+				</span>} <span class="kw">else </span>{
+					<span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;TrieDB iteration error: {}&quot;</span>, error)))
+				}
+			},
+		}
+	}
+}
+
+<span class="kw">impl</span>&lt;S, H, C&gt; Default <span class="kw">for </span>RawIter&lt;S, H, C&gt;
+<span class="kw">where
+	</span>H: Hasher,
+{
+	<span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{
+			stop_on_incomplete_database: <span class="bool-val">false</span>,
+			skip_if_first: <span class="prelude-val">None</span>,
+			child_info: <span class="prelude-val">None</span>,
+			root: Default::default(),
+			trie_iter: TrieDBRawIterator::empty(),
+			state: IterState::FinishedComplete,
+			_phantom: Default::default(),
+		}
+	}
+}
+
+<span class="kw">impl</span>&lt;S, H, C&gt; StorageIterator&lt;H&gt; <span class="kw">for </span>RawIter&lt;S, H, C&gt;
+<span class="kw">where
+	</span>H: Hasher,
+	S: TrieBackendStorage&lt;H&gt;,
+	H::Out: Codec + Ord,
+	C: AsLocalTrieCache&lt;H&gt; + Send + Sync,
+{
+	<span class="kw">type </span>Backend = <span class="kw">crate</span>::TrieBackend&lt;S, H, C&gt;;
+	<span class="kw">type </span>Error = <span class="kw">crate</span>::DefaultError;
+
+	<span class="attr">#[inline]
+	</span><span class="kw">fn </span>next_key(<span class="kw-2">&amp;mut </span><span class="self">self</span>, backend: <span class="kw-2">&amp;</span><span class="self">Self</span>::Backend) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;StorageKey&gt;&gt; {
+		<span class="kw">let </span>skip_if_first = <span class="self">self</span>.skip_if_first.take();
+		<span class="self">self</span>.prepare(<span class="kw-2">&amp;</span>backend.essence, |trie, trie_iter| {
+			<span class="kw">let </span><span class="kw-2">mut </span>result = trie_iter.next_key(<span class="kw-2">&amp;</span>trie);
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(skipped_key) = skip_if_first {
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="kw-2">ref </span>key)) = result {
+					<span class="kw">if </span><span class="kw-2">*</span>key == skipped_key {
+						result = trie_iter.next_key(<span class="kw-2">&amp;</span>trie);
+					}
+				}
+			}
+			result
+		})
+	}
+
+	<span class="attr">#[inline]
+	</span><span class="kw">fn </span>next_pair(<span class="kw-2">&amp;mut </span><span class="self">self</span>, backend: <span class="kw-2">&amp;</span><span class="self">Self</span>::Backend) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="prelude-ty">Result</span>&lt;(StorageKey, StorageValue)&gt;&gt; {
+		<span class="kw">let </span>skip_if_first = <span class="self">self</span>.skip_if_first.take();
+		<span class="self">self</span>.prepare(<span class="kw-2">&amp;</span>backend.essence, |trie, trie_iter| {
+			<span class="kw">let </span><span class="kw-2">mut </span>result = trie_iter.next_item(<span class="kw-2">&amp;</span>trie);
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(skipped_key) = skip_if_first {
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>((<span class="kw-2">ref </span>key, <span class="kw">_</span>))) = result {
+					<span class="kw">if </span><span class="kw-2">*</span>key == skipped_key {
+						result = trie_iter.next_item(<span class="kw-2">&amp;</span>trie);
+					}
+				}
+			}
+			result
+		})
+	}
+
+	<span class="kw">fn </span>was_complete(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+		<span class="macro">matches!</span>(<span class="self">self</span>.state, IterState::FinishedComplete)
+	}
+}
+
 <span class="doccomment">/// Patricia trie-based pairs storage essence.
-</span><span class="kw">pub struct </span>TrieBackendEssence&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; {
+</span><span class="kw">pub struct </span>TrieBackendEssence&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C&gt; {
 	storage: S,
 	root: H::Out,
 	empty: H::Out,
 	<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 	</span><span class="kw">pub</span>(<span class="kw">crate</span>) cache: Arc&lt;RwLock&lt;Cache&lt;H::Out&gt;&gt;&gt;,
+	<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	</span><span class="kw">pub</span>(<span class="kw">crate</span>) trie_node_cache: <span class="prelude-ty">Option</span>&lt;C&gt;,
+	<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	</span><span class="kw">pub</span>(<span class="kw">crate</span>) recorder: <span class="prelude-ty">Option</span>&lt;Recorder&lt;H&gt;&gt;,
+	<span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+	</span>_phantom: PhantomData&lt;C&gt;,
 }
 
-<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; TrieBackendEssence&lt;S, H&gt;
-<span class="kw">where
-	</span>H::Out: Encode,
-{
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C&gt; TrieBackendEssence&lt;S, H, C&gt; {
 	<span class="doccomment">/// Create new trie-based backend.
 	</span><span class="kw">pub fn </span>new(storage: S, root: H::Out) -&gt; <span class="self">Self </span>{
 		TrieBackendEssence {
@@ -834,12 +1142,41 @@
 			empty: H::hash(<span class="kw-2">&amp;</span>[<span class="number">0u8</span>]),
 			<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 			</span>cache: Arc::new(RwLock::new(Cache::new())),
+			<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+			</span>trie_node_cache: <span class="prelude-val">None</span>,
+			<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+			</span>recorder: <span class="prelude-val">None</span>,
+			<span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+			</span>_phantom: PhantomData,
+		}
+	}
+
+	<span class="doccomment">/// Create new trie-based backend.
+	</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	</span><span class="kw">pub fn </span>new_with_cache_and_recorder(
+		storage: S,
+		root: H::Out,
+		cache: <span class="prelude-ty">Option</span>&lt;C&gt;,
+		recorder: <span class="prelude-ty">Option</span>&lt;Recorder&lt;H&gt;&gt;,
+	) -&gt; <span class="self">Self </span>{
+		TrieBackendEssence {
+			storage,
+			root,
+			empty: H::hash(<span class="kw-2">&amp;</span>[<span class="number">0u8</span>]),
+			cache: Arc::new(RwLock::new(Cache::new())),
+			trie_node_cache: cache,
+			recorder,
 		}
 	}
 
 	<span class="doccomment">/// Get backend storage reference.
 	</span><span class="kw">pub fn </span>backend_storage(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>S {
 		<span class="kw-2">&amp;</span><span class="self">self</span>.storage
+	}
+
+	<span class="doccomment">/// Get backend storage mutable reference.
+	</span><span class="kw">pub fn </span>backend_storage_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>S {
+		<span class="kw-2">&amp;mut </span><span class="self">self</span>.storage
 	}
 
 	<span class="doccomment">/// Get trie root.
@@ -865,6 +1202,133 @@
 	<span class="doccomment">/// Consumes self and returns underlying storage.
 	</span><span class="kw">pub fn </span>into_storage(<span class="self">self</span>) -&gt; S {
 		<span class="self">self</span>.storage
+	}
+}
+
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C: AsLocalTrieCache&lt;H&gt;&gt; TrieBackendEssence&lt;S, H, C&gt; {
+	<span class="doccomment">/// Call the given closure passing it the recorder and the cache.
+	///
+	/// If the given `storage_root` is `None`, `self.root` will be used.
+	</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	#[inline]
+	</span><span class="kw">fn </span>with_recorder_and_cache&lt;R&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		storage_root: <span class="prelude-ty">Option</span>&lt;H::Out&gt;,
+		callback: <span class="kw">impl </span>FnOnce(
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;&gt;,
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;NodeCodec&lt;H&gt;&gt;&gt;,
+		) -&gt; R,
+	) -&gt; R {
+		<span class="kw">let </span>storage_root = storage_root.unwrap_or_else(|| <span class="self">self</span>.root);
+		<span class="kw">let </span><span class="kw-2">mut </span>recorder = <span class="self">self</span>.recorder.as_ref().map(|r| r.as_trie_recorder(storage_root));
+		<span class="kw">let </span>recorder = <span class="kw">match </span>recorder.as_mut() {
+			<span class="prelude-val">Some</span>(recorder) =&gt; <span class="prelude-val">Some</span>(recorder <span class="kw">as </span><span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;),
+			<span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
+		};
+
+		<span class="kw">let </span><span class="kw-2">mut </span>cache = <span class="self">self
+			</span>.trie_node_cache
+			.as_ref()
+			.map(|c| c.as_local_trie_cache().as_trie_db_cache(storage_root));
+		<span class="kw">let </span>cache = cache.as_mut().map(|c| c <span class="kw">as _</span>);
+
+		callback(recorder, cache)
+	}
+
+	<span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+	#[inline]
+	</span><span class="kw">fn </span>with_recorder_and_cache&lt;R&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		<span class="kw">_</span>: <span class="prelude-ty">Option</span>&lt;H::Out&gt;,
+		callback: <span class="kw">impl </span>FnOnce(
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;&gt;,
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;NodeCodec&lt;H&gt;&gt;&gt;,
+		) -&gt; R,
+	) -&gt; R {
+		callback(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>)
+	}
+
+	<span class="doccomment">/// Call the given closure passing it the recorder and the cache.
+	///
+	/// This function must only be used when the operation in `callback` is
+	/// calculating a `storage_root`. It is expected that `callback` returns
+	/// the new storage root. This is required to register the changes in the cache
+	/// for the correct storage root. The given `storage_root` corresponds to the root of the &quot;old&quot;
+	/// trie. If the value is not given, `self.root` is used.
+	</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+	</span><span class="kw">fn </span>with_recorder_and_cache_for_storage_root&lt;R&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		storage_root: <span class="prelude-ty">Option</span>&lt;H::Out&gt;,
+		callback: <span class="kw">impl </span>FnOnce(
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;&gt;,
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;NodeCodec&lt;H&gt;&gt;&gt;,
+		) -&gt; (<span class="prelude-ty">Option</span>&lt;H::Out&gt;, R),
+	) -&gt; R {
+		<span class="kw">let </span>storage_root = storage_root.unwrap_or_else(|| <span class="self">self</span>.root);
+		<span class="kw">let </span><span class="kw-2">mut </span>recorder = <span class="self">self</span>.recorder.as_ref().map(|r| r.as_trie_recorder(storage_root));
+		<span class="kw">let </span>recorder = <span class="kw">match </span>recorder.as_mut() {
+			<span class="prelude-val">Some</span>(recorder) =&gt; <span class="prelude-val">Some</span>(recorder <span class="kw">as </span><span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;),
+			<span class="prelude-val">None </span>=&gt; <span class="prelude-val">None</span>,
+		};
+
+		<span class="kw">let </span>result = <span class="kw">if let </span><span class="prelude-val">Some</span>(local_cache) = <span class="self">self</span>.trie_node_cache.as_ref() {
+			<span class="kw">let </span><span class="kw-2">mut </span>cache = local_cache.as_local_trie_cache().as_trie_db_mut_cache();
+
+			<span class="kw">let </span>(new_root, r) = callback(recorder, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut </span>cache));
+
+			<span class="kw">if let </span><span class="prelude-val">Some</span>(new_root) = new_root {
+				cache.merge_into(local_cache.as_local_trie_cache(), new_root);
+			}
+
+			r
+		} <span class="kw">else </span>{
+			callback(recorder, <span class="prelude-val">None</span>).<span class="number">1
+		</span>};
+
+		result
+	}
+
+	<span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
+	</span><span class="kw">fn </span>with_recorder_and_cache_for_storage_root&lt;R&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		<span class="kw">_</span>: <span class="prelude-ty">Option</span>&lt;H::Out&gt;,
+		callback: <span class="kw">impl </span>FnOnce(
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieRecorder&lt;H::Out&gt;&gt;,
+			<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;mut </span><span class="kw">dyn </span>TrieCache&lt;NodeCodec&lt;H&gt;&gt;&gt;,
+		) -&gt; (<span class="prelude-ty">Option</span>&lt;H::Out&gt;, R),
+	) -&gt; R {
+		callback(<span class="prelude-val">None</span>, <span class="prelude-val">None</span>).<span class="number">1
+	</span>}
+}
+
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C: AsLocalTrieCache&lt;H&gt; + Send + Sync&gt;
+	TrieBackendEssence&lt;S, H, C&gt;
+<span class="kw">where
+	</span>H::Out: Codec + Ord,
+{
+	<span class="doccomment">/// Calls the given closure with a [`TrieDb`] constructed for the given
+	/// storage root and (optionally) child trie.
+	</span><span class="attr">#[inline]
+	</span><span class="kw">fn </span>with_trie_db&lt;R&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		root: H::Out,
+		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
+		callback: <span class="kw">impl </span>FnOnce(<span class="kw-2">&amp;</span>sp_trie::TrieDB&lt;Layout&lt;H&gt;&gt;) -&gt; R,
+	) -&gt; R {
+		<span class="kw">let </span>backend = <span class="self">self </span><span class="kw">as </span><span class="kw-2">&amp;</span><span class="kw">dyn </span>HashDBRef&lt;H, Vec&lt;u8&gt;&gt;;
+		<span class="kw">let </span>db = child_info
+			.as_ref()
+			.map(|child_info| KeySpacedDB::new(backend, child_info.keyspace()));
+		<span class="kw">let </span>db = db.as_ref().map(|db| db <span class="kw">as </span><span class="kw-2">&amp;</span><span class="kw">dyn </span>HashDBRef&lt;H, Vec&lt;u8&gt;&gt;).unwrap_or(backend);
+
+		<span class="self">self</span>.with_recorder_and_cache(<span class="prelude-val">Some</span>(root), |recorder, cache| {
+			<span class="kw">let </span>trie = TrieDBBuilder::&lt;H&gt;::new(db, <span class="kw-2">&amp;</span>root)
+				.with_optional_recorder(recorder)
+				.with_optional_cache(cache)
+				.build();
+
+			callback(<span class="kw-2">&amp;</span>trie)
+		})
 	}
 
 	<span class="doccomment">/// Return the next key in the trie i.e. the minimum key that is strictly superior to `key` in
@@ -921,48 +1385,77 @@
 		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
 		key: <span class="kw-2">&amp;</span>[u8],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageKey&gt;&gt; {
-		<span class="kw">let </span>dyn_eph: <span class="kw-2">&amp;</span><span class="kw">dyn </span>HashDBRef&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;;
-		<span class="kw">let </span>keyspace_eph;
-		<span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = child_info.as_ref() {
-			keyspace_eph = KeySpacedDB::new(<span class="self">self</span>, child_info.keyspace());
-			dyn_eph = <span class="kw-2">&amp;</span>keyspace_eph;
-		} <span class="kw">else </span>{
-			dyn_eph = <span class="self">self</span>;
-		}
+		<span class="self">self</span>.with_trie_db(<span class="kw-2">*</span>root, child_info, |trie| {
+			<span class="kw">let </span><span class="kw-2">mut </span>iter = trie.key_iter().map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iteration error: {}&quot;</span>, e))<span class="question-mark">?</span>;
 
-		<span class="kw">let </span>trie =
-			TrieDB::&lt;H&gt;::new(dyn_eph, root).map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB creation error: {}&quot;</span>, e))<span class="question-mark">?</span>;
-		<span class="kw">let </span><span class="kw-2">mut </span>iter = trie.key_iter().map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iteration error: {}&quot;</span>, e))<span class="question-mark">?</span>;
+			<span class="comment">// The key just after the one given in input, basically `key++0`.
+			// Note: We are sure this is the next key if:
+			// * size of key has no limit (i.e. we can always add 0 to the path),
+			// * and no keys can be inserted between `key` and `key++0` (this is ensured by sp-io).
+			</span><span class="kw">let </span><span class="kw-2">mut </span>potential_next_key = Vec::with_capacity(key.len() + <span class="number">1</span>);
+			potential_next_key.extend_from_slice(key);
+			potential_next_key.push(<span class="number">0</span>);
 
-		<span class="comment">// The key just after the one given in input, basically `key++0`.
-		// Note: We are sure this is the next key if:
-		// * size of key has no limit (i.e. we can always add 0 to the path),
-		// * and no keys can be inserted between `key` and `key++0` (this is ensured by sp-io).
-		</span><span class="kw">let </span><span class="kw-2">mut </span>potential_next_key = Vec::with_capacity(key.len() + <span class="number">1</span>);
-		potential_next_key.extend_from_slice(key);
-		potential_next_key.push(<span class="number">0</span>);
+			iter.seek(<span class="kw-2">&amp;</span>potential_next_key)
+				.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iterator seek error: {}&quot;</span>, e))<span class="question-mark">?</span>;
 
-		iter.seek(<span class="kw-2">&amp;</span>potential_next_key)
-			.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iterator seek error: {}&quot;</span>, e))<span class="question-mark">?</span>;
+			<span class="kw">let </span>next_element = iter.next();
 
-		<span class="kw">let </span>next_element = iter.next();
+			<span class="kw">let </span>next_key = <span class="kw">if let </span><span class="prelude-val">Some</span>(next_element) = next_element {
+				<span class="kw">let </span>next_key =
+					next_element.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iterator next error: {}&quot;</span>, e))<span class="question-mark">?</span>;
+				<span class="prelude-val">Some</span>(next_key)
+			} <span class="kw">else </span>{
+				<span class="prelude-val">None
+			</span>};
 
-		<span class="kw">let </span>next_key = <span class="kw">if let </span><span class="prelude-val">Some</span>(next_element) = next_element {
-			<span class="kw">let </span>next_key =
-				next_element.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iterator next error: {}&quot;</span>, e))<span class="question-mark">?</span>;
-			<span class="prelude-val">Some</span>(next_key)
-		} <span class="kw">else </span>{
-			<span class="prelude-val">None
-		</span>};
+			<span class="prelude-val">Ok</span>(next_key)
+		})
+	}
 
-		<span class="prelude-val">Ok</span>(next_key)
+	<span class="doccomment">/// Returns the hash value
+	</span><span class="kw">pub fn </span>storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;&gt; {
+		<span class="kw">let </span>map_e = |e| <span class="macro">format!</span>(<span class="string">&quot;Trie lookup error: {}&quot;</span>, e);
+
+		<span class="self">self</span>.with_recorder_and_cache(<span class="prelude-val">None</span>, |recorder, cache| {
+			TrieDBBuilder::new(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.root)
+				.with_optional_cache(cache)
+				.with_optional_recorder(recorder)
+				.build()
+				.get_hash(key)
+				.map_err(map_e)
+		})
 	}
 
 	<span class="doccomment">/// Get the value of storage at given key.
 	</span><span class="kw">pub fn </span>storage(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt; {
 		<span class="kw">let </span>map_e = |e| <span class="macro">format!</span>(<span class="string">&quot;Trie lookup error: {}&quot;</span>, e);
 
-		read_trie_value::&lt;Layout&lt;H&gt;, <span class="kw">_</span>&gt;(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.root, key).map_err(map_e)
+		<span class="self">self</span>.with_recorder_and_cache(<span class="prelude-val">None</span>, |recorder, cache| {
+			read_trie_value::&lt;Layout&lt;H&gt;, <span class="kw">_</span>&gt;(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.root, key, recorder, cache).map_err(map_e)
+		})
+	}
+
+	<span class="doccomment">/// Returns the hash value
+	</span><span class="kw">pub fn </span>child_storage_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, child_info: <span class="kw-2">&amp;</span>ChildInfo, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;H::Out&gt;&gt; {
+		<span class="kw">let </span>child_root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info)<span class="question-mark">? </span>{
+			<span class="prelude-val">Some</span>(root) =&gt; root,
+			<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+		};
+
+		<span class="kw">let </span>map_e = |e| <span class="macro">format!</span>(<span class="string">&quot;Trie lookup error: {}&quot;</span>, e);
+
+		<span class="self">self</span>.with_recorder_and_cache(<span class="prelude-val">Some</span>(child_root), |recorder, cache| {
+			read_child_trie_hash::&lt;Layout&lt;H&gt;, <span class="kw">_</span>&gt;(
+				child_info.keyspace(),
+				<span class="self">self</span>,
+				<span class="kw-2">&amp;</span>child_root,
+				key,
+				recorder,
+				cache,
+			)
+			.map_err(map_e)
+		})
 	}
 
 	<span class="doccomment">/// Get the value of child storage at given key.
@@ -971,241 +1464,67 @@
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		key: <span class="kw-2">&amp;</span>[u8],
 	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;StorageValue&gt;&gt; {
-		<span class="kw">let </span>root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info)<span class="question-mark">? </span>{
+		<span class="kw">let </span>child_root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info)<span class="question-mark">? </span>{
 			<span class="prelude-val">Some</span>(root) =&gt; root,
 			<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
 		};
 
 		<span class="kw">let </span>map_e = |e| <span class="macro">format!</span>(<span class="string">&quot;Trie lookup error: {}&quot;</span>, e);
 
-		read_child_trie_value::&lt;Layout&lt;H&gt;, <span class="kw">_</span>&gt;(child_info.keyspace(), <span class="self">self</span>, <span class="kw-2">&amp;</span>root, key)
+		<span class="self">self</span>.with_recorder_and_cache(<span class="prelude-val">Some</span>(child_root), |recorder, cache| {
+			read_child_trie_value::&lt;Layout&lt;H&gt;, <span class="kw">_</span>&gt;(
+				child_info.keyspace(),
+				<span class="self">self</span>,
+				<span class="kw-2">&amp;</span>child_root,
+				key,
+				recorder,
+				cache,
+			)
 			.map_err(map_e)
+		})
 	}
 
-	<span class="doccomment">/// Retrieve all entries keys of storage and call `f` for each of those keys.
-	/// Aborts as soon as `f` returns false.
-	///
-	/// Returns `true` when all keys were iterated.
-	</span><span class="kw">pub fn </span>apply_to_key_values_while(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		f: <span class="kw">impl </span>FnMut(Vec&lt;u8&gt;, Vec&lt;u8&gt;) -&gt; bool,
-		allow_missing_nodes: bool,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;bool&gt; {
-		<span class="kw">let </span>root = <span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = child_info.as_ref() {
-			<span class="kw">match </span><span class="self">self</span>.child_root(child_info)<span class="question-mark">? </span>{
-				<span class="prelude-val">Some</span>(child_root) =&gt; child_root,
-				<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">true</span>),
-			}
+	<span class="doccomment">/// Create a raw iterator over the storage.
+	</span><span class="kw">pub fn </span>raw_iter(<span class="kw-2">&amp;</span><span class="self">self</span>, args: IterArgs) -&gt; <span class="prelude-ty">Result</span>&lt;RawIter&lt;S, H, C&gt;&gt; {
+		<span class="kw">let </span>root = <span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = args.child_info.as_ref() {
+			<span class="kw">let </span>root = <span class="kw">match </span><span class="self">self</span>.child_root(<span class="kw-2">&amp;</span>child_info)<span class="question-mark">? </span>{
+				<span class="prelude-val">Some</span>(root) =&gt; root,
+				<span class="prelude-val">None </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(Default::default()),
+			};
+			root
 		} <span class="kw">else </span>{
 			<span class="self">self</span>.root
 		};
 
-		<span class="self">self</span>.trie_iter_inner(<span class="kw-2">&amp;</span>root, prefix, f, child_info, start_at, allow_missing_nodes)
-	}
-
-	<span class="doccomment">/// Retrieve all entries keys of a storage and call `f` for each of those keys.
-	/// Aborts as soon as `f` returns false.
-	</span><span class="kw">pub fn </span>apply_to_keys_while&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8]) -&gt; bool&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		f: F,
-	) {
-		<span class="kw">let </span>root = <span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = child_info.as_ref() {
-			<span class="kw">match </span><span class="self">self</span>.child_root(child_info) {
-				<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(v)) =&gt; v,
-				<span class="comment">// If the child trie doesn&#39;t exist, there is no need to continue.
-				</span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; <span class="kw">return</span>,
-				<span class="prelude-val">Err</span>(e) =&gt; {
-					<span class="macro">debug!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Error while iterating child storage: {}&quot;</span>, e);
-					<span class="kw">return
-				</span>},
-			}
-		} <span class="kw">else </span>{
-			<span class="self">self</span>.root
-		};
-
-		<span class="self">self</span>.trie_iter_key_inner(<span class="kw-2">&amp;</span>root, prefix, f, child_info, start_at)
-	}
-
-	<span class="doccomment">/// Execute given closure for all keys starting with prefix.
-	</span><span class="kw">pub fn </span>for_child_keys_with_prefix(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		child_info: <span class="kw-2">&amp;</span>ChildInfo,
-		prefix: <span class="kw-2">&amp;</span>[u8],
-		<span class="kw-2">mut </span>f: <span class="kw">impl </span>FnMut(<span class="kw-2">&amp;</span>[u8]),
-	) {
-		<span class="kw">let </span>root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info) {
-			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(v)) =&gt; v,
-			<span class="comment">// If the child trie doesn&#39;t exist, there is no need to continue.
-			</span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; <span class="kw">return</span>,
-			<span class="prelude-val">Err</span>(e) =&gt; {
-				<span class="macro">debug!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Error while iterating child storage: {}&quot;</span>, e);
-				<span class="kw">return
-			</span>},
-		};
-
-		<span class="self">self</span>.trie_iter_key_inner(
-			<span class="kw-2">&amp;</span>root,
-			<span class="prelude-val">Some</span>(prefix),
-			|k| {
-				f(k);
-				<span class="bool-val">true
-			</span>},
-			<span class="prelude-val">Some</span>(child_info),
-			<span class="prelude-val">None</span>,
-		)
-	}
-
-	<span class="doccomment">/// Execute given closure for all keys starting with prefix.
-	</span><span class="kw">pub fn </span>for_keys_with_prefix&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8])&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8], <span class="kw-2">mut </span>f: F) {
-		<span class="self">self</span>.trie_iter_key_inner(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.root,
-			<span class="prelude-val">Some</span>(prefix),
-			|k| {
-				f(k);
-				<span class="bool-val">true
-			</span>},
-			<span class="prelude-val">None</span>,
-			<span class="prelude-val">None</span>,
-		)
-	}
-
-	<span class="kw">fn </span>trie_iter_key_inner&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8]) -&gt; bool&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		root: <span class="kw-2">&amp;</span>H::Out,
-		maybe_prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		<span class="kw-2">mut </span>f: F,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		maybe_start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-	) {
-		<span class="kw">let </span><span class="kw-2">mut </span>iter = <span class="kw">move </span>|db| -&gt; sp_std::result::Result&lt;(), Box&lt;TrieError&lt;H::Out&gt;&gt;&gt; {
-			<span class="kw">let </span>trie = TrieDB::&lt;H&gt;::new(db, root)<span class="question-mark">?</span>;
-			<span class="kw">let </span>prefix = maybe_prefix.unwrap_or(<span class="kw-2">&amp;</span>[]);
-			<span class="kw">let </span>iter = <span class="kw">match </span>maybe_start_at {
-				<span class="prelude-val">Some</span>(start_at) =&gt;
-					TrieDBKeyIterator::new_prefixed_then_seek(<span class="kw-2">&amp;</span>trie, prefix, start_at),
-				<span class="prelude-val">None </span>=&gt; TrieDBKeyIterator::new_prefixed(<span class="kw-2">&amp;</span>trie, prefix),
-			}<span class="question-mark">?</span>;
-
-			<span class="kw">for </span>x <span class="kw">in </span>iter {
-				<span class="kw">let </span>key = x<span class="question-mark">?</span>;
-
-				<span class="macro">debug_assert!</span>(maybe_prefix
-					.as_ref()
-					.map(|prefix| key.starts_with(prefix))
-					.unwrap_or(<span class="bool-val">true</span>));
-
-				<span class="kw">if </span>!f(<span class="kw-2">&amp;</span>key) {
-					<span class="kw">break
-				</span>}
-			}
-
-			<span class="prelude-val">Ok</span>(())
-		};
-
-		<span class="kw">let </span>result = <span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = child_info {
-			<span class="kw">let </span>db = KeySpacedDB::new(<span class="self">self</span>, child_info.keyspace());
-			iter(<span class="kw-2">&amp;</span>db)
-		} <span class="kw">else </span>{
-			iter(<span class="self">self</span>)
-		};
-		<span class="kw">if let </span><span class="prelude-val">Err</span>(e) = result {
-			<span class="macro">debug!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Error while iterating by prefix: {}&quot;</span>, e);
+		<span class="kw">if </span><span class="self">self</span>.root == Default::default() {
+			<span class="comment">// A special-case for an empty storage root.
+			</span><span class="kw">return </span><span class="prelude-val">Ok</span>(Default::default())
 		}
-	}
 
-	<span class="kw">fn </span>trie_iter_inner&lt;F: FnMut(Vec&lt;u8&gt;, Vec&lt;u8&gt;) -&gt; bool&gt;(
-		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		root: <span class="kw-2">&amp;</span>H::Out,
-		prefix: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		<span class="kw-2">mut </span>f: F,
-		child_info: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>ChildInfo&gt;,
-		start_at: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>[u8]&gt;,
-		allow_missing_nodes: bool,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;bool&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>iter = <span class="kw">move </span>|db| -&gt; sp_std::result::Result&lt;bool, Box&lt;TrieError&lt;H::Out&gt;&gt;&gt; {
-			<span class="kw">let </span>trie = TrieDB::&lt;H&gt;::new(db, root)<span class="question-mark">?</span>;
-
-			<span class="kw">let </span>prefix = prefix.unwrap_or(<span class="kw-2">&amp;</span>[]);
-			<span class="kw">let </span>iterator = <span class="kw">if let </span><span class="prelude-val">Some</span>(start_at) = start_at {
-				TrieDBIterator::new_prefixed_then_seek(<span class="kw-2">&amp;</span>trie, prefix, start_at)<span class="question-mark">?
-			</span>} <span class="kw">else </span>{
-				TrieDBIterator::new_prefixed(<span class="kw-2">&amp;</span>trie, prefix)<span class="question-mark">?
-			</span>};
-			<span class="kw">for </span>x <span class="kw">in </span>iterator {
-				<span class="kw">let </span>(key, value) = x<span class="question-mark">?</span>;
-
-				<span class="macro">debug_assert!</span>(key.starts_with(prefix));
-
-				<span class="kw">if </span>!f(key, value) {
-					<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
+		<span class="kw">let </span>trie_iter = <span class="self">self
+			</span>.with_trie_db(root, args.child_info.as_ref(), |db| {
+				<span class="kw">let </span>prefix = args.prefix.as_deref().unwrap_or(<span class="kw-2">&amp;</span>[]);
+				<span class="kw">if let </span><span class="prelude-val">Some</span>(start_at) = args.start_at {
+					TrieDBRawIterator::new_prefixed_then_seek(db, prefix, <span class="kw-2">&amp;</span>start_at)
+				} <span class="kw">else </span>{
+					TrieDBRawIterator::new_prefixed(db, prefix)
 				}
-			}
+			})
+			.map_err(|e| <span class="macro">format!</span>(<span class="string">&quot;TrieDB iteration error: {}&quot;</span>, e))<span class="question-mark">?</span>;
 
-			<span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
-		};
-
-		<span class="kw">let </span>result = <span class="kw">if let </span><span class="prelude-val">Some</span>(child_info) = child_info {
-			<span class="kw">let </span>db = KeySpacedDB::new(<span class="self">self</span>, child_info.keyspace());
-			iter(<span class="kw-2">&amp;</span>db)
-		} <span class="kw">else </span>{
-			iter(<span class="self">self</span>)
-		};
-		<span class="kw">match </span>result {
-			<span class="prelude-val">Ok</span>(completed) =&gt; <span class="prelude-val">Ok</span>(completed),
-			<span class="prelude-val">Err</span>(e) <span class="kw">if </span><span class="macro">matches!</span>(<span class="kw-2">*</span>e, TrieError::IncompleteDatabase(<span class="kw">_</span>)) &amp;&amp; allow_missing_nodes =&gt;
-				<span class="prelude-val">Ok</span>(<span class="bool-val">false</span>),
-			<span class="prelude-val">Err</span>(e) =&gt; <span class="prelude-val">Err</span>(<span class="macro">format!</span>(<span class="string">&quot;TrieDB iteration error: {}&quot;</span>, e)),
-		}
-	}
-
-	<span class="doccomment">/// Execute given closure for all key and values starting with prefix.
-	</span><span class="kw">pub fn </span>for_key_values_with_prefix&lt;F: FnMut(<span class="kw-2">&amp;</span>[u8], <span class="kw-2">&amp;</span>[u8])&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8], <span class="kw-2">mut </span>f: F) {
-		<span class="kw">let _ </span>= <span class="self">self</span>.trie_iter_inner(
-			<span class="kw-2">&amp;</span><span class="self">self</span>.root,
-			<span class="prelude-val">Some</span>(prefix),
-			|k, v| {
-				f(<span class="kw-2">&amp;</span>k, <span class="kw-2">&amp;</span>v);
-				<span class="bool-val">true
+		<span class="prelude-val">Ok</span>(RawIter {
+			stop_on_incomplete_database: args.stop_on_incomplete_database,
+			skip_if_first: <span class="kw">if </span>args.start_at_exclusive {
+				args.start_at.map(|key| key.to_vec())
+			} <span class="kw">else </span>{
+				<span class="prelude-val">None
 			</span>},
-			<span class="prelude-val">None</span>,
-			<span class="prelude-val">None</span>,
-			<span class="bool-val">false</span>,
-		);
-	}
-
-	<span class="doccomment">/// Returns all `(key, value)` pairs in the trie.
-	</span><span class="kw">pub fn </span>pairs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;(StorageKey, StorageValue)&gt; {
-		<span class="kw">let </span>collect_all = || -&gt; sp_std::result::Result&lt;<span class="kw">_</span>, Box&lt;TrieError&lt;H::Out&gt;&gt;&gt; {
-			<span class="kw">let </span>trie = TrieDB::&lt;H&gt;::new(<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.root)<span class="question-mark">?</span>;
-			<span class="kw">let </span><span class="kw-2">mut </span>v = Vec::new();
-			<span class="kw">for </span>x <span class="kw">in </span>trie.iter()<span class="question-mark">? </span>{
-				<span class="kw">let </span>(key, value) = x<span class="question-mark">?</span>;
-				v.push((key.to_vec(), value.to_vec()));
-			}
-
-			<span class="prelude-val">Ok</span>(v)
-		};
-
-		<span class="kw">match </span>collect_all() {
-			<span class="prelude-val">Ok</span>(v) =&gt; v,
-			<span class="prelude-val">Err</span>(e) =&gt; {
-				<span class="macro">debug!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Error extracting trie values: {}&quot;</span>, e);
-				Vec::new()
-			},
-		}
-	}
-
-	<span class="doccomment">/// Returns all keys that start with the given `prefix`.
-	</span><span class="kw">pub fn </span>keys(<span class="kw-2">&amp;</span><span class="self">self</span>, prefix: <span class="kw-2">&amp;</span>[u8]) -&gt; Vec&lt;StorageKey&gt; {
-		<span class="kw">let </span><span class="kw-2">mut </span>keys = Vec::new();
-		<span class="self">self</span>.for_keys_with_prefix(prefix, |k| keys.push(k.to_vec()));
-		keys
+			child_info: args.child_info,
+			root,
+			trie_iter,
+			state: IterState::Pending,
+			_phantom: Default::default(),
+		})
 	}
 
 	<span class="doccomment">/// Return the storage root after applying the given `delta`.
@@ -1213,27 +1532,28 @@
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
 		delta: <span class="kw">impl </span>Iterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;)&gt;,
 		state_version: StateVersion,
-	) -&gt; (H::Out, S::Overlay)
-	<span class="kw">where
-		</span>H::Out: Ord,
-	{
+	) -&gt; (H::Out, S::Overlay) {
 		<span class="kw">let </span><span class="kw-2">mut </span>write_overlay = S::Overlay::default();
-		<span class="kw">let </span><span class="kw-2">mut </span>root = <span class="self">self</span>.root;
 
-		{
+		<span class="kw">let </span>root = <span class="self">self</span>.with_recorder_and_cache_for_storage_root(<span class="prelude-val">None</span>, |recorder, cache| {
 			<span class="kw">let </span><span class="kw-2">mut </span>eph = Ephemeral::new(<span class="self">self</span>.backend_storage(), <span class="kw-2">&amp;mut </span>write_overlay);
 			<span class="kw">let </span>res = <span class="kw">match </span>state_version {
-				StateVersion::V0 =&gt;
-					delta_trie_root::&lt;sp_trie::LayoutV0&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(<span class="kw-2">&amp;mut </span>eph, root, delta),
-				StateVersion::V1 =&gt;
-					delta_trie_root::&lt;sp_trie::LayoutV1&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(<span class="kw-2">&amp;mut </span>eph, root, delta),
+				StateVersion::V0 =&gt; delta_trie_root::&lt;sp_trie::LayoutV0&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
+					<span class="kw-2">&amp;mut </span>eph, <span class="self">self</span>.root, delta, recorder, cache,
+				),
+				StateVersion::V1 =&gt; delta_trie_root::&lt;sp_trie::LayoutV1&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
+					<span class="kw-2">&amp;mut </span>eph, <span class="self">self</span>.root, delta, recorder, cache,
+				),
 			};
 
 			<span class="kw">match </span>res {
-				<span class="prelude-val">Ok</span>(ret) =&gt; root = ret,
-				<span class="prelude-val">Err</span>(e) =&gt; <span class="macro">warn!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Failed to write to trie: {}&quot;</span>, e),
+				<span class="prelude-val">Ok</span>(ret) =&gt; (<span class="prelude-val">Some</span>(ret), ret),
+				<span class="prelude-val">Err</span>(e) =&gt; {
+					<span class="macro">warn!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Failed to write to trie: {}&quot;</span>, e);
+					(<span class="prelude-val">None</span>, <span class="self">self</span>.root)
+				},
 			}
-		}
+		});
 
 		(root, write_overlay)
 	}
@@ -1245,15 +1565,12 @@
 		child_info: <span class="kw-2">&amp;</span>ChildInfo,
 		delta: <span class="kw">impl </span>Iterator&lt;Item = (<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8], <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[u8]&gt;)&gt;,
 		state_version: StateVersion,
-	) -&gt; (H::Out, bool, S::Overlay)
-	<span class="kw">where
-		</span>H::Out: Ord,
-	{
+	) -&gt; (H::Out, bool, S::Overlay) {
 		<span class="kw">let </span>default_root = <span class="kw">match </span>child_info.child_type() {
 			ChildType::ParentKeyId =&gt; empty_child_trie_root::&lt;sp_trie::LayoutV1&lt;H&gt;&gt;(),
 		};
 		<span class="kw">let </span><span class="kw-2">mut </span>write_overlay = S::Overlay::default();
-		<span class="kw">let </span><span class="kw-2">mut </span>root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info) {
+		<span class="kw">let </span>child_root = <span class="kw">match </span><span class="self">self</span>.child_root(child_info) {
 			<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(hash)) =&gt; hash,
 			<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; default_root,
 			<span class="prelude-val">Err</span>(e) =&gt; {
@@ -1262,32 +1579,40 @@
 			},
 		};
 
-		{
-			<span class="kw">let </span><span class="kw-2">mut </span>eph = Ephemeral::new(<span class="self">self</span>.backend_storage(), <span class="kw-2">&amp;mut </span>write_overlay);
-			<span class="kw">match match </span>state_version {
-				StateVersion::V0 =&gt;
-					child_delta_trie_root::&lt;sp_trie::LayoutV0&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
-						child_info.keyspace(),
-						<span class="kw-2">&amp;mut </span>eph,
-						root,
-						delta,
-					),
-				StateVersion::V1 =&gt;
-					child_delta_trie_root::&lt;sp_trie::LayoutV1&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
-						child_info.keyspace(),
-						<span class="kw-2">&amp;mut </span>eph,
-						root,
-						delta,
-					),
-			} {
-				<span class="prelude-val">Ok</span>(ret) =&gt; root = ret,
-				<span class="prelude-val">Err</span>(e) =&gt; <span class="macro">warn!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Failed to write to trie: {}&quot;</span>, e),
-			}
-		}
+		<span class="kw">let </span>new_child_root =
+			<span class="self">self</span>.with_recorder_and_cache_for_storage_root(<span class="prelude-val">Some</span>(child_root), |recorder, cache| {
+				<span class="kw">let </span><span class="kw-2">mut </span>eph = Ephemeral::new(<span class="self">self</span>.backend_storage(), <span class="kw-2">&amp;mut </span>write_overlay);
+				<span class="kw">match match </span>state_version {
+					StateVersion::V0 =&gt;
+						child_delta_trie_root::&lt;sp_trie::LayoutV0&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
+							child_info.keyspace(),
+							<span class="kw-2">&amp;mut </span>eph,
+							child_root,
+							delta,
+							recorder,
+							cache,
+						),
+					StateVersion::V1 =&gt;
+						child_delta_trie_root::&lt;sp_trie::LayoutV1&lt;H&gt;, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;(
+							child_info.keyspace(),
+							<span class="kw-2">&amp;mut </span>eph,
+							child_root,
+							delta,
+							recorder,
+							cache,
+						),
+				} {
+					<span class="prelude-val">Ok</span>(ret) =&gt; (<span class="prelude-val">Some</span>(ret), ret),
+					<span class="prelude-val">Err</span>(e) =&gt; {
+						<span class="macro">warn!</span>(target: <span class="string">&quot;trie&quot;</span>, <span class="string">&quot;Failed to write to trie: {}&quot;</span>, e);
+						(<span class="prelude-val">None</span>, child_root)
+					},
+				}
+			});
 
-		<span class="kw">let </span>is_default = root == default_root;
+		<span class="kw">let </span>is_default = new_child_root == default_root;
 
-		(root, is_default, write_overlay)
+		(new_child_root, is_default, write_overlay)
 	}
 }
 
@@ -1361,6 +1686,14 @@
 	</span><span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;DBValue&gt;&gt;;
 }
 
+<span class="kw">impl</span>&lt;T: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; TrieBackendStorage&lt;H&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>T {
+	<span class="kw">type </span>Overlay = T::Overlay;
+
+	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;DBValue&gt;&gt; {
+		(<span class="kw-2">*</span><span class="self">self</span>).get(key, prefix)
+	}
+}
+
 <span class="comment">// This implementation is used by normal storage trie clients.
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">impl</span>&lt;H: Hasher&gt; TrieBackendStorage&lt;H&gt; <span class="kw">for </span>Arc&lt;<span class="kw">dyn </span>Storage&lt;H&gt;&gt; {
@@ -1383,7 +1716,9 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; AsHashDB&lt;H, DBValue&gt; <span class="kw">for </span>TrieBackendEssence&lt;S, H&gt; {
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C: AsLocalTrieCache&lt;H&gt; + Send + Sync&gt; AsHashDB&lt;H, DBValue&gt;
+	<span class="kw">for </span>TrieBackendEssence&lt;S, H, C&gt;
+{
 	<span class="kw">fn </span>as_hash_db&lt;<span class="lifetime">&#39;b</span>&gt;(<span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>(<span class="kw">dyn </span>HashDB&lt;H, DBValue&gt; + <span class="lifetime">&#39;b</span>) {
 		<span class="self">self
 	</span>}
@@ -1392,7 +1727,9 @@
 	</span>}
 }
 
-<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; HashDB&lt;H, DBValue&gt; <span class="kw">for </span>TrieBackendEssence&lt;S, H&gt; {
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C: AsLocalTrieCache&lt;H&gt; + Send + Sync&gt; HashDB&lt;H, DBValue&gt;
+	<span class="kw">for </span>TrieBackendEssence&lt;S, H, C&gt;
+{
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Option</span>&lt;DBValue&gt; {
 		<span class="kw">if </span><span class="kw-2">*</span>key == <span class="self">self</span>.empty {
 			<span class="kw">return </span><span class="prelude-val">Some</span>([<span class="number">0u8</span>].to_vec())
@@ -1423,7 +1760,9 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher&gt; HashDBRef&lt;H, DBValue&gt; <span class="kw">for </span>TrieBackendEssence&lt;S, H&gt; {
+<span class="kw">impl</span>&lt;S: TrieBackendStorage&lt;H&gt;, H: Hasher, C: AsLocalTrieCache&lt;H&gt; + Send + Sync&gt;
+	HashDBRef&lt;H, DBValue&gt; <span class="kw">for </span>TrieBackendEssence&lt;S, H, C&gt;
+{
 	<span class="kw">fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>H::Out, prefix: Prefix) -&gt; <span class="prelude-ty">Option</span>&lt;DBValue&gt; {
 		HashDB::get(<span class="self">self</span>, key, prefix)
 	}
@@ -1438,7 +1777,8 @@
 	<span class="kw">use super</span>::<span class="kw-2">*</span>;
 	<span class="kw">use </span>sp_core::{Blake2Hasher, H256};
 	<span class="kw">use </span>sp_trie::{
-		trie_types::TrieDBMutV1 <span class="kw">as </span>TrieDBMut, KeySpacedDBMut, PrefixedMemoryDB, TrieMut,
+		cache::LocalTrieCache, trie_types::TrieDBMutBuilderV1 <span class="kw">as </span>TrieDBMutBuilder, KeySpacedDBMut,
+		PrefixedMemoryDB, TrieMut,
 	};
 
 	<span class="attr">#[test]
@@ -1452,7 +1792,7 @@
 
 		<span class="kw">let </span><span class="kw-2">mut </span>mdb = PrefixedMemoryDB::&lt;Blake2Hasher&gt;::default();
 		{
-			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMut::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_1);
+			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilder::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_1).build();
 			trie.insert(<span class="string">b&quot;3&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
 			trie.insert(<span class="string">b&quot;4&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
 			trie.insert(<span class="string">b&quot;6&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
@@ -1461,18 +1801,18 @@
 			<span class="kw">let </span><span class="kw-2">mut </span>mdb = KeySpacedDBMut::new(<span class="kw-2">&amp;mut </span>mdb, child_info.keyspace());
 			<span class="comment">// reuse of root_1 implicitly assert child trie root is same
 			// as top trie (contents must remain the same).
-			</span><span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMut::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_1);
+			</span><span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilder::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_1).build();
 			trie.insert(<span class="string">b&quot;3&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
 			trie.insert(<span class="string">b&quot;4&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
 			trie.insert(<span class="string">b&quot;6&quot;</span>, <span class="kw-2">&amp;</span>[<span class="number">1</span>]).expect(<span class="string">&quot;insert failed&quot;</span>);
 		}
 		{
-			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMut::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_2);
+			<span class="kw">let </span><span class="kw-2">mut </span>trie = TrieDBMutBuilder::new(<span class="kw-2">&amp;mut </span>mdb, <span class="kw-2">&amp;mut </span>root_2).build();
 			trie.insert(child_info.prefixed_storage_key().as_slice(), root_1.as_ref())
 				.expect(<span class="string">&quot;insert failed&quot;</span>);
 		};
 
-		<span class="kw">let </span>essence_1 = TrieBackendEssence::new(mdb, root_1);
+		<span class="kw">let </span>essence_1 = TrieBackendEssence::&lt;<span class="kw">_</span>, <span class="kw">_</span>, LocalTrieCache&lt;<span class="kw">_</span>&gt;&gt;::new(mdb, root_1);
 
 		<span class="macro">assert_eq!</span>(essence_1.next_storage_key(<span class="string">b&quot;2&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&quot;3&quot;</span>.to_vec())));
 		<span class="macro">assert_eq!</span>(essence_1.next_storage_key(<span class="string">b&quot;3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&quot;4&quot;</span>.to_vec())));
@@ -1480,8 +1820,8 @@
 		<span class="macro">assert_eq!</span>(essence_1.next_storage_key(<span class="string">b&quot;5&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&quot;6&quot;</span>.to_vec())));
 		<span class="macro">assert_eq!</span>(essence_1.next_storage_key(<span class="string">b&quot;6&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>));
 
-		<span class="kw">let </span>mdb = essence_1.into_storage();
-		<span class="kw">let </span>essence_2 = TrieBackendEssence::new(mdb, root_2);
+		<span class="kw">let </span>mdb = essence_1.backend_storage().clone();
+		<span class="kw">let </span>essence_2 = TrieBackendEssence::&lt;<span class="kw">_</span>, <span class="kw">_</span>, LocalTrieCache&lt;<span class="kw">_</span>&gt;&gt;::new(mdb, root_2);
 
 		<span class="macro">assert_eq!</span>(essence_2.next_child_storage_key(child_info, <span class="string">b&quot;2&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&quot;3&quot;</span>.to_vec())));
 		<span class="macro">assert_eq!</span>(essence_2.next_child_storage_key(child_info, <span class="string">b&quot;3&quot;</span>), <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="string">b&quot;4&quot;</span>.to_vec())));

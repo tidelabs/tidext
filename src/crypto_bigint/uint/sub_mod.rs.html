@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/crypto-bigint-0.3.2/src/uint/sub_mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sub_mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../crypto_bigint/index.html">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/crypto-bigint-0.4.9/src/uint/sub_mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sub_mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="icon" href="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../crypto_bigint/index.html">
                         <img src="https://raw.githubusercontent.com/RustCrypto/meta/master/logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
@@ -118,6 +118,69 @@
 <a href="#117" id="117">117</a>
 <a href="#118" id="118">118</a>
 <a href="#119" id="119">119</a>
+<a href="#120" id="120">120</a>
+<a href="#121" id="121">121</a>
+<a href="#122" id="122">122</a>
+<a href="#123" id="123">123</a>
+<a href="#124" id="124">124</a>
+<a href="#125" id="125">125</a>
+<a href="#126" id="126">126</a>
+<a href="#127" id="127">127</a>
+<a href="#128" id="128">128</a>
+<a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
 </pre><pre class="rust"><code><span class="doccomment">//! [`UInt`] subtraction modulus operations.
 
 </span><span class="kw">use crate</span>::{Limb, SubMod, UInt};
@@ -125,7 +188,7 @@
 <span class="kw">impl</span>&lt;<span class="kw">const </span>LIMBS: usize&gt; UInt&lt;LIMBS&gt; {
     <span class="doccomment">/// Computes `self - rhs mod p` in constant time.
     ///
-    /// Assumes `self` and `rhs` are `&lt; p`.
+    /// Assumes `self - rhs` as unbounded signed integer is in `[-p, p)`.
     </span><span class="kw">pub const fn </span>sub_mod(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>UInt&lt;LIMBS&gt;, p: <span class="kw-2">&amp;</span>UInt&lt;LIMBS&gt;) -&gt; UInt&lt;LIMBS&gt; {
         <span class="kw">let </span>(<span class="kw-2">mut </span>out, borrow) = <span class="self">self</span>.sbb(rhs, Limb::ZERO);
 
@@ -143,25 +206,32 @@
 
         out
     }
+
+    <span class="doccomment">/// Computes `self - rhs mod p` in constant time for the special modulus
+    /// `p = MAX+1-c` where `c` is small enough to fit in a single [`Limb`].
+    ///
+    /// Assumes `self - rhs` as unbounded signed integer is in `[-p, p)`.
+    </span><span class="kw">pub const fn </span>sub_mod_special(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>, c: Limb) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(out, borrow) = <span class="self">self</span>.sbb(rhs, Limb::ZERO);
+
+        <span class="comment">// If underflow occurred, then we need to subtract `c` to account for
+        // the underflow. This cannot underflow due to the assumption
+        // `self - rhs &gt;= -p`.
+        </span><span class="kw">let </span>l = borrow.<span class="number">0 </span>&amp; c.<span class="number">0</span>;
+        <span class="kw">let </span>(out, <span class="kw">_</span>) = out.sbb(<span class="kw-2">&amp;</span>UInt::from_word(l), Limb::ZERO);
+        out
+    }
 }
 
-<span class="macro">macro_rules! </span>impl_sub_mod {
-    ($(<span class="macro-nonterminal">$size</span>:expr),+) =&gt; {
-        $(
-            <span class="kw">impl </span>SubMod <span class="kw">for </span>UInt&lt;<span class="macro-nonterminal">$size</span>&gt; {
-                <span class="kw">type </span>Output = <span class="self">Self</span>;
+<span class="kw">impl</span>&lt;<span class="kw">const </span>LIMBS: usize&gt; SubMod <span class="kw">for </span>UInt&lt;LIMBS&gt; {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
 
-                <span class="kw">fn </span>sub_mod(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>, p: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-                    <span class="macro">debug_assert!</span>(<span class="self">self </span>&lt; p);
-                    <span class="macro">debug_assert!</span>(rhs &lt; p);
-                    <span class="self">self</span>.sub_mod(rhs, p)
-                }
-            }
-        )+
-    };
+    <span class="kw">fn </span>sub_mod(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="self">Self</span>, p: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="macro">debug_assert!</span>(<span class="self">self </span>&lt; p);
+        <span class="macro">debug_assert!</span>(rhs &lt; p);
+        <span class="self">self</span>.sub_mod(rhs, p)
+    }
 }
-
-<span class="macro">impl_sub_mod!</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>);
 
 <span class="attr">#[cfg(all(test, feature = <span class="string">&quot;rand&quot;</span>))]
 </span><span class="kw">mod </span>tests {
@@ -221,6 +291,49 @@
         };
     }
 
+    <span class="macro">macro_rules! </span>test_sub_mod_special {
+        (<span class="macro-nonterminal">$size</span>:expr, <span class="macro-nonterminal">$test_name</span>:ident) =&gt; {
+            <span class="attr">#[test]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$test_name</span>() {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = rand_chacha::ChaCha8Rng::seed_from_u64(<span class="number">1</span>);
+                <span class="kw">let </span>moduli = [
+                    NonZero::&lt;Limb&gt;::random(<span class="kw-2">&amp;mut </span>rng),
+                    NonZero::&lt;Limb&gt;::random(<span class="kw-2">&amp;mut </span>rng),
+                ];
+
+                <span class="kw">for </span>special <span class="kw">in </span><span class="kw-2">&amp;</span>moduli {
+                    <span class="kw">let </span>p = <span class="kw-2">&amp;</span>NonZero::new(UInt::ZERO.wrapping_sub(<span class="kw-2">&amp;</span>UInt::from_word(special.<span class="number">0</span>)))
+                        .unwrap();
+
+                    <span class="kw">let </span>minus_one = p.wrapping_sub(<span class="kw-2">&amp;</span>UInt::ONE);
+
+                    <span class="kw">let </span>base_cases = [
+                        (UInt::ZERO, UInt::ZERO, UInt::ZERO),
+                        (UInt::ONE, UInt::ZERO, UInt::ONE),
+                        (UInt::ZERO, UInt::ONE, minus_one),
+                        (minus_one, minus_one, UInt::ZERO),
+                        (UInt::ZERO, minus_one, UInt::ONE),
+                    ];
+                    <span class="kw">for </span>(a, b, c) <span class="kw">in </span><span class="kw-2">&amp;</span>base_cases {
+                        <span class="kw">let </span>x = a.sub_mod_special(<span class="kw-2">&amp;</span>b, <span class="kw-2">*</span>special.as_ref());
+                        <span class="macro">assert_eq!</span>(<span class="kw-2">*</span>c, x, <span class="string">&quot;{} - {} mod {} = {} != {}&quot;</span>, a, b, p, x, c);
+                    }
+
+                    <span class="kw">for </span>_i <span class="kw">in </span><span class="number">0</span>..<span class="number">100 </span>{
+                        <span class="kw">let </span>a = UInt::&lt;<span class="macro-nonterminal">$size</span>&gt;::random_mod(<span class="kw-2">&amp;mut </span>rng, p);
+                        <span class="kw">let </span>b = UInt::&lt;<span class="macro-nonterminal">$size</span>&gt;::random_mod(<span class="kw-2">&amp;mut </span>rng, p);
+
+                        <span class="kw">let </span>c = a.sub_mod_special(<span class="kw-2">&amp;</span>b, <span class="kw-2">*</span>special.as_ref());
+                        <span class="macro">assert!</span>(c &lt; <span class="kw-2">**</span>p, <span class="string">&quot;not reduced: {} &gt;= {} &quot;</span>, c, p);
+
+                        <span class="kw">let </span>expected = a.sub_mod(<span class="kw-2">&amp;</span>b, p);
+                        <span class="macro">assert_eq!</span>(c, expected, <span class="string">&quot;incorrect result&quot;</span>);
+                    }
+                }
+            }
+        };
+    }
+
     <span class="comment">// Test requires 1-limb is capable of representing a 64-bit integer
     </span><span class="attr">#[cfg(target_pointer_width = <span class="string">&quot;64&quot;</span>)]
     </span><span class="macro">test_sub_mod!</span>(<span class="number">1</span>, sub1);
@@ -236,6 +349,19 @@
     <span class="macro">test_sub_mod!</span>(<span class="number">10</span>, sub10);
     <span class="macro">test_sub_mod!</span>(<span class="number">11</span>, sub11);
     <span class="macro">test_sub_mod!</span>(<span class="number">12</span>, sub12);
+
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">1</span>, sub_mod_special_1);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">2</span>, sub_mod_special_2);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">3</span>, sub_mod_special_3);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">4</span>, sub_mod_special_4);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">5</span>, sub_mod_special_5);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">6</span>, sub_mod_special_6);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">7</span>, sub_mod_special_7);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">8</span>, sub_mod_special_8);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">9</span>, sub_mod_special_9);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">10</span>, sub_mod_special_10);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">11</span>, sub_mod_special_11);
+    <span class="macro">test_sub_mod_special!</span>(<span class="number">12</span>, sub_mod_special_12);
 }
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="crypto_bigint" data-themes="" data-resource-suffix="" data-rustdoc-version="1.67.1 (d5a82bbd2 2023-02-07)" data-search-js="search-444266647c4dba98.js" data-settings-js="settings-bebeae96e00e4617.js" data-settings-css="settings-af96d9e2fc13e081.css" ></div></body></html>

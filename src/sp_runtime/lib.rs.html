@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/runtime/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/runtime/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_runtime/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -1110,44 +1110,9 @@
 <a href="#1110" id="1110">1110</a>
 <a href="#1111" id="1111">1111</a>
 <a href="#1112" id="1112">1112</a>
-<a href="#1113" id="1113">1113</a>
-<a href="#1114" id="1114">1114</a>
-<a href="#1115" id="1115">1115</a>
-<a href="#1116" id="1116">1116</a>
-<a href="#1117" id="1117">1117</a>
-<a href="#1118" id="1118">1118</a>
-<a href="#1119" id="1119">1119</a>
-<a href="#1120" id="1120">1120</a>
-<a href="#1121" id="1121">1121</a>
-<a href="#1122" id="1122">1122</a>
-<a href="#1123" id="1123">1123</a>
-<a href="#1124" id="1124">1124</a>
-<a href="#1125" id="1125">1125</a>
-<a href="#1126" id="1126">1126</a>
-<a href="#1127" id="1127">1127</a>
-<a href="#1128" id="1128">1128</a>
-<a href="#1129" id="1129">1129</a>
-<a href="#1130" id="1130">1130</a>
-<a href="#1131" id="1131">1131</a>
-<a href="#1132" id="1132">1132</a>
-<a href="#1133" id="1133">1133</a>
-<a href="#1134" id="1134">1134</a>
-<a href="#1135" id="1135">1135</a>
-<a href="#1136" id="1136">1136</a>
-<a href="#1137" id="1137">1137</a>
-<a href="#1138" id="1138">1138</a>
-<a href="#1139" id="1139">1139</a>
-<a href="#1140" id="1140">1140</a>
-<a href="#1141" id="1141">1141</a>
-<a href="#1142" id="1142">1142</a>
-<a href="#1143" id="1143">1143</a>
-<a href="#1144" id="1144">1144</a>
-<a href="#1145" id="1145">1145</a>
-<a href="#1146" id="1146">1146</a>
-<a href="#1147" id="1147">1147</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2017-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -1166,12 +1131,8 @@
 
 </span><span class="attr">#![warn(missing_docs)]
 #![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
-</span><span class="comment">// to allow benchmarking
-</span><span class="attr">#![cfg_attr(feature = <span class="string">&quot;bench&quot;</span>, feature(test))]
-#[cfg(feature = <span class="string">&quot;bench&quot;</span>)]
-</span><span class="kw">extern crate </span>test;
 
-<span class="attr">#[doc(hidden)]
+#[doc(hidden)]
 </span><span class="kw">pub use </span>codec;
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>scale_info;
@@ -1183,6 +1144,8 @@
 
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>paste;
+<span class="attr">#[doc(hidden)]
+</span><span class="kw">pub use </span>sp_arithmetic::traits::Saturating;
 
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>sp_application_crypto <span class="kw">as </span>app_crypto;
@@ -1202,7 +1165,6 @@
 <span class="kw">use </span>codec::{Decode, Encode, MaxEncodedLen};
 <span class="kw">use </span>scale_info::TypeInfo;
 
-<span class="kw">pub mod </span>bounded;
 <span class="kw">pub mod </span>curve;
 <span class="kw">pub mod </span>generic;
 <span class="kw">pub mod </span>legacy;
@@ -1217,9 +1179,6 @@
 
 <span class="kw">pub use </span><span class="kw">crate</span>::runtime_string::<span class="kw-2">*</span>;
 
-<span class="comment">// Re-export bounded types
-</span><span class="kw">pub use </span>bounded::{BoundedBTreeMap, BoundedBTreeSet, BoundedSlice, BoundedVec, WeakBoundedVec};
-
 <span class="comment">// Re-export Multiaddress
 </span><span class="kw">pub use </span>multiaddress::MultiAddress;
 
@@ -1229,9 +1188,13 @@
 <span class="kw">pub use </span>sp_application_crypto::{BoundToRuntimeAppPublic, RuntimeAppPublic};
 <span class="doccomment">/// Re-export this since it&#39;s part of the API of this crate.
 </span><span class="kw">pub use </span>sp_core::{
+	bounded::{BoundedBTreeMap, BoundedBTreeSet, BoundedSlice, BoundedVec, WeakBoundedVec},
 	crypto::{key_types, AccountId32, CryptoType, CryptoTypeId, KeyTypeId},
 	TypeId,
 };
+<span class="doccomment">/// Re-export bounded_vec and bounded_btree_map macros only when std is enabled.
+</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="kw">pub use </span>sp_core::{bounded_btree_map, bounded_vec};
 
 <span class="doccomment">/// Re-export `RuntimeDebug`, to avoid dependency clutter.
 </span><span class="kw">pub use </span>sp_core::RuntimeDebug;
@@ -1242,9 +1205,9 @@
 </span><span class="kw">pub use </span>sp_arithmetic::helpers_128bit;
 <span class="doccomment">/// Re-export top-level arithmetic stuff.
 </span><span class="kw">pub use </span>sp_arithmetic::{
-	traits::SaturatedConversion, FixedI128, FixedI64, FixedPointNumber, FixedPointOperand,
-	FixedU128, InnerOf, PerThing, PerU16, Perbill, Percent, Permill, Perquintill, Rational128,
-	UpperOf,
+	traits::SaturatedConversion, ArithmeticError, FixedI128, FixedI64, FixedPointNumber,
+	FixedPointOperand, FixedU128, InnerOf, PerThing, PerU16, Perbill, Percent, Permill,
+	Perquintill, Rational128, Rounding, UpperOf,
 };
 
 <span class="kw">pub use </span>either::Either;
@@ -1296,6 +1259,11 @@
 	/// exists.
 	</span><span class="kw">pub fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>, engine_id: ConsensusEngineId) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>EncodedJustification&gt; {
 		<span class="self">self</span>.iter().find(|j| j.<span class="number">0 </span>== engine_id).map(|j| <span class="kw-2">&amp;</span>j.<span class="number">1</span>)
+	}
+
+	<span class="doccomment">/// Remove the encoded justification for the given consensus engine, if it exists.
+	</span><span class="kw">pub fn </span>remove(<span class="kw-2">&amp;mut </span><span class="self">self</span>, engine_id: ConsensusEngineId) {
+		<span class="self">self</span>.<span class="number">0</span>.retain(|j| j.<span class="number">0 </span>!= engine_id)
 	}
 
 	<span class="doccomment">/// Return a copy of the encoded justification for the given consensus
@@ -1378,7 +1346,7 @@
 <span class="doccomment">/// Consensus engine unique ID.
 </span><span class="kw">pub type </span>ConsensusEngineId = [u8; <span class="number">4</span>];
 
-<span class="doccomment">/// Signature verify that can work with any known signature types..
+<span class="doccomment">/// Signature verify that can work with any known signature types.
 </span><span class="attr">#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
 #[derive(Eq, PartialEq, Clone, Encode, Decode, MaxEncodedLen, RuntimeDebug, TypeInfo)]
 </span><span class="kw">pub enum </span>MultiSignature {
@@ -1618,7 +1586,7 @@
 </span><span class="kw">pub type </span>DispatchResultWithInfo&lt;T&gt; = sp_std::result::Result&lt;T, DispatchErrorWithPostInfo&lt;T&gt;&gt;;
 
 <span class="doccomment">/// Reason why a pallet call failed.
-</span><span class="attr">#[derive(Eq, Clone, Copy, Encode, Decode, Debug, TypeInfo)]
+</span><span class="attr">#[derive(Eq, Clone, Copy, Encode, Decode, Debug, TypeInfo, MaxEncodedLen)]
 #[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
 </span><span class="kw">pub struct </span>ModuleError {
 	<span class="doccomment">/// Module index, matching the metadata module index.
@@ -1638,7 +1606,7 @@
 }
 
 <span class="doccomment">/// Errors related to transactional storage layers.
-</span><span class="attr">#[derive(Eq, PartialEq, Clone, Copy, Encode, Decode, Debug, TypeInfo)]
+</span><span class="attr">#[derive(Eq, PartialEq, Clone, Copy, Encode, Decode, Debug, TypeInfo, MaxEncodedLen)]
 #[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
 </span><span class="kw">pub enum </span>TransactionalError {
 	<span class="doccomment">/// Too many transactional layers have been spawned.
@@ -1663,7 +1631,7 @@
 }
 
 <span class="doccomment">/// Reason why a dispatch call failed.
-</span><span class="attr">#[derive(Eq, Clone, Copy, Encode, Decode, Debug, TypeInfo, PartialEq)]
+</span><span class="attr">#[derive(Eq, Clone, Copy, Encode, Decode, Debug, TypeInfo, PartialEq, MaxEncodedLen)]
 #[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
 </span><span class="kw">pub enum </span>DispatchError {
 	<span class="doccomment">/// Some error occurred.
@@ -1691,6 +1659,12 @@
 	<span class="doccomment">/// The number of transactional layers has been reached, or we are not in a transactional
 	/// layer.
 	</span>Transactional(TransactionalError),
+	<span class="doccomment">/// Resources exhausted, e.g. attempt to read/write data which is too large to manipulate.
+	</span>Exhausted,
+	<span class="doccomment">/// The state is corrupt; this is generally not going to fix itself.
+	</span>Corruption,
+	<span class="doccomment">/// Some resource (e.g. a preimage) is unavailable right now. This might fix itself later.
+	</span>Unavailable,
 }
 
 <span class="doccomment">/// Result of a `Dispatchable` which contains the `DispatchResult` and additional information about
@@ -1740,7 +1714,7 @@
 }
 
 <span class="doccomment">/// Description of what went wrong when trying to complete an operation on a token.
-</span><span class="attr">#[derive(Eq, PartialEq, Clone, Copy, Encode, Decode, Debug, TypeInfo)]
+</span><span class="attr">#[derive(Eq, PartialEq, Clone, Copy, Encode, Decode, Debug, TypeInfo, MaxEncodedLen)]
 #[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
 </span><span class="kw">pub enum </span>TokenError {
 	<span class="doccomment">/// Funds are unavailable.
@@ -1779,28 +1753,6 @@
 	}
 }
 
-<span class="doccomment">/// Arithmetic errors.
-</span><span class="attr">#[derive(Eq, PartialEq, Clone, Copy, Encode, Decode, Debug, TypeInfo)]
-#[cfg_attr(feature = <span class="string">&quot;std&quot;</span>, derive(Serialize, Deserialize))]
-</span><span class="kw">pub enum </span>ArithmeticError {
-	<span class="doccomment">/// Underflow.
-	</span>Underflow,
-	<span class="doccomment">/// Overflow.
-	</span>Overflow,
-	<span class="doccomment">/// Division by zero.
-	</span>DivisionByZero,
-}
-
-<span class="kw">impl </span>From&lt;ArithmeticError&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-	<span class="kw">fn </span>from(e: ArithmeticError) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
-		<span class="kw">match </span>e {
-			ArithmeticError::Underflow =&gt; <span class="string">&quot;An underflow would occur&quot;</span>,
-			ArithmeticError::Overflow =&gt; <span class="string">&quot;An overflow would occur&quot;</span>,
-			ArithmeticError::DivisionByZero =&gt; <span class="string">&quot;Division by zero&quot;</span>,
-		}
-	}
-}
-
 <span class="kw">impl </span>From&lt;ArithmeticError&gt; <span class="kw">for </span>DispatchError {
 	<span class="kw">fn </span>from(e: ArithmeticError) -&gt; DispatchError {
 		<span class="self">Self</span>::Arithmetic(e)
@@ -1815,18 +1767,21 @@
 
 <span class="kw">impl </span>From&lt;DispatchError&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
 	<span class="kw">fn </span>from(err: DispatchError) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+		<span class="kw">use </span>DispatchError::<span class="kw-2">*</span>;
 		<span class="kw">match </span>err {
-			DispatchError::Other(msg) =&gt; msg,
-			DispatchError::CannotLookup =&gt; <span class="string">&quot;Cannot lookup&quot;</span>,
-			DispatchError::BadOrigin =&gt; <span class="string">&quot;Bad origin&quot;</span>,
-			DispatchError::Module(ModuleError { message, .. }) =&gt;
-				message.unwrap_or(<span class="string">&quot;Unknown module error&quot;</span>),
-			DispatchError::ConsumerRemaining =&gt; <span class="string">&quot;Consumer remaining&quot;</span>,
-			DispatchError::NoProviders =&gt; <span class="string">&quot;No providers&quot;</span>,
-			DispatchError::TooManyConsumers =&gt; <span class="string">&quot;Too many consumers&quot;</span>,
-			DispatchError::Token(e) =&gt; e.into(),
-			DispatchError::Arithmetic(e) =&gt; e.into(),
-			DispatchError::Transactional(e) =&gt; e.into(),
+			Other(msg) =&gt; msg,
+			CannotLookup =&gt; <span class="string">&quot;Cannot lookup&quot;</span>,
+			BadOrigin =&gt; <span class="string">&quot;Bad origin&quot;</span>,
+			Module(ModuleError { message, .. }) =&gt; message.unwrap_or(<span class="string">&quot;Unknown module error&quot;</span>),
+			ConsumerRemaining =&gt; <span class="string">&quot;Consumer remaining&quot;</span>,
+			NoProviders =&gt; <span class="string">&quot;No providers&quot;</span>,
+			TooManyConsumers =&gt; <span class="string">&quot;Too many consumers&quot;</span>,
+			Token(e) =&gt; e.into(),
+			Arithmetic(e) =&gt; e.into(),
+			Transactional(e) =&gt; e.into(),
+			Exhausted =&gt; <span class="string">&quot;Resources exhausted&quot;</span>,
+			Corruption =&gt; <span class="string">&quot;State corrupt&quot;</span>,
+			Unavailable =&gt; <span class="string">&quot;Resource unavailable&quot;</span>,
 		}
 	}
 }
@@ -1842,33 +1797,37 @@
 
 <span class="kw">impl </span>traits::Printable <span class="kw">for </span>DispatchError {
 	<span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+		<span class="kw">use </span>DispatchError::<span class="kw-2">*</span>;
 		<span class="string">&quot;DispatchError&quot;</span>.print();
 		<span class="kw">match </span><span class="self">self </span>{
-			<span class="self">Self</span>::Other(err) =&gt; err.print(),
-			<span class="self">Self</span>::CannotLookup =&gt; <span class="string">&quot;Cannot lookup&quot;</span>.print(),
-			<span class="self">Self</span>::BadOrigin =&gt; <span class="string">&quot;Bad origin&quot;</span>.print(),
-			<span class="self">Self</span>::Module(ModuleError { index, error, message }) =&gt; {
+			Other(err) =&gt; err.print(),
+			CannotLookup =&gt; <span class="string">&quot;Cannot lookup&quot;</span>.print(),
+			BadOrigin =&gt; <span class="string">&quot;Bad origin&quot;</span>.print(),
+			Module(ModuleError { index, error, message }) =&gt; {
 				index.print();
 				error.print();
 				<span class="kw">if let </span><span class="prelude-val">Some</span>(msg) = message {
 					msg.print();
 				}
 			},
-			<span class="self">Self</span>::ConsumerRemaining =&gt; <span class="string">&quot;Consumer remaining&quot;</span>.print(),
-			<span class="self">Self</span>::NoProviders =&gt; <span class="string">&quot;No providers&quot;</span>.print(),
-			<span class="self">Self</span>::TooManyConsumers =&gt; <span class="string">&quot;Too many consumers&quot;</span>.print(),
-			<span class="self">Self</span>::Token(e) =&gt; {
+			ConsumerRemaining =&gt; <span class="string">&quot;Consumer remaining&quot;</span>.print(),
+			NoProviders =&gt; <span class="string">&quot;No providers&quot;</span>.print(),
+			TooManyConsumers =&gt; <span class="string">&quot;Too many consumers&quot;</span>.print(),
+			Token(e) =&gt; {
 				<span class="string">&quot;Token error: &quot;</span>.print();
 				&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;::from(<span class="kw-2">*</span>e).print();
 			},
-			<span class="self">Self</span>::Arithmetic(e) =&gt; {
+			Arithmetic(e) =&gt; {
 				<span class="string">&quot;Arithmetic error: &quot;</span>.print();
 				&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;::from(<span class="kw-2">*</span>e).print();
 			},
-			<span class="self">Self</span>::Transactional(e) =&gt; {
+			Transactional(e) =&gt; {
 				<span class="string">&quot;Transactional error: &quot;</span>.print();
 				&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;::from(<span class="kw-2">*</span>e).print();
 			},
+			Exhausted =&gt; <span class="string">&quot;Resources exhausted&quot;</span>.print(),
+			Corruption =&gt; <span class="string">&quot;State corrupt&quot;</span>.print(),
+			Unavailable =&gt; <span class="string">&quot;Resource unavailable&quot;</span>.print(),
 		}
 	}
 }
@@ -1967,7 +1926,8 @@
 </span><span class="macro">macro_rules! </span>assert_eq_error_rate {
 	(<span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$y</span>:expr, <span class="macro-nonterminal">$error</span>:expr $(,)<span class="question-mark">?</span>) =&gt; {
 		<span class="macro">assert!</span>(
-			(<span class="macro-nonterminal">$x</span>) &gt;= ((<span class="macro-nonterminal">$y</span>) - (<span class="macro-nonterminal">$error</span>)) &amp;&amp; (<span class="macro-nonterminal">$x</span>) &lt;= ((<span class="macro-nonterminal">$y</span>) + (<span class="macro-nonterminal">$error</span>)),
+			(<span class="macro-nonterminal">$x </span>&gt;= <span class="macro-nonterminal">$crate::Saturating::saturating_sub</span>(<span class="macro-nonterminal">$y</span>, <span class="macro-nonterminal">$error</span>)) &amp;&amp;
+				(<span class="macro-nonterminal">$x </span>&lt;= <span class="macro-nonterminal">$crate::Saturating::saturating_add</span>(<span class="macro-nonterminal">$y</span>, <span class="macro-nonterminal">$error</span>)),
 			<span class="string">&quot;{:?} != {:?} (with error rate {:?})&quot;</span>,
 			<span class="macro-nonterminal">$x</span>,
 			<span class="macro-nonterminal">$y</span>,
@@ -1976,42 +1936,19 @@
 	};
 }
 
-<span class="doccomment">/// Build a bounded vec from the given literals.
-///
-/// The type of the outcome must be known.
-///
-/// Will not handle any errors and just panic if the given literals cannot fit in the corresponding
-/// bounded vec type. Thus, this is only suitable for testing and non-consensus code.
+<span class="doccomment">/// Same as [`assert_eq_error_rate`], but intended to be used with floating point number, or
+/// generally those who do not have over/underflow potentials.
 </span><span class="attr">#[macro_export]
 #[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="macro">macro_rules! </span>bounded_vec {
-	($ (<span class="macro-nonterminal">$values</span>:expr),* $(,)<span class="question-mark">?</span>) =&gt; {
-		{
-			<span class="macro-nonterminal">$</span><span class="macro">crate::sp_std::vec!</span>[$(<span class="macro-nonterminal">$values</span>),<span class="kw-2">*</span>].try_into().unwrap()
-		}
-	};
-	( <span class="macro-nonterminal">$value</span>:expr ; <span class="macro-nonterminal">$repetition</span>:expr ) =&gt; {
-		{
-			<span class="macro-nonterminal">$</span><span class="macro">crate::sp_std::vec!</span>[<span class="macro-nonterminal">$value </span>; <span class="macro-nonterminal">$repetition</span>].try_into().unwrap()
-		}
-	}
-}
-
-<span class="doccomment">/// Build a bounded btree-map from the given literals.
-///
-/// The type of the outcome must be known.
-///
-/// Will not handle any errors and just panic if the given literals cannot fit in the corresponding
-/// bounded vec type. Thus, this is only suitable for testing and non-consensus code.
-</span><span class="attr">#[macro_export]
-#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="macro">macro_rules! </span>bounded_btree_map {
-	($ ( <span class="macro-nonterminal">$key</span>:expr =&gt; <span class="macro-nonterminal">$value</span>:expr ),* $(,)<span class="question-mark">?</span>) =&gt; {
-		{
-			<span class="macro-nonterminal">$crate::traits::TryCollect</span>::&lt;<span class="macro-nonterminal">$crate::BoundedBTreeMap</span>&lt;<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;::try_collect(
-				<span class="macro-nonterminal">$</span><span class="macro">crate::sp_std::vec!</span>[$((<span class="macro-nonterminal">$key</span>, <span class="macro-nonterminal">$value</span>)),<span class="kw-2">*</span>].into_iter()
-			).unwrap()
-		}
+</span><span class="macro">macro_rules! </span>assert_eq_error_rate_float {
+	(<span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$y</span>:expr, <span class="macro-nonterminal">$error</span>:expr $(,)<span class="question-mark">?</span>) =&gt; {
+		<span class="macro">assert!</span>(
+			(<span class="macro-nonterminal">$x </span>&gt;= <span class="macro-nonterminal">$y </span>- <span class="macro-nonterminal">$error</span>) &amp;&amp; (<span class="macro-nonterminal">$x </span>&lt;= <span class="macro-nonterminal">$y </span>+ <span class="macro-nonterminal">$error</span>),
+			<span class="string">&quot;{:?} != {:?} (with error rate {:?})&quot;</span>,
+			<span class="macro-nonterminal">$x</span>,
+			<span class="macro-nonterminal">$y</span>,
+			<span class="macro-nonterminal">$error</span>,
+		);
 	};
 }
 
@@ -2024,13 +1961,6 @@
 	<span class="doccomment">/// Convert an encoded extrinsic to an `OpaqueExtrinsic`.
 	</span><span class="kw">pub fn </span>from_bytes(<span class="kw-2">mut </span>bytes: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, codec::Error&gt; {
 		<span class="self">Self</span>::decode(<span class="kw-2">&amp;mut </span>bytes)
-	}
-}
-
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl </span>parity_util_mem::MallocSizeOf <span class="kw">for </span>OpaqueExtrinsic {
-	<span class="kw">fn </span>size_of(<span class="kw-2">&amp;</span><span class="self">self</span>, ops: <span class="kw-2">&amp;mut </span>parity_util_mem::MallocSizeOfOps) -&gt; usize {
-		<span class="self">self</span>.<span class="number">0</span>.size_of(ops)
 	}
 }
 
@@ -2260,7 +2190,7 @@
 		ext.insert(<span class="string">b&quot;c&quot;</span>.to_vec(), <span class="macro">vec!</span>[<span class="number">3u8</span>; <span class="number">33</span>]);
 		ext.insert(<span class="string">b&quot;d&quot;</span>.to_vec(), <span class="macro">vec!</span>[<span class="number">4u8</span>; <span class="number">33</span>]);
 
-		<span class="kw">let </span>pre_root = ext.backend.root().clone();
+		<span class="kw">let </span>pre_root = <span class="kw-2">*</span>ext.backend.root();
 		<span class="kw">let </span>(<span class="kw">_</span>, proof) = ext.execute_and_prove(|| {
 			sp_io::storage::get(<span class="string">b&quot;a&quot;</span>);
 			sp_io::storage::get(<span class="string">b&quot;b&quot;</span>);

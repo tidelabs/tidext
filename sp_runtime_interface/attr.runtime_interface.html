@@ -170,10 +170,10 @@ This instructs the macro to make two significant changes to the generated code:<
 <ol>
 <li>The generated functions are not callable from the native side.</li>
 <li>The trait as shown above is not implemented for <a href="../sp_externalities/trait.Externalities.html" title="Externalities"><code>Externalities</code></a> and is instead
-implemented for <code>FunctionExecutor</code> (from <code>sp-wasm-interface</code>).</li>
+implemented for <code>FunctionContext</code> (from <code>sp-wasm-interface</code>).</li>
 </ol>
 <h2 id="disable-tracing"><a href="#disable-tracing">Disable tracing</a></h2>
-<p>By addding <code>no_tracing</code> to the list of options you can prevent the wasm-side interface from
+<p>By adding <code>no_tracing</code> to the list of options you can prevent the wasm-side interface from
 generating the default <code>sp-tracing</code>-calls. Note that this is rarely needed but only meant
 for the case when that would create a circular dependency. You usually <em>do not</em> want to add
 this flag, as tracing doesn’t cost you anything by default anyways (it is added as a no-op)

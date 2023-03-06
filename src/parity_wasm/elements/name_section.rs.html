@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.42.2/src/elements/name_section.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>name_section.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/parity-wasm-0.45.0/src/elements/name_section.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>name_section.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../parity_wasm/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -370,21 +370,12 @@
 <a href="#370" id="370">370</a>
 <a href="#371" id="371">371</a>
 <a href="#372" id="372">372</a>
-<a href="#373" id="373">373</a>
-<a href="#374" id="374">374</a>
-<a href="#375" id="375">375</a>
-<a href="#376" id="376">376</a>
-<a href="#377" id="377">377</a>
-<a href="#378" id="378">378</a>
-<a href="#379" id="379">379</a>
-<a href="#380" id="380">380</a>
-<a href="#381" id="381">381</a>
-<a href="#382" id="382">382</a>
-</pre><pre class="rust"><code><span class="kw">use </span>alloc::{string::String, vec::Vec};
-<span class="kw">use </span><span class="kw">crate</span>::io;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::io;
+<span class="kw">use </span>alloc::string::String;
 
-<span class="kw">use super</span>::{Deserialize, Error, Module, Serialize, VarUint32, VarUint7, Type};
-<span class="kw">use </span><span class="kw">super</span>::index_map::IndexMap;
+<span class="kw">use super</span>::{
+	index_map::IndexMap, Deserialize, Error, Module, Serialize, Type, VarUint32, VarUint7,
+};
 
 <span class="kw">const </span>NAME_TYPE_MODULE: u8 = <span class="number">0</span>;
 <span class="kw">const </span>NAME_TYPE_FUNCTION: u8 = <span class="number">1</span>;
@@ -405,14 +396,12 @@
 
 <span class="kw">impl </span>NameSection {
 	<span class="doccomment">/// Creates a new name section.
-	</span><span class="kw">pub fn </span>new(module: <span class="prelude-ty">Option</span>&lt;ModuleNameSubsection&gt;,
-                  functions: <span class="prelude-ty">Option</span>&lt;FunctionNameSubsection&gt;,
-                  locals: <span class="prelude-ty">Option</span>&lt;LocalNameSubsection&gt;) -&gt; <span class="self">Self </span>{
-		<span class="self">Self </span>{
-			module,
-			functions,
-			locals,
-		}
+	</span><span class="kw">pub fn </span>new(
+		module: <span class="prelude-ty">Option</span>&lt;ModuleNameSubsection&gt;,
+		functions: <span class="prelude-ty">Option</span>&lt;FunctionNameSubsection&gt;,
+		locals: <span class="prelude-ty">Option</span>&lt;LocalNameSubsection&gt;,
+	) -&gt; <span class="self">Self </span>{
+		<span class="self">Self </span>{ module, functions, locals }
 	}
 
 	<span class="doccomment">/// Module name subsection of this section.
@@ -448,55 +437,48 @@
 
 <span class="kw">impl </span>NameSection {
 	<span class="doccomment">/// Deserialize a name section.
-	</span><span class="kw">pub fn </span>deserialize&lt;R: io::Read&gt;(
-		module: <span class="kw-2">&amp;</span>Module,
-		rdr: <span class="kw-2">&amp;mut </span>R,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
+	</span><span class="kw">pub fn </span>deserialize&lt;R: io::Read&gt;(module: <span class="kw-2">&amp;</span>Module, rdr: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>module_name: <span class="prelude-ty">Option</span>&lt;ModuleNameSubsection&gt; = <span class="prelude-val">None</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>function_names: <span class="prelude-ty">Option</span>&lt;FunctionNameSubsection&gt; = <span class="prelude-val">None</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>local_names: <span class="prelude-ty">Option</span>&lt;LocalNameSubsection&gt; = <span class="prelude-val">None</span>;
 
-		<span class="kw">loop </span>{
-			<span class="kw">let </span>subsection_type: u8 = <span class="kw">match </span>VarUint7::deserialize(rdr) {
-				<span class="prelude-val">Ok</span>(raw_subsection_type) =&gt; raw_subsection_type.into(),
-				<span class="comment">// todo: be more selective detecting no more subsection
-				</span><span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; { <span class="kw">break</span>; },
-			};
-
+		<span class="kw">while let </span><span class="prelude-val">Ok</span>(raw_subsection_type) = VarUint7::deserialize(rdr) {
+			<span class="kw">let </span>subsection_type = raw_subsection_type.into();
 			<span class="comment">// deserialize the section size
-			</span>VarUint32::deserialize(rdr)<span class="question-mark">?</span>;
+			</span><span class="kw">let </span>size: usize = VarUint32::deserialize(rdr)<span class="question-mark">?</span>.into();
 
 			<span class="kw">match </span>subsection_type {
 				NAME_TYPE_MODULE =&gt; {
-					<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw">_</span>) = module_name {
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_FUNCTION));
+					<span class="kw">if </span>module_name.is_some() {
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_FUNCTION))
 					}
 					module_name = <span class="prelude-val">Some</span>(ModuleNameSubsection::deserialize(rdr)<span class="question-mark">?</span>);
 				},
 
 				NAME_TYPE_FUNCTION =&gt; {
-					<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw">_</span>) = function_names {
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_FUNCTION));
+					<span class="kw">if </span>function_names.is_some() {
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_FUNCTION))
 					}
 					function_names = <span class="prelude-val">Some</span>(FunctionNameSubsection::deserialize(module, rdr)<span class="question-mark">?</span>);
 				},
 
 				NAME_TYPE_LOCAL =&gt; {
-					<span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw">_</span>) = local_names {
-						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_LOCAL));
+					<span class="kw">if </span>local_names.is_some() {
+						<span class="kw">return </span><span class="prelude-val">Err</span>(Error::DuplicatedNameSubsections(NAME_TYPE_LOCAL))
 					}
 					local_names = <span class="prelude-val">Some</span>(LocalNameSubsection::deserialize(module, rdr)<span class="question-mark">?</span>);
 				},
 
-				<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::UnknownNameSubsectionType(subsection_type))
+				<span class="kw">_ </span>=&gt; {
+					<span class="comment">// Consume the entire subsection size and drop it. This allows other sections to still be
+					// consumed if there are any.
+					</span><span class="kw">let </span><span class="kw-2">mut </span>buf = <span class="macro">vec!</span>[<span class="number">0</span>; size];
+					rdr.read(<span class="kw-2">&amp;mut </span>buf)<span class="question-mark">?</span>;
+				},
 			};
 		}
 
-		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{
-			module: module_name,
-			functions: function_names,
-			locals: local_names,
-		})
+		<span class="prelude-val">Ok</span>(<span class="self">Self </span>{ module: module_name, functions: function_names, locals: local_names })
 	}
 }
 
@@ -504,7 +486,11 @@
 	<span class="kw">type </span>Error = Error;
 
 	<span class="kw">fn </span>serialize&lt;W: io::Write&gt;(<span class="self">self</span>, wtr: <span class="kw-2">&amp;mut </span>W) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-		<span class="kw">fn </span>serialize_subsection&lt;W: io::Write&gt;(wtr: <span class="kw-2">&amp;mut </span>W, name_type: u8, name_payload: <span class="kw-2">&amp;</span>Vec&lt;u8&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+		<span class="kw">fn </span>serialize_subsection&lt;W: io::Write&gt;(
+			wtr: <span class="kw-2">&amp;mut </span>W,
+			name_type: u8,
+			name_payload: <span class="kw-2">&amp;</span>[u8],
+		) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
 			VarUint7::from(name_type).serialize(wtr)<span class="question-mark">?</span>;
 			VarUint32::from(name_payload.len()).serialize(wtr)<span class="question-mark">?</span>;
 			wtr.write(name_payload).map_err(Into::into)
@@ -635,39 +621,37 @@
 
 		<span class="kw">let </span>max_signature_args = module
 			.type_section()
-			.map(|ts|
+			.map(|ts| {
 				ts.types()
 					.iter()
-					.map(|x| { <span class="kw">let </span>Type::Function(<span class="kw-2">ref </span>func) = <span class="kw-2">*</span>x; func.params().len() })
+					.map(|x| {
+						<span class="kw">let </span>Type::Function(<span class="kw-2">ref </span>func) = <span class="kw-2">*</span>x;
+						func.params().len()
+					})
 					.max()
-					.unwrap_or(<span class="number">0</span>))
+					.unwrap_or(<span class="number">0</span>)
+			})
 			.unwrap_or(<span class="number">0</span>);
 
 		<span class="kw">let </span>max_locals = module
 			.code_section()
-			.map(|cs|
+			.map(|cs| {
 				cs.bodies()
 					.iter()
-					.map(|f|
-						f.locals()
-						   .iter()
-						   .map(|l| l.count() <span class="kw">as </span>usize)
-						   .sum())
+					.map(|f| f.locals().iter().map(|l| l.count() <span class="kw">as </span>usize).sum())
 					.max()
-					.unwrap_or(<span class="number">0</span>))
+					.unwrap_or(<span class="number">0</span>)
+			})
 			.unwrap_or(<span class="number">0</span>);
 
 		<span class="kw">let </span>max_space = max_signature_args + max_locals;
 
 		<span class="kw">let </span>deserialize_locals = |<span class="kw">_</span>: u32, rdr: <span class="kw-2">&amp;mut </span>R| IndexMap::deserialize(max_space, rdr);
 
-		<span class="kw">let </span>local_names = IndexMap::deserialize_with(
-			max_entry_space,
-			<span class="kw-2">&amp;</span>deserialize_locals,
-			rdr,
-		)<span class="question-mark">?</span>;
+		<span class="kw">let </span>local_names = IndexMap::deserialize_with(max_entry_space, <span class="kw-2">&amp;</span>deserialize_locals, rdr)<span class="question-mark">?</span>;
 		<span class="prelude-val">Ok</span>(LocalNameSubsection { local_names })
-	}}
+	}
+}
 
 <span class="kw">impl </span>Serialize <span class="kw">for </span>LocalNameSubsection {
 	<span class="kw">type </span>Error = Error;
@@ -688,9 +672,7 @@
 	// and make sure it matches the original.
 	</span><span class="kw">fn </span>serialize_test(original: NameSection) -&gt; Vec&lt;u8&gt; {
 		<span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="macro">vec!</span>[];
-		original
-			.serialize(<span class="kw-2">&amp;mut </span>buffer)
-			.expect(<span class="string">&quot;serialize error&quot;</span>);
+		original.serialize(<span class="kw-2">&amp;mut </span>buffer).expect(<span class="string">&quot;serialize error&quot;</span>);
 		buffer
 		<span class="comment">// todo: add deserialization to this test
 	</span>}
@@ -699,7 +681,7 @@
 	</span><span class="kw">fn </span>serialize_module_name() {
 		<span class="kw">let </span>module_name_subsection = ModuleNameSubsection::new(<span class="string">&quot;my_mod&quot;</span>);
 		<span class="kw">let </span>original = NameSection::new(<span class="prelude-val">Some</span>(module_name_subsection), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
-		serialize_test(original.clone());
+		serialize_test(original);
 	}
 
 	<span class="attr">#[test]
@@ -735,7 +717,11 @@
 		locals.insert(<span class="number">1</span>, <span class="string">&quot;msg2&quot;</span>.to_string());
 		local_name_subsection.local_names_mut().insert(<span class="number">0</span>, locals);
 
-		<span class="kw">let </span>name_section = NameSection::new(<span class="prelude-val">Some</span>(module_name_subsection), <span class="prelude-val">Some</span>(function_name_subsection), <span class="prelude-val">Some</span>(local_name_subsection));
+		<span class="kw">let </span>name_section = NameSection::new(
+			<span class="prelude-val">Some</span>(module_name_subsection),
+			<span class="prelude-val">Some</span>(function_name_subsection),
+			<span class="prelude-val">Some</span>(local_name_subsection),
+		);
 		serialize_test(name_section);
 	}
 
@@ -750,16 +736,10 @@
 		<span class="kw">let </span>local_names = name_section.locals().expect(<span class="string">&quot;local_name_section should be present&quot;</span>);
 
 		<span class="kw">let </span>locals = local_names.local_names().get(<span class="number">0</span>).expect(<span class="string">&quot;entry #0 should be present&quot;</span>);
-		<span class="macro">assert_eq!</span>(
-			locals.get(<span class="number">0</span>).expect(<span class="string">&quot;entry #0 should be present&quot;</span>),
-			<span class="string">&quot;abc&quot;
-		</span>);
+		<span class="macro">assert_eq!</span>(locals.get(<span class="number">0</span>).expect(<span class="string">&quot;entry #0 should be present&quot;</span>), <span class="string">&quot;abc&quot;</span>);
 
 		<span class="kw">let </span>locals = local_names.local_names().get(<span class="number">1</span>).expect(<span class="string">&quot;entry #1 should be present&quot;</span>);
-		<span class="macro">assert_eq!</span>(
-			locals.get(<span class="number">0</span>).expect(<span class="string">&quot;entry #0 should be present&quot;</span>),
-			<span class="string">&quot;def&quot;
-		</span>);
+		<span class="macro">assert_eq!</span>(locals.get(<span class="number">0</span>).expect(<span class="string">&quot;entry #0 should be present&quot;</span>), <span class="string">&quot;def&quot;</span>);
 	}
 }
 </code></pre></div>

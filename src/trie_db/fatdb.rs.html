@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.23.1/src/fatdb.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fatdb.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.25.1/src/fatdb.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fatdb.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../trie_db/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -185,8 +185,6 @@
 <a href="#185" id="185">185</a>
 <a href="#186" id="186">186</a>
 <a href="#187" id="187">187</a>
-<a href="#188" id="188">188</a>
-<a href="#189" id="189">189</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2017, 2021 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -207,31 +205,28 @@
 };
 <span class="kw">use </span>hash_db::{HashDBRef, Hasher};
 
-<span class="kw">use </span><span class="kw">crate</span>::rstd::boxed::Box;
+<span class="kw">use crate</span>::{rstd::boxed::Box, TrieDBBuilder};
 
 <span class="doccomment">/// A `Trie` implementation which hashes keys and uses a generic `HashDB` backing database.
 /// Additionaly it stores inserted hash-key mappings for later retrieval.
 ///
 /// Use it as a `Trie` or `TrieMut` trait object.
-</span><span class="kw">pub struct </span>FatDB&lt;<span class="lifetime">&#39;db</span>, L&gt;
+</span><span class="kw">pub struct </span>FatDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
-	raw: TrieDB&lt;<span class="lifetime">&#39;db</span>, L&gt;,
+	raw: TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; FatDB&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; FatDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
 	<span class="doccomment">/// Create a new trie with the backing database `db` and empty `root`
 	/// Initialise to the state entailed by the genesis block.
 	/// This guarantees the trie is built correctly.
-	</span><span class="kw">pub fn </span>new(
-		db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw">dyn </span>HashDBRef&lt;L::Hash, DBValue&gt;,
-		root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieHash&lt;L&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
-		<span class="prelude-val">Ok</span>(FatDB { raw: TrieDB::new(db, root)<span class="question-mark">? </span>})
+	</span><span class="kw">pub fn </span>new(db: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span><span class="kw">dyn </span>HashDBRef&lt;L::Hash, DBValue&gt;, root: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieHash&lt;L&gt;) -&gt; <span class="self">Self </span>{
+		FatDB { raw: TrieDBBuilder::new(db, root).build() }
 	}
 
 	<span class="doccomment">/// Get the backing database.
@@ -240,7 +235,7 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; Trie&lt;L&gt; <span class="kw">for </span>FatDB&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; Trie&lt;L&gt; <span class="kw">for </span>FatDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
@@ -252,14 +247,15 @@
 		<span class="self">self</span>.raw.contains(L::Hash::hash(key).as_ref())
 	}
 
-	<span class="kw">fn </span>get_with&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;key</span>, Q: Query&lt;L::Hash&gt;&gt;(
-		<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>,
-		key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;key </span>[u8],
+	<span class="kw">fn </span>get_hash(<span class="kw-2">&amp;</span><span class="self">self</span>, key: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;TrieHash&lt;L&gt;&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+		<span class="self">self</span>.raw.get_hash(key)
+	}
+
+	<span class="kw">fn </span>get_with&lt;Q: Query&lt;L::Hash&gt;&gt;(
+		<span class="kw-2">&amp;</span><span class="self">self</span>,
+		key: <span class="kw-2">&amp;</span>[u8],
 		query: Q,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;
-	<span class="kw">where
-		</span><span class="lifetime">&#39;a</span>: <span class="lifetime">&#39;key</span>,
-	{
+	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;Q::Item&gt;, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="self">self</span>.raw.get_with(L::Hash::hash(key).as_ref(), query)
 	}
 
@@ -285,25 +281,25 @@
 }
 
 <span class="doccomment">/// Iterator over inserted pairs of key values.
-</span><span class="kw">pub struct </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+</span><span class="kw">pub struct </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
-	trie_iterator: TrieDBIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;,
-	trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, L&gt;,
+	trie_iterator: TrieDBIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
+	trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; FatDBIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; FatDBIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
 	<span class="doccomment">/// Creates new iterator.
-	</span><span class="kw">pub fn </span>new(trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	</span><span class="kw">pub fn </span>new(trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="prelude-val">Ok</span>(FatDBIterator { trie_iterator: TrieDBIterator::new(trie)<span class="question-mark">?</span>, trie })
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
@@ -313,11 +309,11 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; Iterator <span class="kw">for </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; Iterator <span class="kw">for </span>FatDBIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
-	<span class="kw">type </span>Item = TrieItem&lt;<span class="lifetime">&#39;db</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
+	<span class="kw">type </span>Item = TrieItem&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
 
 	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
 		<span class="self">self</span>.trie_iterator.next().map(|res| {
@@ -333,25 +329,25 @@
 }
 
 <span class="doccomment">/// Iterator over inserted keys.
-</span><span class="kw">pub struct </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+</span><span class="kw">pub struct </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
-	trie_iterator: TrieDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;,
-	trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, L&gt;,
+	trie_iterator: TrieDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
+	trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
 	<span class="doccomment">/// Creates new iterator.
-	</span><span class="kw">pub fn </span>new(trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
+	</span><span class="kw">pub fn </span>new(trie: <span class="kw-2">&amp;</span><span class="lifetime">&#39;db </span>TrieDB&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt; {
 		<span class="prelude-val">Ok</span>(FatDBKeyIterator { trie_iterator: TrieDBKeyIterator::new(trie)<span class="question-mark">?</span>, trie })
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; TrieIterator&lt;L&gt; <span class="kw">for </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
@@ -361,11 +357,11 @@
 	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, L&gt; Iterator <span class="kw">for </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, L&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt; Iterator <span class="kw">for </span>FatDBKeyIterator&lt;<span class="lifetime">&#39;db</span>, <span class="lifetime">&#39;cache</span>, L&gt;
 <span class="kw">where
 	</span>L: TrieLayout,
 {
-	<span class="kw">type </span>Item = TrieKeyItem&lt;<span class="lifetime">&#39;db</span>, TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
+	<span class="kw">type </span>Item = TrieKeyItem&lt;TrieHash&lt;L&gt;, CError&lt;L&gt;&gt;;
 
 	<span class="kw">fn </span>next(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::Item&gt; {
 		<span class="self">self</span>.trie_iterator.next().map(|res| {

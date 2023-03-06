@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/primitives/api/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/primitives/api/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../sp_api/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -676,9 +676,67 @@
 <a href="#676" id="676">676</a>
 <a href="#677" id="677">677</a>
 <a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
+<a href="#686" id="686">686</a>
+<a href="#687" id="687">687</a>
+<a href="#688" id="688">688</a>
+<a href="#689" id="689">689</a>
+<a href="#690" id="690">690</a>
+<a href="#691" id="691">691</a>
+<a href="#692" id="692">692</a>
+<a href="#693" id="693">693</a>
+<a href="#694" id="694">694</a>
+<a href="#695" id="695">695</a>
+<a href="#696" id="696">696</a>
+<a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
+<a href="#704" id="704">704</a>
+<a href="#705" id="705">705</a>
+<a href="#706" id="706">706</a>
+<a href="#707" id="707">707</a>
+<a href="#708" id="708">708</a>
+<a href="#709" id="709">709</a>
+<a href="#710" id="710">710</a>
+<a href="#711" id="711">711</a>
+<a href="#712" id="712">712</a>
+<a href="#713" id="713">713</a>
+<a href="#714" id="714">714</a>
+<a href="#715" id="715">715</a>
+<a href="#716" id="716">716</a>
+<a href="#717" id="717">717</a>
+<a href="#718" id="718">718</a>
+<a href="#719" id="719">719</a>
+<a href="#720" id="720">720</a>
+<a href="#721" id="721">721</a>
+<a href="#722" id="722">722</a>
+<a href="#723" id="723">723</a>
+<a href="#724" id="724">724</a>
+<a href="#725" id="725">725</a>
+<a href="#726" id="726">726</a>
+<a href="#727" id="727">727</a>
+<a href="#728" id="728">728</a>
+<a href="#729" id="729">729</a>
+<a href="#730" id="730">730</a>
+<a href="#731" id="731">731</a>
+<a href="#732" id="732">732</a>
+<a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -756,13 +814,11 @@
 <span class="attr">#[doc(hidden)]
 #[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
 </span><span class="kw">pub use </span>sp_core::to_substrate_wasm_fn_return_value;
-<span class="attr">#[doc(hidden)]
-#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">pub use </span>sp_core::NativeOrEncoded;
 <span class="kw">use </span>sp_core::OpaqueMetadata;
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>sp_core::{offchain, ExecutionContext};
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+<span class="attr">#[doc(hidden)]
+#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">pub use </span>sp_runtime::StateVersion;
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>sp_runtime::{
@@ -777,16 +833,15 @@
 <span class="attr">#[doc(hidden)]
 #[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">pub use </span>sp_state_machine::{
-	Backend <span class="kw">as </span>StateBackend, InMemoryBackend, OverlayedChanges, StorageProof,
+	backend::AsTrieBackend, Backend <span class="kw">as </span>StateBackend, InMemoryBackend, OverlayedChanges,
+	StorageProof, TrieBackend, TrieBackendBuilder,
 };
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">use </span>sp_std::result;
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>sp_std::{mem, slice};
 <span class="attr">#[doc(hidden)]
 </span><span class="kw">pub use </span>sp_version::{create_apis_vec, ApiId, ApisVec, RuntimeVersion};
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">use </span>std::{cell::RefCell, panic::UnwindSafe};
+</span><span class="kw">use </span>std::cell::RefCell;
 
 <span class="doccomment">/// Maximum nesting level for extrinsics.
 </span><span class="kw">pub const </span>MAX_EXTRINSIC_DEPTH: u32 = <span class="number">256</span>;
@@ -796,7 +851,7 @@
 /// The macro will create two declarations, one for using on the client side and one for using
 /// on the runtime side. The declaration for the runtime side is hidden in its own module.
 /// The client side declaration gets two extra parameters per function,
-/// `&amp;self` and `at: &amp;BlockId&lt;Block&gt;`. The runtime side declaration will match the given trait
+/// `&amp;self` and `at: Block::Hash`. The runtime side declaration will match the given trait
 /// declaration. Besides one exception, the macro adds an extra generic parameter `Block:
 /// BlockT` to the client side and the runtime side. This generic parameter is usable by the
 /// user.
@@ -863,8 +918,58 @@
 /// ```
 ///
 /// To check if a given runtime implements a runtime api trait, the `RuntimeVersion` has the
-/// function `has_api&lt;A&gt;()`. Also the `ApiExt` provides a function `has_api&lt;A&gt;(at: &amp;BlockId)`
+/// function `has_api&lt;A&gt;()`. Also the `ApiExt` provides a function `has_api&lt;A&gt;(at: Hash)`
 /// to check if the runtime at the given block id implements the requested runtime api trait.
+///
+/// # Declaring multiple api versions
+///
+/// Optionally multiple versions of the same api can be declared. This is useful for
+/// development purposes. For example you want to have a testing version of the api which is
+/// available only on a testnet. You can define one stable and one development version. This
+/// can be done like this:
+/// ```rust
+/// sp_api::decl_runtime_apis! {
+///     /// Declare the api trait.
+/// 	#[api_version(2)]
+///     pub trait Balance {
+///         /// Get the balance.
+///         fn get_balance() -&gt; u64;
+///         /// Set the balance.
+///         fn set_balance(val: u64);
+///         /// Transfer the balance to another user id
+///         #[api_version(3)]
+///         fn transfer_balance(uid: u64);
+///     }
+/// }
+///
+/// # fn main() {}
+/// ```
+/// The example above defines two api versions - 2 and 3. Version 2 contains `get_balance` and
+/// `set_balance`. Version 3 additionally contains `transfer_balance`, which is not available
+/// in version 2. Version 2 in this case is considered the default/base version of the api.
+/// More than two versions can be defined this way. For example:
+/// ```rust
+/// sp_api::decl_runtime_apis! {
+///     /// Declare the api trait.
+///     #[api_version(2)]
+///     pub trait Balance {
+///         /// Get the balance.
+///         fn get_balance() -&gt; u64;
+///         /// Set the balance.
+///         fn set_balance(val: u64);
+///         /// Transfer the balance to another user id
+///         #[api_version(3)]
+///         fn transfer_balance(uid: u64);
+///         /// Clears the balance
+///         #[api_version(4)]
+///         fn clear_balance();
+///     }
+/// }
+///
+/// # fn main() {}
+/// ```
+/// Note that the latest version (4 in our example above) always contains all methods from all
+/// the versions before.
 </span><span class="kw">pub use </span>sp_api_proc_macro::decl_runtime_apis;
 
 <span class="doccomment">/// Tags given trait implementations as runtime apis.
@@ -954,6 +1059,22 @@
 ///
 /// # fn main() {}
 /// ```
+///
+/// # Implementing specific api version
+///
+/// If `decl_runtime_apis!` declares multiple versions for an api `impl_runtime_apis!`
+/// should specify which version it implements by adding `api_version` attribute to the
+/// `impl` block. If omitted - the base/default version is implemented. Here is an example:
+/// ```ignore
+/// sp_api::impl_runtime_apis! {
+///     #[api_version(3)]
+///     impl self::Balance&lt;Block&gt; for Runtime {
+///          // implementation
+///     }
+/// }
+/// ```
+/// In this case `Balance` api version 3 is being implemented for `Runtime`. The `impl` block
+/// must contain all methods declared in version 3 and below.
 </span><span class="kw">pub use </span>sp_api_proc_macro::impl_runtime_apis;
 
 <span class="doccomment">/// Mocks given trait implementations as runtime apis.
@@ -1015,19 +1136,17 @@
 ///
 /// This attribute can be placed above individual function in the mock implementation to
 /// request more control over the function declaration. From the client side each runtime api
-/// function is called with the `at` parameter that is a [`BlockId`](sp_api::BlockId). When
-/// using the `advanced` attribute, the macro expects that the first parameter of the function
-/// is this `at` parameter. Besides that the macro also doesn&#39;t do the automatic return value
-/// rewrite, which means that full return value must be specified. The full return value is
-/// constructed like [`Result`]`&lt;`[`NativeOrEncoded`](sp_api::NativeOrEncoded)`&lt;ReturnValue&gt;,
-/// Error&gt;` while `ReturnValue` being the return value that is specified in the trait
-/// declaration.
+/// function is called with the `at` parameter that is a [`Hash`](sp_runtime::traits::Hash).
+/// When using the `advanced` attribute, the macro expects that the first parameter of the
+/// function is this `at` parameter. Besides that the macro also doesn&#39;t do the automatic
+/// return value rewrite, which means that full return value must be specified. The full return
+/// value is constructed like [`Result`]`&lt;&lt;ReturnValue&gt;, Error&gt;` while `ReturnValue` being the
+/// return value that is specified in the trait declaration.
 ///
 /// ## Example
 /// ```rust
-/// # use sp_runtime::{traits::Block as BlockT, generic::BlockId};
+/// # use sp_runtime::traits::Block as BlockT;
 /// # use sp_test_primitives::Block;
-/// # use sp_core::NativeOrEncoded;
 /// # use codec;
 /// #
 /// # sp_api::decl_runtime_apis! {
@@ -1046,16 +1165,14 @@
 /// sp_api::mock_impl_runtime_apis! {
 ///     impl Balance&lt;Block&gt; for MockApi {
 ///         #[advanced]
-///         fn get_balance(&amp;self, at: &amp;BlockId&lt;Block&gt;) -&gt; Result&lt;NativeOrEncoded&lt;u64&gt;, sp_api::ApiError&gt; {
+///         fn get_balance(&amp;self, at: &lt;Block as BlockT&gt;::Hash) -&gt; Result&lt;u64, sp_api::ApiError&gt; {
 ///             println!(&quot;Being called at: {}&quot;, at);
 ///
 ///             Ok(self.balance.into())
 ///         }
 ///         #[advanced]
-///         fn set_balance(at: &amp;BlockId&lt;Block&gt;, val: u64) -&gt; Result&lt;NativeOrEncoded&lt;()&gt;, sp_api::ApiError&gt; {
-///             if let BlockId::Number(1) = at {
-///                 println!(&quot;Being called to set balance to: {}&quot;, val);
-///             }
+///         fn set_balance(at: &lt;Block as BlockT&gt;::Hash, val: u64) -&gt; Result&lt;(), sp_api::ApiError&gt; {
+///             println!(&quot;Being called at: {}&quot;, at);
 ///
 ///             Ok(().into())
 ///         }
@@ -1068,7 +1185,7 @@
 
 <span class="doccomment">/// A type that records all accessed trie nodes and generates a proof out of it.
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">pub type </span>ProofRecorder&lt;B&gt; = sp_state_machine::ProofRecorder&lt;&lt;B <span class="kw">as </span>BlockT&gt;::Hash&gt;;
+</span><span class="kw">pub type </span>ProofRecorder&lt;B&gt; = sp_trie::recorder::Recorder&lt;HashFor&lt;B&gt;&gt;;
 
 <span class="doccomment">/// A type that is used as cache for the storage transactions.
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
@@ -1132,8 +1249,12 @@
 		<span class="attr">#[source]
 		</span>error: codec::Error,
 	},
+	<span class="attr">#[error(<span class="string">&quot;The given `StateBackend` isn&#39;t a `TrieBackend`.&quot;</span>)]
+	</span>StateBackendIsNotTrie,
 	<span class="attr">#[error(transparent)]
 	</span>Application(<span class="attr">#[from] </span>Box&lt;<span class="kw">dyn </span>std::error::Error + Send + Sync&gt;),
+	<span class="attr">#[error(<span class="string">&quot;Api called for an unknown Block: {0}&quot;</span>)]
+	</span>UnknownBlock(String),
 }
 
 <span class="doccomment">/// Extends the runtime api implementation with some common functionality.
@@ -1152,14 +1273,14 @@
 		</span><span class="self">Self</span>: Sized;
 
 	<span class="doccomment">/// Checks if the given api is implemented and versions match.
-	</span><span class="kw">fn </span>has_api&lt;A: RuntimeApiInfo + <span class="question-mark">?</span>Sized&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;bool, ApiError&gt;
+	</span><span class="kw">fn </span>has_api&lt;A: RuntimeApiInfo + <span class="question-mark">?</span>Sized&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, at_hash: Block::Hash) -&gt; <span class="prelude-ty">Result</span>&lt;bool, ApiError&gt;
 	<span class="kw">where
 		</span><span class="self">Self</span>: Sized;
 
 	<span class="doccomment">/// Check if the given api is implemented and the version passes a predicate.
 	</span><span class="kw">fn </span>has_api_with&lt;A: RuntimeApiInfo + <span class="question-mark">?</span>Sized, P: Fn(u32) -&gt; bool&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		at_hash: Block::Hash,
 		pred: P,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;bool, ApiError&gt;
 	<span class="kw">where
@@ -1168,7 +1289,7 @@
 	<span class="doccomment">/// Returns the version of the given api.
 	</span><span class="kw">fn </span>api_version&lt;A: RuntimeApiInfo + <span class="question-mark">?</span>Sized&gt;(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;,
+		at_hash: Block::Hash,
 	) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="prelude-ty">Option</span>&lt;u32&gt;, ApiError&gt;
 	<span class="kw">where
 		</span><span class="self">Self</span>: Sized;
@@ -1201,16 +1322,11 @@
 
 <span class="doccomment">/// Parameters for [`CallApiAt::call_api_at`].
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">pub struct </span>CallApiAtParams&lt;<span class="lifetime">&#39;a</span>, Block: BlockT, NC, Backend: StateBackend&lt;HashFor&lt;Block&gt;&gt;&gt; {
+</span><span class="kw">pub struct </span>CallApiAtParams&lt;<span class="lifetime">&#39;a</span>, Block: BlockT, Backend: StateBackend&lt;HashFor&lt;Block&gt;&gt;&gt; {
 	<span class="doccomment">/// The block id that determines the state that should be setup when calling the function.
-	</span><span class="kw">pub </span>at: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>BlockId&lt;Block&gt;,
+	</span><span class="kw">pub </span>at: Block::Hash,
 	<span class="doccomment">/// The name of the function that should be called.
 	</span><span class="kw">pub </span>function: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
-	<span class="doccomment">/// An optional native call that calls the `function`. This is an optimization to call into a
-	/// native runtime without requiring to encode/decode the parameters. The native runtime can
-	/// still be called when this value is `None`, we then just fallback to encoding/decoding the
-	/// parameters.
-	</span><span class="kw">pub </span>native_call: <span class="prelude-ty">Option</span>&lt;NC&gt;,
 	<span class="doccomment">/// The encoded arguments of the function.
 	</span><span class="kw">pub </span>arguments: Vec&lt;u8&gt;,
 	<span class="doccomment">/// The overlayed changes that are on top of the state.
@@ -1227,20 +1343,20 @@
 </span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">pub trait </span>CallApiAt&lt;Block: BlockT&gt; {
 	<span class="doccomment">/// The state backend that is used to store the block states.
-	</span><span class="kw">type </span>StateBackend: StateBackend&lt;HashFor&lt;Block&gt;&gt;;
+	</span><span class="kw">type </span>StateBackend: StateBackend&lt;HashFor&lt;Block&gt;&gt; + AsTrieBackend&lt;HashFor&lt;Block&gt;&gt;;
 
 	<span class="doccomment">/// Calls the given api function with the given encoded arguments at the given block and returns
 	/// the encoded result.
-	</span><span class="kw">fn </span>call_api_at&lt;
-		R: Encode + Decode + PartialEq,
-		NC: FnOnce() -&gt; result::Result&lt;R, ApiError&gt; + UnwindSafe,
-	&gt;(
+	</span><span class="kw">fn </span>call_api_at(
 		<span class="kw-2">&amp;</span><span class="self">self</span>,
-		params: CallApiAtParams&lt;Block, NC, <span class="self">Self</span>::StateBackend&gt;,
-	) -&gt; <span class="prelude-ty">Result</span>&lt;NativeOrEncoded&lt;R&gt;, ApiError&gt;;
+		params: CallApiAtParams&lt;Block, <span class="self">Self</span>::StateBackend&gt;,
+	) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;u8&gt;, ApiError&gt;;
 
 	<span class="doccomment">/// Returns the runtime version at the given block.
-	</span><span class="kw">fn </span>runtime_version_at(<span class="kw-2">&amp;</span><span class="self">self</span>, at: <span class="kw-2">&amp;</span>BlockId&lt;Block&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;RuntimeVersion, ApiError&gt;;
+	</span><span class="kw">fn </span>runtime_version_at(<span class="kw-2">&amp;</span><span class="self">self</span>, at_hash: Block::Hash) -&gt; <span class="prelude-ty">Result</span>&lt;RuntimeVersion, ApiError&gt;;
+
+	<span class="doccomment">/// Get the state `at` the given block.
+	</span><span class="kw">fn </span>state_at(<span class="kw-2">&amp;</span><span class="self">self</span>, at: Block::Hash) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::StateBackend, ApiError&gt;;
 }
 
 <span class="doccomment">/// Auxiliary wrapper that holds an api instance and binds it to the given lifetime.

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.21.1/src/runtime/io/registration.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>registration.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/tokio-1.26.0/src/runtime/io/registration.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>registration.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../tokio/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -249,12 +249,11 @@
 <a href="#249" id="249">249</a>
 <a href="#250" id="250">250</a>
 <a href="#251" id="251">251</a>
-<a href="#252" id="252">252</a>
-<a href="#253" id="253">253</a>
 </pre><pre class="rust"><code><span class="attr">#![cfg_attr(not(feature = <span class="string">&quot;net&quot;</span>), allow(dead_code))]
 
 </span><span class="kw">use </span><span class="kw">crate</span>::io::interest::Interest;
 <span class="kw">use </span><span class="kw">crate</span>::runtime::io::{Direction, Handle, ReadyEvent, ScheduledIo};
+<span class="kw">use </span><span class="kw">crate</span>::runtime::scheduler;
 <span class="kw">use </span><span class="kw">crate</span>::util::slab;
 
 <span class="kw">use </span>mio::event::Source;
@@ -296,8 +295,8 @@
     /// [`poll_write_ready`]: method@Self::poll_write_ready`
     </span><span class="attr">#[derive(Debug)]
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Registration {
-        <span class="doccomment">/// Handle to the associated driver.
-        </span>handle: Handle,
+        <span class="doccomment">/// Handle to the associated runtime.
+        </span>handle: scheduler::Handle,
 
         <span class="doccomment">/// Reference to state stored by the driver.
         </span>shared: slab::Ref&lt;ScheduledIo&gt;,
@@ -310,10 +309,8 @@
 <span class="comment">// ===== impl Registration =====
 
 </span><span class="kw">impl </span>Registration {
-    <span class="doccomment">/// Registers the I/O resource with the default reactor, for a specific
-    /// `Interest`. `new_with_interest` should be used over `new` when you need
-    /// control over the readiness state, such as when a file descriptor only
-    /// allows reads. This does not add `hup` or `error` so if you are
+    <span class="doccomment">/// Registers the I/O resource with the reactor for the provided handle, for
+    /// a specific `Interest`. This does not add `hup` or `error` so if you are
     /// interested in those states, you will need to add them to the readiness
     /// state passed to this function.
     ///
@@ -321,12 +318,13 @@
     ///
     /// - `Ok` if the registration happened successfully
     /// - `Err` if an error was encountered during registration
+    </span><span class="attr">#[track_caller]
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>new_with_interest_and_handle(
         io: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>Source,
         interest: Interest,
-        handle: Handle,
+        handle: scheduler::Handle,
     ) -&gt; io::Result&lt;Registration&gt; {
-        <span class="kw">let </span>shared = handle.inner.add_source(io, interest)<span class="question-mark">?</span>;
+        <span class="kw">let </span>shared = handle.driver().io().add_source(io, interest)<span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(Registration { handle, shared })
     }
@@ -348,7 +346,7 @@
     ///
     /// `Err` is returned if an error is encountered.
     </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>deregister(<span class="kw-2">&amp;mut </span><span class="self">self</span>, io: <span class="kw-2">&amp;mut </span><span class="kw">impl </span>Source) -&gt; io::Result&lt;()&gt; {
-        <span class="self">self</span>.handle.inner.deregister_source(io)
+        <span class="self">self</span>.handle().deregister_source(io)
     }
 
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>clear_readiness(<span class="kw-2">&amp;</span><span class="self">self</span>, event: ReadyEvent) {
@@ -398,10 +396,10 @@
         direction: Direction,
     ) -&gt; Poll&lt;io::Result&lt;ReadyEvent&gt;&gt; {
         <span class="comment">// Keep track of task budget
-        </span><span class="kw">let </span>coop = <span class="macro">ready!</span>(<span class="kw">crate</span>::coop::poll_proceed(cx));
+        </span><span class="kw">let </span>coop = <span class="macro">ready!</span>(<span class="kw">crate</span>::runtime::coop::poll_proceed(cx));
         <span class="kw">let </span>ev = <span class="macro">ready!</span>(<span class="self">self</span>.shared.poll_readiness(cx, direction));
 
-        <span class="kw">if </span><span class="self">self</span>.handle.inner.is_shutdown() {
+        <span class="kw">if </span>ev.is_shutdown {
             <span class="kw">return </span>Poll::Ready(<span class="prelude-val">Err</span>(gone()));
         }
 
@@ -450,6 +448,10 @@
             res =&gt; res,
         }
     }
+
+    <span class="kw">fn </span>handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Handle {
+        <span class="self">self</span>.handle.driver().io()
+    }
 }
 
 <span class="kw">impl </span>Drop <span class="kw">for </span>Registration {
@@ -466,29 +468,23 @@
 }
 
 <span class="kw">fn </span>gone() -&gt; io::Error {
-    io::Error::new(io::ErrorKind::Other, <span class="string">&quot;IO driver has terminated&quot;</span>)
+    io::Error::new(
+        io::ErrorKind::Other,
+        <span class="kw">crate</span>::util::error::RUNTIME_SHUTTING_DOWN_ERROR,
+    )
 }
 
 <span class="macro">cfg_io_readiness! </span>{
     <span class="kw">impl </span>Registration {
         <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">async fn </span>readiness(<span class="kw-2">&amp;</span><span class="self">self</span>, interest: Interest) -&gt; io::Result&lt;ReadyEvent&gt; {
-            <span class="kw">use </span>std::future::Future;
-            <span class="kw">use </span>std::pin::Pin;
+            <span class="kw">let </span>ev = <span class="self">self</span>.shared.readiness(interest).<span class="kw">await</span>;
 
-            <span class="kw">let </span>fut = <span class="self">self</span>.shared.readiness(interest);
-            <span class="macro">pin!</span>(fut);
+            <span class="kw">if </span>ev.is_shutdown {
+                <span class="kw">return </span><span class="prelude-val">Err</span>(gone())
+            }
 
-            <span class="kw">crate</span>::future::poll_fn(|cx| {
-                <span class="kw">if </span><span class="self">self</span>.handle.inner.is_shutdown() {
-                    <span class="kw">return </span>Poll::Ready(<span class="prelude-val">Err</span>(io::Error::new(
-                        io::ErrorKind::Other,
-                        <span class="kw">crate</span>::util::error::RUNTIME_SHUTTING_DOWN_ERROR
-                    )));
-                }
-
-                Pin::new(<span class="kw-2">&amp;mut </span>fut).poll(cx).map(<span class="prelude-val">Ok</span>)
-            }).<span class="kw">await
-        </span>}
+            <span class="prelude-val">Ok</span>(ev)
+        }
 
         <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">async fn </span>async_io&lt;R&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, interest: Interest, <span class="kw-2">mut </span>f: <span class="kw">impl </span>FnMut() -&gt; io::Result&lt;R&gt;) -&gt; io::Result&lt;R&gt; {
             <span class="kw">loop </span>{

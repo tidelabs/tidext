@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/procedural/src/pallet/parse/storage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../frame_support_procedural/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/procedural/src/pallet/parse/storage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>storage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../../frame_support_procedural/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -731,9 +731,113 @@
 <a href="#731" id="731">731</a>
 <a href="#732" id="732">732</a>
 <a href="#733" id="733">733</a>
+<a href="#734" id="734">734</a>
+<a href="#735" id="735">735</a>
+<a href="#736" id="736">736</a>
+<a href="#737" id="737">737</a>
+<a href="#738" id="738">738</a>
+<a href="#739" id="739">739</a>
+<a href="#740" id="740">740</a>
+<a href="#741" id="741">741</a>
+<a href="#742" id="742">742</a>
+<a href="#743" id="743">743</a>
+<a href="#744" id="744">744</a>
+<a href="#745" id="745">745</a>
+<a href="#746" id="746">746</a>
+<a href="#747" id="747">747</a>
+<a href="#748" id="748">748</a>
+<a href="#749" id="749">749</a>
+<a href="#750" id="750">750</a>
+<a href="#751" id="751">751</a>
+<a href="#752" id="752">752</a>
+<a href="#753" id="753">753</a>
+<a href="#754" id="754">754</a>
+<a href="#755" id="755">755</a>
+<a href="#756" id="756">756</a>
+<a href="#757" id="757">757</a>
+<a href="#758" id="758">758</a>
+<a href="#759" id="759">759</a>
+<a href="#760" id="760">760</a>
+<a href="#761" id="761">761</a>
+<a href="#762" id="762">762</a>
+<a href="#763" id="763">763</a>
+<a href="#764" id="764">764</a>
+<a href="#765" id="765">765</a>
+<a href="#766" id="766">766</a>
+<a href="#767" id="767">767</a>
+<a href="#768" id="768">768</a>
+<a href="#769" id="769">769</a>
+<a href="#770" id="770">770</a>
+<a href="#771" id="771">771</a>
+<a href="#772" id="772">772</a>
+<a href="#773" id="773">773</a>
+<a href="#774" id="774">774</a>
+<a href="#775" id="775">775</a>
+<a href="#776" id="776">776</a>
+<a href="#777" id="777">777</a>
+<a href="#778" id="778">778</a>
+<a href="#779" id="779">779</a>
+<a href="#780" id="780">780</a>
+<a href="#781" id="781">781</a>
+<a href="#782" id="782">782</a>
+<a href="#783" id="783">783</a>
+<a href="#784" id="784">784</a>
+<a href="#785" id="785">785</a>
+<a href="#786" id="786">786</a>
+<a href="#787" id="787">787</a>
+<a href="#788" id="788">788</a>
+<a href="#789" id="789">789</a>
+<a href="#790" id="790">790</a>
+<a href="#791" id="791">791</a>
+<a href="#792" id="792">792</a>
+<a href="#793" id="793">793</a>
+<a href="#794" id="794">794</a>
+<a href="#795" id="795">795</a>
+<a href="#796" id="796">796</a>
+<a href="#797" id="797">797</a>
+<a href="#798" id="798">798</a>
+<a href="#799" id="799">799</a>
+<a href="#800" id="800">800</a>
+<a href="#801" id="801">801</a>
+<a href="#802" id="802">802</a>
+<a href="#803" id="803">803</a>
+<a href="#804" id="804">804</a>
+<a href="#805" id="805">805</a>
+<a href="#806" id="806">806</a>
+<a href="#807" id="807">807</a>
+<a href="#808" id="808">808</a>
+<a href="#809" id="809">809</a>
+<a href="#810" id="810">810</a>
+<a href="#811" id="811">811</a>
+<a href="#812" id="812">812</a>
+<a href="#813" id="813">813</a>
+<a href="#814" id="814">814</a>
+<a href="#815" id="815">815</a>
+<a href="#816" id="816">816</a>
+<a href="#817" id="817">817</a>
+<a href="#818" id="818">818</a>
+<a href="#819" id="819">819</a>
+<a href="#820" id="820">820</a>
+<a href="#821" id="821">821</a>
+<a href="#822" id="822">822</a>
+<a href="#823" id="823">823</a>
+<a href="#824" id="824">824</a>
+<a href="#825" id="825">825</a>
+<a href="#826" id="826">826</a>
+<a href="#827" id="827">827</a>
+<a href="#828" id="828">828</a>
+<a href="#829" id="829">829</a>
+<a href="#830" id="830">830</a>
+<a href="#831" id="831">831</a>
+<a href="#832" id="832">832</a>
+<a href="#833" id="833">833</a>
+<a href="#834" id="834">834</a>
+<a href="#835" id="835">835</a>
+<a href="#836" id="836">836</a>
+<a href="#837" id="837">837</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2020-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -761,7 +865,9 @@
 	<span class="macro">syn::custom_keyword!</span>(getter);
 	<span class="macro">syn::custom_keyword!</span>(storage_prefix);
 	<span class="macro">syn::custom_keyword!</span>(unbounded);
+	<span class="macro">syn::custom_keyword!</span>(whitelist_storage);
 	<span class="macro">syn::custom_keyword!</span>(OptionQuery);
+	<span class="macro">syn::custom_keyword!</span>(ResultQuery);
 	<span class="macro">syn::custom_keyword!</span>(ValueQuery);
 }
 
@@ -769,16 +875,21 @@
 /// * `#[pallet::getter(fn dummy)]`
 /// * `#[pallet::storage_prefix = &quot;CustomName&quot;]`
 /// * `#[pallet::unbounded]`
+/// * `#[pallet::whitelist_storage]
 </span><span class="kw">pub enum </span>PalletStorageAttr {
 	Getter(syn::Ident, proc_macro2::Span),
 	StorageName(syn::LitStr, proc_macro2::Span),
 	Unbounded(proc_macro2::Span),
+	WhitelistStorage(proc_macro2::Span),
 }
 
 <span class="kw">impl </span>PalletStorageAttr {
 	<span class="kw">fn </span>attr_span(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; proc_macro2::Span {
 		<span class="kw">match </span><span class="self">self </span>{
-			<span class="self">Self</span>::Getter(<span class="kw">_</span>, span) | <span class="self">Self</span>::StorageName(<span class="kw">_</span>, span) | <span class="self">Self</span>::Unbounded(span) =&gt; <span class="kw-2">*</span>span,
+			<span class="self">Self</span>::Getter(<span class="kw">_</span>, span) |
+			<span class="self">Self</span>::StorageName(<span class="kw">_</span>, span) |
+			<span class="self">Self</span>::Unbounded(span) |
+			<span class="self">Self</span>::WhitelistStorage(span) =&gt; <span class="kw-2">*</span>span,
 		}
 	}
 }
@@ -816,6 +927,9 @@
 			content.parse::&lt;keyword::unbounded&gt;()<span class="question-mark">?</span>;
 
 			<span class="prelude-val">Ok</span>(<span class="self">Self</span>::Unbounded(attr_span))
+		} <span class="kw">else if </span>lookahead.peek(keyword::whitelist_storage) {
+			content.parse::&lt;keyword::whitelist_storage&gt;()<span class="question-mark">?</span>;
+			<span class="prelude-val">Ok</span>(<span class="self">Self</span>::WhitelistStorage(attr_span))
 		} <span class="kw">else </span>{
 			<span class="prelude-val">Err</span>(lookahead.error())
 		}
@@ -826,6 +940,7 @@
 	getter: <span class="prelude-ty">Option</span>&lt;syn::Ident&gt;,
 	rename_as: <span class="prelude-ty">Option</span>&lt;syn::LitStr&gt;,
 	unbounded: bool,
+	whitelisted: bool,
 }
 
 <span class="kw">impl </span>PalletStorageAttrInfo {
@@ -833,12 +948,14 @@
 		<span class="kw">let </span><span class="kw-2">mut </span>getter = <span class="prelude-val">None</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>rename_as = <span class="prelude-val">None</span>;
 		<span class="kw">let </span><span class="kw-2">mut </span>unbounded = <span class="bool-val">false</span>;
+		<span class="kw">let </span><span class="kw-2">mut </span>whitelisted = <span class="bool-val">false</span>;
 		<span class="kw">for </span>attr <span class="kw">in </span>attrs {
 			<span class="kw">match </span>attr {
 				PalletStorageAttr::Getter(ident, ..) <span class="kw">if </span>getter.is_none() =&gt; getter = <span class="prelude-val">Some</span>(ident),
 				PalletStorageAttr::StorageName(name, ..) <span class="kw">if </span>rename_as.is_none() =&gt;
 					rename_as = <span class="prelude-val">Some</span>(name),
 				PalletStorageAttr::Unbounded(..) <span class="kw">if </span>!unbounded =&gt; unbounded = <span class="bool-val">true</span>,
+				PalletStorageAttr::WhitelistStorage(..) <span class="kw">if </span>!whitelisted =&gt; whitelisted = <span class="bool-val">true</span>,
 				attr =&gt;
 					<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(
 						attr.attr_span(),
@@ -847,7 +964,7 @@
 			}
 		}
 
-		<span class="prelude-val">Ok</span>(PalletStorageAttrInfo { getter, rename_as, unbounded })
+		<span class="prelude-val">Ok</span>(PalletStorageAttrInfo { getter, rename_as, unbounded, whitelisted })
 	}
 }
 
@@ -862,6 +979,7 @@
 
 <span class="kw">pub enum </span>QueryKind {
 	OptionQuery,
+	ResultQuery(syn::Path, syn::Ident),
 	ValueQuery,
 }
 
@@ -886,7 +1004,7 @@
 	<span class="doccomment">/// Optional expression that evaluates to a type that can be used as StoragePrefix instead of
 	/// ident.
 	</span><span class="kw">pub </span>rename_as: <span class="prelude-ty">Option</span>&lt;syn::LitStr&gt;,
-	<span class="doccomment">/// Whereas the querytype of the storage is OptionQuery or ValueQuery.
+	<span class="doccomment">/// Whereas the querytype of the storage is OptionQuery, ResultQuery or ValueQuery.
 	/// Note that this is best effort as it can&#39;t be determined when QueryKind is generic, and
 	/// result can be false if user do some unexpected type alias.
 	</span><span class="kw">pub </span>query_kind: <span class="prelude-ty">Option</span>&lt;QueryKind&gt;,
@@ -902,6 +1020,8 @@
 	</span><span class="kw">pub </span>named_generics: <span class="prelude-ty">Option</span>&lt;StorageGenerics&gt;,
 	<span class="doccomment">/// If the value stored in this storage is unbounded.
 	</span><span class="kw">pub </span>unbounded: bool,
+	<span class="doccomment">/// Whether or not reads to this storage key will be ignored by benchmarking
+	</span><span class="kw">pub </span>whitelisted: bool,
 }
 
 <span class="doccomment">/// The parsed generic from the
@@ -1272,8 +1392,8 @@
 		found =&gt; {
 			<span class="kw">let </span>msg = <span class="macro">format!</span>(
 				<span class="string">&quot;Invalid pallet::storage, expected ident: `StorageValue` or \
-				`StorageMap` or `StorageDoubleMap` or `StorageNMap` in order to expand metadata, \
-				found `{}`.&quot;</span>,
+				`StorageMap` or `CountedStorageMap` or `StorageDoubleMap` or `StorageNMap` \
+				in order to expand metadata, found `{}`.&quot;</span>,
 				found,
 			);
 			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(segment.ident.span(), msg))
@@ -1395,6 +1515,7 @@
 		attr_span: proc_macro2::Span,
 		index: usize,
 		item: <span class="kw-2">&amp;mut </span>syn::Item,
+		dev_mode: bool,
 	) -&gt; syn::Result&lt;<span class="self">Self</span>&gt; {
 		<span class="kw">let </span>item = <span class="kw">if let </span>syn::Item::Type(item) = item {
 			item
@@ -1403,9 +1524,11 @@
 		};
 
 		<span class="kw">let </span>attrs: Vec&lt;PalletStorageAttr&gt; = helper::take_item_pallet_attrs(<span class="kw-2">&amp;mut </span>item.attrs)<span class="question-mark">?</span>;
-		<span class="kw">let </span>PalletStorageAttrInfo { getter, rename_as, unbounded } =
+		<span class="kw">let </span>PalletStorageAttrInfo { getter, rename_as, <span class="kw-2">mut </span>unbounded, whitelisted } =
 			PalletStorageAttrInfo::from_attrs(attrs)<span class="question-mark">?</span>;
 
+		<span class="comment">// set all storages to be unbounded if dev_mode is enabled
+		</span>unbounded |= dev_mode;
 		<span class="kw">let </span>cfg_attrs = helper::get_item_cfg_attrs(<span class="kw-2">&amp;</span>item.attrs);
 
 		<span class="kw">let </span>instances = <span class="macro">vec!</span>[helper::check_type_def_gen(<span class="kw-2">&amp;</span>item.generics, item.ident.span())<span class="question-mark">?</span>];
@@ -1428,21 +1551,105 @@
 		<span class="kw">let </span>(named_generics, metadata, query_kind) = process_generics(<span class="kw-2">&amp;</span>typ.path.segments[<span class="number">0</span>])<span class="question-mark">?</span>;
 
 		<span class="kw">let </span>query_kind = query_kind
-			.map(|query_kind| <span class="kw">match </span>query_kind {
-				syn::Type::Path(path)
-					<span class="kw">if </span>path.path.segments.last().map_or(<span class="bool-val">false</span>, |s| s.ident == <span class="string">&quot;OptionQuery&quot;</span>) =&gt;
-					<span class="prelude-val">Some</span>(QueryKind::OptionQuery),
-				syn::Type::Path(path)
-					<span class="kw">if </span>path.path.segments.last().map_or(<span class="bool-val">false</span>, |s| s.ident == <span class="string">&quot;ValueQuery&quot;</span>) =&gt;
-					<span class="prelude-val">Some</span>(QueryKind::ValueQuery),
-				<span class="kw">_ </span>=&gt; <span class="prelude-val">None</span>,
-			})
-			.unwrap_or(<span class="prelude-val">Some</span>(QueryKind::OptionQuery)); <span class="comment">// This value must match the default generic.
+			.map(|query_kind| {
+				<span class="kw">use </span>syn::{
+					AngleBracketedGenericArguments, GenericArgument, Path, PathArguments, Type,
+					TypePath,
+				};
 
-		</span><span class="kw">if let </span>(<span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(getter)) = (query_kind.as_ref(), getter.as_ref()) {
+				<span class="kw">let </span>result_query = <span class="kw">match </span>query_kind {
+					Type::Path(path)
+						<span class="kw">if </span>path
+							.path
+							.segments
+							.last()
+							.map_or(<span class="bool-val">false</span>, |s| s.ident == <span class="string">&quot;OptionQuery&quot;</span>) =&gt;
+						<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(QueryKind::OptionQuery)),
+					Type::Path(TypePath { path: Path { segments, .. }, .. })
+						<span class="kw">if </span>segments.last().map_or(<span class="bool-val">false</span>, |s| s.ident == <span class="string">&quot;ResultQuery&quot;</span>) =&gt;
+						segments
+							.last()
+							.expect(<span class="string">&quot;segments is checked to have the last value; qed&quot;</span>)
+							.clone(),
+					Type::Path(path)
+						<span class="kw">if </span>path.path.segments.last().map_or(<span class="bool-val">false</span>, |s| s.ident == <span class="string">&quot;ValueQuery&quot;</span>) =&gt;
+						<span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(QueryKind::ValueQuery)),
+					<span class="kw">_ </span>=&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+				};
+
+				<span class="kw">let </span>error_type = <span class="kw">match </span>result_query.arguments {
+					PathArguments::AngleBracketed(AngleBracketedGenericArguments {
+						args, ..
+					}) =&gt; {
+						<span class="kw">if </span>args.len() != <span class="number">1 </span>{
+							<span class="kw">let </span>msg = <span class="macro">format!</span>(
+								<span class="string">&quot;Invalid pallet::storage, unexpected number of generic arguments \
+								for ResultQuery, expected 1 type argument, found {}&quot;</span>,
+								args.len(),
+							);
+							<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(args.span(), msg))
+						}
+
+						args[<span class="number">0</span>].clone()
+					},
+					args =&gt; {
+						<span class="kw">let </span>msg = <span class="macro">format!</span>(
+							<span class="string">&quot;Invalid pallet::storage, unexpected generic args for ResultQuery, \
+							expected angle-bracketed arguments, found `{}`&quot;</span>,
+							args.to_token_stream().to_string()
+						);
+						<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(args.span(), msg))
+					},
+				};
+
+				<span class="kw">match </span>error_type {
+					GenericArgument::Type(Type::Path(TypePath {
+						path: Path { segments: err_variant, leading_colon },
+						..
+					})) =&gt; {
+						<span class="kw">if </span>err_variant.len() &lt; <span class="number">2 </span>{
+							<span class="kw">let </span>msg = <span class="macro">format!</span>(
+								<span class="string">&quot;Invalid pallet::storage, unexpected number of path segments for \
+								the generics in ResultQuery, expected a path with at least 2 \
+								segments, found {}&quot;</span>,
+								err_variant.len(),
+							);
+							<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(err_variant.span(), msg))
+						}
+						<span class="kw">let </span><span class="kw-2">mut </span>error = err_variant.clone();
+						<span class="kw">let </span>err_variant = error
+							.pop()
+							.expect(<span class="string">&quot;Checked to have at least 2; qed&quot;</span>)
+							.into_value()
+							.ident;
+
+						<span class="comment">// Necessary here to eliminate the last double colon
+						</span><span class="kw">let </span>last =
+							error.pop().expect(<span class="string">&quot;Checked to have at least 2; qed&quot;</span>).into_value();
+						error.push_value(last);
+
+						<span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(QueryKind::ResultQuery(
+							syn::Path { leading_colon, segments: error },
+							err_variant,
+						)))
+					},
+					gen_arg =&gt; {
+						<span class="kw">let </span>msg = <span class="macro">format!</span>(
+							<span class="string">&quot;Invalid pallet::storage, unexpected generic argument kind, expected a \
+							type path to a `PalletError` enum variant, found `{}`&quot;</span>,
+							gen_arg.to_token_stream().to_string(),
+						);
+						<span class="prelude-val">Err</span>(syn::Error::new(gen_arg.span(), msg))
+					},
+				}
+			})
+			.transpose()<span class="question-mark">?
+			</span>.unwrap_or(<span class="prelude-val">Some</span>(QueryKind::OptionQuery));
+
+		<span class="kw">if let </span>(<span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(getter)) = (query_kind.as_ref(), getter.as_ref()) {
 			<span class="kw">let </span>msg = <span class="string">&quot;Invalid pallet::storage, cannot generate getter because QueryKind is not \
-				identifiable. QueryKind must be `OptionQuery`, `ValueQuery`, or default one to be \
-				identifiable.&quot;</span>;
+				identifiable. QueryKind must be `OptionQuery`, `ResultQuery`, `ValueQuery`, or default \
+				one to be identifiable.&quot;</span>;
 			<span class="kw">return </span><span class="prelude-val">Err</span>(syn::Error::new(getter.span(), msg))
 		}
 
@@ -1461,6 +1668,7 @@
 			cfg_attrs,
 			named_generics,
 			unbounded,
+			whitelisted,
 		})
 	}
 }

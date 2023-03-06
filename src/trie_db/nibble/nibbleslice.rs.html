@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.23.1/src/nibble/nibbleslice.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>nibbleslice.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../trie_db/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/trie-db-0.25.1/src/nibble/nibbleslice.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>nibbleslice.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../trie_db/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -418,6 +418,65 @@
 <a href="#418" id="418">418</a>
 <a href="#419" id="419">419</a>
 <a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
+<a href="#432" id="432">432</a>
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
+<a href="#450" id="450">450</a>
+<a href="#451" id="451">451</a>
+<a href="#452" id="452">452</a>
+<a href="#453" id="453">453</a>
+<a href="#454" id="454">454</a>
+<a href="#455" id="455">455</a>
+<a href="#456" id="456">456</a>
+<a href="#457" id="457">457</a>
+<a href="#458" id="458">458</a>
+<a href="#459" id="459">459</a>
+<a href="#460" id="460">460</a>
+<a href="#461" id="461">461</a>
+<a href="#462" id="462">462</a>
+<a href="#463" id="463">463</a>
+<a href="#464" id="464">464</a>
+<a href="#465" id="465">465</a>
+<a href="#466" id="466">466</a>
+<a href="#467" id="467">467</a>
+<a href="#468" id="468">468</a>
+<a href="#469" id="469">469</a>
+<a href="#470" id="470">470</a>
+<a href="#471" id="471">471</a>
+<a href="#472" id="472">472</a>
+<a href="#473" id="473">473</a>
+<a href="#474" id="474">474</a>
+<a href="#475" id="475">475</a>
+<a href="#476" id="476">476</a>
+<a href="#477" id="477">477</a>
+<a href="#478" id="478">478</a>
+<a href="#479" id="479">479</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2017, 2018 Parity Technologies
 //
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -434,7 +493,7 @@
 
 </span><span class="doccomment">//! Nibble-orientated view onto byte-slice, allowing nibble-precision offsets.
 
-</span><span class="kw">use super</span>::{nibble_ops, BackingByteVec, NibbleSlice, NibbleSliceIterator};
+</span><span class="kw">use super</span>::{nibble_ops, BackingByteVec, NibbleSlice, NibbleSliceIterator, NibbleVec};
 <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
 </span><span class="kw">use </span><span class="kw">crate</span>::rstd::fmt;
 <span class="kw">use crate</span>::{node::NodeKey, node_codec::Partial, rstd::cmp::<span class="kw-2">*</span>};
@@ -553,15 +612,35 @@
 
 	<span class="doccomment">/// How many of the same nibbles at the beginning do we match with `them`?
 	</span><span class="kw">pub fn </span>common_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>, them: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; usize {
-		<span class="kw">let </span>s = min(<span class="self">self</span>.len(), them.len());
-		<span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0usize</span>;
-		<span class="kw">while </span>i &lt; s {
-			<span class="kw">if </span><span class="self">self</span>.at(i) != them.at(i) {
-				<span class="kw">break
-			</span>}
-			i += <span class="number">1</span>;
+		<span class="kw">let </span>self_align = <span class="self">self</span>.offset % nibble_ops::NIBBLE_PER_BYTE;
+		<span class="kw">let </span>them_align = them.offset % nibble_ops::NIBBLE_PER_BYTE;
+		<span class="kw">if </span>self_align == them_align {
+			<span class="kw">let </span><span class="kw-2">mut </span>self_start = <span class="self">self</span>.offset / nibble_ops::NIBBLE_PER_BYTE;
+			<span class="kw">let </span><span class="kw-2">mut </span>them_start = them.offset / nibble_ops::NIBBLE_PER_BYTE;
+			<span class="kw">let </span><span class="kw-2">mut </span>first = <span class="number">0</span>;
+			<span class="kw">if </span>self_align != <span class="number">0 </span>{
+				<span class="kw">if </span>nibble_ops::pad_right(<span class="self">self</span>.data[self_start]) !=
+					nibble_ops::pad_right(them.data[them_start])
+				{
+					<span class="comment">// warning only for radix 16
+					</span><span class="kw">return </span><span class="number">0
+				</span>}
+				self_start += <span class="number">1</span>;
+				them_start += <span class="number">1</span>;
+				first += <span class="number">1</span>;
+			}
+			nibble_ops::biggest_depth(<span class="kw-2">&amp;</span><span class="self">self</span>.data[self_start..], <span class="kw-2">&amp;</span>them.data[them_start..]) + first
+		} <span class="kw">else </span>{
+			<span class="kw">let </span>s = min(<span class="self">self</span>.len(), them.len());
+			<span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0usize</span>;
+			<span class="kw">while </span>i &lt; s {
+				<span class="kw">if </span><span class="self">self</span>.at(i) != them.at(i) {
+					<span class="kw">break
+				</span>}
+				i += <span class="number">1</span>;
+			}
+			i
 		}
-		i
 	}
 
 	<span class="doccomment">/// Return `Partial` representation of this slice:
@@ -647,22 +726,61 @@
 		}
 	}
 
+	<span class="doccomment">/// Get [`Prefix`] representation of the inner data.
+	///
+	/// This means the entire inner data will be returned as [`Prefix`], ignoring any `offset`.
+	</span><span class="kw">pub fn </span>original_data_as_prefix(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Prefix {
+		(<span class="kw-2">&amp;</span><span class="self">self</span>.data, <span class="prelude-val">None</span>)
+	}
+
 	<span class="doccomment">/// Owned version of a `Prefix` from a `left` method call.
 	</span><span class="kw">pub fn </span>left_owned(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">self</span>) -&gt; (BackingByteVec, <span class="prelude-ty">Option</span>&lt;u8&gt;) {
 		<span class="kw">let </span>(a, b) = <span class="self">self</span>.left();
 		(a.into(), b)
 	}
+
+	<span class="doccomment">/// Same as [`Self::starts_with`] but using [`NibbleVec`].
+	</span><span class="kw">pub fn </span>starts_with_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>NibbleVec) -&gt; bool {
+		<span class="kw">if </span><span class="self">self</span>.len() &lt; other.len() {
+			<span class="kw">return </span><span class="bool-val">false
+		</span>}
+
+		<span class="kw">match </span>other.as_nibbleslice() {
+			<span class="prelude-val">Some</span>(other) =&gt; <span class="self">self</span>.starts_with(<span class="kw-2">&amp;</span>other),
+			<span class="prelude-val">None </span>=&gt; {
+				<span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..other.len() {
+					<span class="kw">if </span><span class="self">self</span>.at(i) != other.at(i) {
+						<span class="kw">return </span><span class="bool-val">false
+					</span>}
+				}
+				<span class="bool-val">true
+			</span>},
+		}
+	}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Into&lt;NodeKey&gt; <span class="kw">for </span>NibbleSlice&lt;<span class="lifetime">&#39;a</span>&gt; {
-	<span class="kw">fn </span>into(<span class="self">self</span>) -&gt; NodeKey {
-		(<span class="self">self</span>.offset, <span class="self">self</span>.data.into())
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; From&lt;NibbleSlice&lt;<span class="lifetime">&#39;a</span>&gt;&gt; <span class="kw">for </span>NodeKey {
+	<span class="kw">fn </span>from(slice: NibbleSlice&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; NodeKey {
+		(slice.offset, slice.data.into())
 	}
 }
 
 <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PartialEq <span class="kw">for </span>NibbleSlice&lt;<span class="lifetime">&#39;a</span>&gt; {
 	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, them: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
 		<span class="self">self</span>.len() == them.len() &amp;&amp; <span class="self">self</span>.starts_with(them)
+	}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; PartialEq&lt;NibbleVec&gt; <span class="kw">for </span>NibbleSlice&lt;<span class="lifetime">&#39;a</span>&gt; {
+	<span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>NibbleVec) -&gt; bool {
+		<span class="kw">if </span><span class="self">self</span>.len() != other.len() {
+			<span class="kw">return </span><span class="bool-val">false
+		</span>}
+
+		<span class="kw">match </span>other.as_nibbleslice() {
+			<span class="prelude-val">Some</span>(other) =&gt; <span class="kw-2">*</span><span class="self">self </span>== other,
+			<span class="prelude-val">None </span>=&gt; <span class="self">self</span>.iter().enumerate().all(|(index, l)| l == other.at(index)),
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/e363f4c/codegen/src/api/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/subxt-7867b11699a3996e/38aeeb3/codegen/src/api/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../subxt_codegen/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -374,6 +374,45 @@
 <a href="#374" id="374">374</a>
 <a href="#375" id="375">375</a>
 <a href="#376" id="376">376</a>
+<a href="#377" id="377">377</a>
+<a href="#378" id="378">378</a>
+<a href="#379" id="379">379</a>
+<a href="#380" id="380">380</a>
+<a href="#381" id="381">381</a>
+<a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2019-2022 Parity Technologies (UK) Ltd.
 // This file is dual-licensed as Apache-2.0 or GPL-3.0.
 // see LICENSE for license details.
@@ -394,7 +433,13 @@
         CompositeDef,
         CompositeDefFields,
         TypeGenerator,
+        TypeSubstitutes,
     },
+    utils::{
+        fetch_metadata_bytes_blocking,
+        Uri,
+    },
+    CratePath,
 };
 <span class="kw">use </span>codec::Decode;
 <span class="kw">use </span>frame_metadata::{
@@ -410,7 +455,6 @@
     quote,
 };
 <span class="kw">use </span>std::{
-    collections::HashMap,
     fs,
     io::Read,
     path,
@@ -425,12 +469,16 @@
 /// * `item_mod` - The module declaration for which the API is implemented.
 /// * `path` - The path to the scale encoded metadata of the runtime node.
 /// * `derives` - Provide custom derives for the generated types.
+/// * `type_substitutes` - Provide custom type substitutes.
+/// * `crate_path` - Path to the `subxt` crate.
 ///
 /// **Note:** This is a wrapper over [RuntimeGenerator] for static metadata use-cases.
-</span><span class="kw">pub fn </span>generate_runtime_api&lt;P&gt;(
+</span><span class="kw">pub fn </span>generate_runtime_api_from_path&lt;P&gt;(
     item_mod: syn::ItemMod,
     path: P,
     derives: DerivesRegistry,
+    type_substitutes: TypeSubstitutes,
+    crate_path: CratePath,
 ) -&gt; TokenStream2
 <span class="kw">where
     </span>P: AsRef&lt;path::Path&gt;,
@@ -443,11 +491,70 @@
     file.read_to_end(<span class="kw-2">&amp;mut </span>bytes)
         .unwrap_or_else(|e| <span class="macro">abort_call_site!</span>(<span class="string">&quot;Failed to read metadata file: {}&quot;</span>, e));
 
+    generate_runtime_api_from_bytes(
+        item_mod,
+        <span class="kw-2">&amp;</span>bytes,
+        derives,
+        type_substitutes,
+        crate_path,
+    )
+}
+
+<span class="doccomment">/// Generates the API for interacting with a substrate runtime, using metadata
+/// that can be downloaded from a node at the provided URL. This function blocks
+/// while retrieving the metadata.
+///
+/// # Arguments
+///
+/// * `item_mod` - The module declaration for which the API is implemented.
+/// * `url` - HTTP/WS URL to the substrate node you&#39;d like to pull metadata from.
+/// * `derives` - Provide custom derives for the generated types.
+/// * `type_substitutes` - Provide custom type substitutes.
+/// * `crate_path` - Path to the `subxt` crate.
+///
+/// **Note:** This is a wrapper over [RuntimeGenerator] for static metadata use-cases.
+</span><span class="kw">pub fn </span>generate_runtime_api_from_url(
+    item_mod: syn::ItemMod,
+    url: <span class="kw-2">&amp;</span>Uri,
+    derives: DerivesRegistry,
+    type_substitutes: TypeSubstitutes,
+    crate_path: CratePath,
+) -&gt; TokenStream2 {
+    <span class="kw">let </span>bytes = fetch_metadata_bytes_blocking(url)
+        .unwrap_or_else(|e| <span class="macro">abort_call_site!</span>(<span class="string">&quot;Failed to obtain metadata: {}&quot;</span>, e));
+
+    generate_runtime_api_from_bytes(
+        item_mod,
+        <span class="kw-2">&amp;</span>bytes,
+        derives,
+        type_substitutes,
+        crate_path,
+    )
+}
+
+<span class="doccomment">/// Generates the API for interacting with a substrate runtime, using metadata bytes.
+///
+/// # Arguments
+///
+/// * `item_mod` - The module declaration for which the API is implemented.
+/// * `bytes` - The raw metadata bytes.
+/// * `derives` - Provide custom derives for the generated types.
+/// * `type_substitutes` - Provide custom type substitutes.
+/// * `crate_path` - Path to the `subxt` crate.
+///
+/// **Note:** This is a wrapper over [RuntimeGenerator] for static metadata use-cases.
+</span><span class="kw">pub fn </span>generate_runtime_api_from_bytes(
+    item_mod: syn::ItemMod,
+    bytes: <span class="kw-2">&amp;</span>[u8],
+    derives: DerivesRegistry,
+    type_substitutes: TypeSubstitutes,
+    crate_path: CratePath,
+) -&gt; TokenStream2 {
     <span class="kw">let </span>metadata = frame_metadata::RuntimeMetadataPrefixed::decode(<span class="kw-2">&amp;mut &amp;</span>bytes[..])
         .unwrap_or_else(|e| <span class="macro">abort_call_site!</span>(<span class="string">&quot;Failed to decode metadata: {}&quot;</span>, e));
 
     <span class="kw">let </span>generator = RuntimeGenerator::new(metadata);
-    generator.generate_runtime(item_mod, derives)
+    generator.generate_runtime(item_mod, derives, type_substitutes, crate_path)
 }
 
 <span class="doccomment">/// Create the API for interacting with a Substrate runtime.
@@ -458,8 +565,9 @@
 <span class="kw">impl </span>RuntimeGenerator {
     <span class="doccomment">/// Create a new runtime generator from the provided metadata.
     ///
-    /// **Note:** If you have a path to the metadata, prefer to use [generate_runtime_api]
-    /// for generating the runtime API.
+    /// **Note:** If you have the metadata path, URL or bytes to hand, prefer to use
+    /// one of the `generate_runtime_api_from_*` functions for generating the runtime API
+    /// from that.
     </span><span class="kw">pub fn </span>new(metadata: RuntimeMetadataPrefixed) -&gt; <span class="self">Self </span>{
         <span class="kw">match </span>metadata.<span class="number">1 </span>{
             RuntimeMetadata::V14(v14) =&gt; <span class="self">Self </span>{ metadata: v14 },
@@ -477,66 +585,19 @@
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         item_mod: syn::ItemMod,
         derives: DerivesRegistry,
+        type_substitutes: TypeSubstitutes,
+        crate_path: CratePath,
     ) -&gt; TokenStream2 {
+        <span class="kw">let </span>item_mod_attrs = item_mod.attrs.clone();
         <span class="kw">let </span>item_mod_ir = ir::ItemMod::from(item_mod);
         <span class="kw">let </span>default_derives = derives.default_derives();
-
-        <span class="comment">// Some hardcoded default type substitutes, can be overridden by user
-        </span><span class="kw">let </span><span class="kw-2">mut </span>type_substitutes = [
-            (
-                <span class="string">&quot;bitvec::order::Lsb0&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::bitvec::order::Lsb0),
-            ),
-            (
-                <span class="string">&quot;bitvec::order::Msb0&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::bitvec::order::Msb0),
-            ),
-            (
-                <span class="string">&quot;sp_core::crypto::AccountId32&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::sp_core::crypto::AccountId32),
-            ),
-            (
-                <span class="string">&quot;primitive_types::H160&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::sp_core::H160),
-            ),
-            (
-                <span class="string">&quot;primitive_types::H256&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::sp_core::H256),
-            ),
-            (
-                <span class="string">&quot;primitive_types::H512&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::sp_core::H512),
-            ),
-            (
-                <span class="string">&quot;sp_runtime::multiaddress::MultiAddress&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::ext::sp_runtime::MultiAddress),
-            ),
-            (
-                <span class="string">&quot;frame_support::traits::misc::WrapperKeepOpaque&quot;</span>,
-                <span class="macro">parse_quote!</span>(::subxt::utils::WrapperKeepOpaque),
-            ),
-            <span class="comment">// BTreeMap and BTreeSet impose an `Ord` constraint on their key types. This
-            // can cause an issue with generated code that doesn&#39;t impl `Ord` by default.
-            // Decoding them to Vec by default (KeyedVec is just an alias for Vec with
-            // suitable type params) avoids these issues.
-            </span>(<span class="string">&quot;BTreeMap&quot;</span>, <span class="macro">parse_quote!</span>(::subxt::utils::KeyedVec)),
-            (<span class="string">&quot;BTreeSet&quot;</span>, <span class="macro">parse_quote!</span>(::std::vec::Vec)),
-        ]
-        .iter()
-        .map(|(path, substitute): <span class="kw-2">&amp;</span>(<span class="kw-2">&amp;</span>str, syn::TypePath)| {
-            (path.to_string(), substitute.clone())
-        })
-        .collect::&lt;HashMap&lt;<span class="kw">_</span>, <span class="kw">_</span>&gt;&gt;();
-
-        <span class="kw">for </span>(path, substitute) <span class="kw">in </span>item_mod_ir.type_substitutes().iter() {
-            type_substitutes.insert(path.to_string(), substitute.clone());
-        }
 
         <span class="kw">let </span>type_gen = TypeGenerator::new(
             <span class="kw-2">&amp;</span><span class="self">self</span>.metadata.types,
             <span class="string">&quot;runtime_types&quot;</span>,
             type_substitutes,
             derives.clone(),
+            crate_path.clone(),
         );
         <span class="kw">let </span>types_mod = type_gen.generate_types_mod();
         <span class="kw">let </span>types_mod_ident = types_mod.ident();
@@ -566,16 +627,23 @@
         <span class="kw">let </span>metadata_hash = get_metadata_per_pallet_hash(<span class="kw-2">&amp;</span><span class="self">self</span>.metadata, <span class="kw-2">&amp;</span>pallet_names);
 
         <span class="kw">let </span>modules = pallets_with_mod_names.iter().map(|(pallet, mod_name)| {
-            <span class="kw">let </span>calls =
-                calls::generate_calls(<span class="kw-2">&amp;</span><span class="self">self</span>.metadata, <span class="kw-2">&amp;</span>type_gen, pallet, types_mod_ident);
+            <span class="kw">let </span>calls = calls::generate_calls(
+                <span class="kw-2">&amp;</span><span class="self">self</span>.metadata,
+                <span class="kw-2">&amp;</span>type_gen,
+                pallet,
+                types_mod_ident,
+                <span class="kw-2">&amp;</span>crate_path,
+            );
 
-            <span class="kw">let </span>event = events::generate_events(<span class="kw-2">&amp;</span>type_gen, pallet, types_mod_ident);
+            <span class="kw">let </span>event =
+                events::generate_events(<span class="kw-2">&amp;</span>type_gen, pallet, types_mod_ident, <span class="kw-2">&amp;</span>crate_path);
 
             <span class="kw">let </span>storage_mod = storage::generate_storage(
                 <span class="kw-2">&amp;</span><span class="self">self</span>.metadata,
                 <span class="kw-2">&amp;</span>type_gen,
                 pallet,
                 types_mod_ident,
+                <span class="kw-2">&amp;</span>crate_path,
             );
 
             <span class="kw">let </span>constants_mod = constants::generate_constants(
@@ -583,6 +651,7 @@
                 <span class="kw-2">&amp;</span>type_gen,
                 pallet,
                 types_mod_ident,
+                <span class="kw-2">&amp;</span>crate_path,
             );
 
             <span class="macro">quote! </span>{
@@ -617,11 +686,11 @@
             }
         };
 
-        <span class="kw">let </span>mod_ident = item_mod_ir.ident;
+        <span class="kw">let </span>mod_ident = <span class="kw-2">&amp;</span>item_mod_ir.ident;
         <span class="kw">let </span>pallets_with_constants: Vec&lt;<span class="kw">_</span>&gt; = pallets_with_mod_names
             .iter()
             .filter_map(|(pallet, pallet_mod_name)| {
-                (!pallet.constants.is_empty()).then(|| pallet_mod_name)
+                (!pallet.constants.is_empty()).then_some(pallet_mod_name)
             })
             .collect();
 
@@ -639,9 +708,16 @@
             })
             .collect();
 
+        <span class="kw">let </span>rust_items = item_mod_ir.rust_items();
+
         <span class="macro">quote! </span>{
+            #( #item_mod_attrs )*
             <span class="attr">#[allow(dead_code, unused_imports, non_camel_case_types)]
+            #[allow(clippy::all)]
             </span><span class="kw">pub mod </span>#mod_ident {
+                <span class="comment">// Preserve any Rust items that were previously defined in the adorned module
+                </span>#( #rust_items ) *
+
                 <span class="comment">// Make it easy to access the root via `root_mod` at different levels:
                 </span><span class="kw">use super</span>::#mod_ident <span class="kw">as </span>root_mod;
                 <span class="comment">// Identify the pallets composing the static metadata by name.
@@ -709,11 +785,12 @@
 }
 
 <span class="doccomment">/// Return a vector of tuples of variant names and corresponding struct definitions.
-</span><span class="kw">pub fn </span>generate_structs_from_variants&lt;<span class="lifetime">&#39;a</span>, F&gt;(
-    type_gen: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>TypeGenerator,
+</span><span class="kw">pub fn </span>generate_structs_from_variants&lt;F&gt;(
+    type_gen: <span class="kw-2">&amp;</span>TypeGenerator,
     type_id: u32,
     variant_to_struct_name: F,
     error_message_type_name: <span class="kw-2">&amp;</span>str,
+    crate_path: <span class="kw-2">&amp;</span>CratePath,
 ) -&gt; Vec&lt;(String, CompositeDef)&gt;
 <span class="kw">where
     </span>F: Fn(<span class="kw-2">&amp;</span>str) -&gt; std::borrow::Cow&lt;str&gt;,
@@ -739,6 +816,7 @@
                     <span class="prelude-val">Some</span>(<span class="macro">parse_quote!</span>(<span class="kw">pub</span>)),
                     type_gen,
                     var.docs(),
+                    crate_path,
                 );
                 (var.name().to_string(), struct_def)
             })

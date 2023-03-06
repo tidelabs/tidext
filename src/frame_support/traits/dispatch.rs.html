@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/12b0503/frame/support/src/traits/dispatch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dispatch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/git/checkouts/substrate-773f176d546a32fa/ad53996/frame/support/src/traits/dispatch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dispatch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../frame_support/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -380,9 +380,76 @@
 <a href="#380" id="380">380</a>
 <a href="#381" id="381">381</a>
 <a href="#382" id="382">382</a>
+<a href="#383" id="383">383</a>
+<a href="#384" id="384">384</a>
+<a href="#385" id="385">385</a>
+<a href="#386" id="386">386</a>
+<a href="#387" id="387">387</a>
+<a href="#388" id="388">388</a>
+<a href="#389" id="389">389</a>
+<a href="#390" id="390">390</a>
+<a href="#391" id="391">391</a>
+<a href="#392" id="392">392</a>
+<a href="#393" id="393">393</a>
+<a href="#394" id="394">394</a>
+<a href="#395" id="395">395</a>
+<a href="#396" id="396">396</a>
+<a href="#397" id="397">397</a>
+<a href="#398" id="398">398</a>
+<a href="#399" id="399">399</a>
+<a href="#400" id="400">400</a>
+<a href="#401" id="401">401</a>
+<a href="#402" id="402">402</a>
+<a href="#403" id="403">403</a>
+<a href="#404" id="404">404</a>
+<a href="#405" id="405">405</a>
+<a href="#406" id="406">406</a>
+<a href="#407" id="407">407</a>
+<a href="#408" id="408">408</a>
+<a href="#409" id="409">409</a>
+<a href="#410" id="410">410</a>
+<a href="#411" id="411">411</a>
+<a href="#412" id="412">412</a>
+<a href="#413" id="413">413</a>
+<a href="#414" id="414">414</a>
+<a href="#415" id="415">415</a>
+<a href="#416" id="416">416</a>
+<a href="#417" id="417">417</a>
+<a href="#418" id="418">418</a>
+<a href="#419" id="419">419</a>
+<a href="#420" id="420">420</a>
+<a href="#421" id="421">421</a>
+<a href="#422" id="422">422</a>
+<a href="#423" id="423">423</a>
+<a href="#424" id="424">424</a>
+<a href="#425" id="425">425</a>
+<a href="#426" id="426">426</a>
+<a href="#427" id="427">427</a>
+<a href="#428" id="428">428</a>
+<a href="#429" id="429">429</a>
+<a href="#430" id="430">430</a>
+<a href="#431" id="431">431</a>
+<a href="#432" id="432">432</a>
+<a href="#433" id="433">433</a>
+<a href="#434" id="434">434</a>
+<a href="#435" id="435">435</a>
+<a href="#436" id="436">436</a>
+<a href="#437" id="437">437</a>
+<a href="#438" id="438">438</a>
+<a href="#439" id="439">439</a>
+<a href="#440" id="440">440</a>
+<a href="#441" id="441">441</a>
+<a href="#442" id="442">442</a>
+<a href="#443" id="443">443</a>
+<a href="#444" id="444">444</a>
+<a href="#445" id="445">445</a>
+<a href="#446" id="446">446</a>
+<a href="#447" id="447">447</a>
+<a href="#448" id="448">448</a>
+<a href="#449" id="449">449</a>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.
 
-// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
 // Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -402,10 +469,12 @@
 </span><span class="kw">use </span><span class="kw">crate</span>::dispatch::{DispatchResultWithPostInfo, Parameter, RawOrigin};
 <span class="kw">use </span>codec::MaxEncodedLen;
 <span class="kw">use </span>sp_runtime::{
-	traits::{BadOrigin, Member, Morph, TryMorph},
+	traits::{BadOrigin, Get, Member, Morph, TryMorph},
 	Either,
 };
-<span class="kw">use </span>sp_std::marker::PhantomData;
+<span class="kw">use </span>sp_std::{cmp::Ordering, marker::PhantomData};
+
+<span class="kw">use </span><span class="kw">super</span>::misc;
 
 <span class="doccomment">/// Some sort of check on the origin is performed by this object.
 </span><span class="kw">pub trait </span>EnsureOrigin&lt;OuterOrigin&gt; {
@@ -420,28 +489,15 @@
 	<span class="doccomment">/// Perform the origin check.
 	</span><span class="kw">fn </span>try_origin(o: OuterOrigin) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Success, OuterOrigin&gt;;
 
-	<span class="doccomment">/// Returns an outer origin capable of passing `try_origin` check.
-	///
-	/// NOTE: This should generally *NOT* be reimplemented. Instead implement
-	/// `try_successful_origin`.
+	<span class="doccomment">/// Attempt to get an outer origin capable of passing `try_origin` check. May return `Err` if it
+	/// is impossible.
 	///
 	/// ** Should be used for benchmarking only!!! **
 	</span><span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
-	</span><span class="kw">fn </span>successful_origin() -&gt; OuterOrigin {
-		<span class="self">Self</span>::try_successful_origin().expect(<span class="string">&quot;No origin exists which can satisfy the guard&quot;</span>)
-	}
-
-	<span class="doccomment">/// Attept to get an outer origin capable of passing `try_origin` check. May return `Err` if it
-	/// is impossible. Default implementation just uses `successful_origin()`.
-	///
-	/// ** Should be used for benchmarking only!!! **
-	</span><span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
-	</span><span class="kw">fn </span>try_successful_origin() -&gt; <span class="prelude-ty">Result</span>&lt;OuterOrigin, ()&gt; {
-		<span class="prelude-val">Ok</span>(<span class="self">Self</span>::successful_origin())
-	}
+	</span><span class="kw">fn </span>try_successful_origin() -&gt; <span class="prelude-ty">Result</span>&lt;OuterOrigin, ()&gt;;
 }
 
-<span class="doccomment">/// `EnsureOrigin` implementation that always fails.
+<span class="doccomment">/// [`EnsureOrigin`] implementation that always fails.
 </span><span class="kw">pub struct </span>NeverEnsureOrigin&lt;Success&gt;(sp_std::marker::PhantomData&lt;Success&gt;);
 <span class="kw">impl</span>&lt;OO, Success&gt; EnsureOrigin&lt;OO&gt; <span class="kw">for </span>NeverEnsureOrigin&lt;Success&gt; {
 	<span class="kw">type </span>Success = Success;
@@ -451,6 +507,90 @@
 	<span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
 	</span><span class="kw">fn </span>try_successful_origin() -&gt; <span class="prelude-ty">Result</span>&lt;OO, ()&gt; {
 		<span class="prelude-val">Err</span>(())
+	}
+}
+
+<span class="doccomment">/// [`EnsureOrigin`] implementation that checks that an origin has equal or higher privilege
+/// compared to the expected `Origin`.
+///
+/// It will take the shortcut of comparing the incoming origin with the expected `Origin` and if
+/// both are the same the origin is accepted.
+///
+/// # Example
+///
+/// ```rust
+/// # use frame_support::traits::{EnsureOriginEqualOrHigherPrivilege, PrivilegeCmp, EnsureOrigin as _};
+/// # use sp_runtime::traits::{parameter_types, Get};
+/// # use sp_std::cmp::Ordering;
+///
+/// #[derive(Eq, PartialEq, Debug)]
+/// pub enum Origin {
+///     Root,
+///     SomethingBelowRoot,
+///     NormalUser,
+/// }
+///
+/// struct OriginPrivilegeCmp;
+///
+/// impl PrivilegeCmp&lt;Origin&gt; for OriginPrivilegeCmp {
+///     fn cmp_privilege(left: &amp;Origin, right: &amp;Origin) -&gt; Option&lt;Ordering&gt; {
+///         match (left, right) {
+///             (Origin::Root, Origin::Root) =&gt; Some(Ordering::Equal),
+///             (Origin::Root, _) =&gt; Some(Ordering::Greater),
+///             (Origin::SomethingBelowRoot, Origin::SomethingBelowRoot) =&gt; Some(Ordering::Equal),
+///             (Origin::SomethingBelowRoot, Origin::Root) =&gt; Some(Ordering::Less),
+///             (Origin::SomethingBelowRoot, Origin::NormalUser) =&gt; Some(Ordering::Greater),
+///             (Origin::NormalUser, Origin::NormalUser) =&gt; Some(Ordering::Equal),
+///             (Origin::NormalUser, _) =&gt; Some(Ordering::Less),
+///         }
+///     }
+/// }
+///
+/// parameter_types! {
+///     pub const ExpectedOrigin: Origin = Origin::SomethingBelowRoot;
+/// }
+///
+/// type EnsureOrigin = EnsureOriginEqualOrHigherPrivilege&lt;ExpectedOrigin, OriginPrivilegeCmp&gt;;
+///
+/// // `Root` has an higher privilege as our expected origin.
+/// assert!(EnsureOrigin::ensure_origin(Origin::Root).is_ok());
+/// // `SomethingBelowRoot` is exactly the expected origin.
+/// assert!(EnsureOrigin::ensure_origin(Origin::SomethingBelowRoot).is_ok());
+/// // The `NormalUser` origin is not allowed.
+/// assert!(EnsureOrigin::ensure_origin(Origin::NormalUser).is_err());
+/// ```
+</span><span class="kw">pub struct </span>EnsureOriginEqualOrHigherPrivilege&lt;Origin, PrivilegeCmp&gt;(
+	sp_std::marker::PhantomData&lt;(Origin, PrivilegeCmp)&gt;,
+);
+
+<span class="kw">impl</span>&lt;OuterOrigin, Origin, PrivilegeCmp&gt; EnsureOrigin&lt;OuterOrigin&gt;
+	<span class="kw">for </span>EnsureOriginEqualOrHigherPrivilege&lt;Origin, PrivilegeCmp&gt;
+<span class="kw">where
+	</span>Origin: Get&lt;OuterOrigin&gt;,
+	OuterOrigin: Eq,
+	PrivilegeCmp: misc::PrivilegeCmp&lt;OuterOrigin&gt;,
+{
+	<span class="kw">type </span>Success = ();
+
+	<span class="kw">fn </span>try_origin(o: OuterOrigin) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Success, OuterOrigin&gt; {
+		<span class="kw">let </span>expected_origin = Origin::get();
+
+		<span class="comment">// If this is the expected origin, it has the same privilege.
+		</span><span class="kw">if </span>o == expected_origin {
+			<span class="kw">return </span><span class="prelude-val">Ok</span>(())
+		}
+
+		<span class="kw">let </span>cmp = PrivilegeCmp::cmp_privilege(<span class="kw-2">&amp;</span>o, <span class="kw-2">&amp;</span>expected_origin);
+
+		<span class="kw">match </span>cmp {
+			<span class="prelude-val">Some</span>(Ordering::Equal) | <span class="prelude-val">Some</span>(Ordering::Greater) =&gt; <span class="prelude-val">Ok</span>(()),
+			<span class="prelude-val">None </span>| <span class="prelude-val">Some</span>(Ordering::Less) =&gt; <span class="prelude-val">Err</span>(o),
+		}
+	}
+
+	<span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
+	</span><span class="kw">fn </span>try_successful_origin() -&gt; <span class="prelude-ty">Result</span>&lt;OuterOrigin, ()&gt; {
+		<span class="prelude-val">Ok</span>(Origin::get())
 	}
 }
 
@@ -467,25 +607,12 @@
 	<span class="doccomment">/// Perform the origin check, returning the origin value if unsuccessful. This allows chaining.
 	</span><span class="kw">fn </span>try_origin(o: OuterOrigin, a: <span class="kw-2">&amp;</span>Argument) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Success, OuterOrigin&gt;;
 
-	<span class="doccomment">/// Returns an outer origin capable of passing `try_origin` check.
-	///
-	/// NOTE: This should generally *NOT* be reimplemented. Instead implement
-	/// `try_successful_origin`.
+	<span class="doccomment">/// Attempt to get an outer origin capable of passing `try_origin` check. May return `Err` if it
+	/// is impossible.
 	///
 	/// ** Should be used for benchmarking only!!! **
 	</span><span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
-	</span><span class="kw">fn </span>successful_origin(a: <span class="kw-2">&amp;</span>Argument) -&gt; OuterOrigin {
-		<span class="self">Self</span>::try_successful_origin(a).expect(<span class="string">&quot;No origin exists which can satisfy the guard&quot;</span>)
-	}
-
-	<span class="doccomment">/// Attept to get an outer origin capable of passing `try_origin` check. May return `Err` if it
-	/// is impossible. Default implementation just uses `successful_origin()`.
-	///
-	/// ** Should be used for benchmarking only!!! **
-	</span><span class="attr">#[cfg(feature = <span class="string">&quot;runtime-benchmarks&quot;</span>)]
-	</span><span class="kw">fn </span>try_successful_origin(a: <span class="kw-2">&amp;</span>Argument) -&gt; <span class="prelude-ty">Result</span>&lt;OuterOrigin, ()&gt; {
-		<span class="prelude-val">Ok</span>(<span class="self">Self</span>::successful_origin(a))
-	}
+	</span><span class="kw">fn </span>try_successful_origin(a: <span class="kw-2">&amp;</span>Argument) -&gt; <span class="prelude-ty">Result</span>&lt;OuterOrigin, ()&gt;;
 }
 
 <span class="kw">pub struct </span>AsEnsureOriginWithArg&lt;EO&gt;(sp_std::marker::PhantomData&lt;EO&gt;);
@@ -611,41 +738,32 @@
 /// Implemented for pallet dispatchable type by `decl_module` and for runtime dispatchable by
 /// `construct_runtime`.
 </span><span class="kw">pub trait </span>UnfilteredDispatchable {
-	<span class="doccomment">/// The origin type of the runtime, (i.e. `frame_system::Config::Origin`).
-	</span><span class="kw">type </span>Origin;
+	<span class="doccomment">/// The origin type of the runtime, (i.e. `frame_system::Config::RuntimeOrigin`).
+	</span><span class="kw">type </span>RuntimeOrigin;
 
 	<span class="doccomment">/// Dispatch this call but do not check the filter in origin.
-	</span><span class="kw">fn </span>dispatch_bypass_filter(<span class="self">self</span>, origin: <span class="self">Self</span>::Origin) -&gt; DispatchResultWithPostInfo;
+	</span><span class="kw">fn </span>dispatch_bypass_filter(<span class="self">self</span>, origin: <span class="self">Self</span>::RuntimeOrigin) -&gt; DispatchResultWithPostInfo;
 }
 
-<span class="doccomment">/// Type that can be dispatched with an additional storage layer which is used to execute the call.
-</span><span class="kw">pub trait </span>DispatchableWithStorageLayer {
-	<span class="doccomment">/// The origin type of the runtime, (i.e. `frame_system::Config::Origin`).
-	</span><span class="kw">type </span>Origin;
+<span class="doccomment">/// The trait implemented by the overarching enumeration of the different pallets&#39; origins.
+/// Unlike `OriginTrait` impls, this does not include any kind of dispatch/call filter. Also, this
+/// trait is more flexible in terms of how it can be used: it is a `Parameter` and `Member`, so it
+/// can be used as dispatchable parameters as well as in storage items.
+</span><span class="kw">pub trait </span>CallerTrait&lt;AccountId&gt;: Parameter + Member + From&lt;RawOrigin&lt;AccountId&gt;&gt; {
+	<span class="doccomment">/// Extract the signer from the message if it is a `Signed` origin.
+	</span><span class="kw">fn </span>into_system(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;RawOrigin&lt;AccountId&gt;&gt;;
 
-	<span class="doccomment">/// Same as `dispatch` from the [`frame_support::dispatch::Dispatchable`] trait, but
-	/// specifically spawns a new storage layer to execute the call inside of.
-	</span><span class="kw">fn </span>dispatch_with_storage_layer(<span class="self">self</span>, origin: <span class="self">Self</span>::Origin) -&gt; DispatchResultWithPostInfo;
-
-	<span class="doccomment">/// Same as `dispatch_bypass_filter` from the [`UnfilteredDispatchable`] trait, but specifically
-	/// spawns a new storage layer to execute the call inside of.
-	</span><span class="kw">fn </span>dispatch_bypass_filter_with_storage_layer(
-		<span class="self">self</span>,
-		origin: <span class="self">Self</span>::Origin,
-	) -&gt; DispatchResultWithPostInfo;
+	<span class="doccomment">/// Extract a reference to the system-level `RawOrigin` if it is that.
+	</span><span class="kw">fn </span>as_system_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>RawOrigin&lt;AccountId&gt;&gt;;
 }
 
-<span class="doccomment">/// Methods available on `frame_system::Config::Origin`.
+<span class="doccomment">/// Methods available on `frame_system::Config::RuntimeOrigin`.
 </span><span class="kw">pub trait </span>OriginTrait: Sized {
 	<span class="doccomment">/// Runtime call type, as in `frame_system::Config::Call`
 	</span><span class="kw">type </span>Call;
 
 	<span class="doccomment">/// The caller origin, overarching type of all pallets origins.
-	</span><span class="kw">type </span>PalletsOrigin: Parameter
-		+ Member
-		+ Into&lt;<span class="self">Self</span>&gt;
-		+ From&lt;RawOrigin&lt;<span class="self">Self</span>::AccountId&gt;&gt;
-		+ MaxEncodedLen;
+	</span><span class="kw">type </span>PalletsOrigin: Into&lt;<span class="self">Self</span>&gt; + CallerTrait&lt;<span class="self">Self</span>::AccountId&gt; + MaxEncodedLen;
 
 	<span class="doccomment">/// The AccountId used across the system.
 	</span><span class="kw">type </span>AccountId;
@@ -665,8 +783,11 @@
 	/// For root origin caller, the filters are bypassed and true is returned.
 	</span><span class="kw">fn </span>filter_call(<span class="kw-2">&amp;</span><span class="self">self</span>, call: <span class="kw-2">&amp;</span><span class="self">Self</span>::Call) -&gt; bool;
 
-	<span class="doccomment">/// Get the caller.
+	<span class="doccomment">/// Get a reference to the caller (`CallerTrait` impl).
 	</span><span class="kw">fn </span>caller(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::PalletsOrigin;
+
+	<span class="doccomment">/// Consume `self` and return the caller.
+	</span><span class="kw">fn </span>into_caller(<span class="self">self</span>) -&gt; <span class="self">Self</span>::PalletsOrigin;
 
 	<span class="doccomment">/// Do something with the caller, consuming self but returning it if the caller was unused.
 	</span><span class="kw">fn </span>try_with_caller&lt;R&gt;(
@@ -684,7 +805,20 @@
 	</span><span class="kw">fn </span>signed(by: <span class="self">Self</span>::AccountId) -&gt; <span class="self">Self</span>;
 
 	<span class="doccomment">/// Extract the signer from the message if it is a `Signed` origin.
-	</span><span class="kw">fn </span>as_signed(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::AccountId&gt;;
+	</span><span class="kw">fn </span>as_signed(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>::AccountId&gt; {
+		<span class="self">self</span>.into_caller().into_system().and_then(|s| {
+			<span class="kw">if let </span>RawOrigin::Signed(who) = s {
+				<span class="prelude-val">Some</span>(who)
+			} <span class="kw">else </span>{
+				<span class="prelude-val">None
+			</span>}
+		})
+	}
+
+	<span class="doccomment">/// Extract a reference to the sytsem origin, if that&#39;s what the caller is.
+	</span><span class="kw">fn </span>as_system_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>RawOrigin&lt;<span class="self">Self</span>::AccountId&gt;&gt; {
+		<span class="self">self</span>.caller().as_system_ref()
+	}
 }
 
 <span class="attr">#[cfg(test)]

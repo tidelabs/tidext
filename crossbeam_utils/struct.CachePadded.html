@@ -28,9 +28,9 @@ a value of type <code>T</code>.</p>
 <span class="kw">let </span>addr1 = <span class="kw-2">&amp;*</span>array[<span class="number">0</span>] <span class="kw">as </span><span class="kw-2">*const </span>i8 <span class="kw">as </span>usize;
 <span class="kw">let </span>addr2 = <span class="kw-2">&amp;*</span>array[<span class="number">1</span>] <span class="kw">as </span><span class="kw-2">*const </span>i8 <span class="kw">as </span>usize;
 
-<span class="macro">assert!</span>(addr2 - addr1 &gt;= <span class="number">64</span>);
-<span class="macro">assert_eq!</span>(addr1 % <span class="number">64</span>, <span class="number">0</span>);
-<span class="macro">assert_eq!</span>(addr2 % <span class="number">64</span>, <span class="number">0</span>);</code></pre></div>
+<span class="macro">assert!</span>(addr2 - addr1 &gt;= <span class="number">32</span>);
+<span class="macro">assert_eq!</span>(addr1 % <span class="number">32</span>, <span class="number">0</span>);
+<span class="macro">assert_eq!</span>(addr2 % <span class="number">32</span>, <span class="number">0</span>);</code></pre></div>
 <p>When building a concurrent queue with a head and a tail index, it is wise to place them in
 different cache lines so that concurrent threads pushing and popping elements don’t invalidate
 each other’s cache lines:</p>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/num-format-0.4.0/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../num_format/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/num-format-0.4.4/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-1f7d512b176f0f72.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-124a1ca42af929b6.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-6827029ac823cab7.css" id="mainThemeStyle"><link rel="stylesheet" id="themeStyle" href="../../static.files/light-ebce58d0a40c3431.css"><link rel="stylesheet" disabled href="../../static.files/dark-f23faae4a2daf9a6.css"><link rel="stylesheet" disabled href="../../static.files/ayu-8af5e100b21cd173.css"><script id="default-settings" ></script><script src="../../static.files/storage-d43fa987303ecbbb.js"></script><script defer src="../../static.files/source-script-5cf2e01a42cc9858.js"></script><script defer src="../../source-files.js"></script><script defer src="../../static.files/main-c55e1eb52e1886b4.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../num_format/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-5ec35bf9ca753509.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -300,10 +300,7 @@
 <a href="#300" id="300">300</a>
 <a href="#301" id="301">301</a>
 <a href="#302" id="302">302</a>
-<a href="#303" id="303">303</a>
-<a href="#304" id="304">304</a>
 </pre><pre class="rust"><code><span class="doccomment">/*!
-[![Build Status](https://travis-ci.org/bcmyers/num-format.svg?branch=master)](https://travis-ci.org/bcmyers/num-format)
 [![Crates.io](https://img.shields.io/crates/v/num-format.svg)](https://crates.io/crates/num-format)
 [![Documentation](https://docs.rs/num-format/badge.svg)](https://docs.rs/num-format/)
 ![License](https://img.shields.io/crates/l/num_format.svg)
@@ -430,7 +427,7 @@ OS&#39;s locale information. It has a very similar API to [`Locale`] and should 
 operating systems (i.e. macOS, linux, the BSDs, and Windows).
 
 &lt;i&gt;Since this type requires several dependencies (especially on Windows), it is behind a feature
-flag. To use it, include `num-format = { version = &quot;0.4&quot;, features = [&quot;with-system-locale&quot;] }`
+flag. To use it, include `num-format = { version = &quot;0.4.3&quot;, features = [&quot;with-system-locale&quot;] }`
 in your `Cargo.toml`. Additionally, on Windows (but **only** on Windows), using `SystemLocale`
 requires Clang 3.9 or higher.&lt;/i&gt;
 
@@ -482,7 +479,8 @@ fn main() -&gt; Result&lt;(), Error&gt; {
 
 # Requirements
 
-* Rust 1.31 or greater
+* Rust 1.56.0 or greater if compiled with `--no-default-features`
+* Rust 1.58.0 or greater if compiled with default features
 * If you&#39;re using the `with-system-locale` feature **and** you&#39;re on Windows, Clang 3.9 or higher
   is also required. See [here](https://rust-lang.github.io/rust-bindgen/requirements.html) for
   installation instructions.
@@ -491,10 +489,10 @@ fn main() -&gt; Result&lt;(), Error&gt; {
 
 | Available features   | What to put in your `Cargo.toml`                                      |
 | :------------------- | :-------------------------------------------------------------------- |
-| `no_std`             | `num-format = { version = &quot;0.4&quot;, default-features = false }`          |
-| `with-num-bigint`    | `num-format = { version = &quot;0.4&quot;, features = [&quot;with-num-bigint&quot;] }`    |
-| `with-serde`         | `num-format = { version = &quot;0.4&quot;, features = [&quot;with-serde&quot;] }`         |
-| `with-system-locale` | `num-format = { version = &quot;0.4&quot;, features = [&quot;with-system-locale&quot;] }` |
+| `no_std`             | `num-format = { version = &quot;0.4.3&quot;, default-features = false }`          |
+| `with-num-bigint`    | `num-format = { version = &quot;0.4.3&quot;, features = [&quot;with-num-bigint&quot;] }`    |
+| `with-serde`         | `num-format = { version = &quot;0.4.3&quot;, features = [&quot;with-serde&quot;] }`         |
+| `with-system-locale` | `num-format = { version = &quot;0.4.3&quot;, features = [&quot;with-system-locale&quot;] }` |
 
 # License
 
@@ -506,45 +504,42 @@ fn main() -&gt; Result&lt;(), Error&gt; {
 at your option.
 
 [bindgen]: https://crates.io/crates/bindgen
-[`Buffer`]: https://docs.rs/num-format/0.4.0/num_format/struct.Buffer.html
+[`Buffer`]: https://docs.rs/num-format/0.4.3/num_format/struct.Buffer.html
 [Common Locale Data Repository]: https://en.wikipedia.org/wiki/Common_Locale_Data_Repository
-[`CustomFormat`]: https://docs.rs/num-format/0.4.0/num_format/struct.CustomFormat.html
+[`CustomFormat`]: https://docs.rs/num-format/0.4.3/num_format/struct.CustomFormat.html
 [`File`]: https://doc.rust-lang.org/std/fs/struct.File.html
 [`fmt::Write`]: https://doc.rust-lang.org/std/fmt/fn.write.html
-[`Format`]: https://docs.rs/num-format/0.4.0/num_format/trait.Format.html
+[`Format`]: https://docs.rs/num-format/0.4.3/num_format/trait.Format.html
 [`io::Write`]: https://doc.rust-lang.org/std/io/trait.Write.html
-[`Locale`]: https://docs.rs/num-format/0.4.0/num_format/enum.Locale.html
+[`Locale`]: https://docs.rs/num-format/0.4.3/num_format/enum.Locale.html
 [`num_bigint::BigInt`]: https://docs.rs/num-bigint/0.2.2/num_bigint/struct.BigInt.html
 [picking a format]: #picking-a-format
 [`String`]: https://doc.rust-lang.org/std/string/struct.String.html
 [The Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0
 [The MIT license]: http://opensource.org/licenses/MIT
-[`ToFormattedString`]: https://docs.rs/num-format/0.4.0/num_format/trait.ToFormattedString.html
-[`to_formatted_string`]: https://docs.rs/num-format/0.4.0/num_format/trait.ToFormattedString.html#method.to_formatted_string
+[`ToFormattedString`]: https://docs.rs/num-format/0.4.3/num_format/trait.ToFormattedString.html
+[`to_formatted_string`]: https://docs.rs/num-format/0.4.3/num_format/trait.ToFormattedString.html#method.to_formatted_string
 [Unicode Consortium]: https://en.wikipedia.org/wiki/Unicode_Consortium
 [`Vec`]: https://doc.rust-lang.org/std/vec/struct.Vec.html
-[`WriteFormatted`]: https://docs.rs/num-format/0.4.0/num_format/trait.WriteFormatted.html
+[`WriteFormatted`]: https://docs.rs/num-format/0.4.3/num_format/trait.WriteFormatted.html
 */
 
 </span><span class="attr">#![cfg_attr(not(feature = <span class="string">&quot;std&quot;</span>), no_std)]
+#![allow(clippy::needless_doctest_main)]
 #![deny(
     dead_code,
     deprecated,
-    <span class="comment">// missing_copy_implementations,
-    </span>missing_debug_implementations,
+    future_incompatible,
+    missing_copy_implementations,
+    missing_debug_implementations,
     missing_docs,
+    nonstandard_style,
+    rust_2018_idioms,
     trivial_casts,
     trivial_numeric_casts,
-    unused_extern_crates,
-    unused_imports,
-    unused_macros,
-    unused_mut,
-    unused_results,
-    unused_parens,
-    unused_unsafe,
-    unused_variables
+    unused
 )]
-#![doc(html_root_url = <span class="string">&quot;https://docs.rs/num-format/0.4.0&quot;</span>)]
+#![doc(html_root_url = <span class="string">&quot;https://docs.rs/num-format/0.4.4&quot;</span>)]
 
 #[cfg(all(feature = <span class="string">&quot;with-system-locale&quot;</span>, unix))]
 #[macro_use]
@@ -568,6 +563,7 @@ at your option.
 <span class="kw">mod </span>grouping;
 <span class="kw">mod </span>impls;
 <span class="kw">mod </span>locale;
+<span class="kw">pub mod </span>parsing;
 <span class="kw">mod </span>strings;
 <span class="attr">#[cfg(all(feature = <span class="string">&quot;with-system-locale&quot;</span>, any(unix, windows)))]
 </span><span class="kw">mod </span>system_locale;
