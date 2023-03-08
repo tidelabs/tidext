@@ -414,7 +414,7 @@ mod client {
         make_rpc_call!(
           self,
           "payment_queryInfo",
-          Option<RuntimeDispatchInfo<Balance>>,
+          Option<RuntimeDispatchInfo<Balance, u64>>,
           extrinsic,
           best_block
         )?
