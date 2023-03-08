@@ -19,12 +19,10 @@ use crate::{
   TidechainCall, TidechainConfig, TidefiKeyring, TidefiRuntime,
 };
 use pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
-use sp_core::{
-  blake2_256,
-  crypto::{Ss58AddressFormat, Ss58Codec},
-};
+use sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
 use std::sync::Arc;
 use subxt::{
+  config::Hasher,
   error::{DispatchError, TransactionError},
   events::Phase,
   rpc::{rpc_params, types::SubstrateTxStatus},
@@ -241,22 +239,20 @@ mod client {
       extrinsic: String,
     ) -> Result<Hash, Error> {
       // rebuild the extrinsic bytes from the hex string
-      let ext_bytes = hex::decode(
-        extrinsic
-          .strip_prefix("0x")
-          .ok_or(Error::InvalidExtrinsic)?,
-      )
-      .map_err(|_| Error::InvalidExtrinsic)?;
+      let ext_bytes = Encoded(
+        hex::decode(
+          extrinsic
+            .strip_prefix("0x")
+            .ok_or(Error::InvalidExtrinsic)?,
+        )
+        .map_err(|_| Error::InvalidExtrinsic)?,
+      );
 
       // extrinsic hash
-      let ext_hash = blake2_256(&ext_bytes[..]);
+      let ext_hash = <TidechainConfig as subxt::Config>::Hasher::hash_of(&ext_bytes);
 
       // submit and watch for transaction progress.
-      let mut sub = self
-        .runtime()
-        .rpc()
-        .watch_extrinsic(Encoded(ext_bytes))
-        .await?;
+      let mut sub = self.runtime().rpc().watch_extrinsic(ext_bytes).await?;
 
       while let Some(status) = sub.next().await {
         match status? {
@@ -273,7 +269,7 @@ mod client {
               .extrinsics
               .iter()
               .position(|ext| {
-                let hash = blake2_256(&ext.0);
+                let hash = <TidechainConfig as subxt::Config>::Hasher::hash_of(&ext.0);
                 hash == ext_hash
               })
               .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))?;
