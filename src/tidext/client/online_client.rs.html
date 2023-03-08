@@ -484,10 +484,6 @@
 <a href="#484" id="484">484</a>
 <a href="#485" id="485">485</a>
 <a href="#486" id="486">486</a>
-<a href="#487" id="487">487</a>
-<a href="#488" id="488">488</a>
-<a href="#489" id="489">489</a>
-<a href="#490" id="490">490</a>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2021-2023 Semantic Network Ltd.
 // This file is part of tidext.
 
@@ -509,12 +505,10 @@
   TidechainCall, TidechainConfig, TidefiKeyring, TidefiRuntime,
 };
 <span class="kw">use </span>pallet_transaction_payment_rpc_runtime_api::RuntimeDispatchInfo;
-<span class="kw">use </span>sp_core::{
-  blake2_256,
-  crypto::{Ss58AddressFormat, Ss58Codec},
-};
+<span class="kw">use </span>sp_core::crypto::{Ss58AddressFormat, Ss58Codec};
 <span class="kw">use </span>std::sync::Arc;
 <span class="kw">use </span>subxt::{
+  config::Hasher,
   error::{DispatchError, TransactionError},
   events::Phase,
   rpc::{rpc_params, types::SubstrateTxStatus},
@@ -731,22 +725,20 @@
       extrinsic: String,
     ) -&gt; <span class="prelude-ty">Result</span>&lt;Hash, Error&gt; {
       <span class="comment">// rebuild the extrinsic bytes from the hex string
-      </span><span class="kw">let </span>ext_bytes = hex::decode(
-        extrinsic
-          .strip_prefix(<span class="string">&quot;0x&quot;</span>)
-          .ok_or(Error::InvalidExtrinsic)<span class="question-mark">?</span>,
-      )
-      .map_err(|<span class="kw">_</span>| Error::InvalidExtrinsic)<span class="question-mark">?</span>;
+      </span><span class="kw">let </span>ext_bytes = Encoded(
+        hex::decode(
+          extrinsic
+            .strip_prefix(<span class="string">&quot;0x&quot;</span>)
+            .ok_or(Error::InvalidExtrinsic)<span class="question-mark">?</span>,
+        )
+        .map_err(|<span class="kw">_</span>| Error::InvalidExtrinsic)<span class="question-mark">?</span>,
+      );
 
       <span class="comment">// extrinsic hash
-      </span><span class="kw">let </span>ext_hash = blake2_256(<span class="kw-2">&amp;</span>ext_bytes[..]);
+      </span><span class="kw">let </span>ext_hash = &lt;TidechainConfig <span class="kw">as </span>subxt::Config&gt;::Hasher::hash_of(<span class="kw-2">&amp;</span>ext_bytes);
 
       <span class="comment">// submit and watch for transaction progress.
-      </span><span class="kw">let </span><span class="kw-2">mut </span>sub = <span class="self">self
-        </span>.runtime()
-        .rpc()
-        .watch_extrinsic(Encoded(ext_bytes))
-        .<span class="kw">await</span><span class="question-mark">?</span>;
+      </span><span class="kw">let </span><span class="kw-2">mut </span>sub = <span class="self">self</span>.runtime().rpc().watch_extrinsic(ext_bytes).<span class="kw">await</span><span class="question-mark">?</span>;
 
       <span class="kw">while let </span><span class="prelude-val">Some</span>(status) = sub.next().<span class="kw">await </span>{
         <span class="kw">match </span>status<span class="question-mark">? </span>{
@@ -763,7 +755,7 @@
               .extrinsics
               .iter()
               .position(|ext| {
-                <span class="kw">let </span>hash = blake2_256(<span class="kw-2">&amp;</span>ext.<span class="number">0</span>);
+                <span class="kw">let </span>hash = &lt;TidechainConfig <span class="kw">as </span>subxt::Config&gt;::Hasher::hash_of(<span class="kw-2">&amp;</span>ext.<span class="number">0</span>);
                 hash == ext_hash
               })
               .ok_or_else(|| Error::Substrate(TransactionError::BlockHashNotFound.into()))<span class="question-mark">?</span>;
