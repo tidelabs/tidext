@@ -15,7 +15,10 @@
 // along with tidext.  If not, see <http://www.gnu.org/licenses/>.
 
 use napi::Status;
-use napi::{bindgen_prelude::ToNapiValue, Error, Result};
+use napi::{
+  bindgen_prelude::{FromNapiValue, ToNapiValue},
+  Error, Result,
+};
 use tidefi_primitives::Hash;
 use tidefi_primitives::{
   CurrencyId as PrimitiveCurrencyId, CurrencyMetadata as PrimitiveCurrencyMetadata,
