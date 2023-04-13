@@ -301,7 +301,7 @@ mod client {
         }
       }
 
-      Ok(Hash::from(ext_hash))
+      Ok(ext_hash)
     }
 
     /// Return a list of all stakes for the `AccountId` with optional `CurrencyId`
