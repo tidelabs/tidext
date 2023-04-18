@@ -117,6 +117,10 @@ mod client {
     #[tidext::pallet = "staking"]
     fn unbond(&self, amount: Balance);
 
+    /// Cancel a portion of the stash scheduled for unbonding
+    #[tidext::pallet = "staking"]
+    fn rebond(&self, amount: Balance);
+
     /// Remove any unlocked chunks from the unlocking queue from our management
     #[tidext::pallet = "staking"]
     fn withdraw_unbonded(&self, num_slashing_spans: u32);
